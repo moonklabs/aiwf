@@ -1,161 +1,161 @@
-# Simone for Claude Code
+# Claude Code를 위한 Moonklabs
 
-## What is this?
+## 이것은 무엇인가요?
 
-Simone is a directory-based project management system I built to work better with Claude Code. It's basically a set of folders, markdown files, and custom commands that help break down software projects into manageable chunks that AI can handle effectively.
+Moonklabs은 Claude Code와 더 효과적으로 작업하기 위해 만든 디렉토리 기반 프로젝트 관리 시스템입니다. 기본적으로 폴더, 마크다운 파일 및 AI가 효과적으로 처리할 수 있는 관리 가능한 단위로 소프트웨어 프로젝트를 분할하는 데 도움이 되는 사용자 정의 명령의 집합입니다.
 
-**⚠️ Complexity Warning**: Simone is a sophisticated system that requires time to understand properly. It's not a simple plug-and-play solution, but rather a framework that works best when you take the time to learn how it operates and adapt it to your workflow.
+**⚠️ 복잡성 경고**: Moonklabs은 제대로 이해하는 데 시간이 필요한 정교한 시스템입니다. 단순한 플러그 앤 플레이 솔루션이 아니라, 작동 방식을 배우고 워크플로에 적응하는 데 시간을 투자할 때 가장 잘 작동하는 프레임워크입니다.
 
-**📋 Latest Updates**: See [CHANGELOG.md](CHANGELOG.md) for recent changes and improvements.
+**📋 최신 업데이트**: 최근 변경 사항 및 개선 사항은 [CHANGELOG.md](CHANGELOG.md)를 참조하세요.
 
-## How to Get Started
+## 시작하는 방법
 
-### 1. Install Simone
+### 1. Moonklabs 설치하기
 
 ```bash
-npx hello-simone
+npx hello-moonklabs
 ```
 
-This sets up the folder structure and installs/updates the command files in your project. Can also be used to update an existing installation - command files get backed up automatically.
+이것은 폴더 구조를 설정하고 프로젝트에 명령 파일을 설치/업데이트합니다. 기존 설치를 업데이트하는 데도 사용할 수 있으며, 명령 파일은 자동으로 백업됩니다.
 
-### 2. Initialize Your Project
+### 2. 프로젝트 초기화하기
 
-Open your project in Claude Code and run:
-
-```
-/project:simone:initialize
-```
-
-This guides you through the basic setup process. Works with new or existing codebases, and can help you create project documentation (PRDs, architecture docs) or work with documents you already have.
-
-### 3. Set Up Your First Milestone
-
-Create a milestone folder in `.simone/02_REQUIREMENTS/` named `M01_Your_Milestone_Name` (e.g., `M01_Basic_Application`). Include at least:
-
-- `M01_PRD.md` - Product requirements document
-- Other specs as needed: `M01_Database_Schema.md`, `M01_API_Specs.md`, etc.
-
-*Note: There's no command for this yet. Use the existing chat from step 2 to guide Claude through milestone creation, ensuring proper naming with the `M##_` prefix and underscores.*
-
-### 4. Break Down into Sprints
+Claude Code에서 프로젝트를 열고 다음을 실행하세요:
 
 ```
-/project:simone:create_sprints_from_milestone
+/project:moonklabs:initialize
 ```
 
-This analyzes your milestone and breaks it down into logical sprints. It looks at the entire scope and creates meaningful sprint boundaries without detailed tasks yet.
+이것은 기본 설정 과정을 안내합니다. 새로운 코드베이스나 기존 코드베이스와 함께 작동하며, 프로젝트 문서(PRD, 아키텍처 문서)를 생성하거나 이미 가지고 있는 문서와 함께 작업하는 데 도움을 줍니다.
 
-### 5. Create Your First Tasks
+### 3. 첫 번째 마일스톤 설정하기
 
-```
-/project:simone:create_sprint_tasks
-```
+`.moonklabs/02_REQUIREMENTS/`에 `M01_Your_Milestone_Name`(예: `M01_Basic_Application`)이라는 이름의 마일스톤 폴더를 생성하세요. 최소한 다음을 포함하세요:
 
-This analyzes your sprints, reviews documentation, researches necessary information, and identifies knowledge gaps to gain comprehensive understanding of your project. Creates detailed, actionable tasks for the current sprint.
+- `M01_PRD.md` - 제품 요구사항 문서
+- 필요에 따른 기타 사양: `M01_Database_Schema.md`, `M01_API_Specs.md` 등
 
-*Important: Only create tasks for your next sprint, not all sprints upfront. After completing Sprint 1, then create tasks for Sprint 2. This ensures the system can reference your existing codebase and incorporate completed work into future task creation.*
+*참고: 아직 이를 위한 명령어는 없습니다. 2단계의 기존 채팅을 사용하여 Claude가 마일스톤을 생성하도록 안내하고, `M##_` 접두사와 밑줄을 사용한 적절한 이름 지정을 확인하세요.*
 
-### 6. Start Working
-
-```
-/project:simone:do_task
-```
-
-This will automatically pick a task from your general tasks or sprints. For faster execution, specify a task ID:
+### 4. 스프린트로 분할하기
 
 ```
-/project:simone:do_task T01_S01
+/project:moonklabs:create_sprints_from_milestone
 ```
 
-Claude will then work through the specified task with full project context.
+이것은 마일스톤을 분석하고 논리적인 스프린트로 분할합니다. 전체 범위를 살펴보고 아직 세부 작업 없이 의미 있는 스프린트 경계를 생성합니다.
 
-That's the basic workflow to get started! You can also:
+### 5. 첫 번째 작업 생성하기
 
-- Create general tasks with `/project:simone:create_general_task`
-- Use YOLO mode to run a full sprint autonomously
-- Explore other commands in `.claude/commands/simone/`
+```
+/project:moonklabs:create_sprint_tasks
+```
 
-**Important**: Simone is a complex system, not a simple set-and-forget tool. It works best when you understand how it operates. Take time to read through the commands and consider adapting them to your workflow.
+이것은 스프린트를 분석하고, 문서를 검토하며, 필요한 정보를 조사하고, 프로젝트에 대한 포괄적인 이해를 얻기 위한 지식 격차를 식별합니다. 현재 스프린트에 대한 상세하고 실행 가능한 작업을 생성합니다.
 
-## How it Works
+*중요: 모든 스프린트에 대한 작업을 미리 생성하지 말고 다음 스프린트에 대한 작업만 생성하세요. 스프린트 1을 완료한 후에 스프린트 2에 대한 작업을 생성하세요. 이렇게 하면 시스템이 기존 코드베이스를 참조하고 완료된 작업을 향후 작업 생성에 통합할 수 있습니다.*
 
-Simone organizes your project into:
+### 6. 작업 시작하기
 
-- **Milestones**: Major features or project phases
-- **Sprints**: Groups of related tasks within a milestone
-- **Tasks**: Individual work items scoped for one Claude session
+```
+/project:moonklabs:do_task
+```
 
-Each task gets full project context so Claude knows exactly what to build and how it fits into your architecture.
+이것은 일반 작업이나 스프린트에서 작업을 자동으로 선택합니다. 더 빠른 실행을 위해 작업 ID를 지정하세요:
 
-## Why I built this
+```
+/project:moonklabs:do_task T01_S01
+```
 
-AI coding tools have become incredibly powerful, but they all face the same fundamental challenge: context management. The context window is limited in size, and we have little control over what stays in context and what doesn't.
+그러면 Claude는 전체 프로젝트 컨텍스트와 함께 지정된 작업을 수행합니다.
 
-The problem with long-running sessions is context decay - as you work, critical project knowledge silently falls off the end of the context window. You don't know what's been forgotten until something goes wrong.
+이것이 시작하기 위한 기본 워크플로입니다! 또한 다음과 같은 작업도 가능합니다:
 
-My solution: Start fresh for each task, but provide rich surrounding context. By keeping tasks focused and well-scoped, I can dedicate more of the context window to relevant project knowledge, requirements, and architectural decisions. This way:
+- `/project:moonklabs:create_general_task`로 일반 작업 생성
+- YOLO 모드를 사용하여 전체 스프린트를 자율적으로 실행
+- `.claude/commands/moonklabs/`에서 다른 명령어 탐색
 
-- Each task starts with exactly the project context it needs
-- No critical knowledge gets lost in long sessions
-- Claude can work confidently with full awareness of requirements
-- The surrounding context guides development, not just the task description
+**중요**: Moonklabs은 단순한 설정 후 잊어버리는 도구가 아닌 복잡한 시스템입니다. 작동 방식을 이해할 때 가장 효과적으로 작동합니다. 명령어를 읽어보고 워크플로에 맞게 조정하는 시간을 가지세요.
 
-The result is a task-based workflow where Claude always has the right context for the job at hand.
+## 작동 방식
+
+Moonklabs은 프로젝트를 다음과 같이 구성합니다:
+
+- **마일스톤**: 주요 기능 또는 프로젝트 단계
+- **스프린트**: 마일스톤 내의 관련 작업 그룹
+- **작업**: 하나의 Claude 세션에 맞게 범위가 지정된 개별 작업 항목
+
+각 작업은 전체 프로젝트 컨텍스트를 가져와 Claude가 무엇을 구축해야 하는지, 그리고 아키텍처에 어떻게 맞는지 정확히 알 수 있습니다.
+
+## 이것을 만든 이유
+
+AI 코딩 도구는 믿을 수 없을 정도로 강력해졌지만, 모두 동일한 근본적인 과제에 직면해 있습니다: 컨텍스트 관리. 컨텍스트 창의 크기는 제한되어 있으며, 무엇이 컨텍스트에 남아있고 무엇이 그렇지 않은지에 대한 제어가 거의 없습니다.
+
+장시간 실행 세션의 문제점은 컨텍스트 감소입니다 - 작업을 진행하면서 중요한 프로젝트 지식이 컨텍스트 창의 끝에서 조용히 사라집니다. 무언가 잘못될 때까지 무엇이 잊혀졌는지 알 수 없습니다.
+
+저의 해결책: 각 작업마다 새로 시작하지만 풍부한 주변 컨텍스트를 제공합니다. 작업을 집중적이고 잘 정의된 범위로 유지함으로써, 컨텍스트 창의 더 많은 부분을 관련 프로젝트 지식, 요구사항 및 아키텍처 결정에 할당할 수 있습니다. 이러한 방식으로:
+
+- 각 작업은 필요한 프로젝트 컨텍스트만을 정확히 가지고 시작합니다
+- 장시간 세션에서도 중요한 지식이 손실되지 않습니다
+- Claude는 요구사항을 완전히 이해한 상태에서 자신 있게 작업할 수 있습니다
+- 주변 컨텍스트가 단순한 작업 설명을 넘어 개발을 안내합니다
+
+그 결과 Claude가 항상 해당 작업에 적합한 컨텍스트를 보유한 작업 기반 워크플로가 완성됩니다.
 
 ## Key Components
 
 ### 00_PROJECT_MANIFEST.md
 
-The central document containing the project's vision, goals, and high-level overview. It serves as the starting point for Claude to understand the project. **Important**: The manifest file must be named exactly `00_PROJECT_MANIFEST.md`, not `MANIFEST.md`.
+프로젝트의 비전, 목표 및 상위 개요를 담고 있는 핵심 문서입니다. Claude가 프로젝트를 이해하기 위한 시작점 역할을 합니다. **중요**: 매니페스트 파일 이름은 반드시 `00_PROJECT_MANIFEST.md`이어야 하며 `MANIFEST.md`가 아닙니다.
 
 ### 01_PROJECT_DOCS/
 
-Contains general project documentation including technical specifications, user guides, and API documentation that Claude can reference.
+기술 사양, 사용자 가이드, API 문서 등 Claude가 참조할 수 있는 일반 프로젝트 문서를 포함합니다.
 
 ### 02_REQUIREMENTS/
 
-Organized by milestones, this directory stores product requirements documents (PRDs) and their amendments, providing a clear view of what needs to be built. This helps Claude understand the project requirements. Milestone folders must follow the naming convention `M##_Milestone_Name/` (e.g., `M01_Backend_Setup/`).
+마일스톤별로 구성된 이 디렉터리는 제품 요구사항 문서(PRD)와 수정 사항을 보관하여 무엇을 구축해야 하는지 명확히 보여 줍니다. 이를 통해 Claude는 프로젝트 요구사항을 이해할 수 있습니다. 마일스톤 폴더는 `M##_Milestone_Name/`(예: `M01_Backend_Setup/`) 형식을 따라야 합니다.
 
 ### 03_SPRINTS/
 
-Contains sprint plans and task definitions organized by milestone and sprint sequence. Each sprint folder contains individual task files with detailed information for Claude to work on.
+마일스톤과 스프린트 순서에 따라 구성된 스프린트 계획과 작업 정의를 포함합니다. 각 스프린트 폴더에는 Claude가 작업할 수 있도록 상세 정보가 담긴 개별 작업 파일이 포함되어 있습니다.
 
 ### 04_GENERAL_TASKS/
 
-Stores task definitions for work not tied to a specific sprint. Completed tasks use a `TX` prefix (e.g., `TX001_Completed_Task.md`), making it easy for Claude to identify what's been done.
+특정 스프린트에 속하지 않는 작업 정의를 저장합니다. 완료된 작업은 `TX` 접두사를 사용합니다(예: `TX001_Completed_Task.md`)—이를 통해 Claude가 완료된 작업을 쉽게 식별할 수 있습니다.
 
 ### 05_ARCHITECTURAL_DECISIONS/
 
-Captures significant architectural decisions as Architecture Decision Records (ADRs), documenting the context, options considered, and rationale. This provides critical context for Claude when making technical decisions. Uses a structured ADR template for consistency.
+중요한 아키텍처 결정을 ADR(Architecture Decision Record) 형식으로 기록하여, 배경, 고려된 옵션 및 근거를 문서화합니다. 이는 Claude가 기술적 결정을 내릴 때 필수적인 컨텍스트를 제공합니다. 일관성을 위해 구조화된 ADR 템플릿을 사용합니다.
 
 ### 10_STATE_OF_PROJECT/
 
-Contains timestamped project review snapshots created by the `project_review` command. These provide a historical record of project health, technical decisions, and progress over time.
+`project_review` 명령으로 생성된 타임스탬프가 있는 프로젝트 리뷰 스냅샷을 포함합니다. 이를 통해 프로젝트 상태, 기술적 결정, 진행 상황의 히스토리를 기록할 수 있습니다.
 
 ### 99_TEMPLATES/
 
-Contains standardized templates for different document types to ensure consistency for both humans and Claude:
+사람과 Claude 모두의 일관성을 보장하기 위해 다양한 문서 유형에 대한 표준화된 템플릿을 포함합니다:
 
-- Task templates with structured objectives and acceptance criteria
-- Sprint and milestone metadata templates
-- ADR template for documenting architectural decisions
-- All templates use simplified date formats (YYYY-MM-DD HH:MM)
+- 구조화된 목표와 수용 기준이 포함된 작업 템플릿
+- 스프린트 및 마일스톤 메타데이터 템플릿
+- 아키텍처 결정을 문서화하기 위한 ADR 템플릿
+- 모든 템플릿은 단순화된 날짜 형식(YYYY-MM-DD HH:MM)을 사용합니다
 
-### .claude/commands/simone/
+### .claude/commands/moonklabs/
 
-Custom Claude Code commands that power the Simone workflow:
+Moonklabs 워크플로를 구동하는 맞춤형 Claude Code 명령어:
 
-- `initialize` - Set up project structure and documentation
-- `create_sprints_from_milestone` - Break milestones into logical sprints
-- `create_sprint_tasks` - Generate detailed tasks from sprint plans
-- `do_task` - Execute individual tasks with full context
-- `yolo` - Autonomous sprint execution (use with caution)
-- And many more for testing, reviewing, and project management
+- `initialize` - 프로젝트 구조와 문서를 설정
+- `create_sprints_from_milestone` - 마일스톤을 논리적 스프린트로 분할
+- `create_sprint_tasks` - 스프린트 계획에서 상세 작업 생성
+- `do_task` - 전체 컨텍스트로 개별 작업 실행
+- `yolo` - 자율 스프린트 실행(주의해서 사용)
+- 그 외 테스트, 리뷰, 프로젝트 관리용 명령어 다수
 
-## Directory Structure
+## 디렉토리 구조
 
 ```plaintext
-.simone/
+.moonklabs/
 ├── 00_PROJECT_MANIFEST.md
 ├── 01_PROJECT_DOCS/
 ├── 02_REQUIREMENTS/
@@ -180,13 +180,13 @@ Custom Claude Code commands that power the Simone workflow:
     └── milestone_meta_template.md
 ```
 
-## Configuration Tips
+## 구성 팁
 
-### Enabling Parallel Task Execution
+### 병렬 작업 실행 활성화
 
-While Simone commands like `create_sprint_tasks` support the `useParallelSubagents` instruction, Claude Code needs to be configured to actually execute tasks in parallel. By default, it only runs one task at a time.
+`create_sprint_tasks`와 같은 Moonklabs 명령은 `useParallelSubagents` 지시어를 지원하지만, 실제로 작업을 병렬로 실행하려면 Claude Code 설정이 필요합니다. 기본적으로는 한 번에 하나의 작업만 실행됩니다.
 
-To enable parallel execution:
+병렬 실행을 활성화하려면:
 
 ```bash
 # Set the number of parallel tasks (example: 3)
@@ -196,24 +196,24 @@ claude config set --global "parallelTasksCount" 3
 claude config list -g
 ```
 
-**Important considerations:**
+**중요 고려 사항:**
 
-- Choose the number based on your system's capabilities and rate limits
-- Parallel execution increases API usage significantly
-- Some tasks may have conflicts when run in parallel
-- Start with a small number (2-3) and adjust based on your experience
+- 시스템 성능과 레이트 리밋을 고려하여 숫자를 선택하세요
+- 병렬 실행은 API 사용량을 크게 증가시킵니다
+- 일부 작업은 병렬로 실행될 때 충돌이 발생할 수 있습니다
+- 작은 숫자(2-3)부터 시작하여 경험에 따라 조정하세요
 
-## Contributing & Feedback
+## 기여 및 피드백
 
-I'd love to hear from you! This is very much shaped by how I work, and I'm sure there are tons of improvements to be made.
+여러분의 의견을 듣고 싶습니다! 이는 제 워크플로에 맞춰져 있으므로 개선할 부분이 많을 것입니다.
 
-- **GitHub Issues**: Best place for bugs and feature requests
-- **Anthropic Discord**: Find me @helmi if you want to chat about it
-- **Pull Requests**: Very welcome! Let's make this better together
+- **GitHub Issues**: 버그 및 기능 요청을 위한 최적의 장소
+- **Anthropic Discord**: 대화를 원하시면 @helmi 로 찾아주세요
+- **Pull Requests**: 언제든 환영합니다! 함께 더 나은 프로젝트를 만들어봅시다
 
-I'm particularly interested in:
+특히 다음에 관심이 있습니다:
 
-- How you're using it differently
-- What's missing for your workflow
-- Ideas for better Claude Code integration
-- Different organizational approaches
+- 다른 방식으로 사용하는 방법
+- 워크플로에 부족한 점
+- 더 나은 Claude Code 통합 아이디어
+- 다양한 조직화 방법

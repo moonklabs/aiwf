@@ -7,23 +7,12 @@
 ehthumbs.db
 Thumbs.db
 
-# Root level files (except specific allowed files)
-/*
-!/.moonklabs
-!/.simone
-!/.claude
-!/claude-code
-!/cursor
-!/windsurf
-!/.gitignore
-!/README.md
-!/LICENSE
-!/SYNC_GUIDE.md
-!/sync-simone.sh
-!/CHANGELOG.md
 
 # Editor directories and files
-#.cursor/
+.claude
+.moonklabs
+.cursor
+.windsurf
 .idea
 .vscode/*
 !.vscode/extensions.json

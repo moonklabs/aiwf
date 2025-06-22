@@ -1,172 +1,172 @@
-# Simone Framework Sync Guide
+# Moonklabs 프레임워크 동기화 가이드
 
-## Overview
+## 개요
 
-This guide explains how to sync Simone framework updates from development projects (like Synapsa) back to the canonical `claude-simone` repository.
+이 가이드는 개발 프로젝트(예: SellerKing)에서 Moonklabs 프레임워크 업데이트를 공식 `claude-moonklabs` 저장소로 동기화하는 방법을 설명합니다.
 
-**Important**: This is a ONE-WAY sync process. Framework improvements flow from active development projects → claude-simone, not the other way around.
+**중요**: 이것은 단방향(ONE-WAY) 동기화 프로세스입니다. 프레임워크 개선 사항은 활성 개발 프로젝트 → claude-moonklabs 방향으로만 흐르며 그 반대는 아닙니다.
 
-## Current Development Context
+## 현재 개발 상황
 
-- **Primary Development**: Happens in Synapsa project
-- **Framework Evolution**: New commands, templates, and improvements are tested in real use
-- **Sync Direction**: Synapsa → claude-simone (when improvements are stable)
-- **Manual Review**: Each sync should be carefully reviewed, not automated
+- **주요 개발**: SellerKing 프로젝트에서 진행
+- **프레임워크 발전**: 새로운 명령어, 템플릿 및 개선 사항이 실제 사용 환경에서 테스트됨
+- **동기화 방향**: SellerKing → claude-moonklabs (개선 사항이 안정화되었을 때)
+- **수동 검토**: 각 동기화는 자동화하지 말고 신중하게 검토해야 함
 
-## What to Consider When Syncing
+## 동기화 시 고려 사항
 
-Before syncing, ask yourself:
-1. Is this change Synapsa-specific or would it benefit all Simone users?
-2. Has this been tested enough in real use?
-3. Will this break existing workflows?
-4. Is the change documented clearly?
+동기화를 수행하기 전에 다음을 자문하세요:
+1. 이 변경 사항이 Synapsa 전용인가, 아니면 모든 Moonklabs 사용자에게 도움이 되는가?
+2. 실제 사용 환경에서 충분히 테스트되었는가?
+3. 기존 워크플로를 깨뜨리지 않는가?
+4. 변경 사항이 명확하게 문서화되었는가?
 
-## What Gets Synced
+## 동기화 대상
 
-### Framework Core (Always Sync)
+### 프레임워크 핵심(항상 동기화)
 ```
-/.claude/commands/simone/     # All command definitions
-/.simone/99_TEMPLATES/        # All templates
-/.simone/CLAUDE.MD           # Framework instructions
-/.simone/README.md           # Framework documentation
-```
-
-### Framework Structure (Sync Structure Only)
-```
-/.simone/10_STATE_OF_PROJECT/  # Directory only, not contents
+/.claude/commands/moonklabs/     # 모든 명령 정의
+/.moonklabs/99_TEMPLATES/        # 모든 템플릿
+/.moonklabs/CLAUDE.MD           # 프레임워크 지침
+/.moonklabs/README.md           # 프레임워크 문서
 ```
 
-### Project-Specific (Never Sync)
+### 프레임워크 구조(구조만 동기화)
 ```
-/.simone/00_PROJECT_MANIFEST.md
-/.simone/01_PROJECT_DOCS/*
-/.simone/02_REQUIREMENTS/*
-/.simone/03_SPRINTS/*
-/.simone/04_GENERAL_TASKS/*
-/.simone/05_ARCHITECTURAL_DECISIONS/*
-/.simone/10_STATE_OF_PROJECT/* (contents)
+/.moonklabs/10_STATE_OF_PROJECT/  # 디렉터리만, 내용은 제외
 ```
 
-## Manual Sync Process (Synapsa → claude-simone)
+### 프로젝트 전용(동기화 제외)
+```
+/.moonklabs/00_PROJECT_MANIFEST.md
+/.moonklabs/01_PROJECT_DOCS/*
+/.moonklabs/02_REQUIREMENTS/*
+/.moonklabs/03_SPRINTS/*
+/.moonklabs/04_GENERAL_TASKS/*
+/.moonklabs/05_ARCHITECTURAL_DECISIONS/*
+/.moonklabs/10_STATE_OF_PROJECT/* (contents)
+```
 
-1. **Identify What Changed**
+## 수동 동기화 프로세스(SellerKing → claude-moonklabs)
+
+1. **변경 사항 식별**
    ```bash
-   # From claude-simone directory
-   # Compare commands
-   diff -r ./.claude/commands/simone/ ~/code/synapsa/.claude/commands/simone/
+   # claude-moonklabs 디렉터리에서 실행
+   # 명령어 비교
+   diff -r ./.claude/commands/moonklabs/ ~/code/sellerking/.claude/commands/moonklabs/
    
-   # Compare templates
-   diff -r ./.simone/99_TEMPLATES/ ~/code/synapsa/.simone/99_TEMPLATES/
+   # 템플릿 비교
+   diff -r ./.moonklabs/99_TEMPLATES/ ~/code/sellerking/.moonklabs/99_TEMPLATES/
    
-   # Check for new structural elements
-   ls -la ~/code/synapsa/.simone/
+   # 새로운 구조 요소 확인
+   ls -la ~/code/sellerking/.moonklabs/
    ```
 
-2. **Review Each Change Carefully**
+2. **각 변경 사항을 신중하게 검토**
    - Read through command changes - are they improvements or project-specific?
    - Check template modifications - are they more generic or more specific?
    - Look for new directories or conventions
 
-3. **Selective Manual Copy**
+3. **선택적 수동 복사**
    - Copy only framework improvements
    - Leave out Synapsa-specific adaptations
-   - Preserve generic examples in claude-simone
+   - Preserve generic examples in claude-moonklabs
 
-4. **Test in claude-simone Context**
+4. **claude-moonklabs 컨텍스트에서 테스트**
    - Ensure examples still make sense
    - Verify commands work with generic project structure
    - Check that documentation is project-agnostic
 
-5. **Document Changes for Users**
+5. **사용자용 변경 사항 문서화**
    - Update README.md with new features or changes
    - Add usage examples for new commands
    - Note any breaking changes or migration needs
    - Consider creating a CHANGELOG.md for version history
 
-6. **Prepare for GitHub Push**
+6. **GitHub 푸시 준비**
    - Review all documentation for clarity
    - Ensure examples are helpful and generic
    - Check that getting started instructions still work
    - Commit with clear message about what's new
 
-## Sync Decision Tree
+## 동기화 결정 트리
 
 ```
 Is it a command file? → YES → Sync it
                      ↓ NO
 Is it a template? → YES → Sync it
                  ↓ NO
-Is it CLAUDE.MD or README.md in .simone/? → YES → Sync it
+Is it CLAUDE.MD or README.md in .moonklabs/? → YES → Sync it
                                           ↓ NO
 Is it a new directory structure? → YES → Create directory only
                                 ↓ NO
 Don't sync (project-specific content)
 ```
 
-## Handling Conflicts
+## 충돌 처리
 
-### Command Updates
+### 명령어 업데이트
 - New commands: Add directly
 - Modified commands: Review changes, ensure compatibility
 - Removed commands: Keep if still used in project
 
-### Template Changes
-- Always take latest version from claude-simone
+### 템플릿 변경
+- Always take latest version from claude-moonklabs
 - Templates should be generic enough for all projects
 
-### Structure Changes
+### 구조 변경
 - New directories: Add to all projects
 - Directory renames: Carefully migrate with content preservation
 
-## Best Practices
+## 모범 사례
 
-1. **Regular Syncs**: Sync framework updates monthly or when new features are announced
-2. **Test After Sync**: Run a few commands to ensure everything works
-3. **Document Custom Changes**: If you modify framework files, document why
-4. **Contribute Back**: If you improve templates or commands, PR to claude-simone
+1. **정기적인 동기화**: Sync framework updates monthly or when new features are announced
+2. **동기화 후 테스트**: Run a few commands to ensure everything works
+3. **맞춤 변경 사항 문서화**: If you modify framework files, document why
+4. **기여 환영**: If you improve templates or commands, PR to claude-moonklabs
 
-## Example: Syncing to Synapsa
+## 예시: Synapsa로 동기화
 
 ```bash
-# From synapsa directory
-cd ~/code/synapsa
+# sellerking 디렉터리에서 실행
+cd ~/code/sellerking
 
-# Dry run first
+# 먼저 드라이런
 rsync -av --dry-run \
-  --include='/.claude/commands/simone/***' \
-  --include='/.simone/99_TEMPLATES/***' \
-  --include='/.simone/CLAUDE.MD' \
-  --include='/.simone/README.md' \
+  --include='/.claude/commands/moonklabs/***' \
+  --include='/.moonklabs/99_TEMPLATES/***' \
+  --include='/.moonklabs/CLAUDE.MD' \
+  --include='/.moonklabs/README.md' \
   --exclude='/*' \
-  ~/code/claude-simone/ ./
+  ~/code/claude-moonklabs/ ./
 
-# If looks good, run without --dry-run
+# 이상 없으면 --dry-run 없이 실행
 rsync -av \
-  --include='/.claude/commands/simone/***' \
-  --include='/.simone/99_TEMPLATES/***' \
-  --include='/.simone/CLAUDE.MD' \
-  --include='/.simone/README.md' \
+  --include='/.claude/commands/moonklabs/***' \
+  --include='/.moonklabs/99_TEMPLATES/***' \
+  --include='/.moonklabs/CLAUDE.MD' \
+  --include='/.moonklabs/README.md' \
   --exclude='/*' \
-  ~/code/claude-simone/ ./
+  ~/code/claude-moonklabs/ ./
 
-# Create any new directories
-mkdir -p .simone/10_STATE_OF_PROJECT
+# 새 디렉터리 생성
+mkdir -p .moonklabs/10_STATE_OF_PROJECT
 ```
 
-## Troubleshooting
+## 문제 해결
 
-### Missing Directories
-Create them manually: `mkdir -p .simone/10_STATE_OF_PROJECT`
+### 누락된 디렉터리
+수동으로 생성: `mkdir -p .moonklabs/10_STATE_OF_PROJECT`
 
-### Command Not Working
-Check if it depends on new directory structures or conventions
+### 명령어 작동 안 함
+새로운 디렉터리 구조나 규약에 의존하는지 확인
 
-### Merge Conflicts
-Always prefer claude-simone version for framework files
+### 병합 충돌
+프레임워크 파일은 항상 claude-moonklabs 버전을 우선 사용
 
-## Future Improvements
+## 향후 개선사항
 
-- [ ] Automated sync script with safety checks
-- [ ] Version tracking for framework components
-- [ ] Compatibility matrix for different Simone versions
-- [ ] Migration guides for breaking changes
+- [ ] 안전 검사 포함 자동 동기화 스크립트
+- [ ] 프레임워크 구성 요소 버전 추적
+- [ ] 다양한 Moonklabs 버전에 대한 호환 매트릭스
+- [ ] 브레이킹 체인지용 마이그레이션 가이드
