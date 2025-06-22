@@ -9,8 +9,12 @@ Thumbs.db
 
 # Root level files (except specific allowed files)
 /*
+!/.moonklabs
 !/.simone
 !/.claude
+!/claude-code
+!/cursor
+!/windsurf
 !/.gitignore
 !/README.md
 !/LICENSE
@@ -19,7 +23,7 @@ Thumbs.db
 !/CHANGELOG.md
 
 # Editor directories and files
-.cursor/
+#.cursor/
 .idea
 .vscode/*
 !.vscode/extensions.json
