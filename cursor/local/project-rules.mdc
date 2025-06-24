@@ -9,7 +9,7 @@ This file serves as a setup configuration for you and the AI assistant in this w
 During the initial conversation, interactive customization will be conducted, and content tailored to your specific needs will be added to this file as differences.
 
 # Important Notes
-- The settings in this file are designed not to conflict with the content of `.cursorrules / .cursorrules_JA` in the root folder of the workspace.
+- The settings in this file are designed not to conflict with the content of `.cursorrules` in the root folder of the workspace.
 - The interactive setup process will be completed in a maximum of 10 exchanges.
 
 # Interactive Setup Process - Common Question Items
