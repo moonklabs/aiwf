@@ -1,4 +1,4 @@
-# Mermaid 다이어그램 유지 관리
+# Maintain Mermaid Diagrams
 
 Instructions for generating, maintaining and updating the mermaid diagrams in the current project's architecture documentation.
 
