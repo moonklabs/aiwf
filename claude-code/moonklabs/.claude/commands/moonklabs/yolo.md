@@ -147,15 +147,62 @@ Your work is done. Move to `## CREATE SUMMARY`
 ## CREATE SUMMARY
 
 - Get current datetime stamp from the system and compare to initially remembered timestamp. Calculate duration of the process.
-- Create a summary report including:
-  - Mode executed (Sprint-specific or General)
-  - Sprint tasks created (if applicable)
-  - Number of tasks completed
-  - Number of tasks skipped/failed
-  - Total duration
-  - Any critical issues encountered
-  - Current test status
-  - Next recommended action
-- Report the result of the review to the user including the duration.
+
+### GENERATE PROJECT STATUS REPORT
+
+**Gather Project Status Data:**
+
+- Scan `.moonklabs/01_MILESTONES/` for milestone completion status
+- Scan `.moonklabs/03_SPRINTS/` for all sprint status and task completion
+- Scan `.moonklabs/04_GENERAL_TASKS/` for general task completion
+- Count completed vs total tasks for each category
+
+**Create Visual Progress Report:**
+
+```
+=== MOONKLABS PROJECT STATUS REPORT ===
+
+🎯 MILESTONES PROGRESS:
+[▓▓▓▓▓▓▓░░░] 70% (7/10 completed)
+M01: ✅ Setup & Architecture
+M02: ✅ Core Features
+M03: ✅ Authentication
+M04: 🔄 In Progress - API Development
+M05: ⏳ Pending - Frontend Integration
+
+📊 SPRINT PROGRESS:
+[▓▓▓▓▓▓░░░░] 60% (3/5 sprints completed)
+S01: ✅ Complete (12/12 tasks)
+S02: ✅ Complete (8/8 tasks)
+S03: 🔄 Active (5/9 tasks completed)
+S04: ⏳ Planned (0/0 tasks)
+S05: ⏳ Planned (0/0 tasks)
+
+⚡ GENERAL TASKS:
+[▓▓▓▓▓▓▓▓░░] 80% (16/20 completed)
+
+📈 OVERALL PROJECT HEALTH:
+[▓▓▓▓▓▓▓░░░] 73% Complete
+```
+
+**Create Summary Report including:**
+
+- Mode executed (Sprint-specific or General)
+- Sprint tasks created (if applicable)
+- Number of tasks completed this session
+- Number of tasks skipped/failed this session
+- Total duration of YOLO session
+- Current project completion percentage
+- Any critical issues encountered
+- Current test status
+- Next recommended action
+- Top 3 priority items for next session
+
+**Report the complete status to the user including:**
+
+- Visual progress graphs
+- Session summary
+- Project health overview
+- Recommended next steps
 
 Your work is done. Thank you.
