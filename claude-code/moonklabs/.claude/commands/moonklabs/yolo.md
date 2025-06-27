@@ -85,7 +85,9 @@ Execute based on mode:
 - if you have touched this task before ignore it and jump to the next task
 - if you can't find a task that you have not tried fixing before jump to ### EXECUTE PROJECT REVIEW
 - if you find a task that you cannot fix because the work was done already, close the task and note in Output Log of task.
-- **BEFORE STARTING**: Create a git branch for the task: `git checkout -b task/<task-id>`
+- **BEFORE STARTING**:
+  - **If** `worktree` NOT in arguments: Create a git branch for the task: `git checkout -b task/<task-id>`
+  - **If** `worktree` in arguments: Skip branch creation (worktree mode)
 - **USE A SUBAGENT** and have it include @.claude/commands/moonklabs/do_task.md with the Task ID as Argument to execute the Task.
 - **AFTER TASK COMPLETION**: Run tests to verify nothing broke using test.md command (@.claude/commands/moonklabs/test.md)
 - on any failure in the task execution assess the severity of the error:
@@ -98,7 +100,9 @@ Execute based on mode:
 - **ONLY IF** tests are passing and no critical issues exist
 - **USE A SUBAGENT** and have it include @.claude/commands/moonklabs/commit.md with the Task ID as Argument and YOLO as additional argument
 - on any failure when committing, note the problem in the OUTPUT LOG of the task and continue
-- after successful commit, merge to main: `git checkout main && git merge task/<task-id>`
+- after successful commit,
+  - **If** `worktree` NOT in arguments: after successful commit, merge to main: `git checkout main && git merge task/<task-id>`
+  - **If** `worktree` in arguments: after successful commit, push changes: `git push`
 - on success move on
 
 ### REPEAT FOR ALL OPEN TASKS
