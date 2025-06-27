@@ -32,14 +32,24 @@
 2. **종속성:** 먼저 완료해야 할 종속 태스크가 있는지 확인
 3. **요구사항:** `.moonklabs/02_REQUIREMENTS/`의 관련 요구사항 문서 읽기
 4. **범위 확인:** 태스크가 현재 스프린트 목표와 일치하는지 확인
+5. **GitHub Issue 확인:** 태스크 파일에 `github_issue` 필드가 있는지 확인
 
 **IMPORTANT:** 태스크가 미래 스프린트의 기능을 참조하거나 충족되지 않은 종속성이 있는 경우, 일시 정지하고 명확히 요청.
+
+**GitHub Issue 생성 (선택사항):**
+- 태스크에 GitHub issue가 없고 사용자가 issue 추적을 원하는 경우
+- `/project:moonklabs:issue_create {task_id}` 명령 사용 제안
 
 ## 4 · 상태를 진행 중으로 설정
 
 - 현재 로컬 타임스탬프 찾기 (YYYY-MM-DD HH:MM).
 - front-matter를 **status: in_progress**로 업데이트하고 Updated 시간 설정
 - .moonklabs/00_PROJECT_MANIFEST.md를 업데이트하여 태스크를 진행 중으로 설정, 업데이트 시간 및 현재 스프린트 상태.
+- **GitHub Issue 업데이트 (있는 경우):**
+  ```bash
+  gh issue comment {issue_number} --body "🚀 태스크 작업을 시작했습니다."
+  gh issue edit {issue_number} --add-label "in-progress"
+  ```
 
 ## 5 · 태스크 작업 실행
 
@@ -76,6 +86,11 @@
 - 태스크 상태를 **completed**로 설정
 - 파일명에서 적절한 완료 인식을 위해 태스크 파일 이름 변경 (TX[TASK_ID]...)
 - 새 상태를 반영하도록 .moonklabs/00_PROJECT_MANIFEST.md 업데이트
+- **GitHub Issue 업데이트 (있는 경우):**
+  ```bash
+  gh issue comment {issue_number} --body "✅ 태스크가 완료되었습니다."
+  gh issue edit {issue_number} --remove-label "in-progress" --add-label "completed"
+  ```
 - 사용자에게 결과 **보고**
 
   ✅ **결과**: 성공의 간단한 설명
@@ -89,4 +104,5 @@
 - 사용자를 위한 **제안**:
 
   - 🛠️ 변경사항을 git에 커밋하려면 /project:moonklabs:commit `TASK_ID` 사용
+  - 🔀 Pull Request를 생성하려면 /project:moonklabs:pr_create `TASK_ID` 사용
   - 🧹  다음 태스크를 시작하기 전에 컨텍스트를 지우려면 /clear 사용

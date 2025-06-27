@@ -86,6 +86,9 @@
 - 이전에 수정을 시도하지 않은 태스크를 찾을 수 없으면 ### EXECUTE PROJECT REVIEW로 이동
 - 이미 작업이 완료되어 수정할 수 없는 태스크를 찾으면, 태스크를 닫고 태스크의 Output Log에 메모.
 - **BEFORE STARTING:** 태스크를 위한 git 브랜치 생성: `git checkout -b task/<task-id>`
+- **GitHub Issue 생성 (선택사항):** 
+  - 태스크에 `github_issue` 필드가 없는 경우
+  - 서브에이전트를 사용하여 @.claude/commands/moonklabs/issue_create.md를 포함하여 issue 생성
 - **USE A SUBAGENT:** 태스크 ID를 인자로 하여 @.claude/commands/moonklabs/do_task.md를 포함하여 태스크를 실행하도록 하세요.
 - **AFTER TASK COMPLETION:** test.md 명령을 사용하여 아무것도 깨지지 않았는지 확인하기 위해 테스트 실행 (@.claude/commands/moonklabs/test.md)
 - 태스크 실행의 실패 시 오류의 심각도 평가:
@@ -99,6 +102,9 @@
 - **USE A SUBAGENT:** 태스크 ID를 인자로, YOLO를 추가 인자로 하여 @.claude/commands/moonklabs/commit.md를 포함하도록 하세요
 - 커밋 시 실패하면, 태스크의 OUTPUT LOG 에 문제를 메모하고 계속
 - 성공적인 커밋 후, main으로 병합: `git checkout main && git merge task/<task-id>`
+- **Pull Request 생성 (선택사항):**
+  - GitHub issue가 연결되어 있는 경우
+  - 서브에이전트를 사용하여 @.claude/commands/moonklabs/pr_create.md를 포함하여 PR 생성
 - 성공 시 계속
 
 ### 모든 열린 태스크에 대해 반복

@@ -107,6 +107,7 @@ For the next commit to create:
 - **Commit message**: Use conventional commit format, be clear and concise
   - **CRITICAL:** Must not contain any attribution to Claude, Anthropic, or AI assistance
   - If task-related, include task ID in message (e.g., "feat(agents): implement T01_S02 coordinator agent" or "fix(api): resolve T003 authentication issue")
+  - **GitHub Issue Linking**: If task has a GitHub issue, include `fixes #123` or `relates to #456` in commit message
 - **Reasoning**: Brief explanation of why these changes belong together
 
 ## 4 · Check if user approval is necessary
@@ -128,6 +129,12 @@ For the approved commit:
 - **IMPORTANT:** We are using pre-commit hooks that will likely report shortcomings. You need to fix them. Don't skip validation unless there are open tasks adressing especially these problems.
 - **Create the commit** with the approved message
 - Verify commit was created successfully
+- **GitHub Issue Update (if applicable):**
+  - If task has a linked GitHub issue
+  - Add commit link comment to issue:
+    ```bash
+    gh issue comment {issue_number} --body "🔗 Commit: {commit_sha} - {commit_message}"
+    ```
 - **IMPORTANT:** If there are more commits remaining, return to step 3 for the next commit
 - Only proceed to step 6 when all commits are completed
 

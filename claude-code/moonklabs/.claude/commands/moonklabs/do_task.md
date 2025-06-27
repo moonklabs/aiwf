@@ -32,14 +32,24 @@ Read the task description. If anything is unclear, ask clarifying questions befo
 2. **Dependencies:** Check if any dependent tasks need to be completed first
 3. **Requirements:** Read relevant requirements docs in `.moonklabs/02_REQUIREMENTS/`
 4. **Scope Verification:** Ensure task aligns with current sprint objectives
+5. **GitHub Issue Check:** Check if task file has a `github_issue` field
 
 **IMPORTANT:** If task references functionality from future sprints or has unmet dependencies, pause and ask for clarification.
+
+**GitHub Issue Creation (Optional):**
+- If task doesn't have a GitHub issue and user wants issue tracking
+- Suggest using `/project:moonklabs:issue_create {task_id}` command
 
 ## 4 · Set status to in_progress
 
 - Find out the current local timestamp (YYYY-MM-DD HH:MM).
 - Update front-matter to **status: in_progress** and set Updated time
 - Update ./moonklabs/00_PROJECT_MANIFEST.md to set task in progress, updated time and current Sprint Status.
+- **GitHub Issue Update (if exists):**
+  ```bash
+  gh issue comment {issue_number} --body "🚀 Task work has started."
+  gh issue edit {issue_number} --add-label "in-progress"
+  ```
 
 ## 5 · Execute task work
 
@@ -76,6 +86,11 @@ Follow these steps for a Code Review (in order)
 - set the Task status to **completed**
 - Rename the Task file accordingly to enable proper Completed recognition from the filename (TX[TASK_ID]...)
 - Update .moonklabs/00_PROJECT_MANIFEST.md to reflect the new status
+- **GitHub Issue Update (if exists):**
+  ```bash
+  gh issue comment {issue_number} --body "✅ Task has been completed."
+  gh issue edit {issue_number} --remove-label "in-progress" --add-label "completed"
+  ```
 - **Report** the result to the user
 
   ✅ **Result**: Quick statement of success
@@ -89,4 +104,5 @@ Follow these steps for a Code Review (in order)
 - **Suggestions** for the User:
 
   - 🛠️ Use /project:moonklabs:commit `TASK_ID` to commit the changes to git
+  - 🔀 Use /project:moonklabs:pr_create `TASK_ID` to create a Pull Request
   - 🧹 Use /clear to clear the context before starting the next Task

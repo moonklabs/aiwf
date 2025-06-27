@@ -107,6 +107,7 @@
 - **Commit Message**: 관례적 커밋 형식 사용, 명확하고 간결하게
   - **CRITICAL:** Claude, Anthropic, 또는 AI 지원에 대한 어떤 언급도 포함하지 않아야 함
   - 태스크 관련인 경우, 메시지에 태스크 ID 포함 (예: "feat(agents): implement T01_S02 coordinator agent" 또는 "fix(api): resolve T003 authentication issue")
+  - **GitHub Issue 연결**: 태스크에 GitHub issue가 있는 경우, 커밋 메시지에 `fixes #123` 또는 `relates to #456` 포함
 - **Reasoning**: 이러한 변경사항이 함께 속하는 이유에 대한 간단한 설명
 
 ## 4 · 사용자 승인이 필요한지 확인
@@ -128,6 +129,12 @@ YOLO가 <$ARGUMENTS>의 일부인 경우 이를 건너뛰고 다음 단계로 �
 - **IMPORTANT:** pre-commit 훅을 사용하고 있으며 부족한 점을 보고할 가능성이 있습니다. 이를 수정해야 합니다. 특히 이러한 문제를 다루는 열린 태스크가 있지 않는 한 검증을 건너뛰지 마세요.
 - 승인된 메시지로 **커밋 생성**
 - 커밋이 성공적으로 생성되었는지 확인
+- **GitHub Issue 업데이트 (해당되는 경우):**
+  - 태스크에 GitHub issue가 연결되어 있는 경우
+  - Issue에 커밋 링크 코멘트 추가:
+    ```bash
+    gh issue comment {issue_number} --body "🔗 커밋: {commit_sha} - {commit_message}"
+    ```
 - **IMPORTANT:** 남은 커밋이 더 있으면 다음 커밋을 위해 3단계로 돌아가기
 - 모든 커밋이 완료된 경우에만 6단계로 진행
 

@@ -113,6 +113,9 @@ Execute based on mode:
 - **BEFORE STARTING**:
   - **If** `worktree` NOT in arguments: Create a git branch for the task: `git checkout -b task/<task-id>`
   - **If** `worktree` in arguments: Skip branch creation (worktree mode)
+- **GitHub Issue Creation (Optional):** 
+  - If task doesn't have a `github_issue` field
+  - Use SUBAGENT to include @.claude/commands/moonklabs/issue_create.md to create issue
 - **USE A SUBAGENT** and have it include @.claude/commands/moonklabs/do_task.md with the Task ID as Argument to execute the Task.
 - **AFTER TASK COMPLETION**: Run tests to verify nothing broke using test.md command (@.claude/commands/moonklabs/test.md)
 - on any failure in the task execution assess the severity of the error:
@@ -128,6 +131,9 @@ Execute based on mode:
 - after successful commit,
   - **If** `worktree` NOT in arguments: after successful commit, merge to main: `git checkout main && git merge task/<task-id>`
   - **If** `worktree` in arguments: after successful commit, push changes: `git push`
+- **Pull Request Creation (Optional):**
+  - If GitHub issue is linked to the task
+  - Use SUBAGENT to include @.claude/commands/moonklabs/pr_create.md to create PR
 - **IMMEDIATELY** go back to `### FIND OPEN WORK` to continue with next task
 
 ### CONTINUOUS EXECUTION LOOP
