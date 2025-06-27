@@ -13,6 +13,9 @@ Priority is to get the work completed.
 Check <$ARGUMENTS>:
 
 - If sprint ID provided (e.g., S03): Work ONLY on that sprint
+- If `sprint-all` provided: Execute ALL sprints sequentially until completion
+- If `milestone-all` provided: Execute ALL milestones (including all their sprints) until completion
+- If `worktree` provided: Use worktree mode (no branch creation, direct push)
 - If empty: Work on general tasks first, then active sprint tasks
 
 **Report Mode** to the User!
@@ -54,6 +57,28 @@ Execute based on mode:
   - If meta exists: Jump to ### CREATE SPRINT TASKS
   - If no meta: Exit with error - sprint doesn't exist
 - If tasks exist: Continue to **Task selection** section below
+
+**If `sprint-all` in arguments:**
+
+- Scan ALL sprints in .moonklabs/03_SPRINTS/ directory
+- Create ordered list of ALL sprints (S01, S02, S03, ...)
+- For each sprint in sequence:
+  - Check if sprint has tasks, if not create them
+  - Execute ALL tasks in current sprint before moving to next
+  - Mark sprint as completed when all tasks done
+- Continue until ALL sprints are 100% completed
+- Priority: Complete current sprint entirely before starting next
+
+**If `milestone-all` in arguments:**
+
+- Scan ALL milestones in .moonklabs/01_MILESTONES/ directory
+- For each milestone in sequence:
+  - Identify all related sprints for this milestone
+  - Execute ALL sprints related to current milestone
+  - Execute ALL tasks in each sprint
+  - Mark milestone as completed when all related work done
+- Continue until ALL milestones are 100% completed
+- Priority: Complete current milestone entirely before starting next
 
 **If NO arguments (general mode):**
 
@@ -103,24 +128,56 @@ Execute based on mode:
 - after successful commit,
   - **If** `worktree` NOT in arguments: after successful commit, merge to main: `git checkout main && git merge task/<task-id>`
   - **If** `worktree` in arguments: after successful commit, push changes: `git push`
-- on success move on
+- **IMMEDIATELY** go back to `### FIND OPEN WORK` to continue with next task
 
-### REPEAT FOR ALL OPEN TASKS
+### CONTINUOUS EXECUTION LOOP
 
-**Based on current mode:**
+**⚡ YOLO MODE: NO STOPPING UNTIL COMPLETION**
+
+**This is the main execution loop - DO NOT EXIT EARLY**
 
 **Sprint-specific mode:**
 
-- Continue with next task in the specified sprint only
-- Go back to ### WORK ON TASK until all sprint tasks are done
-- When sprint is complete, move to project review
+- **LOOP UNTIL** ALL tasks in the specified sprint are completed
+- After each commit, **IMMEDIATELY** go back to `### FIND OPEN WORK`
+- **ONLY** move to project review when sprint is 100% complete
+- **NEVER** ask for user input or confirmation
+
+**Sprint-all mode:**
+
+- **LOOP UNTIL** ALL sprints are 100% completed
+- For each sprint: Complete ALL tasks before moving to next sprint
+- After each commit, **IMMEDIATELY** go back to `### FIND OPEN WORK`
+- Track progress: Current sprint X of Y total sprints
+- **NEVER** skip incomplete sprints
+- **ONLY** exit when ALL sprints are fully completed
+
+**Milestone-all mode:**
+
+- **LOOP UNTIL** ALL milestones are 100% completed
+- For each milestone: Complete ALL related sprints and tasks
+- After each commit, **IMMEDIATELY** go back to `### FIND OPEN WORK`
+- Track progress: Current milestone X of Y total milestones
+- **NEVER** skip incomplete milestones or their dependencies
+- **ONLY** exit when ALL milestones are fully achieved
 
 **General mode:**
 
-- After completing a general task, check for more general tasks first
-- If no general tasks remain, move to active sprint tasks
-- Continue until all accessible tasks are done
-- When done move on
+- **LOOP CONTINUOUSLY** through:
+  1. Complete ALL available general tasks
+  2. Then move to active sprint tasks
+  3. Complete ALL active sprint tasks
+  4. Check for new sprints or tasks created
+  5. Repeat until NO more work available
+- After each commit, **IMMEDIATELY** go back to `### FIND OPEN WORK`
+- **ONLY** exit when absolutely no work remains
+
+**Stopping Conditions (ONLY stop if ALL are true):**
+
+- NO pending tasks in target scope
+- NO tasks that can be auto-fixed
+- NO sprints needing task creation
+- Project review passes with NO new tasks created
 
 ## EXECUTE PROJECT REVIEW
 
@@ -132,17 +189,44 @@ Execute based on mode:
   - Go back to `### FIND OPEN WORK` to work on these fixes
   - On PASS: move on
 
-## MORE WORK TO DO?
+## CONTINUATION CHECK
 
-**Based on current mode:**
+**⚡ MANDATORY CONTINUATION LOGIC**
+
+**Check for remaining work:**
+
+- Scan for ANY pending tasks in current scope
+- Check if project review created new tasks
+- Verify if any sprints need task creation
+
+**Decision Matrix:**
 
 **Sprint-specific mode:**
 
-Your work is done. Move to `## CREATE SUMMARY`
+- **IF** sprint has ANY pending tasks → Go back to `### FIND OPEN WORK`
+- **IF** sprint is 100% complete → Move to `## CREATE SUMMARY`
+
+**Sprint-all mode:**
+
+- **IF** ANY sprint has pending tasks → Go back to `### FIND OPEN WORK`
+- **IF** ANY sprint needs task creation → Go back to `### FIND OPEN WORK`
+- **IF** ALL sprints are 100% complete → Move to `## CREATE SUMMARY`
+
+**Milestone-all mode:**
+
+- **IF** ANY milestone has incomplete sprints → Go back to `### FIND OPEN WORK`
+- **IF** ANY milestone-related tasks pending → Go back to `### FIND OPEN WORK`
+- **IF** ALL milestones are 100% complete → Move to `## CREATE SUMMARY`
 
 **General mode:**
 
-- Move on to check for more open Tasks or Sprints. Move to `### FIND OPEN WORK`
+- **IF** ANY general tasks pending → Go back to `### FIND OPEN WORK`
+- **IF** ANY sprint tasks pending → Go back to `### FIND OPEN WORK`
+- **IF** ANY sprints need task creation → Go back to `### FIND OPEN WORK`
+- **IF** project review failed and created new tasks → Go back to `### FIND OPEN WORK`
+- **ONLY IF** absolutely NO work remains → Move to `## CREATE SUMMARY`
+
+**🚨 CRITICAL: Do NOT move to summary unless 100% certain no work remains**
 
 ## CREATE SUMMARY
 
@@ -187,12 +271,14 @@ S05: ⏳ Planned (0/0 tasks)
 
 **Create Summary Report including:**
 
-- Mode executed (Sprint-specific or General)
+- Mode executed (Sprint-specific, Sprint-all, Milestone-all, or General)
 - Sprint tasks created (if applicable)
 - Number of tasks completed this session
 - Number of tasks skipped/failed this session
 - Total duration of YOLO session
 - Current project completion percentage
+- Sprints completed (if sprint-all mode)
+- Milestones achieved (if milestone-all mode)
 - Any critical issues encountered
 - Current test status
 - Next recommended action
