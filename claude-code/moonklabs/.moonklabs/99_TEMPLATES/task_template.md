@@ -4,6 +4,7 @@ sprint_sequence_id: S<ID> # e.g., S01 (If part of a sprint, otherwise null or ab
 status: open # open | in_progress | pending_review | done | failed | blocked
 complexity: Medium # Low | Medium | High
 last_updated: YYYY-MM-DDTHH:MM:SSZ
+github_issue: # Optional: GitHub issue number (e.g., #123)
 ---
 
 # Task: (Filename serves as the descriptive title)

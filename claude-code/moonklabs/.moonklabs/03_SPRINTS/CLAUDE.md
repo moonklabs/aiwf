@@ -47,16 +47,37 @@ Tasks within a sprint follow a standard format:
   - Update status to "done"
   - Rename file from T... to TX... (e.g., `TX01_S01_Task_Name.md`)
   - Update Output Log with final entry
+  - If GitHub issue is linked, update issue status
 
 Always use the template at `.Moonklabs/99_TEMPLATES/task_template.md` when creating new sprint tasks.
+
+### GitHub Issue Integration
+
+When working with tasks that have GitHub issues:
+
+1. **Creating Issues**: Use `/project:moonklabs:issue_create {task_id}` to create a GitHub issue from a task
+2. **Linking Issues**: Add `github_issue: #123` to task frontmatter
+3. **Status Updates**: Update issue status when task status changes
+4. **Commit Integration**: Include `fixes #123` or `relates to #456` in commit messages
+5. **Pull Requests**: Use `/project:moonklabs:pr_create {task_id}` to create PR with issue linking
 
 ## Working with Sprint Tasks
 
 When executing a sprint task:
 
 1. Analyze task's Acceptance Criteria and Subtasks
-2. Update status to "in_progress"
-3. Log activities in the Output Log with timestamps after every Subtask(!)
-4. Mark subtasks as completed using [x] only when they are really completed. If you were not able to complete them, don't mark them and tell the user.
-5. Reference architectural guidelines when implementing technical solutions
-6. Ensure the task follows the structure from the task template
+2. Check if task has a linked GitHub issue (look for `github_issue` in frontmatter)
+3. Update status to "in_progress" and update GitHub issue if linked:
+   ```bash
+   gh issue comment {issue_number} --body "🚀 Task work has started."
+   gh issue edit {issue_number} --add-label "in-progress"
+   ```
+4. Log activities in the Output Log with timestamps after every Subtask(!)
+5. Mark subtasks as completed using [x] only when they are really completed. If you were not able to complete them, don't mark them and tell the user.
+6. Reference architectural guidelines when implementing technical solutions
+7. Ensure the task follows the structure from the task template
+8. When task is complete, update GitHub issue if linked:
+   ```bash
+   gh issue comment {issue_number} --body "✅ Task has been completed."
+   gh issue edit {issue_number} --remove-label "in-progress" --add-label "completed"
+   ```
