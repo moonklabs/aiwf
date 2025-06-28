@@ -11,6 +11,7 @@ Thumbs.db
 # Editor directories and files
 /.claude
 /.moonklabs
+.moonklabs_backup_*/
 /.cursor
 /.windsurf
 /.idea
