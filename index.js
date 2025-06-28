@@ -251,14 +251,15 @@ async function installMoonklabs(options = {}) {
             } catch (error) {
                 // If manifest doesn't exist, that's okay
             }
-            // Download templates on fresh install
-            try {
-                logWithSpinner(spinner, '템플릿 디렉토리를 다운로드 중...', debugLog);
-                await downloadDirectory(`${GITHUB_CONTENT_PREFIX}/.moonklabs/98_PROMPTS`, '.moonklabs/98_PROMPTS', spinner);
-                await downloadDirectory(`${GITHUB_CONTENT_PREFIX}/.moonklabs/99_TEMPLATES`, '.moonklabs/99_TEMPLATES', spinner);
-            } catch (error) {
-                logWithSpinner(spinner, '템플릿 디렉토리를 찾을 수 없어 건너뜁니다...', debugLog);
-            }
+        }
+
+        // Download templates on fresh install
+        try {
+            logWithSpinner(spinner, '템플릿 디렉토리를 다운로드 중...', debugLog);
+            await downloadDirectory(`${GITHUB_CONTENT_PREFIX}/.moonklabs/98_PROMPTS`, '.moonklabs/98_PROMPTS', spinner);
+            await downloadDirectory(`${GITHUB_CONTENT_PREFIX}/.moonklabs/99_TEMPLATES`, '.moonklabs/99_TEMPLATES', spinner);
+        } catch (error) {
+            logWithSpinner(spinner, '템플릿 디렉토리를 찾을 수 없어 건너뜁니다...', debugLog);
         }
 
         // Always update CLAUDE.md documentation files
@@ -290,14 +291,6 @@ async function installMoonklabs(options = {}) {
             logWithSpinner(spinner, '명령어 디렉토리를 찾을 수 없어 건너뜁니다...', debugLog);
         }
 
-        // 1. prompts 폴더 다운로드
-        // try {
-        //     logWithSpinner(spinner, 'prompts 폴더를 다운로드 중...', debugLog);
-        //     await downloadDirectory(`prompts`, 'prompts', spinner);
-        // } catch (error) {
-        //     logWithSpinner(spinner, 'prompts 폴더를 찾을 수 없어 건너뜁니다...', debugLog);
-        // }
-
         // 2. rules/global 폴더 다운로드 (임시 폴더)
         let tmpRulesGlobal = '.moonklabs/_tmp_rules_global';
         try {
@@ -306,6 +299,16 @@ async function installMoonklabs(options = {}) {
         } catch (error) {
             logWithSpinner(spinner, 'rules/global 폴더를 찾을 수 없어 건너뜁니다...', debugLog);
             tmpRulesGlobal = null;
+        }
+
+        // 2-1. rules/manual 폴더 다운로드 (임시 폴더)
+        let tmpRulesManual = '.moonklabs/_tmp_rules_manual';
+        try {
+            logWithSpinner(spinner, 'rules/manual 폴더를 다운로드 중...', debugLog);
+            await downloadDirectory(`rules/manual`, tmpRulesManual, spinner);
+        } catch (error) {
+            logWithSpinner(spinner, 'rules/manual 폴더를 찾을 수 없어 건너뜁니다...', debugLog);
+            tmpRulesManual = null;
         }
 
         // 3. rules/global -> .cursor/rules(.mdc+헤더), .windsurf/rules(확장자 유지) 복사
@@ -319,7 +322,7 @@ async function installMoonklabs(options = {}) {
                 const srcPath = path.join(tmpRulesGlobal, file);
                 const stat = await fs.stat(srcPath);
                 if (!stat.isFile()) continue;
-                // .cursor/rules: 확장자 mdc, 헤더 추가
+                // .cursor/rules: 확장자 mdc, 헤더 추가 (alwaysApply: true)
                 const base = path.parse(file).name;
                 const cursorTarget = path.join(cursorRulesDir, base + '.mdc');
                 const content = await fs.readFile(srcPath, 'utf8');
@@ -336,6 +339,36 @@ async function installMoonklabs(options = {}) {
                 await fs.unlink(path.join(tmpRulesGlobal, file));
             }
             await fs.rmdir(tmpRulesGlobal);
+        }
+
+        // 3-1. rules/manual -> .cursor/rules(.mdc+헤더), .windsurf/rules(확장자 유지) 복사
+        if (tmpRulesManual) {
+            const cursorRulesDir = '.cursor/rules';
+            const windsurfRulesDir = '.windsurf/rules';
+            await fs.mkdir(cursorRulesDir, { recursive: true });
+            await fs.mkdir(windsurfRulesDir, { recursive: true });
+            const files = await fs.readdir(tmpRulesManual);
+            for (const file of files) {
+                const srcPath = path.join(tmpRulesManual, file);
+                const stat = await fs.stat(srcPath);
+                if (!stat.isFile()) continue;
+                // .cursor/rules: 확장자 mdc, 헤더 추가 (alwaysApply: false)
+                const base = path.parse(file).name;
+                const cursorTarget = path.join(cursorRulesDir, base + '.mdc');
+                const content = await fs.readFile(srcPath, 'utf8');
+                const header = '---\ndescription: \nglobs: \nalwaysApply: false\n---\n';
+                await fs.writeFile(cursorTarget, header + content, 'utf8');
+                logWithSpinner(spinner, `[rules/manual] ${file} -> .cursor/rules/${base}.mdc`, debugLog);
+                // .windsurf/rules: 확장자 유지, 헤더 없음
+                const windsurfTarget = path.join(windsurfRulesDir, file);
+                await fs.copyFile(srcPath, windsurfTarget);
+                logWithSpinner(spinner, `[rules/manual] ${file} -> .windsurf/rules/${file}`, debugLog);
+            }
+            // 임시 폴더 삭제
+            for (const file of files) {
+                await fs.unlink(path.join(tmpRulesManual, file));
+            }
+            await fs.rmdir(tmpRulesManual);
         }
 
         if (hasExisting) {
@@ -430,6 +463,6 @@ program
     .version('1.0.1')
     .description('Moonklabs 프레임워크 설치 프로그램')
     .option('-f, --force', '프롬프트 없이 강제 설치')
-    .action(() => installMoonklabs({ debugLog: true }));
+    .action((options) => installMoonklabs({ ...options, debugLog: true }));
 
 program.parse(process.argv);
