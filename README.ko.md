@@ -13,7 +13,7 @@ Moonklabs는 Claude Code를 사용한 AI 지원 개발을 위해 특별히 설�
 모든 프로젝트 디렉토리에 Moonklabs를 설치하세요:
 
 ```bash
-npx @moonklabs/aiwf
+npx aiwf
 ```
 
 이것으로 끝입니다! 설치 프로그램은 다음을 수행합니다:
@@ -27,7 +27,7 @@ npx @moonklabs/aiwf
 ### 첫 설치
 
 ```bash
-npx @moonklabs/aiwf
+npx aiwf
 ```
 
 ### 기존 설치 업데이트
@@ -43,7 +43,7 @@ Moonklabs가 이미 설치된 경우, 설치 프로그램이 이를 감지하고
 모든 프롬프트를 건너뛰고 강제로 설치합니다:
 
 ```bash
-npx @moonklabs/aiwf --force
+npx aiwf --force
 ```
 
 ## 설치되는 항목

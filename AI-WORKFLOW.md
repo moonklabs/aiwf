@@ -15,7 +15,7 @@ Moonklabs은 Claude Code, Gemini-CLI 와 더 효과적으로 작업하기 위해
 ### 1. Moonklabs 설치하기
 
 ```bash
-npx @moonklabs/aiwf
+npx aiwf
 ```
 
 이것은 폴더 구조를 설정하고 프로젝트에 명령 파일을 설치/업데이트합니다. 기존 설치를 업데이트하는 데도 사용할 수 있으며, 명령 파일은 자동으로 백업됩니다.

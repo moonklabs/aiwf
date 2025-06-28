@@ -15,7 +15,7 @@ Moonklabs is a markdown-based project management framework designed specifically
 Install Moonklabs in any project directory:
 
 ```bash
-npx @moonklabs/aiwf
+npx aiwf
 ```
 
 That's it! The installer will:
@@ -29,7 +29,7 @@ That's it! The installer will:
 ### First Time Installation
 
 ```bash
-npx @moonklabs/aiwf
+npx aiwf
 ```
 
 ### Update Existing Installation
@@ -45,7 +45,7 @@ If Moonklabs is already installed, the installer will detect it and offer option
 Skip all prompts and force installation:
 
 ```bash
-npx @moonklabs/aiwf --force
+npx aiwf --force
 ```
 
 ## What Gets Installed

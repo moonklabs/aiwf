@@ -1,5 +1,5 @@
 {
-    "name": "@moonklabs/aiwf",
+    "name": "aiwf",
     "version": "0.1.0",
     "description": "AI Workflow Framework for Moonklabs",
     "main": "index.js",
