@@ -1,6 +1,6 @@
 [Read in Korean (한국어로 보기)](README.ko.md)
 
-# hello-moonklabs
+# aiwf
 
 This project is an updated version of [Simone](https://github.com/Helmi/claude-simone).
 
@@ -15,7 +15,7 @@ Moonklabs is a markdown-based project management framework designed specifically
 Install Moonklabs in any project directory:
 
 ```bash
-npx hello-moonklabs
+npx @moonklabs/aiwf
 ```
 
 That's it! The installer will:
@@ -89,6 +89,10 @@ After installation:
 1. Open your project in Claude Code
 2. Use `/project:moonklabs` commands to manage your project
 3. Start with `/project:moonklabs:initialize` to set up your project
+
+## Command Reference
+
+For a full list of available Moonklabs commands and detailed usage, see [COMMANDS_GUIDE.md](COMMANDS_GUIDE.md).
 
 ## Features
 

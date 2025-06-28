@@ -1,4 +1,4 @@
-# hello-moonklabs
+# aiwf
 
 이 프로젝트는 [Simone](https://github.com/Helmi/claude-simone)의 업데이트된 버전입니다.
 
@@ -13,7 +13,7 @@ Moonklabs는 Claude Code를 사용한 AI 지원 개발을 위해 특별히 설�
 모든 프로젝트 디렉토리에 Moonklabs를 설치하세요:
 
 ```bash
-npx hello-moonklabs
+npx @moonklabs/aiwf
 ```
 
 이것으로 끝입니다! 설치 프로그램은 다음을 수행합니다:
@@ -87,6 +87,10 @@ aiwf/
 1.  Claude Code에서 프로젝트를 엽니다
 2.  `/project:moonklabs` 명령어를 사용하여 프로젝트를 관리합니다
 3.  `/project:moonklabs:initialize`로 시작하여 프로젝트를 설정합니다
+
+## 명령어 가이드
+
+Moonklabs의 전체 명령어 목록과 자세한 사용법은 [COMMANDS_GUIDE.md](COMMANDS_GUIDE.md) 문서를 참고하세요.
 
 ## 특징
 

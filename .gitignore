@@ -9,13 +9,14 @@ Thumbs.db
 
 
 # Editor directories and files
-/.claude
-/.moonklabs
+.claude
+.gemini
+.moonklabs
 .moonklabs_backup_*/
-/.cursor
-/.windsurf
-/.idea
-/.vscode/*
+.cursor
+.windsurf
+.idea
+.vscode/*
 !.vscode/extensions.json
 !.vscode/settings.json
 *.swp

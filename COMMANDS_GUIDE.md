@@ -319,6 +319,78 @@ Moonklabs 명령어는 `/project:moonklabs:<command_name> [arguments]` 형식을
 
 **사용 시기**: When you want autonomous progress
 
+## 추가/고급 명령어
+
+### 📌 `/project:moonklabs:pr_create`
+
+**목적**: Pull Request를 생성하고 템플릿을 적용하여 변경 사항을 정리합니다.
+
+**사용법**:
+
+```
+/project:moonklabs:pr_create "Add authentication to API"
+```
+
+---
+
+### 🗂️ `/project:moonklabs:issue_create`
+
+**목적**: GitHub Issue를 생성하여 버그 리포트·기능 요청을 기록합니다.
+
+**사용법**:
+
+```
+/project:moonklabs:issue_create "Bug: login fails on Safari"
+```
+
+---
+
+### 🛠️ `/project:moonklabs:plan_milestone`
+
+**목적**: 대화형 프로세스로 신규 마일스톤을 계획하고 `.moonklabs/02_REQUIREMENTS/` 구조를 자동 생성합니다.
+
+---
+
+### 📈 `/project:moonklabs:mermaid`
+
+**목적**: 코드베이스를 분석하여 Mermaid 다이어그램(UML/시퀀스 등)을 생성합니다.
+
+---
+
+### ♾️ `/project:moonklabs:infinite`
+
+**목적**: 명세에 따라 무한(또는 지정 횟수) 반복 결과물을 생성하는 고급 반복 생성 루프를 실행합니다.
+
+---
+
+### 🤖 `/project:moonklabs:tm-run-all-subtask`
+
+**목적**: Task Master의 모든 서브태스크를 한 번에 실행하여 진행 상황을 자동화합니다.
+
+---
+
+### 🧠 `/project:moonklabs:ultrathink_general`
+
+**목적**: 폭넓은 문제를 심층 분석하기 위한 울트라 씽킹(General) 세션을 시작합니다.
+
+---
+
+### 🧠 `/project:moonklabs:ultrathink_code_basic`
+
+**목적**: 코드 기반 문제를 기본 수준에서 심층 분석하는 울트라 씽킹 세션을 시작합니다.
+
+---
+
+### 🧠 `/project:moonklabs:ultrathink_code_advanced`
+
+**목적**: 복잡한 코드·아키텍처 문제를 고급 수준에서 심층 분석하는 울트라 씽킹 세션을 시작합니다.
+
+---
+
+### ⚙️ `/project:moonklabs:prime_context`
+
+**목적**: 프로젝트 컨텍스트(파일 목록·주요 문서)를 빠르게 불러와 프라임합니다.
+
 ## 모범 사례
 
 ### 일일 워크플로
