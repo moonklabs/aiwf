@@ -31,6 +31,7 @@ aiwf/
 ## Development Commands
 
 ### Building and Testing
+
 ```bash
 # Install dependencies
 npm install
@@ -46,6 +47,7 @@ npm publish
 ```
 
 ### Package Usage
+
 ```bash
 # Install Moonklabs in any project
 npx aiwf
@@ -57,13 +59,16 @@ npx aiwf --force
 ## Technical Implementation Details
 
 ### GitHub Integration
+
 The installer (`index.js`) fetches content directly from the GitHub repository:
+
 - **API URL**: `https://api.github.com/repos/moonklabs/aiwf`
 - **Raw Content**: `https://raw.githubusercontent.com/moonklabs/aiwf/master`
 - **Content Prefix**: `claude-code/moonklabs`
 
 ### Installation Process
-1. **Detection**: Checks for existing `.moonklabs/` or `.claude/commands/moonklabs/` 
+
+1. **Detection**: Checks for existing `.moonklabs/` or `.claude/commands/moonklabs/`
 2. **Backup**: Creates timestamped backups of existing files (`.bak` format)
 3. **Download**: Fetches framework components from GitHub
 4. **Setup**: Creates directory structure and copies files
@@ -72,6 +77,7 @@ The installer (`index.js`) fetches content directly from the GitHub repository:
    - Windsurf: Plain `.md` files in `.windsurf/rules/`
 
 ### File Processing Logic
+
 - **CLAUDE.md files**: Always updated to latest version
 - **Commands**: Always updated from repository
 - **Templates**: Downloaded on fresh installs only
@@ -80,7 +86,9 @@ The installer (`index.js`) fetches content directly from the GitHub repository:
 ## Moonklabs Framework Integration
 
 ### Command Structure
+
 Available via `/project:moonklabs:<command>` in Claude Code:
+
 - **Setup**: `initialize`, `prime`, `prime_context`
 - **Planning**: `plan_milestone`, `create_sprints_from_milestone`, `create_sprint_tasks`
 - **Development**: `do_task`, `commit`, `test`, `code_review`
@@ -89,13 +97,16 @@ Available via `/project:moonklabs:<command>` in Claude Code:
 - **Analysis**: `ultrathink_*`, `mermaid`, `project_review`
 
 ### GitHub Issue Integration
+
 The framework supports seamless GitHub integration:
+
 - Tasks can be linked to GitHub issues via `github_issue` field
 - Automatic status synchronization using `gh` CLI
 - PR creation with issue linking
 - Commit message integration (`fixes #123`, `relates to #456`)
 
 ### Project Structure Created
+
 ```
 target_project/
 ├── .moonklabs/                 # Project management root
@@ -112,18 +123,22 @@ target_project/
 ## Development Patterns
 
 ### Error Handling
+
 - Network failures during GitHub API calls are handled gracefully
 - Backup/restore functionality for failed updates
 - User prompts for dangerous operations
 
 ### CLI Design
+
 Uses modern Node.js libraries:
+
 - **commander**: CLI argument parsing
-- **chalk**: Colored terminal output  
+- **chalk**: Colored terminal output
 - **ora**: Loading spinners
 - **prompts**: Interactive user input
 
 ### File Management
+
 - Recursive directory creation with `fs.mkdir({ recursive: true })`
 - Stream-based file downloads using `pipeline()`
 - Atomic operations with backup/restore capability
@@ -131,16 +146,19 @@ Uses modern Node.js libraries:
 ## Important Constraints
 
 ### Installation Safety
+
 - Never overwrites user-created project content
 - Always creates backups before updates
 - Preserves existing work in sprints and tasks
 
 ### GitHub Dependency
+
 - Requires internet connection for installation
 - All content fetched from live GitHub repository
 - Uses GitHub API rate limits (unauthenticated)
 
 ### Node.js Requirements
+
 - Minimum Node.js 14.0.0
 - Uses ES modules (`"type": "module"`)
 - Requires `https` and `fs/promises` support
@@ -148,17 +166,20 @@ Uses modern Node.js libraries:
 ## Working with This Codebase
 
 ### Making Changes to Framework
+
 1. Modify files in `claude-code/moonklabs/`
 2. Test locally with `node index.js`
 3. Commit and push to GitHub
 4. Framework updates are automatically available via `npx aiwf`
 
 ### Adding New Commands
+
 1. Create command files in `claude-code/moonklabs/.claude/commands/moonklabs/`
 2. Include both English and Korean versions (`moonklabs/` and `moonklabs_kr/`)
-3. Update documentation in `COMMANDS_GUIDE.md`
+3. Update documentation in `docs/COMMANDS_GUIDE.md`
 
 ### Modifying Installation Logic
+
 - Main installer logic is in `index.js`
 - GitHub API integration in `fetchGitHubContent()` and `downloadFile()`
 - Directory processing in `downloadDirectory()`

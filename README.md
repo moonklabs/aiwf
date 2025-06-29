@@ -92,7 +92,7 @@ After installation:
 
 ## Command Reference
 
-For a full list of available Moonklabs commands and detailed usage, see [COMMANDS_GUIDE.md](COMMANDS_GUIDE.md).
+For a full list of available Moonklabs commands and detailed usage, see [COMMANDS_GUIDE.md](docs/COMMANDS_GUIDE.md).
 
 ## Features
 

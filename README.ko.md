@@ -90,7 +90,7 @@ aiwf/
 
 ## 명령어 가이드
 
-Moonklabs의 전체 명령어 목록과 자세한 사용법은 [COMMANDS_GUIDE.md](COMMANDS_GUIDE.md) 문서를 참고하세요.
+Moonklabs의 전체 명령어 목록과 자세한 사용법은 [COMMANDS_GUIDE.md](docs/COMMANDS_GUIDE.md) 문서를 참고하세요.
 
 ## 특징
 
