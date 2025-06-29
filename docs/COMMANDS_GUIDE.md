@@ -1,1 +1,597 @@
- 
+# Moonklabs 명령어 가이드
+
+이 가이드는 사용 가능한 Moonklabs 명령어와 이를 프로젝트에서 효과적으로 사용하는 방법을 설명합니다.
+
+## 명령어 개요
+
+Moonklabs 명령어는 `/project:moonklabs:<command_name> [arguments]` 형식을 따릅니다.
+
+## 설정 및 컨텍스트 명령어
+
+### 🚀 `/project:moonklabs:initialize`
+
+**목적**: 새 프로젝트 또는 기존 프로젝트에서 Moonklabs 초기화
+
+**사용법**:
+
+```
+/project:moonklabs:initialize
+```
+
+**동작**:
+
+1. 프로젝트를 스캔하고 분석
+2. 프로젝트 타입 확인 요청
+3. 기존 Moonklabs 문서 확인
+4. 문서 생성 과정 안내 (기존 문서 가져오기 또는 새로 생성)
+5. 첫 번째 마일스톤 생성
+6. 프로젝트 매니페스트 생성
+
+**사용 시기**: 프로젝트에서 Moonklabs를 처음 설정할 때
+
+---
+
+### 🧠 `/project:moonklabs:prime`
+
+**목적**: 코딩 세션 시작 시 프로젝트 컨텍스트를 로드합니다
+
+**사용법**:
+
+```
+/project:moonklabs:prime
+```
+
+**동작**:
+
+- 프로젝트 매니페스트를 읽음
+- 현재 마일스톤 및 스프린트 정보를 로드
+- 활성 작업을 식별
+- 빠른 상태 개요를 제공
+
+**사용 시기**: 코딩 세션을 시작할 때 전체 상황을 빠르게 파악할 때
+
+## 계획 명령어
+
+### 📅 `/project:moonklabs:create_sprints_from_milestone`
+
+**목적**: 마일스톤을 관리 가능한 스프린트로 분해
+
+**사용법**:
+
+```
+/project:moonklabs:create_sprints_from_milestone 001_MVP_FOUNDATION
+```
+
+**동작**:
+
+1. 마일스톤 요구사항을 분석
+2. 관련 요구사항을 약 1주 길이의 스프린트로 그룹화
+3. 스프린트 폴더 및 META 파일 생성
+4. 스프린트 정보를 매니페스트에 업데이트
+
+**사용 시기**: 새로운 마일스톤을 생성한 후
+
+---
+
+### 📋 `/project:moonklabs:create_sprint_tasks`
+
+**목적**: 스프린트를 위한 상세 작업 분해 생성
+
+**사용법**:
+
+```
+/project:moonklabs:create_sprint_tasks S01
+# or for specific sprint:
+/project:moonklabs:create_sprint_tasks S02_001_MVP_FOUNDATION
+```
+
+**동작**:
+
+1. 스프린트 요구사항을 분석
+2. 이를 구체적이고 실행 가능한 작업으로 분해
+3. 목표가 명확한 작업 파일을 생성
+4. 작업 간 종속성을 처리
+
+**사용 시기**: 각 스프린트 시작 시
+
+---
+
+### ✏️ `/project:moonklabs:create_general_task`
+
+**목적**: 스프린트와 연결되지 않은 독립형 작업 생성
+
+**사용법**:
+
+```
+/project:moonklabs:create_general_task
+# Then describe your task when prompted
+```
+
+**예시 작업**:
+
+- "Fix memory leak in physics engine"
+- "Update documentation for API changes"
+- "Refactor database connection pooling"
+
+**사용 시기**: 유지보수, 버그 수정 또는 스프린트 범위를 벗어난 작업에 사용
+
+## 개발 명령어
+
+### 💻 `/project:moonklabs:do_task`
+
+**목적**: 특정 작업을 실행
+
+**사용법**:
+
+```
+/project:moonklabs:do_task
+# 사용 가능한 작업을 나열하고 선택을 요청
+
+# 또는 작업을 직접 지정:
+/project:moonklabs:do_task T001_S01_setup_tauri
+```
+
+**동작**:
+
+1. 작업 요구사항 읽기
+2. 솔루션 구현
+3. 해당되는 경우 테스트 실행
+4. 작업 상태 업데이트
+5. 필요한 파일/변경 사항 생성
+
+**사용 시기**: 특정 작업을 수행할 준비가 되었을 때
+
+---
+
+### 📝 `/project:moonklabs:commit`
+
+**목적**: 잘 구조화된 git 커밋 생성 및 GitHub 이슈 연동
+
+**사용법**:
+
+```
+/project:moonklabs:commit
+# 변경 사항을 검토하고 커밋을 생성
+
+# 또는 특정 작업에 대해:
+/project:moonklabs:commit T001_S01_setup_tauri
+
+# 리뷰와 함께:
+/project:moonklabs:commit --review
+```
+
+**동작**:
+
+1. 변경 사항 분석
+2. 관련 변경 사항 그룹화
+3. 의미있는 커밋 메시지 생성
+4. 커밋을 작업/요구사항에 연결
+5. GitHub 이슈와 연동 (fixes #123, relates to #456)
+6. 선택적으로 코드 리뷰 먼저 실행
+
+**사용 시기**: 완료한 작업을 저장하고 싶을 때
+
+---
+
+### 🧪 `/project:moonklabs:test`
+
+**목적**: 테스트 실행 및 일반적인 문제 수정
+
+**사용법**:
+
+```
+/project:moonklabs:test
+# 모든 테스트 실행
+
+/project:moonklabs:test unit
+# 특정 테스트 스위트 실행
+```
+
+**동작**:
+
+1. package.json에서 테스트 명령어 식별
+2. 적절한 테스트 실행
+3. 일반적인 문제 수정 (누락된 의존성, 구성)
+4. 결과를 명확하게 리포트
+
+**사용 시기**: 커밋하기 전이나 테스트가 실패할 때
+
+## 코드 리뷰 명령어
+
+### 🔍 `/project:moonklabs:code_review`
+
+**목적**: 명세에 따른 코드 검토
+
+**사용법**:
+
+```
+/project:moonklabs:code_review
+# 커밋되지 않은 변경 사항 검토
+
+/project:moonklabs:code_review src/app/components/GameCanvas.tsx
+# 특정 파일 검토
+```
+
+**동작**:
+
+1. 요구사항에 대한 코드 검사
+2. 패턴 및 관습 확인
+3. 버그 및 문제점 식별
+4. 개선 사항 제안
+5. 명세 준수 확인
+
+**사용 시기**: 중요한 변경 사항을 커밋하기 전
+
+---
+
+### 📊 `/project:moonklabs:project_review`
+
+**목적**: 프로젝트 전반적인 상태 점검
+
+**사용법**:
+
+```
+/project:moonklabs:project_review
+```
+
+**동작**:
+
+1. 전체 아키텍처 검토
+2. 기술 부채 확인
+3. 진행 상황 vs 일정 분석
+4. 위험 요소 및 차단 요소 식별
+5. 개선 사항 제안
+
+**사용 시기**: 주간 또는 스프린트 경계에서
+
+---
+
+### 🧪 `/project:moonklabs:testing_review`
+
+**목적**: 테스트 커버리지 및 품질 분석
+
+**사용법**:
+
+```
+/project:moonklabs:testing_review
+```
+
+**동작**:
+
+1. 테스트 커버리지 검토
+2. 누락된 테스트 케이스 식별
+3. 테스트 품질 확인
+4. 개선 사항 제안
+
+**사용 시기**: 기능 구현 후
+
+---
+
+### 💬 `/project:moonklabs:discuss_review`
+
+**목적**: 검토 결과에 대한 기술적 토론
+
+**사용법**:
+
+```
+/project:moonklabs:discuss_review
+# 다른 검토 명령어 실행 후
+```
+
+**동작**:
+
+- 상세한 설명 제공
+- 장단점 토론
+- 솔루션 제안
+- 질문에 답변
+
+**사용 시기**: 검토 피드백을 더 잘 이해하기 위해
+
+## 자동화 명령어
+
+### 🚀 `/project:moonklabs:yolo`
+
+**목적**: 자율적 작업 실행
+
+**사용법**:
+
+```
+/project:moonklabs:yolo
+# 모든 열린 작업을 순차 실행
+
+/project:moonklabs:yolo S02
+# 특정 스프린트를 순차 실행
+
+/project:moonklabs:yolo sprint-all
+# 모든 스프린트를 순차 실행
+
+/project:moonklabs:yolo milestone-all
+# 모든 마일스톤을 순차 실행
+
+/project:moonklabs:yolo S02 worktree
+# Git worktree 모드로 실행
+```
+
+**동작**:
+
+1. 열린 작업 식별
+2. 순서대로 실행
+3. 종속성 처리
+4. 완료된 작업 커밋
+5. 진행 상황 업데이트
+6. GitHub 이슈 상태 업데이트
+
+**안전 기능**:
+
+- 확인 없이 스키마 수정하지 않음
+- 위험한 작업 건너뛰기
+- 코드 품질 유지
+- 논리적 커밋 생성
+- 테스트 실패 시 중단
+
+**사용 시기**: 자율적인 진행을 원할 때
+
+## 추가/고급 명령어
+
+### 📌 `/project:moonklabs:pr_create`
+
+**목적**: Pull Request를 생성하고 템플릿을 적용하여 변경 사항을 정리
+
+**사용법**:
+
+```
+/project:moonklabs:pr_create
+# 대화형으로 PR 생성
+
+/project:moonklabs:pr_create "Add authentication to API"
+# 제목과 함께 PR 생성
+```
+
+**동작**:
+
+1. 현재 브랜치의 변경 사항 분석
+2. 연관된 이슈 및 작업 식별
+3. PR 제목 및 설명 생성
+4. 테스트 체크리스트 포함
+5. GitHub에 PR 생성
+
+---
+
+### 🗂️ `/project:moonklabs:issue_create`
+
+**목적**: GitHub Issue를 생성하여 버그 리포트 및 기능 요청 기록
+
+**사용법**:
+
+```
+/project:moonklabs:issue_create
+# 대화형으로 이슈 생성
+
+/project:moonklabs:issue_create "Bug: login fails on Safari"
+# 제목과 함께 이슈 생성
+```
+
+**동작**:
+
+1. 이슈 제목 및 설명 입력 받기
+2. 적절한 라벨 및 마일스톤 자동 할당
+3. 버그/기능 요청 템플릿 적용
+4. GitHub에 이슈 생성
+5. 필요시 작업으로 변환
+
+---
+
+### 🛠️ `/project:moonklabs:plan_milestone`
+
+**목적**: 대화형 프로세스로 신규 마일스톤을 계획하고 `.moonklabs/02_REQUIREMENTS/` 구조를 자동 생성
+
+**사용법**:
+
+```
+/project:moonklabs:plan_milestone
+```
+
+**동작**:
+
+1. 마일스톤 목표 및 범위 정의
+2. 요구사항 문서 구조 생성
+3. PRD 및 기술 명세 템플릿 생성
+4. 마일스톤 디렉토리 구조 설정
+5. 프로젝트 매니페스트 업데이트
+
+---
+
+### 📈 `/project:moonklabs:mermaid`
+
+**목적**: 코드베이스를 분석하여 Mermaid 다이어그램 생성
+
+**사용법**:
+
+```
+/project:moonklabs:mermaid
+# 전체 아키텍처 다이어그램 생성
+
+/project:moonklabs:mermaid flowchart
+# 플로우차트 생성
+
+/project:moonklabs:mermaid sequence
+# 시퀀스 다이어그램 생성
+```
+
+**동작**:
+
+1. 코드베이스 구조 분석
+2. 컴포넌트 및 모듈 관계 파악
+3. 적절한 다이어그램 유형 선택
+4. Mermaid 문법으로 다이어그램 생성
+5. 문서에 삽입 가능한 형태로 출력
+
+---
+
+### ♾️ `/project:moonklabs:infinite`
+
+**목적**: 명세에 따라 반복적으로 결과물을 생성하는 고급 반복 루프 실행
+
+**사용법**:
+
+```
+/project:moonklabs:infinite
+# 무한 반복 모드
+
+/project:moonklabs:infinite 5
+# 5회 반복 모드
+```
+
+**동작**:
+
+1. 반복 생성 규칙 정의
+2. 초기 조건 설정
+3. 지정된 횟수만큼 반복 실행
+4. 각 반복마다 결과 검증
+5. 최종 결과물 통합
+
+---
+
+### 🤖 `/project:moonklabs:tm-run-all-subtask`
+
+**목적**: Task Master의 모든 서브태스크를 한 번에 실행하여 진행 상황 자동화
+
+**사용법**:
+
+```
+/project:moonklabs:tm-run-all-subtask
+```
+
+**동작**:
+
+1. 활성 서브태스크 식별
+2. 종속성 순서 결정
+3. 병렬 실행 가능 여부 판단
+4. 순차적으로 서브태스크 실행
+5. 전체 진행 상황 업데이트
+
+---
+
+### 🧠 `/project:moonklabs:ultrathink_general`
+
+**목적**: 폭넓은 문제를 심층 분석하기 위한 울트라 씽킹 세션
+
+**사용법**:
+
+```
+/project:moonklabs:ultrathink_general "복잡한 비즈니스 로직 설계"
+```
+
+---
+
+### 🧠 `/project:moonklabs:ultrathink_code_basic`
+
+**목적**: 코드 기반 문제를 기본 수준에서 심층 분석하는 울트라 씽킹 세션
+
+**사용법**:
+
+```
+/project:moonklabs:ultrathink_code_basic "성능 최적화 방안"
+```
+
+---
+
+### 🧠 `/project:moonklabs:ultrathink_code_advanced`
+
+**목적**: 복잡한 코드 및 아키텍처 문제를 고급 수준에서 심층 분석하는 울트라 씽킹 세션
+
+**사용법**:
+
+```
+/project:moonklabs:ultrathink_code_advanced "마이크로서비스 아키텍처 설계"
+```
+
+---
+
+### ⚙️ `/project:moonklabs:prime_context`
+
+**목적**: 프로젝트 컨텍스트를 빠르게 불러와 프라임
+
+**사용법**:
+
+```
+/project:moonklabs:prime_context
+```
+
+**동작**:
+
+1. 프로젝트 파일 목록 스캔
+2. 주요 문서 식별
+3. 현재 상태 요약
+4. 컨텍스트 정보 로드
+5. 작업 준비 상태 설정
+
+## 모범 사례
+
+### 일일 워크플로
+
+```bash
+# Start of day
+/project:moonklabs:prime
+
+# Work on tasks
+/project:moonklabs:do_task
+/project:moonklabs:test
+/project:moonklabs:commit
+
+# End of day
+/project:moonklabs:project_review
+```
+
+### 스프린트 워크플로
+
+```bash
+# Sprint planning
+/project:moonklabs:create_sprint_tasks S02
+
+# Sprint execution
+/project:moonklabs:do_task T001_S02_first_task
+/project:moonklabs:do_task T002_S02_second_task
+/project:moonklabs:commit --review
+
+# Sprint review
+/project:moonklabs:project_review
+```
+
+### 빠른 수정
+
+```bash
+# 버그 수정 워크플로
+/project:moonklabs:create_general_task
+# 설명: "Fix memory leak in /src/foo.bar"
+/project:moonklabs:do_task T003
+/project:moonklabs:test
+/project:moonklabs:commit T003
+```
+
+## 팁 & 트릭
+
+1. **일상적인 작업에는 YOLO 사용**: 간단한 기능 구현에 유용
+2. **항상 먼저 prime 실행**: 명령어가 적절한 컨텍스트를 갖도록 보장
+3. **주요 커밋 전 검토**: 문제를 조기에 발견
+4. **버그는 일반 작업으로 생성**: 추적 가능하게 유지
+5. **작업별 커밋 사용**: 더 나은 추적성
+
+## 명령어 안전 장치
+
+Moonklabs 명령어에는 다음과 같은 안전 기능이 포함되어 있습니다:
+
+- 중요 파일 삭제하지 않음
+- 스키마 변경 전 확인 요청
+- 명세에 따른 변경 사항 검증
+- 코드 품질 기준 유지
+- 점진적 커밋 생성
+
+## 도움 받기
+
+명령어에 대한 도움이 필요한 경우:
+
+1. 인수 없이 명령어를 실행하여 사용법 정보 확인
+2. 이 가이드 확인
+3. `.moonklabs/`의 작업 예시 확인
+4. `.claude/commands/`의 명령어 소스 검토
