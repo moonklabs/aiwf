@@ -69,9 +69,11 @@ async function getDirectoryStructure(path = '') {
     return JSON.parse(content);
 }
 
+const COMMANDS_DIR = '.claude/commands/moonklabs';
+
 async function checkExistingInstallation() {
     const moonklabsExists = await fs.access('.moonklabs').then(() => true).catch(() => false);
-    const claudeCommandsExists = await fs.access('.claude/commands/moonklabs').then(() => true).catch(() => false);
+    const claudeCommandsExists = await fs.access(COMMANDS_DIR).then(() => true).catch(() => false);
     return moonklabsExists || claudeCommandsExists;
 }
 
@@ -99,7 +101,7 @@ async function backupFile(filePath, backupDir) {
             await fs.copyFile(filePath, backupPath);
             // 상대경로 보존: .claude/commands/moonklabs/foo.md -> backupDir/claude-commands-moonklabs-foo.md.bak
             let bakFileName;
-            if (filePath.startsWith('.claude/commands/moonklabs/')) {
+            if (filePath.startsWith(COMMANDS_DIR + '/')) {
                 bakFileName = filePath.replace(/\//g, '-').replace(/^\./, '') + '.bak';
             } else if (filePath.startsWith('.moonklabs/')) {
                 bakFileName = filePath.replace(/\//g, '-').replace(/^\./, '') + '.bak';
@@ -137,13 +139,12 @@ async function backupCommandsAndDocs() {
             }
         }
         // Backup all command files
-        const commandsDir = '.claude/commands/moonklabs';
-        const commandsExist = await fs.access(commandsDir).then(() => true).catch(() => false);
+        const commandsExist = await fs.access(COMMANDS_DIR).then(() => true).catch(() => false);
         if (commandsExist) {
             try {
-                const commandFiles = await fs.readdir(commandsDir);
+                const commandFiles = await fs.readdir(COMMANDS_DIR);
                 for (const file of commandFiles) {
-                    const filePath = path.join(commandsDir, file);
+                    const filePath = path.join(COMMANDS_DIR, file);
                     const stat = await fs.stat(filePath);
                     if (stat.isFile() && file.endsWith('.md')) {
                         const backupPath = await backupFile(filePath, BACKUP_DIR);
@@ -280,13 +281,20 @@ async function installMoonklabs(options = {}) {
             }
         }
 
-        // Create .claude/commands/moonklabs directory
-        await fs.mkdir('.claude/commands/moonklabs', { recursive: true });
+        // Delete and recreate commands directory
+        const commandsExist = await fs.access(COMMANDS_DIR).then(() => true).catch(() => false);
+        
+        if (commandsExist) {
+            logWithSpinner(spinner, '기존 Moonklabs 명령어 폴더를 삭제하는 중...', debugLog);
+            await fs.rm(COMMANDS_DIR, { recursive: true, force: true });
+        }
+        
+        await fs.mkdir(COMMANDS_DIR, { recursive: true });
 
-        // Always update commands
-        logWithSpinner(spinner, 'Moonklabs 명령어를 업데이트하는 중...', debugLog);
+        // Always update commands (clean download)
+        logWithSpinner(spinner, 'Moonklabs 명령어를 새로 다운로드하는 중...', debugLog);
         try {
-            await downloadDirectory(`${GITHUB_CONTENT_PREFIX}/.claude/commands/moonklabs`, '.claude/commands/moonklabs', spinner);
+            await downloadDirectory(`${GITHUB_CONTENT_PREFIX}/${COMMANDS_DIR}`, COMMANDS_DIR, spinner);
         } catch (error) {
             logWithSpinner(spinner, '명령어 디렉토리를 찾을 수 없어 건너뜁니다...', debugLog);
         }
@@ -374,7 +382,7 @@ async function installMoonklabs(options = {}) {
         if (hasExisting) {
             spinner.succeed(chalk.green('✅ Moonklabs 프레임워크가 성공적으로 업데이트되었습니다!'));
             console.log(chalk.blue('\n🔄 업데이트 내역:'));
-            console.log(chalk.gray('   • .claude/commands/moonklabs/ 내의 명령어'));
+            console.log(chalk.gray(`   • ${COMMANDS_DIR}/ 내의 명령어`));
             console.log(chalk.gray('   • 문서 (CLAUDE.md 파일)'));
             console.log(chalk.green('\n💾 작업 내용은 보존되었습니다:'));
             console.log(chalk.gray('   • 모든 작업, 스프린트, 및 프로젝트 파일이 변경되지 않음'));
@@ -440,7 +448,7 @@ async function restoreFromBackup(spinner) {
             } else if (backup.startsWith('claude-commands-moonklabs-')) {
                 // .claude/commands/moonklabs/ 하위
                 const rel = backup.replace('claude-commands-moonklabs-', '').replace(/-/g, '/').replace('.bak', '');
-                originalFile = path.join('.claude', 'commands', 'moonklabs', rel);
+                originalFile = path.join(COMMANDS_DIR, rel);
             } else {
                 // 기타
                 originalFile = backup.replace('.bak', '');
