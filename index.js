@@ -15,8 +15,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const program = new Command();
 
-const GITHUB_API_URL = 'https://api.github.com/repos/aiwf/aiwf';
-const GITHUB_RAW_URL = 'https://raw.githubusercontent.com/aiwf/aiwf/master';
+const GITHUB_API_URL = 'https://api.github.com/repos/moonklabs/aiwf';
+const GITHUB_RAW_URL = 'https://raw.githubusercontent.com/moonklabs/aiwf/master';
 const GITHUB_CONTENT_PREFIX = 'claude-code/aiwf';
 
 async function fetchGitHubContent(url) {
