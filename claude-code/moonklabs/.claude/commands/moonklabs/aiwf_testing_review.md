@@ -49,7 +49,7 @@ Use general best practices as review criteria:
 
 **EXAMINE** the current test codebase:
 
-- USE test.md command to run tests
+- USE test.md command to run tests (@.claude/commands/moonklabs/aiwf_test.md)
 - EXPLORE test directory structure and organization
 - IDENTIFY test categories and their purposes
 - CHECK test naming conventions and patterns

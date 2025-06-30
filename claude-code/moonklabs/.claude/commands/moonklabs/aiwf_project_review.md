@@ -50,7 +50,7 @@ If empty, perform full project review. Otherwise interpret <$ARGUMENTS> to ident
 
 **CRITICAL:** Test infrastructure health is a BLOCKING criteria for sprint/milestone progression.
 
-- USE test.md command to execute full test suite (@.claude/commands/moonklabs/test.md)
+- USE test.md command to execute full test suite (@.claude/commands/moonklabs/aiwf_test.md)
 - ANALYZE test results: passed/failed/skipped counts and failure categories
 - CALCULATE test health score (0-10 scale):
   - 10: 100% pass rate, no infrastructure issues

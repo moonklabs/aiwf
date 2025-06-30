@@ -37,6 +37,7 @@ Read the task description. If anything is unclear, ask clarifying questions befo
 **IMPORTANT:** If task references functionality from future sprints or has unmet dependencies, pause and ask for clarification.
 
 **GitHub Issue Creation (Optional):**
+
 - If task doesn't have a GitHub issue and user wants issue tracking
 - Suggest using `/project:moonklabs:issue_create {task_id}` command
 
@@ -70,7 +71,7 @@ Placeholder - just move on to the next step
 
 Follow these steps for a Code Review (in order)
 
-- include @.claude/commands/moonklabs/code_review.md and use the Task ID as Scope.
+- include @.claude/commands/moonklabs/aiwf_code_review.md and use the Task ID as Scope.
 - Follow the instructions in the file to run a code review in **PARALLEL SUBAGENTS**
 - When done continue acting on the results accordingly
 - Understand and think about the results
