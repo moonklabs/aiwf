@@ -12,7 +12,7 @@ last_updated: 2023-07-15
 
 Set up the initial project structure for the backend API service, including directory organization, dependency installation, and basic configuration.
 
-**Note: This is an example task to demonstrate the structure of a task in the Moonklabs framework.**
+**Note: This is an example task to demonstrate the structure of a task in the AIWF framework.**
 
 ## Goal / Objectives
 

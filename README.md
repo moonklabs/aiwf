@@ -4,15 +4,15 @@
 
 This project is an updated version of [Simone](https://github.com/Helmi/claude-simone).
 
-> 🚀 Quick installer for the Moonklabs project management framework for Claude Code
+> 🚀 Quick installer for the AIWF project management framework for Claude Code
 
-## What is Moonklabs?
+## What is AIWF?
 
-Moonklabs is a markdown-based project management framework designed specifically for AI-assisted development with Claude Code. It helps break down software projects into manageable chunks for effective AI handling.
+AIWF is a markdown-based project management framework designed specifically for AI-assisted development with Claude Code. It helps break down software projects into manageable chunks for effective AI handling.
 
 ## Installation
 
-Install Moonklabs in any project directory:
+Install AIWF in any project directory:
 
 ```bash
 npx aiwf
@@ -20,8 +20,8 @@ npx aiwf
 
 That's it! The installer will:
 
-- Create the `.moonklabs/` directory structure for project management
-- Set up `.claude/commands/moonklabs/` for custom Claude commands
+- Create the `.aiwf/` directory structure for project management
+- Set up `.claude/commands/aiwf/` for custom Claude commands
 - Download the latest templates and documentation
 
 ## Usage
@@ -34,7 +34,7 @@ npx aiwf
 
 ### Update Existing Installation
 
-If Moonklabs is already installed, the installer will detect it and offer options to:
+If AIWF is already installed, the installer will detect it and offer options to:
 
 - Update (with automatic backup)
 - Skip installation
@@ -57,7 +57,7 @@ aiwf/
 ├── claude-code/
 │   ├── docker/
 │   │   └── Dockerfile
-│   ├── moonklabs/
+│   ├── aiwf/
 │   └── simone/
 │       ├── CHANGELOG.md
 │       ├── LICENSE
@@ -87,12 +87,12 @@ aiwf/
 After installation:
 
 1. Open your project in Claude Code
-2. Use `/project:moonklabs` commands to manage your project
-3. Start with `/project:moonklabs:initialize` to set up your project
+2. Use `/project:aiwf` commands to manage your project
+3. Start with `/project:aiwf:initialize` to set up your project
 
 ## Command Reference
 
-For a full list of available Moonklabs commands and detailed usage, see [COMMANDS_GUIDE.md](docs/COMMANDS_GUIDE.md).
+For a full list of available AIWF commands and detailed usage, see [COMMANDS_GUIDE.md](docs/COMMANDS_GUIDE.md).
 
 ## Features
 
@@ -109,8 +109,8 @@ For a full list of available Moonklabs commands and detailed usage, see [COMMAND
 
 ## Source
 
-This installer fetches the Moonklabs framework from:
-https://github.com/moonklabs/aiwf
+This installer fetches the AIWF framework from:
+https://github.com/aiwf/aiwf
 
 ## License
 

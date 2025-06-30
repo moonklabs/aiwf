@@ -23,7 +23,7 @@ Check: <$ARGUMENTS>
 
 **REQUIRED:** Sprint ID must be provided (e.g., S02). If empty, ask user to specify which sprint to detail.
 
-- VERIFY sprint directory exists in `.moonklabs/03_SPRINTS/`
+- VERIFY sprint directory exists in `.aiwf/03_SPRINTS/`
 - CHECK sprint meta file exists (e.g., `S02_sprint_meta.md`)
 - VERIFY sprint status is not already "completed"
 - If tasks already exist, ask user if they want to recreate them or any other guidance
@@ -32,11 +32,11 @@ Check: <$ARGUMENTS>
 
 Use PARALLEL SUBAGENTS to READ and UNDERSTAND the project's context:
 
-- READ `.moonklabs/00_PROJECT_MANIFEST.md` for project context
+- READ `.aiwf/00_PROJECT_MANIFEST.md` for project context
 - READ sprint meta file completely to understand goals and deliverables
-- READ parent milestone requirements from `.moonklabs/02_REQUIREMENTS/`
-- READ `.moonklabs/01_PROJECT_DOCS/ARCHITECTURE.md` for technical context
-- READ `.moonklabs/01_PROJECT_DOCS/LONG_TERM_VISION.md` to understand architectural decisions
+- READ parent milestone requirements from `.aiwf/02_REQUIREMENTS/`
+- READ `.aiwf/01_PROJECT_DOCS/ARCHITECTURE.md` for technical context
+- READ `.aiwf/01_PROJECT_DOCS/LONG_TERM_VISION.md` to understand architectural decisions
 
 **IMPORTANT:** Sprint tasks must align with documented sprint goals, not expand scope.
 
@@ -44,7 +44,7 @@ Use PARALLEL SUBAGENTS to READ and UNDERSTAND the project's context:
 
 **USE PARALLEL SUBAGENTS** to execute these commands:
 
-- SEARCH `.moonklabs/05_ARCHITECTURE_DECISIONS/` for ADRs matching sprint ID (e.g., `ADR*_S02_*.md`)
+- SEARCH `.aiwf/05_ARCHITECTURE_DECISIONS/` for ADRs matching sprint ID (e.g., `ADR*_S02_*.md`)
 - READ all found ADRs to understand technical decisions
 - CHECK sprint meta for ADR references section
 - NOTE which technical decisions will affect task implementation
@@ -80,7 +80,7 @@ Based on sprint goals and deliverables (execute in Parallel Subagents):
     - ALL TASK FILES must to be created in the Sprint Directory (where the sprint meta file is)
     - CREATE file with naming: `T<NN>_S<NN>_<Descriptive_Name>.md`
     - USE sequential numbering starting from T01
-    - FOLLOW task template structure exactly from `.moonklabs/99_TEMPLATES/task_template.md`
+    - FOLLOW task template structure exactly from `.aiwf/99_TEMPLATES/task_template.md`
     - ADD basic description and objectives from sprint goals
 
     ### 2. Research codebase interfaces

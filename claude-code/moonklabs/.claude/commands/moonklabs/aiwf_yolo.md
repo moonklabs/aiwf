@@ -34,7 +34,7 @@ You need to stick to this process and **PRECISELY** follow it
 
 Before you start:
 
-- Run tests to ensure clean baseline using test.md command (@.claude/commands/moonklabs/aiwf_test.md)
+- Run tests to ensure clean baseline using test.md command (@.claude/commands/aiwf/aiwf_test.md)
 - **If** FAIL rate is above 10% asses if a fix is possible. If so, fix and move on. If not, move on anyways.
 
 - Check git status to ensure clean working directory
@@ -50,7 +50,7 @@ Execute based on mode:
 
 **If Sprint ID provided in arguments:**
 
-- Navigate to .moonklabs/03_SPRINTS/{sprint_id}/
+- Navigate to .aiwf/03_SPRINTS/{sprint_id}/
 - Check if sprint has tasks (T\*.md files)
 - If NO tasks exist:
   - Check for sprint meta file
@@ -60,7 +60,7 @@ Execute based on mode:
 
 **If `sprint-all` in arguments:**
 
-- Scan ALL sprints in .moonklabs/03_SPRINTS/ directory
+- Scan ALL sprints in .aiwf/03_SPRINTS/ directory
 - Create ordered list of ALL sprints (S01, S02, S03, ...)
 - For each sprint in sequence:
   - Check if sprint has tasks, if not create them
@@ -71,7 +71,7 @@ Execute based on mode:
 
 **If `milestone-all` in arguments:**
 
-- Scan ALL milestones in .moonklabs/01_MILESTONES/ directory
+- Scan ALL milestones in .aiwf/01_MILESTONES/ directory
 - For each milestone in sequence:
   - Identify all related sprints for this milestone
   - Execute ALL sprints related to current milestone
@@ -83,9 +83,9 @@ Execute based on mode:
 **If NO arguments (general mode):**
 
 - Use PARALLEL SUBAGENTS to check:
-  - .moonklabs/04_GENERAL_TASKS for open general tasks
-  - .moonklabs/00_PROJECT_MANIFEST.md for currently active sprint
-  - .moonklabs/03_SPRINTS/ for any sprint with only meta file
+  - .aiwf/04_GENERAL_TASKS for open general tasks
+  - .aiwf/00_PROJECT_MANIFEST.md for currently active sprint
+  - .aiwf/03_SPRINTS/ for any sprint with only meta file
 - Priority order:
   1. General tasks (if any open)
   2. Active sprint tasks (if any open)
@@ -101,7 +101,7 @@ Execute based on mode:
 
 **ONLY EXECUTE** if sprint needs task creation
 
-- Use a **SUBAGENT** and have it include @.claude/commands/moonklabs/aiwf_create_sprint_tasks.md with Sprint ID as argument
+- Use a **SUBAGENT** and have it include @.claude/commands/aiwf/aiwf_create_sprint_tasks.md with Sprint ID as argument
 - Wait for completion
 - After task creation move back to `### FIND OPEN WORK`
 
@@ -115,9 +115,9 @@ Execute based on mode:
   - **If** `worktree` in arguments: Skip branch creation (worktree mode)
 - **GitHub Issue Creation (Optional):**
   - If task doesn't have a `github_issue` field
-  - Use SUBAGENT to include @.claude/commands/moonklabs/aiwf_issue_create.md to create issue
-- **USE A SUBAGENT** and have it include @.claude/commands/moonklabs/aiwf_do_task.md with the Task ID as Argument to execute the Task.
-- **AFTER TASK COMPLETION**: Run tests to verify nothing broke using test.md command (@.claude/commands/moonklabs/aiwf_test.md)
+  - Use SUBAGENT to include @.claude/commands/aiwf/aiwf_issue_create.md to create issue
+- **USE A SUBAGENT** and have it include @.claude/commands/aiwf/aiwf_do_task.md with the Task ID as Argument to execute the Task.
+- **AFTER TASK COMPLETION**: Run tests to verify nothing broke using test.md command (@.claude/commands/aiwf/aiwf_test.md)
 - on any failure in the task execution assess the severity of the error:
   - CRITICAL errors (breaking tests, security issues, data loss risk): **FIX PROBLEMS**
   - NON-CRITICAL errors (linting, formatting, minor issues): note in OUTPUT LOG and continue
@@ -126,14 +126,14 @@ Execute based on mode:
 ### COMMIT WORK
 
 - **ONLY IF** tests are passing and no critical issues exist
-- **USE A SUBAGENT** and have it include @.claude/commands/moonklabs/aiwf_commit.md with the Task ID as Argument and YOLO as additional argument
+- **USE A SUBAGENT** and have it include @.claude/commands/aiwf/aiwf_commit.md with the Task ID as Argument and YOLO as additional argument
 - on any failure when committing, note the problem in the OUTPUT LOG of the task and continue
 - after successful commit,
   - **If** `worktree` NOT in arguments: after successful commit, merge to main: `git checkout main && git merge task/<task-id>`
   - **If** `worktree` in arguments: after successful commit, push changes: `git push`
 - **Pull Request Creation (Optional):**
   - If GitHub issue is linked to the task
-  - Use SUBAGENT to include @.claude/commands/moonklabs/aiwf_pr_create.md to create PR
+  - Use SUBAGENT to include @.claude/commands/aiwf/aiwf_pr_create.md to create PR
 - **IMMEDIATELY** go back to `### FIND OPEN WORK` to continue with next task
 
 ### CONTINUOUS EXECUTION LOOP
@@ -187,11 +187,11 @@ Execute based on mode:
 
 ## EXECUTE PROJECT REVIEW
 
-- **USE A SUBAGENT** and have it include @.claude/commands/moonklabs/aiwf_project_review.md
+- **USE A SUBAGENT** and have it include @.claude/commands/aiwf/aiwf_project_review.md
 - Depending on the results of the review:
   - On FAIL: Think about possible fixes.
   - If fixes are quickly done, fix right away and repeat `## EXECUTE PROJECT REVIEW``
-  - If fixes are more complex **USE A SUBAGENT** and have it include @.claude/commands/moonklabs/aiwf_create_general_task.md to create new general tasks as needed.
+  - If fixes are more complex **USE A SUBAGENT** and have it include @.claude/commands/aiwf/aiwf_create_general_task.md to create new general tasks as needed.
   - Go back to `### FIND OPEN WORK` to work on these fixes
   - On PASS: move on
 
@@ -242,9 +242,9 @@ Execute based on mode:
 
 **Gather Project Status Data:**
 
-- Scan `.moonklabs/01_MILESTONES/` for milestone completion status
-- Scan `.moonklabs/03_SPRINTS/` for all sprint status and task completion
-- Scan `.moonklabs/04_GENERAL_TASKS/` for general task completion
+- Scan `.aiwf/01_MILESTONES/` for milestone completion status
+- Scan `.aiwf/03_SPRINTS/` for all sprint status and task completion
+- Scan `.aiwf/04_GENERAL_TASKS/` for general task completion
 - Count completed vs total tasks for each category
 
 **Create Visual Progress Report:**

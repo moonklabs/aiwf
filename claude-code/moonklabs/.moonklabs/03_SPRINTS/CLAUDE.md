@@ -35,7 +35,7 @@ Update status as progress occurs:
 
 - planning → in_progress → review → complete
 
-Always use the template at `.Moonklabs/99_TEMPLATES/sprint_template.md` when creating new sprint meta files.
+Always use the template at `.AIWF/99_TEMPLATES/sprint_template.md` when creating new sprint meta files.
 
 ## Sprint Tasks
 
@@ -49,17 +49,17 @@ Tasks within a sprint follow a standard format:
   - Update Output Log with final entry
   - If GitHub issue is linked, update issue status
 
-Always use the template at `.Moonklabs/99_TEMPLATES/task_template.md` when creating new sprint tasks.
+Always use the template at `.AIWF/99_TEMPLATES/task_template.md` when creating new sprint tasks.
 
 ### GitHub Issue Integration
 
 When working with tasks that have GitHub issues:
 
-1. **Creating Issues**: Use `/project:moonklabs:issue_create {task_id}` to create a GitHub issue from a task
+1. **Creating Issues**: Use `/project:aiwf:issue_create {task_id}` to create a GitHub issue from a task
 2. **Linking Issues**: Add `github_issue: #123` to task frontmatter
 3. **Status Updates**: Update issue status when task status changes
 4. **Commit Integration**: Include `fixes #123` or `relates to #456` in commit messages
-5. **Pull Requests**: Use `/project:moonklabs:pr_create {task_id}` to create PR with issue linking
+5. **Pull Requests**: Use `/project:aiwf:pr_create {task_id}` to create PR with issue linking
 
 ## Working with Sprint Tasks
 

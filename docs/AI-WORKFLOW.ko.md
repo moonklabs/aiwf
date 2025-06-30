@@ -1,18 +1,18 @@
-# Claude Code를 위한 Moonklabs
+# Claude Code를 위한 AIWF
 
 ## 이것은 무엇인가요?
 
-Moonklabs은 Claude Code, Gemini-CLI 와 더 효과적으로 작업하기 위해 만든 디렉토리 기반 프로젝트 관리 시스템입니다. 기본적으로 폴더, 마크다운 파일 및 AI가 효과적으로 처리할 수 있는 관리 가능한 단위로 소프트웨어 프로젝트를 분할하는 데 도움이 되는 사용자 정의 명령의 집합입니다.
+AIWF은 Claude Code, Gemini-CLI 와 더 효과적으로 작업하기 위해 만든 디렉토리 기반 프로젝트 관리 시스템입니다. 기본적으로 폴더, 마크다운 파일 및 AI가 효과적으로 처리할 수 있는 관리 가능한 단위로 소프트웨어 프로젝트를 분할하는 데 도움이 되는 사용자 정의 명령의 집합입니다.
 
 **🚀 NEW**: 강화된 YOLO 모드로 전체 스프린트나 마일스톤을 한 번에 자동 완료할 수 있습니다!
 
-**⚠️ 복잡성 경고**: Moonklabs은 제대로 이해하는 데 시간이 필요한 정교한 시스템입니다. 단순한 플러그 앤 플레이 솔루션이 아니라, 작동 방식을 배우고 워크플로에 적응하는 데 시간을 투자할 때 가장 잘 작동하는 프레임워크입니다.
+**⚠️ 복잡성 경고**: AIWF은 제대로 이해하는 데 시간이 필요한 정교한 시스템입니다. 단순한 플러그 앤 플레이 솔루션이 아니라, 작동 방식을 배우고 워크플로에 적응하는 데 시간을 투자할 때 가장 잘 작동하는 프레임워크입니다.
 
 **📋 최신 업데이트**: 최근 변경 사항 및 개선 사항은 [CHANGELOG.md](CHANGELOG.md)를 참조하세요.
 
 ## 시작하는 방법
 
-### 1. Moonklabs 설치하기
+### 1. AIWF 설치하기
 
 ```bash
 npx aiwf
@@ -25,14 +25,14 @@ npx aiwf
 Claude Code에서 프로젝트를 열고 다음을 실행하세요:
 
 ```
-/project:moonklabs:initialize
+/project:aiwf:initialize
 ```
 
 이것은 기본 설정 과정을 안내합니다. 새로운 코드베이스나 기존 코드베이스와 함께 작동하며, 프로젝트 문서(PRD, 아키텍처 문서)를 생성하거나 이미 가지고 있는 문서와 함께 작업하는 데 도움을 줍니다.
 
 ### 3. 첫 번째 마일스톤 설정하기
 
-`.moonklabs/02_REQUIREMENTS/`에 `M01_Your_Milestone_Name`(예: `M01_Basic_Application`)이라는 이름의 마일스톤 폴더를 생성하세요. 최소한 다음을 포함하세요:
+`.aiwf/02_REQUIREMENTS/`에 `M01_Your_Milestone_Name`(예: `M01_Basic_Application`)이라는 이름의 마일스톤 폴더를 생성하세요. 최소한 다음을 포함하세요:
 
 - `M01_PRD.md` - 제품 요구사항 문서
 - 필요에 따른 기타 사양: `M01_Database_Schema.md`, `M01_API_Specs.md` 등
@@ -42,7 +42,7 @@ _참고: 아직 이를 위한 명령어는 없습니다. 2단계의 기존 채�
 ### 4. 스프린트로 분할하기
 
 ```
-/project:moonklabs:create_sprints_from_milestone
+/project:aiwf:create_sprints_from_milestone
 ```
 
 이것은 마일스톤을 분석하고 논리적인 스프린트로 분할합니다. 전체 범위를 살펴보고 아직 세부 작업 없이 의미 있는 스프린트 경계를 생성합니다.
@@ -50,7 +50,7 @@ _참고: 아직 이를 위한 명령어는 없습니다. 2단계의 기존 채�
 ### 5. 첫 번째 작업 생성하기
 
 ```
-/project:moonklabs:create_sprint_tasks
+/project:aiwf:create_sprint_tasks
 ```
 
 이것은 스프린트를 분석하고, 문서를 검토하며, 필요한 정보를 조사하고, 프로젝트에 대한 포괄적인 이해를 얻기 위한 지식 격차를 식별합니다. 현재 스프린트에 대한 상세하고 실행 가능한 작업을 생성합니다.
@@ -60,22 +60,22 @@ _중요: 모든 스프린트에 대한 작업을 미리 생성하지 말고 다�
 ### 6. 작업 시작하기
 
 ```
-/project:moonklabs:do_task
+/project:aiwf:do_task
 ```
 
 이것은 일반 작업이나 스프린트에서 작업을 자동으로 선택합니다. 더 빠른 실행을 위해 작업 ID를 지정하세요:
 
 ```
-/project:moonklabs:do_task T01_S01
+/project:aiwf:do_task T01_S01
 ```
 
 그러면 Claude는 전체 프로젝트 컨텍스트와 함께 지정된 작업을 수행합니다.
 
 이것이 시작하기 위한 기본 워크플로입니다! 또한 다음과 같은 작업도 가능합니다:
 
-- `/project:moonklabs:create_general_task`로 일반 작업 생성
+- `/project:aiwf:create_general_task`로 일반 작업 생성
 - YOLO 모드를 사용하여 전체 스프린트 또는 마일스톤을 자율적으로 실행
-- `.claude/commands/moonklabs/`에서 다른 명령어 탐색
+- `.claude/commands/aiwf/`에서 다른 명령어 탐색
 
 ### 7. YOLO 모드 - 자율 실행
 
@@ -84,7 +84,7 @@ YOLO 모드는 사용자 개입 없이 연속적으로 작업을 실행하는 �
 **기본 YOLO 모드:**
 
 ```
-/project:moonklabs:yolo
+/project:aiwf:yolo
 ```
 
 일반 작업을 먼저 처리한 후 활성 스프린트 작업을 실행합니다.
@@ -92,7 +92,7 @@ YOLO 모드는 사용자 개입 없이 연속적으로 작업을 실행하는 �
 **스프린트별 실행:**
 
 ```
-/project:moonklabs:yolo S03
+/project:aiwf:yolo S03
 ```
 
 지정된 스프린트(S03)의 모든 작업을 완료할 때까지 실행합니다.
@@ -100,7 +100,7 @@ YOLO 모드는 사용자 개입 없이 연속적으로 작업을 실행하는 �
 **🚀 NEW: 전체 스프린트 실행:**
 
 ```
-/project:moonklabs:yolo sprint-all
+/project:aiwf:yolo sprint-all
 ```
 
 모든 스프린트를 순차적으로 완료할 때까지 멈추지 않고 실행합니다.
@@ -108,7 +108,7 @@ YOLO 모드는 사용자 개입 없이 연속적으로 작업을 실행하는 �
 **🚀 NEW: 전체 마일스톤 실행:**
 
 ```
-/project:moonklabs:yolo milestone-all
+/project:aiwf:yolo milestone-all
 ```
 
 모든 마일스톤과 관련된 스프린트, 작업을 완료할 때까지 실행합니다.
@@ -116,8 +116,8 @@ YOLO 모드는 사용자 개입 없이 연속적으로 작업을 실행하는 �
 **🔧 Worktree 모드:**
 
 ```
-/project:moonklabs:yolo S03 worktree
-/project:moonklabs:yolo sprint-all worktree
+/project:aiwf:yolo S03 worktree
+/project:aiwf:yolo sprint-all worktree
 ```
 
 Git worktree 환경에서 실행 시 브랜치 생성 없이 직접 푸시합니다.
@@ -136,11 +136,11 @@ Git worktree 환경에서 실행 시 브랜치 생성 없이 직접 푸시합니
 - 테스트가 10% 이상 실패하면 평가 후 진행 여부를 결정합니다
 - 데이터베이스 스키마 변경이 필요하면 중단됩니다
 
-**중요**: Moonklabs은 단순한 설정 후 잊어버리는 도구가 아닌 복잡한 시스템입니다. 작동 방식을 이해할 때 가장 효과적으로 작동합니다. 명령어를 읽어보고 워크플로에 맞게 조정하는 시간을 가지세요.
+**중요**: AIWF은 단순한 설정 후 잊어버리는 도구가 아닌 복잡한 시스템입니다. 작동 방식을 이해할 때 가장 효과적으로 작동합니다. 명령어를 읽어보고 워크플로에 맞게 조정하는 시간을 가지세요.
 
 ## 작동 방식
 
-Moonklabs은 프로젝트를 다음과 같이 구성합니다:
+AIWF은 프로젝트를 다음과 같이 구성합니다:
 
 - **마일스톤**: 주요 기능 또는 프로젝트 단계
 - **스프린트**: 마일스톤 내의 관련 작업 그룹
@@ -202,9 +202,9 @@ AI 코딩 도구는 믿을 수 없을 정도로 강력해졌지만, 모두 동�
 - 아키텍처 결정을 문서화하기 위한 ADR 템플릿
 - 모든 템플릿은 단순화된 날짜 형식(YYYY-MM-DD HH:MM)을 사용합니다
 
-### .claude/commands/moonklabs/
+### .claude/commands/aiwf/
 
-Moonklabs 워크플로를 구동하는 맞춤형 Claude Code 명령어:
+AIWF 워크플로를 구동하는 맞춤형 Claude Code 명령어:
 
 - `initialize` - 프로젝트 구조와 문서를 설정
 - `create_sprints_from_milestone` - 마일스톤을 논리적 스프린트로 분할
@@ -221,7 +221,7 @@ Moonklabs 워크플로를 구동하는 맞춤형 Claude Code 명령어:
 ## 디렉토리 구조
 
 ```plaintext
-.moonklabs/
+.aiwf/
 ├── 00_PROJECT_MANIFEST.md
 ├── 01_PROJECT_DOCS/
 ├── 02_REQUIREMENTS/
@@ -250,7 +250,7 @@ Moonklabs 워크플로를 구동하는 맞춤형 Claude Code 명령어:
 
 ### 병렬 작업 실행 활성화
 
-`create_sprint_tasks`와 같은 Moonklabs 명령은 `useParallelSubagents` 지시어를 지원하지만, 실제로 작업을 병렬로 실행하려면 Claude Code 설정이 필요합니다. 기본적으로는 한 번에 하나의 작업만 실행됩니다.
+`create_sprint_tasks`와 같은 AIWF 명령은 `useParallelSubagents` 지시어를 지원하지만, 실제로 작업을 병렬로 실행하려면 Claude Code 설정이 필요합니다. 기본적으로는 한 번에 하나의 작업만 실행됩니다.
 
 병렬 실행을 활성화하려면:
 

@@ -1,44 +1,44 @@
-# Moonklabs 명령어 가이드
+# AIWF 명령어 가이드
 
-이 가이드는 사용 가능한 Moonklabs 명령어와 이를 프로젝트에서 효과적으로 사용하는 방법을 설명합니다.
+이 가이드는 사용 가능한 AIWF 명령어와 이를 프로젝트에서 효과적으로 사용하는 방법을 설명합니다.
 
 ## 명령어 개요
 
-Moonklabs 명령어는 `/project:moonklabs:<command_name> [arguments]` 형식을 따릅니다.
+AIWF 명령어는 `/project:aiwf:<command_name> [arguments]` 형식을 따릅니다.
 
 ## 설정 및 컨텍스트 명령어
 
-### 🚀 `/project:moonklabs:initialize`
+### 🚀 `/project:aiwf:initialize`
 
-**목적**: 새 프로젝트 또는 기존 프로젝트에서 Moonklabs 초기화
+**목적**: 새 프로젝트 또는 기존 프로젝트에서 AIWF 초기화
 
 **사용법**:
 
 ```
-/project:moonklabs:initialize
+/project:aiwf:initialize
 ```
 
 **동작**:
 
 1. Scans and analyzes your project
 2. Asks for confirmation about project type
-3. Checks for existing Moonklabs documents
+3. Checks for existing AIWF documents
 4. Guides you through document creation (imports existing docs or creates new ones)
 5. Creates your first milestone
 6. Generates project manifest
 
-**사용 시기**: 프로젝트에서 Moonklabs를 처음 설정할 때(현재 ForeLoop에는 이미 설정되어 있습니다!)
+**사용 시기**: 프로젝트에서 AIWF를 처음 설정할 때(현재 ForeLoop에는 이미 설정되어 있습니다!)
 
 ---
 
-### 🧠 `/project:moonklabs:prime`
+### 🧠 `/project:aiwf:prime`
 
 **목적**: 코딩 세션 시작 시 프로젝트 컨텍스트를 로드합니다
 
 **사용법**:
 
 ```
-/project:moonklabs:prime
+/project:aiwf:prime
 ```
 
 **동작**:
@@ -52,14 +52,14 @@ Moonklabs 명령어는 `/project:moonklabs:<command_name> [arguments]` 형식을
 
 ## 계획 명령어
 
-### 📅 `/project:moonklabs:create_sprints_from_milestone`
+### 📅 `/project:aiwf:create_sprints_from_milestone`
 
 **목적**: 마일스톤을 관리 가능한 스프린트로 분해
 
 **사용법**:
 
 ```
-/project:moonklabs:create_sprints_from_milestone 001_MVP_FOUNDATION
+/project:aiwf:create_sprints_from_milestone 001_MVP_FOUNDATION
 ```
 
 **동작**:
@@ -73,16 +73,16 @@ Moonklabs 명령어는 `/project:moonklabs:<command_name> [arguments]` 형식을
 
 ---
 
-### 📋 `/project:moonklabs:create_sprint_tasks`
+### 📋 `/project:aiwf:create_sprint_tasks`
 
 **목적**: 스프린트를 위한 상세 작업 분해 생성
 
 **사용법**:
 
 ```
-/project:moonklabs:create_sprint_tasks S01
+/project:aiwf:create_sprint_tasks S01
 # or for specific sprint:
-/project:moonklabs:create_sprint_tasks S02_001_MVP_FOUNDATION
+/project:aiwf:create_sprint_tasks S02_001_MVP_FOUNDATION
 ```
 
 **동작**:
@@ -96,14 +96,14 @@ Moonklabs 명령어는 `/project:moonklabs:<command_name> [arguments]` 형식을
 
 ---
 
-### ✏️ `/project:moonklabs:create_general_task`
+### ✏️ `/project:aiwf:create_general_task`
 
 **목적**: 스프린트와 연결되지 않은 독립형 작업 생성
 
 **사용법**:
 
 ```
-/project:moonklabs:create_general_task
+/project:aiwf:create_general_task
 # Then describe your task when prompted
 ```
 
@@ -117,18 +117,18 @@ Moonklabs 명령어는 `/project:moonklabs:<command_name> [arguments]` 형식을
 
 ## Development Commands
 
-### 💻 `/project:moonklabs:do_task`
+### 💻 `/project:aiwf:do_task`
 
 **목적**: 특정 작업을 실행
 
 **사용법**:
 
 ```
-/project:moonklabs:do_task
+/project:aiwf:do_task
 # 사용 가능한 작업을 나열하고 선택을 요청
 
 # 또는 작업을 직접 지정:
-/project:moonklabs:do_task T001_S01_setup_tauri
+/project:aiwf:do_task T001_S01_setup_tauri
 ```
 
 **동작**:
@@ -143,21 +143,21 @@ Moonklabs 명령어는 `/project:moonklabs:<command_name> [arguments]` 형식을
 
 ---
 
-### 📝 `/project:moonklabs:commit`
+### 📝 `/project:aiwf:commit`
 
 **목적**: Create well-structured git commits
 
 **사용법**:
 
 ```
-/project:moonklabs:commit
+/project:aiwf:commit
 # 변경 사항을 검토하고 커밋을 생성
 
 # 또는 특정 작업에 대해:
-/project:moonklabs:commit T001_S01_setup_tauri
+/project:aiwf:commit T001_S01_setup_tauri
 
 # 리뷰와 함께:
-/project:moonklabs:commit --review
+/project:aiwf:commit --review
 ```
 
 **동작**:
@@ -172,17 +172,17 @@ Moonklabs 명령어는 `/project:moonklabs:<command_name> [arguments]` 형식을
 
 ---
 
-### 🧪 `/project:moonklabs:test`
+### 🧪 `/project:aiwf:test`
 
 **목적**: Run tests and fix common issues
 
 **사용법**:
 
 ```
-/project:moonklabs:test
+/project:aiwf:test
 # 모든 테스트 실행
 
-/project:moonklabs:test unit
+/project:aiwf:test unit
 # 특정 테스트 스위트 실행
 ```
 
@@ -197,17 +197,17 @@ Moonklabs 명령어는 `/project:moonklabs:<command_name> [arguments]` 형식을
 
 ## 코드 리뷰 명령어
 
-### 🔍 `/project:moonklabs:code_review`
+### 🔍 `/project:aiwf:code_review`
 
 **목적**: Review code against specifications
 
 **사용법**:
 
 ```
-/project:moonklabs:code_review
+/project:aiwf:code_review
 # 커밋되지 않은 변경 사항 검토
 
-/project:moonklabs:code_review src/app/components/GameCanvas.tsx
+/project:aiwf:code_review src/app/components/GameCanvas.tsx
 # Reviews specific file
 ```
 
@@ -223,14 +223,14 @@ Moonklabs 명령어는 `/project:moonklabs:<command_name> [arguments]` 형식을
 
 ---
 
-### 📊 `/project:moonklabs:project_review`
+### 📊 `/project:aiwf:project_review`
 
 **목적**: Comprehensive project health check
 
 **사용법**:
 
 ```
-/project:moonklabs:project_review
+/project:aiwf:project_review
 ```
 
 **동작**:
@@ -245,14 +245,14 @@ Moonklabs 명령어는 `/project:moonklabs:<command_name> [arguments]` 형식을
 
 ---
 
-### 🧪 `/project:moonklabs:testing_review`
+### 🧪 `/project:aiwf:testing_review`
 
 **목적**: Analyze test coverage and quality
 
 **사용법**:
 
 ```
-/project:moonklabs:testing_review
+/project:aiwf:testing_review
 ```
 
 **동작**:
@@ -266,14 +266,14 @@ Moonklabs 명령어는 `/project:moonklabs:<command_name> [arguments]` 형식을
 
 ---
 
-### 💬 `/project:moonklabs:discuss_review`
+### 💬 `/project:aiwf:discuss_review`
 
 **목적**: Technical discussion about review findings
 
 **사용법**:
 
 ```
-/project:moonklabs:discuss_review
+/project:aiwf:discuss_review
 # After running another review command
 ```
 
@@ -288,27 +288,27 @@ Moonklabs 명령어는 `/project:moonklabs:<command_name> [arguments]` 형식을
 
 ## 자동화 명령어
 
-### 🚀 `/project:moonklabs:yolo`
+### 🚀 `/project:aiwf:yolo`
 
 **목적**: 자율적인 작업 실행
 
 **사용법**:
 
 ```
-/project:moonklabs:yolo
+/project:aiwf:yolo
 # 모든 열린 작업을 순차 실행
 
-/project:moonklabs:yolo S02
+/project:aiwf:yolo S02
 # 특정 스프린트를 순차 실행
 
-/project:moonklabs:yolo sprint-all
+/project:aiwf:yolo sprint-all
 # 모든 스프린트를 순차적으로 완료할 때까지 실행
 
-/project:moonklabs:yolo milestone-all
+/project:aiwf:yolo milestone-all
 # 모든 마일스톤과 관련된 스프린트, 작업을 완료할 때까지 실행
 
-/project:moonklabs:yolo S03 worktree
-/project:moonklabs:yolo sprint-all worktree
+/project:aiwf:yolo S03 worktree
+/project:aiwf:yolo sprint-all worktree
 # Git worktree 환경에서 실행 시 브랜치 생성 없이 직접 푸시
 ```
 
@@ -338,73 +338,73 @@ Moonklabs 명령어는 `/project:moonklabs:<command_name> [arguments]` 형식을
 
 ## 추가/고급 명령어
 
-### 📌 `/project:moonklabs:pr_create`
+### 📌 `/project:aiwf:pr_create`
 
 **목적**: Pull Request를 생성하고 템플릿을 적용하여 변경 사항을 정리합니다.
 
 **사용법**:
 
 ```
-/project:moonklabs:pr_create "Add authentication to API"
+/project:aiwf:pr_create "Add authentication to API"
 ```
 
 ---
 
-### 🗂️ `/project:moonklabs:issue_create`
+### 🗂️ `/project:aiwf:issue_create`
 
 **목적**: GitHub Issue를 생성하여 버그 리포트·기능 요청을 기록합니다.
 
 **사용법**:
 
 ```
-/project:moonklabs:issue_create "Bug: login fails on Safari"
+/project:aiwf:issue_create "Bug: login fails on Safari"
 ```
 
 ---
 
-### 🛠️ `/project:moonklabs:plan_milestone`
+### 🛠️ `/project:aiwf:plan_milestone`
 
-**목적**: 대화형 프로세스로 신규 마일스톤을 계획하고 `.moonklabs/02_REQUIREMENTS/` 구조를 자동 생성합니다.
+**목적**: 대화형 프로세스로 신규 마일스톤을 계획하고 `.aiwf/02_REQUIREMENTS/` 구조를 자동 생성합니다.
 
 ---
 
-### 📈 `/project:moonklabs:mermaid`
+### 📈 `/project:aiwf:mermaid`
 
 **목적**: 코드베이스를 분석하여 Mermaid 다이어그램(UML/시퀀스 등)을 생성합니다.
 
 ---
 
-### ♾️ `/project:moonklabs:infinite`
+### ♾️ `/project:aiwf:infinite`
 
 **목적**: 명세에 따라 무한(또는 지정 횟수) 반복 결과물을 생성하는 고급 반복 생성 루프를 실행합니다.
 
 ---
 
-### 🤖 `/project:moonklabs:tm-run-all-subtask`
+### 🤖 `/project:aiwf:tm-run-all-subtask`
 
 **목적**: Task Master의 모든 서브태스크를 한 번에 실행하여 진행 상황을 자동화합니다.
 
 ---
 
-### 🧠 `/project:moonklabs:ultrathink_general`
+### 🧠 `/project:aiwf:ultrathink_general`
 
 **목적**: 폭넓은 문제를 심층 분석하기 위한 울트라 씽킹(General) 세션을 시작합니다.
 
 ---
 
-### 🧠 `/project:moonklabs:ultrathink_code_basic`
+### 🧠 `/project:aiwf:ultrathink_code_basic`
 
 **목적**: 코드 기반 문제를 기본 수준에서 심층 분석하는 울트라 씽킹 세션을 시작합니다.
 
 ---
 
-### 🧠 `/project:moonklabs:ultrathink_code_advanced`
+### 🧠 `/project:aiwf:ultrathink_code_advanced`
 
 **목적**: 복잡한 코드·아키텍처 문제를 고급 수준에서 심층 분석하는 울트라 씽킹 세션을 시작합니다.
 
 ---
 
-### ⚙️ `/project:moonklabs:prime_context`
+### ⚙️ `/project:aiwf:prime_context`
 
 **목적**: 프로젝트 컨텍스트(파일 목록·주요 문서)를 빠르게 불러와 프라임합니다.
 
@@ -414,41 +414,41 @@ Moonklabs 명령어는 `/project:moonklabs:<command_name> [arguments]` 형식을
 
 ```bash
 # Start of day
-/project:moonklabs:prime
+/project:aiwf:prime
 
 # Work on tasks
-/project:moonklabs:do_task
-/project:moonklabs:test
-/project:moonklabs:commit
+/project:aiwf:do_task
+/project:aiwf:test
+/project:aiwf:commit
 
 # End of day
-/project:moonklabs:project_review
+/project:aiwf:project_review
 ```
 
 ### 스프린트 워크플로
 
 ```bash
 # Sprint planning
-/project:moonklabs:create_sprint_tasks S02
+/project:aiwf:create_sprint_tasks S02
 
 # Sprint execution
-/project:moonklabs:do_task T001_S02_first_task
-/project:moonklabs:do_task T002_S02_second_task
-/project:moonklabs:commit --review
+/project:aiwf:do_task T001_S02_first_task
+/project:aiwf:do_task T002_S02_second_task
+/project:aiwf:commit --review
 
 # Sprint review
-/project:moonklabs:project_review
+/project:aiwf:project_review
 ```
 
 ### 빠른 수정
 
 ```bash
 # Bug fix workflow
-/project:moonklabs:create_general_task
+/project:aiwf:create_general_task
 # Describe: "Fix memory leak in /src/foo.bar"
-/project:moonklabs:do_task T003
-/project:moonklabs:test
-/project:moonklabs:commit T003
+/project:aiwf:do_task T003
+/project:aiwf:test
+/project:aiwf:commit T003
 ```
 
 ## 팁 & 트릭
@@ -461,7 +461,7 @@ Moonklabs 명령어는 `/project:moonklabs:<command_name> [arguments]` 형식을
 
 ## 명령어 안전 장치
 
-Moonklabs commands include safety features:
+AIWF commands include safety features:
 
 - Won't delete critical files
 - Asks before schema changes
@@ -475,5 +475,5 @@ If you need help with a command:
 
 1. Run the command without arguments for usage info
 2. Check this guide
-3. Look at task examples in `.moonklabs/`
+3. Look at task examples in `.aiwf/`
 4. Review the command source in `.claude/commands/`

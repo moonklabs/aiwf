@@ -1,4 +1,4 @@
-# Moonklabs 메타데이터 관리 시스템 PRD
+# AIWF 메타데이터 관리 시스템 PRD
 
 _(GitHub Issue 사용 옵션형 — 미사용 시에도 동작하도록 설계)_
 
@@ -17,7 +17,7 @@ _(GitHub Issue 사용 옵션형 — 미사용 시에도 동작하도록 설계)_
 ## 1. 제품 개요
 
 > **문제**  
-> Moonklabs 프로젝트는 마일스톤·스프린트·태스크 정보를 Markdown 파일에 분산 저장한다. 여러 사람이 동시 작업할 때  
+> AIWF 프로젝트는 마일스톤·스프린트·태스크 정보를 Markdown 파일에 분산 저장한다. 여러 사람이 동시 작업할 때  
 > • 어떤 ID가 이미 존재하는지  
 > • 누가 어떤 태스크를 맡았는지  
 > • 상태가 최신인지  
@@ -42,15 +42,15 @@ _(GitHub Issue 사용 옵션형 — 미사용 시에도 동작하도록 설계)_
 
 ## 3. 핵심 기능 및 상세 사양
 
-| 분류                | 기능                        | 사양                                                                                      |
-| ------------------- | --------------------------- | ----------------------------------------------------------------------------------------- |
-| 메타데이터          | **index.json 생성**         | `npm run moonklabs:sync` → Markdown front-matter 파싱 후 마일스톤·스프린트·태스크 맵 생성 |
-| 검증                | **validate-index**          | 중복 ID, 잠금 충돌, 규칙 위반 CI 차단<br/>`npm run validate-index` & GitHub Actions       |
-| 동시 작업           | **lockedBy 필드**           | `moon lock TS01` → `lockedBy`·`lockTime` 기록, 병행 작업 충돌 시 git merge conflict 유도  |
-| Git 통합            | **브랜치 네이밍 규칙**      | `feat/MS01-SP02-implement-login-api` 식으로 범위 명시                                     |
-| CI/CD               | **validate-index.yml**      | PR 시 `moonklabs:sync` → `validate-index` 자동 실행                                       |
-| CLI                 | **moon lock/unlock** (단축) | commander 기반 CLI; 잠금/해제 & 상태 변경                                                 |
-| 옵션형 GitHub Issue | **Issue ↔ index 싱크**      | (선택) `moon sync issues` 커맨드: Issue Label ↔ ID 매핑 후 index 갱신                     |
+| 분류                | 기능                        | 사양                                                                                     |
+| ------------------- | --------------------------- | ---------------------------------------------------------------------------------------- |
+| 메타데이터          | **index.json 생성**         | `npm run aiwf:sync` → Markdown front-matter 파싱 후 마일스톤·스프린트·태스크 맵 생성     |
+| 검증                | **validate-index**          | 중복 ID, 잠금 충돌, 규칙 위반 CI 차단<br/>`npm run validate-index` & GitHub Actions      |
+| 동시 작업           | **lockedBy 필드**           | `moon lock TS01` → `lockedBy`·`lockTime` 기록, 병행 작업 충돌 시 git merge conflict 유도 |
+| Git 통합            | **브랜치 네이밍 규칙**      | `feat/MS01-SP02-implement-login-api` 식으로 범위 명시                                    |
+| CI/CD               | **validate-index.yml**      | PR 시 `aiwf:sync` → `validate-index` 자동 실행                                           |
+| CLI                 | **moon lock/unlock** (단축) | commander 기반 CLI; 잠금/해제 & 상태 변경                                                |
+| 옵션형 GitHub Issue | **Issue ↔ index 싱크**      | (선택) `moon sync issues` 커맨드: Issue Label ↔ ID 매핑 후 index 갱신                    |
 
 ### 데이터 스키마 요약
 

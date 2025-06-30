@@ -12,7 +12,7 @@ Accepted
 
 Our API requires a secure authentication mechanism to identify users, protect resources, and control access to endpoints. We needed to select an approach that balances security, usability, and compatibility with our chosen tech stack.
 
-**Note: This is an example Architecture Decision Record to demonstrate how ADRs might be structured in the Moonklabs framework.**
+**Note: This is an example Architecture Decision Record to demonstrate how ADRs might be structured in the AIWF framework.**
 
 Several authentication strategies were considered:
 

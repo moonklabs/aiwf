@@ -1,7 +1,7 @@
 {
     "name": "aiwf",
     "version": "0.1.0",
-    "description": "AI Workflow Framework for Moonklabs",
+    "description": "AI Workflow Framework for Claude Code, Gemini-CLI",
     "main": "index.js",
     "type": "module",
     "bin": {
@@ -11,7 +11,7 @@
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "keywords": [
-        "moonklabs",
+        "aiwf",
         "ai",
         "workflow",
         "framework"
@@ -20,12 +20,12 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/moonklabs/aiwf.git"
+        "url": "git+https://github.com/aiwf/aiwf.git"
     },
     "bugs": {
-        "url": "https://github.com/moonklabs/aiwf/issues"
+        "url": "https://github.com/aiwf/aiwf/issues"
     },
-    "homepage": "https://github.com/moonklabs/aiwf#readme",
+    "homepage": "https://github.com/aiwf/aiwf#readme",
     "engines": {
         "node": ">=14.0.0"
     },

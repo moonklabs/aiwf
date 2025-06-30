@@ -22,14 +22,14 @@ Follow these instructions to sprint the scope of a Milestone into Sprints
 **USE PARALLEL SUBAGENTS** to do these tasks:
 
 - Parse arguments for milestone ID (defaults to current milestone from PROJECT_MANIFEST)
-- Read `.moonklabs/00_PROJECT_MANIFEST.md` to understand current progress
-- Scan `.moonklabs/03_SPRINTS/` to identify existing sprints for the target milestone
+- Read `.aiwf/00_PROJECT_MANIFEST.md` to understand current progress
+- Scan `.aiwf/03_SPRINTS/` to identify existing sprints for the target milestone
 - For each existing sprint, read its sprint meta file to determine status from YAML frontmatter
 - Analyze the Tasks in Sprints to understand that work that has been done (from Subtasks)
 
 ## 2 · Assess completed work vs milestone requirements
 
-- Read milestone meta file from `.moonklabs/02_REQUIREMENTS/$MILESTONE_ID/`
+- Read milestone meta file from `.aiwf/02_REQUIREMENTS/$MILESTONE_ID/`
 - **CRITICAL:** Follow and read ALL linked documents in the milestone meta:
   - Product Requirements (PRD.md)
   - Database Specifications (SPECS_DB.md)
@@ -64,8 +64,8 @@ Follow these instructions to sprint the scope of a Milestone into Sprints
 ## 5 · Create sprint directories and meta files
 
 - For each planned sprint that doesn't exist:
-  - Create directory `.moonklabs/03_SPRINTS/$FULL_SPRINT_NAME/` (using complete sprint name like "S02_M01_LLM_Integration")
-  - Use template from `.moonklabs/99_TEMPLATES/sprint_meta_template.md`
+  - Create directory `.aiwf/03_SPRINTS/$FULL_SPRINT_NAME/` (using complete sprint name like "S02_M01_LLM_Integration")
+  - Use template from `.aiwf/99_TEMPLATES/sprint_meta_template.md`
   - Fill in sprint meta with:
     - High-level goal and scope
     - Key deliverables (bullet points, not detailed tasks)
@@ -74,7 +74,7 @@ Follow these instructions to sprint the scope of a Milestone into Sprints
 
 ## 6 · Update PROJECT_MANIFEST with sprint roadmap
 
-- Update `.moonklabs/00_PROJECT_MANIFEST.md`:
+- Update `.aiwf/00_PROJECT_MANIFEST.md`:
   - Set `highest_sprint_in_milestone` to the highest planned sprint
   - Update sprint summary section with overview of remaining sprints
   - Mark completed sprints as ✅ COMPLETED

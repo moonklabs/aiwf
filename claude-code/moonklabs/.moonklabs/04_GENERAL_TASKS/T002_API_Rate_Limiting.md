@@ -11,7 +11,7 @@ last_updated: 2023-07-25T09:15:00Z
 
 Implement rate limiting for the API to prevent abuse and ensure fair usage across all clients. This task involves adding middleware to track and limit requests based on client IP or API key.
 
-**Note: This is an example general task to demonstrate how non-sprint-specific tasks might be structured in the Moonklabs framework.**
+**Note: This is an example general task to demonstrate how non-sprint-specific tasks might be structured in the AIWF framework.**
 
 ## Goal / Objectives
 

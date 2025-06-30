@@ -12,7 +12,7 @@ Accepted
 
 The backend system needs a database to store user accounts, projects, tasks, and other application data. The choice of database system will impact performance, scalability, development speed, and maintenance requirements.
 
-**Note: This is an example Architecture Decision Record to demonstrate how ADRs might be structured in the Moonklabs framework.**
+**Note: This is an example Architecture Decision Record to demonstrate how ADRs might be structured in the AIWF framework.**
 
 We evaluated several options including:
 

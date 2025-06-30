@@ -1,8 +1,8 @@
-# CLAUDE.md - Moonklabs Framework Structure Guide
+# CLAUDE.md - AIWF Framework Structure Guide
 
 ## Overview
 
-This is the root directory of the Moonklabs framework structure. It contains all project documentation, requirements, sprints, and organizational files.
+This is the root directory of the AIWF framework structure. It contains all project documentation, requirements, sprints, and organizational files.
 
 ## Critical Files
 
@@ -30,7 +30,7 @@ The manifest is the central reference file that tracks:
 ## Directory Structure
 
 ```
-.Moonklabs/
+.AIWF/
 ├── 00_PROJECT_MANIFEST.md          # Central project reference (CORRECT NAME)
 ├── 01_PROJECT_DOCS/                # General project documentation
 ├── 02_REQUIREMENTS/                # Milestone-based requirements

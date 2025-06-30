@@ -27,11 +27,11 @@ Follow step by step and adhere closely to the following instructions for each st
 
 Check: <$ARGUMENTS>
 
-If empty, perform full project review. Otherwise interpret <$ARGUMENTS> to identify specific focus areas (milestone, sprint, architecture component, etc.). Unless stated in Argument do not compare to previews project reviews in `.moonklabs/10_STATE_OF_PROJECT`.
+If empty, perform full project review. Otherwise interpret <$ARGUMENTS> to identify specific focus areas (milestone, sprint, architecture component, etc.). Unless stated in Argument do not compare to previews project reviews in `.aiwf/10_STATE_OF_PROJECT`.
 
 **IMPORTANT:** This review looks at overall project state in context of recent changes.
 
-**CRITICAL:** Read `.moonklabs/00_PROJECT_MANIFEST.md` FIRST to understand:
+**CRITICAL:** Read `.aiwf/00_PROJECT_MANIFEST.md` FIRST to understand:
 
 - Current milestone and sprint status
 - What work is complete vs in-progress vs planned
@@ -39,7 +39,7 @@ If empty, perform full project review. Otherwise interpret <$ARGUMENTS> to ident
 
 **CONTEXT CHECK:** Before evaluating functionality:
 
-- Navigate to `.moonklabs/03_SPRINTS/` to find the current sprint
+- Navigate to `.aiwf/03_SPRINTS/` to find the current sprint
 - Read the sprint meta file to understand what's in scope
 - Check completed vs planned tasks within the sprint
 - Understand what future sprints will deliver
@@ -50,7 +50,7 @@ If empty, perform full project review. Otherwise interpret <$ARGUMENTS> to ident
 
 **CRITICAL:** Test infrastructure health is a BLOCKING criteria for sprint/milestone progression.
 
-- USE test.md command to execute full test suite (@.claude/commands/moonklabs/aiwf_test.md)
+- USE test.md command to execute full test suite (@.claude/commands/aiwf/aiwf_test.md)
 - ANALYZE test results: passed/failed/skipped counts and failure categories
 - CALCULATE test health score (0-10 scale):
   - 10: 100% pass rate, no infrastructure issues
@@ -75,9 +75,9 @@ If empty, perform full project review. Otherwise interpret <$ARGUMENTS> to ident
 
 **USE PARALLEL AGENTS** to follow these steps:
 
-- READ all core documents in `.moonklabs/01_PROJECT_DOCS/` especially ARCHITECTURE.md
-- READ current milestone requirements in `.moonklabs/02_REQUIREMENTS/`
-- READ architecture decisions in `.moonklabs/05_ARCHITECTURE_DECISIONS` as they might extend/contradict other documents
+- READ all core documents in `.aiwf/01_PROJECT_DOCS/` especially ARCHITECTURE.md
+- READ current milestone requirements in `.aiwf/02_REQUIREMENTS/`
+- READ architecture decisions in `.aiwf/05_ARCHITECTURE_DECISIONS` as they might extend/contradict other documents
 - IDENTIFY any gaps between documentation and current implementation
 - CHECK if the project is still following the documented architecture vision
 - VERIFY that current code structure matches documented patterns
@@ -88,8 +88,8 @@ If empty, perform full project review. Otherwise interpret <$ARGUMENTS> to ident
 
 **USE PARALLEL AGENTS** to follow these steps:
 
-- READ `.moonklabs/00_PROJECT_MANIFEST.md` for current status
-- ANALYZE completed sprints in `.moonklabs/03_SPRINTS/`
+- READ `.aiwf/00_PROJECT_MANIFEST.md` for current status
+- ANALYZE completed sprints in `.aiwf/03_SPRINTS/`
 - COMPARE actual progress against CURRENT SPRINT deliverables (not full milestone)
 - DISTINGUISH between sprint-level tasks vs milestone-level features
 - ASSESS if current sprint focus aligns with milestone goals
@@ -128,7 +128,7 @@ If empty, perform full project review. Otherwise interpret <$ARGUMENTS> to ident
 
 - **Development scripts** — MUST go through `run_dev.py`, not standalone files
 - **Test files** — MUST be in `tests/` directory with proper naming (`test_*.py`)
-- **Documentation** — MUST be in `docs/` or `.moonklabs/01_PROJECT_DOCS/`
+- **Documentation** — MUST be in `docs/` or `.aiwf/01_PROJECT_DOCS/`
 - **Configuration** — MUST follow established patterns (`.env.example`, `pyproject.toml`)
 - **Temporary files** — SHOULD NOT exist in committed code
 
@@ -170,7 +170,7 @@ Be thorough and **go above and beyond** in your analysis - leave no stone unturn
 **IMPORTANT:** Get current timestamp and create output file
 
 - Get current timestamp using system date command
-- Create filename: `YYYY-MM-DD-HH-MM-<judgment-slug>.md` in `.moonklabs/10_STATE_OF_PROJECT/`
+- Create filename: `YYYY-MM-DD-HH-MM-<judgment-slug>.md` in `.aiwf/10_STATE_OF_PROJECT/`
 - Judgment slug should be 2-3 words describing overall project health (e.g., "solid-progress", "needs-focus", "critical-issues", "doing-great", "on-track")
 
 **IMPORTANT:** Write full report to the timestamped file with this format:

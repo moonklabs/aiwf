@@ -12,7 +12,7 @@ AIWF 명령어는 `/aiwf_<command_name> [arguments]` 형식을 따릅니다.
 
 ### 🚀 `/aiwf_initialize`
 
-**목적**: 새 프로젝트 또는 기존 프로젝트에서 Moonklabs 초기화
+**목적**: 새 프로젝트 또는 기존 프로젝트에서 AIWF 초기화
 
 **사용법**:
 
@@ -24,7 +24,7 @@ AIWF 명령어는 `/aiwf_<command_name> [arguments]` 형식을 따릅니다.
 
 1. 프로젝트를 스캔하고 분석
 2. 프로젝트 타입 확인 요청
-3. 기존 Moonklabs 문서 확인
+3. 기존 AIWF 문서 확인
 4. 문서 생성 과정 안내 (기존 문서 가져오기 또는 새로 생성)
 5. 첫 번째 마일스톤 생성
 6. 프로젝트 매니페스트 생성
@@ -385,7 +385,7 @@ AIWF 명령어는 `/aiwf_<command_name> [arguments]` 형식을 따릅니다.
 
 ### 🛠️ `/aiwf_create_milestone_plan`
 
-**목적**: 대화형 프로세스로 신규 마일스톤을 계획하고 `.moonklabs/02_REQUIREMENTS/` 구조를 자동 생성
+**목적**: 대화형 프로세스로 신규 마일스톤을 계획하고 `.aiwf/02_REQUIREMENTS/` 구조를 자동 생성
 
 **사용법**:
 
@@ -621,5 +621,5 @@ AIWF 명령어에는 다음과 같은 안전 기능이 포함되어 있습니다
 
 1. 인수 없이 명령어를 실행하여 사용법 정보 확인
 2. 이 가이드 확인
-3. `.moonklabs/`의 작업 예시 확인
+3. `.aiwf/`의 작업 예시 확인
 4. `.claude/commands/`의 명령어 소스 검토

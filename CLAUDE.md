@@ -4,14 +4,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is **aiwf** (AI Workflow Framework), an NPM package that installs the Moonklabs project management framework for AI-assisted development. It's an updated version of the Simone framework, specifically designed for Claude Code integration.
+This is **aiwf** (AI Workflow Framework), an NPM package that installs the AIWF project management framework for AI-assisted development. It's an updated version of the Simone framework, specifically designed for Claude Code integration.
 
 ## Core Architecture
 
 ### Main Components
 
-1. **CLI Installer (`index.js`)**: The main entry point that downloads and installs Moonklabs framework components from GitHub
-2. **Moonklabs Framework**: A markdown-based project management system located in `claude-code/moonklabs/`
+1. **CLI Installer (`index.js`)**: The main entry point that downloads and installs AIWF framework components from GitHub
+2. **AIWF Framework**: A markdown-based project management system located in `claude-code/aiwf/`
 3. **Rules System**: Development guidelines in `rules/global/` and `rules/manual/` for Cursor and Windsurf IDEs
 
 ### Key Directories
@@ -20,9 +20,9 @@ This is **aiwf** (AI Workflow Framework), an NPM package that installs the Moonk
 aiwf/
 ├── index.js                    # Main CLI installer with GitHub API integration
 ├── package.json               # NPM package configuration
-├── claude-code/moonklabs/      # Complete Moonklabs framework
+├── claude-code/aiwf/      # Complete AIWF framework
 │   ├── .claude/commands/       # Claude Code custom commands
-│   └── .moonklabs/            # Project management structure
+│   └── .aiwf/            # Project management structure
 └── rules/                     # IDE-specific development rules
     ├── global/                # Always-apply rules
     └── manual/                # On-demand rules
@@ -36,7 +36,7 @@ aiwf/
 # Install dependencies
 npm install
 
-# Test the installer (creates .moonklabs/ and .claude/ in current directory)
+# Test the installer (creates .aiwf/ and .claude/ in current directory)
 node index.js
 
 # Test with force flag (skips prompts)
@@ -49,7 +49,7 @@ npm publish
 ### Package Usage
 
 ```bash
-# Install Moonklabs in any project
+# Install AIWF in any project
 npx aiwf
 
 # Force installation without prompts
@@ -62,13 +62,13 @@ npx aiwf --force
 
 The installer (`index.js`) fetches content directly from the GitHub repository:
 
-- **API URL**: `https://api.github.com/repos/moonklabs/aiwf`
-- **Raw Content**: `https://raw.githubusercontent.com/moonklabs/aiwf/master`
-- **Content Prefix**: `claude-code/moonklabs`
+- **API URL**: `https://api.github.com/repos/aiwf/aiwf`
+- **Raw Content**: `https://raw.githubusercontent.com/aiwf/aiwf/master`
+- **Content Prefix**: `claude-code/aiwf`
 
 ### Installation Process
 
-1. **Detection**: Checks for existing `.moonklabs/` or `.claude/commands/moonklabs/`
+1. **Detection**: Checks for existing `.aiwf/` or `.claude/commands/aiwf/`
 2. **Backup**: Creates timestamped backups of existing files (`.bak` format)
 3. **Download**: Fetches framework components from GitHub
 4. **Setup**: Creates directory structure and copies files
@@ -83,11 +83,11 @@ The installer (`index.js`) fetches content directly from the GitHub repository:
 - **Templates**: Downloaded on fresh installs only
 - **User content**: Preserved during updates (sprints, tasks, etc.)
 
-## Moonklabs Framework Integration
+## AIWF Framework Integration
 
 ### Command Structure
 
-Available via `/project:moonklabs:<command>` in Claude Code:
+Available via `/project:aiwf:<command>` in Claude Code:
 
 - **Setup**: `initialize`, `prime`, `prime_context`
 - **Planning**: `plan_milestone`, `create_sprints_from_milestone`, `create_sprint_tasks`
@@ -109,14 +109,14 @@ The framework supports seamless GitHub integration:
 
 ```
 target_project/
-├── .moonklabs/                 # Project management root
+├── .aiwf/                 # Project management root
 │   ├── 00_PROJECT_MANIFEST.md  # Central tracking
 │   ├── 02_REQUIREMENTS/        # Milestone requirements
 │   ├── 03_SPRINTS/            # Sprint execution
 │   ├── 04_GENERAL_TASKS/      # Standalone tasks
 │   ├── 98_PROMPTS/            # Useful prompts
 │   └── 99_TEMPLATES/          # Document templates
-├── .claude/commands/moonklabs/ # Claude Code commands
+├── .claude/commands/aiwf/ # Claude Code commands
 └── .cursor/rules/             # Cursor IDE rules
 ```
 
@@ -167,15 +167,15 @@ Uses modern Node.js libraries:
 
 ### Making Changes to Framework
 
-1. Modify files in `claude-code/moonklabs/`
+1. Modify files in `claude-code/aiwf/`
 2. Test locally with `node index.js`
 3. Commit and push to GitHub
 4. Framework updates are automatically available via `npx aiwf`
 
 ### Adding New Commands
 
-1. Create command files in `claude-code/moonklabs/.claude/commands/moonklabs/`
-2. Include both English and Korean versions (`moonklabs/` and `moonklabs_kr/`)
+1. Create command files in `claude-code/aiwf/.claude/commands/aiwf/`
+2. Include both English and Korean versions (`aiwf/` and `aiwf_kr/`)
 3. Update documentation in `docs/COMMANDS_GUIDE.md`
 
 ### Modifying Installation Logic

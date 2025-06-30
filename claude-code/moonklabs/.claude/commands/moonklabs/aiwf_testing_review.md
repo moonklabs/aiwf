@@ -6,7 +6,7 @@
 
 **FIRST**, check if a testing strategy document exists:
 
-- CHECK for `.moonklabs/01_PROJECT_DOCS/TESTING_STRATEGY.md`
+- CHECK for `.aiwf/01_PROJECT_DOCS/TESTING_STRATEGY.md`
 - If NOT found, inform the user: "No testing strategy document found. Would you like me to help create one, or proceed with a general test quality review?"
 - If user wants to proceed without strategy, adapt the review to focus on general test quality principles
 
@@ -28,7 +28,7 @@ Follow step by step and adhere closely to the following instructions for each st
 
 **Option A - Strategy document exists:**
 
-- LOAD `.moonklabs/01_PROJECT_DOCS/TESTING_STRATEGY.md`
+- LOAD `.aiwf/01_PROJECT_DOCS/TESTING_STRATEGY.md`
 - EXTRACT key principles and priorities
 - IDENTIFY what should and shouldn't be tested
 - NOTE coverage expectations and quality gates
@@ -49,7 +49,7 @@ Use general best practices as review criteria:
 
 **EXAMINE** the current test codebase:
 
-- USE test.md command to run tests (@.claude/commands/moonklabs/aiwf_test.md)
+- USE test.md command to run tests (@.claude/commands/aiwf/aiwf_test.md)
 - EXPLORE test directory structure and organization
 - IDENTIFY test categories and their purposes
 - CHECK test naming conventions and patterns
@@ -133,7 +133,7 @@ Reason: [Why this aligns with strategy]
 **GENERATE** a focused report on test-strategy alignment:
 
 - Get current timestamp using system date command
-- Create report in `.moonklabs/10_STATE_OF_PROJECT/YYYY-MM-DD-HH-MM-test-alignment.md`
+- Create report in `.aiwf/10_STATE_OF_PROJECT/YYYY-MM-DD-HH-MM-test-alignment.md`
 
 **Report structure:**
 

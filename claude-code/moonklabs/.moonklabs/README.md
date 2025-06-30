@@ -1,12 +1,12 @@
-# Moonklabs Framework
+# AIWF Framework
 
-Moonklabs is a project management system designed to work with Claude Code's strengths and limitations. It provides structure for breaking down software projects into manageable, context-aware tasks.
+AIWF is a project management system designed to work with Claude Code's strengths and limitations. It provides structure for breaking down software projects into manageable, context-aware tasks.
 
 ## Core Concept
 
-The fundamental challenge: AI context windows are limited and we can't control what information stays or leaves during long sessions. Moonklabs solves this by starting fresh for each task while providing rich, relevant context.
+The fundamental challenge: AI context windows are limited and we can't control what information stays or leaves during long sessions. AIWF solves this by starting fresh for each task while providing rich, relevant context.
 
-## How Moonklabs Works
+## How AIWF Works
 
 ### 1. Requirements First
 
@@ -49,7 +49,7 @@ Each task follows a strict workflow:
 
 ### 4. Context Management
 
-For each task, Moonklabs provides:
+For each task, AIWF provides:
 
 - The specific task description and criteria
 - Relevant sprint and milestone context
@@ -79,7 +79,7 @@ Built-in review processes maintain standards:
 
 ## Commands Overview
 
-Moonklabs commands (`/project:Moonklabs:command`) automate the workflow:
+AIWF commands (`/project:AIWF:command`) automate the workflow:
 
 - Planning: `plan_milestone`, `create_sprint`
 - Execution: `create_task`, `do_task`, `code_review`

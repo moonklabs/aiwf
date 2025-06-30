@@ -1,12 +1,12 @@
 [Read in Korean (한국어로 보기)](PRD.ko.md)
 
-# HelloMoonklabs - Installer for Moonklabs Framework
+# HelloAIWF - Installer for AIWF Framework
 
 _Version: 0.1.0_
 
 ## Overview
 
-A minimal, `npx`-executable command-line tool to install the Moonklabs project management framework into any project. It provides a structured directory layout and command-line tools for streamlined project management, with a user interface localized in Korean.
+A minimal, `npx`-executable command-line tool to install the AIWF project management framework into any project. It provides a structured directory layout and command-line tools for streamlined project management, with a user interface localized in Korean.
 
 ## Core Functionality
 
@@ -15,25 +15,25 @@ A minimal, `npx`-executable command-line tool to install the Moonklabs project m
 The tool is executed via `npx`:
 
 ```bash
-npx hello-moonklabs
+npx hello-aiwf
 ```
 
 ### Key Features
 
 1.  **Creates Directory Structure**:
 
-    - Initializes the `.moonklabs/` directory with standardized subdirectories for documents, requirements, sprints, and more.
-    - Sets up the `.claude/commands/moonklabs/` directory for custom Claude commands.
+    - Initializes the `.aiwf/` directory with standardized subdirectories for documents, requirements, sprints, and more.
+    - Sets up the `.claude/commands/aiwf/` directory for custom Claude commands.
 
 2.  **Fetches from GitHub**:
 
-    - Downloads the latest framework files from the `moonklabs/aiwf` repository on GitHub.
-    - Specifically, it sources files from the `claude-code/moonklabs/` subdirectory.
+    - Downloads the latest framework files from the `aiwf/aiwf` repository on GitHub.
+    - Specifically, it sources files from the `claude-code/aiwf/` subdirectory.
     - Installs commands, documentation templates, and the project manifest.
 
 3.  **Handles Existing Installations**:
 
-    - Detects if a Moonklabs framework is already present.
+    - Detects if a AIWF framework is already present.
     - Prompts the user to **Update**, **Skip**, or **Cancel**.
     - The update process preserves user-created files (tasks, sprints) while updating command scripts and `CLAUDE.md` documents.
     - Automatically backs up overwritten files with a `.bak` extension.
@@ -72,7 +72,7 @@ aiwf/
 ├── claude-code/
 │   ├── docker/
 │   │   └── Dockerfile
-│   ├── moonklabs/
+│   ├── aiwf/
 │   └── simone/
 │       ├── CHANGELOG.md
 │       ├── LICENSE

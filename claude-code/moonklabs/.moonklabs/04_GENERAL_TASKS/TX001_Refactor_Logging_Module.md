@@ -11,7 +11,7 @@ last_updated: 2023-07-22T16:45:00Z
 
 The current logging implementation is basic and needs to be enhanced to provide better visibility and monitoring capabilities. This task involves refactoring the logging module to add structured logging, log rotation, and improved error tracking.
 
-**Note: This is an example general task to demonstrate how non-sprint-specific tasks might be structured in the Moonklabs framework.**
+**Note: This is an example general task to demonstrate how non-sprint-specific tasks might be structured in the AIWF framework.**
 
 ## Goal / Objectives
 

@@ -21,8 +21,8 @@ Discussion Starter: <$ARGUMENTS>
 Based on the conversation, you may suggest:
 
 - **Amending review findings** if new context changes severity/priority
-- **Updating documentation** in `.moonklabs/01_PROJECT_DOCS/` if architectural decisions need clarification
-- **Revising requirements** in `.moonklabs/02_REQUIREMENTS/` if scope understanding was incorrect
+- **Updating documentation** in `.aiwf/01_PROJECT_DOCS/` if architectural decisions need clarification
+- **Revising requirements** in `.aiwf/02_REQUIREMENTS/` if scope understanding was incorrect
 - **Creating tasks** for specific technical debt items that need addressing
 - **Adjusting sprint priorities** based on refined understanding
 

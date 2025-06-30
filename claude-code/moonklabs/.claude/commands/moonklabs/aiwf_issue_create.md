@@ -13,8 +13,8 @@ Automatically create a GitHub issue based on a task file.
 ## 1 · Parse Task File
 
 Get task ID from <$ARGUMENTS>:
-- Sprint tasks: Search `.moonklabs/03_SPRINTS/`
-- General tasks: Search `.moonklabs/04_GENERAL_TASKS/`
+- Sprint tasks: Search `.aiwf/03_SPRINTS/`
+- General tasks: Search `.aiwf/04_GENERAL_TASKS/`
 
 Extract from task file:
 - Title
@@ -36,7 +36,7 @@ Extract from task file:
 ### Related Information
 - Task ID: {task_id}
 - Sprint: {sprint_id}
-- Task file: `.moonklabs/.../{task_file}`
+- Task file: `.aiwf/.../{task_file}`
 ```
 
 ## 3 · Create GitHub Issue

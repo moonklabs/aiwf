@@ -41,7 +41,7 @@ The sprint will be considered complete when:
 
 ## Notes / Context
 
-This is an example sprint document to demonstrate how sprints might be structured in a project using the Moonklabs framework. This simulates what a typical initial API development sprint might look like.
+This is an example sprint document to demonstrate how sprints might be structured in a project using the AIWF framework. This simulates what a typical initial API development sprint might look like.
 
 ## Related Documents
 

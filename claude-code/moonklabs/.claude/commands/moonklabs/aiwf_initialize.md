@@ -1,14 +1,14 @@
-# Moonklabs 프레임워크 초기화
+# AIWF 프레임워크 초기화
 
-Initialize the Moonklabs project management framework through an adaptive, interactive process.
+Initialize the AIWF project management framework through an adaptive, interactive process.
 
 ## Create a TODO with EXACTLY these items
 
 1. Scan and analyze the project
 2. Interactive confirmation with user
-3. Check for existing Moonklabs documents
+3. Check for existing AIWF documents
 4. Guide document creation process
-5. Create first milestone for Moonklabs
+5. Create first milestone for AIWF
 6. Generate project manifest
 7. Provide next steps
 
@@ -32,14 +32,14 @@ Initialize the Moonklabs project management framework through an adaptive, inter
 
 ```
 I found this to be a [project type] project named [detected name].
-Is this correct? Should I proceed with Moonklabs setup?
+Is this correct? Should I proceed with AIWF setup?
 ```
 
 **Get user confirmation before continuing**
 
-### 3. Check for existing Moonklabs documents
+### 3. Check for existing AIWF documents
 
-**Scan .moonklabs/ directory for:**
+**Scan .aiwf/ directory for:**
 
 - Any documents in 01_PROJECT_DOCS/
 - Any milestones in 02_REQUIREMENTS/
@@ -49,7 +49,7 @@ Is this correct? Should I proceed with Moonklabs setup?
 **Interactive decision:**
 
 - If documents found: "I found existing documents: [list]. Should we work with these or extend them?"
-- If no documents: "No Moonklabs documents found yet. Do you have any existing project documentation you'd like to copy in before we continue?"
+- If no documents: "No AIWF documents found yet. Do you have any existing project documentation you'd like to copy in before we continue?"
 
 **Allow user to:**
 
@@ -75,12 +75,12 @@ Is this correct? Should I proceed with Moonklabs setup?
 **If using existing docs:**
 
 - Import and adapt existing documentation
-- Fill in any Moonklabs-specific sections
+- Fill in any AIWF-specific sections
 - Ensure compatibility with framework structure
 
 **Keep it conversational and adaptive**
 
-### 5. Create first milestone for Moonklabs
+### 5. Create first milestone for AIWF
 
 **Determine appropriate first milestone:**
 
@@ -110,7 +110,7 @@ Is this correct? Should I proceed with Moonklabs setup?
 **Customized guidance based on setup:**
 
 ```
-✅ Moonklabs initialized for [project name]!
+✅ AIWF initialized for [project name]!
 
 Current setup:
 - Project type: [type]
@@ -120,7 +120,7 @@ Current setup:
 Next steps:
 - Review your architecture: 01_PROJECT_DOCS/ARCHITECTURE.md
 - Check milestone requirements: 02_REQUIREMENTS/[milestone]/
-- Start first task: /project:moonklabs:create_general_task
+- Start first task: /project:aiwf:create_general_task
 
 Ready to begin development!
 ```

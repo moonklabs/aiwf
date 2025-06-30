@@ -1,6 +1,6 @@
 # Demo Project Architecture (EXAMPLE)
 
-This document outlines the high-level architecture of the Demo Project. **This is an example document to demonstrate how architecture might be documented in the Moonklabs framework.**
+This document outlines the high-level architecture of the Demo Project. **This is an example document to demonstrate how architecture might be documented in the AIWF framework.**
 
 ## System Overview
 

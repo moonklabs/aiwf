@@ -23,7 +23,7 @@ If empty, use default, otherwise interpret <$ARGUMENTS> to identify the scope of
 
 **CONTEXT:** Before reviewing code changes:
 
-- Read `.moonklabs/00_PROJECT_MANIFEST.md` to understand current sprint and milestone context
+- Read `.aiwf/00_PROJECT_MANIFEST.md` to understand current sprint and milestone context
 - Use the manifest to identify which sprint is active and what work is in scope
 - Only evaluate against requirements appropriate for the current sprint's deliverables
 
@@ -34,11 +34,11 @@ With the identified Scope use `git diff` (on default: `git diff HEAD~1`) to find
 ### 3. Find relevant Specifications and Documentation
 
 - FIND the Task, Sprint and Milestone involved in the work that was done and output your findings
-- Navigate to `.moonklabs/03_SPRINTS/` to find the current sprint directory
+- Navigate to `.aiwf/03_SPRINTS/` to find the current sprint directory
 - READ the sprint meta file to understand sprint objectives and deliverables
 - If a specific task is in scope, find and READ the task file in the sprint directory
-- IDENTIFY related requirements in `.moonklabs/02_REQUIREMENTS/` for the current milestone
-- READ involved Documents especially in `.moonklabs/01_PROJECT_DOCS/` and `.moonklabs/02_REQUIREMENTS/`
+- IDENTIFY related requirements in `.aiwf/02_REQUIREMENTS/` for the current milestone
+- READ involved Documents especially in `.aiwf/01_PROJECT_DOCS/` and `.aiwf/02_REQUIREMENTS/`
 - **IMPORTANT:** Focus on current sprint deliverables, not future milestone features
 
 ### 4. Compare code changes against Documentation and Requirements
@@ -74,7 +74,7 @@ With the identified Scope use `git diff` (on default: `git diff HEAD~1`) to find
 #### IMPORTANT: Output Format
 
 - Output the results of your review to the task's **## Output Log** section in the task file
-- Find the task file in `.moonklabs/03_SPRINTS/` or `.moonklabs/04_GENERAL_TASKS/` based on the scope
+- Find the task file in `.aiwf/03_SPRINTS/` or `.aiwf/04_GENERAL_TASKS/` based on the scope
 - Append the review results to the existing Output Log with timestamp
 - Output Format:
   ```

@@ -6,7 +6,7 @@
 
 This amendment updates the authentication flow requirements to incorporate OAuth 2.0 support for social logins in addition to the existing email/password authentication.
 
-**Note: This is an example amendment document to demonstrate how requirement changes might be tracked in the Moonklabs framework.**
+**Note: This is an example amendment document to demonstrate how requirement changes might be tracked in the AIWF framework.**
 
 ## Changes to Product Requirements
 

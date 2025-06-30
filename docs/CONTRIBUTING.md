@@ -17,7 +17,7 @@ aiwf (AI Workflow Framework) 프로젝트에 기여해 주셔서 감사합니다
 
 ### 프로젝트 이해
 
-aiwf는 Claude Code와 통합된 Moonklabs 프로젝트 관리 프레임워크를 설치하는 NPM CLI 패키지입니다. 기여하기 전에 다음을 이해해 주세요:
+aiwf는 Claude Code와 통합된 AIWF 프로젝트 관리 프레임워크를 설치하는 NPM CLI 패키지입니다. 기여하기 전에 다음을 이해해 주세요:
 
 - **목적**: AI 기반 개발 워크플로우 프레임워크 배포
 - **대상 사용자**: Claude Code, Cursor, Windsurf 사용자
@@ -44,14 +44,14 @@ aiwf는 Claude Code와 통합된 Moonklabs 프로젝트 관리 프레임워크�
 
 ```bash
 # 1. 리포지토리 포크
-# GitHub에서 https://github.com/moonklabs/aiwf를 개인 계정으로 포크
+# GitHub에서 https://github.com/aiwf/aiwf를 개인 계정으로 포크
 
 # 2. 로컬에 클론
 git clone https://github.com/YOUR_USERNAME/aiwf.git
 cd aiwf
 
 # 3. 원본 리포지토리를 upstream으로 추가
-git remote add upstream https://github.com/moonklabs/aiwf.git
+git remote add upstream https://github.com/aiwf/aiwf.git
 
 # 4. 의존성 설치
 npm install
@@ -68,7 +68,7 @@ npm run lint           # 코드 스타일 검사 (설정 후)
 
 가장 권장하는 기여 방법입니다:
 
-1. **이슈 찾기**: [GitHub Issues](https://github.com/moonklabs/aiwf/issues)에서 작업할 이슈 선택
+1. **이슈 찾기**: [GitHub Issues](https://github.com/aiwf/aiwf/issues)에서 작업할 이슈 선택
 2. **이슈 할당**: 댓글로 작업 의사 표현
 3. **브랜치 생성**: `feature/issue-번호-간단한-설명` 형식
 
@@ -94,19 +94,19 @@ npm run lint           # 코드 스타일 검사 (설정 후)
 
 ```javascript
 // 좋음: ES6+ 문법 사용
-const apiUrl = 'https://api.github.com';
+const apiUrl = "https://api.github.com";
 const fetchData = async (url) => {
   try {
     const response = await fetch(url);
     return await response.json();
   } catch (error) {
-    console.error('API 호출 실패:', error);
+    console.error("API 호출 실패:", error);
     throw error;
   }
 };
 
 // 피하기: var 사용, 콜백 헬
-var oldUrl = 'https://api.github.com';
+var oldUrl = "https://api.github.com";
 function fetchDataOld(url, callback) {
   // 구식 패턴
 }
@@ -132,9 +132,9 @@ function fetchDataOld(url, callback) {
 async function fetchRepositoryContent(repoUrl, path) {
   // 입력 검증
   if (!repoUrl || !path) {
-    throw new Error('리포지토리 URL과 경로는 필수입니다');
+    throw new Error("리포지토리 URL과 경로는 필수입니다");
   }
-  
+
   // API 호출 구현...
 }
 ```
@@ -166,32 +166,32 @@ npm run format
 
 ```javascript
 // tests/unit/github-api.test.js
-import { jest } from '@jest/globals';
-import { fetchGitHubContent } from '../../index.js';
+import { jest } from "@jest/globals";
+import { fetchGitHubContent } from "../../index.js";
 
-describe('GitHub API 함수들', () => {
+describe("GitHub API 함수들", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  describe('fetchGitHubContent', () => {
-    test('성공적으로 데이터를 가져와야 함', async () => {
+  describe("fetchGitHubContent", () => {
+    test("성공적으로 데이터를 가져와야 함", async () => {
       // Given (준비)
-      const mockUrl = 'https://api.github.com/repos/test/repo';
-      const expectedData = { name: 'test-repo' };
-      
+      const mockUrl = "https://api.github.com/repos/test/repo";
+      const expectedData = { name: "test-repo" };
+
       // When (실행)
       const result = await fetchGitHubContent(mockUrl);
-      
+
       // Then (검증)
       expect(result).toEqual(expectedData);
     });
 
-    test('잘못된 URL에 대해 에러를 발생시켜야 함', async () => {
+    test("잘못된 URL에 대해 에러를 발생시켜야 함", async () => {
       // Given & When & Then
-      await expect(fetchGitHubContent('invalid-url'))
-        .rejects
-        .toThrow('올바르지 않은 URL입니다');
+      await expect(fetchGitHubContent("invalid-url")).rejects.toThrow(
+        "올바르지 않은 URL입니다"
+      );
     });
   });
 });
@@ -235,28 +235,36 @@ docs(readme): 설치 가이드 업데이트
 
 ```markdown
 ## 변경사항 요약
+
 <!-- 이 PR에서 무엇을 변경했는지 간단히 설명 -->
 
 ## 관련 이슈
+
 <!-- 관련된 이슈가 있다면 링크 -->
+
 Closes #123
 
 ## 변경 유형
+
 - [ ] 버그 수정 (기존 기능을 깨뜨리지 않는 변경사항)
 - [ ] 새로운 기능 (기존 기능을 깨뜨리지 않는 새로운 기능)
 - [ ] Breaking change (기존 기능에 영향을 주는 변경사항)
 - [ ] 문서 업데이트
 
 ## 테스트 방법
+
 <!-- 이 변경사항을 어떻게 테스트했는지 설명 -->
+
 1. 단계 1
 2. 단계 2
 3. 예상 결과
 
 ## 스크린샷 (해당하는 경우)
+
 <!-- 시각적 변경사항이 있다면 스크린샷 포함 -->
 
 ## 추가 참고사항
+
 <!-- 리뷰어가 알아야 할 추가 정보 -->
 ```
 
@@ -275,26 +283,32 @@ Closes #123
 
 ```markdown
 ## 버그 설명
+
 <!-- 버그에 대한 명확하고 간단한 설명 -->
 
 ## 재현 단계
+
 1. '...'로 이동
 2. '...'를 클릭
 3. 아래로 스크롤하여 '...'를 확인
 4. 오류 발생
 
 ## 예상 동작
+
 <!-- 예상했던 동작에 대한 설명 -->
 
 ## 실제 동작
+
 <!-- 실제로 일어난 일에 대한 설명 -->
 
 ## 환경
+
 - OS: [예: macOS 12.0]
 - Node.js 버전: [예: 18.0.0]
 - aiwf 버전: [예: 1.0.0]
 
 ## 추가 컨텍스트
+
 <!-- 문제에 대한 추가 정보나 스크린샷 -->
 ```
 
@@ -302,18 +316,23 @@ Closes #123
 
 ```markdown
 ## 기능 설명
+
 <!-- 원하는 기능에 대한 설명 -->
 
 ## 문제점
+
 <!-- 이 기능이 해결할 문제에 대한 설명 -->
 
 ## 제안하는 해결책
+
 <!-- 어떻게 구현되었으면 하는지에 대한 설명 -->
 
 ## 대안
+
 <!-- 고려한 다른 해결책들 -->
 
 ## 추가 컨텍스트
+
 <!-- 기능 요청에 대한 추가 정보나 스크린샷 -->
 ```
 
@@ -377,11 +396,11 @@ aiwf는 [Semantic Versioning](https://semver.org/)을 따릅니다:
 
 기여해 주신 모든 분들께 감사드립니다! 주요 기여자들은 다음에서 확인할 수 있습니다:
 
-- [Contributors 페이지](https://github.com/moonklabs/aiwf/graphs/contributors)
-- [릴리스 노트](https://github.com/moonklabs/aiwf/releases)에서 각 릴리스별 기여자 언급
+- [Contributors 페이지](https://github.com/aiwf/aiwf/graphs/contributors)
+- [릴리스 노트](https://github.com/aiwf/aiwf/releases)에서 각 릴리스별 기여자 언급
 
 ---
 
-궁금한 점이 있으시면 언제든지 [이슈를 생성](https://github.com/moonklabs/aiwf/issues/new)하거나 [토론](https://github.com/moonklabs/aiwf/discussions)에 참여해 주세요!
+궁금한 점이 있으시면 언제든지 [이슈를 생성](https://github.com/aiwf/aiwf/issues/new)하거나 [토론](https://github.com/aiwf/aiwf/discussions)에 참여해 주세요!
 
 함께 더 나은 aiwf를 만들어 나가요! 🚀

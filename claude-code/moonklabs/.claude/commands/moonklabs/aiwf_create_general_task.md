@@ -1,6 +1,6 @@
 # 일반 Task 생성 - 탑 다운 실행
 
-Creates a new general task in `.moonklabs/04_GENERAL_TASKS/` following project documentation standards.
+Creates a new general task in `.aiwf/04_GENERAL_TASKS/` following project documentation standards.
 
 ## Create a TODO with EXACTLY these 10 Items
 
@@ -22,7 +22,7 @@ Creates a new general task in `.moonklabs/04_GENERAL_TASKS/` following project d
 The argument format is: `<Task Title or Description>`
 
 - If arguments are empty, prompt user for task details
-- Generate sequential task ID by examining existing tasks in `.moonklabs/04_GENERAL_TASKS/`
+- Generate sequential task ID by examining existing tasks in `.aiwf/04_GENERAL_TASKS/`
 - Find highest task number (T###) and increment by 1
 - Format: `T###_<Task_Title_Snake_Case>.md`
 - **IMPORTANT:** Task IDs must be sequential with no gaps
@@ -31,19 +31,19 @@ The argument format is: `<Task Title or Description>`
 
 Use PARALLEL SUBAGENTS to READ and UNDERSTAND the project's context:
 
-- READ `.moonklabs/00_PROJECT_MANIFEST.md` - Get current project state
-- READ `.moonklabs/01_PROJECT_DOCS/ARCHITECTURE.md` - Understand system constraints
-- READ `.moonklabs/01_PROJECT_DOCS/LONG_TERM_VISION.md` - Understand future direction
-- READ latest files in `.moonklabs/10_STATE_OF_PROJECT/` - Review current state
-- SCAN `.moonklabs/05_ARCHITECTURE_DECISIONS/` for relevant ADRs
+- READ `.aiwf/00_PROJECT_MANIFEST.md` - Get current project state
+- READ `.aiwf/01_PROJECT_DOCS/ARCHITECTURE.md` - Understand system constraints
+- READ `.aiwf/01_PROJECT_DOCS/LONG_TERM_VISION.md` - Understand future direction
+- READ latest files in `.aiwf/10_STATE_OF_PROJECT/` - Review current state
+- SCAN `.aiwf/05_ARCHITECTURE_DECISIONS/` for relevant ADRs
 - **IMPORTANT:** General tasks must align with documented architecture
 
 ### 3. Verify task doesn't duplicate existing work
 
 **SEARCH** comprehensively for potential duplicates:
 
-- Check all files in `.moonklabs/04_GENERAL_TASKS/`
-- Search sprint tasks in `.moonklabs/03_SPRINTS/*/T*.md`
+- Check all files in `.aiwf/04_GENERAL_TASKS/`
+- Search sprint tasks in `.aiwf/03_SPRINTS/*/T*.md`
 - Look for similar functionality in completed milestones
 - **CRITICAL:** If duplicate found, stop and report to user with file reference
 
@@ -61,10 +61,10 @@ Based on the task description, use PARALLEL SUBAGENTS to:
 
 ### 5. Create task file using standard template
 
-**USE** the task template in `.moonklabs/99_TEMPLATES/task_template.md` as base structure:
+**USE** the task template in `.aiwf/99_TEMPLATES/task_template.md` as base structure:
 
 - Copy template structure exactly
-- Place file in `.moonklabs/04_GENERAL_TASKS/T###_<Title>.md`
+- Place file in `.aiwf/04_GENERAL_TASKS/T###_<Title>.md`
 - Include timestamp: Execute `date '+%Y-%m-%d %H:%M:%S'` for creation time
 - **IMPORTANT:** Follow template structure precisely - no deviations
 
@@ -103,7 +103,7 @@ Populate the task file with:
 
 ### 8. Update project manifest with new task
 
-**UPDATE** `.moonklabs/00_PROJECT_MANIFEST.md`:
+**UPDATE** `.aiwf/00_PROJECT_MANIFEST.md`:
 
 - Add task to "## General Tasks" section
 - Format: `- [ ] T###: [Task Title] - Status: Not Started`

@@ -1,4 +1,4 @@
-# $Argument 기반 Moonklabs 태스크 처리
+# $Argument 기반 AIWF 태스크 처리
 
 **IMPORTANT:** Follow from Top to Bottom - don't skip anything!
 
@@ -19,7 +19,7 @@
 
 ## 2 · Identify task file
 
-Search .moonklabs/03_SPRINTS/ and .moonklabs/04_GENERAL_TASKS/.
+Search .aiwf/03_SPRINTS/ and .aiwf/04_GENERAL_TASKS/.
 If no open task matches, pause and ask the user how to proceed.
 
 ## 3 · Analyse the task
@@ -30,7 +30,7 @@ Read the task description. If anything is unclear, ask clarifying questions befo
 
 1. **Sprint Context:** Confirm task belongs to current sprint scope
 2. **Dependencies:** Check if any dependent tasks need to be completed first
-3. **Requirements:** Read relevant requirements docs in `.moonklabs/02_REQUIREMENTS/`
+3. **Requirements:** Read relevant requirements docs in `.aiwf/02_REQUIREMENTS/`
 4. **Scope Verification:** Ensure task aligns with current sprint objectives
 5. **GitHub Issue Check:** Check if task file has a `github_issue` field
 
@@ -39,13 +39,13 @@ Read the task description. If anything is unclear, ask clarifying questions befo
 **GitHub Issue Creation (Optional):**
 
 - If task doesn't have a GitHub issue and user wants issue tracking
-- Suggest using `/project:moonklabs:issue_create {task_id}` command
+- Suggest using `/project:aiwf:issue_create {task_id}` command
 
 ## 4 · Set status to in_progress
 
 - Find out the current local timestamp (YYYY-MM-DD HH:MM).
 - Update front-matter to **status: in_progress** and set Updated time
-- Update ./moonklabs/00_PROJECT_MANIFEST.md to set task in progress, updated time and current Sprint Status.
+- Update ./aiwf/00_PROJECT_MANIFEST.md to set task in progress, updated time and current Sprint Status.
 - **GitHub Issue Update (if exists):**
   ```bash
   gh issue comment {issue_number} --body "🚀 Task work has started."
@@ -55,7 +55,7 @@ Read the task description. If anything is unclear, ask clarifying questions befo
 ## 5 · Execute task work
 
 - Follow Description, Goal and Acceptance Criteria.
-- Consult supporting docs in .moonklabs/01_PROJECT_DOCS/ and .moonklabs/02_REQUIREMENTS/.
+- Consult supporting docs in .aiwf/01_PROJECT_DOCS/ and .aiwf/02_REQUIREMENTS/.
 - Iterate over subtasks:
   1. Pick the next incomplete subtask.
   2. Implement the required changes, consulting docs as needed.
@@ -71,7 +71,7 @@ Placeholder - just move on to the next step
 
 Follow these steps for a Code Review (in order)
 
-- include @.claude/commands/moonklabs/aiwf_code_review.md and use the Task ID as Scope.
+- include @.claude/commands/aiwf/aiwf_code_review.md and use the Task ID as Scope.
 - Follow the instructions in the file to run a code review in **PARALLEL SUBAGENTS**
 - When done continue acting on the results accordingly
 - Understand and think about the results
@@ -86,7 +86,7 @@ Follow these steps for a Code Review (in order)
 
 - set the Task status to **completed**
 - Rename the Task file accordingly to enable proper Completed recognition from the filename (TX[TASK_ID]...)
-- Update .moonklabs/00_PROJECT_MANIFEST.md to reflect the new status
+- Update .aiwf/00_PROJECT_MANIFEST.md to reflect the new status
 - **GitHub Issue Update (if exists):**
   ```bash
   gh issue comment {issue_number} --body "✅ Task has been completed."
@@ -104,6 +104,6 @@ Follow these steps for a Code Review (in order)
 
 - **Suggestions** for the User:
 
-  - 🛠️ Use /project:moonklabs:commit `TASK_ID` to commit the changes to git
-  - 🔀 Use /project:moonklabs:pr_create `TASK_ID` to create a Pull Request
+  - 🛠️ Use /project:aiwf:commit `TASK_ID` to commit the changes to git
+  - 🔀 Use /project:aiwf:pr_create `TASK_ID` to create a Pull Request
   - 🧹 Use /clear to clear the context before starting the next Task

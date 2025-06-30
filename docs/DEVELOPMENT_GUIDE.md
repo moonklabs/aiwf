@@ -1,6 +1,6 @@
 # aiwf 개발 가이드
 
-aiwf (AI Workflow Framework)는 Claude Code와 통합된 Moonklabs 프로젝트 관리 프레임워크를 설치하는 NPM CLI 패키지입니다. 이 문서는 aiwf 프로젝트에 기여하고자 하는 개발자들을 위한 종합적인 개발 환경 설정 및 워크플로우 가이드입니다.
+aiwf (AI Workflow Framework)는 Claude Code와 통합된 AIWF 프로젝트 관리 프레임워크를 설치하는 NPM CLI 패키지입니다. 이 문서는 aiwf 프로젝트에 기여하고자 하는 개발자들을 위한 종합적인 개발 환경 설정 및 워크플로우 가이드입니다.
 
 ## 목차
 
@@ -30,7 +30,7 @@ aiwf 프로젝트 개발을 위해 다음 도구들이 필요합니다:
 
 ```bash
 # 1. 리포지토리 클론
-git clone https://github.com/moonklabs/aiwf.git
+git clone https://github.com/aiwf/aiwf.git
 cd aiwf
 
 # 2. 의존성 설치
@@ -50,9 +50,9 @@ npm run lint  # ESLint 검사 (설정 후)
 aiwf/
 ├── index.js                    # 메인 CLI 실행 파일
 ├── package.json               # NPM 패키지 설정
-├── claude-code/moonklabs/      # Moonklabs 프레임워크 소스
+├── claude-code/aiwf/      # AIWF 프레임워크 소스
 │   ├── .claude/commands/       # Claude Code 커스텀 명령어
-│   └── .moonklabs/            # 프로젝트 관리 구조
+│   └── .aiwf/            # 프로젝트 관리 구조
 ├── rules/                     # IDE별 개발 규칙
 │   ├── global/                # 항상 적용되는 규칙
 │   └── manual/                # 필요시 적용하는 규칙
@@ -70,38 +70,35 @@ aiwf/
 aiwf는 ES 모듈 기반 프로젝트이므로 Jest 설정 시 ES 모듈 지원이 필요합니다.
 
 #### 설치
+
 ```bash
 npm install --save-dev jest @jest/globals
 ```
 
 #### jest.config.js 설정
+
 ```javascript
 export default {
-  preset: 'jest-esm',
-  extensionsToTreatAsEsm: ['.js'],
+  preset: "jest-esm",
+  extensionsToTreatAsEsm: [".js"],
   globals: {
-    'ts-jest': {
-      useESM: true
-    }
+    "ts-jest": {
+      useESM: true,
+    },
   },
   moduleNameMapping: {
-    '^(\\.{1,2}/.*)\\.js$': '$1'
+    "^(\\.{1,2}/.*)\\.js$": "$1",
   },
   transform: {},
-  testEnvironment: 'node',
-  collectCoverageFrom: [
-    'index.js',
-    '!node_modules/**',
-    '!coverage/**'
-  ],
-  coverageReporters: ['text', 'lcov', 'html'],
-  testMatch: [
-    '<rootDir>/tests/**/*.test.js'
-  ]
+  testEnvironment: "node",
+  collectCoverageFrom: ["index.js", "!node_modules/**", "!coverage/**"],
+  coverageReporters: ["text", "lcov", "html"],
+  testMatch: ["<rootDir>/tests/**/*.test.js"],
 };
 ```
 
 #### package.json 테스트 스크립트
+
 ```json
 {
   "scripts": {
@@ -118,11 +115,13 @@ export default {
 코드 품질과 일관성을 위한 린팅 및 포맷팅 도구 설정입니다.
 
 #### 설치
+
 ```bash
 npm install --save-dev eslint prettier eslint-config-prettier eslint-plugin-prettier
 ```
 
 #### .eslintrc.json 설정
+
 ```json
 {
   "env": {
@@ -130,10 +129,7 @@ npm install --save-dev eslint prettier eslint-config-prettier eslint-plugin-pret
     "node": true,
     "jest": true
   },
-  "extends": [
-    "eslint:recommended",
-    "prettier"
-  ],
+  "extends": ["eslint:recommended", "prettier"],
   "plugins": ["prettier"],
   "parserOptions": {
     "ecmaVersion": 2022,
@@ -150,6 +146,7 @@ npm install --save-dev eslint prettier eslint-config-prettier eslint-plugin-pret
 ```
 
 #### .prettierrc 설정
+
 ```json
 {
   "semi": true,
@@ -162,6 +159,7 @@ npm install --save-dev eslint prettier eslint-config-prettier eslint-plugin-pret
 ```
 
 #### package.json 린팅 스크립트
+
 ```json
 {
   "scripts": {
@@ -175,6 +173,7 @@ npm install --save-dev eslint prettier eslint-config-prettier eslint-plugin-pret
 ### 2.3 IDE 통합 설정
 
 #### VS Code 설정 (.vscode/settings.json)
+
 ```json
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -204,6 +203,7 @@ aiwf 프로젝트는 Git Flow 기반의 브랜치 전략을 사용합니다:
 - **release/**: 릴리스 준비 브랜치
 
 #### 기능 개발 워크플로우
+
 ```bash
 # 1. develop 브랜치에서 기능 브랜치 생성
 git checkout develop
@@ -237,6 +237,7 @@ Conventional Commits 형식을 따릅니다:
 ```
 
 #### 커밋 타입
+
 - **feat**: 새로운 기능 추가
 - **fix**: 버그 수정
 - **docs**: 문서 변경
@@ -246,6 +247,7 @@ Conventional Commits 형식을 따릅니다:
 - **chore**: 빌드 과정 또는 도구 변경
 
 #### 예시
+
 ```bash
 feat(cli): GitHub API 에러 처리 개선
 fix(installer): 백업 파일 생성 시 타임스탬프 오류 수정
@@ -268,16 +270,18 @@ docs(readme): 설치 가이드 업데이트
 ### 4.1 JavaScript/ES6+ 스타일 가이드
 
 #### 변수 선언
+
 ```javascript
 // 좋음: const 우선 사용
-const apiUrl = 'https://api.github.com';
+const apiUrl = "https://api.github.com";
 let mutableValue = 0;
 
 // 피하기: var 사용 금지
-var oldStyle = 'avoid';
+var oldStyle = "avoid";
 ```
 
 #### 함수 선언
+
 ```javascript
 // 좋음: 화살표 함수 사용
 const fetchData = async (url) => {
@@ -285,25 +289,26 @@ const fetchData = async (url) => {
     const response = await fetch(url);
     return await response.json();
   } catch (error) {
-    console.error('데이터 가져오기 실패:', error);
+    console.error("데이터 가져오기 실패:", error);
     throw error;
   }
 };
 
 // 좋음: 명시적 함수 선언
 function processData(data) {
-  return data.filter(item => item.isValid);
+  return data.filter((item) => item.isValid);
 }
 ```
 
 #### 객체와 배열
+
 ```javascript
 // 좋음: 구조 분해 할당 사용
 const { name, version } = packageJson;
 const [first, ...rest] = items;
 
 // 좋음: 스프레드 연산자 사용
-const newObject = { ...existingObject, newProperty: 'value' };
+const newObject = { ...existingObject, newProperty: "value" };
 const newArray = [...existingArray, newItem];
 ```
 
@@ -331,7 +336,7 @@ async function fetchGitHubContent(url, options = {}) {
 }
 
 // 복잡한 로직에 대한 인라인 주석
-const backupTimestamp = new Date().toISOString().replace(/[:.]/g, '-');
+const backupTimestamp = new Date().toISOString().replace(/[:.]/g, "-");
 // ISO 문자열에서 파일명에 사용할 수 없는 문자들을 대시로 변경
 ```
 
@@ -343,14 +348,14 @@ try {
   const result = await someAsyncOperation();
   return result;
 } catch (error) {
-  if (error.code === 'ENOENT') {
-    console.error('파일을 찾을 수 없습니다:', error.path);
-  } else if (error.code === 'EACCES') {
-    console.error('파일 접근 권한이 없습니다:', error.path);
+  if (error.code === "ENOENT") {
+    console.error("파일을 찾을 수 없습니다:", error.path);
+  } else if (error.code === "EACCES") {
+    console.error("파일 접근 권한이 없습니다:", error.path);
   } else {
-    console.error('예상치 못한 오류:', error.message);
+    console.error("예상치 못한 오류:", error.message);
   }
-  
+
   throw new Error(`작업 실패: ${error.message}`);
 }
 ```
@@ -381,23 +386,23 @@ tests/
 
 ```javascript
 // github-api.test.js
-import { jest } from '@jest/globals';
-import { fetchGitHubContent } from '../../index.js';
+import { jest } from "@jest/globals";
+import { fetchGitHubContent } from "../../index.js";
 
 // 네트워크 호출 모킹
-jest.mock('https');
+jest.mock("https");
 
-describe('GitHub API functions', () => {
+describe("GitHub API functions", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  describe('fetchGitHubContent', () => {
-    test('성공적으로 데이터를 가져와야 함', async () => {
+  describe("fetchGitHubContent", () => {
+    test("성공적으로 데이터를 가져와야 함", async () => {
       // Given
-      const mockUrl = 'https://api.github.com/repos/test/repo';
-      const mockResponse = { name: 'test-repo' };
-      
+      const mockUrl = "https://api.github.com/repos/test/repo";
+      const mockResponse = { name: "test-repo" };
+
       // Mock 설정
       // ...
 
@@ -408,11 +413,11 @@ describe('GitHub API functions', () => {
       expect(result).toEqual(mockResponse);
     });
 
-    test('네트워크 오류 시 적절한 에러를 발생시켜야 함', async () => {
+    test("네트워크 오류 시 적절한 에러를 발생시켜야 함", async () => {
       // Given & When & Then
-      await expect(fetchGitHubContent('invalid-url'))
-        .rejects
-        .toThrow('네트워크 오류');
+      await expect(fetchGitHubContent("invalid-url")).rejects.toThrow(
+        "네트워크 오류"
+      );
     });
   });
 });
@@ -422,18 +427,18 @@ describe('GitHub API functions', () => {
 
 ```javascript
 // installer.test.js
-import fs from 'fs/promises';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import fs from "fs/promises";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-describe('Installer Integration Tests', () => {
+describe("Installer Integration Tests", () => {
   let tempDir;
 
   beforeEach(async () => {
     // 임시 디렉토리 생성
-    tempDir = await fs.mkdtemp(path.join(__dirname, 'temp-'));
+    tempDir = await fs.mkdtemp(path.join(__dirname, "temp-"));
   });
 
   afterEach(async () => {
@@ -441,7 +446,7 @@ describe('Installer Integration Tests', () => {
     await fs.rm(tempDir, { recursive: true, force: true });
   });
 
-  test('전체 설치 프로세스가 정상 동작해야 함', async () => {
+  test("전체 설치 프로세스가 정상 동작해야 함", async () => {
     // 전체 설치 프로세스 테스트
     // ...
   });
@@ -465,67 +470,68 @@ describe('Installer Integration Tests', () => {
 aiwf 프로젝트는 GitHub Actions를 사용하여 CI/CD를 구성합니다.
 
 #### .github/workflows/ci.yml
+
 ```yaml
 name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
   pull_request:
-    branches: [ main, develop ]
+    branches: [main, develop]
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    
+
     strategy:
       matrix:
         node-version: [14.x, 16.x, 18.x]
-    
+
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Node.js ${{ matrix.node-version }} 설정
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    
-    - name: 의존성 설치
-      run: npm ci
-    
-    - name: 린팅 검사
-      run: npm run lint
-    
-    - name: 테스트 실행
-      run: npm run test:ci
-    
-    - name: 커버리지 업로드
-      uses: codecov/codecov-action@v3
-      with:
-        file: ./coverage/lcov.info
+      - uses: actions/checkout@v3
+
+      - name: Node.js ${{ matrix.node-version }} 설정
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+
+      - name: 의존성 설치
+        run: npm ci
+
+      - name: 린팅 검사
+        run: npm run lint
+
+      - name: 테스트 실행
+        run: npm run test:ci
+
+      - name: 커버리지 업로드
+        uses: codecov/codecov-action@v3
+        with:
+          file: ./coverage/lcov.info
 
   deploy:
     needs: test
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
-    
+
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Node.js 설정
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18.x'
-        registry-url: 'https://registry.npmjs.org'
-    
-    - name: 의존성 설치
-      run: npm ci
-    
-    - name: NPM 배포
-      run: npm publish
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - uses: actions/checkout@v3
+
+      - name: Node.js 설정
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18.x"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: 의존성 설치
+        run: npm ci
+
+      - name: NPM 배포
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 ```
 
 ### 6.2 배포 프로세스
@@ -547,6 +553,7 @@ jobs:
 ### 7.1 일반적인 설치 문제
 
 #### Node.js 버전 문제
+
 ```bash
 # 문제: Node.js 버전이 14.0.0 미만
 # 해결: nvm을 사용하여 적절한 버전 설치
@@ -555,6 +562,7 @@ nvm use 18
 ```
 
 #### 권한 문제
+
 ```bash
 # 문제: npm install 시 권한 오류
 # 해결: npm 글로벌 디렉토리 권한 변경
@@ -565,6 +573,7 @@ export PATH=~/.npm-global/bin:$PATH
 ### 7.2 테스트 관련 문제 해결
 
 #### ES 모듈 관련 오류
+
 ```javascript
 // 문제: Jest에서 ES 모듈을 인식하지 못함
 // 해결: jest.config.js에서 ES 모듈 설정 확인
@@ -579,6 +588,7 @@ export PATH=~/.npm-global/bin:$PATH
 ```
 
 #### 네트워크 테스트 불안정성
+
 ```javascript
 // 문제: GitHub API 호출 테스트가 불안정함
 // 해결: 적절한 모킹과 타임아웃 설정
@@ -586,14 +596,15 @@ export PATH=~/.npm-global/bin:$PATH
 jest.setTimeout(10000); // 10초 타임아웃
 
 // 네트워크 호출 모킹
-jest.mock('https', () => ({
-  request: jest.fn()
+jest.mock("https", () => ({
+  request: jest.fn(),
 }));
 ```
 
 ### 7.3 빌드 및 배포 문제
 
 #### GitHub Actions 실패
+
 ```yaml
 # 문제: CI 파이프라인에서 테스트 실패
 # 해결: 로컬에서 CI 환경과 동일한 조건으로 테스트
@@ -608,6 +619,7 @@ env | grep NODE
 ### 7.4 IDE 설정 문제
 
 #### VS Code에서 ESLint 동작하지 않음
+
 ```json
 // .vscode/settings.json
 {
@@ -625,12 +637,14 @@ env | grep NODE
 aiwf 프로젝트에 기여하기 위한 단계별 가이드입니다.
 
 #### 첫 번째 기여 준비
+
 1. **이슈 확인**: GitHub Issues에서 작업할 이슈 선택
 2. **포크 생성**: 개인 계정으로 프로젝트 포크
 3. **로컬 설정**: 개발 환경 설정 및 테스트 실행
 4. **브랜치 생성**: feature/issue-번호-설명 형식으로 브랜치 생성
 
 #### 코드 작성 가이드
+
 1. **코딩 표준 준수**: ESLint 및 Prettier 규칙 따르기
 2. **테스트 작성**: 새로운 기능에 대한 테스트 포함
 3. **문서 업데이트**: 필요시 관련 문서 업데이트
@@ -639,6 +653,7 @@ aiwf 프로젝트에 기여하기 위한 단계별 가이드입니다.
 ### 8.2 코드 리뷰 기준
 
 #### 리뷰어 체크리스트
+
 - [ ] 코딩 표준 준수 여부
 - [ ] 테스트 커버리지 적절성
 - [ ] 에러 처리 적절성
@@ -647,6 +662,7 @@ aiwf 프로젝트에 기여하기 위한 단계별 가이드입니다.
 - [ ] 문서화 완성도
 
 #### 기여자 체크리스트
+
 - [ ] 모든 테스트 통과
 - [ ] 린팅 검사 통과
 - [ ] 브랜치 최신 상태 유지
@@ -656,12 +672,14 @@ aiwf 프로젝트에 기여하기 위한 단계별 가이드입니다.
 ### 8.3 커뮤니티 가이드라인
 
 #### 행동강령
+
 1. **존중**: 모든 기여자를 존중하고 건설적인 피드백 제공
 2. **포용성**: 다양한 배경의 기여자들을 환영
 3. **투명성**: 의사결정 과정을 투명하게 공유
 4. **협력**: 문제 해결을 위한 협력적 자세 유지
 
 #### 커뮤니케이션 채널
+
 - **GitHub Issues**: 버그 리포트 및 기능 요청
 - **GitHub Discussions**: 일반적인 토론 및 질문
 - **Pull Requests**: 코드 리뷰 및 기술적 논의

@@ -22,10 +22,10 @@ Creates a new milestone with proper structure, documentation, and project integr
 **USE PARALLEL SUBAGENTS** to do these tasks:
 
 - Parse arguments for suggested milestone name/focus (defaults to interactive creation)
-- Read `.moonklabs/00_PROJECT_MANIFEST.md` to understand current project state
-- Scan `.moonklabs/02_REQUIREMENTS/` to identify existing milestones and numbering
-- Read `.moonklabs/01_PROJECT_DOCS/ARCHITECTURE.md` to understand project scope
-- Check latest project review in `.moonklabs/10_STATE_OF_PROJECT/` for current status
+- Read `.aiwf/00_PROJECT_MANIFEST.md` to understand current project state
+- Scan `.aiwf/02_REQUIREMENTS/` to identify existing milestones and numbering
+- Read `.aiwf/01_PROJECT_DOCS/ARCHITECTURE.md` to understand project scope
+- Check latest project review in `.aiwf/10_STATE_OF_PROJECT/` for current status
 - **IMPORTANT:** Understand project phase and what logical next milestone should be
 
 ## 2 · Interactive milestone scoping and definition
@@ -60,7 +60,7 @@ If no arguments:
 - Create descriptive milestone name from user input
 - Format: `M##_Milestone_Name_Snake_Case`
 - **CRITICAL:** Ensure no duplicate milestone numbers
-- Validate naming follows Moonklabs conventions (underscores, no spaces)
+- Validate naming follows AIWF conventions (underscores, no spaces)
 
 **Confirm with user:**
 
@@ -71,8 +71,8 @@ If no arguments:
 
 **Create milestone structure:**
 
-- Create directory: `.moonklabs/02_REQUIREMENTS/M##_Milestone_Name/`
-- Copy template from `.moonklabs/99_TEMPLATES/milestone_meta_template.md`
+- Create directory: `.aiwf/02_REQUIREMENTS/M##_Milestone_Name/`
+- Copy template from `.aiwf/99_TEMPLATES/milestone_meta_template.md`
 - Create milestone meta file: `M##_milestone_meta.md`
 
 **Populate milestone meta file:**
@@ -118,7 +118,7 @@ Based on milestone scope, suggest needed documents:
 
 ## 6 · Update project manifest with milestone
 
-**UPDATE** `.moonklabs/00_PROJECT_MANIFEST.md`:
+**UPDATE** `.aiwf/00_PROJECT_MANIFEST.md`:
 
 - Add milestone to milestones section:
   - Format: `- [ ] M##: [Milestone Name] - Status: Planning`
@@ -180,10 +180,10 @@ Based on milestone scope, suggest needed documents:
 
 - Review milestone details: `02_REQUIREMENTS/M##_[Name]/M##_milestone_meta.md`
 - Create supporting documentation as planned
-- Break down into sprints: `/project:moonklabs:create_sprints_from_milestone M##`
+- Break down into sprints: `/project:aiwf:create_sprints_from_milestone M##`
 - Update with specific requirements as they become clear
 
-🎯 **Ready for Development**: Use `/project:moonklabs:create_sprints_from_milestone M##` when ready to start implementation planning
+🎯 **Ready for Development**: Use `/project:aiwf:create_sprints_from_milestone M##` when ready to start implementation planning
 ```
 
 **IMPORTANT NOTES**:

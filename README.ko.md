@@ -1,16 +1,16 @@
-# aiwf
+# AIWF (AI Workflow Framework)
 
 이 프로젝트는 [Simone](https://github.com/Helmi/claude-simone)의 업데이트된 버전입니다.
 
-> 🚀 Claude Code용 Moonklabs 프로젝트 관리 프레임워크를 위한 빠른 설치 프로그램
+> 🚀 Claude Code용 AIWF 프로젝트 관리 프레임워크를 위한 빠른 설치 프로그램
 
-## Moonklabs Framework란 무엇인가요?
+## AIWF Framework란 무엇인가요?
 
-Moonklabs는 Claude Code를 사용한 AI 지원 개발을 위해 특별히 설계된 마크다운 기반 프로젝트 관리 프레임워크입니다. 소프트웨어 프로젝트를 관리 가능한 덩어리로 나누어 효과적인 AI 처리를 돕습니다.
+AIWF는 Claude Code를 사용한 AI 지원 개발을 위해 특별히 설계된 마크다운 기반 프로젝트 관리 프레임워크입니다. 소프트웨어 프로젝트를 관리 가능한 덩어리로 나누어 효과적인 AI 처리를 돕습니다.
 
 ## 설치
 
-모든 프로젝트 디렉토리에 Moonklabs를 설치하세요:
+모든 프로젝트 디렉토리에 AIWF를 설치하세요:
 
 ```bash
 npx aiwf
@@ -18,8 +18,8 @@ npx aiwf
 
 이것으로 끝입니다! 설치 프로그램은 다음을 수행합니다:
 
-- 프로젝트 관리를 위한 `.moonklabs/` 디렉토리 구조 생성
-- 사용자 지정 Claude 명령어를 위한 `.claude/commands/moonklabs/` 설정
+- 프로젝트 관리를 위한 `.aiwf/` 디렉토리 구조 생성
+- 사용자 지정 Claude 명령어를 위한 `.claude/commands/aiwf/` 설정
 - 최신 템플릿 및 문서 다운로드
 
 ## 사용법
@@ -32,7 +32,7 @@ npx aiwf
 
 ### 기존 설치 업데이트
 
-Moonklabs가 이미 설치된 경우, 설치 프로그램이 이를 감지하고 다음 옵션을 제공합니다:
+AIWF가 이미 설치된 경우, 설치 프로그램이 이를 감지하고 다음 옵션을 제공합니다:
 
 - 업데이트 (자동 백업 포함)
 - 설치 건너뛰기
@@ -55,7 +55,7 @@ aiwf/
 ├── claude-code/
 │   ├── docker/
 │   │   └── Dockerfile
-│   ├── moonklabs/
+│   ├── aiwf/
 │   └── simone/
 │       ├── CHANGELOG.md
 │       ├── LICENSE
@@ -85,12 +85,12 @@ aiwf/
 설치 후:
 
 1.  Claude Code에서 프로젝트를 엽니다
-2.  `/project:moonklabs` 명령어를 사용하여 프로젝트를 관리합니다
-3.  `/project:moonklabs:initialize`로 시작하여 프로젝트를 설정합니다
+2.  `/aiwf_` 로 시작하는 명령어를 사용하여 프로젝트를 관리합니다
+3.  `/aiwf_initialize`로 시작하여 프로젝트를 설정합니다
 
 ## 명령어 가이드
 
-Moonklabs의 전체 명령어 목록과 자세한 사용법은 [COMMANDS_GUIDE.md](docs/COMMANDS_GUIDE.md) 문서를 참고하세요.
+AIWF의 전체 명령어 목록과 자세한 사용법은 [COMMANDS_GUIDE.md](docs/COMMANDS_GUIDE.md) 문서를 참고하세요.
 
 ## 특징
 
@@ -107,8 +107,8 @@ Moonklabs의 전체 명령어 목록과 자세한 사용법은 [COMMANDS_GUIDE.m
 
 ## 소스
 
-이 설치 프로그램은 다음에서 Moonklabs 프레임워크를 가져옵니다:
-https://github.com/moonklabs/aiwf
+이 설치 프로그램은 다음에서 AIWF 프레임워크를 가져옵니다:
+https://github.com/aiwf/aiwf
 
 ## 라이선스
 

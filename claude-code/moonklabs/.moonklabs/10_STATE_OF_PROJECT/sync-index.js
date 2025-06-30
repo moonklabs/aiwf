@@ -3,7 +3,7 @@ import path from 'path';
 import fg from 'fast-glob';
 import matter from 'gray-matter';
 
-const ROOT = path.resolve(process.cwd(), 'claude-code/moonklabs/.moonklabs');
+const ROOT = path.resolve(process.cwd(), 'claude-code/aiwf/.aiwf');
 const OUTPUT = path.join(ROOT, '10_STATE_OF_PROJECT', 'index.json');
 
 // Directories to scan for milestone/sprint/task markdown files
@@ -70,7 +70,7 @@ function main() {
     const index = buildIndex();
     ensureDirSync(path.dirname(OUTPUT));
     fs.writeFileSync(OUTPUT, JSON.stringify(index, null, 2));
-    console.log(`[moonklabs] index.json generated with ${Object.keys(index.milestones).length} milestones, ${Object.keys(index.sprints).length} sprints, ${Object.keys(index.tasks).length} tasks.`);
+    console.log(`[aiwf] index.json generated with ${Object.keys(index.milestones).length} milestones, ${Object.keys(index.sprints).length} sprints, ${Object.keys(index.tasks).length} tasks.`);
 }
 
 if (require.main === module) {

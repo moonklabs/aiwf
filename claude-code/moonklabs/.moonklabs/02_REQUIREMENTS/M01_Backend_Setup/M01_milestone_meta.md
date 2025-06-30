@@ -34,7 +34,7 @@ This milestone will be considered complete when:
 
 ## Notes / Context
 
-This is an example milestone document to demonstrate how milestones might be structured in a project using the Moonklabs framework. The backend infrastructure established here would be the foundation for a typical web application.
+This is an example milestone document to demonstrate how milestones might be structured in a project using the AIWF framework. The backend infrastructure established here would be the foundation for a typical web application.
 
 ## Related Sprints
 

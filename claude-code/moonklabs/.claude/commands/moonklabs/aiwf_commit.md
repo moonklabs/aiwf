@@ -35,8 +35,8 @@ Follow these instructions from top to bottom.
 - General Tasks: `T<NNN>` format (e.g., T001, T002)
 - Completed General Tasks: `TX<NNN>` format (e.g., TX001, TX002)
 - Search for this task ID in:
-  - `.moonklabs/03_SPRINTS/` directory (for sprint tasks)
-  - `.moonklabs/04_GENERAL_TASKS/` directory (for general tasks)
+  - `.aiwf/03_SPRINTS/` directory (for sprint tasks)
+  - `.aiwf/04_GENERAL_TASKS/` directory (for general tasks)
   - Task metadata in files (look for `task_id: T01_S02` in frontmatter)
   - Git diff content (to see if code comments or commits reference the task)
 - Identify ALL files that were modified as part of this task's implementation

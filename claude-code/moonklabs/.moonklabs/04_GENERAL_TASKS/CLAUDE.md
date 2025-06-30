@@ -7,7 +7,7 @@ General tasks are standalone work items not tied to sprints:
 - Files follow pattern: `T<NNN>_<Description>.md`
 - Completed tasks: `TX<NNN>_<Description>.md`
 
-Always use the template at `.Moonklabs/99_TEMPLATES/task_template.md` when creating new general tasks.
+Always use the template at `.AIWF/99_TEMPLATES/task_template.md` when creating new general tasks.
 
 ## Task Formatting
 
@@ -67,13 +67,15 @@ When a task is complete:
 ### Creating Issues from Tasks
 
 To create a GitHub issue from a general task:
+
 ```bash
-/project:moonklabs:issue_create {task_id}
+/project:aiwf:issue_create {task_id}
 ```
 
 ### Linking Existing Issues
 
 Add to task frontmatter:
+
 ```yaml
 github_issue: #123
 ```
@@ -81,12 +83,14 @@ github_issue: #123
 ### Commit Integration
 
 When committing changes for a task with a linked issue:
+
 - Use `fixes #123` to auto-close the issue
 - Use `relates to #123` to reference without closing
 
 ### Pull Request Creation
 
 After task completion, create a PR:
+
 ```bash
-/project:moonklabs:pr_create {task_id}
+/project:aiwf:pr_create {task_id}
 ```
