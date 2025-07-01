@@ -26,6 +26,11 @@
             "Bash(jq *)",
             "Bash(yq *)",
             "Bash(hexyl *)",
+            "Bash(prettier *)",
+            "Bash(eslint *)",
+            "Bash(tsc *)",
+            "Bash(pnpm *)",
+            "Bash(yarn *)",
             "Bash(mkdir -p /tmp/claude-scratch*)",
             "Bash(touch /tmp/claude-*)",
             "Bash(echo * > /tmp/claude-*)",
@@ -47,5 +52,29 @@
     "preferredNotifChannel": "terminal_bell",
     "verbose": true,
     "cleanupPeriodDays": 90,
-    "includeCoAuthoredBy": false
+    "includeCoAuthoredBy": false,
+    "hooks": {
+        "beforeFileEdit": [
+            {
+                "command": "npm run lint:fix --silent || true",
+                "description": "Auto lint fix before file edit"
+            }
+        ],
+        "afterFileEdit": [
+            {
+                "command": "prettier --write {file} || true",
+                "description": "Auto format after file edit"
+            }
+        ],
+        "beforeCommit": [
+            {
+                "command": "npm run lint || echo 'Lint check failed'",
+                "description": "Lint check before commit"
+            },
+            {
+                "command": "npm run test || echo 'Test failed'", 
+                "description": "Run tests before commit"
+            }
+        ]
+    }
 }
