@@ -146,3 +146,15 @@ Provide summary:
 - **Files Committed**: Total count of files committed
 - **Remaining Changes**: Any uncommitted changes still pending
 - **Repository Status**: Current git status after commits
+
+## 7 · Generate Changelog (Optional)
+
+After successful commits:
+
+- Ask user: "커밋이 완료되었습니다. Changelog를 업데이트하시겠습니까? (y/n)"
+- If yes, execute: `/project:aiwf:changelog`
+- This will:
+  - Analyze recent commit history
+  - Generate or update CHANGELOG.md
+  - Categorize changes by type (feat, fix, docs, etc.)
+  - Include the commits just created
