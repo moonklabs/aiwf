@@ -21,7 +21,7 @@ const GITHUB_CONTENT_PREFIX = 'claude-code/aiwf';
 
 async function fetchGitHubContent(url) {
     return new Promise((resolve, reject) => {
-        https.get(url, { headers: { 'User-Agent': 'hello-aiwf' } }, (res) => {
+        https.get(url, { headers: { 'User-Agent': 'aiwf' } }, (res) => {
             let data = '';
             res.on('data', chunk => data += chunk);
             res.on('end', () => {
@@ -40,7 +40,7 @@ async function fetchGitHubContent(url) {
 
 async function downloadFile(url, destPath) {
     return new Promise((resolve, reject) => {
-        https.get(url, { headers: { 'User-Agent': 'hello-aiwf' } }, (response) => {
+        https.get(url, { headers: { 'User-Agent': 'aiwf' } }, (response) => {
             if (response.statusCode !== 200) {
                 response.destroy();
                 reject(new Error(`Failed to download ${url}: ${response.statusCode}`));
@@ -195,7 +195,7 @@ function logWithSpinner(spinner, message, debugLog) {
 // 언어별 메시지 정의
 const messages = {
     ko: {
-        welcome: '\n🎉 Hello AIWF에 오신 것을 환영합니다!\n',
+        welcome: '\n🎉 AIWF에 오신 것을 환영합니다!\n',
         description: '이 설치 프로그램은 AIWF AI 프롬프트 프레임워크를 설정합니다',
         optimized: '특별히 Claude Code 에 최적화 되어있습니다.\n',
         selectLanguage: 'Please select language / 언어를 선택해주세요:',
@@ -216,7 +216,7 @@ const messages = {
         enjoy: '\nEnjoy AIWF! 🚀\n'
     },
     en: {
-        welcome: '\n🎉 Welcome to Hello AIWF!\n',
+        welcome: '\n🎉 Welcome to AIWF!\n',
         description: 'This installer sets up the AIWF AI prompt framework',
         optimized: 'Specially optimized for Claude Code.\n',
         selectLanguage: 'Please select language / 언어를 선택해주세요:',
@@ -240,7 +240,7 @@ const messages = {
 
 async function installAIWF(options = {}) {
     const debugLog = options.debugLog || false;
-    
+
     // 언어 선택
     let selectedLanguage = 'en'; // 기본값은 영어
     if (!options.force) {
@@ -253,14 +253,14 @@ async function installAIWF(options = {}) {
                 { title: '한국어 (Korean)', value: 'ko' }
             ]
         });
-        
+
         if (languageResponse.language) {
             selectedLanguage = languageResponse.language;
         }
     }
 
     const msg = messages[selectedLanguage];
-    
+
     console.log(chalk.blue.bold(msg.welcome));
     console.log(chalk.gray(msg.description));
     console.log(chalk.gray(msg.optimized));
@@ -538,10 +538,10 @@ async function restoreFromBackup(spinner) {
 }
 
 program
-    .name('hello-aiwf')
+    .name('aiwf')
     .version('1.0.1')
-    .description('AIWF 프레임워크 설치 프로그램')
-    .option('-f, --force', '프롬프트 없이 강제 설치')
+    .description('AIWF Installer')
+    .option('-f, --force', 'Force install without prompts')
     .action((options) => installAIWF({ ...options, debugLog: true }));
 
 program.parse(process.argv);
