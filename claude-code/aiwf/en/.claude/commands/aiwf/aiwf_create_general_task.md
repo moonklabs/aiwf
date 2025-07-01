@@ -1,4 +1,4 @@
-# 일반 Task 생성 - 탑 다운 실행
+# Create General Task - Top-Down Execution
 
 Creates a new general task in `.aiwf/04_GENERAL_TASKS/` following project documentation standards.
 

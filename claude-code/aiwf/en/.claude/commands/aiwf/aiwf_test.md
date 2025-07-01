@@ -1,4 +1,4 @@
-# 테스트 실행 및 일반적인 문제 수정
+# Test Execution and Common Issue Resolution
 
 Follow these instructions from top to bottom.
 

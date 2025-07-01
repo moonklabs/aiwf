@@ -1,4 +1,4 @@
-# Ultra Think - 극한 심층사고 지시 (/ultrathink_general 클라우드 컴퓨팅 다음의 패러다임은 무엇일까?)
+# Ultra Think - Deep Cognitive Analysis (/ultrathink_general What comes after cloud computing?)
 
 Activate Claude's maximum cognitive depth for exploring the fundamental nature of problems, reaching the event horizon of understanding, and generating transformative insights.
 

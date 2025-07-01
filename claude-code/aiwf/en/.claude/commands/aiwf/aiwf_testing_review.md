@@ -1,6 +1,6 @@
-# 테스팅 리뷰 - 탑 다운 실행
+# Testing Review - Top-Down Execution
 
-아키텍처, 진행 상황, 기술 결정에 초점을 맞춘 포괄적인 프로젝트 수준 리뷰를 수행합니다.
+Perform a comprehensive, top-down project-level review focused on architecture, progress, and technical decisions.
 
 ## Prerequisites Check
 

@@ -1,4 +1,4 @@
-# 변경사항 분석 및 사용자 확인을 통한 논리적 git 커밋 생성
+# Analyze Changes and Create Logical Git Commits
 
 Follow these instructions from top to bottom.
 

@@ -1,28 +1,28 @@
 # Generate Product Documentation Workflow
 
-이 규칙은 AI가 몇 가지 핵심 질문을 통해 입력을 수집한 뒤, PRD → IA → UCD → UI/UX 문서를 **순차적으로** 생성하도록 안내합니다. 모든 출력은 **Markdown** 형식을 사용하며 **한국어**로 작성됩니다.
+This rule guides AI to collect input through several key questions, then **sequentially** generate PRD → IA → UCD → UI/UX documents. All outputs use **Markdown** format and are written in **English**.
 
 ---
 
-## 1. 질문 단계
+## 1. Question Phase
 
-AI는 다음 정보를 **질문**을 통해 사용자에게서 수집합니다.
+AI collects the following information from the user through **questions**:
 
 1. `<product-overview>`
-2. `<references>` (URL 목록)
-3. `<must-features>` (필수 기능 목록)
+2. `<references>` (List of URLs)
+3. `<must-features>` (List of must-have features)
 4. `<target-user-persona>`
 5. `<target-platforms>`
 6. `<storage-type>`
 7. `<tech-stack>`
 
-> ⚠️ 모든 질문은 한글로 하며, 필요 시 추가적인 참고 서비스·경쟁 제품 정보를 요청합니다.
+> ⚠️ All questions are in English, and if needed, request additional reference service or competitive product information.
 
 ---
 
-## 2. PRD 작성 단계
+## 2. PRD Writing Phase
 
-사용자로부터 모든 입력을 받은 뒤, 아래 **샘플 프롬프트** 구조를 참고하여 PRD를 생성합니다.
+After collecting all inputs from the user, create a PRD document based on the following **sample prompt** structure:
 
 ```prompt
 Write a PRD document based on the following information:
@@ -70,29 +70,29 @@ Use markdown format
 </guidelines>
 ```
 
-문서에 포함해야 할 **추가 지침**:
+Additional instructions to include in the document:
 
-- 표와 리스트를 활용해 정보를 구조화할 것.
-- 참고 서비스는 최소 3개 이상, 각 서비스 사용 이유를 2~3줄로 기술.
+- Use tables or lists where appropriate to organize information systematically.
+- Include at least 3 reference services, with detailed rationale for each.
 
-PRD 작성을 완료하면 "✅ PRD 완료" 메시지와 함께 IA 단계 진행 여부를 묻는 **한글** 질문을 덧붙입니다.
+After completing the PRD, append a **English** question asking if the user wants to proceed to the IA phase, with a message "✅ PRD completed".
 
 ---
 
-## 3. IA(Information Architecture) 작성 단계
+## 3. IA(Information Architecture) Writing Phase
 
-사용자가 **계속**을 선택하면 IA 문서를 생성합니다.
+If the user chooses to continue, create an IA document based on the following information:
 
-IA 문서는 다음을 포함합니다:
+The IA document should include:
 
-1. **사이트맵** – 트리 형태로 표현
-2. **콘텐츠 인벤토리** – 페이지별 주요 콘텐츠 표
-3. **사용자 흐름** – 순서도(텍스트 기반)로 최소 2개 핵심 시나리오 제공
-4. **내비게이션 구조 및 URL 패턴**
+1. **Site Map** – Represented as a tree structure
+2. **Content Inventory** – List of key content for each page
+3. **User Flow** – Provide at least 2 core scenarios in text-based flowchart format
+4. **Navigation Structure and URL Patterns**
 
-문서 형식: Markdown, 한국어
+Document format: Markdown, English
 
-### IA 샘플 프롬프트
+### IA Sample Prompt
 
 ```prompt
 Write an Information Architecture document based on PRD, and following information:
@@ -128,21 +128,21 @@ Use markdown format
 </guidelines>
 ```
 
-IA 작성 후 "✅ IA 완료" 메시지와 함께 UCD 단계 진행 여부 질의.
+After completing the IA, append a **English** question asking if the user wants to proceed to the UCD phase, with a message "✅ IA completed".
 
 ---
 
-## 4. UCD(User-Centered Design) 작성 단계
+## 4. UCD(User-Centered Design) Writing Phase
 
-UCD 문서는 다음을 포함합니다:
+The UCD document should include:
 
-1. **주요 페르소나 2–3개** – 표로 정리 (목표, 동기, pain point)
-2. **시나리오** – 페르소나별 핵심 사용 시나리오 2개 이상
-3. **요구사항 매트릭스** – 기능 ↔ 페르소나 매핑
+1. **Main Persona** – 2-3 personas, summarized in a table (goals, motivations, pain points)
+2. **Scenarios** – At least 2 core scenarios per persona
+3. **Requirements Matrix** – Mapping of features to personas
 
-문서 형식: Markdown, 한국어
+Document format: Markdown, English
 
-### UCD 샘플 프롬프트
+### UCD Sample Prompt
 
 ```prompt
 Write a detailed use case document based on PRD, IA, and following information:
@@ -178,22 +178,22 @@ Use markdown format
 </guidelines>
 ```
 
-완료 후 "✅ UCD 완료" 메시지와 함께 UI/UX 단계 진행 여부 질의.
+After completing the UCD, append a **English** question asking if the user wants to proceed to the UI/UX phase, with a message "✅ UCD completed".
 
 ---
 
-## 5. UI/UX 가이드 작성 단계
+## 5. UI/UX Guide Writing Phase
 
 내용:
 
-1. **와이어프레임 설명** – 각 핵심 화면의 레이아웃과 구성 요소(텍스트 설명)
-2. **네비게이션 원칙** – 일관된 UI 패턴 설명
-3. **스타일 가이드 초안** – 컬러 팔레트, 타이포그래피, 컴포넌트 규칙
-4. **접근성 고려사항** – WCAG 2.1 준수 핵심 포인트
+1. **Wireframe Description** – Layout and components of each core screen (text description)
+2. **Navigation Principles** – Description of consistent UI patterns
+3. **Style Guide Draft** – Color palette, typography, component rules
+4. **Accessibility Considerations** – WCAG 2.1 compliance key points
 
-문서 형식: Markdown, 한국어
+Document format: Markdown, English
 
-### UI/UX 샘플 프롬프트
+### UI/UX Sample Prompt
 
 ```prompt
 <role>
@@ -261,20 +261,20 @@ Use markdown format
 </guidelines>
 ```
 
-완료 후 "🎉 모든 문서 생성 완료" 메시지와 함께 다음 단계(스프린트/태스크 분해) 안내.
+After completing all documents, inform the user with a message "🎉 All documents created" and guide them to the next step (sprint/task decomposition).
 
 ---
 
-## 6. 스프린트/태스크 분해 준비
+## 6. Sprint/Task Decomposition Preparation
 
-모든 문서가 완료되면, AI는 `yolo` 또는 `create_sprints_from_milestone` 명령을 사용해 개발 스프린트와 태스크를 자동으로 생성할 수 있음을 사용자에게 알립니다.
+After all documents are completed, inform the user that AI can automatically create development sprints and tasks using the `yolo` or `create_sprints_from_milestone` commands.
 
 ---
 
-### 사용 예
+### Example Usage
 
-1. AI → 질문 단계 진행
-2. 사용자 → 정보 제공
-3. AI → PRD 생성, IA 진행 여부 질문
-4. 사용자 → "계속"
-5. AI → IA 생성, UCD 진행 여부 질문 … 반복
+1. AI → Question Phase
+2. User → Provide Information
+3. AI → PRD Creation, IA Progress Question
+4. User → "Continue"
+5. AI → IA Creation, UCD Progress Question … Repeat

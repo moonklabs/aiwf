@@ -1,4 +1,4 @@
-# 스프린트를 위한 Task 생성 - 탑 다운 실행
+# Create Sprint Tasks - Top-Down Execution
 
 Create detailed tasks for an existing sprint with integrated implementation guidance.
 

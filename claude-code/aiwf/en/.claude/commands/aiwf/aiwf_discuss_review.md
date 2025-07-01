@@ -1,4 +1,4 @@
-# 리뷰 결과 논의
+# Discuss Review Results
 
 Engage in technical discussion about recent review findings based on discussion starter.
 

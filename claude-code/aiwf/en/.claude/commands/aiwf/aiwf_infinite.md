@@ -1,202 +1,202 @@
-# 무한 에이전틱 루프 명령
+# INFINITE AGENTIC LOOP COMMAND
 
-이 무한 생성 작업에 대해 깊이 생각하세요. 당신은 정교한 반복 생성 프로세스를 시작하려고 합니다. deep think
+Think deeply about this infinite generation task. You are about to embark on a sophisticated iterative creation process.
 
-**변수:**
+**Variables:**
 
 spec_file: $ARGUMENTS
 output_dir: $ARGUMENTS
 count: $ARGUMENTS
 
-**인자 파싱:**
-"$ARGUMENTS"에서 다음 인자들을 파싱합니다:
+**ARGUMENTS PARSING:**
+Parse the following arguments from "$ARGUMENTS":
 
-1. `spec_file` - 마크다운 명세 파일 경로
-2. `output_dir` - 반복 결과가 저장될 디렉토리
-3. `count` - 반복 횟수 (1-N 또는 "infinite")
+1. `spec_file` - Path to the markdown specification file
+2. `output_dir` - Directory where iterations will be saved
+3. `count` - Number of iterations (1-N or "infinite")
 
-**1단계: 명세 분석**
-`spec_file`의 명세 파일을 읽고 깊이 이해합니다. 이 파일은 다음을 정의합니다:
+**PHASE 1: SPECIFICATION ANALYSIS**
+Read and deeply understand the specification file at `spec_file`. This file defines:
 
-- 생성할 콘텐츠 유형
-- 형식과 구조 요구사항
-- 특정 매개변수나 제약사항
-- 반복 간의 의도된 진화 패턴
+- What type of content to generate
+- The format and structure requirements
+- Any specific parameters or constraints
+- The intended evolution pattern between iterations
 
-명세의 의도와 각 반복이 이전 작업을 어떻게 기반으로 해야 하는지 신중히 생각하세요.
+Think carefully about the spec's intent and how each iteration should build upon previous work.
 
-**2단계: 출력 디렉토리 탐색**
-현재 상태를 이해하기 위해 `output_dir`을 철저히 분석합니다:
+**PHASE 2: OUTPUT DIRECTORY RECONNAISSANCE**
+Thoroughly analyze the `output_dir` to understand the current state:
 
-- 모든 기존 파일과 명명 패턴 나열
-- 현재 존재하는 가장 높은 반복 번호 식별
-- 기존 반복들 간의 콘텐츠 진화 분석
-- 이전 생성의 궤적 이해
-- 새로운 반복을 위한 격차나 기회 파악
+- List all existing files and their naming patterns
+- Identify the highest iteration number currently present
+- Analyze the content evolution across existing iterations
+- Understand the trajectory of previous generations
+- Determine what gaps or opportunities exist for new iterations
 
-**3단계: 반복 전략**
-명세 분석과 기존 반복을 기반으로:
+**PHASE 3: ITERATION STRATEGY**
+Based on the spec analysis and existing iterations:
 
-- 시작 반복 번호 결정 (최고 기존 번호 + 1)
-- 각 새로운 반복이 독특하고 진화적일 방법 계획
-- 새로움을 유지하면서 이전 반복을 기반으로 구축하는 방법 고려
-- count가 "infinite"인 경우, 컨텍스트 제한까지 지속적 생성 준비
+- Determine the starting iteration number (highest existing + 1)
+- Plan how each new iteration will be unique and evolutionary
+- Consider how to build upon previous iterations while maintaining novelty
+- If count is "infinite", prepare for continuous generation until context limits
 
-**4단계: 병렬 에이전트 조율**
-최대 효율성과 창의적 다양성을 위해 여러 서브 에이전트를 병렬로 배포합니다:
+**PHASE 4: PARALLEL AGENT COORDINATION**
+Deploy multiple Sub Agents to generate iterations in parallel for maximum efficiency and creative diversity:
 
-**서브 에이전트 배포 전략:**
+**Sub-Agent Distribution Strategy:**
 
-- count 1-5: 모든 에이전트 동시 실행
-- count 6-20: 5개 에이전트씩 배치로 실행하여 조율 관리
-- "infinite": 3-5개 에이전트의 웨이브를 실행하고, 컨텍스트를 모니터링하며 새로운 웨이브 생성
+- For count 1-5: Launch all agents simultaneously
+- For count 6-20: Launch in batches of 5 agents to manage coordination
+- For "infinite": Launch waves of 3-5 agents, monitoring context and spawning new waves
 
-**에이전트 할당 프로토콜:**
-각 서브 에이전트는 다음을 받습니다:
+**Agent Assignment Protocol:**
+Each Sub Agent receives:
 
-1. **명세 컨텍스트**: 완전한 명세 파일 분석
-2. **디렉토리 스냅샷**: 실행 시점의 output_dir 현재 상태
-3. **반복 할당**: 특정 반복 번호 (시작*번호 + 에이전트*인덱스)
-4. **독특성 지시**: 기존 반복의 개념을 중복하지 않도록 명시적 지시
-5. **품질 기준**: 명세의 상세 요구사항
+1. **Spec Context**: Complete specification file analysis
+2. **Directory Snapshot**: Current state of output_dir at launch time
+3. **Iteration Assignment**: Specific iteration number (starting_number + agent_index)
+4. **Uniqueness Directive**: Explicit instruction to avoid duplicating concepts from existing iterations
+5. **Quality Standards**: Detailed requirements from the specification
 
-**에이전트 작업 명세:**
-
-```
-작업: [OUTPUT_DIR]에 [SPEC_FILE]의 반복 [NUMBER] 생성
-
-당신은 반복 [NUMBER]를 생성하는 서브 에이전트 [X]입니다.
-
-컨텍스트:
-- 명세: [전체 명세 분석]
-- 기존 반복: [현재 output_dir 내용 요약]
-- 당신의 반복 번호: [NUMBER]
-- 할당된 창의적 방향: [탐색할 특정 혁신 차원]
-
-요구사항:
-1. 명세를 완전히 읽고 이해
-2. 기존 반복을 분석하여 출력이 독특한지 확인
-3. 명세 형식을 정확히 따라 콘텐츠 생성
-4. 명세 준수를 유지하면서 [할당된 혁신 차원]에 집중
-5. 지정된 정확한 이름 패턴으로 파일 생성
-6. 반복이 진정한 가치와 새로움을 추가하는지 확인
-
-산출물: 명세에 따른 단일 파일, 독특하고 혁신적인 콘텐츠 포함
-```
-
-**병렬 실행 관리:**
-
-- Task 도구를 사용하여 모든 할당된 서브 에이전트를 동시에 실행
-- 에이전트 진행과 완료 모니터링
-- 에이전트 실패 시 반복 번호 재할당으로 처리
-- 중복 반복 번호가 생성되지 않도록 보장
-- 완료된 모든 반복 수집 및 검증
-
-**5단계: 무한 모드 오케스트레이션**
-무한 생성 모드의 경우, 지속적인 병렬 웨이브를 조율합니다:
-
-**웨이브 기반 생성:**
-
-1. **웨이브 계획**: 컨텍스트 용량에 따라 다음 웨이브 크기(3-5 에이전트) 결정
-2. **에이전트 준비**: 각 새로운 웨이브를 위한 신선한 컨텍스트 스냅샷 준비
-3. **점진적 정교화**: 각 웨이브는 더 발전된 혁신 차원을 탐색해야 함
-4. **컨텍스트 모니터링**: 모든 에이전트와 메인 오케스트레이터의 총 컨텍스트 사용량 추적
-5. **우아한 종료**: 컨텍스트 한계에 접근하면 현재 웨이브를 완료하고 요약
-
-**무한 실행 사이클:**
+**Agent Task Specification:**
 
 ```
-WHILE 컨텍스트_용량 > 임계값:
-    1. 현재 output_dir 상태 평가
-    2. 다음 에이전트 웨이브 계획 (남은 컨텍스트에 따른 크기)
-    3. 점점 정교한 창의적 방향 할당
-    4. 병렬 서브 에이전트 웨이브 실행
-    5. 웨이브 완료 모니터링
-    6. 디렉토리 상태 스냅샷 업데이트
-    7. 남은 컨텍스트 용량 평가
-    8. 충분한 용량 있으면: 다음 웨이브로 계속
-    9. 한계에 접근하면: 최종 웨이브 완료하고 요약
+TASK: Generate iteration [NUMBER] for [SPEC_FILE] in [OUTPUT_DIR]
+
+You are Sub Agent [X] generating iteration [NUMBER].
+
+CONTEXT:
+- Specification: [Full spec analysis]
+- Existing iterations: [Summary of current output_dir contents]
+- Your iteration number: [NUMBER]
+- Assigned creative direction: [Specific innovation dimension to explore]
+
+REQUIREMENTS:
+1. Read and understand the specification completely
+2. Analyze existing iterations to ensure your output is unique
+3. Generate content following the spec format exactly
+4. Focus on [assigned innovation dimension] while maintaining spec compliance
+5. Create file with exact name pattern specified
+6. Ensure your iteration adds genuine value and novelty
+
+DELIVERABLE: Single file as specified, with unique innovative content
 ```
 
-**점진적 정교화 전략:**
+**Parallel Execution Management:**
 
-- **웨이브 1**: 단일 혁신 차원의 기본 기능 대체
-- **웨이브 2**: 향상된 상호작용이 있는 다차원 혁신
-- **웨이브 3**: 적응형 행동이 있는 복잡한 패러다임 조합
-- **웨이브 N**: 명세의 경계를 확장하는 혁명적 개념
+- Launch all assigned Sub Agents simultaneously using Task tool
+- Monitor agent progress and completion
+- Handle any agent failures by reassigning iteration numbers
+- Ensure no duplicate iteration numbers are generated
+- Collect and validate all completed iterations
 
-**컨텍스트 최적화:**
+**PHASE 5: INFINITE MODE ORCHESTRATION**
+For infinite generation mode, orchestrate continuous parallel waves:
 
-- 각 웨이브는 컨텍스트 누적을 피하기 위해 신선한 에이전트 인스턴스 사용
-- 메인 오케스트레이터는 경량 상태 추적 유지
-- 컨텍스트 관리를 위한 완료된 반복의 점진적 요약
-- 후반 웨이브에서 덜 필수적인 세부사항의 전략적 제거
+**Wave-Based Generation:**
 
-**실행 원칙:**
+1. **Wave Planning**: Determine next wave size (3-5 agents) based on context capacity
+2. **Agent Preparation**: Prepare fresh context snapshots for each new wave
+3. **Progressive Sophistication**: Each wave should explore more advanced innovation dimensions
+4. **Context Monitoring**: Track total context usage across all agents and main orchestrator
+5. **Graceful Conclusion**: When approaching context limits, complete current wave and summarize
 
-**품질 & 독특성:**
+**Infinite Execution Cycle:**
 
-- 각 반복은 진정으로 독특하고 가치있어야 함
-- 새로운 요소를 도입하면서 이전 작업을 기반으로 구축
-- 원래 명세와의 일관성 유지
-- 적절한 파일 구성과 명명 보장
+```
+WHILE context_capacity > threshold:
+    1. Assess current output_dir state
+    2. Plan next wave of agents (size based on remaining context)
+    3. Assign increasingly sophisticated creative directions
+    4. Launch parallel Sub Agent wave
+    5. Monitor wave completion
+    6. Update directory state snapshot
+    7. Evaluate context capacity remaining
+    8. If sufficient capacity: Continue to next wave
+    9. If approaching limits: Complete final wave and summarize
+```
 
-**병렬 조율:**
+**Progressive Sophistication Strategy:**
 
-- 창의적 다양성을 극대화하기 위해 서브 에이전트를 전략적으로 배포
-- 중복을 피하기 위해 각 에이전트에 독특한 혁신 차원 할당
-- 파일 명명 충돌을 방지하기 위한 타이밍 조정
-- 성공적인 완료와 품질을 위한 모든 에이전트 모니터링
+- **Wave 1**: Basic functional replacements with single innovation dimension
+- **Wave 2**: Multi-dimensional innovations with enhanced interactions
+- **Wave 3**: Complex paradigm combinations with adaptive behaviors
+- **Wave N**: Revolutionary concepts pushing the boundaries of the specification
 
-**확장성 & 효율성:**
+**Context Optimization:**
 
-- 병렬 스트림 전체의 진화 궤적에 대해 깊이 생각 deep think
-- 무한 모드의 경우, 컨텍스트 소진 전 최대 가치있는 출력 최적화
-- 컨텍스트 한계를 지능적으로 관리하기 위한 웨이브 기반 생성 사용
-- 병렬 속도와 품질 및 조율 오버헤드의 균형
+- Each wave uses fresh agent instances to avoid context accumulation
+- Main orchestrator maintains lightweight state tracking
+- Progressive summarization of completed iterations to manage context
+- Strategic pruning of less essential details in later waves
 
-**에이전트 관리:**
+**EXECUTION PRINCIPLES:**
 
-- 각 서브 에이전트에 완전한 컨텍스트와 명확한 할당 제공
-- 반복 재할당으로 에이전트 실패를 우아하게 처리
-- 모든 병렬 출력이 전체 진행과 일관되게 통합되도록 보장
+**Quality & Uniqueness:**
 
-**울트라 씽킹 지시:**
-생성을 시작하기 전에, 다음에 대해 확장된 사고를 수행하세요:
+- Each iteration must be genuinely unique and valuable
+- Build upon previous work while introducing novel elements
+- Maintain consistency with the original specification
+- Ensure proper file organization and naming
 
-**명세 & 진화:**
+**Parallel Coordination:**
 
-- 명세의 더 깊은 의미
-- 반복 간 의미있는 진행을 만드는 방법
-- 각 반복을 가치있고 독특하게 만드는 것
-- 일관성과 혁신의 균형을 맞추는 방법
+- Deploy Sub Agents strategically to maximize creative diversity
+- Assign distinct innovation dimensions to each agent to avoid overlap
+- Coordinate timing to prevent file naming conflicts
+- Monitor all agents for successful completion and quality
 
-**병렬 전략:**
+**Scalability & Efficiency:**
 
-- 요청된 수에 대한 최적의 서브 에이전트 배포
-- 다양성을 극대화하기 위해 독특한 창의적 방향을 할당하는 방법
-- 무한 모드의 웨이브 크기와 타이밍
-- 여러 병렬 에이전트 간의 컨텍스트 관리
+- Think deeply about the evolution trajectory across parallel streams
+- For infinite mode, optimize for maximum valuable output before context exhaustion
+- Use wave-based generation to manage context limits intelligently
+- Balance parallel speed with quality and coordination overhead
 
-**조율 과제:**
+**Agent Management:**
 
-- 병렬 스트림 간 중복 개념 방지 방법
-- 각 에이전트가 진정으로 독특한 출력을 생산하도록 보장하는 전략
-- 동시 쓰기가 있는 파일 명명과 디렉토리 구성 관리
-- 병렬 출력의 품질 관리 메커니즘
+- Provide each Sub Agent with complete context and clear assignments
+- Handle agent failures gracefully with iteration reassignment
+- Ensure all parallel outputs integrate cohesively with the overall progression
 
-**무한 모드 최적화:**
+**ULTRA-THINKING DIRECTIVE:**
+Before beginning generation, engage in extended thinking about:
 
-- 지속적인 출력을 위한 웨이브 기반 생성 패턴
-- 여러 웨이브에 걸친 점진적 정교화 전략
-- 컨텍스트 용량 모니터링과 우아한 종료 계획
-- 병렬 생성 속도와 혁신 깊이의 균형
+**Specification & Evolution:**
 
-**위험 완화:**
+- The deeper implications of the specification
+- How to create meaningful progression across iterations
+- What makes each iteration valuable and unique
+- How to balance consistency with innovation
 
-- 에이전트 실패와 반복 재할당 처리
-- 병렬 실행에도 불구하고 일관된 전체 진행 보장
-- 전체 시스템의 컨텍스트 창 한계 관리
-- 모든 병렬 출력의 명세 준수 유지
+**Parallel Strategy:**
 
-이러한 병렬 조율 과제에 대한 깊은 분석으로 실행을 시작하고, 최대 창의적 출력과 효율성을 위해 서브 에이전트를 활용하여 각 단계를 체계적으로 진행하세요.
+- Optimal Sub Agent distribution for the requested count
+- How to assign distinct creative directions to maximize diversity
+- Wave sizing and timing for infinite mode
+- Context management across multiple parallel agents
+
+**Coordination Challenges:**
+
+- How to prevent duplicate concepts across parallel streams
+- Strategies for ensuring each agent produces genuinely unique output
+- Managing file naming and directory organization with concurrent writes
+- Quality control mechanisms for parallel outputs
+
+**Infinite Mode Optimization:**
+
+- Wave-based generation patterns for sustained output
+- Progressive sophistication strategies across multiple waves
+- Context capacity monitoring and graceful conclusion planning
+- Balancing speed of parallel generation with depth of innovation
+
+**Risk Mitigation:**
+
+- Handling agent failures and iteration reassignment
+- Ensuring coherent overall progression despite parallel execution
+- Managing context window limits across the entire system
+- Maintaining specification compliance across all parallel outputs
+
+Begin execution with deep analysis of these parallel coordination challenges and proceed systematically through each phase, leveraging Sub Agents for maximum creative output and efficiency.

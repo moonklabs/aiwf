@@ -1,4 +1,4 @@
-# YOLO 모드에서 모든 열린 태스크 실행
+# YOLO Mode - Execute All Open Tasks
 
 This mode is meant to be run without user interaction.
 You **DO NOT** ask the user any questions or ask for confirmation

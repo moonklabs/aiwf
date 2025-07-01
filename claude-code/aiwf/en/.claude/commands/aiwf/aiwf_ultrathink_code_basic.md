@@ -1,4 +1,4 @@
-# Ultra Think - 심층사고 지시 (/ultrathink_code_basic 마이크로서비스로 개선할수 있을까?)
+# Ultra Think - Deep Cognitive Analysis (/ultrathink_code_basic Can we improve it with microservices?)
 
 Engage Claude in ultra-deep thinking mode for complex problem-solving, architectural decisions, and thorough analysis requiring maximum reasoning capabilities.
 

@@ -1,8 +1,5 @@
-# 컨텍스트 윈도우 프라임
+# Prime Context
 
-실행:
-    git ls-files
+RUN: git ls-files
 
-읽기:
-    README.md
-    ai_docs/claude_code_fresh_tutorials.md
+READ: README.md ai_docs/claude_code_fresh_tutorials.md

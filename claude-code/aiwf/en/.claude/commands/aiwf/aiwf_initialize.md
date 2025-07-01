@@ -1,4 +1,4 @@
-# AIWF 프레임워크 초기화
+# AIWF Framework Initialization
 
 Initialize the AIWF project management framework through an adaptive, interactive process.
 

@@ -1,4 +1,4 @@
-# 신규 마일스톤 계획 및 생성 - (탑 다운 실행)
+# Create Milestone Plan - Top-Down Execution
 
 Creates a new milestone with proper structure, documentation, and project integration through an interactive, adaptive process.
 

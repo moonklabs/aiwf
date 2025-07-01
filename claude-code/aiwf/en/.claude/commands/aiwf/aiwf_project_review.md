@@ -1,4 +1,4 @@
-# 프로젝트 리뷰 - 탑 다운 실행
+# Project Review - Top-Down Execution
 
 Perform a comprehensive project-level review focusing on architecture, progress, and technical decisions.
 

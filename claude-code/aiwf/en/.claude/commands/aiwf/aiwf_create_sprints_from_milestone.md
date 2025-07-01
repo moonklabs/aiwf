@@ -1,4 +1,4 @@
-# 마일스톤에서 스프린트 계획하기 - 탑 다운 실행
+# Create Sprints from Milestone - Top-Down Execution
 
 Follow these instructions to sprint the scope of a Milestone into Sprints
 

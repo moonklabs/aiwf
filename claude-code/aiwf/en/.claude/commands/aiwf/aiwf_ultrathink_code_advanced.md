@@ -1,4 +1,4 @@
-# Ultra Think - 코드 심층사고 엔진 (/ultrathink_code_advanced 이 5000줄 클래스를 어떻게 분해할까?)
+# Ultra Think - Deep Code Reasoning (/ultrathink_code_advanced How to decompose this 5000-line class?)
 
 Activate Claude's maximum cognitive depth for code architecture decisions, complex implementation challenges, and discovering elegant solutions at the intersection of theory and practice.
 

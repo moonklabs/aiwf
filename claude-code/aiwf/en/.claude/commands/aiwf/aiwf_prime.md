@@ -1,4 +1,4 @@
-# 지식 프라임
+# Prime Knowledge
 
 Prime yourself with basic information about this project.
 Make sure you are aware of the environment.
