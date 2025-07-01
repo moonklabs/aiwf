@@ -1,6 +1,6 @@
 {
     "name": "aiwf",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "description": "AI Workflow Framework for Claude Code with multi-language support (Korean/English)",
     "main": "index.js",
     "type": "module",
