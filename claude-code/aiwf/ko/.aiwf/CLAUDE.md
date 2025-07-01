@@ -1,5 +1,7 @@
 # CLAUDE.md - AIWF Framework Structure Guide
 
+Always communicate in Korean
+
 ## Overview
 
 This is the root directory of the AIWF framework structure. It contains all project documentation, requirements, sprints, and organizational files.

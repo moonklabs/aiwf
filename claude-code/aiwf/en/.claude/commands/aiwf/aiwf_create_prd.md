@@ -1,6 +1,6 @@
 # Generate Product Documentation Workflow
 
-This rule guides AI to collect input through several key questions, then **sequentially** generate PRD → IA → UCD → UI/UX documents. All outputs use **Markdown** format and are written in **English**.
+This rule guides AI to collect input through several key questions, then **sequentially** generate PRD → IA → UCD → UI/UX documents. All outputs use **Markdown** format.
 
 ---
 
@@ -61,9 +61,7 @@ Use markdown format
 </response-format>
 <guidelines>
 - Use tables or lists where appropriate to organize information systematically.
-- All user interactions, including inputs and outputs, must be in Korean.
 - Provide accurate answers with reliable references
-- Write in Korean
 - Clearly separate each section
 - Collect additional reference services and provide detailed rationale
 - Do not include detailed data structure and storage design
@@ -118,9 +116,7 @@ Use markdown format
 </response-format>
 <guidelines>
 - Use tables or lists where appropriate to organize information systematically
-- All user interactions, including inputs and outputs, must be in Korean
 - Provide accurate answers with reliable references
-- Write in Korean
 - Clearly separate each section
 - Consider user experience and accessibility
 - Include responsive design considerations
@@ -168,9 +164,7 @@ Use markdown format
 </response-format>
 <guidelines>
 - Use tables or lists where appropriate to organize information systematically
-- All user interactions, including inputs and outputs, must be in Korean
 - Provide accurate answers with reliable references
-- Write in Korean
 - Clearly separate each section
 - Include detailed step-by-step descriptions
 - Consider error cases and alternative flows
@@ -247,7 +241,6 @@ Use markdown format
 </response-format>
 <guidelines>
 - Use tables or lists where appropriate to organize information systematically
-- All descriptions must be in Korean
 - Considering color scheme, select proper color for each color in tailwindcss palette
 - Provide specific color codes
 - Provide rationale for design decisions
@@ -255,7 +248,6 @@ Use markdown format
 - Include all text content in UI
 - If needed, use enough images in each components
 - provide each image's url. Use stock photos from picsum.photos where appropriate, only valid URLs you know exist
-- Write in Korean
 - must handle root route
 - consider proper grid system for all components
 </guidelines>
