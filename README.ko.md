@@ -1,28 +1,32 @@
 # AIWF (AI Workflow Framework)
 
+[Read in Korean (한국어로 보기)](README.ko.md)
+
+[![NPM Version](https://img.shields.io/npm/v/aiwf.svg)](https://www.npmjs.com/package/aiwf)
+[![License](https://img.shields.io/npm/l/aiwf.svg)](https://github.com/aiwf/aiwf/blob/main/LICENSE)
+[![Downloads](https://img.shields.io/npm/dm/aiwf.svg)](https://www.npmjs.com/package/aiwf)
+
+## AIWF란?
+
+AIWF는 Claude Code와 함께 AI 기반 개발을 위해 특별히 설계된 마크다운 기반 프로젝트 관리 프레임워크입니다. 소프트웨어 프로젝트를 AI가 효과적으로 처리할 수 있는 관리 가능한 단위로 분해하여 생산성을 극대화합니다.
 이 프로젝트는 [Simone](https://github.com/Helmi/claude-simone)의 업데이트된 버전입니다.
 
-> 🚀 Claude Code용 AIWF 프로젝트 관리 프레임워크를 위한 빠른 설치 프로그램
+## 📦 설치
 
-## AIWF Framework란 무엇인가요?
-
-AIWF는 Claude Code를 사용한 AI 지원 개발을 위해 특별히 설계된 마크다운 기반 프로젝트 관리 프레임워크입니다. 소프트웨어 프로젝트를 관리 가능한 덩어리로 나누어 효과적인 AI 처리를 돕습니다.
-
-## 설치
-
-모든 프로젝트 디렉토리에 AIWF를 설치하세요:
+프로젝트 디렉토리에서 AIWF 설치:
 
 ```bash
 npx aiwf
 ```
 
-이것으로 끝입니다! 설치 프로그램은 다음을 수행합니다:
+설치 프로그램의 동작:
 
-- 프로젝트 관리를 위한 `.aiwf/` 디렉토리 구조 생성
-- 사용자 지정 Claude 명령어를 위한 `.claude/commands/aiwf/` 설정
-- 최신 템플릿 및 문서 다운로드
+1. **언어 선택**: 한국어와 영어 중 선택
+2. **디렉토리 구성**: 프로젝트 관리를 위한 `.aiwf/` 디렉토리 구조 생성
+3. **명령어 설치**: 선택한 언어의 `.claude/commands/aiwf/` Claude 명령어 설정
+4. **콘텐츠 다운로드**: 선택한 언어의 최신 템플릿과 문서 다운로드
 
-## 사용법
+## 🚀 사용법
 
 ### 첫 설치
 
@@ -32,7 +36,7 @@ npx aiwf
 
 ### 기존 설치 업데이트
 
-AIWF가 이미 설치된 경우, 설치 프로그램이 이를 감지하고 다음 옵션을 제공합니다:
+AIWF가 이미 설치되어 있다면 설치 프로그램이 자동으로 감지하고 다음 옵션을 제공합니다:
 
 - 업데이트 (자동 백업 포함)
 - 설치 건너뛰기
@@ -40,76 +44,100 @@ AIWF가 이미 설치된 경우, 설치 프로그램이 이를 감지하고 다�
 
 ### 강제 설치
 
-모든 프롬프트를 건너뛰고 강제로 설치합니다:
+모든 프롬프트를 건너뛰고 강제 설치 (기본값: 한국어):
 
 ```bash
 npx aiwf --force
 ```
 
-## 설치되는 항목
+### 언어별 설치
+
+설치 프로그램은 선택한 언어에 따라 적절한 언어 버전을 자동으로 선택합니다:
+
+- 한국어 버전: 한국어 명령어와 문서 포함 (기본값)
+- English version: English commands and documentation
+
+## 📁 설치 내용
+
+### 디렉토리 구조
 
 ```
-aiwf/
-├── AI-WORKFLOW.md
-├── CHANGELOG.md
-├── claude-code/
-│   ├── docker/
-│   │   └── Dockerfile
-│   ├── aiwf/
-│   └── simone/
-│       ├── CHANGELOG.md
-│       ├── LICENSE
-│       ├── README.md
-│       ├── SYNC_GUIDE.md
-│       └── sync-simone.sh
-├── COMMANDS_GUIDE.md
-├── LICENSE
-├── package-lock.json
-├── package.json
-├── PRD.ko.md
-├── PRD.md
-├── README.ko.md
-├── README.md
-└── rules/
-    ├── global/
-    │   ├── code-style-guide.md
-    │   ├── coding-principles.md
-    │   ├── development-process.md
-    │   └── global-rules.md
-    └── manual/
-        └── generate-plan-docs.md
+your_project/
+├── .aiwf/                        # 프로젝트 관리 루트
+│   ├── 00_PROJECT_MANIFEST.md    # 중앙 추적 문서
+│   ├── 01_PROJECT_DOCS/          # 프로젝트 문서
+│   ├── 02_REQUIREMENTS/          # 마일스톤 요구사항
+│   ├── 03_SPRINTS/              # 스프린트 실행 추적
+│   ├── 04_GENERAL_TASKS/        # 독립 작업
+│   ├── 05_ARCHITECTURE_DECISIONS/ # ADR 문서
+│   ├── 10_STATE_OF_PROJECT/     # 프로젝트 상태 스냅샷
+│   ├── 98_PROMPTS/              # 유용한 AI 프롬프트
+│   └── 99_TEMPLATES/            # 문서 템플릿
+├── .claude/commands/aiwf/       # 언어별 Claude 명령어
+├── .cursor/rules/               # Cursor IDE 개발 규칙
+└── .windsurf/rules/             # Windsurf IDE 개발 규칙
 ```
 
-## 다음 단계
+### 언어별 콘텐츠
 
-설치 후:
+선택한 언어에 따라 다음이 설치됩니다:
 
-1.  Claude Code에서 프로젝트를 엽니다
-2.  `/aiwf_` 로 시작하는 명령어를 사용하여 프로젝트를 관리합니다
-3.  `/aiwf_initialize`로 시작하여 프로젝트를 설정합니다
+**한국어 버전 (`ko/`)** (기본값):
 
-## 명령어 가이드
+- 한국어 Claude 명령어 (`_kr` 접미사 포함)
+- 한국어 문서 및 템플릿
+- 현지화된 프로젝트 관리 콘텐츠
 
-AIWF의 전체 명령어 목록과 자세한 사용법은 [COMMANDS_GUIDE.md](docs/COMMANDS_GUIDE.md) 문서를 참고하세요.
+**English Version (`en/`)**:
 
-## 특징
+- English Claude commands
+- English documentation and templates
+- Standard project management content
 
-- 🎨 색상과 진행 표시기가 있는 아름다운 CLI
-- 🔄 자동 백업 기능이 있는 스마트 업데이트 감지
-- 📦 공식 GitHub 리포지토리에서 직접 다운로드
-- 🚀 `npx`로 작동 - 전역 설치 필요 없음
-- 💾 업데이트 시 타임스탬프가 찍힌 백업 생성
+## 🎯 시작하기
 
-## 요구사항
+설치 후 다음 단계:
+
+1. Claude Code에서 프로젝트를 엽니다
+2. `/project:aiwf` 명령어를 사용하여 프로젝트를 관리합니다
+3. `/project:aiwf:initialize` 명령어로 프로젝트 설정을 시작합니다
+
+### 주요 명령어
+
+- **초기화**: `/project:aiwf:initialize` - 프로젝트 초기 설정
+- **계획**: `/project:aiwf:plan_milestone` - 마일스톤 계획 수립
+- **스프린트**: `/project:aiwf:create_sprints_from_milestone` - 스프린트 생성
+- **작업**: `/project:aiwf:do_task` - 작업 실행
+- **리뷰**: `/project:aiwf:code_review` - 코드 리뷰
+- **GitHub 연동**: `/project:aiwf:issue_create`, `/project:aiwf:pr_create`
+
+## 📚 문서 참조
+
+전체 AIWF 명령어 목록과 자세한 사용법은 [COMMANDS_GUIDE.md](docs/COMMANDS_GUIDE.md)를 참조하세요.
+
+## ✨ 주요 기능
+
+- 🌍 **다국어 지원** - 한국어와 영어 완전 지원
+- 🎨 **아름다운 CLI** - 컬러와 진행 표시기가 있는 사용자 친화적 인터페이스
+- 🔄 **스마트 업데이트** - 자동 백업과 함께 지능형 업데이트 감지
+- 📦 **직접 다운로드** - 공식 GitHub 저장소에서 직접 다운로드
+- 🚀 **간편한 사용** - `npx` 사용으로 전역 설치 불필요
+- 💾 **안전한 백업** - 업데이트 시 타임스탬프 백업 생성
+- 🎯 **언어별 맞춤** - 언어별 명령어와 문서
+- 🔧 **IDE 통합** - Cursor와 Windsurf 개발 규칙 지원
+- 🔗 **GitHub 연동** - 이슈 및 PR 생성 자동화
+- 📊 **프로젝트 추적** - 마일스톤, 스프린트, 작업 체계적 관리
+
+## 🔧 요구사항
 
 - Node.js 14.0.0 이상
 - GitHub에서 다운로드하기 위한 인터넷 연결
 
-## 소스
+## 📖 소스
 
 이 설치 프로그램은 다음에서 AIWF 프레임워크를 가져옵니다:
 https://github.com/aiwf/aiwf
 
-## 라이선스
+## 📝 라이선스
 
 MIT

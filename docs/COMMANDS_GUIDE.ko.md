@@ -1,44 +1,58 @@
-# AIWF 명령어 가이드
+# AIWF (AI Workflow Framework) 명령어 가이드
 
 이 가이드는 사용 가능한 AIWF 명령어와 이를 프로젝트에서 효과적으로 사용하는 방법을 설명합니다.
 
+> **다국어 지원**: AIWF는 한국어와 영어를 모두 지원합니다. 설치 시 선택한 언어에 따라 해당 언어의 명령어와 문서가 제공됩니다.
+
 ## 명령어 개요
 
-AIWF 명령어는 `/project:aiwf:<command_name> [arguments]` 형식을 따릅니다.
+AIWF 명령어는 `/aiwf_<command_name> [arguments]` 형식을 따릅니다.
+
+> **참고**:
+>
+> - 이전 버전과의 호환성을 위해 `/aiwf_<command_name>` 형식도 계속 지원됩니다.
+> - 한국어 명령어는 `_kr` 접미사를 가질 수 있습니다 (예: `/aiwf_initialize_kr`)
+
+## 언어별 명령어
+
+### 명령어 버전
+
+- **기본 명령어**: 영어 또는 다국어 혼용
+- **한국어 명령어**: `_kr` 접미사가 있는 완전한 한국어 버전
 
 ## 설정 및 컨텍스트 명령어
 
-### 🚀 `/project:aiwf:initialize`
+### 🚀 `/aiwf_initialize`
 
 **목적**: 새 프로젝트 또는 기존 프로젝트에서 AIWF 초기화
 
 **사용법**:
 
 ```
-/project:aiwf:initialize
+/aiwf_initialize
 ```
 
 **동작**:
 
-1. Scans and analyzes your project
-2. Asks for confirmation about project type
-3. Checks for existing AIWF documents
-4. Guides you through document creation (imports existing docs or creates new ones)
-5. Creates your first milestone
-6. Generates project manifest
+1. 프로젝트를 스캔하고 분석
+2. 프로젝트 타입 확인 요청
+3. 기존 AIWF 문서 확인
+4. 문서 생성 과정 안내 (기존 문서 가져오기 또는 새로 생성)
+5. 첫 번째 마일스톤 생성
+6. 프로젝트 매니페스트 생성
 
-**사용 시기**: 프로젝트에서 AIWF를 처음 설정할 때(현재 ForeLoop에는 이미 설정되어 있습니다!)
+**사용 시기**: 프로젝트에서 AIWF를 처음 설정할 때
 
 ---
 
-### 🧠 `/project:aiwf:prime`
+### 🧠 `/aiwf_prime`
 
 **목적**: 코딩 세션 시작 시 프로젝트 컨텍스트를 로드합니다
 
 **사용법**:
 
 ```
-/project:aiwf:prime
+/aiwf_prime
 ```
 
 **동작**:
@@ -52,14 +66,14 @@ AIWF 명령어는 `/project:aiwf:<command_name> [arguments]` 형식을 따릅니
 
 ## 계획 명령어
 
-### 📅 `/project:aiwf:create_sprints_from_milestone`
+### 📅 `/aiwf_create_sprints_from_milestone`
 
 **목적**: 마일스톤을 관리 가능한 스프린트로 분해
 
 **사용법**:
 
 ```
-/project:aiwf:create_sprints_from_milestone 001_MVP_FOUNDATION
+/aiwf_create_sprints_from_milestone 001_MVP_FOUNDATION
 ```
 
 **동작**:
@@ -73,16 +87,16 @@ AIWF 명령어는 `/project:aiwf:<command_name> [arguments]` 형식을 따릅니
 
 ---
 
-### 📋 `/project:aiwf:create_sprint_tasks`
+### 📋 `/aiwf_create_sprint_tasks`
 
 **목적**: 스프린트를 위한 상세 작업 분해 생성
 
 **사용법**:
 
 ```
-/project:aiwf:create_sprint_tasks S01
+/aiwf_create_sprint_tasks S01
 # or for specific sprint:
-/project:aiwf:create_sprint_tasks S02_001_MVP_FOUNDATION
+/aiwf_create_sprint_tasks S02_001_MVP_FOUNDATION
 ```
 
 **동작**:
@@ -96,14 +110,14 @@ AIWF 명령어는 `/project:aiwf:<command_name> [arguments]` 형식을 따릅니
 
 ---
 
-### ✏️ `/project:aiwf:create_general_task`
+### ✏️ `/aiwf_create_general_task`
 
 **목적**: 스프린트와 연결되지 않은 독립형 작업 생성
 
 **사용법**:
 
 ```
-/project:aiwf:create_general_task
+/aiwf_create_general_task
 # Then describe your task when prompted
 ```
 
@@ -115,298 +129,442 @@ AIWF 명령어는 `/project:aiwf:<command_name> [arguments]` 형식을 따릅니
 
 **사용 시기**: 유지보수, 버그 수정 또는 스프린트 범위를 벗어난 작업에 사용
 
-## Development Commands
+## 개발 명령어
 
-### 💻 `/project:aiwf:do_task`
+### 💻 `/aiwf_do_task`
 
 **목적**: 특정 작업을 실행
 
 **사용법**:
 
 ```
-/project:aiwf:do_task
+/aiwf_do_task
 # 사용 가능한 작업을 나열하고 선택을 요청
 
 # 또는 작업을 직접 지정:
-/project:aiwf:do_task T001_S01_setup_tauri
+/aiwf_do_task T001_S01_setup_tauri
 ```
 
 **동작**:
 
-1. Reads task requirements
-2. Implements the solution
-3. Runs tests if applicable
-4. Updates task status
-5. Creates necessary files/changes
+1. 작업 요구사항 읽기
+2. 솔루션 구현
+3. 해당되는 경우 테스트 실행
+4. 작업 상태 업데이트
+5. 필요한 파일/변경 사항 생성
 
-**사용 시기**: Ready to work on a specific task
+**사용 시기**: 특정 작업을 수행할 준비가 되었을 때
 
 ---
 
-### 📝 `/project:aiwf:commit`
+### 📝 `/aiwf_commit`
 
-**목적**: Create well-structured git commits
+**목적**: 잘 구조화된 git 커밋 생성 및 GitHub 이슈 연동
 
 **사용법**:
 
 ```
-/project:aiwf:commit
+/aiwf_commit
 # 변경 사항을 검토하고 커밋을 생성
 
 # 또는 특정 작업에 대해:
-/project:aiwf:commit T001_S01_setup_tauri
+/aiwf_commit T001_S01_setup_tauri
 
 # 리뷰와 함께:
-/project:aiwf:commit --review
+/aiwf_commit --review
 ```
 
 **동작**:
 
-1. Analyzes changes made
-2. Groups related changes
-3. Creates meaningful commit messages
-4. Links commits to tasks/requirements
-5. Optionally runs code review first
+1. 변경 사항 분석
+2. 관련 변경 사항 그룹화
+3. 의미있는 커밋 메시지 생성
+4. 커밋을 작업/요구사항에 연결
+5. GitHub 이슈와 연동 (fixes #123, relates to #456)
+6. 선택적으로 코드 리뷰 먼저 실행
 
-**사용 시기**: After completing work you want to save
+**사용 시기**: 완료한 작업을 저장하고 싶을 때
 
 ---
 
-### 🧪 `/project:aiwf:test`
+### 🧪 `/aiwf_test`
 
-**목적**: Run tests and fix common issues
+**목적**: 테스트 실행 및 일반적인 문제 수정
 
 **사용법**:
 
 ```
-/project:aiwf:test
+/aiwf_test
 # 모든 테스트 실행
 
-/project:aiwf:test unit
+/aiwf_test unit
 # 특정 테스트 스위트 실행
 ```
 
 **동작**:
 
-1. Identifies test commands from package.json
-2. Runs appropriate tests
-3. Fixes common issues (missing deps, configs)
-4. Reports results clearly
+1. package.json에서 테스트 명령어 식별
+2. 적절한 테스트 실행
+3. 일반적인 문제 수정 (누락된 의존성, 구성)
+4. 결과를 명확하게 리포트
 
-**사용 시기**: Before committing or when tests fail
+**사용 시기**: 커밋하기 전이나 테스트가 실패할 때
 
 ## 코드 리뷰 명령어
 
-### 🔍 `/project:aiwf:code_review`
+### 🔍 `/aiwf_code_review`
 
-**목적**: Review code against specifications
+**목적**: 명세에 따른 코드 검토
 
 **사용법**:
 
 ```
-/project:aiwf:code_review
+/aiwf_code_review
 # 커밋되지 않은 변경 사항 검토
 
-/project:aiwf:code_review src/app/components/GameCanvas.tsx
-# Reviews specific file
+/aiwf_code_review src/app/components/GameCanvas.tsx
+# 특정 파일 검토
 ```
 
 **동작**:
 
-1. Checks code against requirements
-2. Verifies patterns and conventions
-3. Identifies bugs and issues
-4. Suggests improvements
-5. Ensures spec compliance
+1. 요구사항에 대한 코드 검사
+2. 패턴 및 관습 확인
+3. 버그 및 문제점 식별
+4. 개선 사항 제안
+5. 명세 준수 확인
 
-**사용 시기**: Before committing important changes
+**사용 시기**: 중요한 변경 사항을 커밋하기 전
 
 ---
 
-### 📊 `/project:aiwf:project_review`
+### 📊 `/aiwf_project_review`
 
-**목적**: Comprehensive project health check
+**목적**: 프로젝트 전반적인 상태 점검
 
 **사용법**:
 
 ```
-/project:aiwf:project_review
+/aiwf_project_review
 ```
 
 **동작**:
 
-1. Reviews overall architecture
-2. Checks technical debt
-3. Analyzes progress vs. timeline
-4. Identifies risks and blockers
-5. Suggests improvements
+1. 전체 아키텍처 검토
+2. 기술 부채 확인
+3. 진행 상황 vs 일정 분석
+4. 위험 요소 및 차단 요소 식별
+5. 개선 사항 제안
 
-**사용 시기**: Weekly or at sprint boundaries
+**사용 시기**: 주간 또는 스프린트 경계에서
 
 ---
 
-### 🧪 `/project:aiwf:testing_review`
+### 🧪 `/aiwf_testing_review`
 
-**목적**: Analyze test coverage and quality
+**목적**: 테스트 커버리지 및 품질 분석
 
 **사용법**:
 
 ```
-/project:aiwf:testing_review
+/aiwf_testing_review
 ```
 
 **동작**:
 
-1. Reviews test coverage
-2. Identifies missing test cases
-3. Checks test quality
-4. Suggests improvements
+1. 테스트 커버리지 검토
+2. 누락된 테스트 케이스 식별
+3. 테스트 품질 확인
+4. 개선 사항 제안
 
-**사용 시기**: After implementing features
+**사용 시기**: 기능 구현 후
 
 ---
 
-### 💬 `/project:aiwf:discuss_review`
+### 💬 `/aiwf_discuss_review`
 
-**목적**: Technical discussion about review findings
+**목적**: 검토 결과에 대한 기술적 토론
 
 **사용법**:
 
 ```
-/project:aiwf:discuss_review
-# After running another review command
+/aiwf_discuss_review
+# 다른 검토 명령어 실행 후
 ```
 
 **동작**:
 
-- Provides detailed explanations
-- Discusses trade-offs
-- Suggests solutions
-- Answers questions
+- 상세한 설명 제공
+- 장단점 토론
+- 솔루션 제안
+- 질문에 답변
 
-**사용 시기**: To understand review feedback better
+**사용 시기**: 검토 피드백을 더 잘 이해하기 위해
 
 ## 자동화 명령어
 
-### 🚀 `/project:aiwf:yolo`
+### 🚀 `/aiwf_yolo`
 
-**목적**: 자율적인 작업 실행
+**목적**: 자율적 작업 실행
 
 **사용법**:
 
 ```
-/project:aiwf:yolo
+/aiwf_yolo
 # 모든 열린 작업을 순차 실행
 
-/project:aiwf:yolo S02
+/aiwf_yolo S02
 # 특정 스프린트를 순차 실행
 
-/project:aiwf:yolo sprint-all
-# 모든 스프린트를 순차적으로 완료할 때까지 실행
+/aiwf_yolo sprint-all
+# 모든 스프린트를 순차 실행
 
-/project:aiwf:yolo milestone-all
-# 모든 마일스톤과 관련된 스프린트, 작업을 완료할 때까지 실행
+/aiwf_yolo milestone-all
+# 모든 마일스톤을 순차 실행
 
-/project:aiwf:yolo S03 worktree
-/project:aiwf:yolo sprint-all worktree
-# Git worktree 환경에서 실행 시 브랜치 생성 없이 직접 푸시
+/aiwf_yolo S02 worktree
+# Git worktree 모드로 실행
 ```
 
 **동작**:
 
-1. 열려 있는 작업을 식별합니다.
-2. 순서대로 실행합니다.
-3. 종속성을 처리합니다.
-4. 완료된 작업을 커밋합니다.
-5. 진행 상황을 업데이트합니다.
+1. 열린 작업 식별
+2. 순서대로 실행
+3. 종속성 처리
+4. 완료된 작업 커밋
+5. 진행 상황 업데이트
+6. GitHub 이슈 상태 업데이트
 
-**YOLO 모드 특징:**
+**안전 기능**:
 
-- ⚡ 연속 실행: 각 작업 완료 후 즉시 다음 작업으로 이동
-- 🎯 완전 자율: 사용자 입력이나 확인 없이 진행
-- 📊 진행률 추적: 현재 진행 상황을 실시간으로 보고
-- 🛡️ 안전 장치: 테스트 실패나 치명적 오류 시 중단
-- 📈 상세 리포트: 완료 시 전체 프로젝트 상태 리포트 제공
-
-**⚠️ 주의사항:**
-
-- 중요한 파일(.env, 마이그레이션) 수정 시 중단됩니다
-- 테스트가 10% 이상 실패하면 평가 후 진행 여부를 결정합니다
-- 데이터베이스 스키마 변경이 필요하면 중단됩니다
+- 확인 없이 스키마 수정하지 않음
+- 위험한 작업 건너뛰기
+- 코드 품질 유지
+- 논리적 커밋 생성
+- 테스트 실패 시 중단
 
 **사용 시기**: 자율적인 진행을 원할 때
 
 ## 추가/고급 명령어
 
-### 📌 `/project:aiwf:pr_create`
+### 📌 `/aiwf_pr_create`
 
-**목적**: Pull Request를 생성하고 템플릿을 적용하여 변경 사항을 정리합니다.
-
-**사용법**:
-
-```
-/project:aiwf:pr_create "Add authentication to API"
-```
-
----
-
-### 🗂️ `/project:aiwf:issue_create`
-
-**목적**: GitHub Issue를 생성하여 버그 리포트·기능 요청을 기록합니다.
+**목적**: Pull Request를 생성하고 템플릿을 적용하여 변경 사항을 정리
 
 **사용법**:
 
 ```
-/project:aiwf:issue_create "Bug: login fails on Safari"
+/aiwf_pr_create
+# 대화형으로 PR 생성
+
+/aiwf_pr_create "Add authentication to API"
+# 제목과 함께 PR 생성
+```
+
+**동작**:
+
+1. 현재 브랜치의 변경 사항 분석
+2. 연관된 이슈 및 작업 식별
+3. PR 제목 및 설명 생성
+4. 테스트 체크리스트 포함
+5. GitHub에 PR 생성
+
+---
+
+### 🗂️ `/aiwf_issue_create`
+
+**목적**: GitHub Issue를 생성하여 버그 리포트 및 기능 요청 기록
+
+**사용법**:
+
+```
+/aiwf_issue_create
+# 대화형으로 이슈 생성
+
+/aiwf_issue_create "Bug: login fails on Safari"
+# 제목과 함께 이슈 생성
+```
+
+**동작**:
+
+1. 이슈 제목 및 설명 입력 받기
+2. 적절한 라벨 및 마일스톤 자동 할당
+3. 버그/기능 요청 템플릿 적용
+4. GitHub에 이슈 생성
+5. 필요시 작업으로 변환
+
+---
+
+### 🛠️ `/aiwf_create_milestone_plan`
+
+**목적**: 대화형 프로세스로 신규 마일스톤을 계획하고 `.aiwf/02_REQUIREMENTS/` 구조를 자동 생성
+
+**사용법**:
+
+```
+/aiwf_create_milestone_plan
+```
+
+**동작**:
+
+1. 마일스톤 목표 및 범위 정의
+2. 요구사항 문서 구조 생성
+3. PRD 및 기술 명세 템플릿 생성
+4. 마일스톤 디렉토리 구조 설정
+5. 프로젝트 매니페스트 업데이트
+
+---
+
+### 📝 `/aiwf_create_prd`
+
+**목적**: 제품 요구사항 문서(PRD)를 생성하여 기능의 상세 명세를 작성
+
+**사용법**:
+
+```
+/aiwf_create_prd
+# 대화형으로 PRD 생성
+
+/aiwf_create_prd "사용자 인증 시스템"
+# 특정 기능에 대한 PRD 생성
+```
+
+**동작**:
+
+1. 기능의 목적과 범위 정의
+2. 사용자 스토리 및 시나리오 작성
+3. 기술적 요구사항 명세
+4. 제약사항 및 의존성 파악
+5. PRD 문서 구조 생성
+
+**사용 시기**: 새로운 기능을 구현하기 전 상세 명세가 필요할 때
+
+---
+
+### 📈 `/aiwf_mermaid`
+
+**목적**: 코드베이스를 분석하여 Mermaid 다이어그램 생성
+
+**사용법**:
+
+```
+/aiwf_mermaid
+# 전체 아키텍처 다이어그램 생성
+
+/aiwf_mermaid flowchart
+# 플로우차트 생성
+
+/aiwf_mermaid sequence
+# 시퀀스 다이어그램 생성
+```
+
+**동작**:
+
+1. 코드베이스 구조 분석
+2. 컴포넌트 및 모듈 관계 파악
+3. 적절한 다이어그램 유형 선택
+4. Mermaid 문법으로 다이어그램 생성
+5. 문서에 삽입 가능한 형태로 출력
+
+---
+
+### ♾️ `/aiwf_infinite`
+
+**목적**: 명세에 따라 반복적으로 결과물을 생성하는 고급 반복 루프 실행
+
+**사용법**:
+
+```
+/aiwf_infinite
+# 무한 반복 모드
+
+/aiwf_infinite 5
+# 5회 반복 모드
+```
+
+**동작**:
+
+1. 반복 생성 규칙 정의
+2. 초기 조건 설정
+3. 지정된 횟수만큼 반복 실행
+4. 각 반복마다 결과 검증
+5. 최종 결과물 통합
+
+---
+
+### 🤖 `/aiwf_tm-run-all-subtask`
+
+**목적**: Task Master의 모든 서브태스크를 한 번에 실행하여 진행 상황 자동화
+
+**사용법**:
+
+```
+/aiwf_tm-run-all-subtask
+```
+
+**동작**:
+
+1. 활성 서브태스크 식별
+2. 종속성 순서 결정
+3. 병렬 실행 가능 여부 판단
+4. 순차적으로 서브태스크 실행
+5. 전체 진행 상황 업데이트
+
+---
+
+### 🧠 `/aiwf_ultrathink_general`
+
+**목적**: 폭넓은 문제를 심층 분석하기 위한 울트라 씽킹 세션
+
+**사용법**:
+
+```
+/aiwf_ultrathink_general "복잡한 비즈니스 로직 설계"
 ```
 
 ---
 
-### 🛠️ `/project:aiwf:plan_milestone`
+### 🧠 `/aiwf_ultrathink_code_basic`
 
-**목적**: 대화형 프로세스로 신규 마일스톤을 계획하고 `.aiwf/02_REQUIREMENTS/` 구조를 자동 생성합니다.
+**목적**: 코드 기반 문제를 기본 수준에서 심층 분석하는 울트라 씽킹 세션
 
----
+**사용법**:
 
-### 📈 `/project:aiwf:mermaid`
-
-**목적**: 코드베이스를 분석하여 Mermaid 다이어그램(UML/시퀀스 등)을 생성합니다.
-
----
-
-### ♾️ `/project:aiwf:infinite`
-
-**목적**: 명세에 따라 무한(또는 지정 횟수) 반복 결과물을 생성하는 고급 반복 생성 루프를 실행합니다.
+```
+/aiwf_ultrathink_code_basic "성능 최적화 방안"
+```
 
 ---
 
-### 🤖 `/project:aiwf:tm-run-all-subtask`
+### 🧠 `/aiwf_ultrathink_code_advanced`
 
-**목적**: Task Master의 모든 서브태스크를 한 번에 실행하여 진행 상황을 자동화합니다.
+**목적**: 복잡한 코드 및 아키텍처 문제를 고급 수준에서 심층 분석하는 울트라 씽킹 세션
 
----
+**사용법**:
 
-### 🧠 `/project:aiwf:ultrathink_general`
-
-**목적**: 폭넓은 문제를 심층 분석하기 위한 울트라 씽킹(General) 세션을 시작합니다.
-
----
-
-### 🧠 `/project:aiwf:ultrathink_code_basic`
-
-**목적**: 코드 기반 문제를 기본 수준에서 심층 분석하는 울트라 씽킹 세션을 시작합니다.
+```
+/aiwf_ultrathink_code_advanced "마이크로서비스 아키텍처 설계"
+```
 
 ---
 
-### 🧠 `/project:aiwf:ultrathink_code_advanced`
+### ⚙️ `/aiwf_prime_context`
 
-**목적**: 복잡한 코드·아키텍처 문제를 고급 수준에서 심층 분석하는 울트라 씽킹 세션을 시작합니다.
+**목적**: 프로젝트 컨텍스트를 빠르게 불러와 프라임
 
----
+**사용법**:
 
-### ⚙️ `/project:aiwf:prime_context`
+```
+/aiwf_prime_context
+```
 
-**목적**: 프로젝트 컨텍스트(파일 목록·주요 문서)를 빠르게 불러와 프라임합니다.
+**동작**:
+
+1. 프로젝트 파일 목록 스캔
+2. 주요 문서 식별
+3. 현재 상태 요약
+4. 컨텍스트 정보 로드
+5. 작업 준비 상태 설정
 
 ## 모범 사례
 
@@ -414,66 +572,66 @@ AIWF 명령어는 `/project:aiwf:<command_name> [arguments]` 형식을 따릅니
 
 ```bash
 # Start of day
-/project:aiwf:prime
+/aiwf_prime
 
 # Work on tasks
-/project:aiwf:do_task
-/project:aiwf:test
-/project:aiwf:commit
+/aiwf_do_task
+/aiwf_test
+/aiwf_commit
 
 # End of day
-/project:aiwf:project_review
+/aiwf_project_review
 ```
 
 ### 스프린트 워크플로
 
 ```bash
 # Sprint planning
-/project:aiwf:create_sprint_tasks S02
+/aiwf_create_sprint_tasks S02
 
 # Sprint execution
-/project:aiwf:do_task T001_S02_first_task
-/project:aiwf:do_task T002_S02_second_task
-/project:aiwf:commit --review
+/aiwf_do_task T001_S02_first_task
+/aiwf_do_task T002_S02_second_task
+/aiwf_commit --review
 
 # Sprint review
-/project:aiwf:project_review
+/aiwf_project_review
 ```
 
 ### 빠른 수정
 
 ```bash
-# Bug fix workflow
-/project:aiwf:create_general_task
-# Describe: "Fix memory leak in /src/foo.bar"
-/project:aiwf:do_task T003
-/project:aiwf:test
-/project:aiwf:commit T003
+# 버그 수정 워크플로
+/aiwf_create_general_task
+# 설명: "Fix memory leak in /src/foo.bar"
+/aiwf_do_task T003
+/aiwf_test
+/aiwf_commit T003
 ```
 
 ## 팁 & 트릭
 
-1. **Use YOLO for routine tasks**: Great for implementing straightforward features
-2. **Always prime first**: Ensures commands have proper context
-3. **Review before major commits**: Catch issues early
-4. **Create general tasks for bugs**: Keeps them trackable
-5. **Use task-specific commits**: Better traceability
+1. **일상적인 작업에는 YOLO 사용**: 간단한 기능 구현에 유용
+2. **항상 먼저 prime 실행**: 명령어가 적절한 컨텍스트를 갖도록 보장
+3. **주요 커밋 전 검토**: 문제를 조기에 발견
+4. **버그는 일반 작업으로 생성**: 추적 가능하게 유지
+5. **작업별 커밋 사용**: 더 나은 추적성
 
 ## 명령어 안전 장치
 
-AIWF commands include safety features:
+AIWF 명령어에는 다음과 같은 안전 기능이 포함되어 있습니다:
 
-- Won't delete critical files
-- Asks before schema changes
-- Validates changes against specs
-- Maintains code quality standards
-- Creates incremental commits
+- 중요 파일 삭제하지 않음
+- 스키마 변경 전 확인 요청
+- 명세에 따른 변경 사항 검증
+- 코드 품질 기준 유지
+- 점진적 커밋 생성
 
 ## 도움 받기
 
-If you need help with a command:
+명령어에 대한 도움이 필요한 경우:
 
-1. Run the command without arguments for usage info
-2. Check this guide
-3. Look at task examples in `.aiwf/`
-4. Review the command source in `.claude/commands/`
+1. 인수 없이 명령어를 실행하여 사용법 정보 확인
+2. 이 가이드 확인
+3. `.aiwf/`의 작업 예시 확인
+4. `.claude/commands/`의 명령어 소스 검토
