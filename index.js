@@ -118,9 +118,9 @@ async function backupFile(filePath, backupDir) {
     return null;
 }
 
-async function backupCommandsAndDocs() {
+async function backupCommandsAndDocs(msg) {
     if (!BACKUP_DIR) BACKUP_DIR = getBackupDirName();
-    const spinner = ora('기존 명령어 및 문서 백업 중...').start();
+    const spinner = ora(msg.backingUp).start();
     const backedUpFiles = [];
     await fs.mkdir(BACKUP_DIR, { recursive: true });
     try {
@@ -158,18 +158,18 @@ async function backupCommandsAndDocs() {
             }
         }
         if (backedUpFiles.length > 0) {
-            spinner.succeed(chalk.green(`${backedUpFiles.length}개 파일 백업 완료 (*.bak)`));
+            spinner.succeed(chalk.green(msg.backupComplete.replace('{count}', backedUpFiles.length)));
         } else {
-            spinner.succeed(chalk.gray('백업할 기존 파일이 없습니다'));
+            spinner.succeed(chalk.gray(msg.noFilesToBackup));
         }
         return backedUpFiles;
     } catch (error) {
-        spinner.fail(chalk.red('백업 실패'));
+        spinner.fail(chalk.red(msg.backupFailed));
         throw error;
     }
 }
 
-async function downloadDirectory(githubPath, localPath, spinner) {
+async function downloadDirectory(githubPath, localPath, spinner, msg) {
     await fs.mkdir(localPath, { recursive: true });
 
     const items = await getDirectoryStructure(githubPath);
@@ -178,9 +178,9 @@ async function downloadDirectory(githubPath, localPath, spinner) {
         const itemLocalPath = path.join(localPath, item.name);
 
         if (item.type === 'dir') {
-            await downloadDirectory(item.path, itemLocalPath, spinner);
+            await downloadDirectory(item.path, itemLocalPath, spinner, msg);
         } else if (item.type === 'file') {
-            spinner.text = `${item.path} 다운로드 중...`;
+            spinner.text = msg.downloadingFile.replace('{path}', item.path);
             await downloadFile(item.download_url, itemLocalPath);
         }
     }
@@ -213,7 +213,43 @@ const messages = {
         downloadingCommands: 'AIWF 명령어를 새로 다운로드하는 중...',
         updateSuccess: '✅ AIWF 프레임워크가 성공적으로 업데이트되었습니다!',
         installSuccess: '✅ AIWF 프레임워크가 성공적으로 설치되었습니다!',
-        enjoy: '\nEnjoy AIWF! 🚀\n'
+        enjoy: '\nEnjoy AIWF! 🚀\n',
+        backupComplete: '{count}개 파일 백업 완료 (*.bak)',
+        noFilesToBackup: '백업할 기존 파일이 없습니다',
+        backupFailed: '백업 실패',
+        downloadingFile: '{path} 다운로드 중...',
+        downloadingTemplates: '템플릿 디렉토리를 다운로드 중...',
+        templatesNotFound: '템플릿 디렉토리를 찾을 수 없어 건너뜁니다...',
+        deletingOldCommands: '기존 AIWF 명령어 폴더를 삭제하는 중...',
+        commandsNotFound: '명령어 디렉토리를 찾을 수 없어 건너뜁니다...',
+        downloadingRulesGlobal: 'rules/global 폴더를 다운로드 중...',
+        rulesGlobalNotFound: 'rules/global 폴더를 찾을 수 없어 건너뜁니다...',
+        downloadingRulesManual: 'rules/manual 폴더를 다운로드 중...',
+        rulesManualNotFound: 'rules/manual 폴더를 찾을 수 없어 건너뜁니다...',
+        updateHistory: '🔄 업데이트 내역:',
+        updatedCommands: '내의 명령어',
+        updatedDocs: '문서 (CLAUDE.md 파일)',
+        workPreserved: '💾 작업 내용은 보존되었습니다:',
+        allFilesPreserved: '모든 작업, 스프린트, 및 프로젝트 파일이 변경되지 않음',
+        backupCreated: '백업은 *.bak 파일로 만들어짐',
+        structureCreated: '📁 생성된 구조:',
+        aiwfRoot: '프로젝트 관리 루트',
+        claudeCommands: 'Claude 사용자 명령어',
+        nextSteps: '🚀 다음 단계:',
+        nextStep1: 'Claude Code에서 이 프로젝트를 엽니다',
+        nextStep2: '/aiwf_<command> 명령어를 사용하여 프로젝트를 관리하세요',
+        nextStep3: '/aiwf_initialize를 실행하여 프로젝트를 설정하세요',
+        gettingStarted: '✨ 시작하려면:',
+        startStep1: '새 터미널을 열거나 쉘 프로필을 소싱하세요 (예: source ~/.zshrc)',
+        startStep2: '다음을 실행하세요: claude 를 실행하여 사용 가능한 명령어를 확인하세요.',
+        checkDocs: '자세한 내용은 .aiwf 디렉토리의 문서를 확인하세요.',
+        updateFailed: '업데이트 실패',
+        installFailed: '설치 실패',
+        noBackupFound: '복원할 백업 폴더가 없습니다.',
+        restoringFromBackup: '백업에서 복원 중...',
+        restoreSuccess: '성공적으로 복원되었습니다.',
+        restoreFailed: '복원에 실패했습니다.',
+        cannotRestore: '파일을 복원할 수 없습니다. 수동 확인이 필요합니다.'
     },
     en: {
         welcome: '\n🎉 Welcome to AIWF!\n',
@@ -234,7 +270,43 @@ const messages = {
         downloadingCommands: 'Downloading AIWF commands...',
         updateSuccess: '✅ AIWF framework updated successfully!',
         installSuccess: '✅ AIWF framework installed successfully!',
-        enjoy: '\nEnjoy AIWF! 🚀\n'
+        enjoy: '\nEnjoy AIWF! 🚀\n',
+        backupComplete: '{count} files backed up (*.bak)',
+        noFilesToBackup: 'No existing files to backup',
+        backupFailed: 'Backup failed',
+        downloadingFile: 'Downloading {path}...',
+        downloadingTemplates: 'Downloading template directories...',
+        templatesNotFound: 'Template directories not found, skipping...',
+        deletingOldCommands: 'Deleting existing AIWF commands folder...',
+        commandsNotFound: 'Commands directory not found, skipping...',
+        downloadingRulesGlobal: 'Downloading rules/global folder...',
+        rulesGlobalNotFound: 'rules/global folder not found, skipping...',
+        downloadingRulesManual: 'Downloading rules/manual folder...',
+        rulesManualNotFound: 'rules/manual folder not found, skipping...',
+        updateHistory: '🔄 Update History:',
+        updatedCommands: '/ commands',
+        updatedDocs: 'Documentation (CLAUDE.md files)',
+        workPreserved: '💾 Work preserved:',
+        allFilesPreserved: 'All work, sprints, and project files unchanged',
+        backupCreated: 'Backups created as *.bak files',
+        structureCreated: '📁 Structure created:',
+        aiwfRoot: 'Project management root',
+        claudeCommands: 'Claude user commands',
+        nextSteps: '🚀 Next steps:',
+        nextStep1: 'Open this project in Claude Code',
+        nextStep2: 'Use /aiwf_<command> commands to manage your project',
+        nextStep3: 'Run /aiwf_initialize to set up your project',
+        gettingStarted: '✨ Getting started:',
+        startStep1: 'Open a new terminal or source your shell profile (e.g. source ~/.zshrc)',
+        startStep2: 'Run: claude to see available commands.',
+        checkDocs: 'For more details, check the documentation in the .aiwf directory.',
+        updateFailed: 'Update failed',
+        installFailed: 'Installation failed',
+        noBackupFound: 'No backup folder found to restore.',
+        restoringFromBackup: 'Restoring from backup...',
+        restoreSuccess: 'Successfully restored.',
+        restoreFailed: 'Restore failed.',
+        cannotRestore: 'Cannot restore file. Manual verification required.'
     }
 };
 
@@ -289,7 +361,7 @@ async function installAIWF(options = {}) {
         }
 
         if (response.action === 'update') {
-            await backupCommandsAndDocs();
+            await backupCommandsAndDocs(msg);
         }
     }
 
@@ -327,11 +399,11 @@ async function installAIWF(options = {}) {
 
         // Download templates on fresh install
         try {
-            logWithSpinner(spinner, '템플릿 디렉토리를 다운로드 중...', debugLog);
-            await downloadDirectory(`${GITHUB_CONTENT_LANGUAGE_PREFIX}/.aiwf/98_PROMPTS`, '.aiwf/98_PROMPTS', spinner);
-            await downloadDirectory(`${GITHUB_CONTENT_LANGUAGE_PREFIX}/.aiwf/99_TEMPLATES`, '.aiwf/99_TEMPLATES', spinner);
+            logWithSpinner(spinner, msg.downloadingTemplates, debugLog);
+            await downloadDirectory(`${GITHUB_CONTENT_LANGUAGE_PREFIX}/.aiwf/98_PROMPTS`, '.aiwf/98_PROMPTS', spinner, msg);
+            await downloadDirectory(`${GITHUB_CONTENT_LANGUAGE_PREFIX}/.aiwf/99_TEMPLATES`, '.aiwf/99_TEMPLATES', spinner, msg);
         } catch (error) {
-            logWithSpinner(spinner, '템플릿 디렉토리를 찾을 수 없어 건너뜁니다...', debugLog);
+            logWithSpinner(spinner, msg.templatesNotFound, debugLog);
         }
 
         // Always update CLAUDE.md documentation files
@@ -356,7 +428,7 @@ async function installAIWF(options = {}) {
         const commandsExist = await fs.access(COMMANDS_DIR).then(() => true).catch(() => false);
 
         if (commandsExist) {
-            logWithSpinner(spinner, '기존 AIWF 명령어 폴더를 삭제하는 중...', debugLog);
+            logWithSpinner(spinner, msg.deletingOldCommands, debugLog);
             await fs.rm(COMMANDS_DIR, { recursive: true, force: true });
         }
 
@@ -365,28 +437,28 @@ async function installAIWF(options = {}) {
         // Always update commands (clean download)
         logWithSpinner(spinner, msg.downloadingCommands, debugLog);
         try {
-            await downloadDirectory(`${GITHUB_CONTENT_LANGUAGE_PREFIX}/${COMMANDS_DIR}`, COMMANDS_DIR, spinner);
+            await downloadDirectory(`${GITHUB_CONTENT_LANGUAGE_PREFIX}/${COMMANDS_DIR}`, COMMANDS_DIR, spinner, msg);
         } catch (error) {
-            logWithSpinner(spinner, '명령어 디렉토리를 찾을 수 없어 건너뜁니다...', debugLog);
+            logWithSpinner(spinner, msg.commandsNotFound, debugLog);
         }
 
         // 2. rules/global 폴더 다운로드 (임시 폴더)
         let tmpRulesGlobal = '.aiwf/_tmp_rules_global';
         try {
-            logWithSpinner(spinner, 'rules/global 폴더를 다운로드 중...', debugLog);
-            await downloadDirectory(`rules/global`, tmpRulesGlobal, spinner);
+            logWithSpinner(spinner, msg.downloadingRulesGlobal, debugLog);
+            await downloadDirectory(`rules/global`, tmpRulesGlobal, spinner, msg);
         } catch (error) {
-            logWithSpinner(spinner, 'rules/global 폴더를 찾을 수 없어 건너뜁니다...', debugLog);
+            logWithSpinner(spinner, msg.rulesGlobalNotFound, debugLog);
             tmpRulesGlobal = null;
         }
 
         // 2-1. rules/manual 폴더 다운로드 (임시 폴더)
         let tmpRulesManual = '.aiwf/_tmp_rules_manual';
         try {
-            logWithSpinner(spinner, 'rules/manual 폴더를 다운로드 중...', debugLog);
-            await downloadDirectory(`rules/manual`, tmpRulesManual, spinner);
+            logWithSpinner(spinner, msg.downloadingRulesManual, debugLog);
+            await downloadDirectory(`rules/manual`, tmpRulesManual, spinner, msg);
         } catch (error) {
-            logWithSpinner(spinner, 'rules/manual 폴더를 찾을 수 없어 건너뜁니다...', debugLog);
+            logWithSpinner(spinner, msg.rulesManualNotFound, debugLog);
             tmpRulesManual = null;
         }
 
@@ -452,56 +524,56 @@ async function installAIWF(options = {}) {
 
         if (hasExisting) {
             spinner.succeed(chalk.green(msg.updateSuccess));
-            console.log(chalk.blue('\n🔄 업데이트 내역:'));
-            console.log(chalk.gray(`   • ${COMMANDS_DIR}/ 내의 명령어`));
-            console.log(chalk.gray('   • 문서 (CLAUDE.md 파일)'));
-            console.log(chalk.green('\n💾 작업 내용은 보존되었습니다:'));
-            console.log(chalk.gray('   • 모든 작업, 스프린트, 및 프로젝트 파일이 변경되지 않음'));
-            console.log(chalk.gray('   • 백업은 *.bak 파일로 만들어짐'));
+            console.log(chalk.blue(`\n${msg.updateHistory}`));
+            console.log(chalk.gray(`   • ${COMMANDS_DIR}${msg.updatedCommands}`));
+            console.log(chalk.gray(`   • ${msg.updatedDocs}`));
+            console.log(chalk.green(`\n${msg.workPreserved}`));
+            console.log(chalk.gray(`   • ${msg.allFilesPreserved}`));
+            console.log(chalk.gray(`   • ${msg.backupCreated}`));
         } else {
             spinner.succeed(chalk.green(msg.installSuccess));
-            console.log(chalk.blue('\n📁 생성된 구조:'));
-            console.log(chalk.gray('   .aiwf/                - 프로젝트 관리 루트'));
-            console.log(chalk.gray('   .claude/commands/     - Claude 사용자 명령어'));
+            console.log(chalk.blue(`\n${msg.structureCreated}`));
+            console.log(chalk.gray(`   .aiwf/                - ${msg.aiwfRoot}`));
+            console.log(chalk.gray(`   .claude/commands/     - ${msg.claudeCommands}`));
 
-            console.log(chalk.green('\n🚀 다음 단계:'));
-            console.log(chalk.white('   1. Claude Code에서 이 프로젝트를 엽니다'));
-            console.log(chalk.white('   2. /aiwf_<command> 명령어를 사용하여 프로젝트를 관리하세요'));
-            console.log(chalk.white('   3. /aiwf_initialize를 실행하여 프로젝트를 설정하세요\n'));
+            console.log(chalk.green(`\n${msg.nextSteps}`));
+            console.log(chalk.white(`   1. ${msg.nextStep1}`));
+            console.log(chalk.white(`   2. ${msg.nextStep2}`));
+            console.log(chalk.white(`   3. ${msg.nextStep3}\n`));
 
-            console.log(chalk.blue('\n✨ 시작하려면:'));
-            console.log(chalk.gray('   1. 새 터미널을 열거나 쉘 프로필을 소싱하세요 (예: source ~/.zshrc)'));
-            console.log(chalk.gray(`   2. 다음을 실행하세요: ${chalk.cyan('claude')} 를 실행하여 사용 가능한 명령어를 확인하세요.`));
-            console.log(chalk.gray('\n자세한 내용은 .aiwf 디렉토리의 문서를 확인하세요.'));
+            console.log(chalk.blue(`\n${msg.gettingStarted}`));
+            console.log(chalk.gray(`   1. ${msg.startStep1}`));
+            console.log(chalk.gray(`   2. ${msg.startStep2}`));
+            console.log(chalk.gray(`\n${msg.checkDocs}`));
         }
 
         console.log(chalk.green(msg.enjoy));
 
     } catch (error) {
         if (hasExisting) {
-            spinner.fail(chalk.red('업데이트 실패'));
-            await restoreFromBackup(spinner);
+            spinner.fail(chalk.red(msg.updateFailed));
+            await restoreFromBackup(spinner, msg);
         } else {
-            spinner.fail(chalk.red('설치 실패'));
+            spinner.fail(chalk.red(msg.installFailed));
         }
         console.error(chalk.red(error.message));
         process.exit(1);
     }
 }
 
-async function restoreFromBackup(spinner) {
+async function restoreFromBackup(spinner, msg) {
     if (!BACKUP_DIR) {
         // 가장 최근 backup 폴더 사용
         const aiwfDir = '.aiwf';
         const dirs = (await fs.readdir(aiwfDir)).filter(f => f.startsWith('backup_'));
         if (dirs.length === 0) {
-            spinner.fail(chalk.red('복원할 백업 폴더가 없습니다.'));
+            spinner.fail(chalk.red(msg.noBackupFound));
             return;
         }
         dirs.sort();
         BACKUP_DIR = path.join(aiwfDir, dirs[dirs.length - 1]);
     }
-    spinner.start(chalk.yellow('백업에서 복원 중... '));
+    spinner.start(chalk.yellow(msg.restoringFromBackup));
     try {
         let backupFiles = [];
         try {
@@ -527,12 +599,12 @@ async function restoreFromBackup(spinner) {
             try {
                 await fs.rename(path.join(BACKUP_DIR, backup), originalFile);
             } catch (e) {
-                console.warn(chalk.yellow(`'${backup}' 파일을 복원할 수 없습니다. 수동 확인이 필요합니다.`));
+                console.warn(chalk.yellow(`'${backup}' ${msg.cannotRestore}`));
             }
         }
-        spinner.succeed(chalk.green('성공적으로 복원되었습니다.'));
+        spinner.succeed(chalk.green(msg.restoreSuccess));
     } catch (error) {
-        spinner.fail(chalk.red('복원에 실패했습니다.'));
+        spinner.fail(chalk.red(msg.restoreFailed));
         console.error(error);
     }
 }
