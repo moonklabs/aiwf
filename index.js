@@ -192,11 +192,82 @@ function logWithSpinner(spinner, message, debugLog) {
     if (spinner) spinner.text = message;
 }
 
+// 언어별 메시지 정의
+const messages = {
+    ko: {
+        welcome: '\n🎉 Hello AIWF에 오신 것을 환영합니다!\n',
+        description: '이 설치 프로그램은 AIWF AI 프롬프트 프레임워크를 설정합니다',
+        optimized: '특별히 Claude Code 에 최적화 되어있습니다.\n',
+        selectLanguage: 'Please select language / 언어를 선택해주세요:',
+        korean: '한국어 (Korean)',
+        english: 'English',
+        existingDetected: '기존 AIWF 설치가 감지되었습니다. 무엇을 하시겠습니까?',
+        updateOption: '업데이트 (명령어와 문서만 업데이트하고 작업 내용은 보존)',
+        skipOption: '설치 건너뛰기',
+        cancelOption: '취소',
+        installCancelled: '\n설치가 취소되었습니다.',
+        backingUp: '기존 명령어 및 문서 백업 중...',
+        fetching: 'GitHub에서 AIWF 프레임워크를 가져오는 중...',
+        downloading: 'AIWF 프레임워크 파일을 다운로드하는 중...',
+        updatingDocs: '문서를 업데이트하는 중...',
+        downloadingCommands: 'AIWF 명령어를 새로 다운로드하는 중...',
+        updateSuccess: '✅ AIWF 프레임워크가 성공적으로 업데이트되었습니다!',
+        installSuccess: '✅ AIWF 프레임워크가 성공적으로 설치되었습니다!',
+        enjoy: '\nEnjoy AIWF! 🚀\n'
+    },
+    en: {
+        welcome: '\n🎉 Welcome to Hello AIWF!\n',
+        description: 'This installer sets up the AIWF AI prompt framework',
+        optimized: 'Specially optimized for Claude Code.\n',
+        selectLanguage: 'Please select language / 언어를 선택해주세요:',
+        korean: '한국어 (Korean)',
+        english: 'English',
+        existingDetected: 'Existing AIWF installation detected. What would you like to do?',
+        updateOption: 'Update (Update commands and docs only, preserve work content)',
+        skipOption: 'Skip installation',
+        cancelOption: 'Cancel',
+        installCancelled: '\nInstallation cancelled.',
+        backingUp: 'Backing up existing commands and documents...',
+        fetching: 'Fetching AIWF framework from GitHub...',
+        downloading: 'Downloading AIWF framework files...',
+        updatingDocs: 'Updating documentation...',
+        downloadingCommands: 'Downloading AIWF commands...',
+        updateSuccess: '✅ AIWF framework updated successfully!',
+        installSuccess: '✅ AIWF framework installed successfully!',
+        enjoy: '\nEnjoy AIWF! 🚀\n'
+    }
+};
+
 async function installAIWF(options = {}) {
     const debugLog = options.debugLog || false;
-    console.log(chalk.blue.bold('\n🎉 Hello AIWF에 오신 것을 환영합니다!\n'));
-    console.log(chalk.gray('이 설치 프로그램은 AIWF AI 프롬프트 프레임워크를 설정합니다'));
-    console.log(chalk.gray('특별히 Claude Code 에 최적화 되어있습니다.\n'));
+    
+    // 언어 선택
+    let selectedLanguage = 'en'; // 기본값은 영어
+    if (!options.force) {
+        const languageResponse = await prompts({
+            type: 'select',
+            name: 'language',
+            message: 'Please select language / 언어를 선택해주세요:',
+            choices: [
+                { title: 'English', value: 'en' },
+                { title: '한국어 (Korean)', value: 'ko' }
+            ]
+        });
+        
+        if (languageResponse.language) {
+            selectedLanguage = languageResponse.language;
+        }
+    }
+
+    const msg = messages[selectedLanguage];
+    
+    console.log(chalk.blue.bold(msg.welcome));
+    console.log(chalk.gray(msg.description));
+    console.log(chalk.gray(msg.optimized));
+
+    // 언어별 경로 설정
+    const languagePath = selectedLanguage === 'en' ? 'en' : 'ko';
+    const GITHUB_CONTENT_LANGUAGE_PREFIX = `${GITHUB_CONTENT_PREFIX}/${languagePath}`;
 
     const hasExisting = await checkExistingInstallation();
 
@@ -204,16 +275,16 @@ async function installAIWF(options = {}) {
         const response = await prompts({
             type: 'select',
             name: 'action',
-            message: '기존 AIWF 설치가 감지되었습니다. 무엇을 하시겠습니까?',
+            message: msg.existingDetected,
             choices: [
-                { title: '업데이트 (명령어와 문서만 업데이트하고 작업 내용은 보존)', value: 'update' },
-                { title: '설치 건너뛰기', value: 'skip' },
-                { title: '취소', value: 'cancel' }
+                { title: msg.updateOption, value: 'update' },
+                { title: msg.skipOption, value: 'skip' },
+                { title: msg.cancelOption, value: 'cancel' }
             ]
         });
 
         if (response.action === 'skip' || response.action === 'cancel') {
-            console.log(chalk.yellow('\n설치가 취소되었습니다.'));
+            console.log(chalk.yellow(msg.installCancelled));
             process.exit(0);
         }
 
@@ -222,7 +293,7 @@ async function installAIWF(options = {}) {
         }
     }
 
-    const spinner = ora('GitHub에서 AIWF 프레임워크를 가져오는 중...').start();
+    const spinner = ora(msg.fetching).start();
 
     try {
         // Create .aiwf directory structure
@@ -244,10 +315,10 @@ async function installAIWF(options = {}) {
 
         // Only download manifest on fresh installs
         if (!hasExisting) {
-            logWithSpinner(spinner, 'AIWF 프레임워크 파일을 다운로드하는 중...', debugLog);
+            logWithSpinner(spinner, msg.downloading, debugLog);
             // Get the root manifest
             try {
-                const manifestUrl = `${GITHUB_RAW_URL}/${GITHUB_CONTENT_PREFIX}/.aiwf/00_PROJECT_MANIFEST.md`;
+                const manifestUrl = `${GITHUB_RAW_URL}/${GITHUB_CONTENT_LANGUAGE_PREFIX}/.aiwf/00_PROJECT_MANIFEST.md`;
                 await downloadFile(manifestUrl, '.aiwf/00_PROJECT_MANIFEST.md');
             } catch (error) {
                 // If manifest doesn't exist, that's okay
@@ -257,14 +328,14 @@ async function installAIWF(options = {}) {
         // Download templates on fresh install
         try {
             logWithSpinner(spinner, '템플릿 디렉토리를 다운로드 중...', debugLog);
-            await downloadDirectory(`${GITHUB_CONTENT_PREFIX}/.aiwf/98_PROMPTS`, '.aiwf/98_PROMPTS', spinner);
-            await downloadDirectory(`${GITHUB_CONTENT_PREFIX}/.aiwf/99_TEMPLATES`, '.aiwf/99_TEMPLATES', spinner);
+            await downloadDirectory(`${GITHUB_CONTENT_LANGUAGE_PREFIX}/.aiwf/98_PROMPTS`, '.aiwf/98_PROMPTS', spinner);
+            await downloadDirectory(`${GITHUB_CONTENT_LANGUAGE_PREFIX}/.aiwf/99_TEMPLATES`, '.aiwf/99_TEMPLATES', spinner);
         } catch (error) {
             logWithSpinner(spinner, '템플릿 디렉토리를 찾을 수 없어 건너뜁니다...', debugLog);
         }
 
         // Always update CLAUDE.md documentation files
-        logWithSpinner(spinner, '문서를 업데이트하는 중...', debugLog);
+        logWithSpinner(spinner, msg.updatingDocs, debugLog);
         const claudeFiles = [
             '.aiwf/CLAUDE.md',
             '.aiwf/02_REQUIREMENTS/CLAUDE.md',
@@ -274,7 +345,7 @@ async function installAIWF(options = {}) {
 
         for (const claudeFile of claudeFiles) {
             try {
-                const claudeUrl = `${GITHUB_RAW_URL}/${GITHUB_CONTENT_PREFIX}/${claudeFile}`;
+                const claudeUrl = `${GITHUB_RAW_URL}/${GITHUB_CONTENT_LANGUAGE_PREFIX}/${claudeFile}`;
                 await downloadFile(claudeUrl, claudeFile);
             } catch (error) {
                 // If CLAUDE.md doesn't exist, that's okay
@@ -292,9 +363,9 @@ async function installAIWF(options = {}) {
         await fs.mkdir(COMMANDS_DIR, { recursive: true });
 
         // Always update commands (clean download)
-        logWithSpinner(spinner, 'AIWF 명령어를 새로 다운로드하는 중...', debugLog);
+        logWithSpinner(spinner, msg.downloadingCommands, debugLog);
         try {
-            await downloadDirectory(`${GITHUB_CONTENT_PREFIX}/${COMMANDS_DIR}`, COMMANDS_DIR, spinner);
+            await downloadDirectory(`${GITHUB_CONTENT_LANGUAGE_PREFIX}/${COMMANDS_DIR}`, COMMANDS_DIR, spinner);
         } catch (error) {
             logWithSpinner(spinner, '명령어 디렉토리를 찾을 수 없어 건너뜁니다...', debugLog);
         }
@@ -380,7 +451,7 @@ async function installAIWF(options = {}) {
         }
 
         if (hasExisting) {
-            spinner.succeed(chalk.green('✅ AIWF 프레임워크가 성공적으로 업데이트되었습니다!'));
+            spinner.succeed(chalk.green(msg.updateSuccess));
             console.log(chalk.blue('\n🔄 업데이트 내역:'));
             console.log(chalk.gray(`   • ${COMMANDS_DIR}/ 내의 명령어`));
             console.log(chalk.gray('   • 문서 (CLAUDE.md 파일)'));
@@ -388,7 +459,7 @@ async function installAIWF(options = {}) {
             console.log(chalk.gray('   • 모든 작업, 스프린트, 및 프로젝트 파일이 변경되지 않음'));
             console.log(chalk.gray('   • 백업은 *.bak 파일로 만들어짐'));
         } else {
-            spinner.succeed(chalk.green('✅ AIWF 프레임워크가 성공적으로 설치되었습니다!'));
+            spinner.succeed(chalk.green(msg.installSuccess));
             console.log(chalk.blue('\n📁 생성된 구조:'));
             console.log(chalk.gray('   .aiwf/                - 프로젝트 관리 루트'));
             console.log(chalk.gray('   .claude/commands/     - Claude 사용자 명령어'));
@@ -404,7 +475,7 @@ async function installAIWF(options = {}) {
             console.log(chalk.gray('\n자세한 내용은 .aiwf 디렉토리의 문서를 확인하세요.'));
         }
 
-        console.log(chalk.green('\nEnjoy AIWF! 🚀\n'));
+        console.log(chalk.green(msg.enjoy));
 
     } catch (error) {
         if (hasExisting) {

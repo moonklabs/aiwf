@@ -16,13 +16,17 @@ This is **aiwf** (AI Workflow Framework), an NPM package that installs the AIWF 
 
 ### Key Directories
 
-```
+```text
 aiwf/
 ├── index.js                    # Main CLI installer with GitHub API integration
 ├── package.json               # NPM package configuration
 ├── claude-code/aiwf/      # Complete AIWF framework
-│   ├── .claude/commands/       # Claude Code custom commands
-│   └── .aiwf/            # Project management structure
+│   ├── ko/                    # Korean language version
+│   │   ├── .claude/commands/   # Korean Claude Code custom commands
+│   │   └── .aiwf/             # Korean project management structure
+│   └── en/                    # English language version
+│       ├── .claude/commands/   # English Claude Code custom commands
+│       └── .aiwf/             # English project management structure
 └── rules/                     # IDE-specific development rules
     ├── global/                # Always-apply rules
     └── manual/                # On-demand rules
@@ -49,10 +53,10 @@ npm publish
 ### Package Usage
 
 ```bash
-# Install AIWF in any project
+# Install AIWF in any project (interactive language selection)
 npx aiwf
 
-# Force installation without prompts
+# Force installation without prompts (defaults to Korean)
 npx aiwf --force
 ```
 
@@ -65,14 +69,16 @@ The installer (`index.js`) fetches content directly from the GitHub repository:
 - **API URL**: `https://api.github.com/repos/aiwf/aiwf`
 - **Raw Content**: `https://raw.githubusercontent.com/aiwf/aiwf/master`
 - **Content Prefix**: `claude-code/aiwf`
+- **Language Support**: Supports both Korean (`ko/`) and English (`en/`) versions
 
 ### Installation Process
 
-1. **Detection**: Checks for existing `.aiwf/` or `.claude/commands/aiwf/`
-2. **Backup**: Creates timestamped backups of existing files (`.bak` format)
-3. **Download**: Fetches framework components from GitHub
-4. **Setup**: Creates directory structure and copies files
-5. **Rules Processing**: Converts rules to IDE-specific formats:
+1. **Language Selection**: Interactive prompt to choose between Korean and English
+2. **Detection**: Checks for existing `.aiwf/` or `.claude/commands/aiwf/`
+3. **Backup**: Creates timestamped backups of existing files (`.bak` format)
+4. **Download**: Fetches framework components from GitHub based on selected language
+5. **Setup**: Creates directory structure and copies files
+6. **Rules Processing**: Converts rules to IDE-specific formats:
    - Cursor: `.mdc` files with frontmatter in `.cursor/rules/`
    - Windsurf: Plain `.md` files in `.windsurf/rules/`
 
@@ -107,7 +113,7 @@ The framework supports seamless GitHub integration:
 
 ### Project Structure Created
 
-```
+```text
 target_project/
 ├── .aiwf/                 # Project management root
 │   ├── 00_PROJECT_MANIFEST.md  # Central tracking
@@ -174,15 +180,41 @@ Uses modern Node.js libraries:
 
 ### Adding New Commands
 
-1. Create command files in `claude-code/aiwf/.claude/commands/aiwf/`
-2. Include both English and Korean versions (`aiwf/` and `aiwf_kr/`)
+1. Create command files in both language directories:
+   - Korean: `claude-code/aiwf/ko/.claude/commands/aiwf/`
+   - English: `claude-code/aiwf/en/.claude/commands/aiwf/`
+2. Follow naming conventions:
+   - Korean versions can use `_kr` suffix for clarity
+   - English versions use standard naming
 3. Update documentation in `docs/COMMANDS_GUIDE.md`
 
 ### Modifying Installation Logic
 
 - Main installer logic is in `index.js`
+- Language selection and message handling in `messages` object
 - GitHub API integration in `fetchGitHubContent()` and `downloadFile()`
 - Directory processing in `downloadDirectory()`
 - Backup logic in `backupCommandsAndDocs()`
+- Language-specific path resolution using `GITHUB_CONTENT_LANGUAGE_PREFIX`
 
-The codebase is designed for stability and user safety, with extensive error handling and backup mechanisms to ensure reliable framework distribution.
+## Multilingual Support
+
+### Language Structure
+
+The framework supports both Korean and English through:
+
+- **Separate directory structure**: `ko/` and `en/` folders contain language-specific content
+- **Interactive language selection**: Users choose their preferred language during installation
+- **Localized messages**: All installation messages are available in both languages
+- **Command localization**: Commands are available in both languages with appropriate naming
+
+### Adding New Languages
+
+To add support for additional languages:
+
+1. Create new language directory: `claude-code/aiwf/{lang_code}/`
+2. Copy and translate content from existing language directory
+3. Add language option to `messages` object in `index.js`
+4. Update language selection prompt in `installAIWF()` function
+
+The codebase is designed for stability and user safety, with extensive error handling and backup mechanisms to ensure reliable framework distribution across multiple languages.
