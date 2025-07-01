@@ -72,8 +72,30 @@
                 "description": "Lint check before commit"
             },
             {
-                "command": "npm run test || echo 'Test failed'", 
+                "command": "npm run test || echo 'Test failed'",
                 "description": "Run tests before commit"
+            }
+        ],
+        "Stop": [
+            {
+                "matcher": "",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "afplay /System/Library/Sounds/Glass.aiff"
+                    }
+                ]
+            }
+        ],
+        "PostToolUse": [
+            {
+                "matcher": "Write|Edit|MultiEdit",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "aiwf_test"
+                    }
+                ]
             }
         ]
     }

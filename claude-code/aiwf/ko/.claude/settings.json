@@ -72,8 +72,30 @@
                 "description": "커밋 전 린트 검사"
             },
             {
-                "command": "npm run test || echo '테스트 실패'", 
+                "command": "npm run test || echo '테스트 실패'",
                 "description": "커밋 전 테스트 실행"
+            }
+        ],
+        "Stop": [
+            {
+                "matcher": "",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "afplay /System/Library/Sounds/Glass.aiff"
+                    }
+                ]
+            }
+        ],
+        "PostToolUse": [
+            {
+                "matcher": "Write|Edit|MultiEdit",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "aiwf_test"
+                    }
+                ]
             }
         ]
     }
