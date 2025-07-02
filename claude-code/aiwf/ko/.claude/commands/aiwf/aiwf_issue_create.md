@@ -1,8 +1,8 @@
-# Create GitHub Issue from Task
+# 태스크에서 GitHub 이슈 생성
 
-Automatically create a GitHub issue based on a task file.
+태스크 파일을 기반으로 GitHub 이슈를 자동으로 생성합니다.
 
-## Create TODO with EXACTLY these 5 items
+## 정확히 다음 5개 항목으로 TODO 생성
 
 1. Parse task file and extract information
 2. Generate issue template

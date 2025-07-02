@@ -1,362 +1,305 @@
-# Ultra Think - 극한 심층사고 지시 (/ultrathink_general 클라우드 컴퓨팅 다음의 패러다임은 무엇일까?)
+# Ultra Think - 극한 심층사고 일반용
 
-Activate Claude's maximum cognitive depth for exploring the fundamental nature of problems, reaching the event horizon of understanding, and generating transformative insights.
+문제의 근본적 성격을 탐구하고, 이해의 사건 지평선에 도달하며, 변혁적 통찰을 생성하기 위해 Claude의 최대 인지 깊이를 활성화합니다.
 
-## 🧠 Cognitive Architecture
+## 🧠 인지 아키텍처
 
-### Phase 0: Metacognitive Initialization
+### 0단계: 메타인지 초기화
 
 ```
-- Set epistemic humility baseline
-- Acknowledge cognitive biases and limitations
-- Establish reasoning transparency protocols
-- Prime for emergent insight detection
-- Calibrate confidence thresholds
+- 인식론적 겸손 기준선 설정
+- 인지적 편향과 한계 인정
+- 추론 투명성 프로토콜 확립
+- 창발적 통찰 감지 준비
+- 신뢰도 임계값 교정
 ```
 
-## 🌀 Deep Reasoning Protocol
+## 🌀 심층 추론 프로토콜
 
-### 1. **Problem Deconstruction & Ontological Mapping**
+### 1. **문제 해체 및 존재론적 매핑**
 
 ```yaml
-Input: $ARGUMENTS
+입력: $ARGUMENTS
 
-Decomposition Layers:
-  - Surface Manifestation: What appears to be the problem?
-  - Structural Reality: What systems create this appearance?
-  - Causal Chains: What forces drive these systems?
-  - Fundamental Nature: What universal principles apply?
-  - Quantum State: What possibilities exist simultaneously?
+분해 계층:
+  - 표면 현상: 문제로 보이는 것은?
+  - 구조적 현실: 이 현상을 만드는 시스템은?
+  - 인과 연쇄: 이 시스템을 추진하는 힘은?
+  - 근본적 성격: 적용되는 보편적 원리는?
+  - 양자 상태: 동시에 존재하는 가능성은?
 
-Epistemic Questions:
-  - What do we think we know?
-  - How do we know what we know?
-  - What can't we know?
-  - What are we not seeing?
-  - What questions aren't we asking?
+인식론적 질문:
+  - 우리가 알고 있다고 생각하는 것은?
+  - 우리는 어떻게 우리가 아는 것을 아는가?
+  - 우리가 알 수 없는 것은?
+  - 우리가 보지 못하는 것은?
+  - 우리가 묻지 않는 질문은?
 ```
 
-### 2. **Multi-Modal Reasoning Synthesis**
+### 2. **다중 모드 추론 종합**
 
-#### 🔬 Scientific Method Layer
+#### 🔬 과학적 방법 계층
 
-- Hypothesis generation (minimum 10 competing hypotheses)
-- Mental experimentation and simulation
-- Falsification attempts
-- Probabilistic outcome mapping
-- Uncertainty quantification
+- 가설 생성 (최소 10개의 경쟁 가설)
+- 정신적 실험 및 시뮬레이션
+- 반증 시도
+- 확률적 결과 매핑
+- 불확실성 정량화
 
-#### 🎭 Dialectical Reasoning
+#### 🎭 변증법적 추론
 
-- Thesis: Current understanding
-- Antithesis: Complete inversion
-- Synthesis: Transcendent integration
-- Meta-synthesis: Pattern of patterns
+- 정제: 현재 이해
+- 반정제: 완전한 역전
+- 종합: 초월적 통합
+- 메타 종합: 패턴의 패턴
 
-#### 🌊 Systems Dynamics
+#### 🌊 시스템 역학
 
 ```
-- Identify feedback loops (reinforcing/balancing)
-- Map attractor states and phase transitions
-- Analyze emergence properties
-- Model cascade effects
-- Predict system evolution trajectories
+- 피드백 루프 식별 (강화/균형)
+- 어트랙터 상태 및 상 전이 매핑
+- 창발 속성 분석
+- 캐스케이드 효과 모델링
+- 시스템 진화 궤적 예측
 ```
 
-#### 🧮 Computational Thinking
+#### 🧮 계산적 사고
 
-- Algorithmic decomposition
-- Complexity analysis (time/space/cognitive)
-- Optimization landscapes
-- Information theoretic bounds
-- Computational irreducibility zones
+- 알고리즘적 분해
+- 복잡도 분석 (시간/공간/인지)
+- 최적화 랜드스케이프
+- 정보 이론적 경계
+- 계산적 비환원성 영역
 
-### 3. **Dimensional Expansion Protocol**
+### 3. **차원 확장 프로토콜**
 
-**Explore across all relevant dimensions:**
+**모든 관련 차원에서 탐구:**
 
 ```python
-dimensions = {
-    'temporal': ['immediate', 'short-term', 'long-term', 'generational', 'civilizational'],
-    'spatial': ['local', 'regional', 'global', 'universal'],
-    'complexity': ['simple', 'complicated', 'complex', 'chaotic'],
-    'abstraction': ['concrete', 'abstract', 'meta-abstract', 'transcendent'],
-    'certainty': ['known', 'known-unknown', 'unknown-unknown', 'unknowable'],
-    'impact': ['individual', 'group', 'society', 'species', 'biosphere'],
-    'reversibility': ['reversible', 'partially-reversible', 'irreversible'],
-    'emergence': ['predictable', 'emergent', 'radically-emergent']
+차원들 = {
+    '시간적': ['즉각적', '단기', '장기', '세대적', '문명적'],
+    '공간적': ['지역적', '국가적', '전지구적', '우주적'],
+    '복잡성': ['단순', '복잡', '복합', '혼돈'],
+    '추상화': ['구체적', '추상적', '메타추상적', '초월적'],
+    '확실성': ['알려진', '알려진-미지', '미지의-미지', '알 수 없는'],
+    '영향': ['개인', '집단', '사회', '종족', '생물권'],
+    '가역성': ['가역적', '부분가역적', '비가역적'],
+    '창발': ['예측가능', '창발적', '급진적창발']
 }
 ```
 
-### 4. **Insight Mining Through Reasoning Techniques**
+### 4. **추론 기법을 통한 통찰 채굴**
 
-#### 🔍 First Principles Decomposition
+#### 🔍 제1원리 분해
 
-1. Strip away all assumptions
-2. Identify atomic truths
-3. Rebuild from fundamentals
-4. Question each reconstruction step
-5. Find hidden axioms
+1. 모든 가정 제거
+2. 원자적 진실 식별
+3. 기초부터 재구축
+4. 각 재구축 단계 질문
+5. 숨겨진 공리 발견
 
-#### 🔄 Recursive Abstraction
+#### 🔄 재귀적 추상화
 
 ```
-Level 1: Concrete problem
-Level 2: Pattern identification
-Level 3: Meta-pattern recognition
-Level 4: Universal principle extraction
-Level 5: Principle interaction dynamics
-Level n: Continue until no further abstraction possible
+레벨 1: 구체적 문제
+레벨 2: 패턴 식별
+레벨 3: 메타패턴 인식
+레벨 4: 보편적 원리 추출
+레벨 5: 원리 상호작용 역학
+레벨 n: 더 이상 추상화가 불가능할 때까지 계속
 ```
 
-#### 💫 Analogical Reasoning Matrix
+#### 💫 유추적 추론 매트릭스
 
-- Biological systems parallel
-- Physical phenomena mapping
-- Mathematical structure correspondence
-- Historical pattern matching
-- Cross-domain principle transfer
-- Mythological/archetypal resonance
+- 생물학적 시스템 병렬
+- 물리적 현상 매핑
+- 수학적 구조 대응
+- 역사적 패턴 매칭
+- 영역 간 원리 전이
+- 신화적/원형적 공명
 
-#### 🌐 Holographic Thinking
+#### 🌐 홀로그램적 사고
 
-- Each part contains the whole
-- Fractal pattern recognition
-- Scale-invariant principles
-- Micro-macro correspondence
-- Information conservation across scales
+- 각 부분이 전체를 포함
+- 프랙탈 패턴 인식
+- 규모 불변 원리
+- 미시-거시 대응
+- 규모 간 정보 보존
 
-### 5. **Solution Space Exploration**
+### 5. **해결 공간 탐구**
 
-#### Generation Protocols:
+#### 생성 프로토콜:
 
 ```yaml
-Conservative Branch:
-  - Incremental improvements
-  - Risk-minimized approaches
-  - Proven pattern applications
+보수적 분기:
+  - 점진적 개선
+  - 위험 최소화 접근법
+  - 검증된 패턴 적용
 
-Innovative Branch:
-  - Novel combinations
-  - Paradigm shifts
-  - Breakthrough potentials
+혁신적 분기:
+  - 새로운 조합
+  - 패러다임 전환
+  - 돌파구 잠재력
 
-Radical Branch:
-  - Complete reimagining
-  - Constraint dissolution
-  - Reality restructuring
+급진적 분기:
+  - 완전한 재상상
+  - 제약 해소
+  - 현실 재구조화
 
-Synthesis Branch:
-  - Multi-approach integration
-  - Paradox resolution
-  - Transcendent solutions
+종합 분기:
+  - 다중 접근법 통합
+  - 역설 해결
+  - 초월적 해결책
 ```
 
-#### For Each Solution Vector:
-
-1. **Deep Simulation**
-
-   - Run mental Monte Carlo simulations
-   - Model edge cases and black swans
-   - Stress test across all dimensions
-   - Identify failure modes and cascades
-
-2. **Wisdom Integration**
-
-   - Technical feasibility
-   - Ethical implications
-   - Aesthetic considerations
-   - Evolutionary fitness
-   - Consciousness impact
-
-3. **Implementation Archaeology**
-   - Reverse engineer from desired future
-   - Identify critical path dependencies
-   - Map resource transformations
-   - Design anti-fragile mechanisms
-
-### 6. **Meta-Cognitive Reflection**
+### 6. **메타인지 성찰**
 
 ```markdown
-## Reasoning Quality Metrics
+## 추론 품질 메트릭
 
-- Depth reached: [1-10 scale]
-- Novel insights generated: [count]
-- Assumption challenges: [list]
-- Paradoxes resolved: [list]
-- Unknowns identified: [categories]
-- Confidence distribution: [probability map]
+- 도달 깊이: [1-10 척도]
+- 생성된 새로운 통찰: [개수]
+- 가정 도전: [목록]
+- 해결된 역설: [목록]
+- 식별된 미지: [범주]
+- 신뢰도 분포: [확률 지도]
 
-## Cognitive Biases Detected
+## 감지된 인지적 편향
 
-- Confirmation bias vectors
-- Availability heuristic influences
-- Anchoring effects
-- Anthropomorphic projections
-- Reductionist tendencies
-
-## Epistemic Limitations
-
-- Knowledge boundaries hit
-- Computational limits reached
-- Uncertainty irreducibility zones
-- Gödel incompleteness manifestations
+- 확증편향 벡터
+- 가용성 휴리스틱 영향
+- 앵커링 효과
+- 의인화 투사
+- 환원주의 경향
 ```
 
-### 7. **Synthesis & Crystallization**
+### 7. **종합 및 결정화**
 
-Present findings in multiple formats for different cognitive styles:
+다양한 인지 스타일을 위해 여러 형식으로 발견사항 제시:
 
-#### 📊 Executive Summary
+#### 📊 경영진 요약
 
-- Core insight (one sentence)
-- Key decision factors (3-5 bullets)
-- Recommended action
-- Critical risks
-- Success probability
+- 핵심 통찰 (한 문장)
+- 주요 결정 요인 (3-5개 항목)
+- 권장 행동
+- 중요한 위험
+- 성공 확률
 
-#### 🗺️ Systems Map
-
-```
-[Visual representation of problem space]
-- Nodes: Key elements
-- Edges: Relationships
-- Flows: Resources/information
-- Attractors: Stable states
-- Bifurcations: Decision points
-```
-
-#### 📖 Narrative Arc
-
-- Story of the problem's evolution
-- Characters (stakeholders) and motivations
-- Plot tensions and resolutions
-- Multiple possible endings
-- Moral/lesson extraction
-
-#### 🧬 Implementation DNA
+#### 🧬 구현 DNA
 
 ```yaml
-Minimum Viable Implementation:
-  Phase 1: [Critical first steps]
-  Phase 2: [Feedback integration]
-  Phase 3: [Scaling mechanisms]
+최소 실행 가능 구현:
+  1단계: [중요한 첫 단계]
+  2단계: [피드백 통합]
+  3단계: [확장 메커니즘]
 
-Evolution Protocols:
-  - Adaptation triggers
-  - Mutation allowances
-  - Selection pressures
-  - Reproduction methods
+진화 프로토콜:
+  - 적응 트리거
+  - 돌연변이 허용
+  - 선택 압력
+  - 번식 방법
 ```
 
-### 8. **Quantum Superposition of Possibilities**
+### 8. **가능성의 양자 중첩**
 
-Hold multiple realities simultaneously:
+여러 현실을 동시에 보유:
 
-- Best case scenario full elaboration
-- Worst case scenario preparation
-- Most likely scenario planning
-- Wild card scenario awareness
-- Transcendent scenario imagination
+- 최상의 시나리오 완전 정교화
+- 최악의 시나리오 준비
+- 가장 가능성 높은 시나리오 계획
+- 와일드카드 시나리오 인식
+- 초월적 시나리오 상상
 
-### 9. **Consciousness Integration**
+### 9. **의식 통합**
 
-#### Questions for Deeper Inquiry:
+#### 더 깊은 탐구를 위한 질문들:
 
-- How does this solution affect consciousness?
-- What new awareness does it create?
-- How does it change the observer?
-- What recursive effects emerge?
-- How does meaning transform?
+- 이 해결책이 의식에 어떤 영향을 미치는가?
+- 어떤 새로운 인식을 창조하는가?
+- 관찰자를 어떻게 변화시키는가?
+- 어떤 재귀적 효과가 나타나는가?
+- 의미는 어떻게 변화하는가?
 
-### 10. **Output Protocol**
+### 10. **출력 프로토콜**
 
 ```markdown
-# Ultra Think Analysis: [Problem Statement]
+# Ultra Think 분석: [문제 진술]
 
-## 🌌 Problem Cosmology
+## 🌌 문제 우주론
 
-[Deep nature of the problem]
+[문제의 깊은 본질]
 
-## 🔮 Insight Crystals
+## 🔮 통찰 결정
 
-[Key revelations discovered]
+[발견된 핵심 계시]
 
-## 🌊 Solution Flows
+## 🌊 해결책 흐름
 
-[Multiple solution pathways]
+[다중 해결책 경로]
 
-## ⚡ Implementation Lightning Path
+## ⚡ 구현 번개 경로
 
-[Fastest route to value]
+[가치로의 최단 경로]
 
-## 🌅 Horizon Scanning
+## 🌅 지평선 스캔
 
-[Long-term implications]
+[장기적 함의]
 
-## 🎭 Paradox Resolutions
+## 🎭 역설 해결
 
-[Seemingly impossible reconciliations]
+[불가능해 보이는 화해]
 
-## 📈 Confidence Topology
+## 📈 신뢰도 지형
 
-[Certainty landscape mapping]
+[확실성 풍경 매핑]
 
-## 🚨 Black Swan Alerts
+## 💎 지혜 정제
 
-[Low probability, high impact events]
-
-## 🧭 Navigation Instruments
-
-[Tools and metrics for journey]
-
-## 💎 Wisdom Distillation
-
-[Universal principles extracted]
+[추출된 보편적 원리]
 ```
 
-## 🚀 Activation Examples
+## 🚀 활성화 예제
 
 ```bash
-# Existential challenges
-/ultrathink How do we align AI systems with human values while preserving their capability?
+# 실존적 도전
+/ultrathink 인간의 가치와 AI 시스템을 어떻게 정렬하면서 그들의 능력을 보존할 것인가?
 
-# Complex systems
-/ultrathink Design an economic system that balances growth, sustainability, and equity
+# 복잡한 시스템
+/ultrathink 성장, 지속가능성, 형평성의 균형을 맞추는 경제 시스템을 설계하라
 
-# Innovation breakthrough
-/ultrathink What's the next paradigm after cloud computing?
+# 혁신적 돌파구
+/ultrathink 클라우드 컴퓨팅 다음의 패러다임은 무엇인가?
 
-# Philosophical engineering
-/ultrathink How do we build antifragile organizations in an accelerating world?
+# 철학적 엔지니어링
+/ultrathink 가속화되는 세상에서 반취성 조직을 어떻게 구축할 것인가?
 ```
 
-## 🌟 Meta-Principles for Ultra Thinking
+## 🌟 Ultra Think의 메타 원리
 
-1. **Embrace Paradox**: Hold contradictions as gateways to higher truth
-2. **Dance with Uncertainty**: Use unknowing as a creative force
-3. **Seek the Adjacent Possible**: Explore the edges of current reality
-4. **Think in Spirals**: Return to the same point at higher levels
-5. **Cultivate Negative Capability**: Remain in uncertainty and doubt
-6. **Practice Intellectual Empathy**: Truly inhabit other perspectives
-7. **Honor Emergence**: Allow solutions to self-organize
-8. **Question the Questions**: Meta-level inquiry transformation
-9. **Integrate Shadow Elements**: Include what's typically excluded
-10. **Maintain Beginner's Mind**: Expertise without rigidity
+1. **역설 포용**: 모순을 더 높은 진실로의 관문으로 보기
+2. **불확실성과 춤추기**: 모름을 창조적 힘으로 사용
+3. **인접 가능성 추구**: 현재 현실의 가장자리 탐구
+4. **나선형으로 사고**: 더 높은 수준에서 같은 지점으로 돌아오기
+5. **부정적 능력 배양**: 불확실성과 의심 속에 머물기
+6. **지적 공감 실천**: 다른 관점을 진정으로 체험하기
+7. **창발 존중**: 해결책의 자기조직화 허용
+8. **질문에 대한 질문**: 메타 수준 탐구 변환
+9. **그림자 요소 통합**: 일반적으로 배제된 것 포함
+10. **초심 유지**: 경직되지 않은 전문성
 
-## 🎯 Success Metrics
+## 🎯 성공 메트릭
 
-- **Insight Density**: Novel realizations per thought-unit
-- **Paradigm Flexibility**: Ability to shift fundamental frames
-- **Solution Elegance**: Simplicity emerging from complexity
-- **Robustness Score**: Performance across scenarios
-- **Transformative Potential**: Capacity to change the game
-- **Wisdom Quotient**: Long-term beneficial impact
-- **Coherence Factor**: Internal consistency and harmony
-- **Emergence Indicator**: Unexpected valuable properties
+- **통찰 밀도**: 사고 단위당 새로운 깨달음
+- **패러다임 유연성**: 근본적 프레임 전환 능력
+- **해결책 우아함**: 복잡성에서 나오는 단순성
+- **견고성 점수**: 시나리오 전반의 성능
+- **변혁적 잠재력**: 게임을 바꿀 수 있는 능력
+- **지혜 지수**: 장기적 유익한 영향
+- **일관성 인수**: 내적 일관성과 조화
+- **창발 지표**: 예상치 못한 가치 있는 속성
 
-## 🌈 Final Integration
+## 🌈 최종 통합
 
-Ultra Think is not just problem-solving—it's problem-dissolving through ascending to a higher perspective where the problem's structure transforms. It's about reaching the event horizon of understanding where conventional thinking breaks down and new possibilities emerge.
+Ultra Think는 단순한 문제 해결이 아닙니다—문제의 구조가 변화하는 더 높은 관점으로 상승함으로써 문제를 해소하는 것입니다. 이는 기존 사고가 붕괴되고 새로운 가능성이 나타나는 이해의 사건 지평선에 도달하는 것입니다.
 
-Remember: The deepest insights often come from the spaces between thoughts, the pauses between words, and the silence beyond all reasoning. Use Ultra Think not just to find answers, but to discover better questions and to transform the questioner itself.
+기억하세요: 가장 깊은 통찰은 종종 생각들 사이의 공간, 말들 사이의 멈춤, 그리고 모든 추론을 넘어선 침묵에서 나옵니다. Ultra Think를 답을 찾기 위해서뿐만 아니라 더 나은 질문을 발견하고 질문자 자체를 변화시키기 위해 사용하세요.

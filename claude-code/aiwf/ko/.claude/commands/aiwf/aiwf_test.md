@@ -43,83 +43,82 @@
 
 **테스트 러너를 찾을 수 없는 경우:** 사용자에게 보고하고 올바른 테스트 명령어 요청
 
-## 2 · Analyze results and identify issues
+## 2 · 결과 분석 및 문제 식별
 
-Check for common issues in this order:
+다음 순서로 일반적인 문제 확인:
 
-### Language-specific issues:
+### 언어별 문제:
 
 **Python:**
 
-- Missing **init**.py files (import errors, tests not discovered)
-- Import path problems
-- Fixture issues (pytest)
-- Virtual environment problems
+- **__init__.py** 파일 누락 (import 오류, 테스트 미발견)
+- Import 경로 문제
+- Fixture 문제 (pytest)
+- 가상 환경 문제
 
 **JavaScript/TypeScript:**
 
-- Module resolution errors
-- Missing dependencies in node_modules
-- Jest/Vitest configuration issues
-- TypeScript compilation errors
+- 모듈 해결 오류
+- node_modules의 의존성 누락
+- Jest/Vitest 구성 문제
+- TypeScript 컴파일 오류
 
-**Common across languages:**
+**모든 언어 공통:**
 
-- Environment variable issues (missing config)
-- Database/external service connection errors
-- File path problems (absolute vs relative)
-- Permission issues
+- 환경 변수 문제 (구성 누락)
+- 데이터베이스/외부 서비스 연결 오류
+- 파일 경로 문제 (절대 경로 vs 상대 경로)
+- 권한 문제
 
-## 3 · Fix common problems if found
+## 3 · 발견된 일반적인 문제 수정
 
-**ONLY** fix these specific issues automatically:\*\*
+**오직** 다음 특정 문제들만 자동으로 수정:**
 
-### Python-specific fixes:
+### Python 전용 수정:
 
-- CREATE empty `__init__.py` files where needed
-- FIX simple import path issues
-- ADD missing test directory to Python path if needed
+- 필요한 곳에 빈 `__init__.py` 파일 생성
+- 간단한 import 경로 문제 수정
+- 필요한 경우 Python 경로에 누락된 테스트 디렉토리 추가
 
-### JavaScript/TypeScript fixes:
+### JavaScript/TypeScript 수정:
 
-- RUN `npm install` if node_modules missing
-- FIX simple module resolution in jest.config.js
-- CREATE missing test setup files
+- node_modules가 누락된 경우 `npm install` 실행
+- jest.config.js의 간단한 모듈 해결 문제 수정
+- 누락된 테스트 설정 파일 생성
 
-### General fixes:
+### 일반 수정:
 
-- CREATE missing test directories
-- FIX file permissions if possible
-- IDENTIFY missing env vars and inform user
+- 누락된 테스트 디렉토리 생성
+- 가능한 경우 파일 권한 수정
+- 누락된 환경 변수 식별 및 사용자에게 알림
 
-**DO NOT** fix:
+**수정하지 않을 것:**
 
-- Actual test logic failures
-- Business logic bugs
-- Complex configuration issues
-- Database schema problems
-- External service dependencies
+- 실제 테스트 로직 실패
+- 비즈니스 로직 버그
+- 복잡한 구성 문제
+- 데이터베이스 스키마 문제
+- 외부 서비스 의존성
 
-## 4 · Provide test summary
+## 4 · 테스트 요약 제공
 
-Create a brief summary:
+간단한 요약 생성:
 
 ```
-Test Results:
-- Total: X tests
-- Passed: Y (Z%)
-- Failed: A
-- Skipped: B
-- Time: C seconds
+테스트 결과:
+- 총 개수: X개 테스트
+- 통과: Y개 (Z%)
+- 실패: A개
+- 건너뜀: B개
+- 시간: C초
 
-Issues Fixed:
-- [List any fixes applied]
+수정된 문제:
+- [적용된 수정사항 목록]
 
-Issues Found (requires manual fix):
-- [List problems that need attention]
+발견된 문제 (수동 수정 필요):
+- [주의가 필요한 문제 목록]
 
-Status: PASSING | FAILING | BLOCKED
+상태: PASSING | FAILING | BLOCKED
 ```
 
-**IMPORTANT:** Keep it concise. This command should be quick and focused on running tests, not detailed analysis.
-EOF < /dev/null
+**중요:** 간결하게 유지하세요. 이 명령어는 빠르고 테스트 실행에 집중해야 하며, 상세한 분석에 집중하지 않아야 합니다.

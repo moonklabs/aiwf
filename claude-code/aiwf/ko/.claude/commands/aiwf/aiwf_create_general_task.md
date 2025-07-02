@@ -1,147 +1,147 @@
-# 일반 Task 생성 - 탑 다운 실행
+# 일반 태스크 생성
 
-Creates a new general task in `.aiwf/04_GENERAL_TASKS/` following project documentation standards.
+프로젝트 문서화 표준을 따라 `.aiwf/04_GENERAL_TASKS/`에 새로운 일반 태스크를 생성합니다.
 
-## Create a TODO with EXACTLY these 10 Items
+## 정확히 다음 10개 항목으로 할 일 목록을 생성하세요
 
-1. Parse task arguments and determine task ID
-2. Load project context and documentation requirements
-3. Verify task doesn't duplicate existing work
-4. Research codebase for implementation context
-5. Create task file using standard template
-6. Fill in task details with proper context
-7. Add technical guidance and codebase references
-8. Update project manifest with new task
-9. Validate task alignment with architecture
-10. Perform final quality check and report
+1. 태스크 인수 분석 및 태스크 ID 결정
+2. 프로젝트 컨텍스트 및 문서화 요구사항 로드
+3. 중복 작업이 없는지 확인
+4. 구현 컨텍스트를 위한 코드베이스 연구
+5. 표준 템플릿을 사용하여 태스크 파일 생성
+6. 적절한 컨텍스트로 태스크 세부사항 작성
+7. 기술 가이드라인 및 코드베이스 참조 추가
+8. 새 태스크로 프로젝트 매니페스트 업데이트
+9. 아키텍처와의 태스크 정렬 검증
+10. 최종 품질 검사 및 보고 수행
 
-## DETAILS on every TODO item
+## 모든 할 일 항목에 대한 세부사항
 
-### 1. Parse task arguments and determine task ID
+### 1. 태스크 인수 분석 및 태스크 ID 결정
 
-The argument format is: `<Task Title or Description>`
+인수 형식: `<태스크 제목 또는 설명>`
 
-- If arguments are empty, prompt user for task details
-- Generate sequential task ID by examining existing tasks in `.aiwf/04_GENERAL_TASKS/`
-- Find highest task number (T###) and increment by 1
-- Format: `T###_<Task_Title_Snake_Case>.md`
-- **IMPORTANT:** Task IDs must be sequential with no gaps
+- 인수가 비어있는 경우, 사용자에게 태스크 세부사항을 요청합니다
+- `.aiwf/04_GENERAL_TASKS/`의 기존 태스크를 확인하여 순차적 태스크 ID를 생성합니다
+- 가장 높은 태스크 번호(T###)를 찾아 1을 증가시킵니다
+- 형식: `T###_<태스크_제목_스네이크_케이스>.md`
+- **중요**: 태스크 ID는 빈 공간 없이 순차적이어야 합니다
 
-### 2. Load project context and documentation requirements
+### 2. 프로젝트 컨텍스트 및 문서화 요구사항 로드
 
-Use PARALLEL SUBAGENTS to READ and UNDERSTAND the project's context:
+**병렬 서브에이전트**를 사용하여 프로젝트 컨텍스트를 읽고 이해하세요:
 
-- READ `.aiwf/00_PROJECT_MANIFEST.md` - Get current project state
-- READ `.aiwf/01_PROJECT_DOCS/ARCHITECTURE.md` - Understand system constraints
-- READ `.aiwf/01_PROJECT_DOCS/LONG_TERM_VISION.md` - Understand future direction
-- READ latest files in `.aiwf/10_STATE_OF_PROJECT/` - Review current state
-- SCAN `.aiwf/05_ARCHITECTURE_DECISIONS/` for relevant ADRs
-- **IMPORTANT:** General tasks must align with documented architecture
+- `.aiwf/00_PROJECT_MANIFEST.md` 읽기 - 현재 프로젝트 상태 파악
+- `.aiwf/01_PROJECT_DOCS/ARCHITECTURE.md` 읽기 - 시스템 제약사항 이해
+- `.aiwf/01_PROJECT_DOCS/LONG_TERM_VISION.md` 읽기 - 미래 방향성 이해
+- `.aiwf/10_STATE_OF_PROJECT/`의 최신 파일들 읽기 - 현재 상태 검토
+- `.aiwf/05_ARCHITECTURE_DECISIONS/`에서 관련 ADR 스캔
+- **중요**: 일반 태스크는 문서화된 아키텍처와 일치해야 합니다
 
-### 3. Verify task doesn't duplicate existing work
+### 3. 중복 작업이 없는지 확인
 
-**SEARCH** comprehensively for potential duplicates:
+**포괄적으로 검색**하여 중복 가능성을 찾으세요:
 
-- Check all files in `.aiwf/04_GENERAL_TASKS/`
-- Search sprint tasks in `.aiwf/03_SPRINTS/*/T*.md`
-- Look for similar functionality in completed milestones
-- **CRITICAL:** If duplicate found, stop and report to user with file reference
+- `.aiwf/04_GENERAL_TASKS/`의 모든 파일 확인
+- `.aiwf/03_SPRINTS/*/T*.md`의 스프린트 태스크 검색
+- 완료된 마일스톤에서 유사한 기능 찾기
+- **중요**: 중복이 발견되면 중단하고 파일 참조와 함께 사용자에게 보고
 
-### 4. Research codebase for implementation context
+### 4. 구현 컨텍스트를 위한 코드베이스 연구
 
-Based on the task description, use PARALLEL SUBAGENTS to:
+태스크 설명을 바탕으로 **병렬 서브에이전트**를 사용하여:
 
-- SEARCH for existing patterns similar to what the task requires
-- IDENTIFY key interfaces, classes, or modules that will be affected
-- FIND examples of similar implementations in the codebase
-- LOCATE relevant test patterns and existing test files
-- DISCOVER error handling and logging patterns used
-- MAP OUT integration points with existing code
-- **DOCUMENT** all findings for inclusion in task
+- 태스크가 요구하는 것과 유사한 기존 패턴 검색
+- 영향을 받을 주요 인터페이스, 클래스 또는 모듈 식별
+- 코드베이스에서 유사한 구현 예제 찾기
+- 관련 테스트 패턴 및 기존 테스트 파일 위치 파악
+- 사용되는 오류 처리 및 로깅 패턴 발견
+- 기존 코드와의 통합 지점 매핑
+- **문서화**: 태스크에 포함할 모든 발견사항 기록
 
-### 5. Create task file using standard template
+### 5. 표준 템플릿을 사용하여 태스크 파일 생성
 
-**USE** the task template in `.aiwf/99_TEMPLATES/task_template.md` as base structure:
+`.aiwf/99_TEMPLATES/task_template.md`의 태스크 템플릿을 기본 구조로 **사용**하세요:
 
-- Copy template structure exactly
-- Place file in `.aiwf/04_GENERAL_TASKS/T###_<Title>.md`
-- Include timestamp: Execute `date '+%Y-%m-%d %H:%M:%S'` for creation time
-- **IMPORTANT:** Follow template structure precisely - no deviations
+- 템플릿 구조를 정확히 복사
+- 파일을 `.aiwf/04_GENERAL_TASKS/T###_<제목>.md`에 배치
+- 타임스탬프 포함: 생성 시간을 위해 `date '+%Y-%m-%d %H:%M:%S'` 실행
+- **중요**: 템플릿 구조를 정확히 따르세요 - 변경 없음
 
-### 6. Fill in task details with proper context
+### 6. 적절한 컨텍스트로 태스크 세부사항 작성
 
-Populate the task file with:
+태스크 파일을 다음 내용으로 채우세요:
 
-- **Title**: Clear, actionable task name
-- **Context**: Link to architecture docs and project state
-- **Requirements**: Specific, measurable outcomes
-- **Acceptance Criteria**: Clear definition of done
-- **Dependencies**: Reference relevant sprints/milestones
-- **Implementation Notes**: Technical approach aligned with architecture
-- **CRITICAL:** All content must reference existing documentation
+- **제목**: 명확하고 실행 가능한 태스크 이름
+- **컨텍스트**: 아키텍처 문서 및 프로젝트 상태에 연결
+- **요구사항**: 구체적이고 측정 가능한 결과
+- **승인 기준**: 완료에 대한 명확한 정의
+- **종속성**: 관련 스프린트/마일스톤 참조
+- **구현 노트**: 아키텍처와 일치하는 기술적 접근법
+- **중요**: 모든 내용은 기존 문서를 참조해야 합니다
 
-### 7. Add technical guidance and codebase references
+### 7. 기술 가이드라인 및 코드베이스 참조 추가
 
-**Technical Guidance section:**
+**기술 가이드라인 섹션:**
 
-- Key interfaces and integration points discovered in step 4
-- Specific imports and module references from codebase
-- Existing patterns to follow (with file references)
-- Database models or API contracts to work with
-- Error handling approach used in similar code
-- Testing patterns found in the codebase
+- 4단계에서 발견한 주요 인터페이스 및 통합 지점
+- 코드베이스의 구체적인 import 및 모듈 참조
+- 따라야 할 기존 패턴 (파일 참조 포함)
+- 작업할 데이터베이스 모델 또는 API 계약
+- 유사한 코드에서 사용되는 오류 처리 접근법
+- 코드베이스에서 발견된 테스트 패턴
 
-**Implementation Notes section:**
+**구현 노트 섹션:**
 
-- Step-by-step implementation approach based on research
-- Key architectural decisions to respect (reference ADRs)
-- Specific files and functions to modify or extend
-- Testing approach based on existing test patterns
-- Performance considerations if relevant
+- 연구를 바탕으로 한 단계별 구현 접근법
+- 존중해야 할 주요 아키텍처 결정사항 (ADR 참조)
+- 수정하거나 확장할 구체적인 파일 및 함수
+- 기존 테스트 패턴을 바탕으로 한 테스트 접근법
+- 관련성이 있는 경우 성능 고려사항
 
-**IMPORTANT:** Do NOT include code examples. Provide structural guidance and file references only.
+**중요**: 코드 예제를 포함하지 마세요. 구조적 가이드라인과 파일 참조만 제공하세요.
 
-### 8. Update project manifest with new task
+### 8. 새 태스크로 프로젝트 매니페스트 업데이트
 
-**UPDATE** `.aiwf/00_PROJECT_MANIFEST.md`:
+`.aiwf/00_PROJECT_MANIFEST.md` **업데이트**:
 
-- Add task to "## General Tasks" section
-- Format: `- [ ] T###: [Task Title] - Status: Not Started`
-- Maintain alphabetical/numerical ordering
-- Link to task file: `[T###](04_GENERAL_TASKS/T###_Title.md)`
-- **IMPORTANT:** Preserve all existing content
+- "## 일반 태스크" 섹션에 태스크 추가
+- 형식: `- [ ] T###: [태스크 제목] - 상태: 시작되지 않음`
+- 알파벳/숫자 순서 유지
+- 태스크 파일에 링크: `[T###](04_GENERAL_TASKS/T###_제목.md)`
+- **중요**: 기존 내용을 모두 보존하세요
 
-### 9. Validate task alignment with architecture
+### 9. 아키텍처와의 태스크 정렬 검증
 
-**VERIFY** task compliance:
+태스크 준수사항 **확인**:
 
-- Check task doesn't contradict architecture principles
-- Ensure implementation approach uses established patterns
-- Validate dependencies exist and are correct
-- Confirm task scope is appropriate (not too broad/narrow)
-- Technical guidance aligns with existing codebase patterns
-- **CRITICAL:** Documentation is source of truth - any deviation needs justification
+- 태스크가 아키텍처 원칙과 모순되지 않는지 확인
+- 구현 접근법이 확립된 패턴을 사용하는지 보장
+- 종속성이 존재하고 올바른지 검증
+- 태스크 범위가 적절한지 확인 (너무 광범위하거나 좁지 않게)
+- 기술 가이드라인이 기존 코드베이스 패턴과 일치하는지 확인
+- **중요**: 문서가 진실의 원천입니다 - 어떤 편차든 정당화가 필요합니다
 
-### 10. Perform final quality check and report
+### 10. 최종 품질 검사 및 보고 수행
 
-**QUALITY CHECK**:
+**품질 검사**:
 
-- Task file follows template completely
-- All sections properly filled including new technical guidance
-- References to documentation and codebase are valid
-- Task ID is sequential and unique
-- Manifest updated correctly
-- Technical guidance references actual files and patterns
-- No scope creep or architecture violations
+- 태스크 파일이 템플릿을 완전히 따르는지 확인
+- 새로운 기술 가이드라인을 포함한 모든 섹션이 적절히 작성되었는지 확인
+- 문서 및 코드베이스에 대한 참조가 유효한지 확인
+- 태스크 ID가 순차적이고 고유한지 확인
+- 매니페스트가 올바르게 업데이트되었는지 확인
+- 기술 가이드라인이 실제 파일과 패턴을 참조하는지 확인
+- 범위 확장이나 아키텍처 위반이 없는지 확인
 
-**OUTPUT FORMAT**:
+**출력 형식**:
 
 ```markdown
-✅ **Created**: T###\_<Title>.md
-📋 **Type**: General Task
-🎯 **Purpose**: [One-line summary]
-📚 **References**: [Key documentation links]
-🔧 **Key Integration Points**: [Main files/modules to modify]
-🧪 **Test Approach**: [Testing pattern to follow]
-⏭️ **Next Step**: Review task details and run `/do_task T###` to begin
+✅ **생성**: T###\_<제목>.md
+📋 **유형**: 일반 태스크
+🎯 **목적**: [한 줄 요약]
+📚 **참조**: [주요 문서 링크]
+🔧 **주요 통합 지점**: [수정할 주요 파일/모듈]
+🧪 **테스트 접근법**: [따를 테스트 패턴]
+⏭️ **다음 단계**: 태스크 세부사항을 검토하고 `/do_task T###`를 실행하여 시작하세요
 ```

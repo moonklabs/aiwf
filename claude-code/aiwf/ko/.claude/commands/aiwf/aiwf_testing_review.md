@@ -2,197 +2,197 @@
 
 아키텍처, 진행 상황, 기술 결정에 초점을 맞춘 포괄적인 프로젝트 수준 리뷰를 수행합니다.
 
-## Prerequisites Check
+## 전제조건 확인
 
-**FIRST**, check if a testing strategy document exists:
+**먼저**, 테스팅 전략 문서가 존재하는지 확인하세요:
 
-- CHECK for `.aiwf/01_PROJECT_DOCS/TESTING_STRATEGY.md`
-- If NOT found, inform the user: "No testing strategy document found. Would you like me to help create one, or proceed with a general test quality review?"
-- If user wants to proceed without strategy, adapt the review to focus on general test quality principles
+- `.aiwf/01_PROJECT_DOCS/TESTING_STRATEGY.md` 확인
+- 찾을 수 없는 경우, 사용자에게 알립니다: "테스팅 전략 문서가 없습니다. 새로 만들어드릴까요, 아니면 일반적인 테스트 품질 검토로 진행할까요?"
+- 사용자가 전략 없이 진행하려는 경우, 일반적인 테스트 품질 원칙에 초점을 맞춰 검토를 조정합니다
 
-## Create a TODO with EXACTLY these 7 Items
+## 정확히 다음 7개 항목으로 TODO 생성
 
-1. Load testing strategy document (or define review criteria)
-2. Analyze test implementation structure
-3. Evaluate test-to-code alignment
-4. Identify misaligned or unnecessary tests
-5. Assess critical functionality coverage
-6. Generate modification recommendations
-7. Create alignment report
+1. 테스팅 전략 문서 로드 (또는 검토 기준 정의)
+2. 테스트 구현 구조 분석
+3. 테스트-코드 정렬 평가
+4. 잘못 정렬되거나 불필요한 테스트 식별
+5. 핵심 기능 커버리지 평가
+6. 수정 권장사항 생성
+7. 정렬 보고서 생성
 
-Follow step by step and adhere closely to the following instructions for each step.
+단계별로 따라가며 각 단계에 대한 다음 지침을 엄격히 준수하세요.
 
-## DETAILS on every TODO item
+## 모든 TODO 항목에 대한 세부사항
 
-### 1. Load testing strategy document (or define review criteria)
+### 1. 테스팅 전략 문서 로드 (또는 검토 기준 정의)
 
-**Option A - Strategy document exists:**
+**옵션 A - 전략 문서가 존재하는 경우:**
 
-- LOAD `.aiwf/01_PROJECT_DOCS/TESTING_STRATEGY.md`
-- EXTRACT key principles and priorities
-- IDENTIFY what should and shouldn't be tested
-- NOTE coverage expectations and quality gates
-- UNDERSTAND the testing philosophy
+- `.aiwf/01_PROJECT_DOCS/TESTING_STRATEGY.md` 로드
+- 주요 원칙과 우선순위 추출
+- 테스트해야 할 것과 하지 말아야 할 것 식별
+- 커버리지 기대치와 품질 게이트 주목
+- 테스팅 철학 이해
 
-**Option B - No strategy document:**
-Use general best practices as review criteria:
+**옵션 B - 전략 문서가 없는 경우:**
+검토 기준으로 일반적인 모범 사례를 사용:
 
-- Tests should focus on behavior, not implementation
-- Critical paths must have coverage
-- Tests should be maintainable and clear
-- Avoid over-testing simple getters/setters
-- Balance between coverage and maintenance burden
+- 테스트는 구현이 아닌 동작에 초점을 맞춰야 함
+- 핵심 경로에는 커버리지가 있어야 함
+- 테스트는 유지보수 가능하고 명확해야 함
+- 단순한 getter/setter 과도 테스트 피하기
+- 커버리지와 유지보수 부담 간의 균형
 
-**DOCUMENT** which approach is being used for this review.
+이 검토에 사용되는 접근법을 **문서화**하세요.
 
-### 2. Analyze test implementation structure
+### 2. 테스트 구현 구조 분석
 
-**EXAMINE** the current test codebase:
+현재 테스트 코드베이스를 **검토**하세요:
 
-- USE test.md command to run tests (@.claude/commands/aiwf/aiwf_test.md)
-- EXPLORE test directory structure and organization
-- IDENTIFY test categories and their purposes
-- CHECK test naming conventions and patterns
-- NOTE any test infrastructure or utilities
+- 테스트 실행을 위해 test.md 명령 사용 (@.claude/commands/aiwf/aiwf_test.md)
+- 테스트 디렉토리 구조와 조직 탐색
+- 테스트 카테고리와 그 목적 식별
+- 테스트 명명 규칙과 패턴 확인
+- 테스트 인프라나 유틸리티 주목
 
-**Focus on understanding what exists, not counting.**
+**개수 세기가 아닌 존재하는 것을 이해하는 데 집중하세요.**
 
-### 3. Evaluate test-to-code alignment
+### 3. 테스트-코드 정렬 평가
 
-**COMPARE** tests against actual implementation:
+테스트를 실제 구현과 **비교**하세요:
 
-- For each major component, check if tests match functionality
-- IDENTIFY tests that test implementation details vs behavior
-- FIND tests with excessive setup or mocking
-- LOCATE tests that break frequently on refactoring
-- CHECK if test complexity matches code complexity
+- 각 주요 구성요소에 대해 테스트가 기능과 일치하는지 확인
+- 동작 대 구현 세부사항을 테스트하는 테스트 식별
+- 과도한 설정이나 모킹이 있는 테스트 찾기
+- 리팩토링 시 자주 깨지는 테스트 찾기
+- 테스트 복잡성이 코드 복잡성과 일치하는지 확인
 
-**Key question:** Do the tests validate what users care about?
+**핵심 질문:** 테스트가 사용자가 중요하게 여기는 것을 검증하는가?
 
-### 4. Identify misaligned or unnecessary tests
+### 4. 잘못 정렬되거나 불필요한 테스트 식별
 
-**SEARCH** for tests that don't provide value:
+가치를 제공하지 않는 테스트를 **검색**하세요:
 
-**If using strategy document:**
+**전략 문서를 사용하는 경우:**
 
-- Tests for areas marked as "skip" in strategy
-- Tests outside the defined scope
-- Over-specified tests per strategy guidelines
+- 전략에서 "건너뛰기"로 표시된 영역의 테스트
+- 정의된 범위를 벗어난 테스트
+- 전략 가이드라인에 따라 과도하게 명시된 테스트
 
-**If using general principles:**
+**일반 원칙을 사용하는 경우:**
 
-- Over-engineered tests for simple functionality
-- Tests that break on every refactor
-- Edge case tests for non-critical features
-- Tests with excessive mocking/setup
-- Performance tests without performance requirements
+- 단순한 기능에 대한 과도하게 설계된 테스트
+- 모든 리팩토링에서 깨지는 테스트
+- 중요하지 않은 기능의 에지 케이스 테스트
+- 과도한 모킹/설정이 있는 테스트
+- 성능 요구사항 없는 성능 테스트
 
-**Create a list of specific tests to modify or remove.**
+**수정하거나 제거할 특정 테스트 목록을 생성하세요.**
 
-### 5. Assess critical functionality coverage
+### 5. 핵심 기능 커버리지 평가
 
-**VERIFY** that essential functionality has appropriate tests:
+필수 기능에 적절한 테스트가 있는지 **검증**하세요:
 
-**If using strategy document:**
+**전략 문서를 사용하는 경우:**
 
-- CHECK coverage of high-priority areas defined in strategy
-- VERIFY strategy-specific requirements are tested
+- 전략에서 정의된 높은 우선순위 영역의 커버리지 확인
+- 전략별 요구사항이 테스트되는지 검증
 
-**For all reviews:**
+**모든 검토에 대해:**
 
-- IDENTIFY gaps in critical path testing
-- CHECK authentication/authorization if applicable
-- VERIFY error handling for important operations
-- ENSURE data integrity tests exist where needed
-- CONFIRM integration points are tested
+- 핵심 경로 테스트의 차이 식별
+- 해당되는 경우 인증/권한 확인
+- 중요한 작업의 오류 처리 검증
+- 필요한 곳에 데이터 무결성 테스트 존재 보장
+- 통합 지점이 테스트되는지 확인
 
-**Note specific gaps that need addressing.**
+**해결이 필요한 특정 차이를 기록하세요.**
 
-### 6. Generate modification recommendations
+### 6. 수정 권장사항 생성
 
-**CREATE** specific, actionable recommendations:
+구체적이고 실행 가능한 권장사항을 **생성**하세요:
 
-For each finding:
+각 발견사항에 대해:
 
-- SPECIFY the test file and function
-- EXPLAIN why it needs modification
-- SUGGEST the specific change (remove, simplify, add)
-- PROVIDE example of the improved approach if helpful
+- 테스트 파일과 함수 명시
+- 수정이 필요한 이유 설명
+- 구체적인 변경사항 제안 (제거, 단순화, 추가)
+- 도움이 된다면 개선된 접근법의 예시 제공
 
-**Format:**
+**형식:**
 
 ```
-File: tests/test_example.py::test_function_name
-Issue: [What's wrong]
-Action: [What to do]
-Reason: [Why this aligns with strategy]
+파일: tests/test_example.py::test_function_name
+문제: [문제점]
+조치: [해야 할 일]
+이유: [전략과 일치하는 이유]
 ```
 
-### 7. Create alignment report
+### 7. 정렬 보고서 생성
 
-**GENERATE** a focused report on test-strategy alignment:
+테스트-전략 정렬에 대한 집중된 보고서를 **생성**하세요:
 
-- Get current timestamp using system date command
-- Create report in `.aiwf/10_STATE_OF_PROJECT/YYYY-MM-DD-HH-MM-test-alignment.md`
+- 시스템 날짜 명령을 사용하여 현재 타임스탬프 가져오기
+- `.aiwf/10_STATE_OF_PROJECT/YYYY-MM-DD-HH-MM-test-alignment.md`에 보고서 생성
 
-**Report structure:**
+**보고서 구조:**
 
 ```markdown
-# Test-Strategy Alignment Review - [YYYY-MM-DD HH:MM]
+# 테스트-전략 정렬 검토 - [YYYY-MM-DD HH:MM]
 
-## Alignment Summary
+## 정렬 요약
 
-Overall alignment with testing strategy: [EXCELLENT | GOOD | NEEDS WORK | POOR]
+테스팅 전략과의 전반적인 정렬: [우수 | 양호 | 개선 필요 | 부족]
 
-Key findings:
+주요 발견사항:
 
-- [Major finding about test suite health]
-- [Major finding about coverage]
-- [Major finding about maintenance burden]
+- [테스트 스위트 건강상태에 대한 주요 발견사항]
+- [커버리지에 대한 주요 발견사항]
+- [유지보수 부담에 대한 주요 발견사항]
 
-## Tests Requiring Modification
+## 수정이 필요한 테스트
 
-### Remove (Over-engineered/Out of scope)
+### 제거 (과도하게 설계되었거나 범위를 벗어남)
 
-[List specific tests with reasons]
+[이유와 함께 특정 테스트 목록]
 
-### Simplify (Too complex for purpose)
+### 단순화 (목적에 비해 너무 복잡함)
 
-[List specific tests with simplification approach]
+[단순화 접근법과 함께 특정 테스트 목록]
 
-### Add (Critical gaps)
+### 추가 (핵심 격차)
 
-[List specific missing tests for critical paths]
+[핵심 경로에 대한 특정 누락된 테스트 목록]
 
-## Recommended Actions
+## 권장 조치
 
-### Immediate (Blocking issues)
+### 즉시 (차단 문제)
 
-- [ ] [Specific action with file/test reference]
+- [ ] [파일/테스트 참조와 함께 구체적인 조치]
 
-### Short-term (Quality improvements)
+### 단기 (품질 개선)
 
-- [ ] [Specific action with file/test reference]
+- [ ] [파일/테스트 참조와 함께 구체적인 조치]
 
-### Long-term (Technical debt)
+### 장기 (기술 부채)
 
-- [ ] [Specific action with file/test reference]
+- [ ] [파일/테스트 참조와 함께 구체적인 조치]
 
-## Test Health Indicators
+## 테스트 건강 지표
 
-- Tests align with code purpose: [YES | PARTIALLY | NO]
-- Critical paths covered: [YES | PARTIALLY | NO]
-- Maintenance burden reasonable: [YES | PARTIALLY | NO]
-- Tests support development velocity: [YES | PARTIALLY | NO]
+- 테스트가 코드 목적과 일치: [예 | 부분적으로 | 아니오]
+- 핵심 경로 커버됨: [예 | 부분적으로 | 아니오]
+- 유지보수 부담 합리적: [예 | 부분적으로 | 아니오]
+- 테스트가 개발 속도 지원: [예 | 부분적으로 | 아니오]
 
-## Implementation Examples
+## 구현 예시
 
-[If needed, show before/after examples of test improvements]
+[필요한 경우, 테스트 개선의 전후 예시 표시]
 
-## Next Review
+## 다음 검토
 
-Recommended review in: [X weeks/sprints]
-Focus areas for next review: [Specific areas to monitor]
+권장 검토 시기: [X주/스프린트]
+다음 검토 집중 영역: [모니터링할 특정 영역]
 ```
 
-**IMPORTANT:** Focus on alignment and balance, not metrics. The goal is tests that serve the project's actual needs.
+**중요:** 메트릭이 아닌 정렬과 균형에 초점을 맞추세요. 목표는 프로젝트의 실제 요구를 충족하는 테스트입니다.

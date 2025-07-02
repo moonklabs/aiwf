@@ -1,9 +1,9 @@
 # 지식 프라임
 
-Prime yourself with basic information about this project.
-Make sure you are aware of the environment.
+이 프로젝트의 기본 정보로 자신을 준비시키세요.
+환경을 인식하고 있는지 확인하세요.
 
-## USE **PARALLEL AGENTS** to
+## **병렬 에이전트**를 사용하여 다음을 수행하세요
 
-- READ .aiwf/01_PROJECT_DOCS/ARCHITECTURE.md for basic Project Information
-- READ .aiwf/00_PROJECT_MANIFEST.md for the Project status
+- 기본 프로젝트 정보를 위해 .aiwf/01_PROJECT_DOCS/ARCHITECTURE.md 읽기
+- 프로젝트 상태를 위해 .aiwf/00_PROJECT_MANIFEST.md 읽기

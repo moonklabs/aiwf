@@ -1,62 +1,62 @@
 # 프로젝트 리뷰 - 탑 다운 실행
 
-Perform a comprehensive project-level review focusing on architecture, progress, and technical decisions.
+아키텍처, 진행 상황, 기술 결정에 초점을 맞춘 포괄적인 프로젝트 수준 리뷰를 수행합니다.
 
-**IMPORTANT:**
+**중요사항:**
 
-- This is a high-level review of overall project state, not recent changes.
-- Unless clearly mentioned in project documents, there is no timeline and schedule is irrelevant
+- 이는 최근 변경 사항이 아닌 전체 프로젝트 상태에 대한 고수준 리뷰입니다.
+- 프로젝트 문서에 명확히 언급되지 않은 한, 타임라인과 일정은 관련이 없습니다
 
-## Create a TODO with EXACTLY these 9 Items
+## 정확히 다음 9개 항목으로 TODO 생성
 
-1. Analyze review scope and timing
-2. Execute and assess test infrastructure health
-3. Assess project documentation alignment
-4. Review milestone and sprint progress
-5. Analyze codebase architecture and structure
-6. Audit file organization and workflow compliance
-7. Evaluate technical decisions and complexity
-8. Critique implementation quality (John Carmack perspective)
-9. Provide comprehensive assessment with recommendations
+1. 리뷰 범위 및 타이밍 분석
+2. 테스트 인프라 상태 실행 및 평가
+3. 프로젝트 문서 정렬 평가
+4. 마일스톤 및 스프린트 진행 상황 검토
+5. 코드베이스 아키텍처 및 구조 분석
+6. 파일 구성 및 워크플로우 준수 감사
+7. 기술적 결정 및 복잡성 평가
+8. 구현 품질 비평 (John Carmack 관점)
+9. 권장 사항과 함께 포괄적인 평가 제공
 
-Follow step by step and adhere closely to the following instructions for each step.
+단계별로 진행하며 각 단계에 대한 다음 지침을 엄격히 준수하세요.
 
-## DETAILS on every TODO item
+## 모든 TODO 항목에 대한 세부사항
 
-### 1. Analyze review scope and timing
+### 1. 리뷰 범위 및 타이밍 분석
 
-Check: <$ARGUMENTS>
+확인: <$ARGUMENTS>
 
-If empty, perform full project review. Otherwise interpret <$ARGUMENTS> to identify specific focus areas (milestone, sprint, architecture component, etc.). Unless stated in Argument do not compare to previews project reviews in `.aiwf/10_STATE_OF_PROJECT`.
+비어있다면 전체 프로젝트 리뷰를 수행합니다. 그렇지 않으면 <$ARGUMENTS>를 해석하여 특정 초점 영역(마일스톤, 스프린트, 아키텍처 구성 요소 등)을 식별합니다. Argument에 명시되지 않은 한 `.aiwf/10_STATE_OF_PROJECT`의 이전 프로젝트 리뷰와 비교하지 마세요.
 
-**IMPORTANT:** This review looks at overall project state in context of recent changes.
+**중요:** 이 리뷰는 최근 변경사항의 맥락에서 전체 프로젝트 상태를 살펴봅니다.
 
-**CRITICAL:** Read `.aiwf/00_PROJECT_MANIFEST.md` FIRST to understand:
+**핵심:** `.aiwf/00_PROJECT_MANIFEST.md`를 **먼저** 읽어서 다음을 이해하세요:
 
-- Current milestone and sprint status
-- What work is complete vs in-progress vs planned
-- Active sprint objectives and deliverables
+- 현재 마일스톤 및 스프린트 상태
+- 완료된 작업 vs 진행 중인 작업 vs 계획된 작업
+- 활성 스프린트 목표 및 결과물
 
-**CONTEXT CHECK:** Before evaluating functionality:
+**맥락 확인:** 기능 평가 전에:
 
-- Navigate to `.aiwf/03_SPRINTS/` to find the current sprint
-- Read the sprint meta file to understand what's in scope
-- Check completed vs planned tasks within the sprint
-- Understand what future sprints will deliver
+- `.aiwf/03_SPRINTS/`로 이동하여 현재 스프린트 찾기
+- 스프린트 메타 파일을 읽어 범위 내에 있는 것 이해하기
+- 스프린트 내에서 완료된 태스크 vs 계획된 태스크 확인
+- 향후 스프린트가 제공할 내용 이해하기
 
-**REVIEW PRINCIPLE:** Evaluate against CURRENT SPRINT deliverables, not full milestone scope.
+**리뷰 원칙:** 전체 마일스톤 범위가 아닌 현재 스프린트 결과물에 대해 평가합니다.
 
-### 2. Execute and assess test infrastructure health
+### 2. 테스트 인프라 상태 실행 및 평가
 
-**CRITICAL:** Test infrastructure health is a BLOCKING criteria for sprint/milestone progression.
+**핵심:** 테스트 인프라 상태는 스프린트/마일스톤 진행의 차단 기준입니다.
 
-- USE test.md command to execute full test suite (@.claude/commands/aiwf/aiwf_test.md)
-- ANALYZE test results: passed/failed/skipped counts and failure categories
-- CALCULATE test health score (0-10 scale):
-  - 10: 100% pass rate, no infrastructure issues
-  - 8-9: >95% pass rate, minor issues only
-  - 6-7: 80-95% pass rate, some non-critical failures
-  - 4-5: 60-80% pass rate, significant issues
+- 전체 테스트 스위트 실행을 위해 test.md 명령 사용 (@.claude/commands/aiwf/aiwf_test.md)
+- 테스트 결과 분석: 통과/실패/건너뛴 개수 및 실패 카테고리
+- 테스트 상태 점수 계산 (0-10 스케일):
+  - 10: 100% 통과율, 인프라 문제 없음
+  - 8-9: >95% 통과율, 사소한 문제만 있음
+  - 6-7: 80-95% 통과율, 일부 비핵심 실패
+  - 4-5: 60-80% 통과율, 중대한 문제
   - 0-3: <60% pass rate, critical infrastructure problems
 - CATEGORIZE failures:
   - Infrastructure: Import errors, missing modules

@@ -1,88 +1,88 @@
-# 코드 리뷰 - 탑 다운 실행
+# 코드 리뷰 - 위에서 아래로 실행
 
-Use the following instructions from top to bottom to execute a Code Review.
+코드 리뷰를 실행하기 위해 다음 지침을 위에서 아래로 사용하세요.
 
-## Create a TODO with EXACTLY these 6 Items
+## 정확히 다음 6개 항목으로 할 일 목록을 만드세요
 
-1. Analyze the Scope given
-2. Find code changes within Scope
-3. Find relevant Specification and Documentation
-4. Compare code changes against Documentation and Requirements
-5. Analyze possible differences
-6. Provide PASS/FAIL verdict with details
+1. 주어진 범위 분석
+2. 범위 내에서 코드 변경사항 찾기
+3. 관련 사양 및 문서 찾기
+4. 문서 및 요구사항과 코드 변경사항 비교
+5. 가능한 차이점 분석
+6. 세부사항과 함께 통과/실패 판정 제공
 
-Follow step by step and adhere closely to the following instructions for each step.
+각 단계를 단계별로 따르고 다음 지침을 엄격히 준수하세요.
 
-## DETAILS on every TODO item
+## 모든 할 일 목록 항목에 대한 세부사항
 
-### 1. Analyze the Scope given
+### 1. 주어진 범위 분석
 
-check: <$ARGUMENTS>
+확인: <$ARGUMENTS>
 
-If empty, use default, otherwise interpret <$ARGUMENTS> to identify the scope of the Review. Only continue if you can find meaningful changes to review.
+비어있으면 기본값을 사용하고, 그렇지 않으면 <$ARGUMENTS>를 해석하여 리뷰 범위를 식별합니다. 리뷰할 의미 있는 변경사항을 찾을 수 있는 경우에만 계속합니다.
 
-**CONTEXT:** Before reviewing code changes:
+**맥락:** 코드 변경사항을 리뷰하기 전에:
 
-- Read `.aiwf/00_PROJECT_MANIFEST.md` to understand current sprint and milestone context
-- Use the manifest to identify which sprint is active and what work is in scope
-- Only evaluate against requirements appropriate for the current sprint's deliverables
+- `.aiwf/00_PROJECT_MANIFEST.md`를 읽어 현재 스프린트와 마일스톤 맥락을 이해합니다
+- 매니페스트를 사용하여 어떤 스프린트가 활성이고 어떤 작업이 범위에 있는지 식별합니다
+- 현재 스프린트의 납품에 적절한 요구사항에만 평가합니다
 
-### 2. Find code changes within Scope
+### 2. 범위 내에서 코드 변경사항 찾기
 
-With the identified Scope use `git diff` (on default: `git diff HEAD~1`) to find code changes.
+식별된 범위를 사용하여 `git diff` (기본값: `git diff HEAD~1`)로 코드 변경사항을 찾습니다.
 
-### 3. Find relevant Specifications and Documentation
+### 3. 관련 사양 및 문서 찾기
 
-- FIND the Task, Sprint and Milestone involved in the work that was done and output your findings
-- Navigate to `.aiwf/03_SPRINTS/` to find the current sprint directory
-- READ the sprint meta file to understand sprint objectives and deliverables
-- If a specific task is in scope, find and READ the task file in the sprint directory
-- IDENTIFY related requirements in `.aiwf/02_REQUIREMENTS/` for the current milestone
-- READ involved Documents especially in `.aiwf/01_PROJECT_DOCS/` and `.aiwf/02_REQUIREMENTS/`
-- **IMPORTANT:** Focus on current sprint deliverables, not future milestone features
+- 수행된 작업에 관련된 태스크, 스프린트, 마일스톤을 찾고 발견사항을 출력합니다
+- `.aiwf/03_SPRINTS/`로 이동하여 현재 스프린트 디렉토리를 찾습니다
+- 스프린트 매타 파일을 읽어 스프린트 목표와 납품을 이해합니다
+- 특정 태스크가 범위에 있는 경우, 스프린트 디렉토리에서 태스크 파일을 찾아 읽습니다
+- 현재 마일스톤에 대한 `.aiwf/02_REQUIREMENTS/`에서 관련 요구사항을 식별합니다
+- 관련 문서, 특히 `.aiwf/01_PROJECT_DOCS/`와 `.aiwf/02_REQUIREMENTS/`에서 문서를 읽습니다
+- **중요:** 미래 마일스톤 기능이 아닌 현재 스프린트 납품에만 집중합니다
 
-### 4. Compare code changes against Documentation and Requirements
+### 4. 문서 및 요구사항과 코드 변경사항 비교
 
-- Use DEEP THINKING to compare changes against found Requirements and Specs.
-- Compare especially these things:
-  - **Data models / schemas** — fields, types, constraints, relationships.
-  - **APIs / interfaces** — endpoints, params, return shapes, status codes, errors.
-  - **Config / environment** — keys, defaults, required/optional.
-  - **Behaviour** — business rules, side-effects, error handling.
-  - **Quality** — naming, formatting, tests, linter status.
+- 발견된 요구사항과 사양에 대해 변경사항을 비교하기 위해 심층 사고를 사용합니다
+- 특히 다음 사항들을 비교합니다:
+  - **데이터 모델 / 스키마** — 필드, 타입, 제약사항, 관계
+  - **API / 인터페이스** — 엔드포인트, 매개변수, 반환 형태, 상태 코드, 오류
+  - **설정 / 환경** — 키, 기본값, 필수/선택사항
+  - **동작** — 비즈니스 규칙, 부작용, 오류 처리
+  - **품질** — 이름, 형식, 테스트, 린터 상태
 
-**IMPORTANT**:
+**중요:**
 
-- Deviations from the Specs is not allowed. Not even small ones. Be very picky here!
-- If in doubt call a **FAIL** and ask the User.
-- Zero tolerance on not following the Specs and Documentation.
+- 사양에서 벗어나는 것은 허용되지 않습니다. 작은 것도 안 됩니다. 여기서는 매우 까다롭게 마세요!
+- 의심스러우면 **실패**를 선언하고 사용자에게 문의하세요
+- 사양과 문서를 따르지 않는 것에 대해 무관용입니다
 
-### 5. Analyze the differences
+### 5. 차이점 분석
 
-- Analyze any difference found
-- Give every issue a Severity Score
-- Severity ranges from 1 (low) to 10 (high)
-- Remember List of issues and Scores for output
+- 발견된 모든 차이점을 분석합니다
+- 모든 문제에 심각도 점수를 부여합니다
+- 심각도는 1(낮음)에서 10(높음)까지입니다
+- 출력을 위해 문제 목록과 점수를 기억합니다
 
-### 6. Provide PASS/FAIL verdict with details
+### 6. 세부사항과 함께 통과/실패 판정 제공
 
-- Call a **FAIL** on any differences found.
-  - Zero Tolerance - even on well meant additions.
-  - Leave it on the user to decide if small changes are allowed.
-- Only **PASS** if no discrepancy appeared.
+- 발견된 모든 차이점에 대해 **실패**를 선언합니다
+  - 무관용 - 선의의 추가사항에도 적용됩니다
+  - 작은 변경사항이 허용되는지 여부는 사용자가 결정하도록 합니다
+- 불일치가 나타나지 않은 경우에만 **통과**입니다
 
-#### IMPORTANT: Output Format
+#### 중요: 출력 형식
 
-- Output the results of your review to the task's **## Output Log** section in the task file
-- Find the task file in `.aiwf/03_SPRINTS/` or `.aiwf/04_GENERAL_TASKS/` based on the scope
-- Append the review results to the existing Output Log with timestamp
-- Output Format:
+- 리뷰 결과를 태스크 파일의 **## 출력 로그** 섹션에 출력합니다
+- 범위에 따라 `.aiwf/03_SPRINTS/` 또는 `.aiwf/04_GENERAL_TASKS/`에서 태스크 파일을 찾습니다
+- 타임스탬프와 함께 기존 출력 로그에 리뷰 결과를 추가합니다
+- 출력 형식:
   ```
-  [YYYY-MM-DD HH:MM]: Code Review - PASS/FAIL
-  Result: **FAIL/PASS** Your final decision on if it's a PASS or a FAIL.
-  **Scope:** Inform the user about the review scope.
-  **Findings:** Detailed list with all Issues found and Severity Score.
-  **Summary:** Short summary on what is wrong or not.
-  **Recommendation:** Your personal recommendation on further steps.
+  [YYYY-MM-DD HH:MM]: 코드 리뷰 - 통과/실패
+  결과: **실패/통과** 통과인지 실패인지에 대한 최종 결정
+  **범위:** 리뷰 범위에 대해 사용자에게 알립니다
+  **발견사항:** 발견된 모든 문제와 심각도 점수의 상세 목록
+  **요약:** 문제점이나 문제가 없는 상태에 대한 간단한 요약
+  **권장사항:** 추가 단계에 대한 개인적인 권장사항
   ```
-- Also output a brief result summary to the console for immediate feedback
+- 또한 즉시 피드백을 위해 콘솔에 간단한 결과 요약을 출력합니다

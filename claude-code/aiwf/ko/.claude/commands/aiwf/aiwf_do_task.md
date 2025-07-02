@@ -1,109 +1,109 @@
-# $Argument 기반 AIWF 태스크 처리
+# 인수 기반 AIWF 태스크 처리
 
-**IMPORTANT:** Follow from Top to Bottom - don't skip anything!
+**중요:** 위에서 아래로 순서대로 진행하세요 - 단계를 건너뛰지 마세요!
 
-**CREATE A TODO LIST** with exactly these 8 items
+**정확히 다음 8개 항목으로 할 일 목록을 생성하세요**
 
-1. Analyse scope from argument
-2. Identify task file
-3. Analyse the task
-4. Set status to in_progress
-5. Execute task work
-6. Placeholder
-7. Execute Code review
-8. Finalize Task status
+1. 인수에서 범위 분석
+2. 태스크 파일 식별
+3. 태스크 분석
+4. 상태를 진행 중으로 설정
+5. 태스크 작업 실행
+6. 플레이스홀더
+7. 코드 리뷰 실행
+8. 태스크 상태 완료 처리
 
-## 1 · Analyse scope from argument
+## 1 · 인수에서 범위 분석
 
-<$ARGUMENTS> ⇒ Task ID, Sprint ID, or empty (select next open task in current sprint).
+<$ARGUMENTS> ⇒ 태스크 ID, 스프린트 ID, 또는 빈 값 (현재 스프린트에서 다음 열린 태스크 선택).
 
-## 2 · Identify task file
+## 2 · 태스크 파일 식별
 
-Search .aiwf/03_SPRINTS/ and .aiwf/04_GENERAL_TASKS/.
-If no open task matches, pause and ask the user how to proceed.
+.aiwf/03_SPRINTS/와 .aiwf/04_GENERAL_TASKS/에서 검색합니다.
+일치하는 열린 태스크가 없으면 일시정지하고 사용자에게 진행 방법을 문의합니다.
 
-## 3 · Analyse the task
+## 3 · 태스크 분석
 
-Read the task description. If anything is unclear, ask clarifying questions before continuing.
+태스크 설명을 읽습니다. 불분명한 점이 있으면 계속하기 전에 명확화 질문을 합니다.
 
-**CRITICAL CONTEXT VALIDATION:** Before executing any task spin up Parallel Subagents for these tasks:
+**중요한 맥락 검증:** 태스크를 실행하기 전에 다음 작업들을 위한 병렬 서브에이전트를 실행합니다:
 
-1. **Sprint Context:** Confirm task belongs to current sprint scope
-2. **Dependencies:** Check if any dependent tasks need to be completed first
-3. **Requirements:** Read relevant requirements docs in `.aiwf/02_REQUIREMENTS/`
-4. **Scope Verification:** Ensure task aligns with current sprint objectives
-5. **GitHub Issue Check:** Check if task file has a `github_issue` field
+1. **스프린트 맥락:** 태스크가 현재 스프린트 범위에 속하는지 확인
+2. **의존성:** 먼저 완료해야 할 의존 태스크가 있는지 확인
+3. **요구사항:** `.aiwf/02_REQUIREMENTS/`에서 관련 요구사항 문서 읽기
+4. **범위 검증:** 태스크가 현재 스프린트 목표와 일치하는지 확인
+5. **GitHub 이슈 확인:** 태스크 파일에 `github_issue` 필드가 있는지 확인
 
-**IMPORTANT:** If task references functionality from future sprints or has unmet dependencies, pause and ask for clarification.
+**중요:** 태스크가 미래 스프린트의 기능을 참조하거나 충족되지 않은 의존성이 있으면 일시정지하고 명확화를 요청합니다.
 
-**GitHub Issue Creation (Optional):**
+**GitHub 이슈 생성 (선택사항):**
 
-- If task doesn't have a GitHub issue and user wants issue tracking
-- Suggest using `/project:aiwf:issue_create {task_id}` command
+- 태스크에 GitHub 이슈가 없고 사용자가 이슈 추적을 원하는 경우
+- `/project:aiwf:issue_create {task_id}` 명령어 사용을 제안합니다
 
-## 4 · Set status to in_progress
+## 4 · 상태를 진행 중으로 설정
 
-- Find out the current local timestamp (YYYY-MM-DD HH:MM).
-- Update front-matter to **status: in_progress** and set Updated time
-- Update ./aiwf/00_PROJECT_MANIFEST.md to set task in progress, updated time and current Sprint Status.
-- **GitHub Issue Update (if exists):**
+- 현재 로컬 타임스탬프 확인 (YYYY-MM-DD HH:MM)
+- 프론트매터의 **status: in_progress**로 업데이트하고 업데이트 시간 설정
+- ./aiwf/00_PROJECT_MANIFEST.md에서 태스크 진행 중, 업데이트 시간, 현재 스프린트 상태로 업데이트
+- **GitHub 이슈 업데이트 (존재하는 경우):**
   ```bash
-  gh issue comment {issue_number} --body "🚀 Task work has started."
+  gh issue comment {issue_number} --body "🚀 태스크 작업이 시작되었습니다."
   gh issue edit {issue_number} --add-label "in-progress"
   ```
 
-## 5 · Execute task work
+## 5 · 태스크 작업 실행
 
-- Follow Description, Goal and Acceptance Criteria.
-- Consult supporting docs in .aiwf/01_PROJECT_DOCS/ and .aiwf/02_REQUIREMENTS/.
-- Iterate over subtasks:
-  1. Pick the next incomplete subtask.
-  2. Implement the required changes, consulting docs as needed.
-  3. Mark the subtask done.
-  4. Append a log entry to **## Output Log** using the format `[YYYY-MM-DD HH:MM]: <message>`.
-  5. Repeat until all subtasks are complete.
+- 설명, 목표, 승인 기준을 따릅니다
+- .aiwf/01_PROJECT_DOCS/와 .aiwf/02_REQUIREMENTS/의 지원 문서를 참조합니다
+- 하위 태스크를 반복 처리:
+  1. 다음 미완료 하위 태스크를 선택합니다
+  2. 필요에 따라 문서를 참조하여 필요한 변경사항을 구현합니다
+  3. 하위 태스크를 완료로 표시합니다
+  4. `[YYYY-MM-DD HH:MM]: <메시지>` 형식으로 **## 출력 로그**에 로그 항목을 추가합니다
+  5. 모든 하위 태스크가 완료될 때까지 반복합니다
 
-## 6 · Placeholder
+## 6 · 플레이스홀더
 
-Placeholder - just move on to the next step
+플레이스홀더 - 다음 단계로 진행하세요
 
-## 7 · Execute Code Review
+## 7 · 코드 리뷰 실행
 
-Follow these steps for a Code Review (in order)
+코드 리뷰를 위해 다음 단계를 순서대로 수행합니다
 
-- include @.claude/commands/aiwf/aiwf_code_review.md and use the Task ID as Scope.
-- Follow the instructions in the file to run a code review in **PARALLEL SUBAGENTS**
-- When done continue acting on the results accordingly
-- Understand and think about the results
-- on **FAIL**
-  - thoroughly understand the problem
-  - extend the Current Task with the Subtasks identified by the review
-  - go back to "5 · Execute task work"
-- on **PASS**
-  - move on to next step
+- @.claude/commands/aiwf/aiwf_code_review.md를 포함하고 태스크 ID를 범위로 사용합니다
+- 파일의 지침에 따라 **병렬 서브에이전트**에서 코드 리뷰를 실행합니다
+- 완료되면 결과에 따라 적절히 조치합니다
+- 결과를 이해하고 분석합니다
+- **실패** 시:
+  - 문제를 철저히 이해합니다
+  - 리뷰에서 식별된 하위 태스크로 현재 태스크를 확장합니다
+  - "5 · 태스크 작업 실행"으로 돌아갑니다
+- **통과** 시:
+  - 다음 단계로 진행합니다
 
-## 8 · Finalize task status
+## 8 · 태스크 상태 완료 처리
 
-- set the Task status to **completed**
-- Rename the Task file accordingly to enable proper Completed recognition from the filename (TX[TASK_ID]...)
-- Update .aiwf/00_PROJECT_MANIFEST.md to reflect the new status
-- **GitHub Issue Update (if exists):**
+- 태스크 상태를 **completed**로 설정합니다
+- 파일명에서 완료 인식이 가능하도록 태스크 파일명을 적절히 변경합니다 (TX[TASK_ID]...)
+- .aiwf/00_PROJECT_MANIFEST.md를 업데이트하여 새 상태를 반영합니다
+- **GitHub 이슈 업데이트 (존재하는 경우):**
   ```bash
-  gh issue comment {issue_number} --body "✅ Task has been completed."
+  gh issue comment {issue_number} --body "✅ 태스크가 완료되었습니다."
   gh issue edit {issue_number} --remove-label "in-progress" --add-label "completed"
   ```
-- **Report** the result to the user
+- 사용자에게 **결과 보고**
 
-  ✅ **Result**: Quick statement of success
+  ✅ **결과**: 성공에 대한 간단한 설명
 
-  🔎 **Scope**: Identified task or reason none was processed
+  🔎 **범위**: 식별된 태스크 또는 처리되지 않은 이유
 
-  💬 **Summary**: One-paragraph recap of what was done or why blocked
+  💬 **요약**: 수행된 작업 또는 차단된 이유에 대한 한 문단 요약
 
-  ⏭️ **Next steps**: Recommended follow-up actions
+  ⏭️ **다음 단계**: 권장 후속 조치
 
-- **Suggestions** for the User:
+- 사용자를 위한 **제안**:
 
-  - 🛠️ Use /project:aiwf:commit `TASK_ID` to commit the changes to git
-  - 🔀 Use /project:aiwf:pr_create `TASK_ID` to create a Pull Request
-  - 🧹 Use /clear to clear the context before starting the next Task
+  - 🛠️ /project:aiwf:commit `TASK_ID`를 사용하여 변경사항을 git에 커밋
+  - 🔀 /project:aiwf:pr_create `TASK_ID`를 사용하여 Pull Request 생성
+  - 🧹 /clear를 사용하여 다음 태스크 시작 전 컨텍스트 정리

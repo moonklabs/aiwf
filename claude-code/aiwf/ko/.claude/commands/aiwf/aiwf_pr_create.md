@@ -1,22 +1,22 @@
-# Create Pull Request After Task Completion
+# 태스크 완료 후 풀 리퀘스트 생성
 
-Create a GitHub Pull Request after task completion and link it with related issues.
+태스크 완료 후 GitHub 풀 리퀘스트를 생성하고 관련 이슈와 연결합니다.
 
-## Create TODO with EXACTLY these 6 items
+## 정확히 다음 6개 항목으로 TODO 생성
 
-1. Check current branch and changes
-2. Generate PR body template
-3. Create GitHub PR
-4. Link issue with PR
-5. Assign reviewers
-6. Report results
+1. 현재 브랜치 및 변경사항 확인
+2. PR 본문 템플릿 생성
+3. GitHub PR 생성
+4. 이슈와 PR 연결
+5. 리뷰어 배정
+6. 결과 보고
 
-## 1 · Check Branch and Changes
+## 1 · 브랜치 및 변경사항 확인
 
-Run in parallel:
-- `git branch --show-current`: Check current branch
-- `git log main..HEAD --oneline`: Commit history
-- `git diff main...HEAD --stat`: Changed files statistics
+병렬로 실행:
+- `git branch --show-current`: 현재 브랜치 확인
+- `git log main..HEAD --oneline`: 커밋 히스토리
+- `git diff main...HEAD --stat`: 변경된 파일 통계
 
 Extract GitHub issue number from task file
 
