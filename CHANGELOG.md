@@ -8,6 +8,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- 📚 **Project Documentation Structure**
+  - Created ARCHITECTURE.md with comprehensive system overview
+  - Established M01 milestone: "AIWF 안정화 및 확산"
+  - Created S01 sprint: "문서화 및 프로젝트 구조 정리"
+  - Updated PROJECT_MANIFEST.md with actual project status
+
+### Changed
+- 🔧 **Project Management**
+  - Transitioned from template to active project management
+  - Documented current project status and roadmap
+  - Identified and documented known issues
+
+### Known Issues
+- `update_docs` command file missing (only `aiwf_docs.md` exists)
+- GitHub repository URL still references `moonklabs/aiwf` in code
+
+## [0.3.0] - 2024-12-20
+
+### Added
 - 🌍 **Multi-language Support**
   - Interactive language selection during installation (English/Korean)
   - Language-specific command and documentation installation
