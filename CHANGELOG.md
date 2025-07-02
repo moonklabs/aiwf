@@ -66,15 +66,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 📦 **Project Configuration Enhancements**
   - Enhanced Jest configuration for better test environment setup
   - Improved package.json with enhanced scripts and metadata
-  - Enhanced CLI with improved language detection and error handling
-  - Better user experience with enhanced error handling capabilities
-
-- 🔧 **Project Management Transition**
-  - Transitioned from template to active project management
-  - Documented current project status and comprehensive roadmap
-  - Identified and documented known issues for resolution
   - Better test coverage tracking and reporting capabilities
-  - Enhanced CLI user experience with improved error handling
+  - Enhanced .gitignore with coverage directory for test reporting
 
 - 🔧 **Project Management Transition**
   - Transitioned from template to active project management
@@ -86,23 +79,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Improved backup-related messages in both Korean and English
   - Consolidated AIWF branding and CLI English localization
   - Better Korean/English command integration
-
-- ⚙️ **Enhanced CLI Experience**
-  - Improved CLI with enhanced language detection and error handling
-  - Better user experience with enhanced error handling
-  - Enhanced metadata and script configurations
-
-- 📊 **Project Configuration Enhancements**
-  - Enhanced CLI with improved language detection and error handling
-  - Updated Jest configuration for better test environment setup
-  - Improved package.json scripts and metadata for better development experience
-  - Enhanced .gitignore with coverage directory for test reporting
-
-- 📝 **Korean Commands Quality Improvements**
-  - Standardized TODO generation patterns across all Korean commands
-  - Improved language quality and consistency in 16 Korean command files
-  - Unified terminology usage (task, sprint, milestone) throughout commands
-  - Ensured functional equivalence with English command versions
 
 ### Fixed
 - ⚠️ **Command File Issues Resolution**
