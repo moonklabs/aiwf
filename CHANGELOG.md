@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- 📚 **Latest Documentation Updates** (2025-07-03)
+  - **55d6766**: Comprehensive language management system documentation
+    - Added language management commands documentation (manager, status, switch)
+    - Updated installation options with auto-detection features
+    - Enhanced language standardization and feature parity information
+    - Synchronized documentation across English and Korean versions
+
 - 🌐 **S03 Sprint: Comprehensive Language Management System** (Latest)
   - **T03_S03**: Complete Korean commands standardization with unified terminology
   - Intelligent language detection and preference storage system
@@ -81,6 +88,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Better Korean/English command integration
 
 ### Fixed
+- 🧹 **Latest Code Cleanup** (2025-07-03)
+  - **04a3cba**: Removed duplicate and deprecated aiwf_update_docs commands
+    - Cleaned up deprecated aiwf_update_docs_kr.md marked for removal
+    - Removed duplicate aiwf_update_docs.md files from both language directories
+    - Consolidated to single aiwf_docs.md per language directory
+
 - ⚠️ **Command File Issues Resolution**
   - Resolved missing and duplicate command files
   - Fixed command file inconsistency across language versions
@@ -88,6 +101,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Enhanced command loading and execution reliability
 
 ### Technical Implementation
+- docs: update documentation for language management system (55d6766)
+- cleanup: remove duplicate and deprecated aiwf_update_docs commands (04a3cba)
 - feat(i18n): complete T03_S03 Korean commands standardization (889d66d)
 - feat(i18n): implement comprehensive language management system (f509bd3)
 - chore: enhance project configuration and testing infrastructure (fbd2110)
