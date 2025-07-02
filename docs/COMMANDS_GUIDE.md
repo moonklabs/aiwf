@@ -12,12 +12,76 @@ AIWF commands follow the format `/aiwf_<command_name> [arguments]`.
 > - The `/aiwf_<command_name>` format is still supported for backward compatibility.
 > - Korean commands may have a `_kr` suffix (e.g., `/aiwf_initialize_kr`)
 
-## Language-Specific Commands
+## Language Management System
+
+### Language Support Features
+
+AIWF includes a comprehensive language management system with:
+
+- **Intelligent Language Detection**: Automatically detects system language preferences
+- **Persistent Language Storage**: Saves your language preference for future installations
+- **Interactive Language Switching**: Switch between languages with simple commands
+- **Command-Line Language Tools**: Dedicated CLI tools for language management
+
+### Language Commands
+
+#### 🌐 `/aiwf_language_manager`
+
+**Purpose**: Comprehensive language management interface
+
+**Usage**:
+```
+/aiwf_language_manager
+```
+
+**Behavior**:
+- Shows current language settings and preferences
+- Provides options to change language interactively
+- Manages language detection and storage
+- Validates language settings across the system
+
+#### 🔍 `/aiwf_language_status`
+
+**Purpose**: Check current language configuration and status
+
+**Usage**:
+```
+/aiwf_language_status
+```
+
+**Behavior**:
+- Displays current active language
+- Shows detected system language preferences
+- Reports language file availability and consistency
+- Provides language-specific installation status
+
+#### 🔄 `/aiwf_switch_language`
+
+**Purpose**: Switch between supported languages
+
+**Usage**:
+```
+/aiwf_switch_language
+# Interactive language selection
+
+/aiwf_switch_language ko
+# Switch to Korean
+
+/aiwf_switch_language en
+# Switch to English
+```
+
+**Behavior**:
+- Updates language preferences
+- Reinstalls commands in selected language
+- Maintains project settings and data
+- Provides confirmation of successful language switch
 
 ### Command Versions
 
-- **Default Commands**: English or mixed multilingual
-- **Korean Commands**: Complete Korean versions with `_kr` suffix
+- **Default Commands**: English or standardized multilingual
+- **Korean Commands**: Complete Korean versions with full feature parity
+- **Language Management**: Available in both languages with identical functionality
 
 ## Setup & Context Commands
 
@@ -547,6 +611,24 @@ AIWF commands follow the format `/aiwf_<command_name> [arguments]`.
 
 ---
 
+### ⚙️ `/aiwf_update_docs`
+
+**Purpose**: Update and synchronize project documentation
+
+**Usage**:
+
+```
+/aiwf_update_docs
+```
+
+**Behavior**:
+
+1. Scan project documentation structure
+2. Identify outdated or missing documentation
+3. Update documentation to reflect current project state
+4. Synchronize documentation across different formats
+5. Validate documentation consistency and completeness
+
 ### ⚙️ `/aiwf_prime_context`
 
 **Purpose**: Quickly load and prime project context
@@ -634,3 +716,11 @@ If you need help with commands:
 2. Check this guide
 3. Look at task examples in `.aiwf/`
 4. Review command sources in `.claude/commands/`
+
+## Document Updates
+
+**📝 Important**: This document is automatically updated when new features are added or existing commands are modified. Always refer to the latest version for accurate command information.
+
+**Language Versions**: Both English and Korean versions of this guide are maintained and updated simultaneously to ensure consistency across language installations.
+
+**Last Updated**: 2025-07-03 - Language Management System and Korean Commands Standardization

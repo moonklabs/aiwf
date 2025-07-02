@@ -18,14 +18,15 @@ AIWF is a directory-based project management system I created to work more effec
 npx aiwf
 ```
 
-**Multi-language Support**: During installation, you can choose between English and Korean. The selected language determines which commands and documentation are installed.
+**Multi-language Support**: AIWF features a comprehensive language management system with intelligent detection and preference storage. During installation, you can choose between English and Korean, and later switch languages using the built-in language management commands.
 
 This sets up the folder structure and installs/updates command files in your project. You can also use it to update existing installations - command files are automatically backed up.
 
 **Installation Options**:
 
 - Interactive installation: Select language then install
-- Force installation: `npx aiwf --force` (defaults to English)
+- Force installation: `npx aiwf --force` (uses auto-detected language)
+- Language management: Use `aiwf-lang` commands for post-installation language switching
 
 ### 2. Initialize Your Project
 
@@ -223,7 +224,13 @@ Custom Claude Code commands that drive the AIWF workflow:
   - Execute all milestones: `yolo milestone-all`
   - Worktree support: `yolo sprint-all worktree`
   - Provides continuous execution and detailed progress reports
+- `language_manager` - Comprehensive language management system:
+  - Check current language settings and status
+  - Switch between languages interactively
+  - Auto-detect system language preferences
 - Many more commands for testing, review, and project management
+
+**Language Support**: All commands are available in both English and Korean versions with complete functional equivalence and standardized quality.
 
 ## Directory Structure
 
