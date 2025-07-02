@@ -1,121 +1,121 @@
-# 마일스톤에서 스프린트 계획하기 - 탑 다운 실행
+# 마일스톤에서 스프린트 생성 - 탑 다운 실행
 
-Follow these instructions to sprint the scope of a Milestone into Sprints
+마일스톤의 범위를 스프린트로 분할하기 위해 다음 지침을 따르세요
 
-## Create a TODO with EXACTLY these 8 items
+## 정확히 다음 8개 항목으로 TODO를 생성하세요
 
-1. Analyze current milestone state
-2. Assess completed work vs milestone requirements
-3. Identify remaining work and dependencies
-4. Design logical sprint boundaries
-5. Create sprint directories and meta files
-6. Update PROJECT_MANIFEST with sprint roadmap
-7. Validate sprint coherence and dependencies
-8. Report milestone plan
+1. 현재 마일스톤 상태 분석
+2. 완료된 작업과 마일스톤 요구사항 평가
+3. 남은 작업과 종속성 식별
+4. 논리적 스프린트 경계 설계
+5. 스프린트 디렉토리와 메타 파일 생성
+6. 스프린트 로드맵으로 PROJECT_MANIFEST 업데이트
+7. 스프린트 일관성과 종속성 검증
+8. 마일스톤 계획 보고
 
 ---
 
-## 1 · Analyze current milestone state
+## 1 · 현재 마일스톤 상태 분석
 
-**CRITICAL:** You are given additional Arguments: <$ARGUMENTS>
+**치명적:** 추가 인수가 제공됩니다: <$ARGUMENTS>
 
-**USE PARALLEL SUBAGENTS** to do these tasks:
+**병렬 서브에이전트 사용**하여 다음 태스크 수행:
 
-- Parse arguments for milestone ID (defaults to current milestone from PROJECT_MANIFEST)
-- Read `.aiwf/00_PROJECT_MANIFEST.md` to understand current progress
-- Scan `.aiwf/03_SPRINTS/` to identify existing sprints for the target milestone
-- For each existing sprint, read its sprint meta file to determine status from YAML frontmatter
-- Analyze the Tasks in Sprints to understand that work that has been done (from Subtasks)
+- 마일스톤 ID에 대한 인수 파싱 (PROJECT_MANIFEST의 현재 마일스톤이 기본값)
+- 현재 진행 상황을 이해하기 위해 `.aiwf/00_PROJECT_MANIFEST.md` 읽기
+- 대상 마일스톤의 기존 스프린트를 식별하기 위해 `.aiwf/03_SPRINTS/` 스캔
+- 각 기존 스프린트에 대해, YAML 프론트매터에서 상태를 확인하기 위해 스프린트 메타 파일 읽기
+- 완료된 작업을 이해하기 위해 스프린트의 태스크를 분석 (서브태스크에서)
 
-## 2 · Assess completed work vs milestone requirements
+## 2 · 완료된 작업과 마일스톤 요구사항 평가
 
-- Read milestone meta file from `.aiwf/02_REQUIREMENTS/$MILESTONE_ID/`
-- **CRITICAL:** Follow and read ALL linked documents in the milestone meta:
-  - Product Requirements (PRD.md)
-  - Database Specifications (SPECS_DB.md)
-  - API Specifications (SPECS_API.md)
-  - Tool Specifications (SPECS_TOOLS.md)
-  - Any other linked specifications
-- Study the milestone's Definition of Done (DoD) carefully and **think deeply** about what each DoD criterion actually requires in terms of specific deliverables
-- For each existing sprint, analyze what deliverables have been completed by reading sprint meta and task files
-- **Think more carefully** about the gap analysis: map each completed deliverable against specific DoD requirements and identify what's genuinely missing vs what might already be covered
-- Create clear picture: "What's done vs what's required for milestone completion" with specific justification for each gap identified
+- `.aiwf/02_REQUIREMENTS/$MILESTONE_ID/`에서 마일스톤 메타 파일 읽기
+- **치명적:** 마일스톤 메타에서 연결된 모든 문서를 따라가며 읽기:
+  - 제품 요구사항 (PRD.md)
+  - 데이터베이스 사양 (SPECS_DB.md)
+  - API 사양 (SPECS_API.md)
+  - 도구 사양 (SPECS_TOOLS.md)
+  - 기타 연결된 사양들
+- 마일스톤의 완료 정의(DoD)를 신중히 학습하고 각 DoD 기준이 실제로 특정 결과물 측면에서 무엇을 요구하는지 **깊이 생각**하기
+- 각 기존 스프린트에 대해, 스프린트 메타와 태스크 파일을 읽어 완료된 결과물 분석
+- 격차 분석에 대해 **더 신중히 생각하기**: 완료된 각 결과물을 특정 DoD 요구사항에 대응시키고 진정으로 누락된 것과 이미 다뤄진 것을 식별
+- 명확한 그림 생성: "완료된 것 vs 마일스톤 완성을 위해 필요한 것"에 대해 식별된 각 격차에 대한 구체적 근거 제시
 
-## 3 · Identify remaining work and dependencies
+## 3 · 남은 작업과 종속성 식별
 
-- Based on gap analysis, identify remaining deliverables for milestone completion
-- Group related deliverables that have natural dependencies
-- **CRITICAL:** Each deliverable group should be:
-  - **Independently valuable** (shippable increment)
-  - **Completable in ~1 week** by one person
-  - **Has clear validation criteria**
-- Consider technical dependencies (e.g., auth before UI, LLM integration before tools)
+- 격차 분석을 바탕으로, 마일스톤 완성을 위한 남은 결과물 식별
+- 자연스러운 종속성을 가진 관련 결과물을 그룹화
+- **치명적:** 각 결과물 그룹은 다음과 같아야 함:
+  - **독립적으로 가치 있음** (배포 가능한 증분)
+  - **한 사람이 ~1주일 내에 완료 가능**
+  - **명확한 검증 기준 보유**
+- 기술적 종속성 고려 (예: UI 전에 인증, 도구 전에 LLM 통합)
 
-## 4 · Design logical sprint boundaries
+## 4 · 논리적 스프린트 경계 설계
 
-- Design sprint structure to complete the milestone
-- Each sprint should have:
-  - **Clear focus**: One main deliverable theme
-  - **Natural boundaries**: Minimal dependencies between sprints
-  - **Incremental value**: Each sprint advances toward milestone DoD
-- Sprint naming: `S<nn>_$milestone_id_$focus_slug`
-- **IMPORTANT:** Don't create sprints for work that's already completed
+- 마일스톤을 완성하기 위한 스프린트 구조 설계
+- 각 스프린트는 다음을 보유해야 함:
+  - **명확한 집중점**: 하나의 주요 결과물 테마
+  - **자연스러운 경계**: 스프린트 간 최소한의 종속성
+  - **점진적 가치**: 각 스프린트가 마일스톤 DoD를 향해 전진
+- 스프린트 명명: `S<nn>_$milestone_id_$focus_slug`
+- **중요:** 이미 완료된 작업에 대한 스프린트를 생성하지 마세요
 
-## 5 · Create sprint directories and meta files
+## 5 · 스프린트 디렉토리와 메타 파일 생성
 
-- For each planned sprint that doesn't exist:
-  - Create directory `.aiwf/03_SPRINTS/$FULL_SPRINT_NAME/` (using complete sprint name like "S02_M01_LLM_Integration")
-  - Use template from `.aiwf/99_TEMPLATES/sprint_meta_template.md`
-  - Fill in sprint meta with:
-    - High-level goal and scope
-    - Key deliverables (bullet points, not detailed tasks)
-    - Clear Definition of Done for the sprint
-    - Status: "planned"
+- 존재하지 않는 각 계획된 스프린트에 대해:
+  - 디렉토리 생성 `.aiwf/03_SPRINTS/$FULL_SPRINT_NAME/` ("S02_M01_LLM_Integration"과 같은 완전한 스프린트 이름 사용)
+  - `.aiwf/99_TEMPLATES/sprint_meta_template.md`에서 템플릿 사용
+  - 스프린트 메타를 다음으로 채우기:
+    - 고수준 목표와 범위
+    - 주요 결과물 (자세한 태스크가 아닌 불릿 포인트)
+    - 스프린트에 대한 명확한 완료 정의
+    - 상태: "planned"
 
-## 6 · Update PROJECT_MANIFEST with sprint roadmap
+## 6 · 스프린트 로드맵으로 PROJECT_MANIFEST 업데이트
 
-- Update `.aiwf/00_PROJECT_MANIFEST.md`:
-  - Set `highest_sprint_in_milestone` to the highest planned sprint
-  - Update sprint summary section with overview of remaining sprints
-  - Mark completed sprints as ✅ COMPLETED
-  - Show planned sprints with their focus areas
-  - Update `last_updated` timestamp
+- `.aiwf/00_PROJECT_MANIFEST.md` 업데이트:
+  - `highest_sprint_in_milestone`을 계획된 가장 높은 스프린트로 설정
+  - 남은 스프린트의 개요로 스프린트 요약 섹션 업데이트
+  - 완료된 스프린트를 ✅ COMPLETED로 표시
+  - 계획된 스프린트를 그들의 집중 영역과 함께 표시
+  - `last_updated` 타임스탬프 업데이트
 
-## 7 · Validate sprint coherence and dependencies
+## 7 · 스프린트 일관성과 종속성 검증
 
-- Review the planned sprint sequence for logical flow
-- Ensure each sprint builds naturally on previous work
-- Verify no sprint has impossible dependencies
-- Check that sprint sequence leads to milestone DoD completion
-- **Think about** whether each sprint is independently testable and valuable
+- 논리적 흐름을 위해 계획된 스프린트 순서 검토
+- 각 스프린트가 이전 작업을 자연스럽게 구축하는지 확인
+- 불가능한 종속성을 가진 스프린트가 없는지 확인
+- 스프린트 순서가 마일스톤 DoD 완성으로 이어지는지 확인
+- 각 스프린트가 독립적으로 테스트 가능하고 가치 있는지 **생각하기**
 
-## 8 · Report milestone plan
+## 8 · 마일스톤 계획 보고
 
-Provide comprehensive summary:
+포괄적인 요약 제공:
 
-**Milestone Status:**
+**마일스톤 상태:**
 
-- Target milestone: $milestone_id
-- Sprints completed: $count
-- Sprints planned: $count
-- Estimated completion: $sprint_sequence
+- 대상 마일스톤: $milestone_id
+- 완료된 스프린트: $count
+- 계획된 스프린트: $count
+- 예상 완료: $sprint_sequence
 
-**Sprint Roadmap:**
+**스프린트 로드맵:**
 
-For each sprint (existing and planned):
+각 스프린트에 대해 (기존 및 계획된):
 
 - **$Sprint_ID**: $status - $focus_description
-- Key deliverables: $bullet_list
-- Dependencies: $if_any
+- 주요 결과물: $bullet_list
+- 종속성: $if_any
 
-**Next Steps:**
+**다음 단계:**
 
-- Immediate next sprint to detail: $sprint_id
+- 상세화할 즉시 다음 스프린트: $sprint_id
 
-**Validation:**
+**검증:**
 
-Summarize your validation analysis covering:
+다음을 포함한 검증 분석 요약:
 
-- All milestone DoD items are covered by sprint plan
-- Sprint dependencies are logical and minimal
-- Each sprint delivers independent value
+- 모든 마일스톤 DoD 항목이 스프린트 계획에 포함됨
+- 스프린트 종속성이 논리적이고 최소한임
+- 각 스프린트가 독립적인 가치를 제공함

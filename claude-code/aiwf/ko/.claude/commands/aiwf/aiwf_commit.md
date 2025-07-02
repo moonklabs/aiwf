@@ -1,66 +1,66 @@
 # 변경사항 분석 및 사용자 확인을 통한 논리적 git 커밋 생성
 
-Follow these instructions from top to bottom.
+다음 지시사항을 위에서 아래로 순서대로 따르세요.
 
-## Create a TODO with EXACTLY these 6 items
+## 정확히 다음 6개 항목으로 TODO 생성
 
-1. Parse arguments and analyze git status
-2. Review changes and group by logical commits
-3. Propose commit structure and messages
-4. Check if user approval is necessary
-5. Execute approved commits
-6. Report commit results
+1. 인수 파싱 및 git 상태 분석
+2. 변경사항 검토 및 논리적 커밋별 그룹화
+3. 커밋 구조 및 메시지 제안
+4. 사용자 승인 필요 여부 확인
+5. 승인된 커밋 실행
+6. 커밋 결과 보고
 
 ---
 
-## 1 · Analyze git status and parse arguments
+## 1 · git 상태 분석 및 인수 파싱
 
-- Run these commands in parallel for maximum efficiency: `git status`, `git diff --staged`, `git diff`
-- List all changed files with their folder structure to understand the scope
+- 최대 효율성을 위해 다음 명령어들을 병렬 실행: `git status`, `git diff --staged`, `git diff`
+- 범위를 이해하기 위해 폴더 구조와 함께 모든 변경된 파일 나열
 
-### CRITICAL: Argument Interpretation Rules
+### 중요: 인수 해석 규칙
 
-**Context Provided** (when <$ARGUMENTS> contains text):
+**컨텍스트 제공됨** (<$ARGUMENTS>에 텍스트가 포함된 경우):
 
-- If YOLO is part of the <$ARGUMENTS> it is meant to skip user Approval (see Step 4 on your Todo)
-- The other text in <$ARGUMENTS> represents a **task ID**, **sprint ID**, or other **contextual identifier** provided by the user
-- This is NOT a file path - it's a semantic context for filtering changes
-- **PRIMARY FOCUS**: Only commit files directly related to this context
-- **SECONDARY CONSIDERATION**: After handling the primary context, ask if user wants to commit other unrelated changes
+- YOLO가 <$ARGUMENTS>의 일부라면 사용자 승인을 건너뛰는 것을 의미 (Todo의 4단계 참조)
+- <$ARGUMENTS>의 다른 텍스트는 사용자가 제공한 **태스크 ID**, **스프린트 ID**, 또는 기타 **컨텍스트 식별자**를 나타냄
+- 이것은 파일 경로가 아니라 변경사항을 필터링하기 위한 의미적 컨텍스트임
+- **주요 초점**: 이 컨텍스트와 직접 관련된 파일만 커밋
+- **부차적 고려사항**: 주요 컨텍스트 처리 후, 사용자가 관련 없는 다른 변경사항을 커밋하고 싶은지 묻기
 
-**Task ID Pattern** (e.g., T01_S02, TX03_S01, T003):
+**태스크 ID 패턴** (예: T01_S02, TX03_S01, T003):
 
-- Sprint Tasks: `T<NN>_S<NN>` format (e.g., T01_S02, T03_S02)
-- Completed Sprint Tasks: `TX<NN>_S<NN>` format (e.g., TX01_S02, TX03_S01)
-- General Tasks: `T<NNN>` format (e.g., T001, T002)
-- Completed General Tasks: `TX<NNN>` format (e.g., TX001, TX002)
-- Search for this task ID in:
-  - `.aiwf/03_SPRINTS/` directory (for sprint tasks)
-  - `.aiwf/04_GENERAL_TASKS/` directory (for general tasks)
-  - Task metadata in files (look for `task_id: T01_S02` in frontmatter)
-  - Git diff content (to see if code comments or commits reference the task)
-- Identify ALL files that were modified as part of this task's implementation
-- This includes: source code, tests, configuration, and the task documentation file itself
+- 스프린트 태스크: `T<NN>_S<NN>` 형식 (예: T01_S02, T03_S02)
+- 완료된 스프린트 태스크: `TX<NN>_S<NN>` 형식 (예: TX01_S02, TX03_S01)
+- 일반 태스크: `T<NNN>` 형식 (예: T001, T002)
+- 완료된 일반 태스크: `TX<NNN>` 형식 (예: TX001, TX002)
+- 다음 위치에서 이 태스크 ID를 검색:
+  - `.aiwf/03_SPRINTS/` 디렉토리 (스프린트 태스크용)
+  - `.aiwf/04_GENERAL_TASKS/` 디렉토리 (일반 태스크용)
+  - 파일의 태스크 메타데이터 (frontmatter에서 `task_id: T01_S02` 찾기)
+  - Git diff 내용 (코드 주석이나 커밋이 태스크를 참조하는지 확인)
+- 이 태스크 구현의 일부로 수정된 모든 파일 식별
+- 여기에는 다음이 포함: 소스 코드, 테스트, 구성, 그리고 태스크 문서 파일 자체
 
-**Sprint ID Pattern** (e.g., S01, S02):
+**스프린트 ID 패턴** (예: S01, S02):
 
-- When only sprint ID is provided, commit all changes related to ANY task within that sprint
-- Search pattern: `T*_S<NN>` in the sprint directory
-- Example: "S02" would include changes for T01_S02, T02_S02, T03_S02, etc.
+- 스프린트 ID만 제공된 경우, 해당 스프린트 내의 모든 태스크와 관련된 변경사항을 커밋
+- 검색 패턴: 스프린트 디렉토리의 `T*_S<NN>`
+- 예시: "S02"는 T01_S02, T02_S02, T03_S02 등의 변경사항을 포함
 
-**No Context Provided** (when <$ARGUMENTS> is empty):
+**컨텍스트 제공되지 않음** (<$ARGUMENTS>가 비어있는 경우):
 
-- Analyze all changes and group them logically
-- Propose separate commits for different logical units of work
+- 모든 변경사항을 분석하고 논리적으로 그룹화
+- 서로 다른 논리적 작업 단위에 대해 별도 커밋 제안
 
-### Implementation Steps
+### 구현 단계
 
-1. First, determine if <$ARGUMENTS> contains any text
-2. If yes, explicitly state: "Context provided: '$ARGUMENTS' - I will focus on changes related to this context"
-3. If it's a task ID pattern, find the task file and understand what was implemented
-4. Filter the changed files to only those related to the identified context
-5. If no files match the context, inform the user: "No changes found related to '$ARGUMENTS'"
-6. If unrelated changes exist, mention them but DO NOT include in initial commit proposal
+1. 먼저 <$ARGUMENTS>에 텍스트가 포함되어 있는지 확인
+2. 포함되어 있다면 명시적으로 기술: "컨텍스트 제공됨: '$ARGUMENTS' - 이 컨텍스트와 관련된 변경사항에 집중하겠습니다"
+3. 태스크 ID 패턴인 경우, 태스크 파일을 찾아서 구현된 내용 이해
+4. 식별된 컨텍스트와 관련된 파일들로만 변경된 파일들을 필터링
+5. 컨텍스트와 일치하는 파일이 없으면 사용자에게 알림: "'$ARGUMENTS'와 관련된 변경사항을 찾을 수 없습니다"
+6. 관련 없는 변경사항이 존재하면 언급하되 초기 커밋 제안에는 포함하지 않음
 
 ## 2 · Review changes and group by logical commits
 

@@ -1,134 +1,134 @@
 # AIWF 프레임워크 초기화
 
-Initialize the AIWF project management framework through an adaptive, interactive process.
+적응형, 상호작용적 프로세스를 통해 AIWF 프로젝트 관리 프레임워크를 초기화합니다.
 
-## Create a TODO with EXACTLY these items
+## 정확히 다음 항목들로 TODO를 생성하세요
 
-1. Scan and analyze the project
-2. Interactive confirmation with user
-3. Check for existing AIWF documents
-4. Guide document creation process
-5. Create first milestone for AIWF
-6. Generate project manifest
-7. Provide next steps
+1. 프로젝트 스캔 및 분석
+2. 사용자와 상호작용적 확인
+3. 기존 AIWF 문서 확인
+4. 문서 생성 프로세스 안내
+5. AIWF를 위한 첫 번째 마일스톤 생성
+6. 프로젝트 매니페스트 생성
+7. 다음 단계 제공
 
-## DETAILS on every TODO item
+## 모든 TODO 항목에 대한 세부사항
 
-### 1. Scan and analyze the project
+### 1. 프로젝트 스캔 및 분석
 
-**Detect project characteristics:**
+**프로젝트 특성 탐지:**
 
-- Check for package.json, requirements.txt, composer.json, etc.
-- Identify project type (Node.js, Python, PHP, etc.)
-- Scan overall project structure
-- Check if this is a new or existing project
-- Look for existing documentation (README, docs/, etc.)
+- package.json, requirements.txt, composer.json 등 확인
+- 프로젝트 유형 식별 (Node.js, Python, PHP 등)
+- 전체 프로젝트 구조 스캔
+- 새 프로젝트인지 기존 프로젝트인지 확인
+- 기존 문서 찾기 (README, docs/ 등)
 
-**Keep findings brief** - Just identify the essentials
+**발견사항을 간단히 정리** - 필수 사항만 식별
 
-### 2. Interactive confirmation with user
+### 2. 사용자와 상호작용적 확인
 
-**Present findings conversationally:**
-
-```
-I found this to be a [project type] project named [detected name].
-Is this correct? Should I proceed with AIWF setup?
-```
-
-**Get user confirmation before continuing**
-
-### 3. Check for existing AIWF documents
-
-**Scan .aiwf/ directory for:**
-
-- Any documents in 01_PROJECT_DOCS/
-- Any milestones in 02_REQUIREMENTS/
-- Any existing sprints or tasks
-- Current manifest status
-
-**Interactive decision:**
-
-- If documents found: "I found existing documents: [list]. Should we work with these or extend them?"
-- If no documents: "No AIWF documents found yet. Do you have any existing project documentation you'd like to copy in before we continue?"
-
-**Allow user to:**
-
-- Use existing documents
-- Add new documents
-- Start fresh
-- Cancel to add documents manually first
-
-### 4. Guide document creation process
-
-**Based on user's choice:**
-
-**If starting fresh or extending:**
-
-- Perform deep analysis of the codebase
-- Identify key components and architecture patterns
-- Create draft ARCHITECTURE.md based on analysis
-- Use Q&A style to refine and complete:
-  - "What's the main purpose of this project?"
-  - "What are the key technical decisions?"
-  - "Any important constraints or requirements?"
-
-**If using existing docs:**
-
-- Import and adapt existing documentation
-- Fill in any AIWF-specific sections
-- Ensure compatibility with framework structure
-
-**Keep it conversational and adaptive**
-
-### 5. Create first milestone for AIWF
-
-**Determine appropriate first milestone:**
-
-- If new project: Start with setup/foundation milestone
-- If existing project: Identify current phase and create appropriate milestone
-
-**Interactive milestone creation:**
-
-- "Based on the project state, I suggest creating milestone: [name]"
-- "What would you like to focus on in this milestone?"
-- Create milestone structure with initial requirements
-- Keep scope realistic and focused
-
-### 6. Generate project manifest
-
-**Automatically generate manifest using:**
-
-- Information gathered during setup
-- Created/imported documentation
-- Current milestone details
-- Project metadata
-
-**No user interaction needed** - Just inform when complete
-
-### 7. Provide next steps
-
-**Customized guidance based on setup:**
+**발견사항을 대화형으로 제시:**
 
 ```
-✅ AIWF initialized for [project name]!
-
-Current setup:
-- Project type: [type]
-- Current milestone: [milestone]
-- Documents: [created/imported]
-
-Next steps:
-- Review your architecture: 01_PROJECT_DOCS/ARCHITECTURE.md
-- Check milestone requirements: 02_REQUIREMENTS/[milestone]/
-- Start first task: /project:aiwf:create_general_task
-
-Ready to begin development!
+이것은 [프로젝트 이름]이라는 [프로젝트 유형] 프로젝트인 것으로 확인됩니다.
+맞습니까? AIWF 설정을 계속 진행해도 될까요?
 ```
 
-## ADAPTIVE PROCESS NOTES
+**계속하기 전에 사용자 확인 받기**
 
-- **Stay conversational** - Ask questions naturally, not like a form
-- **Be smart** - Use AI to understand context and make intelligent suggestions
-- **Allow flexibility** - User can skip, cancel, or modify at any point
-- **Focus on value** - Only create what's useful for the specific project
-- **Keep it simple** - Don't overwhelm with options or details
+### 3. 기존 AIWF 문서 확인
+
+**.aiwf/ 디렉토리에서 스캔:**
+
+- 01_PROJECT_DOCS/의 모든 문서
+- 02_REQUIREMENTS/의 모든 마일스톤
+- 기존 스프린트나 태스크
+- 현재 매니페스트 상태
+
+**상호작용적 결정:**
+
+- 문서가 발견된 경우: "기존 문서를 발견했습니다: [목록]. 이것들을 사용하거나 확장할까요?"
+- 문서가 없는 경우: "아직 AIWF 문서가 없습니다. 계속하기 전에 복사하고 싶은 기존 프로젝트 문서가 있나요?"
+
+**사용자가 선택할 수 있는 옵션:**
+
+- 기존 문서 사용
+- 새 문서 추가
+- 새로 시작
+- 먼저 수동으로 문서 추가하기 위해 취소
+
+### 4. 문서 생성 프로세스 안내
+
+**사용자 선택에 따라:**
+
+**새로 시작하거나 확장하는 경우:**
+
+- 코드베이스의 심층 분석 수행
+- 주요 구성요소와 아키텍처 패턴 식별
+- 분석을 바탕으로 ARCHITECTURE.md 초안 생성
+- Q&A 스타일로 정제하고 완성:
+  - "이 프로젝트의 주요 목적은 무엇인가요?"
+  - "핵심 기술적 결정사항은 무엇인가요?"
+  - "중요한 제약사항이나 요구사항이 있나요?"
+
+**기존 문서를 사용하는 경우:**
+
+- 기존 문서를 가져와서 적응
+- AIWF 관련 섹션 작성
+- 프레임워크 구조와의 호환성 보장
+
+**대화형이고 적응적으로 유지**
+
+### 5. AIWF를 위한 첫 번째 마일스톤 생성
+
+**적절한 첫 번째 마일스톤 결정:**
+
+- 새 프로젝트인 경우: 설정/기반 마일스톤으로 시작
+- 기존 프로젝트인 경우: 현재 단계를 식별하고 적절한 마일스톤 생성
+
+**상호작용적 마일스톤 생성:**
+
+- "프로젝트 상태를 바탕으로 다음 마일스톤 생성을 제안합니다: [이름]"
+- "이 마일스톤에서 무엇에 집중하고 싶으신가요?"
+- 초기 요구사항이 포함된 마일스톤 구조 생성
+- 범위를 현실적이고 집중적으로 유지
+
+### 6. 프로젝트 매니페스트 생성
+
+**다음을 사용하여 매니페스트 자동 생성:**
+
+- 설정 중에 수집된 정보
+- 생성/가져온 문서
+- 현재 마일스톤 세부사항
+- 프로젝트 메타데이터
+
+**사용자 상호작용 불필요** - 완료될 때 알리기만 하세요
+
+### 7. 다음 단계 제공
+
+**설정을 바탕으로 맞춤형 안내:**
+
+```
+✅ [프로젝트 이름]에 대한 AIWF 초기화 완료!
+
+현재 설정:
+- 프로젝트 유형: [유형]
+- 현재 마일스톤: [마일스톤]
+- 문서: [생성/가져온 항목]
+
+다음 단계:
+- 아키텍처 검토: 01_PROJECT_DOCS/ARCHITECTURE.md
+- 마일스톤 요구사항 확인: 02_REQUIREMENTS/[마일스톤]/
+- 첫 번째 태스크 시작: /project:aiwf:create_general_task
+
+개발을 시작할 준비가 완료되었습니다!
+```
+
+## 적응형 프로세스 노트
+
+- **대화형 유지** - 양식처럼이 아닌 자연스럽게 질문하기
+- **스마트하게** - AI를 사용하여 맥락을 이해하고 지능적인 제안 만들기
+- **유연성 허용** - 사용자가 언제든지 건너뛰기, 취소, 수정 가능
+- **가치에 집중** - 특정 프로젝트에 유용한 것만 생성
+- **단순하게 유지** - 옵션이나 세부사항으로 압도하지 않기

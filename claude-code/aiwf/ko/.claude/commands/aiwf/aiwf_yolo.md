@@ -1,300 +1,300 @@
-# YOLO 모드에서 모든 열린 태스크 실행
+# YOLO 모드 - 모든 열린 태스크 실행
 
-This mode is meant to be run without user interaction.
-You **DO NOT** ask the user any questions or ask for confirmation
-If in doubt you **RESEARCH** and **ULTRATHINK** about the best solution.
+이 모드는 사용자 상호작용 없이 실행되도록 설계되었습니다.
+사용자에게 질문하거나 확인을 요청하지 **마세요**
+의심스러울 때는 최선의 해결책에 대해 **조사**하고 **초월적으로 생각**하세요.
 
-**IMPORTANT** you try not to stop at any certain point but do so if you need after thoughtful consideration.
+**중요** 특정 지점에서 멈추지 않으려고 노력하되, 신중한 고려 후 필요하다면 그렇게 하세요.
 
-Priority is to get the work completed.
+우선순위는 작업 완료입니다.
 
-## Mode Selection
+## 모드 선택
 
-Check <$ARGUMENTS>:
+<$ARGUMENTS> 확인:
 
-- If sprint ID provided (e.g., S03): Work ONLY on that sprint
-- If `sprint-all` provided: Execute ALL sprints sequentially until completion
-- If `milestone-all` provided: Execute ALL milestones (including all their sprints) until completion
-- If `worktree` provided: Use worktree mode (no branch creation, direct push)
-- If empty: Work on general tasks first, then active sprint tasks
+- 스프린트 ID가 제공된 경우 (예: S03): 해당 스프린트에서만 작업
+- `sprint-all`이 제공된 경우: 완료될 때까지 모든 스프린트를 순차적으로 실행
+- `milestone-all`이 제공된 경우: 완료될 때까지 모든 마일스톤(모든 스프린트 포함) 실행
+- `worktree`가 제공된 경우: 워크트리 모드 사용 (브랜치 생성 없이 직접 푸시)
+- 비어있는 경우: 일반 태스크를 먼저 작업한 후 활성 스프린트 태스크 작업
 
-**Report Mode** to the User!
+**사용자에게 모드 보고!**
 
-## Safety Guidelines
+## 안전 가이드라인
 
-- **NEVER** modify critical files (.env, alembic migrations, production configs)
-- **STOP** if you encounter database schema changes
-- **STOP** if you need to delete more than 5 files
-- **STOP** if tests are failing after your changes
-- **ALWAYS** run tests after implementing a task
+- 중요한 파일(.env, alembic 마이그레이션, 프로덕션 설정)을 **절대** 수정하지 마세요
+- 데이터베이스 스키마 변경이 발생하면 **중단**하세요
+- 5개 이상의 파일을 삭제해야 하는 경우 **중단**하세요
+- 변경 후 테스트가 실패하면 **중단**하세요
+- 태스크 구현 후 **항상** 테스트를 실행하세요
 
-## Follow this exact process
+## 정확한 프로세스를 따르세요
 
-You need to stick to this process and **PRECISELY** follow it
+이 프로세스를 고수하고 **정확히** 따라야 합니다
 
-Before you start:
+시작하기 전에:
 
-- Run tests to ensure clean baseline using test.md command (@.claude/commands/aiwf/aiwf_test.md)
-- **If** FAIL rate is above 10% asses if a fix is possible. If so, fix and move on. If not, move on anyways.
+- test.md 명령(@.claude/commands/aiwf/aiwf_test.md)을 사용하여 깨끗한 기준선을 보장하기 위해 테스트 실행
+- **만약** 실패율이 10%를 초과하면 수정이 가능한지 평가. 가능하다면 수정하고 계속. 그렇지 않다면 어쨌든 계속 진행.
 
-- Check git status to ensure clean working directory
-- **If** git status is not clean just remember and report to the user at the end, but move on.
+- 깨끗한 작업 디렉토리를 보장하기 위해 git 상태 확인
+- **만약** git 상태가 깨끗하지 않다면 기억하고 마지막에 사용자에게 보고하되, 계속 진행.
 
-Also consider <$ARGUMENTS> - if anything between <> can be considered additional instructions, prioritize them in the process.
+또한 <$ARGUMENTS>를 고려 - <> 사이의 것이 추가 지침으로 간주될 수 있다면, 프로세스에서 우선순위를 두세요.
 
-Get the current datetime stamp from the system and remember it
+시스템에서 현재 datetime 스탬프를 가져와서 기억하세요
 
-### FIND OPEN WORK
+### 열린 작업 찾기
 
-Execute based on mode:
+모드에 따라 실행:
 
-**If Sprint ID provided in arguments:**
+**인수에 스프린트 ID가 제공된 경우:**
 
-- Navigate to .aiwf/03_SPRINTS/{sprint_id}/
-- Check if sprint has tasks (T\*.md files)
-- If NO tasks exist:
-  - Check for sprint meta file
-  - If meta exists: Jump to ### CREATE SPRINT TASKS
-  - If no meta: Exit with error - sprint doesn't exist
-- If tasks exist: Continue to **Task selection** section below
+- .aiwf/03_SPRINTS/{sprint_id}/로 이동
+- 스프린트에 태스크가 있는지 확인 (T\*.md 파일)
+- 태스크가 존재하지 않는 경우:
+  - 스프린트 메타 파일 확인
+  - 메타가 존재하면: ### 스프린트 태스크 생성으로 이동
+  - 메타가 없으면: 오류로 종료 - 스프린트가 존재하지 않음
+- 태스크가 존재하면: 아래 **태스크 선택** 섹션으로 계속
 
-**If `sprint-all` in arguments:**
+**인수에 `sprint-all`이 있는 경우:**
 
-- Scan ALL sprints in .aiwf/03_SPRINTS/ directory
-- Create ordered list of ALL sprints (S01, S02, S03, ...)
-- For each sprint in sequence:
-  - Check if sprint has tasks, if not create them
-  - Execute ALL tasks in current sprint before moving to next
-  - Mark sprint as completed when all tasks done
-- Continue until ALL sprints are 100% completed
-- Priority: Complete current sprint entirely before starting next
+- .aiwf/03_SPRINTS/ 디렉토리의 모든 스프린트 스캔
+- 모든 스프린트의 순서 목록 생성 (S01, S02, S03, ...)
+- 각 스프린트를 순서대로:
+  - 스프린트에 태스크가 있는지 확인, 없으면 생성
+  - 다음으로 이동하기 전에 현재 스프린트의 모든 태스크 실행
+  - 모든 태스크가 완료되면 스프린트를 완료로 표시
+- 모든 스프린트가 100% 완료될 때까지 계속
+- 우선순위: 다음을 시작하기 전에 현재 스프린트를 완전히 완료
 
-**If `milestone-all` in arguments:**
+**인수에 `milestone-all`이 있는 경우:**
 
-- Scan ALL milestones in .aiwf/01_MILESTONES/ directory
-- For each milestone in sequence:
-  - Identify all related sprints for this milestone
-  - Execute ALL sprints related to current milestone
-  - Execute ALL tasks in each sprint
-  - Mark milestone as completed when all related work done
-- Continue until ALL milestones are 100% completed
-- Priority: Complete current milestone entirely before starting next
+- .aiwf/01_MILESTONES/ 디렉토리의 모든 마일스톤 스캔
+- 각 마일스톤을 순서대로:
+  - 이 마일스톤과 관련된 모든 스프린트 식별
+  - 현재 마일스톤과 관련된 모든 스프린트 실행
+  - 각 스프린트의 모든 태스크 실행
+  - 관련된 모든 작업이 완료되면 마일스톤을 완료로 표시
+- 모든 마일스톤이 100% 완료될 때까지 계속
+- 우선순위: 다음을 시작하기 전에 현재 마일스톤을 완전히 완료
 
-**If NO arguments (general mode):**
+**인수가 없는 경우 (일반 모드):**
 
-- Use PARALLEL SUBAGENTS to check:
-  - .aiwf/04_GENERAL_TASKS for open general tasks
-  - .aiwf/00_PROJECT_MANIFEST.md for currently active sprint
-  - .aiwf/03_SPRINTS/ for any sprint with only meta file
-- Priority order:
-  1. General tasks (if any open)
-  2. Active sprint tasks (if any open)
-  3. Sprint needing task creation (if found) - maintain order of Sprints
+- 병렬 서브에이전트를 사용하여 확인:
+  - 열린 일반 태스크를 위한 .aiwf/04_GENERAL_TASKS
+  - 현재 활성 스프린트를 위한 .aiwf/00_PROJECT_MANIFEST.md
+  - 메타 파일만 있는 스프린트를 위한 .aiwf/03_SPRINTS/
+- 우선순위 순서:
+  1. 일반 태스크 (열린 것이 있다면)
+  2. 활성 스프린트 태스크 (열린 것이 있다면)
+  3. 태스크 생성이 필요한 스프린트 (발견되면) - 스프린트 순서 유지
 
-**Task Selection:**
+**태스크 선택:**
 
-- From found tasks, select ONE that is not completed. Take the lowest ID in Sprint or General Tasks
-- Skip tasks you've previously attempted (check OUTPUT LOG)
-- If no suitable task found and no sprint needs tasks: Exit gracefully
+- 발견된 태스크에서 완료되지 않은 하나를 선택. 스프린트나 일반 태스크에서 가장 낮은 ID를 선택
+- 이전에 시도한 태스크는 건너뛰기 (OUTPUT LOG 확인)
+- 적합한 태스크를 찾지 못하고 스프린트가 태스크를 필요로 하지 않으면: 우아하게 종료
 
-### CREATE SPRINT TASKS
+### 스프린트 태스크 생성
 
-**ONLY EXECUTE** if sprint needs task creation
-
-- Use a **SUBAGENT** and have it include @.claude/commands/aiwf/aiwf_create_sprint_tasks.md with Sprint ID as argument
-- Wait for completion
-- After task creation move back to `### FIND OPEN WORK`
-
-### WORK ON TASK
-
-- if you have touched this task before ignore it and jump to the next task
-- if you can't find a task that you have not tried fixing before jump to ### EXECUTE PROJECT REVIEW
-- if you find a task that you cannot fix because the work was done already, close the task and note in Output Log of task.
-- **BEFORE STARTING**:
-  - **If** `worktree` NOT in arguments: Create a git branch for the task: `git checkout -b task/<task-id>`
-  - **If** `worktree` in arguments: Skip branch creation (worktree mode)
-- **GitHub Issue Creation (Optional):**
-  - If task doesn't have a `github_issue` field
-  - Use SUBAGENT to include @.claude/commands/aiwf/aiwf_issue_create.md to create issue
-- **USE A SUBAGENT** and have it include @.claude/commands/aiwf/aiwf_do_task.md with the Task ID as Argument to execute the Task.
-- **AFTER TASK COMPLETION**: Run tests to verify nothing broke using test.md command (@.claude/commands/aiwf/aiwf_test.md)
-- on any failure in the task execution assess the severity of the error:
-  - CRITICAL errors (breaking tests, security issues, data loss risk): **FIX PROBLEMS**
-  - NON-CRITICAL errors (linting, formatting, minor issues): note in OUTPUT LOG and continue
-- on success move on
+**오직** 스프린트가 태스크 생성을 필요로 하는 경우에만 실행
+
+- **서브에이전트**를 사용하여 스프린트 ID를 인수로 하여 @.claude/commands/aiwf/aiwf_create_sprint_tasks.md를 포함하도록 함
+- 완료를 기다림
+- 태스크 생성 후 `### 열린 작업 찾기`로 다시 이동
+
+### 태스크 작업
+
+- 이전에 이 태스크를 건드린 적이 있다면 무시하고 다음 태스크로 이동
+- 이전에 수정을 시도하지 않은 태스크를 찾을 수 없다면 ### 프로젝트 리뷰 실행으로 이동
+- 작업이 이미 완료되어 수정할 수 없는 태스크를 발견하면, 태스크를 닫고 태스크의 Output Log에 기록.
+- **시작하기 전에**:
+  - **만약** 인수에 `worktree`가 없다면: 태스크를 위한 git 브랜치 생성: `git checkout -b task/<task-id>`
+  - **만약** 인수에 `worktree`가 있다면: 브랜치 생성 건너뛰기 (워크트리 모드)
+- **GitHub 이슈 생성 (선택사항):**
+  - 태스크에 `github_issue` 필드가 없는 경우
+  - 서브에이전트를 사용하여 이슈 생성을 위해 @.claude/commands/aiwf/aiwf_issue_create.md 포함
+- **서브에이전트 사용**하여 태스크를 실행하기 위해 태스크 ID를 인수로 하여 @.claude/commands/aiwf/aiwf_do_task.md를 포함하도록 함.
+- **태스크 완료 후**: test.md 명령(@.claude/commands/aiwf/aiwf_test.md)을 사용하여 아무것도 깨지지 않았는지 확인하기 위해 테스트 실행
+- 태스크 실행에서 실패 시 오류의 심각성 평가:
+  - 치명적 오류 (테스트 중단, 보안 문제, 데이터 손실 위험): **문제 수정**
+  - 비치명적 오류 (린팅, 포맷팅, 사소한 문제): OUTPUT LOG에 기록하고 계속
+- 성공 시 계속 진행
 
-### COMMIT WORK
+### 작업 커밋
 
-- **ONLY IF** tests are passing and no critical issues exist
-- **USE A SUBAGENT** and have it include @.claude/commands/aiwf/aiwf_commit.md with the Task ID as Argument and YOLO as additional argument
-- on any failure when committing, note the problem in the OUTPUT LOG of the task and continue
-- after successful commit,
-  - **If** `worktree` NOT in arguments: after successful commit, merge to main: `git checkout main && git merge task/<task-id>`
-  - **If** `worktree` in arguments: after successful commit, push changes: `git push`
-- **Pull Request Creation (Optional):**
-  - If GitHub issue is linked to the task
-  - Use SUBAGENT to include @.claude/commands/aiwf/aiwf_pr_create.md to create PR
-- **IMMEDIATELY** go back to `### FIND OPEN WORK` to continue with next task
+- **오직** 테스트가 통과하고 치명적 문제가 없는 경우에만
+- **서브에이전트 사용**하여 태스크 ID를 인수로 하고 YOLO를 추가 인수로 하여 @.claude/commands/aiwf/aiwf_commit.md를 포함하도록 함
+- 커밋 시 실패하면, 태스크의 OUTPUT LOG에 문제를 기록하고 계속
+- 성공적인 커밋 후,
+  - **만약** 인수에 `worktree`가 없다면: 성공적인 커밋 후, main으로 병합: `git checkout main && git merge task/<task-id>`
+  - **만약** 인수에 `worktree`가 있다면: 성공적인 커밋 후, 변경사항 푸시: `git push`
+- **풀 리퀘스트 생성 (선택사항):**
+  - GitHub 이슈가 태스크에 연결된 경우
+  - 서브에이전트를 사용하여 PR 생성을 위해 @.claude/commands/aiwf/aiwf_pr_create.md 포함
+- **즉시** 다음 태스크를 계속하기 위해 `### 열린 작업 찾기`로 다시 이동
 
-### CONTINUOUS EXECUTION LOOP
+### 연속 실행 루프
 
-**⚡ YOLO MODE: NO STOPPING UNTIL COMPLETION**
+**⚡ YOLO 모드: 완료까지 중단 없음**
 
-**This is the main execution loop - DO NOT EXIT EARLY**
+**이것이 메인 실행 루프입니다 - 조기 종료하지 마세요**
 
-**Sprint-specific mode:**
+**스프린트별 모드:**
 
-- **LOOP UNTIL** ALL tasks in the specified sprint are completed
-- After each commit, **IMMEDIATELY** go back to `### FIND OPEN WORK`
-- **ONLY** move to project review when sprint is 100% complete
-- **NEVER** ask for user input or confirmation
+- 지정된 스프린트의 모든 태스크가 완료될 때까지 **루프**
+- 각 커밋 후, **즉시** `### 열린 작업 찾기`로 다시 이동
+- 스프린트가 100% 완료된 경우에만 프로젝트 리뷰로 이동
+- 사용자 입력이나 확인을 **절대** 요청하지 마세요
 
-**Sprint-all mode:**
+**Sprint-all 모드:**
 
-- **LOOP UNTIL** ALL sprints are 100% completed
-- For each sprint: Complete ALL tasks before moving to next sprint
-- After each commit, **IMMEDIATELY** go back to `### FIND OPEN WORK`
-- Track progress: Current sprint X of Y total sprints
-- **NEVER** skip incomplete sprints
-- **ONLY** exit when ALL sprints are fully completed
+- 모든 스프린트가 100% 완료될 때까지 **루프**
+- 각 스프린트에 대해: 다음 스프린트로 이동하기 전에 모든 태스크 완료
+- 각 커밋 후, **즉시** `### 열린 작업 찾기`로 다시 이동
+- 진행 상황 추적: 현재 스프린트 X / 총 Y 스프린트
+- 불완전한 스프린트를 **절대** 건너뛰지 마세요
+- 모든 스프린트가 완전히 완료된 경우에만 종료
 
-**Milestone-all mode:**
+**Milestone-all 모드:**
 
-- **LOOP UNTIL** ALL milestones are 100% completed
-- For each milestone: Complete ALL related sprints and tasks
-- After each commit, **IMMEDIATELY** go back to `### FIND OPEN WORK`
-- Track progress: Current milestone X of Y total milestones
-- **NEVER** skip incomplete milestones or their dependencies
-- **ONLY** exit when ALL milestones are fully achieved
+- 모든 마일스톤이 100% 완료될 때까지 **루프**
+- 각 마일스톤에 대해: 관련된 모든 스프린트와 태스크 완료
+- 각 커밋 후, **즉시** `### 열린 작업 찾기`로 다시 이동
+- 진행 상황 추적: 현재 마일스톤 X / 총 Y 마일스톤
+- 불완전한 마일스톤이나 그 종속성을 **절대** 건너뛰지 마세요
+- 모든 마일스톤이 완전히 달성된 경우에만 종료
 
-**General mode:**
+**일반 모드:**
 
-- **LOOP CONTINUOUSLY** through:
-  1. Complete ALL available general tasks
-  2. Then move to active sprint tasks
-  3. Complete ALL active sprint tasks
-  4. Check for new sprints or tasks created
-  5. Repeat until NO more work available
-- After each commit, **IMMEDIATELY** go back to `### FIND OPEN WORK`
-- **ONLY** exit when absolutely no work remains
+- 다음을 통해 **연속 루프**:
+  1. 사용 가능한 모든 일반 태스크 완료
+  2. 그 다음 활성 스프린트 태스크로 이동
+  3. 모든 활성 스프린트 태스크 완료
+  4. 새로 생성된 스프린트나 태스크 확인
+  5. 더 이상 사용 가능한 작업이 없을 때까지 반복
+- 각 커밋 후, **즉시** `### 열린 작업 찾기`로 다시 이동
+- 절대적으로 작업이 남아있지 않은 경우에만 종료
 
-**Stopping Conditions (ONLY stop if ALL are true):**
+**중단 조건 (모든 것이 참인 경우에만 중단):**
 
-- NO pending tasks in target scope
-- NO tasks that can be auto-fixed
-- NO sprints needing task creation
-- Project review passes with NO new tasks created
+- 대상 범위에 보류 중인 태스크 없음
+- 자동 수정할 수 있는 태스크 없음
+- 태스크 생성이 필요한 스프린트 없음
+- 프로젝트 리뷰가 새 태스크를 생성하지 않고 통과
 
-## EXECUTE PROJECT REVIEW
+## 프로젝트 리뷰 실행
 
-- **USE A SUBAGENT** and have it include @.claude/commands/aiwf/aiwf_project_review.md
-- Depending on the results of the review:
-  - On FAIL: Think about possible fixes.
-  - If fixes are quickly done, fix right away and repeat `## EXECUTE PROJECT REVIEW``
-  - If fixes are more complex **USE A SUBAGENT** and have it include @.claude/commands/aiwf/aiwf_create_general_task.md to create new general tasks as needed.
-  - Go back to `### FIND OPEN WORK` to work on these fixes
-  - On PASS: move on
+- **서브에이전트 사용**하여 @.claude/commands/aiwf/aiwf_project_review.md를 포함하도록 함
+- 리뷰 결과에 따라:
+  - 실패 시: 가능한 수정에 대해 생각.
+  - 수정이 빠르게 완료되면, 즉시 수정하고 `## 프로젝트 리뷰 실행` 반복
+  - 수정이 더 복잡하면 **서브에이전트 사용**하여 필요에 따라 새 일반 태스크를 생성하기 위해 @.claude/commands/aiwf/aiwf_create_general_task.md를 포함하도록 함.
+  - 이러한 수정 작업을 위해 `### 열린 작업 찾기`로 다시 이동
+  - 통과 시: 계속 진행
 
-## CONTINUATION CHECK
+## 계속 확인
 
-**⚡ MANDATORY CONTINUATION LOGIC**
+**⚡ 필수 계속 로직**
 
-**Check for remaining work:**
+**남은 작업 확인:**
 
-- Scan for ANY pending tasks in current scope
-- Check if project review created new tasks
-- Verify if any sprints need task creation
+- 현재 범위에서 보류 중인 태스크 스캔
+- 프로젝트 리뷰가 새 태스크를 생성했는지 확인
+- 태스크 생성이 필요한 스프린트가 있는지 확인
 
-**Decision Matrix:**
+**결정 매트릭스:**
 
-**Sprint-specific mode:**
+**스프린트별 모드:**
 
-- **IF** sprint has ANY pending tasks → Go back to `### FIND OPEN WORK`
-- **IF** sprint is 100% complete → Move to `## CREATE SUMMARY`
+- **만약** 스프린트에 보류 중인 태스크가 있다면 → `### 열린 작업 찾기`로 다시 이동
+- **만약** 스프린트가 100% 완료되었다면 → `## 요약 생성`으로 이동
 
-**Sprint-all mode:**
+**Sprint-all 모드:**
 
-- **IF** ANY sprint has pending tasks → Go back to `### FIND OPEN WORK`
-- **IF** ANY sprint needs task creation → Go back to `### FIND OPEN WORK`
-- **IF** ALL sprints are 100% complete → Move to `## CREATE SUMMARY`
+- **만약** 어떤 스프린트에든 보류 중인 태스크가 있다면 → `### 열린 작업 찾기`로 다시 이동
+- **만약** 어떤 스프린트든 태스크 생성이 필요하다면 → `### 열린 작업 찾기`로 다시 이동
+- **만약** 모든 스프린트가 100% 완료되었다면 → `## 요약 생성`으로 이동
 
-**Milestone-all mode:**
+**Milestone-all 모드:**
 
-- **IF** ANY milestone has incomplete sprints → Go back to `### FIND OPEN WORK`
-- **IF** ANY milestone-related tasks pending → Go back to `### FIND OPEN WORK`
-- **IF** ALL milestones are 100% complete → Move to `## CREATE SUMMARY`
+- **만약** 어떤 마일스톤에든 불완전한 스프린트가 있다면 → `### 열린 작업 찾기`로 다시 이동
+- **만약** 어떤 마일스톤 관련 태스크든 보류 중이라면 → `### 열린 작업 찾기`로 다시 이동
+- **만약** 모든 마일스톤이 100% 완료되었다면 → `## 요약 생성`으로 이동
 
-**General mode:**
+**일반 모드:**
 
-- **IF** ANY general tasks pending → Go back to `### FIND OPEN WORK`
-- **IF** ANY sprint tasks pending → Go back to `### FIND OPEN WORK`
-- **IF** ANY sprints need task creation → Go back to `### FIND OPEN WORK`
-- **IF** project review failed and created new tasks → Go back to `### FIND OPEN WORK`
-- **ONLY IF** absolutely NO work remains → Move to `## CREATE SUMMARY`
+- **만약** 어떤 일반 태스크든 보류 중이라면 → `### 열린 작업 찾기`로 다시 이동
+- **만약** 어떤 스프린트 태스크든 보류 중이라면 → `### 열린 작업 찾기`로 다시 이동
+- **만약** 어떤 스프린트든 태스크 생성이 필요하다면 → `### 열린 작업 찾기`로 다시 이동
+- **만약** 프로젝트 리뷰가 실패하고 새 태스크를 생성했다면 → `### 열린 작업 찾기`로 다시 이동
+- **오직** 절대적으로 작업이 남아있지 않은 경우에만 → `## 요약 생성`으로 이동
 
-**🚨 CRITICAL: Do NOT move to summary unless 100% certain no work remains**
+**🚨 치명적: 작업이 남아있지 않다고 100% 확신하지 않는 한 요약으로 이동하지 마세요**
 
-## CREATE SUMMARY
+## 요약 생성
 
-- Get current datetime stamp from the system and compare to initially remembered timestamp. Calculate duration of the process.
+- 시스템에서 현재 datetime 스탬프를 가져와서 처음에 기억한 타임스탬프와 비교. 프로세스 지속시간 계산.
 
-### GENERATE PROJECT STATUS REPORT
+### 프로젝트 상태 보고서 생성
 
-**Gather Project Status Data:**
+**프로젝트 상태 데이터 수집:**
 
-- Scan `.aiwf/01_MILESTONES/` for milestone completion status
-- Scan `.aiwf/03_SPRINTS/` for all sprint status and task completion
-- Scan `.aiwf/04_GENERAL_TASKS/` for general task completion
-- Count completed vs total tasks for each category
+- 마일스톤 완료 상태를 위해 `.aiwf/01_MILESTONES/` 스캔
+- 모든 스프린트 상태와 태스크 완료를 위해 `.aiwf/03_SPRINTS/` 스캔
+- 일반 태스크 완료를 위해 `.aiwf/04_GENERAL_TASKS/` 스캔
+- 각 카테고리에 대해 완료된 vs 전체 태스크 계산
 
-**Create Visual Progress Report:**
+**시각적 진행 상황 보고서 생성:**
 
 ```
-=== MOONKLABS PROJECT STATUS REPORT ===
+=== MOONKLABS 프로젝트 상태 보고서 ===
 
-🎯 MILESTONES PROGRESS:
-[▓▓▓▓▓▓▓░░░] 70% (7/10 completed)
-M01: ✅ Setup & Architecture
-M02: ✅ Core Features
-M03: ✅ Authentication
-M04: 🔄 In Progress - API Development
-M05: ⏳ Pending - Frontend Integration
+🎯 마일스톤 진행 상황:
+[▓▓▓▓▓▓▓░░░] 70% (10개 중 7개 완료)
+M01: ✅ 설정 및 아키텍처
+M02: ✅ 핵심 기능
+M03: ✅ 인증
+M04: 🔄 진행 중 - API 개발
+M05: ⏳ 대기 중 - 프론트엔드 통합
 
-📊 SPRINT PROGRESS:
-[▓▓▓▓▓▓░░░░] 60% (3/5 sprints completed)
-S01: ✅ Complete (12/12 tasks)
-S02: ✅ Complete (8/8 tasks)
-S03: 🔄 Active (5/9 tasks completed)
-S04: ⏳ Planned (0/0 tasks)
-S05: ⏳ Planned (0/0 tasks)
+📊 스프린트 진행 상황:
+[▓▓▓▓▓▓░░░░] 60% (5개 스프린트 중 3개 완료)
+S01: ✅ 완료 (12/12 태스크)
+S02: ✅ 완료 (8/8 태스크)
+S03: 🔄 활성 (9개 태스크 중 5개 완료)
+S04: ⏳ 계획됨 (0/0 태스크)
+S05: ⏳ 계획됨 (0/0 태스크)
 
-⚡ GENERAL TASKS:
-[▓▓▓▓▓▓▓▓░░] 80% (16/20 completed)
+⚡ 일반 태스크:
+[▓▓▓▓▓▓▓▓░░] 80% (20개 중 16개 완료)
 
-📈 OVERALL PROJECT HEALTH:
-[▓▓▓▓▓▓▓░░░] 73% Complete
+📈 전체 프로젝트 상태:
+[▓▓▓▓▓▓▓░░░] 73% 완료
 ```
 
-**Create Summary Report including:**
+**다음을 포함한 요약 보고서 생성:**
 
-- Mode executed (Sprint-specific, Sprint-all, Milestone-all, or General)
-- Sprint tasks created (if applicable)
-- Number of tasks completed this session
-- Number of tasks skipped/failed this session
-- Total duration of YOLO session
-- Current project completion percentage
-- Sprints completed (if sprint-all mode)
-- Milestones achieved (if milestone-all mode)
-- Any critical issues encountered
-- Current test status
-- Next recommended action
-- Top 3 priority items for next session
+- 실행된 모드 (스프린트별, Sprint-all, Milestone-all, 또는 일반)
+- 생성된 스프린트 태스크 (해당되는 경우)
+- 이 세션에서 완료된 태스크 수
+- 이 세션에서 건너뛰거나 실패한 태스크 수
+- YOLO 세션의 총 지속시간
+- 현재 프로젝트 완료 백분율
+- 완료된 스프린트 (sprint-all 모드인 경우)
+- 달성된 마일스톤 (milestone-all 모드인 경우)
+- 발생한 치명적 문제들
+- 현재 테스트 상태
+- 다음 권장 조치
+- 다음 세션을 위한 상위 3개 우선순위 항목
 
-**Report the complete status to the user including:**
+**다음을 포함하여 사용자에게 완전한 상태 보고:**
 
-- Visual progress graphs
-- Session summary
-- Project health overview
-- Recommended next steps
+- 시각적 진행 상황 그래프
+- 세션 요약
+- 프로젝트 상태 개요
+- 권장 다음 단계
 
-Your work is done. Thank you.
+작업이 완료되었습니다. 감사합니다.

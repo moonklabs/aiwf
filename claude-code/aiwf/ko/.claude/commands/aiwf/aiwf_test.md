@@ -1,47 +1,47 @@
 # 테스트 실행 및 일반적인 문제 수정
 
-Follow these instructions from top to bottom.
+다음 지시사항을 위에서 아래로 순서대로 따르세요.
 
-## Create a TODO with EXACTLY these 4 items
+## 정확히 다음 4개 항목으로 TODO 생성
 
-1. Execute test suite
-2. Analyze results and identify issues
-3. Fix common problems if found
-4. Provide test summary
+1. 테스트 스위트 실행
+2. 결과 분석 및 문제 식별
+3. 발견된 일반적인 문제 수정
+4. 테스트 요약 제공
 
 ---
 
-## 1 · Execute test suite
+## 1 · 테스트 스위트 실행
 
-### First, detect the project's test runner:
+### 먼저 프로젝트의 테스트 러너 감지:
 
-1. **Python projects:**
+1. **Python 프로젝트:**
 
-   - If `pyproject.toml` exists with `[tool.poetry]`: Try `poetry run pytest`
-   - If `setup.py` or `requirements.txt`: Try `pytest` or `python -m pytest`
-   - If custom test script exists (e.g., `run_tests.py`, `run_dev.py`): Use that
-   - Add common flags: `--tb=short` for pytest
+   - `[tool.poetry]`가 있는 `pyproject.toml`이 존재하면: `poetry run pytest` 시도
+   - `setup.py` 또는 `requirements.txt`가 있으면: `pytest` 또는 `python -m pytest` 시도
+   - 커스텀 테스트 스크립트 존재시 (예: `run_tests.py`, `run_dev.py`): 해당 스크립트 사용
+   - 일반적인 플래그 추가: pytest용 `--tb=short`
 
-2. **JavaScript/TypeScript projects:**
+2. **JavaScript/TypeScript 프로젝트:**
 
-   - If `package.json` exists: Check "scripts" section for "test" command
-   - Common: `npm test`, `npm run test`, `yarn test`, `pnpm test`
-   - Framework specific: `jest`, `vitest`, `mocha`
+   - `package.json`이 존재하면: "scripts" 섹션에서 "test" 명령어 확인
+   - 일반적인 명령어: `npm test`, `npm run test`, `yarn test`, `pnpm test`
+   - 프레임워크별: `jest`, `vitest`, `mocha`
 
-3. **Other languages:**
+3. **기타 언어:**
    - Rust: `cargo test`
    - Go: `go test ./...`
-   - Java: `mvn test` or `gradle test`
-   - Ruby: `bundle exec rspec` or `rake test`
-   - PHP: `composer test` or `phpunit`
+   - Java: `mvn test` 또는 `gradle test`
+   - Ruby: `bundle exec rspec` 또는 `rake test`
+   - PHP: `composer test` 또는 `phpunit`
 
-### Execute the detected test command:
+### 감지된 테스트 명령어 실행:
 
-- RUN the appropriate test command
-- CAPTURE full output including any errors
-- NOTE execution time and test counts
+- 적절한 테스트 명령어 실행
+- 오류를 포함한 전체 출력 캡처
+- 실행 시간 및 테스트 개수 기록
 
-**If no test runner is found:** Report this to the user and ask for the correct test command.
+**테스트 러너를 찾을 수 없는 경우:** 사용자에게 보고하고 올바른 테스트 명령어 요청
 
 ## 2 · Analyze results and identify issues
 
