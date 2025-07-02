@@ -2,8 +2,12 @@
  * 기본 프로젝트 구조 테스트
  */
 
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 describe('프로젝트 기본 구조', () => {
   test('package.json 파일이 존재한다', () => {

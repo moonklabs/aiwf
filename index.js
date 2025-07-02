@@ -10,6 +10,14 @@ import { fileURLToPath } from 'url';
 import https from 'https';
 import { createWriteStream } from 'fs';
 import { pipeline } from 'stream/promises';
+import {
+    detectLanguage,
+    loadUserLanguageConfig,
+    saveUserLanguageConfig,
+    getInstallationLanguagePath,
+    SUPPORTED_LANGUAGES,
+    DEFAULT_LANGUAGE
+} from './language-utils.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -1440,21 +1448,58 @@ async function rollbackFailedTools(failedTools, language) {
 async function installAIWF(options = {}) {
     const debugLog = options.debugLog || false;
 
-    // 언어 선택
-    let selectedLanguage = 'en'; // 기본값은 영어
+    // 지능적 언어 선택 시스템
+    let selectedLanguage = DEFAULT_LANGUAGE;
+    
     if (!options.force) {
-        const languageResponse = await prompts({
-            type: 'select',
-            name: 'language',
-            message: 'Please select language / 언어를 선택해주세요:',
-            choices: [
-                { title: 'English', value: 'en' },
-                { title: '한국어 (Korean)', value: 'ko' }
-            ]
-        });
+        // 1. 기존 설정이 있는지 확인
+        const existingConfig = await loadUserLanguageConfig();
+        
+        if (existingConfig && existingConfig.language) {
+            selectedLanguage = existingConfig.language;
+            console.log(chalk.blue(`🌐 기존 언어 설정을 사용합니다 / Using existing language setting: ${selectedLanguage}`));
+        } else {
+            // 2. 자동 언어 감지 시도
+            const detectedLang = await detectLanguage();
+            
+            console.log(chalk.gray(`🔍 시스템 언어 감지 / System language detected: ${detectedLang}`));
+            
+            // 3. 사용자에게 언어 선택 제공 (감지된 언어를 기본값으로)
+            const languageResponse = await prompts({
+                type: 'select',
+                name: 'language',
+                message: 'Please select language / 언어를 선택해주세요:',
+                choices: [
+                    { title: 'English', value: 'en' },
+                    { title: '한국어 (Korean)', value: 'ko' }
+                ],
+                initial: SUPPORTED_LANGUAGES.indexOf(detectedLang) !== -1 ? 
+                         SUPPORTED_LANGUAGES.indexOf(detectedLang) : 0
+            });
 
-        if (languageResponse.language) {
-            selectedLanguage = languageResponse.language;
+            if (languageResponse.language) {
+                selectedLanguage = languageResponse.language;
+            } else {
+                selectedLanguage = detectedLang;
+            }
+            
+            // 4. 선택된 언어를 설정으로 저장
+            try {
+                await saveUserLanguageConfig(selectedLanguage, {
+                    autoDetect: true,
+                    fallback: DEFAULT_LANGUAGE
+                });
+                console.log(chalk.green(`✅ 언어 설정이 저장되었습니다 / Language preference saved: ${selectedLanguage}`));
+            } catch (error) {
+                console.warn(chalk.yellow(`⚠️ 언어 설정 저장 실패 / Failed to save language preference: ${error.message}`));
+            }
+        }
+    } else {
+        // Force 모드일 때도 자동 감지 시도
+        try {
+            selectedLanguage = await detectLanguage();
+        } catch (error) {
+            selectedLanguage = DEFAULT_LANGUAGE;
         }
     }
 
@@ -1464,8 +1509,8 @@ async function installAIWF(options = {}) {
     console.log(chalk.gray(msg.description));
     console.log(chalk.gray(msg.optimized));
 
-    // 언어별 경로 설정
-    const languagePath = selectedLanguage === 'en' ? 'en' : 'ko';
+    // 언어별 경로 설정 (언어 유틸리티 사용)
+    const languagePath = getInstallationLanguagePath(selectedLanguage);
     const GITHUB_CONTENT_LANGUAGE_PREFIX = `${GITHUB_CONTENT_PREFIX}/${languagePath}`;
 
     const hasExisting = await checkExistingInstallation();
