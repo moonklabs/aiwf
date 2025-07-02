@@ -138,7 +138,7 @@ your_project/
 
 ### 알려진 이슈
 - `update_docs` 명령어 파일 누락 (`aiwf_docs.md`만 존재)
-- 일부 위치에서 GitHub 저장소 URL이 여전히 `moonklabs/aiwf` 참조
+- GitHub 저장소 URL이 `aiwf/aiwf`로 통일됨
 
 ### 로드맵
 - [ ] 오프라인 설치 옵션

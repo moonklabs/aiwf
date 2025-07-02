@@ -22,7 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Known Issues
 - `update_docs` command file missing (only `aiwf_docs.md` exists)
-- GitHub repository URL still references `moonklabs/aiwf` in code
+- GitHub repository URL references unified to `aiwf/aiwf` across all files
 
 ## [0.3.0] - 2024-12-20
 

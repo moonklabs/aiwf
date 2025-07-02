@@ -140,7 +140,7 @@ The framework includes 25+ specialized commands for AI-assisted development:
 
 ### Known Issues
 - `update_docs` command file missing (only `aiwf_docs.md` exists)
-- GitHub repository URL still references `moonklabs/aiwf` in some places
+- GitHub repository URL references are now unified to `aiwf/aiwf`
 
 ### Roadmap
 - [ ] Offline installation option
