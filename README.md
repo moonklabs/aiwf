@@ -22,10 +22,11 @@ npx aiwf
 
 The installer will:
 
-1. **Language Selection**: Choose between English and Korean
-2. **Directory Setup**: Create the `.aiwf/` directory structure for project management
-3. **Commands**: Set up `.claude/commands/aiwf/` with localized Claude commands
-4. **Content**: Download the latest templates and documentation in your selected language
+1. **Intelligent Language Detection**: Automatically detect your system language or let you choose
+2. **Language Preference Storage**: Save your language preference for future installations
+3. **Directory Setup**: Create the `.aiwf/` directory structure for project management
+4. **Commands**: Set up `.claude/commands/aiwf/` with localized Claude commands
+5. **Content**: Download the latest templates and documentation in your selected language
 
 ## 🚀 Usage
 
@@ -43,9 +44,28 @@ If AIWF is already installed, the installer will automatically detect it and off
 - Skip installation
 - Cancel
 
+### Language Management
+
+AIWF includes a sophisticated language management system:
+
+```bash
+# Check current language settings
+aiwf-lang status
+
+# Change language interactively
+aiwf-lang set
+
+# Set specific language
+aiwf-lang set ko    # Korean
+aiwf-lang set en    # English
+
+# Reset to auto-detection
+aiwf-lang reset
+```
+
 ### Force Installation
 
-Skip all prompts and force installation (defaults to English):
+Skip all prompts and force installation (uses auto-detected language):
 
 ```bash
 npx aiwf --force
