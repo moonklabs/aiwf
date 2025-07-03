@@ -9,7 +9,8 @@ This guide explains the available AIWF commands and how to use them effectively 
 AIWF commands follow the format `/aiwf_<command_name> [arguments]`.
 
 > **Note**:
-> - The `/aiwf_<command_name>` format is still supported for backward compatibility.
+>
+> - The `/project:aiwf:<command_name>` format is still supported for backward compatibility.
 > - Korean commands may have a `_kr` suffix (e.g., `/aiwf_initialize_kr`)
 
 ## Language Management System
@@ -30,11 +31,13 @@ AIWF includes a comprehensive language management system with:
 **Purpose**: Comprehensive language management interface
 
 **Usage**:
+
 ```
 /aiwf_language_manager
 ```
 
 **Behavior**:
+
 - Shows current language settings and preferences
 - Provides options to change language interactively
 - Manages language detection and storage
@@ -45,11 +48,13 @@ AIWF includes a comprehensive language management system with:
 **Purpose**: Check current language configuration and status
 
 **Usage**:
+
 ```
 /aiwf_language_status
 ```
 
 **Behavior**:
+
 - Displays current active language
 - Shows detected system language preferences
 - Reports language file availability and consistency
@@ -60,6 +65,7 @@ AIWF includes a comprehensive language management system with:
 **Purpose**: Switch between supported languages
 
 **Usage**:
+
 ```
 /aiwf_switch_language
 # Interactive language selection
@@ -72,6 +78,7 @@ AIWF includes a comprehensive language management system with:
 ```
 
 **Behavior**:
+
 - Updates language preferences
 - Reinstalls commands in selected language
 - Maintains project settings and data
