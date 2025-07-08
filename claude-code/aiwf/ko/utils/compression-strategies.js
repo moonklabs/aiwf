@@ -266,13 +266,16 @@ export class AggressiveCompressionStrategy extends CompressionStrategy {
     compressed = this.removeRepetitiveContent(compressed);
 
     // 4. 오래된 로그 제거
-    compressed = this.removeOldLogs(compressed);
+    const oldLogs = this.identifyOldLogs(compressed);
+    for (const log of oldLogs) {
+      compressed = compressed.replace(log + '\n', '');
+    }
 
     // 5. 상세 설명 요약
     compressed = this.summarizeDescriptions(compressed);
 
     // 6. 필터링된 섹션으로 재구성
-    compressed = this.reconstructContent(filteredSections);
+    compressed = filteredSections.map(section => section.content).join('\n\n');
 
     return {
       content: compressed,
@@ -383,13 +386,25 @@ export class BalancedCompressionStrategy extends CompressionStrategy {
     compressed = this.condenseRepetitiveContent(compressed);
 
     // 4. 오래된 로그 제거
-    compressed = this.removeOldLogs(compressed);
+    const oldLogs = this.identifyOldLogs(compressed);
+    for (const log of oldLogs) {
+      compressed = compressed.replace(log + '\n', '');
+    }
 
     // 5. 장문 설명 압축
     compressed = this.compressLongDescriptions(compressed);
 
-    // 6. 필터링된 섹션으로 재구성
-    compressed = this.reconstructContent(filteredSections);
+    // 6. 코드 블록 축소
+    compressed = this.compressCodeBlocks(compressed);
+
+    // 7. 필터링된 섹션으로 재구성
+    compressed = filteredSections.map(section => {
+      // 각 섹션 내용도 압축
+      let sectionContent = section.content;
+      sectionContent = this.condenseRepetitiveContent(sectionContent);
+      sectionContent = this.compressLongDescriptions(sectionContent);
+      return sectionContent;
+    }).join('\n\n');
 
     return {
       content: compressed,
@@ -445,6 +460,25 @@ export class BalancedCompressionStrategy extends CompressionStrategy {
   }
 
   /**
+   * 코드 블록을 압축합니다
+   */
+  compressCodeBlocks(content) {
+    // 긴 코드 블록을 축소
+    const codeBlockPattern = /```[\s\S]*?```/g;
+    return content.replace(codeBlockPattern, (match) => {
+      const lines = match.split('\n');
+      if (lines.length > 20) {
+        // 처음 5줄과 마지막 3줄만 유지
+        const language = lines[0];
+        const firstLines = lines.slice(1, 6).join('\n');
+        const lastLines = lines.slice(-4, -1).join('\n');
+        return `${language}\n${firstLines}\n... [${lines.length - 10}줄 생략] ...\n${lastLines}\n\`\`\``;
+      }
+      return match;
+    });
+  }
+
+  /**
    * 필터링된 섹션으로 콘텐츠를 재구성합니다
    */
   reconstructContent(sections) {
@@ -473,7 +507,10 @@ export class MinimalCompressionStrategy extends CompressionStrategy {
     compressed = this.optimizeFormatting(compressed);
 
     // 2. 오래된 로그만 제거
-    compressed = this.removeOldLogs(compressed);
+    const oldLogs = this.identifyOldLogs(compressed);
+    for (const log of oldLogs) {
+      compressed = compressed.replace(log + '\n', '');
+    }
 
     // 3. 기본 정리
     compressed = this.basicCleanup(compressed);

@@ -1,13 +1,21 @@
-# AIWF 성능 최적화 API 문서
+# AIWF API 문서
 
 ## 개요
 
-이 문서는 AIWF 프로젝트의 성능 최적화 시스템에 대한 API 문서입니다. 다음 모듈들을 포함합니다:
+이 문서는 AIWF 프로젝트의 전체 API에 대한 문서입니다. 다음 모듈들을 포함합니다:
 
+### S01 - Context Engineering 기반
 - GitHub API 캐싱 시스템
 - 파일 배치 처리 시스템
 - 메모리 프로파일링 시스템
 - 성능 벤치마크 시스템
+- Feature Ledger 시스템
+- 토큰 추적 시스템
+
+### S02 - AI 강화 기능
+- AI 페르소나 시스템
+- Context 압축 시스템
+- Feature-Git 연동 시스템
 
 ## 1. GitHub API 캐싱 시스템
 
@@ -536,6 +544,386 @@ try {
 2. **배치 크기**: 너무 큰 배치는 메모리 사용량을 증가시킬 수 있습니다.
 3. **동시성**: 시스템 리소스에 따라 최적의 동시성 수준을 설정하세요.
 4. **모니터링**: 정기적으로 성능 메트릭을 확인하고 최적화하세요.
+
+## 5. Feature Ledger 시스템
+
+### FeatureLedger
+
+Feature(기능) 개발 진행 상황을 추적하고 관리하는 시스템입니다.
+
+#### 생성자
+
+```javascript
+new FeatureLedger(ledgerPath = '.aiwf/04_FEATURES/feature_ledger.json')
+```
+
+#### 메서드
+
+##### `async init()`
+
+Feature Ledger를 초기화합니다.
+
+```javascript
+const ledger = new FeatureLedger();
+await ledger.init();
+```
+
+##### `async createFeature(feature)`
+
+새로운 Feature를 생성합니다.
+
+```javascript
+const newFeature = await ledger.createFeature({
+    name: 'User Authentication',
+    description: '사용자 인증 시스템 구현',
+    category: 'security',
+    priority: 'high'
+});
+console.log(newFeature.id); // F001
+```
+
+##### `async updateFeatureStatus(featureId, status)`
+
+Feature 상태를 업데이트합니다.
+
+```javascript
+await ledger.updateFeatureStatus('F001', 'in_progress');
+```
+
+##### `async linkCommit(featureId, commitHash)`
+
+커밋을 Feature에 연결합니다.
+
+```javascript
+await ledger.linkCommit('F001', 'abc123def456');
+```
+
+##### `async getFeatureProgress(featureId)`
+
+Feature 진행률을 계산합니다.
+
+```javascript
+const progress = await ledger.getFeatureProgress('F001');
+console.log(progress); // 75
+```
+
+## 6. 토큰 추적 시스템
+
+### TokenTracker
+
+Claude Code와의 대화에서 토큰 사용량을 추적하는 시스템입니다.
+
+#### 생성자
+
+```javascript
+new TokenTracker(options = {})
+```
+
+- `maxTokensPerSession`: 세션당 최대 토큰 수 (기본값: 100000)
+- `warningThreshold`: 경고 임계값 (기본값: 80%)
+
+#### 메서드
+
+##### `trackTokens(message, tokenCount)`
+
+토큰 사용량을 기록합니다.
+
+```javascript
+tracker.trackTokens('user message', 150);
+tracker.trackTokens('assistant response', 250);
+```
+
+##### `getSessionStats()`
+
+현재 세션의 토큰 통계를 반환합니다.
+
+```javascript
+const stats = tracker.getSessionStats();
+console.log(stats.totalTokens); // 400
+console.log(stats.remainingTokens); // 99600
+```
+
+##### `predictTokenUsage(content)`
+
+콘텐츠의 예상 토큰 사용량을 계산합니다.
+
+```javascript
+const predicted = tracker.predictTokenUsage('긴 텍스트 내용...');
+console.log(predicted); // 예상 토큰 수
+```
+
+## 7. AI 페르소나 시스템
+
+### AIPersonaManager
+
+AI 페르소나를 관리하고 전환하는 시스템입니다.
+
+#### 생성자
+
+```javascript
+new AIPersonaManager(personaConfigPath = '.aiwf/02_REQUIREMENTS/M02_Context_Engineering_Enhancement/ai_personas.json')
+```
+
+#### 메서드
+
+##### `async init()`
+
+페르소나 시스템을 초기화합니다.
+
+```javascript
+const manager = new AIPersonaManager();
+await manager.init();
+```
+
+##### `async switchPersona(personaName)`
+
+페르소나를 전환합니다.
+
+```javascript
+await manager.switchPersona('architect');
+// 또는
+await manager.switchPersona('debugger');
+```
+
+##### `getCurrentPersona()`
+
+현재 활성화된 페르소나를 반환합니다.
+
+```javascript
+const current = manager.getCurrentPersona();
+console.log(current.name); // 'architect'
+```
+
+##### `getPersonaContext(personaName)`
+
+특정 페르소나의 컨텍스트 규칙을 반환합니다.
+
+```javascript
+const context = manager.getPersonaContext('reviewer');
+console.log(context.priority); // ['changes', 'commits']
+```
+
+##### `async applyPersonaRules(content, personaName)`
+
+페르소나 규칙을 콘텐츠에 적용합니다.
+
+```javascript
+const filtered = await manager.applyPersonaRules(projectContent, 'optimizer');
+```
+
+## 8. Context 압축 시스템
+
+### ContextCompressor
+
+프로젝트 컨텍스트를 압축하여 토큰 사용량을 최적화하는 시스템입니다.
+
+#### 생성자
+
+```javascript
+new ContextCompressor(options = {})
+```
+
+- `defaultMode`: 기본 압축 모드 (기본값: 'balanced')
+- `cacheEnabled`: 압축 캐시 활성화 (기본값: true)
+
+#### 메서드
+
+##### `compressContext(context, mode = 'balanced')`
+
+컨텍스트를 압축합니다.
+
+```javascript
+const compressor = new ContextCompressor();
+const compressed = compressor.compressContext(largeContext, 'aggressive');
+```
+
+##### `calculateCompressionRatio(original, compressed)`
+
+압축률을 계산합니다.
+
+```javascript
+const ratio = compressor.calculateCompressionRatio(original, compressed);
+console.log(ratio); // 0.65 (65% 압축)
+```
+
+##### `async compressFile(filePath, mode)`
+
+파일을 압축합니다.
+
+```javascript
+const compressedContent = await compressor.compressFile('/path/to/file.js', 'balanced');
+```
+
+##### `async compressDirectory(dirPath, mode, options = {})`
+
+디렉토리를 압축합니다.
+
+```javascript
+const result = await compressor.compressDirectory('/src', 'aggressive', {
+    exclude: ['test', 'node_modules'],
+    includeOnly: ['*.js', '*.ts']
+});
+```
+
+### CompressionModes
+
+압축 모드 상수들입니다.
+
+```javascript
+CompressionModes.AGGRESSIVE // 'aggressive'
+CompressionModes.BALANCED   // 'balanced'
+CompressionModes.CONSERVATIVE // 'conservative'
+```
+
+## 9. Feature-Git 연동 시스템
+
+### FeatureGitIntegration
+
+Feature Ledger와 Git을 연동하는 시스템입니다.
+
+#### 생성자
+
+```javascript
+new FeatureGitIntegration(options = {})
+```
+
+- `ledgerPath`: Feature Ledger 경로
+- `autoLink`: 자동 연결 활성화 (기본값: true)
+
+#### 메서드
+
+##### `async init()`
+
+Git 연동을 초기화합니다.
+
+```javascript
+const integration = new FeatureGitIntegration();
+await integration.init();
+```
+
+##### `parseCommitMessage(message)`
+
+커밋 메시지에서 Feature ID를 추출합니다.
+
+```javascript
+const parsed = integration.parseCommitMessage('feat(F001): 새 기능 추가');
+console.log(parsed.featureId); // 'F001'
+console.log(parsed.type); // 'feat'
+```
+
+##### `async linkFeatureCommit(commitHash, featureId)`
+
+커밋을 Feature에 연결합니다.
+
+```javascript
+await integration.linkFeatureCommit('abc123', 'F001');
+```
+
+##### `async installHooks()`
+
+Git hooks를 설치합니다.
+
+```javascript
+await integration.installHooks();
+```
+
+##### `async validateCommit(commitMessage)`
+
+커밋 메시지를 검증합니다.
+
+```javascript
+const isValid = await integration.validateCommit('feat(F001): 유효한 커밋');
+console.log(isValid); // true
+```
+
+##### `async updateFeatureFromCommit(commitHash)`
+
+커밋 정보를 기반으로 Feature를 업데이트합니다.
+
+```javascript
+await integration.updateFeatureFromCommit('abc123');
+```
+
+## 통합 사용 예제
+
+### S02 기능 통합 워크플로우
+
+```javascript
+import { AIPersonaManager } from './lib/ai-persona-manager.js';
+import { ContextCompressor } from './lib/context-compressor.js';
+import { FeatureGitIntegration } from './lib/feature-git-integration.js';
+import { FeatureLedger } from './lib/feature-ledger.js';
+
+async function integratedWorkflow() {
+    // 1. AI 페르소나 설정
+    const personaManager = new AIPersonaManager();
+    await personaManager.init();
+    await personaManager.switchPersona('architect');
+    
+    // 2. Feature 생성
+    const ledger = new FeatureLedger();
+    await ledger.init();
+    const feature = await ledger.createFeature({
+        name: 'Advanced Search',
+        description: '고급 검색 기능 구현',
+        category: 'feature',
+        priority: 'high'
+    });
+    
+    // 3. Git 연동 설정
+    const gitIntegration = new FeatureGitIntegration();
+    await gitIntegration.init();
+    await gitIntegration.installHooks();
+    
+    // 4. Context 압축으로 작업
+    const compressor = new ContextCompressor();
+    const projectContext = await loadProjectContext();
+    const compressed = compressor.compressContext(projectContext, 'balanced');
+    
+    // 5. 개발 작업 진행
+    // ... 코드 작성 ...
+    
+    // 6. 커밋 및 자동 Feature 업데이트
+    // git commit -m "feat(F001): 검색 알고리즘 구현"
+    // 자동으로 Feature 상태가 업데이트됨
+    
+    return {
+        feature,
+        compressionRatio: compressor.calculateCompressionRatio(projectContext, compressed)
+    };
+}
+```
+
+### 페르소나별 작업 흐름
+
+```javascript
+async function personaBasedWorkflow(taskType) {
+    const personaManager = new AIPersonaManager();
+    await personaManager.init();
+    
+    switch (taskType) {
+        case 'design':
+            await personaManager.switchPersona('architect');
+            break;
+        case 'debug':
+            await personaManager.switchPersona('debugger');
+            break;
+        case 'review':
+            await personaManager.switchPersona('reviewer');
+            break;
+        case 'document':
+            await personaManager.switchPersona('documenter');
+            break;
+        case 'optimize':
+            await personaManager.switchPersona('optimizer');
+            break;
+    }
+    
+    const context = personaManager.getPersonaContext(personaManager.getCurrentPersona().name);
+    console.log('페르소나 활성화:', personaManager.getCurrentPersona().name);
+    console.log('컨텍스트 규칙:', context);
+}
+```
 
 ## 지원 및 문의
 
