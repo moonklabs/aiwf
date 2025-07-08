@@ -1,3 +1,5 @@
+[Read in English](ai-personas-guide.md)
+
 # AI 페르소나 사용 가이드
 
 ## 개요

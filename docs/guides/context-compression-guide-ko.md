@@ -1,3 +1,5 @@
+[Read in English](context-compression-guide.md)
+
 # Context 압축 모드 사용 가이드
 
 ## 개요

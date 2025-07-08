@@ -1,3 +1,5 @@
+[Read in English](feature-git-integration-guide.md)
+
 # Feature-Git 연동 설정 가이드
 
 ## 개요
