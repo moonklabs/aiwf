@@ -2,13 +2,13 @@
 sprint_folder_name: S01_M02_context_foundation
 sprint_sequence_id: S01
 milestone_id: M02
-title: Context Engineering 기반 구축 - Context Foundation
+title: Context Foundation - 핵심 기반 구축
 status: planned
 goal: Feature Ledger와 AI 페르소나 시스템의 핵심 기반을 구축하고, Context 압축 아키텍처를 설계하여 M02 마일스톤의 토대를 마련한다.
-last_updated: 2025-07-08T16:00:00Z
+last_updated: 2025-07-08T16:30:00Z
 ---
 
-# Sprint: Context Engineering 기반 구축 (S01)
+# Sprint: Context Foundation (S01)
 
 ## Sprint Goal
 Feature Ledger와 AI 페르소나 시스템의 핵심 기반을 구축하고, Context 압축 아키텍처를 설계하여 M02 마일스톤의 토대를 마련한다.
@@ -38,6 +38,18 @@ Feature Ledger와 AI 페르소나 시스템의 핵심 기반을 구축하고, Co
 - 핵심 명령어 10개 안정화 (축소된 범위)
 - 테스트 커버리지 80% 달성 (현실적 목표)
 - GitHub API 최적화
+
+## 태스크 목록
+
+### Feature Ledger 시스템 (4개 태스크)
+- [ ] [T01_S01: Feature Ledger 데이터 구조 설계](T01_S01_Feature_Ledger_데이터_구조_설계.md)
+- [ ] [T02_S01: Feature Ledger CLI 명령어 개발](T02_S01_Feature_Ledger_CLI_명령어_개발.md)
+- [ ] [T03_S01: Git 연동 Feature 추적](T03_S01_Git_연동_Feature_추적.md)
+- [ ] [T04_S01: Feature Ledger 문서화](T04_S01_Feature_Ledger_문서화.md)
+
+### 시스템 안정화 (2개 태스크)
+- [ ] [T11_S01: 통합 테스트 Suite 구축](T11_S01_통합_테스트_Suite_구축.md)
+- [ ] [T12_S01: 성능 최적화 및 문서화](T12_S01_성능_최적화_및_문서화.md)
 
 ## Definition of Done (for the Sprint)
 
@@ -69,3 +81,4 @@ Feature Ledger와 AI 페르소나 시스템의 핵심 기반을 구축하고, Co
 - **성공 지표**: 다음 스프린트에서 바로 구현 가능한 수준의 설계 완성도
 - **범위 조정**: 1주일 내 완료 가능하도록 구현보다 설계와 프로토타입에 집중
 - **다음 스프린트 준비**: S02에서 본격 구현을 위한 명확한 인터페이스 정의
+- **총 태스크**: 12개 (복잡성: 높음 3개, 보통 7개, 낮음 2개)
