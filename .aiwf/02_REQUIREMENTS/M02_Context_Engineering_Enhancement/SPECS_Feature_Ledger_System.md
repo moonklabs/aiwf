@@ -17,7 +17,11 @@ Feature Ledger System은 AIWF 프로젝트 내에서 개발 중인 기능들을 
 │   │   └── FL000_Initial_Setup.md
 │   ├── archived/
 │   │   └── FL003_Deprecated_API.md
-│   └── FEATURE_LEDGER_INDEX.md
+│   ├── FEATURE_LEDGER_INDEX.md
+│   ├── FEATURE_SCHEMA.md
+│   ├── FEATURE_STATE_DIAGRAM.md
+│   ├── FEATURE_INTEGRATION_GUIDE.md
+│   └── FEATURE_GIT_INTEGRATION.md
 ```
 
 ### File Naming Convention
@@ -31,23 +35,84 @@ Feature Ledger System은 AIWF 프로젝트 내에서 개발 중인 기능들을 
 ### Feature Ledger Entry
 ```yaml
 ---
+# Core Identification
 feature_id: FL001
 title: User Authentication System
 status: active # active | completed | archived | paused
 created_date: 2025-07-08
 last_updated: 2025-07-08 15:45
+
+# Milestone & Sprint Association
 milestone: M02
-sprint: S04_M02
+sprint_ids: [S01_M02, S02_M02]
+tasks: [T01_S01, T02_S01]
+
+# Team & Assignment
 assignee: developer_name
+contributors: [dev2, dev3]
+reviewers: [lead_dev, architect]
+
+# Classification
+priority: high # critical | high | medium | low
+complexity: complex # simple | moderate | complex
+category: feature # feature | enhancement | bugfix | refactor
 tags: [authentication, security, backend]
+
+# Time Tracking
+estimated_hours: 80
+actual_hours: 45
+estimated_completion: 2025-07-20
+actual_completion: null
+
+# Git Integration
+git_branch: feature/FL001-user-auth
+git_commits: [abc123, def456]
+pull_requests:
+  - number: 42
+    title: "Implement JWT authentication"
+    status: open
+    url: "https://github.com/org/repo/pull/42"
+
+# Dependencies
+depends_on: []
+blocks: [FL002, FL003]
+
+# Progress Tracking
+progress_percentage: 55
+checklist_items_total: 12
+checklist_items_completed: 7
+
+# Risk & Issues
+risk_level: medium # low | medium | high
+known_issues: ["Session timeout handling needs refinement"]
+mitigation_plans: ["Implement refresh token mechanism"]
 ---
 ```
 
 ### Feature States
+
 1. **active**: Currently being developed
+   - Has active resources assigned
+   - Work is in progress
+   - Appears in sprint boards and active dashboards
+
 2. **completed**: Development finished and tested
-3. **archived**: No longer relevant or deprecated
-4. **paused**: Temporarily on hold
+   - All acceptance criteria met
+   - Code merged to main branch
+   - Tests passing
+   - Documentation updated
+
+3. **paused**: Temporarily on hold
+   - Work temporarily halted
+   - Resources reallocated
+   - Reason documented in notes
+
+4. **archived**: No longer relevant or deprecated
+   - Kept for historical reference
+   - Cannot be transitioned to other states
+   - Excluded from active reports
+
+For detailed state transition rules, see: `.aiwf/06_FEATURE_LEDGERS/FEATURE_STATE_DIAGRAM.md`
 
 ## Command Specifications
 
@@ -117,11 +182,26 @@ tags: [authentication, security, backend]
 - Pre-commit hook to prompt feature ledger update
 - Auto-detect feature references in commit messages (e.g., `[FL001]`)
 - Generate feature-based changelog
+- Supported commit patterns:
+  - `FL###` - Direct reference
+  - `[FL###]` - Bracketed reference
+  - `feat(FL###):` - Conventional commit format
+  - `fix(FL###):` - Bug fix for feature
+  - `#FL###` - Hash reference
+- Automatic PR linking when title/body contains feature ID
+- Branch naming convention: `feature/FL###-descriptive-name`
+- For detailed Git integration, see: `.aiwf/06_FEATURE_LEDGERS/FEATURE_GIT_INTEGRATION.md`
 
 ### Sprint/Task Integration
-- Auto-link features to tasks
-- Update feature progress from task completion
-- Cross-reference in sprint reviews
+- Features linked to multiple sprints via `sprint_ids` array
+- Bidirectional linking between features and tasks
+- Progress calculation based on task completion
+- Milestone progress aggregated from feature statuses
+- Integration patterns:
+  - Feature → Sprints (one-to-many)
+  - Feature → Tasks (one-to-many)
+  - Milestone → Features (one-to-many)
+- For detailed integration guide, see: `.aiwf/06_FEATURE_LEDGERS/FEATURE_INTEGRATION_GUIDE.md`
 
 ### AI Context Integration
 - Include active features in AI context
@@ -222,9 +302,29 @@ For existing AIWF projects:
 3. Create index from discovered features
 4. Prompt user to review and adjust
 
+## Implementation Status
+
+### Completed Components
+- ✅ Directory structure created (`.aiwf/06_FEATURE_LEDGERS/`)
+- ✅ Feature schema defined (`FEATURE_SCHEMA.md`)
+- ✅ State transition diagram (`FEATURE_STATE_DIAGRAM.md`)
+- ✅ Integration guide (`FEATURE_INTEGRATION_GUIDE.md`)
+- ✅ Git integration specification (`FEATURE_GIT_INTEGRATION.md`)
+- ✅ Feature template (`99_TEMPLATES/feature_template.md`)
+- ✅ Index file structure (`FEATURE_LEDGER_INDEX.md`)
+
+### Pending Components
+- ⏳ CLI commands implementation
+- ⏳ Git hooks setup
+- ⏳ Automated sync mechanisms
+- ⏳ Dashboard generation
+- ⏳ Migration scripts
+
 ## Future Enhancements
 
 1. **Feature Dependencies**: Track inter-feature dependencies
 2. **Metrics Collection**: Auto-calculate velocity and cycle time
 3. **Visual Timeline**: Generate feature timeline visualization
 4. **AI Insights**: Feature completion predictions based on history
+5. **Advanced Search**: Full-text search across features
+6. **Export Capabilities**: Generate reports in various formats

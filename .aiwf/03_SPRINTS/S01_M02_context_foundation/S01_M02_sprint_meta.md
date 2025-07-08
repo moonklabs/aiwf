@@ -42,12 +42,22 @@ Feature Ledger와 AI 페르소나 시스템의 핵심 기반을 구축하고, Co
 ## 태스크 목록
 
 ### Feature Ledger 시스템 (4개 태스크)
-- [ ] [T01_S01: Feature Ledger 데이터 구조 설계](T01_S01_Feature_Ledger_데이터_구조_설계.md)
+- [x] [TX01_S01: Feature Ledger 데이터 구조 설계](TX01_S01_Feature_Ledger_데이터_구조_설계.md)
 - [ ] [T02_S01: Feature Ledger CLI 명령어 개발](T02_S01_Feature_Ledger_CLI_명령어_개발.md)
 - [ ] [T03_S01: Git 연동 Feature 추적](T03_S01_Git_연동_Feature_추적.md)
 - [ ] [T04_S01: Feature Ledger 문서화](T04_S01_Feature_Ledger_문서화.md)
 
-### 시스템 안정화 (2개 태스크)
+### AI 페르소나 시스템 (2개 태스크)
+- [ ] [T05_S01: AI 페르소나 데이터 구조 설계](T05_S01_AI_페르소나_데이터_구조_설계.md)
+- [ ] [T06_S01: 페르소나 관리 명령어 구현](T06_S01_페르소나_관리_명령어_구현.md)
+
+### Context 압축 시스템 (3개 태스크)
+- [ ] [T07_S01: Context 압축 아키텍처 설계](T07_S01_Context_압축_아키텍처_설계.md)
+- [ ] [T08_S01: 토큰 추적 시스템 프로토타입](T08_S01_토큰_추적_시스템_프로토타입.md)
+- [ ] [T09_S01: 압축 알고리즘 프로토타입](T09_S01_압축_알고리즘_프로토타입.md)
+
+### 시스템 안정화 (3개 태스크)
+- [ ] [T10_S01: update_docs 명령어 복구](T10_S01_update_docs_명령어_복구.md)
 - [ ] [T11_S01: 통합 테스트 Suite 구축](T11_S01_통합_테스트_Suite_구축.md)
 - [ ] [T12_S01: 성능 최적화 및 문서화](T12_S01_성능_최적화_및_문서화.md)
 
