@@ -242,7 +242,7 @@ export async function switchLanguage(newLanguage) {
     try {
         // 언어 유효성 검증
         if (!SUPPORTED_LANGUAGES.includes(newLanguage)) {
-            throw new Error(getLocalizedMessage('LANGUAGE_NOT_SUPPORTED'));
+            throw new Error(`지원되지 않는 언어: ${newLanguage}. 지원 언어: ${SUPPORTED_LANGUAGES.join(', ')}`);
         }
         
         // 현재 언어 설정 로드

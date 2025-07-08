@@ -25,9 +25,22 @@ const TEST_DIR = '.aiwf-test';
 const TEST_CONFIG_PATH = `${TEST_DIR}/config/language.json`;
 
 describe('Language Utils', () => {
+    let originalConfigExists = false;
+    let originalConfigContent = null;
+
     beforeEach(async () => {
         // 테스트 디렉토리 생성
         await fs.mkdir(`${TEST_DIR}/config`, { recursive: true });
+        
+        // 기존 설정 파일 백업
+        try {
+            originalConfigContent = await fs.readFile(LANGUAGE_CONFIG_PATH, 'utf8');
+            originalConfigExists = true;
+            // 기존 설정 파일 임시 제거
+            await fs.unlink(LANGUAGE_CONFIG_PATH);
+        } catch (error) {
+            originalConfigExists = false;
+        }
         
         // 환경 변수 초기화
         delete process.env.LANG;
@@ -36,6 +49,12 @@ describe('Language Utils', () => {
     });
 
     afterEach(async () => {
+        // 기존 설정 파일 복원
+        if (originalConfigExists && originalConfigContent) {
+            await fs.mkdir(path.dirname(LANGUAGE_CONFIG_PATH), { recursive: true });
+            await fs.writeFile(LANGUAGE_CONFIG_PATH, originalConfigContent, 'utf8');
+        }
+        
         // 테스트 디렉토리 정리
         try {
             await fs.rm(TEST_DIR, { recursive: true, force: true });
@@ -163,16 +182,13 @@ describe('Language Utils', () => {
         test('should validate supported language', async () => {
             // 유효한 언어
             const result1 = await switchLanguage('ko');
-            expect(['ko', 'en']).toContain('ko');
+            expect(result1.success).toBe(true);
+            expect(result1.newLanguage).toBe('ko');
             
-            // 유효하지 않은 언어는 예외를 발생시켜야 함
-            try {
-                await switchLanguage('invalid');
-                // 이 라인에 도달하면 안됨
-                expect(true).toBe(false);
-            } catch (error) {
-                expect(error.message).toContain('지원되지 않는 언어');
-            }
+            // 유효하지 않은 언어는 실패 객체를 반환해야 함
+            const result2 = await switchLanguage('invalid');
+            expect(result2.success).toBe(false);
+            expect(result2.error).toContain('지원되지 않는 언어');
         });
     });
 
