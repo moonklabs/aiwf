@@ -57,6 +57,6 @@ describe('패키지 구성 검증', () => {
 
   test('bin 명령어가 설정되어 있다', () => {
     expect(packageJson.bin).toHaveProperty('aiwf');
-    expect(packageJson.bin.aiwf).toBe('./index.js');
+    expect(packageJson.bin.aiwf).toBe('./.aiwf/bin/aiwf.js');
   });
 });

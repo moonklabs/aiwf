@@ -38,13 +38,18 @@ export const testUtils = {
     const aiwfDir = path.join(baseDir, '.aiwf');
     const dirs = [
       '00_PROJECT_MANIFEST.md',
-      '01_PROJECT_DOCS',
-      '02_REQUIREMENTS',
+      '01_PROJECT',
+      '02_REQUIREMENTS', 
       '03_SPRINTS',
       '04_GENERAL_TASKS',
-      '05_TEMPLATES',
+      '05_DOCUMENTATION',
       '06_FEATURE_LEDGERS',
-      '07_AI_PERSONAS'
+      '07_BUG_REPORTS',
+      '08_ADR',
+      '09_AI_TOOLS',
+      '10_PERSONAS',
+      '11_CONTEXT_COMPRESSION',
+      '99_TEMPLATES'
     ];
 
     await fs.mkdir(aiwfDir, { recursive: true });
@@ -143,7 +148,7 @@ export const testFixtures = {
     updated_at: '2025-07-09T02:55:00Z'
   },
 
-  aiPersona: {
+  persona: {
     id: 'architect',
     name: 'Software Architect',
     description: 'AI 페르소나 for software architecture',

@@ -47,8 +47,8 @@
         "fs-extra": "^11.3.0",
         "ora": "^8.0.1",
         "prompts": "^2.4.2",
-        "tiktoken": "^1.0.21",
-        "tar": "^6.2.0"
+        "tar": "^6.2.1",
+        "tiktoken": "^1.0.21"
     },
     "devDependencies": {
         "jest": "^30.0.3"
