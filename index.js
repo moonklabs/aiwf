@@ -18,6 +18,8 @@ import {
     SUPPORTED_LANGUAGES,
     DEFAULT_LANGUAGE
 } from './language-utils.js';
+import AIToolCommand from './src/commands/ai-tool.js';
+import { CacheCLI } from './lib/cache-cli.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -1832,8 +1834,114 @@ async function restoreFromBackup(spinner, msg) {
 program
     .name('aiwf')
     .version('1.0.1')
-    .description('AIWF Installer')
+    .description('AIWF - AI Workflow Framework');
+
+// Install command (default action)
+program
+    .command('install', { isDefault: true })
+    .description('Install AIWF framework')
     .option('-f, --force', 'Force install without prompts')
     .action((options) => installAIWF({ ...options, debugLog: true }));
+
+// AI Tool command
+program
+    .command('ai-tool <subcommand> [tool-name]')
+    .description('Manage AI tool integrations')
+    .action(async (subcommand, toolName) => {
+        const aiToolCmd = new AIToolCommand();
+        const args = [subcommand];
+        if (toolName) args.push(toolName);
+        await aiToolCmd.execute(args);
+    });
+
+// Cache management commands
+const cache = program.command('cache');
+cache.description('Manage offline template cache');
+
+cache
+    .command('download')
+    .description('Download templates for offline use')
+    .option('--all', 'Download all templates')
+    .option('--type <type>', 'Download specific type (ai-tools, projects)')
+    .action(async (options) => {
+        const cacheCLI = new CacheCLI();
+        try {
+            await cacheCLI.init();
+            await cacheCLI.downloadCommand(options);
+        } catch (error) {
+            console.error(chalk.red('Cache download failed:', error.message));
+            process.exit(1);
+        } finally {
+            await cacheCLI.cleanup();
+        }
+    });
+
+cache
+    .command('list')
+    .description('List cached templates')
+    .option('--type <type>', 'Filter by type (ai-tools, projects)')
+    .action(async (options) => {
+        const cacheCLI = new CacheCLI();
+        try {
+            await cacheCLI.init();
+            await cacheCLI.listCommand(options);
+        } catch (error) {
+            console.error(chalk.red('Cache list failed:', error.message));
+            process.exit(1);
+        } finally {
+            await cacheCLI.cleanup();
+        }
+    });
+
+cache
+    .command('clean')
+    .description('Clean up cached templates')
+    .option('--all', 'Clear all cached templates')
+    .option('--max-age <days>', 'Maximum age in days (default: 7)', '7')
+    .action(async (options) => {
+        const cacheCLI = new CacheCLI();
+        try {
+            await cacheCLI.init();
+            await cacheCLI.cleanCommand(options);
+        } catch (error) {
+            console.error(chalk.red('Cache clean failed:', error.message));
+            process.exit(1);
+        } finally {
+            await cacheCLI.cleanup();
+        }
+    });
+
+cache
+    .command('update')
+    .description('Check for template updates')
+    .option('--install', 'Install available updates')
+    .action(async (options) => {
+        const cacheCLI = new CacheCLI();
+        try {
+            await cacheCLI.init();
+            await cacheCLI.updateCommand(options);
+        } catch (error) {
+            console.error(chalk.red('Cache update failed:', error.message));
+            process.exit(1);
+        } finally {
+            await cacheCLI.cleanup();
+        }
+    });
+
+cache
+    .command('status')
+    .description('Show cache system status')
+    .action(async () => {
+        const cacheCLI = new CacheCLI();
+        try {
+            await cacheCLI.init();
+            await cacheCLI.statusCommand();
+        } catch (error) {
+            console.error(chalk.red('Cache status failed:', error.message));
+            process.exit(1);
+        } finally {
+            await cacheCLI.cleanup();
+        }
+    });
 
 program.parse(process.argv);

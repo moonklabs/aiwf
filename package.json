@@ -5,8 +5,10 @@
     "main": "index.js",
     "type": "module",
     "bin": {
-        "aiwf": "./index.js",
-        "aiwf-lang": "./language-cli.js"
+        "aiwf": "./.aiwf/bin/aiwf.js",
+        "aiwf-create": "./.aiwf/bin/aiwf-create.js",
+        "aiwf-lang": "./language-cli.js",
+        "aiwf-legacy": "./index.js"
     },
     "scripts": {
         "test": "node --experimental-vm-modules node_modules/.bin/jest",
@@ -42,9 +44,11 @@
     "dependencies": {
         "chalk": "^5.3.0",
         "commander": "^11.1.0",
+        "fs-extra": "^11.3.0",
         "ora": "^8.0.1",
         "prompts": "^2.4.2",
-        "tiktoken": "^1.0.21"
+        "tiktoken": "^1.0.21",
+        "tar": "^6.2.0"
     },
     "devDependencies": {
         "jest": "^30.0.3"
