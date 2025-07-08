@@ -44,8 +44,8 @@ Feature Ledger와 AI 페르소나 시스템의 핵심 기반을 구축하고, Co
 ### Feature Ledger 시스템 (4개 태스크)
 - [x] [TX01_S01: Feature Ledger 데이터 구조 설계](TX01_S01_Feature_Ledger_데이터_구조_설계.md)
 - [x] [TX02_S01: Feature Ledger CLI 명령어 개발](TX02_S01_Feature_Ledger_CLI_명령어_개발.md)
-- [ ] [T03_S01: Git 연동 Feature 추적](T03_S01_Git_연동_Feature_추적.md)
-- [ ] [T04_S01: Feature Ledger 문서화](T04_S01_Feature_Ledger_문서화.md)
+- [x] [TX03_S01: Git 연동 Feature 추적](TX03_S01_Git_연동_Feature_추적.md)
+- [x] [TX04_S01: Feature Ledger 문서화](TX04_S01_Feature_Ledger_문서화.md)
 
 ### AI 페르소나 시스템 (2개 태스크)
 - [ ] [T05_S01: AI 페르소나 데이터 구조 설계](T05_S01_AI_페르소나_데이터_구조_설계.md)
