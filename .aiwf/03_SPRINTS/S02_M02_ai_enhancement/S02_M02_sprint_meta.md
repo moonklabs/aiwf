@@ -17,11 +17,12 @@ completion_timestamp: 2025-07-08T20:16:16Z
 ## Scope & Key Deliverables
 
 ### 1. 5개 AI 페르소나 명령어 구현 (필수)
-- `/project:aiwf:architect` - 아키텍처 전문가 모드
-- `/project:aiwf:security` - 보안 전문가 모드
-- `/project:aiwf:frontend` - 프론트엔드 전문가 모드
-- `/project:aiwf:backend` - 백엔드 전문가 모드
-- `/project:aiwf:data_analyst` - 데이터 분석가 모드
+- `/project:aiwf:architect` - 아키텍처 전문가 모드 (구현됨)
+- `/project:aiwf:debugger` - 디버그 전문가 모드 (보안 대신 구현)
+- `/project:aiwf:reviewer` - 코드 리뷰 전문가 모드 (프론트엔드 대신 구현)
+- `/project:aiwf:documenter` - 문서화 전문가 모드 (백엔드 대신 구현)
+- `/project:aiwf:optimizer` - 최적화 전문가 모드 (데이터 분석가 대신 구현)
+- `/project:aiwf:developer` - 기본 개발자 모드 (추가 구현)
 - 각 페르소나별 컨텍스트 규칙 및 프롬프트 템플릿
 
 ### 2. Context 압축 모드 완성 (필수)
@@ -56,9 +57,9 @@ completion_timestamp: 2025-07-08T20:16:16Z
 - [x] 압축 전후 컨텍스트 품질 유지 확인
 
 ### Feature-Git 연동
-- [x] `link_feature_commit` 명령어 작동
-- [x] Pre-commit hook 자동 설치 및 작동
-- [x] 커밋 메시지 파싱 정확도 95% 이상
+- [ ] `link_feature_commit` 명령어 작동 - 구현 안됨
+- [ ] Pre-commit hook 자동 설치 및 작동 - post-commit만 구현됨
+- [x] 커밋 메시지 파싱 정확도 95% 이상 - Git 유틸리티로 구현
 - [x] Feature 상태 자동 업데이트 검증
 
 ### 시스템 통합
@@ -84,6 +85,7 @@ completion_timestamp: 2025-07-08T20:16:16Z
 
 ### Feature-Git 연동 시스템 (1개 태스크)
 - [x] [TX04_S02: Feature-Git 연동 및 자동화](TX4_S02_Feature_Git_연동_및_자동화.md)
+  - feature_commit_report.js, sync_feature_commits.js, scan_git_history.js 구현됨
 
 ### 통합 및 문서화 (1개 태스크)
 - [x] [TX05_S02: S02 통합 테스트 및 문서화](TX05_S02_S02_통합_테스트_및_문서화.md)
@@ -96,7 +98,10 @@ completion_timestamp: 2025-07-08T20:16:16Z
 - **성공 지표**: 
   - AI 페르소나 사용으로 개발 효율성 30% 향상
   - 토큰 비용 50% 절감 실제 달성
-  - 5개 페르소나 명령어 완전 구현
+  - 6개 페르소나 명령어 구현 (원래 5개 계획, 6개 구현)
+- **구현 차이점**: 
+  - 페르소나 이름이 계획과 다르게 구현됨
+  - Feature Ledger CLI 명령어는 미구현, Git 연동으로 대체
 - **위험 관리**: 토큰 압축률이 목표에 미달할 경우 다양한 전략 준비
 - **다음 스프린트 준비**: AI 도구 통합을 위한 페르소나 시스템 인터페이스 제공
 - **총 태스크**: 5개 (복잡성: 보통 4개, 낮음 1개)
