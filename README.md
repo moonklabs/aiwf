@@ -131,6 +131,7 @@ After installation:
 - **Task**: `/project:aiwf:do_task` - Execute tasks
 - **Review**: `/project:aiwf:code_review` - Code review
 - **GitHub Integration**: `/project:aiwf:issue_create`, `/project:aiwf:pr_create`
+- **AI Personas**: `/project:aiwf:ai_persona:architect`, `/project:aiwf:ai_persona:debugger`, etc.
 
 ## 📚 Documentation
 
@@ -148,6 +149,9 @@ For a complete list of AIWF commands and detailed usage, see [COMMANDS_GUIDE.md]
 - 🔧 **IDE Integration** - Cursor and Windsurf development rules support
 - 🔗 **GitHub Integration** - Automated issue and PR creation
 - 📊 **Project Tracking** - Systematic management of milestones, sprints, and tasks
+- 🎭 **AI Personas** - Optimized AI behavior patterns for different development tasks
+- 🧠 **Auto-Detection** - Automatic persona switching based on task context
+- 📈 **Performance Metrics** - Track and analyze AI persona effectiveness
 
 ## 🔧 Requirements
 

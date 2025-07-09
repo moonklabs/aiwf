@@ -654,6 +654,184 @@ AIWF includes a comprehensive language management system with:
 4. Load context information
 5. Set task-ready state
 
+## AI Persona Commands
+
+### 🎭 `/project:aiwf:ai_persona:switch`
+
+**Purpose**: Switch to a specific AI persona for focused development tasks
+
+**Usage**:
+
+```
+/project:aiwf:ai_persona:switch architect
+# Switch to architect persona
+
+/project:aiwf:ai_persona:switch debugger
+# Switch to debugger persona
+```
+
+**Available Personas**:
+- `architect` - System design and architecture
+- `debugger` - Bug detection and troubleshooting
+- `reviewer` - Code quality and standards
+- `documenter` - Documentation and guides
+- `optimizer` - Performance optimization
+- `developer` - General development (default)
+
+### 🎭 `/project:aiwf:ai_persona:architect`
+
+**Purpose**: Shortcut to switch to architect persona
+
+**Usage**:
+
+```
+/project:aiwf:ai_persona:architect
+```
+
+**When to Use**: When designing system architecture, planning modules, creating technical designs
+
+### 🎭 `/project:aiwf:ai_persona:debugger`
+
+**Purpose**: Shortcut to switch to debugger persona
+
+**Usage**:
+
+```
+/project:aiwf:ai_persona:debugger
+```
+
+**When to Use**: When fixing bugs, tracing errors, investigating issues
+
+### 🎭 `/project:aiwf:ai_persona:reviewer`
+
+**Purpose**: Shortcut to switch to reviewer persona
+
+**Usage**:
+
+```
+/project:aiwf:ai_persona:reviewer
+```
+
+**When to Use**: When reviewing code, checking security, ensuring standards
+
+### 🎭 `/project:aiwf:ai_persona:documenter`
+
+**Purpose**: Shortcut to switch to documenter persona
+
+**Usage**:
+
+```
+/project:aiwf:ai_persona:documenter
+```
+
+**When to Use**: When writing documentation, creating guides, explaining features
+
+### 🎭 `/project:aiwf:ai_persona:optimizer`
+
+**Purpose**: Shortcut to switch to optimizer persona
+
+**Usage**:
+
+```
+/project:aiwf:ai_persona:optimizer
+```
+
+**When to Use**: When optimizing performance, reducing resource usage, improving efficiency
+
+### 🔄 `/project:aiwf:ai_persona:auto`
+
+**Purpose**: Enable or disable automatic persona detection
+
+**Usage**:
+
+```
+/project:aiwf:ai_persona:auto on
+# Enable auto-detection
+
+/project:aiwf:ai_persona:auto off
+# Disable auto-detection
+```
+
+**Behavior**: When enabled, Claude automatically switches personas based on task context
+
+### 📊 `/project:aiwf:ai_persona:status`
+
+**Purpose**: Display current persona and session metrics
+
+**Usage**:
+
+```
+/project:aiwf:ai_persona:status
+```
+
+**Output**: Shows current persona, behaviors, session duration, interactions, and token usage
+
+### 📋 `/project:aiwf:ai_persona:list`
+
+**Purpose**: List all available AI personas
+
+**Usage**:
+
+```
+/project:aiwf:ai_persona:list
+```
+
+**Output**: Shows all personas with descriptions and focus areas
+
+### 🔍 `/project:aiwf:ai_persona:detect`
+
+**Purpose**: Detect optimal persona for a specific task
+
+**Usage**:
+
+```
+/project:aiwf:ai_persona:detect "fix the authentication bug"
+# Detects debugger persona
+
+/project:aiwf:ai_persona:detect "design the API structure"
+# Detects architect persona
+```
+
+### 📈 `/project:aiwf:ai_persona:report`
+
+**Purpose**: Generate performance report for persona usage
+
+**Usage**:
+
+```
+/project:aiwf:ai_persona:report
+# Generate report for all time
+
+/project:aiwf:ai_persona:report week
+# Generate report for past week
+```
+
+**Output**: Performance metrics, persona usage statistics, recommendations
+
+### 📊 `/project:aiwf:ai_persona:stats`
+
+**Purpose**: View detailed statistics for a specific persona
+
+**Usage**:
+
+```
+/project:aiwf:ai_persona:stats debugger
+# View debugger persona stats
+
+/project:aiwf:ai_persona:stats
+# View current persona stats
+```
+
+### 🔄 `/project:aiwf:ai_persona:reset`
+
+**Purpose**: Reset persona system to default (developer)
+
+**Usage**:
+
+```
+/project:aiwf:ai_persona:reset
+```
+
 ## Best Practices
 
 ### Daily Workflow
@@ -662,6 +840,9 @@ AIWF includes a comprehensive language management system with:
 # Start of day
 /aiwf_prime
 
+# Enable AI persona auto-detection
+/project:aiwf:ai_persona:auto on
+
 # Work on tasks
 /aiwf_do_task
 /aiwf_test
@@ -669,6 +850,7 @@ AIWF includes a comprehensive language management system with:
 
 # End of day
 /aiwf_project_review
+/project:aiwf:ai_persona:report
 ```
 
 ### Sprint Workflow
@@ -704,6 +886,11 @@ AIWF includes a comprehensive language management system with:
 3. **Review before major commits**: Catch issues early
 4. **Create bugs as general tasks**: Keep them trackable
 5. **Use task-specific commits**: Better traceability
+6. **Enable AI persona auto-detection**: Let Claude automatically switch to the right mode
+7. **Use architect persona for planning**: Better system design decisions
+8. **Switch to debugger for bug fixing**: More systematic error analysis
+9. **Use optimizer persona sparingly**: Focus on actual bottlenecks
+10. **Check persona reports weekly**: Understand your development patterns
 
 ## Command Safety Features
 
@@ -730,4 +917,4 @@ If you need help with commands:
 
 **Language Versions**: Both English and Korean versions of this guide are maintained and updated simultaneously to ensure consistency across language installations.
 
-**Last Updated**: 2025-07-03 - Language Management System and Korean Commands Standardization
+**Last Updated**: 2025-07-09 - AI Persona System Integration and Documentation
