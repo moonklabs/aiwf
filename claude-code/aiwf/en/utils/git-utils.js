@@ -5,14 +5,14 @@ const path = require('path');
 const { extractFeatureIds, extractFeatureIdFromBranch } = require('../config/commit-patterns');
 
 /**
- * Git 커밋 정보를 추출하는 유틸리티 모듈
+ * Utility module for extracting Git commit information
  */
 
 /**
- * Git 명령어 실행
- * @param {string} command - 실행할 git 명령어
- * @param {string} cwd - 작업 디렉토리 (선택사항)
- * @returns {Promise<string>} - 명령어 출력
+ * Execute Git command
+ * @param {string} command - Git command to execute
+ * @param {string} cwd - Working directory (optional)
+ * @returns {Promise<string>} - Command output
  */
 async function runGitCommand(command, cwd = process.cwd()) {
   try {
@@ -27,27 +27,27 @@ async function runGitCommand(command, cwd = process.cwd()) {
 }
 
 /**
- * 현재 브랜치 이름 가져오기
- * @returns {Promise<string>} - 브랜치 이름
+ * Get current branch name
+ * @returns {Promise<string>} - Branch name
  */
 async function getCurrentBranch() {
   return await runGitCommand('rev-parse --abbrev-ref HEAD');
 }
 
 /**
- * 커밋 정보 객체 구조
+ * Commit information object structure
  * @typedef {Object} CommitInfo
- * @property {string} hash - 커밋 해시
- * @property {string} author - 작성자
- * @property {string} date - 커밋 날짜
- * @property {string} message - 커밋 메시지
- * @property {Array<string>} featureIds - 관련 Feature ID 목록
+ * @property {string} hash - Commit hash
+ * @property {string} author - Author
+ * @property {string} date - Commit date
+ * @property {string} message - Commit message
+ * @property {Array<string>} featureIds - Related Feature ID list
  */
 
 /**
- * 특정 커밋의 상세 정보 가져오기
- * @param {string} commitHash - 커밋 해시
- * @returns {Promise<CommitInfo>} - 커밋 정보
+ * Get detailed information for a specific commit
+ * @param {string} commitHash - Commit hash
+ * @returns {Promise<CommitInfo>} - Commit information
  */
 async function getCommitInfo(commitHash) {
   const format = '%H%n%an%n%aI%n%s%n%b';
@@ -67,14 +67,14 @@ async function getCommitInfo(commitHash) {
 }
 
 /**
- * 커밋 범위에서 Feature 관련 커밋 찾기
- * @param {string} since - 시작 날짜 (예: '2025-01-01')
- * @param {string} until - 종료 날짜 (선택사항)
- * @returns {Promise<Array<CommitInfo>>} - Feature 관련 커밋 목록
+ * Find Feature-related commits in a date range
+ * @param {string} since - Start date (e.g., '2025-01-01')
+ * @param {string} until - End date (optional)
+ * @returns {Promise<Array<CommitInfo>>} - Feature-related commit list
  */
 async function getFeatureRelatedCommits(since, until = 'HEAD') {
   try {
-    // git log 명령어 구성
+    // Construct git log command
     let command = `log --since="${since}"`;
     if (until !== 'HEAD') {
       command += ` --until="${until}"`;
@@ -104,9 +104,9 @@ async function getFeatureRelatedCommits(since, until = 'HEAD') {
 }
 
 /**
- * 특정 Feature ID와 관련된 모든 커밋 찾기
- * @param {string} featureId - Feature ID (예: 'FL001')
- * @returns {Promise<Array<CommitInfo>>} - 해당 Feature의 커밋 목록
+ * Find all commits related to a specific Feature ID
+ * @param {string} featureId - Feature ID (e.g., 'FL001')
+ * @returns {Promise<Array<CommitInfo>>} - Commit list for the Feature
  */
 async function getCommitsByFeatureId(featureId) {
   try {
@@ -135,8 +135,8 @@ async function getCommitsByFeatureId(featureId) {
 }
 
 /**
- * 현재 브랜치의 Feature ID 추출
- * @returns {Promise<string|null>} - Feature ID 또는 null
+ * Extract Feature ID from current branch
+ * @returns {Promise<string|null>} - Feature ID or null
  */
 async function getCurrentFeatureId() {
   try {
@@ -149,9 +149,9 @@ async function getCurrentFeatureId() {
 }
 
 /**
- * 최근 N개의 커밋에서 Feature 관련 커밋 찾기
- * @param {number} count - 확인할 커밋 수
- * @returns {Promise<Array<CommitInfo>>} - Feature 관련 커밋 목록
+ * Find Feature-related commits from recent N commits
+ * @param {number} count - Number of commits to check
+ * @returns {Promise<Array<CommitInfo>>} - Feature-related commit list
  */
 async function getRecentFeatureCommits(count = 10) {
   try {
@@ -180,8 +180,8 @@ async function getRecentFeatureCommits(count = 10) {
 }
 
 /**
- * Git 저장소인지 확인
- * @param {string} dir - 확인할 디렉토리
+ * Check if directory is a Git repository
+ * @param {string} dir - Directory to check
  * @returns {Promise<boolean>}
  */
 async function isGitRepository(dir = process.cwd()) {
@@ -194,8 +194,8 @@ async function isGitRepository(dir = process.cwd()) {
 }
 
 /**
- * 변경된 파일 목록 가져오기
- * @returns {Promise<Array<string>>} - 변경된 파일 경로 목록
+ * Get list of changed files
+ * @returns {Promise<Array<string>>} - List of changed file paths
  */
 async function getChangedFiles() {
   try {

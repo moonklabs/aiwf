@@ -14,52 +14,52 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 /**
- * compress-context 명령어 실행
+ * Execute compress-context command
  */
 export async function executeCompressContext(args = []) {
-  const spinner = ora('Context 압축 준비 중...').start();
+  const spinner = ora('Preparing context compression...').start();
   
   try {
-    // 파라미터 파싱
+    // Parse parameters
     const { mode, targetPath } = parseArguments(args);
     
-    spinner.text = '압축 대상 분석 중...';
+    spinner.text = 'Analyzing compression targets...';
     
-    // 대상 경로 결정
+    // Determine target path
     const resolvedPath = await resolveTargetPath(targetPath);
     const files = await collectMarkdownFiles(resolvedPath);
     
     if (files.length === 0) {
-      spinner.fail('압축할 마크다운 파일이 없습니다.');
+      spinner.fail('No markdown files to compress.');
       return;
     }
     
-    // 압축 전 통계
-    spinner.text = '원본 토큰 수 계산 중...';
+    // Statistics before compression
+    spinner.text = 'Calculating original token count...';
     const beforeStats = await calculateStats(files);
     
-    // 압축 시작
+    // Start compression
     console.log('');
-    console.log(chalk.cyan('🗜️  Context 압축 시작'));
+    console.log(chalk.cyan('🗜️  Starting Context Compression'));
     console.log(chalk.gray('━'.repeat(50)));
-    console.log(`압축 모드: ${chalk.yellow(mode)}`);
-    console.log(`대상: ${chalk.yellow(resolvedPath)}`);
+    console.log(`Compression mode: ${chalk.yellow(mode)}`);
+    console.log(`Target: ${chalk.yellow(resolvedPath)}`);
     console.log('');
     
-    console.log(chalk.cyan('📊 압축 전 통계:'));
-    console.log(`- 총 파일 수: ${files.length}`);
-    console.log(`- 원본 토큰: ${chalk.red(beforeStats.totalTokens.toLocaleString())}`);
-    console.log(`- 원본 크기: ${(beforeStats.totalSize / 1024).toFixed(1)} KB`);
+    console.log(chalk.cyan('📊 Statistics before compression:'));
+    console.log(`- Total files: ${files.length}`);
+    console.log(`- Original tokens: ${chalk.red(beforeStats.totalTokens.toLocaleString())}`);
+    console.log(`- Original size: ${(beforeStats.totalSize / 1024).toFixed(1)} KB`);
     console.log('');
     
-    spinner.text = '압축 진행 중...';
+    spinner.text = 'Compressing...';
     
-    // 압축 수행
+    // Perform compression
     const compressor = new ContextCompressor(mode);
     const compressionResults = [];
     const startTime = Date.now();
     
-    console.log(chalk.cyan('⚙️  압축 진행 중...'));
+    console.log(chalk.cyan('⚙️  Compressing...'));
     
     for (const file of files) {
       const fileName = path.basename(file);
@@ -77,7 +77,7 @@ export async function executeCompressContext(args = []) {
         const savedTokens = result.originalTokens - result.compressedTokens;
         const ratio = result.compressionRatio.toFixed(1);
         
-        console.log(chalk.green(`✓ ${fileName} (${result.originalTokens.toLocaleString()} → ${result.compressedTokens.toLocaleString()} 토큰, -${ratio}%)`));
+        console.log(chalk.green(`✓ ${fileName} (${result.originalTokens.toLocaleString()} → ${result.compressedTokens.toLocaleString()} tokens, -${ratio}%)`));
         
         compressionResults.push({
           filePath: file,
@@ -85,22 +85,22 @@ export async function executeCompressContext(args = []) {
           ...result
         });
       } else {
-        console.log(chalk.red(`✗ ${fileName} (압축 실패: ${result.error})`));
+        console.log(chalk.red(`✗ ${fileName} (compression failed: ${result.error})`));
       }
     }
     
     const processingTime = Date.now() - startTime;
     
-    // 압축 후 통계
+    // Statistics after compression
     const afterStats = calculateCompressedStats(compressionResults);
     const totalSaved = beforeStats.totalTokens - afterStats.totalTokens;
     const overallRatio = ((totalSaved / beforeStats.totalTokens) * 100).toFixed(1);
     
-    // 압축된 파일 저장
-    spinner.text = '압축된 파일 저장 중...';
+    // Save compressed files
+    spinner.text = 'Saving compressed files...';
     const outputDir = await saveCompressedFiles(compressionResults, resolvedPath);
     
-    // 압축 보고서 생성
+    // Generate compression report
     await generateReport(compressionResults, {
       mode,
       targetPath: resolvedPath,
@@ -112,46 +112,46 @@ export async function executeCompressContext(args = []) {
     
     spinner.stop();
     
-    // 결과 출력
+    // Output results
     console.log('');
-    console.log(chalk.cyan('📊 압축 후 통계:'));
-    console.log(`- 압축된 토큰: ${chalk.green(afterStats.totalTokens.toLocaleString())}`);
-    console.log(`- 절약된 토큰: ${chalk.green(totalSaved.toLocaleString())}`);
-    console.log(`- 토큰 절약률: ${chalk.green(overallRatio + '%')}`);
-    console.log(`- 압축 시간: ${(processingTime / 1000).toFixed(1)}초`);
+    console.log(chalk.cyan('📊 Statistics after compression:'));
+    console.log(`- Compressed tokens: ${chalk.green(afterStats.totalTokens.toLocaleString())}`);
+    console.log(`- Tokens saved: ${chalk.green(totalSaved.toLocaleString())}`);
+    console.log(`- Token reduction: ${chalk.green(overallRatio + '%')}`);
+    console.log(`- Processing time: ${(processingTime / 1000).toFixed(1)}s`);
     
-    // 평균 품질 점수 계산
+    // Calculate average quality score
     const avgQuality = compressionResults.reduce((sum, r) => {
       return sum + (r.metadata?.validation?.qualityScore || 0);
     }, 0) / compressionResults.length;
     
-    console.log(`- 품질 점수: ${chalk.green(avgQuality.toFixed(0) + '/100')}`);
+    console.log(`- Quality score: ${chalk.green(avgQuality.toFixed(0) + '/100')}`);
     console.log('');
     
-    console.log(chalk.green('✅ 압축 완료!'));
-    console.log(`압축된 파일 위치: ${chalk.yellow(outputDir)}`);
+    console.log(chalk.green('✅ Compression complete!'));
+    console.log(`Compressed files location: ${chalk.yellow(outputDir)}`);
     
-    // 목표 달성 여부 확인
+    // Check if target achieved
     const targetRange = getTargetRange(mode);
     if (parseFloat(overallRatio) < targetRange.min) {
       console.log('');
-      console.log(chalk.yellow(`⚠️  경고: 압축률이 목표 범위(${targetRange.min}-${targetRange.max}%)에 미달했습니다.`));
-      console.log('더 높은 압축률이 필요하면 aggressive 모드를 시도해보세요.');
+      console.log(chalk.yellow(`⚠️  Warning: Compression rate below target range (${targetRange.min}-${targetRange.max}%).`));
+      console.log('Try aggressive mode for higher compression rates.');
     }
     
-    // 리소스 정리
+    // Clean up resources
     compressor.cleanup();
     
   } catch (error) {
-    spinner.fail(`압축 실패: ${error.message}`);
+    spinner.fail(`Compression failed: ${error.message}`);
     console.error(error);
   }
 }
 
 /**
- * 명령어 인자를 파싱합니다
- * @param {Array<string>} args - 인자 배열
- * @returns {Object} 파싱된 옵션
+ * Parse command arguments
+ * @param {Array<string>} args - Argument array
+ * @returns {Object} Parsed options
  */
 function parseArguments(args) {
   let mode = 'balanced';
@@ -169,34 +169,34 @@ function parseArguments(args) {
 }
 
 /**
- * 대상 경로를 결정합니다
- * @param {string} targetPath - 사용자 지정 경로
- * @returns {string} 결정된 경로
+ * Determine target path
+ * @param {string} targetPath - User specified path
+ * @returns {string} Determined path
  */
 async function resolveTargetPath(targetPath) {
   if (targetPath) {
-    // 절대 경로가 아니면 현재 디렉토리 기준으로 변환
+    // Convert to absolute path if not already
     if (!path.isAbsolute(targetPath)) {
       targetPath = path.join(process.cwd(), targetPath);
     }
     return targetPath;
   }
   
-  // 기본값: 프로젝트의 .aiwf 디렉토리
+  // Default: project's .aiwf directory
   const aiwfPath = path.join(process.cwd(), '.aiwf');
   try {
     await fs.access(aiwfPath);
     return aiwfPath;
   } catch {
-    // .aiwf가 없으면 현재 디렉토리
+    // If no .aiwf, use current directory
     return process.cwd();
   }
 }
 
 /**
- * 마크다운 파일들을 수집합니다
- * @param {string} targetPath - 대상 경로
- * @returns {Array<string>} 파일 경로 배열
+ * Collect markdown files
+ * @param {string} targetPath - Target path
+ * @returns {Array<string>} File path array
  */
 async function collectMarkdownFiles(targetPath) {
   const files = [];
@@ -210,16 +210,16 @@ async function collectMarkdownFiles(targetPath) {
       await collectFromDirectory(targetPath, files);
     }
   } catch (error) {
-    console.error(`경로 접근 오류: ${targetPath}`);
+    console.error(`Path access error: ${targetPath}`);
   }
   
   return files;
 }
 
 /**
- * 디렉토리에서 마크다운 파일을 재귀적으로 수집합니다
- * @param {string} dirPath - 디렉토리 경로
- * @param {Array<string>} files - 파일 배열
+ * Recursively collect markdown files from directory
+ * @param {string} dirPath - Directory path
+ * @param {Array<string>} files - File array
  */
 async function collectFromDirectory(dirPath, files) {
   const entries = await fs.readdir(dirPath, { withFileTypes: true });
@@ -236,9 +236,9 @@ async function collectFromDirectory(dirPath, files) {
 }
 
 /**
- * 파일 통계를 계산합니다
- * @param {Array<string>} files - 파일 경로 배열
- * @returns {Object} 통계 정보
+ * Calculate file statistics
+ * @param {Array<string>} files - File path array
+ * @returns {Object} Statistics information
  */
 async function calculateStats(files) {
   const tokenCounter = new TokenCounter();
@@ -257,9 +257,9 @@ async function calculateStats(files) {
 }
 
 /**
- * 압축된 통계를 계산합니다
- * @param {Array<Object>} results - 압축 결과 배열
- * @returns {Object} 통계 정보
+ * Calculate compressed statistics
+ * @param {Array<Object>} results - Compression result array
+ * @returns {Object} Statistics information
  */
 function calculateCompressedStats(results) {
   const totalTokens = results.reduce((sum, r) => sum + r.compressedTokens, 0);
@@ -269,10 +269,10 @@ function calculateCompressedStats(results) {
 }
 
 /**
- * 압축된 파일들을 저장합니다
- * @param {Array<Object>} results - 압축 결과 배열
- * @param {string} targetPath - 원본 경로
- * @returns {string} 출력 디렉토리
+ * Save compressed files
+ * @param {Array<Object>} results - Compression result array
+ * @param {string} targetPath - Original path
+ * @returns {string} Output directory
  */
 async function saveCompressedFiles(results, targetPath) {
   const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, '-');
@@ -289,33 +289,33 @@ async function saveCompressedFiles(results, targetPath) {
 }
 
 /**
- * 압축 보고서를 생성합니다
- * @param {Array<Object>} results - 압축 결과 배열
- * @param {Object} stats - 통계 정보
+ * Generate compression report
+ * @param {Array<Object>} results - Compression result array
+ * @param {Object} stats - Statistics information
  */
 async function generateReport(results, stats) {
   const report = [];
   
-  report.push('# Context 압축 보고서');
+  report.push('# Context Compression Report');
   report.push('');
-  report.push(`**생성 시간**: ${new Date().toISOString()}`);
-  report.push(`**압축 모드**: ${stats.mode}`);
-  report.push(`**대상 경로**: ${stats.targetPath}`);
-  report.push(`**출력 경로**: ${stats.outputDir}`);
-  report.push('');
-  
-  report.push('## 전체 통계');
-  report.push(`- **파일 수**: ${results.length}`);
-  report.push(`- **원본 토큰**: ${stats.beforeStats.totalTokens.toLocaleString()}`);
-  report.push(`- **압축 토큰**: ${stats.afterStats.totalTokens.toLocaleString()}`);
-  report.push(`- **절약 토큰**: ${(stats.beforeStats.totalTokens - stats.afterStats.totalTokens).toLocaleString()}`);
-  report.push(`- **전체 압축률**: ${((stats.beforeStats.totalTokens - stats.afterStats.totalTokens) / stats.beforeStats.totalTokens * 100).toFixed(1)}%`);
-  report.push(`- **처리 시간**: ${(stats.processingTime / 1000).toFixed(1)}초`);
+  report.push(`**Generated**: ${new Date().toISOString()}`);
+  report.push(`**Compression Mode**: ${stats.mode}`);
+  report.push(`**Target Path**: ${stats.targetPath}`);
+  report.push(`**Output Path**: ${stats.outputDir}`);
   report.push('');
   
-  report.push('## 파일별 상세');
+  report.push('## Overall Statistics');
+  report.push(`- **File Count**: ${results.length}`);
+  report.push(`- **Original Tokens**: ${stats.beforeStats.totalTokens.toLocaleString()}`);
+  report.push(`- **Compressed Tokens**: ${stats.afterStats.totalTokens.toLocaleString()}`);
+  report.push(`- **Tokens Saved**: ${(stats.beforeStats.totalTokens - stats.afterStats.totalTokens).toLocaleString()}`);
+  report.push(`- **Overall Compression Rate**: ${((stats.beforeStats.totalTokens - stats.afterStats.totalTokens) / stats.beforeStats.totalTokens * 100).toFixed(1)}%`);
+  report.push(`- **Processing Time**: ${(stats.processingTime / 1000).toFixed(1)}s`);
   report.push('');
-  report.push('| 파일명 | 원본 토큰 | 압축 토큰 | 압축률 | 품질 점수 |');
+  
+  report.push('## File Details');
+  report.push('');
+  report.push('| File Name | Original Tokens | Compressed Tokens | Compression Rate | Quality Score |');
   report.push('|--------|-----------|-----------|--------|-----------|');
   
   for (const result of results) {
@@ -332,9 +332,9 @@ async function generateReport(results, stats) {
 }
 
 /**
- * 압축 모드별 목표 범위를 반환합니다
- * @param {string} mode - 압축 모드
- * @returns {Object} 목표 범위
+ * Get target range by compression mode
+ * @param {string} mode - Compression mode
+ * @returns {Object} Target range
  */
 function getTargetRange(mode) {
   const ranges = {
@@ -346,7 +346,7 @@ function getTargetRange(mode) {
   return ranges[mode] || { min: 0, max: 100 };
 }
 
-// CLI로 직접 실행하는 경우
+// When run directly from CLI
 if (import.meta.url === `file://${process.argv[1]}`) {
   const args = process.argv.slice(2);
   executeCompressContext(args);

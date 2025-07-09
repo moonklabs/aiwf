@@ -1,7 +1,7 @@
 import { TokenCounter } from './token-counter.js';
 
 /**
- * 텍스트 요약 알고리즘 프로토타입
+ * Text summarization algorithm prototype
  */
 export class TextSummarizer {
   constructor() {
@@ -9,18 +9,18 @@ export class TextSummarizer {
   }
 
   /**
-   * 텍스트를 요약합니다
-   * @param {string} text - 요약할 텍스트
-   * @param {Object} options - 요약 옵션
-   * @returns {Object} 요약 결과
+   * Summarize text
+   * @param {string} text - Text to summarize
+   * @param {Object} options - Summarization options
+   * @returns {Object} Summarization result
    */
   summarize(text, options = {}) {
     const {
-      targetRatio = 0.3, // 목표 압축률 (30%)
-      strategy = 'extractive', // 'extractive' 또는 'abstractive'
-      preserveStructure = true, // 구조 유지 여부
-      minSentenceLength = 20, // 최소 문장 길이
-      maxSentenceLength = 200 // 최대 문장 길이
+      targetRatio = 0.3, // Target compression ratio (30%)
+      strategy = 'extractive', // 'extractive' or 'abstractive'
+      preserveStructure = true, // Whether to preserve structure
+      minSentenceLength = 20, // Minimum sentence length
+      maxSentenceLength = 200 // Maximum sentence length
     } = options;
 
     const summary = strategy === 'extractive' 
@@ -39,30 +39,30 @@ export class TextSummarizer {
   }
 
   /**
-   * 추출적 요약 (중요한 문장들을 선택)
-   * @param {string} text - 요약할 텍스트
-   * @param {number} targetRatio - 목표 압축률
-   * @param {Object} options - 옵션
-   * @returns {Object} 요약 결과
+   * Extractive summarization (select important sentences)
+   * @param {string} text - Text to summarize
+   * @param {number} targetRatio - Target compression ratio
+   * @param {Object} options - Options
+   * @returns {Object} Summarization result
    */
   extractiveSummarization(text, targetRatio, options) {
-    // 1. 텍스트를 문장으로 분할
+    // 1. Split text into sentences
     const sentences = this.splitIntoSentences(text);
     
-    // 2. 각 문장의 중요도 계산
+    // 2. Calculate importance score for each sentence
     const scoredSentences = this.scoreSentences(sentences);
     
-    // 3. 중요도에 따라 정렬
+    // 3. Sort by importance score
     const sortedSentences = scoredSentences.sort((a, b) => b.score - a.score);
     
-    // 4. 목표 비율에 맞춰 상위 문장 선택
+    // 4. Select top sentences according to target ratio
     const targetSentenceCount = Math.ceil(sentences.length * targetRatio);
     const selectedSentences = sortedSentences.slice(0, targetSentenceCount);
     
-    // 5. 원본 순서대로 재배열
+    // 5. Rearrange in original order
     const finalSentences = selectedSentences.sort((a, b) => a.index - b.index);
     
-    // 6. 요약 텍스트 생성
+    // 6. Generate summary text
     const summaryText = finalSentences.map(s => s.text).join(' ');
     
     return {
@@ -79,29 +79,29 @@ export class TextSummarizer {
   }
 
   /**
-   * 추상적 요약 (내용을 재구성)
-   * @param {string} text - 요약할 텍스트
-   * @param {number} targetRatio - 목표 압축률
-   * @param {Object} options - 옵션
-   * @returns {Object} 요약 결과
+   * Abstractive summarization (reconstruct content)
+   * @param {string} text - Text to summarize
+   * @param {number} targetRatio - Target compression ratio
+   * @param {Object} options - Options
+   * @returns {Object} Summarization result
    */
   abstractiveSummarization(text, targetRatio, options) {
-    // 1. 주요 개념 추출
+    // 1. Extract key concepts
     const concepts = this.extractConcepts(text);
     
-    // 2. 핵심 정보 식별
+    // 2. Identify key information
     const keyInfo = this.identifyKeyInformation(text);
     
-    // 3. 구조 분석
+    // 3. Analyze structure
     const structure = this.analyzeStructure(text);
     
-    // 4. 요약 생성
+    // 4. Generate summary
     const summaryText = this.generateAbstractSummary(concepts, keyInfo, structure, targetRatio);
     
     return {
       content: summaryText,
       compressionRatio: this.calculateCompressionRatio(text, summaryText),
-      keyPoints: concepts.slice(0, 5), // 상위 5개 개념
+      keyPoints: concepts.slice(0, 5), // Top 5 concepts
       metadata: {
         strategy: 'abstractive',
         conceptCount: concepts.length,
@@ -112,55 +112,54 @@ export class TextSummarizer {
   }
 
   /**
-   * 텍스트를 문장으로 분할합니다
-   * @param {string} text - 분할할 텍스트
-   * @returns {Array<string>} 문장 배열
+   * Split text into sentences
+   * @param {string} text - Text to split
+   * @returns {Array<string>} Sentence array
    */
   splitIntoSentences(text) {
-    // 마크다운 구조 유지하면서 문장 분할
+    // Split sentences while preserving markdown structure
     const sentences = [];
     const lines = text.split('\n');
     
     for (const line of lines) {
       if (line.trim() === '') continue;
       
-      // 헤더, 목록 항목은 그대로 유지
+      // Keep headers and list items as is
       if (line.match(/^#{1,6}\s+/) || line.match(/^\s*[-*+]\s+/) || line.match(/^\s*\d+\.\s+/)) {
         sentences.push(line.trim());
       } else {
-        // 일반 텍스트는 문장으로 분할
+        // Split regular text into sentences
         const lineSentences = line.split(/[.!?]+/).filter(s => s.trim().length > 0);
         sentences.push(...lineSentences.map(s => s.trim() + '.'));
       }
     }
     
-    return sentences.filter(s => s.length > 10); // 너무 짧은 문장 제거
+    return sentences.filter(s => s.length > 10); // Remove sentences that are too short
   }
 
   /**
-   * 문장들의 중요도를 계산합니다
-   * @param {Array<string>} sentences - 문장 배열
-   * @returns {Array<Object>} 점수가 매겨진 문장 배열
+   * Calculate importance scores for sentences
+   * @param {Array<string>} sentences - Sentence array
+   * @returns {Array<Object>} Scored sentence array
    */
   scoreSentences(sentences) {
     const scoredSentences = [];
     
-    // 키워드 빈도 계산
+    // Calculate keyword frequency
     const wordFreq = this.calculateWordFrequency(sentences.join(' '));
     
-    // 중요 키워드 정의
+    // Define important keywords
     const importantKeywords = [
       'goal', 'objective', 'requirement', 'critical', 'important', 'key', 'main',
       'primary', 'essential', 'must', 'should', 'need', 'implement', 'develop',
       'create', 'build', 'design', 'task', 'subtask', 'acceptance', 'criteria',
-      '목표', '목적', '요구사항', '중요', '핵심', '주요', '필수', '구현', '개발',
-      '생성', '구축', '설계', '태스크', '하위', '승인', '기준'
+      'purpose', 'core', 'mandatory', 'execute', 'generate', 'construct', 'architecture', 'work', 'sub', 'approval', 'standard'
     ];
     
     sentences.forEach((sentence, index) => {
       let score = 0;
       
-      // 1. 문장 길이 점수 (너무 짧거나 긴 문장 페널티)
+      // 1. Sentence length score (penalty for too short or long sentences)
       const length = sentence.length;
       if (length >= 30 && length <= 150) {
         score += 1;
@@ -168,7 +167,7 @@ export class TextSummarizer {
         score -= 0.5;
       }
       
-      // 2. 중요 키워드 점수
+      // 2. Important keyword score
       const lowerSentence = sentence.toLowerCase();
       importantKeywords.forEach(keyword => {
         if (lowerSentence.includes(keyword.toLowerCase())) {
@@ -176,7 +175,7 @@ export class TextSummarizer {
         }
       });
       
-      // 3. 단어 빈도 점수
+      // 3. Word frequency score
       const words = sentence.toLowerCase().split(/\s+/);
       words.forEach(word => {
         if (wordFreq[word] && wordFreq[word] > 1) {
@@ -184,20 +183,20 @@ export class TextSummarizer {
         }
       });
       
-      // 4. 위치 점수 (시작과 끝 부분 문장에 높은 점수)
+      // 4. Position score (higher score for beginning and end sentences)
       if (index < sentences.length * 0.3) {
-        score += 1; // 시작 부분
+        score += 1; // Beginning part
       }
       if (index > sentences.length * 0.7) {
-        score += 0.5; // 끝 부분
+        score += 0.5; // End part
       }
       
-      // 5. 구조적 중요도 (헤더, 목록 항목)
+      // 5. Structural importance (headers, list items)
       if (sentence.match(/^#{1,6}\s+/) || sentence.match(/^\s*[-*+]\s+/)) {
         score += 3;
       }
       
-      // 6. 숫자 포함 점수 (통계, 메트릭 등)
+      // 6. Number inclusion score (statistics, metrics, etc.)
       if (sentence.match(/\d+/)) {
         score += 0.5;
       }
@@ -214,15 +213,15 @@ export class TextSummarizer {
   }
 
   /**
-   * 단어 빈도를 계산합니다
-   * @param {string} text - 분석할 텍스트
-   * @returns {Object} 단어 빈도 객체
+   * Calculate word frequency
+   * @param {string} text - Text to analyze
+   * @returns {Object} Word frequency object
    */
   calculateWordFrequency(text) {
     const words = text.toLowerCase().split(/\s+/);
     const frequency = {};
     
-    // 불용어 제거
+    // Remove stop words
     const stopWords = new Set([
       'the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of',
       'with', 'by', 'from', 'up', 'about', 'into', 'through', 'during', 'before',
@@ -231,15 +230,11 @@ export class TextSummarizer {
       'would', 'should', 'could', 'can', 'may', 'might', 'must', 'this', 'that',
       'these', 'those', 'i', 'you', 'he', 'she', 'it', 'we', 'they', 'me', 'him',
       'her', 'us', 'them', 'my', 'your', 'his', 'its', 'our', 'their',
-      '이', '그', '저', '이것', '그것', '저것', '이거', '그거', '저거', '여기',
-      '거기', '저기', '이곳', '그곳', '저곳', '는', '은', '을', '를', '이',
-      '가', '와', '과', '에', '에서', '으로', '로', '의', '도', '만', '부터',
-      '까지', '처럼', '같이', '보다', '한테', '에게', '께', '한', '하나',
-      '두', '세', '네', '다섯', '여섯', '일곱', '여덟', '아홉', '열'
+      // Korean stop words removed for English-only version
     ]);
     
     words.forEach(word => {
-      const cleanWord = word.replace(/[^\w가-힣]/g, '');
+      const cleanWord = word.replace(/[^\w]/g, '');
       if (cleanWord.length > 2 && !stopWords.has(cleanWord)) {
         frequency[cleanWord] = (frequency[cleanWord] || 0) + 1;
       }
@@ -249,9 +244,9 @@ export class TextSummarizer {
   }
 
   /**
-   * 핵심 포인트를 추출합니다
-   * @param {Array<Object>} sentences - 선택된 문장들
-   * @returns {Array<string>} 핵심 포인트 배열
+   * Extract key points
+   * @param {Array<Object>} sentences - Selected sentences
+   * @returns {Array<string>} Key points array
    */
   extractKeyPoints(sentences) {
     const keyPoints = [];
@@ -259,32 +254,32 @@ export class TextSummarizer {
     sentences.forEach(sentence => {
       const text = sentence.text;
       
-      // 목표, 요구사항, 기준 등 핵심 정보 추출
-      if (text.includes('goal') || text.includes('objective') || text.includes('목표')) {
-        keyPoints.push(`목표: ${text.replace(/^[#\s*-]+/, '').trim()}`);
-      } else if (text.includes('requirement') || text.includes('요구사항')) {
-        keyPoints.push(`요구사항: ${text.replace(/^[#\s*-]+/, '').trim()}`);
-      } else if (text.includes('criteria') || text.includes('기준')) {
-        keyPoints.push(`기준: ${text.replace(/^[#\s*-]+/, '').trim()}`);
-      } else if (text.includes('task') || text.includes('태스크')) {
-        keyPoints.push(`태스크: ${text.replace(/^[#\s*-]+/, '').trim()}`);
+      // Extract key information such as goals, requirements, criteria
+      if (text.includes('goal') || text.includes('objective') || text.includes('purpose')) {
+        keyPoints.push(`Goal: ${text.replace(/^[#\s*-]+/, '').trim()}`);
+      } else if (text.includes('requirement') || text.includes('condition')) {
+        keyPoints.push(`Requirement: ${text.replace(/^[#\s*-]+/, '').trim()}`);
+      } else if (text.includes('criteria') || text.includes('standard')) {
+        keyPoints.push(`Criteria: ${text.replace(/^[#\s*-]+/, '').trim()}`);
+      } else if (text.includes('task') || text.includes('work')) {
+        keyPoints.push(`Task: ${text.replace(/^[#\s*-]+/, '').trim()}`);
       }
     });
     
-    return keyPoints.slice(0, 5); // 상위 5개만 반환
+    return keyPoints.slice(0, 5); // Return top 5 only
   }
 
   /**
-   * 주요 개념을 추출합니다
-   * @param {string} text - 분석할 텍스트
-   * @returns {Array<Object>} 개념 배열
+   * Extract key concepts
+   * @param {string} text - Text to analyze
+   * @returns {Array<Object>} Concept array
    */
   extractConcepts(text) {
     const concepts = [];
     const lines = text.split('\n');
     
     for (const line of lines) {
-      // 헤더에서 개념 추출
+      // Extract concepts from headers
       const headerMatch = line.match(/^#{1,6}\s+(.+)$/);
       if (headerMatch) {
         concepts.push({
@@ -294,7 +289,7 @@ export class TextSummarizer {
         });
       }
       
-      // 목록 항목에서 개념 추출
+      // Extract concepts from list items
       const listMatch = line.match(/^\s*[-*+]\s+(.+)$/);
       if (listMatch) {
         concepts.push({
@@ -309,23 +304,23 @@ export class TextSummarizer {
   }
 
   /**
-   * 핵심 정보를 식별합니다
-   * @param {string} text - 분석할 텍스트
-   * @returns {Array<Object>} 핵심 정보 배열
+   * Identify key information
+   * @param {string} text - Text to analyze
+   * @returns {Array<Object>} Key information array
    */
   identifyKeyInformation(text) {
     const keyInfo = [];
     const sentences = this.splitIntoSentences(text);
     
     const keyPatterns = [
-      /goal|objective|목표|목적/i,
-      /requirement|요구사항|조건/i,
-      /criteria|기준|조건/i,
-      /task|태스크|작업/i,
-      /deadline|마감일|기한/i,
-      /important|중요|핵심/i,
-      /critical|중대|치명적/i,
-      /must|필수|반드시/i
+      /goal|objective|purpose/i,
+      /requirement|condition/i,
+      /criteria|standard/i,
+      /task|work/i,
+      /deadline|due/i,
+      /important|key|core/i,
+      /critical|severe|fatal/i,
+      /must|essential|mandatory/i
     ];
     
     sentences.forEach(sentence => {
@@ -344,9 +339,9 @@ export class TextSummarizer {
   }
 
   /**
-   * 구조를 분석합니다
-   * @param {string} text - 분석할 텍스트
-   * @returns {Array<Object>} 구조 요소 배열
+   * Analyze structure
+   * @param {string} text - Text to analyze
+   * @returns {Array<Object>} Structure element array
    */
   analyzeStructure(text) {
     const structure = [];
@@ -355,7 +350,7 @@ export class TextSummarizer {
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i];
       
-      // 헤더 구조
+      // Header structure
       const headerMatch = line.match(/^(#{1,6})\s+(.+)$/);
       if (headerMatch) {
         structure.push({
@@ -366,7 +361,7 @@ export class TextSummarizer {
         });
       }
       
-      // 목록 구조
+      // List structure
       const listMatch = line.match(/^\s*([-*+]|\d+\.)\s+(.+)$/);
       if (listMatch) {
         structure.push({
@@ -377,7 +372,7 @@ export class TextSummarizer {
         });
       }
       
-      // 코드 블록
+      // Code block
       if (line.match(/^```/)) {
         structure.push({
           type: 'code_block',
@@ -390,36 +385,36 @@ export class TextSummarizer {
   }
 
   /**
-   * 추상적 요약을 생성합니다
-   * @param {Array<Object>} concepts - 개념 배열
-   * @param {Array<Object>} keyInfo - 핵심 정보 배열
-   * @param {Array<Object>} structure - 구조 배열
-   * @param {number} targetRatio - 목표 비율
-   * @returns {string} 요약 텍스트
+   * Generate abstractive summary
+   * @param {Array<Object>} concepts - Concept array
+   * @param {Array<Object>} keyInfo - Key information array
+   * @param {Array<Object>} structure - Structure array
+   * @param {number} targetRatio - Target ratio
+   * @returns {string} Summary text
    */
   generateAbstractSummary(concepts, keyInfo, structure, targetRatio) {
     const summary = [];
     
-    // 1. 주요 개념 요약
+    // 1. Key concept summary
     const topConcepts = concepts.slice(0, Math.ceil(concepts.length * targetRatio));
-    summary.push('## 주요 개념');
+    summary.push('## Key Concepts');
     topConcepts.forEach(concept => {
       summary.push(`- ${concept.text}`);
     });
     
-    // 2. 핵심 정보 요약
+    // 2. Key information summary
     const topKeyInfo = keyInfo.slice(0, Math.ceil(keyInfo.length * targetRatio));
     if (topKeyInfo.length > 0) {
-      summary.push('\n## 핵심 정보');
+      summary.push('\n## Key Information');
       topKeyInfo.forEach(info => {
         summary.push(`- ${info.text}`);
       });
     }
     
-    // 3. 구조적 요약
+    // 3. Structural summary
     const headers = structure.filter(s => s.type === 'header' && s.level <= 3);
     if (headers.length > 0) {
-      summary.push('\n## 구조');
+      summary.push('\n## Structure');
       headers.forEach(header => {
         summary.push(`${'#'.repeat(header.level + 1)} ${header.text}`);
       });
@@ -429,21 +424,21 @@ export class TextSummarizer {
   }
 
   /**
-   * 중요도 점수를 계산합니다
-   * @param {string} text - 분석할 텍스트
-   * @returns {number} 중요도 점수
+   * Calculate importance score
+   * @param {string} text - Text to analyze
+   * @returns {number} Importance score
    */
   calculateImportanceScore(text) {
     let score = 0;
     const lowerText = text.toLowerCase();
     
-    // 키워드 기반 점수
+    // Keyword-based score
     const keywordWeights = {
       'critical': 5, 'important': 4, 'key': 3, 'main': 3, 'primary': 3,
       'essential': 4, 'must': 4, 'should': 3, 'need': 2, 'goal': 4,
       'objective': 4, 'requirement': 4, 'criteria': 3, 'task': 2,
-      '중요': 4, '핵심': 4, '주요': 3, '필수': 4, '목표': 4, '목적': 4,
-      '요구사항': 4, '기준': 3, '태스크': 2, '반드시': 4
+      'important': 4, 'core': 4, 'main': 3, 'essential': 4, 'goal': 4, 'purpose': 4,
+      'requirement': 4, 'criteria': 3, 'task': 2, 'mandatory': 4
     };
     
     Object.entries(keywordWeights).forEach(([keyword, weight]) => {
@@ -452,12 +447,12 @@ export class TextSummarizer {
       }
     });
     
-    // 길이 기반 점수
+    // Length-based score
     if (text.length > 50 && text.length < 200) {
       score += 1;
     }
     
-    // 구두점 기반 점수
+    // Punctuation-based score
     if (text.includes('!') || text.includes('?')) {
       score += 1;
     }
@@ -466,10 +461,10 @@ export class TextSummarizer {
   }
 
   /**
-   * 압축률을 계산합니다
-   * @param {string} original - 원본 텍스트
-   * @param {string} compressed - 압축된 텍스트
-   * @returns {number} 압축률 (백분율)
+   * Calculate compression ratio
+   * @param {string} original - Original text
+   * @param {string} compressed - Compressed text
+   * @returns {number} Compression ratio (percentage)
    */
   calculateCompressionRatio(original, compressed) {
     const originalTokens = this.tokenCounter.countTokens(original);
@@ -480,7 +475,7 @@ export class TextSummarizer {
   }
 
   /**
-   * 리소스를 정리합니다
+   * Clean up resources
    */
   cleanup() {
     if (this.tokenCounter) {
