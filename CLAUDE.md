@@ -105,6 +105,18 @@ This project uses ES modules. Always use:
 - Document any language-specific features clearly
 - Use appropriate language codes in file paths
 
+### Language Content Rules
+**IMPORTANT**: Strict language separation must be maintained:
+- `claude-code/aiwf/en/` - MUST contain ONLY English content
+  - All code comments, documentation, and strings must be in English
+  - No Korean text should appear in any files under this directory
+- `claude-code/aiwf/ko/` - MUST contain ONLY Korean content
+  - All code comments, documentation, and strings must be in Korean
+  - No English text should appear except for:
+    - Technical terms (e.g., API, function names, variable names)
+    - Library/framework names
+    - File paths and URLs
+
 ### Testing
 - Write tests for all new features
 - Maintain integration tests in `tests/integration/`
