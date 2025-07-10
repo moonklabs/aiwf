@@ -13,6 +13,7 @@ Thumbs.db
 /.gemini
 #/.aiwf
 /.aiwf/sessions
+/.aiwf/backup_*/
 .aiwf_backup_*/
 /.cursor
 /.windsurf
