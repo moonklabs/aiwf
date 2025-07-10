@@ -149,9 +149,11 @@ For a complete list of AIWF commands and detailed usage, see [COMMANDS_GUIDE.md]
 - 🔧 **IDE Integration** - Cursor and Windsurf development rules support
 - 🔗 **GitHub Integration** - Automated issue and PR creation
 - 📊 **Project Tracking** - Systematic management of milestones, sprints, and tasks
-- 🎭 **AI Personas** - Optimized AI behavior patterns for different development tasks
-- 🧠 **Auto-Detection** - Automatic persona switching based on task context
-- 📈 **Performance Metrics** - Track and analyze AI persona effectiveness
+- 🎭 **AI Personas** - 5 specialized personas (Architect, Security, Frontend, Backend, Data Analyst)
+- 🧠 **Persona-Aware Compression** - Intelligent context compression optimized for active persona
+- 📈 **Persona Evaluation System** - AI response quality assessment and improvement
+- 🚀 **Feature Ledger** - Feature ID system for development progress tracking
+- 🔍 **AI Tool Templates** - Support for GitHub Copilot, Cursor, Windsurf, and Augment
 
 ## 🔧 Requirements
 
