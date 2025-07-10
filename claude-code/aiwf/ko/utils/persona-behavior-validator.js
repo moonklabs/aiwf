@@ -405,4 +405,4 @@ class PersonaBehaviorValidator {
   }
 }
 
-module.exports = PersonaBehaviorValidator;
+export default PersonaBehaviorValidator;

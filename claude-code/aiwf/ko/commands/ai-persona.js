@@ -129,11 +129,10 @@ function formatPersonaReport(report) {
 function getKoreanPersonaName(persona) {
   const names = {
     architect: '아키텍트',
-    debugger: '디버거',
-    reviewer: '리뷰어',
-    documenter: '문서화 전문가',
-    optimizer: '최적화 전문가',
-    developer: '개발자'
+    security: '보안 전문가',
+    frontend: '프론트엔드 전문가',
+    backend: '백엔드 전문가',
+    data_analyst: '데이터 분석가'
   };
   return names[persona] || persona;
 }
@@ -141,11 +140,10 @@ function getKoreanPersonaName(persona) {
 function getKoreanDescription(persona) {
   const descriptions = {
     architect: '시스템 설계 및 아키텍처',
-    debugger: '버그 감지 및 문제 해결',
-    reviewer: '코드 품질 및 표준',
-    documenter: '문서화 및 가이드',
-    optimizer: '성능 최적화',
-    developer: '일반 개발 (기본값)'
+    security: '보안 취약점 분석 및 방어',
+    frontend: 'UI/UX 및 프론트엔드 개발',
+    backend: 'API 설계 및 백엔드 개발',
+    data_analyst: '데이터 분석 및 인사이트 도출'
   };
   return descriptions[persona] || '';
 }
@@ -158,35 +156,29 @@ function getKoreanBehaviors(persona) {
       '디자인 패턴과 아키텍처 원칙 적용',
       '통합 지점과 인터페이스 고려'
     ],
-    debugger: [
-      '체계적이고 방법론적인 접근',
-      '근본 원인 분석에 집중',
-      '엣지 케이스와 오류 시나리오 고려',
-      '실행 흐름을 단계별로 추적'
+    security: [
+      'OWASP Top 10 기준 보안 취약점 분석',
+      '위험 기반 접근으로 우선순위 설정',
+      '공격 시나리오 구성 및 방어 전략 수립',
+      '최소 권한 원칙과 다층 보안 적용'
     ],
-    reviewer: [
-      '코딩 표준 준수 확인',
-      '보안 취약점 식별',
-      '최적화 및 개선 사항 제안',
-      '모범 사례 준수 확인'
+    frontend: [
+      '사용자 경험과 인터페이스 최적화',
+      '성능과 접근성을 고려한 구현',
+      '반응형 디자인과 크로스 브라우저 호환성',
+      '컴포넌트 재사용성과 유지보수성'
     ],
-    documenter: [
-      '명확하고 이해하기 쉬운 설명 작성',
-      '실용적인 예제 제공',
-      '포괄적인 커버리지 보장',
-      '일관된 문서 스타일 유지'
+    backend: [
+      'API 설계와 데이터베이스 최적화',
+      '확장 가능한 서버 아키텍처 구축',
+      '캐싱 전략과 성능 튜닝',
+      '비동기 처리와 트랜잭션 관리'
     ],
-    optimizer: [
-      '성능 병목 현상 분석',
-      '효율성과 리소스 사용에 집중',
-      '개선 사항 측정 및 벤치마크',
-      '최적화 기법 적용'
-    ],
-    developer: [
-      '균형 잡힌 코딩 접근법',
-      '기능성과 정확성에 집중',
-      '깨끗하고 유지보수 가능한 코드 작성',
-      '프로젝트 규칙 준수'
+    data_analyst: [
+      '데이터 패턴과 트렌드 분석',
+      '통계적 검증과 가설 검정',
+      '시각화와 대시보드 설계',
+      '예측 모델 구축과 평가'
     ]
   };
   return behaviors[persona] || [];
@@ -474,17 +466,132 @@ export const commands = {
 // 테스트를 위한 export
 export { getPersonaManager };
 
+// 명령행 인자 처리 함수
+async function handlePersonaCommand(personaName) {
+  try {
+    const fs = await import('fs');
+    
+    // 기본 모드인 경우
+    if (personaName === 'default') {
+      // .aiwf 디렉토리에서 실행되는 경우 상위 디렉토리로 이동
+      const baseDir = process.cwd().endsWith('.aiwf') ? path.dirname(process.cwd()) : process.cwd();
+      const statusPath = path.join(baseDir, '.aiwf', 'current_persona.json');
+      const status = {
+        active: false,
+        persona: null,
+        activatedAt: null,
+        contextRules: null,
+        description: null
+      };
+      
+      fs.writeFileSync(statusPath, JSON.stringify(status, null, 2));
+      
+      console.log(chalk.cyan('🎭 기본 모드로 복원 완료'));
+      console.log(chalk.gray('모든 페르소나 컨텍스트가 해제되었습니다'));
+      return;
+    }
+    
+    // 유효한 페르소나인지 확인
+    const validPersonas = ['architect', 'security', 'frontend', 'backend', 'data_analyst'];
+    if (!validPersonas.includes(personaName)) {
+      console.log(chalk.red(`❌ 잘못된 페르소나: ${personaName}`));
+      console.log(chalk.yellow('사용 가능한 페르소나: ' + validPersonas.join(', ')));
+      return;
+    }
+    
+    // .aiwf 디렉토리에서 실행되는 경우 상위 디렉토리로 이동
+    const baseDir = process.cwd().endsWith('.aiwf') ? path.dirname(process.cwd()) : process.cwd();
+    
+    // 컨텍스트 규칙 로드
+    const contextRulesPath = path.join(baseDir, '.aiwf', '07_AI_PERSONAS', personaName, 'context_rules.md');
+    let contextRules = null;
+    
+    if (fs.existsSync(contextRulesPath)) {
+      contextRules = fs.readFileSync(contextRulesPath, 'utf8');
+    }
+    
+    // 현재 페르소나 상태 저장
+    const statusPath = path.join(baseDir, '.aiwf', 'current_persona.json');
+    const status = {
+      active: true,
+      persona: personaName,
+      activatedAt: new Date().toISOString(),
+      contextRules: contextRules,
+      description: getKoreanDescription(personaName)
+    };
+    
+    fs.writeFileSync(statusPath, JSON.stringify(status, null, 2));
+    
+    console.log(chalk.cyan('🎭 AI 페르소나 활성화 완료'));
+    console.log(chalk.yellow(`현재 페르소나: ${getKoreanPersonaName(personaName)}`));
+    console.log(chalk.gray(`전문 분야: ${getKoreanDescription(personaName)}`));
+    
+    if (contextRules) {
+      console.log(chalk.green('✅ 페르소나 컨텍스트 규칙이 적용되었습니다'));
+      console.log(chalk.blue('📋 주요 동작 특성:'));
+      getKoreanBehaviors(personaName).forEach(behavior => {
+        console.log(chalk.blue(`  • ${behavior}`));
+      });
+    }
+    
+    console.log(chalk.yellow('\n💡 이제 Claude Code가 ' + getKoreanPersonaName(personaName) + ' 모드로 동작합니다!'));
+    console.log(chalk.gray('페르소나 상태 확인: node ai-persona.js status'));
+    
+  } catch (error) {
+    console.log(chalk.red(`❌ 오류: ${error.message}`));
+  }
+}
+
 // 직접 실행 시 명령줄 인자 처리
 if (import.meta.url === `file://${process.argv[1]}`) {
   const command = process.argv[2];
   const args = process.argv.slice(3);
   
-  if (commands[command]) {
+  // 새로운 5개 페르소나 명령어 처리
+  const validPersonas = ['architect', 'security', 'frontend', 'backend', 'data_analyst'];
+  
+  if (validPersonas.includes(command)) {
+    handlePersonaCommand(command);
+  } else if (command === 'status') {
+    try {
+      const fs = await import('fs');
+      const baseDir = process.cwd().endsWith('.aiwf') ? path.dirname(process.cwd()) : process.cwd();
+      const statusPath = path.join(baseDir, '.aiwf', 'current_persona.json');
+      
+      if (fs.existsSync(statusPath)) {
+        const status = JSON.parse(fs.readFileSync(statusPath, 'utf8'));
+        
+        if (status.active) {
+          console.log(chalk.cyan('🎭 현재 페르소나 상태'));
+          console.log(chalk.gray('━'.repeat(50)));
+          console.log(chalk.yellow(`활성 페르소나: ${getKoreanPersonaName(status.persona)}`));
+          console.log(chalk.gray(`전문 분야: ${status.description}`));
+          console.log(chalk.blue(`활성화 시간: ${new Date(status.activatedAt).toLocaleString('ko-KR')}`));
+          
+          console.log('\n📋 주요 동작 특성:');
+          getKoreanBehaviors(status.persona).forEach(behavior => {
+            console.log(chalk.blue(`  • ${behavior}`));
+          });
+        } else {
+          console.log(chalk.gray('🎭 현재 기본 모드입니다'));
+          console.log(chalk.yellow('사용 가능한 페르소나: architect, security, frontend, backend, data_analyst'));
+        }
+      } else {
+        console.log(chalk.gray('🎭 페르소나가 활성화되지 않았습니다'));
+        console.log(chalk.yellow('사용 가능한 페르소나: architect, security, frontend, backend, data_analyst'));
+      }
+    } catch (error) {
+      console.log(chalk.red(`❌ 상태 확인 오류: ${error.message}`));
+    }
+  } else if (command === 'default') {
+    handlePersonaCommand('default');
+  } else if (commands[command]) {
     commands[command](args)
       .then(console.log)
       .catch(console.error);
   } else {
     console.error('알 수 없는 명령어:', command);
-    console.log('사용 가능한 명령어:', Object.keys(commands).join('\n'));
+    console.log('사용 가능한 페르소나: ' + validPersonas.join(', '));
+    console.log('기타 명령어: status, default');
   }
 }

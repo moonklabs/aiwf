@@ -744,10 +744,10 @@ class PersonaQualityEvaluator {
       evaluations,
       ranking: Object.entries(evaluations)
         .sort((a, b) => b[1].scores.final - a[1].scores.final)
-        .map(([persona, eval]) => ({
+        .map(([persona, evaluation]) => ({
           persona,
-          score: eval.scores.final,
-          quality: eval.quality
+          score: evaluation.scores.final,
+          quality: evaluation.quality
         })),
       bestPersona: null,
       analysis: {}
@@ -759,9 +759,9 @@ class PersonaQualityEvaluator {
     // 지표별 최고 성과자
     Object.keys(this.evaluationMetrics).forEach(metric => {
       const scores = Object.entries(evaluations)
-        .map(([persona, eval]) => ({
+        .map(([persona, evaluation]) => ({
           persona,
-          score: eval.scores.individual[metric]
+          score: evaluation.scores.individual[metric]
         }))
         .sort((a, b) => b.score - a.score);
       
@@ -775,4 +775,4 @@ class PersonaQualityEvaluator {
   }
 }
 
-module.exports = PersonaQualityEvaluator;
+export default PersonaQualityEvaluator;

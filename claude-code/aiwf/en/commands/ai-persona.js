@@ -134,7 +134,7 @@ export const commands = {
     const personaName = args[0];
     
     if (!personaName) {
-      return chalk.red('Error: Please specify a persona name (architect, debugger, reviewer, documenter, optimizer, developer)');
+      return chalk.red('Error: Please specify a persona name (architect, security, frontend, backend, data_analyst)');
     }
     
     try {
@@ -159,24 +159,41 @@ export const commands = {
     return commands['/project:aiwf:ai_persona:switch'](['architect']);
   },
 
-  '/project:aiwf:ai_persona:debugger': async () => {
-    return commands['/project:aiwf:ai_persona:switch'](['debugger']);
+  '/project:aiwf:ai_persona:security': async () => {
+    return commands['/project:aiwf:ai_persona:switch'](['security']);
   },
 
-  '/project:aiwf:ai_persona:reviewer': async () => {
-    return commands['/project:aiwf:ai_persona:switch'](['reviewer']);
+  '/project:aiwf:ai_persona:frontend': async () => {
+    return commands['/project:aiwf:ai_persona:switch'](['frontend']);
   },
 
-  '/project:aiwf:ai_persona:documenter': async () => {
-    return commands['/project:aiwf:ai_persona:switch'](['documenter']);
+  '/project:aiwf:ai_persona:backend': async () => {
+    return commands['/project:aiwf:ai_persona:switch'](['backend']);
   },
 
-  '/project:aiwf:ai_persona:optimizer': async () => {
-    return commands['/project:aiwf:ai_persona:switch'](['optimizer']);
+  '/project:aiwf:ai_persona:data_analyst': async () => {
+    return commands['/project:aiwf:ai_persona:switch'](['data_analyst']);
   },
-
-  '/project:aiwf:ai_persona:developer': async () => {
-    return commands['/project:aiwf:ai_persona:switch'](['developer']);
+  
+  // Shorter aliases for personas
+  '/aiwf:persona:architect': async () => {
+    return commands['/project:aiwf:ai_persona:switch'](['architect']);
+  },
+  
+  '/aiwf:persona:security': async () => {
+    return commands['/project:aiwf:ai_persona:switch'](['security']);
+  },
+  
+  '/aiwf:persona:frontend': async () => {
+    return commands['/project:aiwf:ai_persona:switch'](['frontend']);
+  },
+  
+  '/aiwf:persona:backend': async () => {
+    return commands['/project:aiwf:ai_persona:switch'](['backend']);
+  },
+  
+  '/aiwf:persona:data_analyst': async () => {
+    return commands['/project:aiwf:ai_persona:switch'](['data_analyst']);
   },
 
   /**
@@ -320,7 +337,7 @@ export const commands = {
       const manager = await getPersonaManager();
       await manager.reset();
       
-      return chalk.green('✅ Persona system reset to default (developer)');
+      return chalk.green('✅ Persona system reset to default');
     } catch (error) {
       return chalk.red(`Error: ${error.message}`);
     }
@@ -364,23 +381,282 @@ export const commands = {
     } catch (error) {
       return chalk.red(`Error: ${error.message}`);
     }
+  },
+  
+  // Shorter aliases for common commands
+  '/aiwf:persona:status': async () => {
+    return commands['/project:aiwf:ai_persona:status']();
+  },
+  
+  '/aiwf:persona:list': async () => {
+    return commands['/project:aiwf:ai_persona:list']();
+  },
+  
+  '/aiwf:persona:switch': async (args) => {
+    return commands['/project:aiwf:ai_persona:switch'](args);
+  }
+};
+
+/**
+ * Persona Command Mappings
+ * Maps persona names to their available command shortcuts
+ */
+export const personaCommandMappings = {
+  'architect': [
+    '/project:aiwf:ai_persona:architect',
+    '/aiwf:persona:architect'
+  ],
+  'security': [
+    '/project:aiwf:ai_persona:security',
+    '/aiwf:persona:security'
+  ],
+  'frontend': [
+    '/project:aiwf:ai_persona:frontend',
+    '/aiwf:persona:frontend'
+  ],
+  'backend': [
+    '/project:aiwf:ai_persona:backend',
+    '/aiwf:persona:backend'
+  ],
+  'data_analyst': [
+    '/project:aiwf:ai_persona:data_analyst',
+    '/aiwf:persona:data_analyst'
+  ]
+};
+
+/**
+ * Detailed persona descriptions for AI assistance
+ */
+export const personaDescriptions = {
+  architect: {
+    name: 'architect',
+    description: 'System design and architecture expert focused on scalable, maintainable solutions',
+    behaviors: [
+      'Analyzes overall system architecture and design patterns',
+      'Recommends scalable and maintainable solutions',
+      'Creates clear architectural diagrams and documentation',
+      'Considers non-functional requirements (performance, security, scalability)',
+      'Evaluates technology choices and trade-offs'
+    ],
+    focusAreas: ['system design', 'architecture patterns', 'scalability', 'maintainability'],
+    recommendedTools: ['design tools', 'diagramming', 'documentation']
+  },
+  
+  security: {
+    name: 'security',
+    description: 'Security specialist ensuring code safety and best practices',
+    behaviors: [
+      'Identifies security vulnerabilities and risks',
+      'Implements security best practices',
+      'Reviews authentication and authorization logic',
+      'Ensures data protection and encryption',
+      'Validates input sanitization and output encoding'
+    ],
+    focusAreas: ['security audit', 'vulnerability assessment', 'encryption', 'authentication'],
+    recommendedTools: ['security scanners', 'static analysis', 'penetration testing']
+  },
+  
+  frontend: {
+    name: 'frontend',
+    description: 'Frontend development expert specializing in UI/UX and modern web technologies',
+    behaviors: [
+      'Creates responsive and accessible user interfaces',
+      'Optimizes frontend performance and bundle sizes',
+      'Implements modern frontend frameworks and patterns',
+      'Ensures cross-browser compatibility',
+      'Focuses on user experience and interaction design'
+    ],
+    focusAreas: ['UI/UX', 'React/Vue/Angular', 'CSS/styling', 'performance optimization'],
+    recommendedTools: ['component libraries', 'build tools', 'testing frameworks']
+  },
+  
+  backend: {
+    name: 'backend',
+    description: 'Backend development specialist for APIs, databases, and server-side logic',
+    behaviors: [
+      'Designs efficient database schemas and queries',
+      'Implements robust API endpoints and services',
+      'Optimizes server-side performance',
+      'Handles data processing and business logic',
+      'Ensures data integrity and consistency'
+    ],
+    focusAreas: ['API design', 'database optimization', 'microservices', 'server architecture'],
+    recommendedTools: ['ORMs', 'API frameworks', 'database tools', 'monitoring']
+  },
+  
+  data_analyst: {
+    name: 'data_analyst',
+    description: 'Data analysis expert for insights, visualization, and data-driven decisions',
+    behaviors: [
+      'Analyzes data patterns and trends',
+      'Creates meaningful visualizations and reports',
+      'Implements data processing pipelines',
+      'Performs statistical analysis and modeling',
+      'Optimizes data queries and transformations'
+    ],
+    focusAreas: ['data analysis', 'visualization', 'statistics', 'reporting'],
+    recommendedTools: ['pandas', 'visualization libraries', 'SQL', 'analytics tools']
   }
 };
 
 // Export for testing
 export { getPersonaManager };
 
-// If running directly, handle command line arguments
-if (import.meta.url === `file://${process.argv[1]}`) {
+/**
+ * Handle persona command from command line
+ * Supports direct persona activation and management
+ */
+async function handlePersonaCommand() {
   const command = process.argv[2];
   const args = process.argv.slice(3);
   
-  if (commands[command]) {
-    commands[command](args)
-      .then(console.log)
-      .catch(console.error);
-  } else {
-    console.error('Unknown command:', command);
-    console.log('Available commands:', Object.keys(commands).join('\n'));
+  // If no command provided, show help
+  if (!command) {
+    console.log(chalk.cyan('🎭 AIWF AI Persona Manager'));
+    console.log(chalk.gray('━'.repeat(50)));
+    console.log('\nUsage:');
+    console.log('  ai-persona <persona>    Switch to specific persona');
+    console.log('  ai-persona status       Show current persona status');
+    console.log('  ai-persona list         List available personas');
+    console.log('  ai-persona default      Restore default mode');
+    console.log('\nAvailable personas:');
+    console.log('  architect     - System design and architecture expert');
+    console.log('  security      - Security specialist');
+    console.log('  frontend      - Frontend development expert');
+    console.log('  backend       - Backend development specialist');
+    console.log('  data_analyst  - Data analysis expert');
+    return;
   }
+  
+  try {
+    // Initialize persona manager
+    const manager = await getPersonaManager();
+    
+    // Check if command is a persona name
+    const validPersonas = ['architect', 'security', 'frontend', 'backend', 'data_analyst'];
+    
+    if (validPersonas.includes(command)) {
+      // Save current persona state
+      const personaState = {
+        persona: command,
+        timestamp: new Date().toISOString(),
+        contextRules: []
+      };
+      
+      // Load context rules for the persona
+      try {
+        const contextPath = path.join(process.cwd(), '.aiwf', 'personas', `${command}_context.json`);
+        const { readFile } = await import('fs/promises');
+        const contextData = await readFile(contextPath, 'utf8');
+        const context = JSON.parse(contextData);
+        personaState.contextRules = context.rules || [];
+      } catch (error) {
+        // Context file might not exist, which is okay
+      }
+      
+      // Save persona state
+      const statePath = path.join(process.cwd(), '.aiwf', 'current_persona.json');
+      const { writeFile, mkdir } = await import('fs/promises');
+      await mkdir(path.dirname(statePath), { recursive: true });
+      await writeFile(statePath, JSON.stringify(personaState, null, 2));
+      
+      // Switch persona
+      await manager.switchPersona(command, { manual: true });
+      
+      console.log(chalk.green(`✅ Activated ${command} persona`));
+      
+      // Show persona info
+      const persona = personaDescriptions[command];
+      if (persona) {
+        console.log(chalk.gray('━'.repeat(50)));
+        console.log(chalk.yellow(`Role: ${persona.description}`));
+        
+        if (persona.behaviors?.length) {
+          console.log('\nKey behaviors:');
+          persona.behaviors.forEach(behavior => {
+            console.log(`  • ${behavior}`);
+          });
+        }
+        
+        if (personaState.contextRules?.length) {
+          console.log('\nContext rules applied:');
+          personaState.contextRules.forEach(rule => {
+            console.log(`  • ${rule.description || rule.pattern || 'Custom rule'}`);
+          });
+        }
+      }
+      
+      return;
+    }
+    
+    // Handle other commands
+    switch (command) {
+      case 'status':
+        const current = manager.getCurrentPersona();
+        if (current) {
+          const metrics = await manager.metricsCollector.getCurrentSessionMetrics();
+          console.log(formatPersonaStatus(current, metrics));
+        } else {
+          console.log(chalk.yellow('No persona currently active'));
+        }
+        break;
+        
+      case 'list':
+        const personas = manager.getAvailablePersonas();
+        const currentPersona = manager.getCurrentPersona();
+        
+        console.log(chalk.cyan('🎭 Available AI Personas'));
+        console.log(chalk.gray('━'.repeat(50)));
+        
+        for (const personaName of personas) {
+          const persona = personaDescriptions[personaName];
+          const isCurrent = currentPersona?.name === personaName;
+          
+          console.log(`\n${isCurrent ? '▶ ' : '  '}${chalk.yellow(personaName)}${isCurrent ? ' (current)' : ''}`);
+          if (persona) {
+            console.log(`  ${persona.description}`);
+          }
+        }
+        break;
+        
+      case 'default':
+      case 'reset':
+        // Remove persona state file to restore default mode
+        try {
+          const statePath = path.join(process.cwd(), '.aiwf', 'current_persona.json');
+          const { unlink } = await import('fs/promises');
+          await unlink(statePath);
+          console.log(chalk.green('✅ Restored default mode'));
+        } catch (error) {
+          // File might not exist
+          console.log(chalk.yellow('Already in default mode'));
+        }
+        
+        // Reset persona manager
+        await manager.reset();
+        break;
+        
+      default:
+        // Check if it's a command format
+        if (command.startsWith('/')) {
+          if (commands[command]) {
+            const result = await commands[command](args);
+            console.log(result);
+          } else {
+            console.error(chalk.red(`Unknown command: ${command}`));
+          }
+        } else {
+          console.error(chalk.red(`Unknown command: ${command}`));
+          console.log(chalk.gray('Use "ai-persona" without arguments to see help'));
+        }
+    }
+  } catch (error) {
+    console.error(chalk.red(`Error: ${error.message}`));
+    process.exit(1);
+  }
+}
+
+// If running directly, handle command line arguments
+if (import.meta.url === `file://${process.argv[1]}`) {
+  handlePersonaCommand();
 }
