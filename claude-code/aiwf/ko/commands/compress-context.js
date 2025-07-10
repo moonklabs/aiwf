@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { ContextCompressor } from '../utils/context-compressor.js';
+import { PersonaAwareCompressor } from '../utils/persona-aware-compressor.js';
 import { TokenCounter } from '../utils/token-counter.js';
 import { CompressionMetrics } from '../utils/compression-metrics.js';
 import fs from 'fs/promises';
@@ -21,7 +22,7 @@ export async function executeCompressContext(args = []) {
   
   try {
     // 파라미터 파싱
-    const { mode, targetPath } = parseArguments(args);
+    const { mode, targetPath, usePersona } = parseArguments(args);
     
     spinner.text = '압축 대상 분석 중...';
     
@@ -44,6 +45,7 @@ export async function executeCompressContext(args = []) {
     console.log(chalk.gray('━'.repeat(50)));
     console.log(`압축 모드: ${chalk.yellow(mode)}`);
     console.log(`대상: ${chalk.yellow(resolvedPath)}`);
+    console.log(`페르소나 연동: ${chalk.yellow(usePersona ? '활성화' : '비활성화')}`);
     console.log('');
     
     console.log(chalk.cyan('📊 압축 전 통계:'));
@@ -55,7 +57,9 @@ export async function executeCompressContext(args = []) {
     spinner.text = '압축 진행 중...';
     
     // 압축 수행
-    const compressor = new ContextCompressor(mode);
+    const compressor = usePersona 
+      ? new PersonaAwareCompressor(mode)
+      : new ContextCompressor(mode);
     const compressionResults = [];
     const startTime = Date.now();
     
@@ -126,6 +130,12 @@ export async function executeCompressContext(args = []) {
     }, 0) / compressionResults.length;
     
     console.log(`- 품질 점수: ${chalk.green(avgQuality.toFixed(0) + '/100')}`);
+    
+    // 페르소나 정보 출력
+    if (usePersona && compressor.currentPersona) {
+      console.log(`- 활성 페르소나: ${chalk.cyan(compressor.currentPersona)}`);
+    }
+    
     console.log('');
     
     console.log(chalk.green('✅ 압축 완료!'));
@@ -156,16 +166,19 @@ export async function executeCompressContext(args = []) {
 function parseArguments(args) {
   let mode = 'balanced';
   let targetPath = null;
+  let usePersona = false;
   
   for (const arg of args) {
     if (['aggressive', 'balanced', 'minimal'].includes(arg)) {
       mode = arg;
+    } else if (arg === '--persona' || arg === '-p') {
+      usePersona = true;
     } else if (arg && !arg.startsWith('-')) {
       targetPath = arg;
     }
   }
   
-  return { mode, targetPath };
+  return { mode, targetPath, usePersona };
 }
 
 /**
