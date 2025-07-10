@@ -1,0 +1,29 @@
+{
+  "name": "windsurf",
+  "version": "1.0.0",
+  "description": "Windsurf IDE integration template for AIWF",
+  "compatible_aiwf_version": ">=0.1.0",
+  "features": {
+    "feature_ledger": true,
+    "ai_persona": true,
+    "context_compression": true,
+    "offline_cache": true,
+    "cascade_flow": true
+  },
+  "setup_commands": [],
+  "files_to_copy": [
+    {
+      "source": "template/.windsurf",
+      "destination": ".windsurf"
+    },
+    {
+      "source": "template/windsurf.config.json",
+      "destination": "windsurf.config.json"
+    }
+  ],
+  "settings": {
+    "aiwf_cascade_integration": true,
+    "feature_flow_tracking": true,
+    "ai_persona_switching": true
+  }
+}

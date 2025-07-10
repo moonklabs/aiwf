@@ -1,0 +1,347 @@
+# Augment AI Configuration for AIWF Projects
+# Version: 1.0.0
+
+# Project identification
+project:
+  type: aiwf
+  framework_version: 1.0.0
+  name: "${PROJECT_NAME}"
+  description: "AI Workflow Framework project with Augment integration"
+
+# AIWF structure mapping
+structure:
+  root: .aiwf
+  directories:
+    features: 06_FEATURE_LEDGERS
+    sprints: 03_SPRINTS
+    tasks: 04_GENERAL_TASKS
+    personas: personas
+    templates: 99_TEMPLATES
+    architecture: 05_ARCHITECTURAL_DECISIONS
+    state: 10_STATE_OF_PROJECT
+
+# Context providers
+context:
+  providers:
+    - name: feature_ledger
+      type: markdown
+      path: .aiwf/06_FEATURE_LEDGERS/**/*.md
+      parser: aiwf_feature
+      cache: true
+      refresh: on_save
+      
+    - name: current_sprint
+      type: directory
+      path: .aiwf/03_SPRINTS
+      parser: aiwf_sprint
+      watch: true
+      
+    - name: active_persona
+      type: json
+      path: .aiwf/current_persona.json
+      watch: true
+      
+    - name: project_manifest
+      type: markdown
+      path: .aiwf/00_PROJECT_MANIFEST.md
+      parser: aiwf_manifest
+      cache: true
+
+# Code generation patterns
+patterns:
+  # File naming
+  naming:
+    services: "{feature_id}_{name}.service.{ext}"
+    controllers: "{feature_id}_{name}.controller.{ext}"
+    tests: "{name}.spec.{ext}"
+    components: "{name}.component.{ext}"
+    
+  # Import organization
+  imports:
+    order:
+      - external
+      - "@aiwf/core"
+      - "@aiwf/*"
+      - internal
+      - feature
+      - relative
+    grouping: true
+    sorting: alphabetical
+    
+  # Documentation
+  documentation:
+    style: jsdoc
+    required_tags:
+      - "@feature"
+      - "@task"
+      - "@persona"
+    auto_generate:
+      feature_id: true
+      task_id: true
+      sprint_id: true
+      timestamp: false
+
+# Persona configurations
+personas:
+  architect:
+    focus:
+      - system_design
+      - architectural_patterns
+      - scalability
+      - abstractions
+    patterns:
+      - interfaces
+      - abstract_classes
+      - design_patterns
+      - dependency_injection
+    suggestions:
+      priority: architecture_first
+      examples: true
+      alternatives: multiple
+      
+  security:
+    focus:
+      - input_validation
+      - authentication
+      - authorization
+      - encryption
+    patterns:
+      - sanitization
+      - rate_limiting
+      - audit_logging
+      - security_headers
+    warnings:
+      level: high
+      types:
+        - sql_injection
+        - xss
+        - csrf
+        - exposed_secrets
+        
+  frontend:
+    focus:
+      - user_experience
+      - component_design
+      - performance
+      - accessibility
+    patterns:
+      - react_hooks
+      - state_management
+      - responsive_design
+      - lazy_loading
+    frameworks:
+      react: true
+      vue: true
+      angular: true
+      
+  backend:
+    focus:
+      - api_design
+      - data_models
+      - business_logic
+      - integrations
+    patterns:
+      - rest_api
+      - graphql
+      - microservices
+      - event_driven
+    databases:
+      sql: true
+      nosql: true
+      cache: true
+      
+  data_analyst:
+    focus:
+      - data_processing
+      - visualization
+      - statistics
+      - reporting
+    patterns:
+      - pandas_operations
+      - numpy_calculations
+      - chart_generation
+      - data_pipelines
+    libraries:
+      pandas: true
+      numpy: true
+      matplotlib: true
+      seaborn: true
+
+# Code suggestions behavior
+suggestions:
+  # Context awareness
+  context_depth: 3
+  include_related_features: true
+  check_dependencies: true
+  
+  # Validation
+  validation:
+    feature_status: always
+    task_alignment: always
+    sprint_scope: warning
+    persona_match: info
+    
+  # Auto-completion
+  autocomplete:
+    trigger_chars: 3
+    show_metadata: true
+    include_examples: true
+    max_suggestions: 10
+    
+  # Intelligence features
+  intelligence:
+    learn_from_codebase: true
+    adapt_to_style: true
+    suggest_refactoring: true
+    detect_patterns: true
+
+# Integration rules
+rules:
+  # Feature validation
+  - id: feature_validation
+    name: "Require feature validation"
+    severity: error
+    applies_to: ["services", "controllers"]
+    pattern: "class.*"
+    requires: "validateFeature|checkFeature"
+    message: "All services must validate their feature status"
+    
+  # Task references
+  - id: task_reference
+    name: "Task reference required"
+    severity: warning
+    applies_to: ["all"]
+    pattern: "export (class|function|const)"
+    requires: "@task"
+    message: "Exported items should reference their task ID"
+    
+  # Security checks
+  - id: input_sanitization
+    name: "Input sanitization"
+    severity: error
+    applies_to: ["controllers", "api"]
+    pattern: "req\\.(body|params|query)"
+    requires: "sanitize|validate"
+    message: "User input must be sanitized"
+    
+  # Test coverage
+  - id: test_required
+    name: "Test file required"
+    severity: warning
+    applies_to: ["services", "controllers", "utils"]
+    requires_file: "{name}.spec.{ext}"
+    message: "Test file is missing"
+
+# Error handling
+error_handling:
+  style: contextual
+  include_metadata: true
+  patterns:
+    feature_error: |
+      class {Name}Error extends Error {
+        constructor(message, context) {
+          super(`[{feature_id}/{task_id}] ${message}`);
+          this.feature = '{feature_id}';
+          this.task = '{task_id}';
+          this.timestamp = new Date().toISOString();
+        }
+      }
+    
+# Git integration
+git:
+  hooks:
+    pre_commit:
+      - validate_features
+      - check_task_references
+      - run_linter
+    post_commit:
+      - update_feature_progress
+      - log_to_sprint
+      
+  commit_format: "{type}({feature_id}): {message}"
+  branch_format: "feature/{feature_id}-{name}"
+  
+# Performance optimization
+performance:
+  analyze: true
+  suggest_optimizations: true
+  track_metrics: true
+  thresholds:
+    response_time: 100ms
+    bundle_size: 500kb
+    memory_usage: 100mb
+    
+# Testing integration
+testing:
+  framework: jest
+  coverage:
+    threshold: 80
+    include_feature_tests: true
+    require_acceptance_tests: true
+  patterns:
+    unit: "*.spec.{js,ts}"
+    integration: "*.integration.{js,ts}"
+    e2e: "*.e2e.{js,ts}"
+    
+# Documentation generation
+documentation:
+  auto_generate: true
+  update_on_save: true
+  targets:
+    - feature_ledger
+    - api_docs
+    - readme
+    - changelog
+  format:
+    style: markdown
+    include_examples: true
+    include_diagrams: true
+    
+# Custom commands
+commands:
+  - name: "Create Feature"
+    command: "aiwf:create-feature"
+    shortcut: "cmd+shift+f"
+    description: "Create a new feature in Feature Ledger"
+    
+  - name: "Update Task"
+    command: "aiwf:update-task"
+    shortcut: "cmd+shift+t"
+    description: "Update current task status"
+    
+  - name: "Switch Persona"
+    command: "aiwf:switch-persona"
+    shortcut: "cmd+shift+p"
+    description: "Switch active AI persona"
+    
+  - name: "Sprint Status"
+    command: "aiwf:sprint-status"
+    shortcut: "cmd+shift+s"
+    description: "Show current sprint status"
+
+# Cache configuration
+cache:
+  enabled: true
+  location: .augment/cache
+  max_size: 100mb
+  ttl: 24h
+  clear_on:
+    - major_version_change
+    - structure_change
+    - manual_clear
+    
+# Telemetry
+telemetry:
+  enabled: false
+  anonymous: true
+  track:
+    - feature_usage
+    - persona_switches
+    - performance_metrics
+    
+# Experimental features
+experimental:
+  ai_refactoring: false
+  auto_test_generation: false
+  smart_documentation: false
+  predictive_coding: false

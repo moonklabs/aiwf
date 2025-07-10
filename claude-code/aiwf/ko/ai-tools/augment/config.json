@@ -1,0 +1,30 @@
+{
+  "name": "augment",
+  "version": "1.0.0",
+  "description": "Augment Code integration template for AIWF",
+  "compatible_aiwf_version": ">=0.1.0",
+  "features": {
+    "feature_ledger": true,
+    "ai_persona": true,
+    "context_compression": true,
+    "offline_cache": true,
+    "team_collaboration": true
+  },
+  "setup_commands": [],
+  "files_to_copy": [
+    {
+      "source": "template/.augment",
+      "destination": ".augment"
+    },
+    {
+      "source": "template/augment.config.json",
+      "destination": "augment.config.json"
+    }
+  ],
+  "settings": {
+    "aiwf_team_sync": true,
+    "feature_awareness": true,
+    "codebase_understanding": true,
+    "automated_documentation": true
+  }
+}
