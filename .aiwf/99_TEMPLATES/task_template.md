@@ -1,34 +1,36 @@
-# 작업 템플릿
+---
+task_id: T<TaskNN>_S<SprintSequenceID> # For Sprint Tasks (e.g., T01_S01) OR T<NNN> for General Tasks (e.g., T501)
+sprint_sequence_id: S<ID> # e.g., S01 (If part of a sprint, otherwise null or absent)
+status: open # open | in_progress | pending_review | done | failed | blocked
+complexity: Medium # Low | Medium | High
+last_updated: YYYY-MM-DDTHH:MM:SSZ
+github_issue: # Optional: GitHub issue number (e.g., #123)
+---
 
-## 작업 개요
-- **제목**: 
-- **담당자**: 
-- **우선순위**: 
-- **마감일**: 
+# Task: (Filename serves as the descriptive title)
 
-## 작업 내용
-### 목표
-- 
+## Description
+Briefly explain what this task is about. Provide necessary context to understand the 'why' behind the task.
 
-### 요구사항
-- 
+## Goal / Objectives
+Clearly state what needs to be achieved by completing this task. What does success look like?
+- Objective 1
+- Objective 2
 
-### 완료 기준
-- 
+## Acceptance Criteria
+Specific, measurable conditions that must be met for this task to be considered 'done'.
+- [ ] Criterion 1 is met.
+- [ ] Criterion 2 is verified.
 
-## 기술적 세부사항
-### 구현 방향
-- 
+## Subtasks
+A checklist of smaller steps to complete this task.
+- [ ] Subtask 1
+- [ ] Subtask 2
 
-### 고려사항
-- 
+## Output Log
+*(This section is populated as work progresses on the task)*
 
-## 체크리스트
-- [ ] 요구사항 분석 완료
-- [ ] 구현 완료
-- [ ] 테스트 완료
-- [ ] 문서 작성 완료
-- [ ] 코드 리뷰 완료
-
-## 참고사항
-- 
+[YYYY-MM-DD HH:MM:SS] Started task
+[YYYY-MM-DD HH:MM:SS] Modified files: file1.js, file2.js
+[YYYY-MM-DD HH:MM:SS] Completed subtask: Implemented feature X
+[YYYY-MM-DD HH:MM:SS] Task completed
