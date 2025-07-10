@@ -1,0 +1,36 @@
+{
+  "testSuite": "S02_Integration",
+  "tests": [
+    {
+      "name": "Persona Switching Time",
+      "status": "passed",
+      "executionTime": 0.30884159899999997,
+      "criteria": "< 2 seconds"
+    },
+    {
+      "name": "Pre-commit Hook Installation",
+      "status": "passed",
+      "executionTime": 0.00018016499999998814,
+      "criteria": "Hook installed or installable"
+    },
+    {
+      "name": "Multi-language Support",
+      "status": "passed",
+      "executionTime": 0.0003207589999999527,
+      "criteria": "Korean/English commands"
+    },
+    {
+      "name": "Performance Baseline",
+      "status": "passed",
+      "executionTime": 0.05095473399999992,
+      "criteria": "< 5 seconds total",
+      "actualValue": "0.05s"
+    }
+  ],
+  "summary": {
+    "total": 4,
+    "passed": 4,
+    "failed": 0,
+    "coverage": "100%"
+  }
+}

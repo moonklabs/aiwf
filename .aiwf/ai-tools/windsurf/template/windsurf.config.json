@@ -1,0 +1,63 @@
+{
+  "windsurf": {
+    "version": "1.0.0",
+    "aiwf_integration": {
+      "enabled": true,
+      "feature_ledger": {
+        "path": ".aiwf/feature-ledger/",
+        "auto_reference": true,
+        "validation": true
+      },
+      "personas": {
+        "path": ".aiwf/personas/",
+        "default": "developer",
+        "auto_switch": true
+      },
+      "sprints": {
+        "path": ".aiwf/03_SPRINTS/",
+        "track_progress": true,
+        "task_integration": true
+      },
+      "context": {
+        "compression_threshold": 1000,
+        "auto_compress": true,
+        "cache_compressed": true
+      }
+    },
+    "cascade_settings": {
+      "aiwf_aware": true,
+      "feature_suggestions": true,
+      "task_context": true,
+      "persona_based_flow": true
+    },
+    "workspace": {
+      "feature_first": true,
+      "sprint_aligned": true,
+      "documentation_sync": true
+    },
+    "ai_settings": {
+      "model_preferences": {
+        "fast_tasks": "cascade-small",
+        "complex_tasks": "cascade-large",
+        "architecture": "cascade-architect"
+      },
+      "context_management": {
+        "max_tokens": 100000,
+        "compression_enabled": true,
+        "feature_context_priority": true
+      }
+    },
+    "shortcuts": {
+      "check_feature": "cmd+shift+f",
+      "update_task": "cmd+shift+t",
+      "switch_persona": "cmd+shift+p",
+      "compress_context": "cmd+shift+c"
+    },
+    "automation": {
+      "auto_update_task_status": true,
+      "auto_reference_features": true,
+      "auto_compress_large_files": true,
+      "auto_sync_documentation": true
+    }
+  }
+}
