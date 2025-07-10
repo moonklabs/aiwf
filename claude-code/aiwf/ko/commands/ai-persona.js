@@ -6,6 +6,7 @@
  */
 
 import { AIPersonaManager } from '../../../../lib/ai-persona-manager.js';
+import { getBackgroundMonitor } from '../utils/background-monitor.js';
 import path from 'path';
 import chalk from 'chalk';
 
@@ -241,6 +242,10 @@ export const commands = {
       }
       
       await manager.switchPersona(personaName, { manual: true });
+      
+      // 백그라운드 모니터 초기화 (비차단)
+      const monitor = getBackgroundMonitor();
+      monitor.initialize().catch(() => {}); // 에러 무시
       
       return chalk.green(`✅ ${getKoreanPersonaName(personaName)} 페르소나로 전환했습니다`);
     } catch (error) {

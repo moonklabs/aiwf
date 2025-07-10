@@ -129,7 +129,7 @@ your_project/
 - 📊 **프로젝트 추적** - 마일스톤, 스프린트, 작업 체계적 관리
 - 🎭 **AI 페르소나** - 5가지 전문 페르소나 (Architect, Security, Frontend, Backend, Data Analyst)
 - 🧠 **페르소나 인식 압축** - 활성 페르소나에 최적화된 지능형 컨텍스트 압축
-- 📈 **페르소나 평가 시스템** - AI 응답 품질 평가 및 개선
+- 📈 **경량 평가 시스템** - 최소한의 부담으로 자동 백그라운드 품질 모니터링
 - 🚀 **Feature Ledger** - 개발 진행 상황 추적을 위한 기능 ID 시스템
 - 🔍 **AI 도구 템플릿** - GitHub Copilot, Cursor, Windsurf, Augment 지원
 

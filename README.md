@@ -151,7 +151,7 @@ For a complete list of AIWF commands and detailed usage, see [COMMANDS_GUIDE.md]
 - 📊 **Project Tracking** - Systematic management of milestones, sprints, and tasks
 - 🎭 **AI Personas** - 5 specialized personas (Architect, Security, Frontend, Backend, Data Analyst)
 - 🧠 **Persona-Aware Compression** - Intelligent context compression optimized for active persona
-- 📈 **Persona Evaluation System** - AI response quality assessment and improvement
+- 📈 **Lightweight Evaluation** - Automatic background quality monitoring with minimal overhead
 - 🚀 **Feature Ledger** - Feature ID system for development progress tracking
 - 🔍 **AI Tool Templates** - Support for GitHub Copilot, Cursor, Windsurf, and Augment
 

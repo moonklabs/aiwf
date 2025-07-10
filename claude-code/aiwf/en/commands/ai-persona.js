@@ -6,6 +6,7 @@
  */
 
 import { AIPersonaManager } from '../../../../lib/ai-persona-manager.js';
+import { getBackgroundMonitor } from '../../ko/utils/background-monitor.js';
 import path from 'path';
 import chalk from 'chalk';
 
@@ -145,6 +146,10 @@ export const commands = {
       }
       
       await manager.switchPersona(personaName, { manual: true });
+      
+      // Initialize background monitor (non-blocking)
+      const monitor = getBackgroundMonitor();
+      monitor.initialize().catch(() => {}); // Ignore errors
       
       return chalk.green(`✅ Switched to ${personaName} persona`);
     } catch (error) {

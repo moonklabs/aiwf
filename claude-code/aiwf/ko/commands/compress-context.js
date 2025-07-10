@@ -2,6 +2,7 @@
 
 import { ContextCompressor } from '../utils/context-compressor.js';
 import { PersonaAwareCompressor } from '../utils/persona-aware-compressor.js';
+import { getBackgroundMonitor } from '../utils/background-monitor.js';
 import { TokenCounter } from '../utils/token-counter.js';
 import { CompressionMetrics } from '../utils/compression-metrics.js';
 import fs from 'fs/promises';
@@ -140,6 +141,26 @@ export async function executeCompressContext(args = []) {
     
     console.log(chalk.green('✅ 압축 완료!'));
     console.log(`압축된 파일 위치: ${chalk.yellow(outputDir)}`);
+    
+    // 페르소나 인식 압축인 경우 백그라운드 품질 체크
+    if (usePersona && compressor.currentPersona) {
+      const monitor = getBackgroundMonitor();
+      
+      // 압축된 내용의 샘플로 품질 체크 (비차단)
+      const sampleResult = compressionResults[0];
+      if (sampleResult) {
+        monitor.monitorResponse(
+          sampleResult.compressed.substring(0, 1000), // 샘플만
+          compressor.currentPersona,
+          { silent: false }
+        ).then(feedback => {
+          if (feedback && feedback.feedback) {
+            console.log('');
+            console.log(feedback.feedback);
+          }
+        }).catch(() => {}); // 에러 무시
+      }
+    }
     
     // 목표 달성 여부 확인
     const targetRange = getTargetRange(mode);
