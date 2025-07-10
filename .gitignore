@@ -12,6 +12,7 @@ Thumbs.db
 /.claude
 /.gemini
 #/.aiwf
+/.aiwf/sessions
 .aiwf_backup_*/
 /.cursor
 /.windsurf

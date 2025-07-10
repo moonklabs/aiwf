@@ -92,6 +92,12 @@ The Korean version (`ko/`) includes additional features:
 - `npm run lang:reset` - Reset to auto-detection
 - `npm run validate:commands` - Validate command implementations
 
+## AIWF Framework Development Rules
+
+- **CRITICAL**: All development and source code modifications for the AIWF framework itself **MUST** occur within the `claude-code/aiwf/{en|ko}/` directories.
+- The root `.aiwf/` directory is a "live" instance for testing and demonstration purposes **ONLY**. Do **NOT** modify files in the root `.aiwf/` as part of framework development.
+- Before modifying any file, confirm that the target path is within `claude-code/aiwf/`.
+
 ## Development Guidelines
 
 ### ES Module Usage
