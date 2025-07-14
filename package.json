@@ -1,14 +1,12 @@
 {
     "name": "aiwf",
-    "version": "0.3.1",
+    "version": "0.3.2",
     "description": "AI Workflow Framework for Claude Code with multi-language support (Korean/English)",
     "main": "index.js",
     "type": "module",
     "bin": {
-        "aiwf": "./.aiwf/bin/aiwf.js",
-        "aiwf-create": "./.aiwf/bin/aiwf-create.js",
-        "aiwf-lang": "./language-cli.js",
-        "aiwf-legacy": "./index.js"
+        "aiwf": "./index.js",
+        "aiwf-lang": "./language-cli.js"
     },
     "scripts": {
         "test": "node --experimental-vm-modules node_modules/.bin/jest",

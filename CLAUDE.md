@@ -81,9 +81,7 @@ The Korean version (`ko/`) includes additional features:
 - **Version**: 0.3.1
 - **Main binaries**:
   - `aiwf` - Main CLI command
-  - `aiwf-create` - Project creation command
   - `aiwf-lang` - Language management CLI
-  - `aiwf-legacy` - Legacy compatibility
 
 ### Available Scripts
 - `npm test` - Run Jest tests with ES module support
