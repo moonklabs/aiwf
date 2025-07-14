@@ -82,9 +82,9 @@ async function getDirectoryStructure(path = '') {
 const COMMANDS_DIR = '.claude/commands/aiwf';
 
 async function checkExistingInstallation() {
-    const aiwfExists = await fs.access('.aiwf').then(() => true).catch(() => false);
-    const claudeCommandsExists = await fs.access(COMMANDS_DIR).then(() => true).catch(() => false);
-    return aiwfExists || claudeCommandsExists;
+    const flagFile = path.join('.aiwf', 'installed.flag');
+    const flagExists = await fs.access(flagFile).then(() => true).catch(() => false);
+    return flagExists;
 }
 
 // 백업 폴더명 생성 함수
@@ -1781,6 +1781,10 @@ async function installAIWF(options = {}) {
         console.error(chalk.red(error.message));
         process.exit(1);
     }
+
+    // 설치 완료 플래그 파일 생성
+    const flagFile = path.join('.aiwf', 'installed.flag');
+    await fs.writeFile(flagFile, 'installed', 'utf8');
 }
 
 async function restoreFromBackup(spinner, msg) {
