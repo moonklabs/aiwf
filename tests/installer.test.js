@@ -30,7 +30,7 @@ describe('AIWF 인스톨러 기능', () => {
   });
 
   test('버전 명령어가 올바르게 작동한다', () => {
-    const result = execSync('node index.js --version', { 
+    const result = execSync('node src/cli/index.js --version', { 
       cwd: path.join(__dirname, '..'),
       encoding: 'utf8',
       timeout: 5000
@@ -39,7 +39,7 @@ describe('AIWF 인스톨러 기능', () => {
   });
 
   test('도움말 명령어가 올바르게 작동한다', () => {
-    const result = execSync('node index.js --help', { 
+    const result = execSync('node src/cli/index.js --help', { 
       cwd: path.join(__dirname, '..'),
       encoding: 'utf8',
       timeout: 5000

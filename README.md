@@ -154,6 +154,31 @@ For a complete list of AIWF commands and detailed usage, see [COMMANDS_GUIDE.md]
 - 📈 **Lightweight Evaluation** - Automatic background quality monitoring with minimal overhead
 - 🚀 **Feature Ledger** - Feature ID system for development progress tracking
 - 🔍 **AI Tool Templates** - Support for GitHub Copilot, Cursor, Windsurf, and Augment
+- 🪝 **Git Hooks Integration** - Automated feature tracking with git commits
+
+## 📁 Project Structure
+
+```
+aiwf/
+├── ai-tools/           # AI tool-specific configurations
+├── commands/           # AIWF command implementations
+├── config/             # Configuration files
+├── docs/               # Project documentation
+├── feature-ledger/     # Feature tracking JSON files
+├── hooks/              # Git hooks for automated workflows
+├── lib/                # Core library modules
+├── personas/           # AI persona definitions
+├── rules/              # Development rules and guidelines
+├── scripts/            # Build and utility scripts
+├── templates/          # Project templates (api-server, npm-library, web-app)
+├── tests/              # Test suites
+└── utils/              # Utility modules
+```
+
+### Key Directories
+
+- **feature-ledger/**: Tracks feature development status and git commit relationships
+- **hooks/**: Contains git hooks (post-commit) for automatic feature tracking
 
 ## 🔧 Requirements
 

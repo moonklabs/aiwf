@@ -13,7 +13,7 @@ const __dirname = path.dirname(__filename);
 // 애플리케이션 실행 헬퍼
 async function runApp(args = [], timeout = 10000) {
   return new Promise((resolve, reject) => {
-    const appPath = path.join(__dirname, '..', 'index.js');
+    const appPath = path.join(__dirname, '..', 'src', 'cli', 'index.js');
     const child = spawn('node', [appPath, ...args], {
       stdio: 'pipe',
       timeout: timeout
@@ -70,7 +70,7 @@ describe('AIWF 애플리케이션 테스트', () => {
 describe('Language CLI 테스트', () => {
   async function runLanguageCli(args = [], timeout = 5000) {
     return new Promise((resolve, reject) => {
-      const cliPath = path.join(__dirname, '..', 'language-cli.js');
+      const cliPath = path.join(__dirname, '..', 'src', 'cli', 'language-cli.js');
       const child = spawn('node', [cliPath, ...args], {
         stdio: 'pipe',
         timeout: timeout

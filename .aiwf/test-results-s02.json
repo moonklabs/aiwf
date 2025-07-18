@@ -4,25 +4,25 @@
     {
       "name": "Persona Switching Time",
       "status": "passed",
-      "executionTime": 0.30884159899999997,
+      "executionTime": 0.3060533329999998,
       "criteria": "< 2 seconds"
     },
     {
       "name": "Pre-commit Hook Installation",
       "status": "passed",
-      "executionTime": 0.00018016499999998814,
+      "executionTime": 0.0006559580000002824,
       "criteria": "Hook installed or installable"
     },
     {
       "name": "Multi-language Support",
       "status": "passed",
-      "executionTime": 0.0003207589999999527,
+      "executionTime": 0.0004612090000000535,
       "criteria": "Korean/English commands"
     },
     {
       "name": "Performance Baseline",
       "status": "passed",
-      "executionTime": 0.05095473399999992,
+      "executionTime": 0.05384158300000035,
       "criteria": "< 5 seconds total",
       "actualValue": "0.05s"
     }

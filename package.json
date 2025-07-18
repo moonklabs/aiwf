@@ -5,14 +5,14 @@
     "main": "index.js",
     "type": "module",
     "bin": {
-        "aiwf": "./index.js",
-        "aiwf-lang": "./language-cli.js"
+        "aiwf": "./src/cli/index.js",
+        "aiwf-lang": "./src/cli/language-cli.js"
     },
     "scripts": {
         "test": "node --experimental-vm-modules node_modules/.bin/jest",
-        "lang:status": "node language-cli.js status",
-        "lang:set": "node language-cli.js set",
-        "lang:reset": "node language-cli.js reset",
+        "lang:status": "node src/cli/index.js lang status",
+        "lang:set": "node src/cli/index.js lang set",
+        "lang:reset": "node src/cli/index.js lang reset",
         "validate:commands": "node scripts/validate-commands.js"
     },
     "keywords": [
@@ -30,12 +30,12 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/aiwf/aiwf.git"
+        "url": "git+https://github.com/moonklabs/aiwf.git"
     },
     "bugs": {
-        "url": "https://github.com/aiwf/aiwf/issues"
+        "url": "https://github.com/moonklabs/aiwf/issues"
     },
-    "homepage": "https://github.com/aiwf/aiwf#readme",
+    "homepage": "https://github.com/moonklabs/aiwf#readme",
     "engines": {
         "node": ">=14.0.0"
     },

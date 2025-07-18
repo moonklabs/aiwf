@@ -3,17 +3,17 @@
  */
 
 import { jest } from '@jest/globals';
-import { AIPersonaManager } from '../../lib/ai-persona-manager.js';
-import { ContextEngine } from '../../lib/context-engine.js';
-import { MetricsCollector } from '../../lib/metrics-collector.js';
-import { TaskAnalyzer } from '../../lib/task-analyzer.js';
+import { AIPersonaManager } from '../../src/lib/ai-persona-manager.js';
+import { ContextEngine } from '../../src/lib/context-engine.js';
+import { MetricsCollector } from '../../src/lib/metrics-collector.js';
+import { TaskAnalyzer } from '../../src/lib/task-analyzer.js';
 import fs from 'fs/promises';
 import path from 'path';
 
 // Mock dependencies
-jest.mock('../../lib/context-engine.js');
-jest.mock('../../lib/metrics-collector.js');
-jest.mock('../../lib/task-analyzer.js');
+jest.mock('../../src/lib/context-engine.js');
+jest.mock('../../src/lib/metrics-collector.js');
+jest.mock('../../src/lib/task-analyzer.js');
 jest.mock('fs/promises');
 
 describe('AIPersonaManager', () => {

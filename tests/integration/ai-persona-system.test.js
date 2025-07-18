@@ -2,10 +2,10 @@
  * AI Persona System Integration Tests
  */
 
-import { AIPersonaManager } from '../../lib/ai-persona-manager.js';
-import { ContextEngine } from '../../lib/context-engine.js';
-import { MetricsCollector } from '../../lib/metrics-collector.js';
-import { TaskAnalyzer } from '../../lib/task-analyzer.js';
+import { AIPersonaManager } from '../../src/lib/ai-persona-manager.js';
+import { ContextEngine } from '../../src/lib/context-engine.js';
+import { MetricsCollector } from '../../src/lib/metrics-collector.js';
+import { TaskAnalyzer } from '../../src/lib/task-analyzer.js';
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';

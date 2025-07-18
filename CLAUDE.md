@@ -20,65 +20,139 @@ The AIWF project is organized as follows:
 
 ```
 aiwf/
-├── claude-code/           # Template files for AIWF installation
-│   ├── aiwf/             # Core AIWF templates
-│   │   ├── en/           # English language templates
-│   │   └── ko/           # Korean language templates
-│   └── docker/           # Docker configuration
+├── ai-tools/             # AI tool-specific configurations
+│   ├── claude-code/      # Claude Code specific settings
+│   ├── cursor/           # Cursor AI integration
+│   ├── windsurf/        # Windsurf integration
+│   └── github-copilot/   # GitHub Copilot integration
+├── commands/             # AIWF command implementations
+│   ├── ai-persona.js     # AI persona management
+│   ├── compress-context.js # Context compression
+│   ├── evaluate.js       # Evaluation functionality
+│   ├── feature-ledger.js # Feature tracking
+│   └── token-tracking.js # Token usage monitoring
+├── config/               # Configuration files
+│   ├── commit-patterns.js # Git commit patterns
+│   └── language.json     # Language settings
 ├── docs/                 # Project documentation
+├── feature-ledger/       # Feature tracking JSON files
+│   ├── FL-001-authentication.json
+│   └── feature-index.json
+├── hooks/                # Git hooks and installation scripts
+│   ├── install-hooks.sh  # Hook installation script
+│   └── post-commit       # Post-commit hook
 ├── lib/                  # Core library modules
-├── src/                  # Source code
+├── personas/             # AI persona definitions and knowledge bases
+├── rules/                # Development rules and guidelines
+│   ├── global/          # Global development rules
+│   └── manual/          # Manual operation guides
+├── scripts/              # Build and utility scripts
+├── templates/            # Project templates
+│   ├── api-server/      # Express.js API server template
+│   ├── npm-library/     # NPM library template
+│   └── web-app/         # React web app template
 ├── tests/                # Test suites
 │   ├── integration/      # Integration tests
 │   └── unit/            # Unit tests
-├── scripts/              # Build and validation scripts
-├── rules/                # Development rules and guidelines
+├── utils/                # Utility modules
 ├── package.json          # NPM package configuration
 ├── CLAUDE.md            # This file - Claude Code guidance
 └── README.md            # Project documentation
 ```
 
-## claude-code Directory
+## AI Tools Directory
 
-The `claude-code/` directory contains template files that are copied during AIWF installation. It's structured by language:
+The `ai-tools/` directory contains configurations for various AI coding assistants:
 
-### Language Structure (en/ and ko/)
-- **commands/**: Claude Code command implementations
-  - ai-persona.js - AI persona management
-  - compress-context.js - Context compression utilities
-  - feature_commit_report.js - Git commit reporting
-  - scan_git_history.js - Git history analysis
-  - sync_feature_commits.js - Feature commit synchronization
-  - token-tracking.js - Token usage monitoring
+- **claude-code/**: Claude Code specific settings and templates
+- **cursor/**: Cursor AI integration files
+- **windsurf/**: Windsurf configuration
+- **github-copilot/**: GitHub Copilot integration
+- **augment/**: Augment AI tool configuration
 
-- **utils/**: Utility modules
-  - compression-*.js - Various compression strategies
-  - git-utils.js - Git operation utilities
-  - token-*.js - Token tracking and optimization
-  - text-summarizer.js - Text summarization utilities
+Each tool directory includes:
+- `config.json`: Tool-specific configuration
+- `template/`: Template files for that specific AI tool
+- `README.md`: Documentation for the integration
 
-- **config/**: Configuration files
-  - commit-patterns.js - Git commit pattern definitions
+## Commands Directory
 
-- **hooks/**: Git hooks
-  - post-commit - Post-commit hook script
-  - install-hooks.sh - Hook installation script
+The `commands/` directory contains all AIWF command implementations:
 
-- **tests/**: Test files for the templates
+- **ai-persona.js**: Manages AI personas and their behaviors
+- **compress-context.js**: Compresses context to optimize token usage
+- **evaluate.js**: Evaluates code quality and AI responses
+- **feature-ledger.js**: Tracks features and their development status
+- **feature-commit-report.js**: Generates reports from git commits
+- **persona-context-apply.js**: Applies persona contexts to AI interactions
+- **scan-git-history.js**: Analyzes git history for insights
+- **sync-feature-commits.js**: Synchronizes feature commits with ledger
+- **token-tracking.js**: Monitors and reports token usage
 
-### Korean Version Additional Features
-The Korean version (`ko/`) includes additional features:
-- persona-context-apply.js - Persona context application
-- context-rule-parser.js - Context rule parsing
-- persona-behavior-validator.js - Behavior validation
-- persona-quality-evaluator.js - Quality evaluation
-- prompt-injector.js - Prompt injection utilities
+## Templates Directory
+
+The `templates/` directory provides starter templates for different project types:
+
+- **api-server/**: Express.js API server with TypeScript
+  - Includes Swagger documentation
+  - AIWF middleware integration
+  - Jest testing setup
+  
+- **npm-library/**: NPM package template
+  - TypeScript configuration
+  - Rollup bundling
+  - Complete testing setup
+  
+- **web-app/**: React + Vite web application
+  - TypeScript + Tailwind CSS
+  - AIWF dashboard components
+  - State management setup
+
+## Feature Ledger Directory
+
+The `feature-ledger/` directory contains JSON files for tracking feature development:
+
+- **FL-001-authentication.json**: Authentication feature tracking
+- **feature-index.json**: Index of all features and their status
+
+Feature ledgers help track:
+- Feature status (planned, in-progress, completed)
+- Related git commits
+- Development milestones
+- Integration with git workflow through hooks
+
+## Hooks Directory
+
+The `hooks/` directory contains Git hooks for automated workflow:
+
+- **install-hooks.sh**: Script to install git hooks into the project
+- **post-commit**: Automatically syncs feature ledger with git commits
+
+To install hooks:
+```bash
+./hooks/install-hooks.sh
+```
+
+The post-commit hook automatically:
+- Parses commit messages for feature references
+- Updates feature status in the ledger
+- Maintains feature-commit relationships
+
+## Utils Directory
+
+The `utils/` directory contains utility modules for various AIWF features:
+
+- **Compression utilities**: Various strategies for context compression
+- **Git utilities**: Git operation helpers and integrations
+- **Token management**: Token counting, tracking, and optimization
+- **Text processing**: Summarization and content normalization
+- **Persona utilities**: Context parsing and behavior validation
 
 ## Key Files and Configurations
 
 ### package.json Configuration
 - **Type**: ES Module (`"type": "module"`)
-- **Version**: 0.3.1
+- **Version**: 0.3.3
 - **Main binaries**:
   - `aiwf` - Main CLI command
   - `aiwf-lang` - Language management CLI
@@ -92,9 +166,10 @@ The Korean version (`ko/`) includes additional features:
 
 ## AIWF Framework Development Rules
 
-- **CRITICAL**: All development and source code modifications for the AIWF framework itself **MUST** occur within the `claude-code/aiwf/{en|ko}/` directories.
-- The root `.aiwf/` directory is a "live" instance for testing and demonstration purposes **ONLY**. Do **NOT** modify files in the root `.aiwf/` as part of framework development.
-- Before modifying any file, confirm that the target path is within `claude-code/aiwf/`.
+- **CRITICAL**: All development and source code modifications for the AIWF framework occur directly in the root project directories.
+- When developing new features or modifying existing ones, work directly with the files in `commands/`, `utils/`, `lib/`, etc.
+- The `.aiwf/` directory (when created in user projects) is a generated instance for the end user. Framework development happens in the main repository.
+- Always test changes thoroughly before committing, as modifications directly affect the framework.
 
 ## Development Guidelines
 
@@ -105,21 +180,21 @@ This project uses ES modules. Always use:
 - File extensions in imports when needed
 
 ### Language Support
-- Maintain feature parity between `en/` and `ko/` versions
-- Document any language-specific features clearly
-- Use appropriate language codes in file paths
+- AIWF supports both English and Korean languages
+- Language is managed through the `aiwf-lang` CLI command
+- Documentation is provided in both languages (e.g., README.md, README.ko.md)
+- Commands and interfaces adapt based on the selected language
 
 ### Language Content Rules
-**IMPORTANT**: Strict language separation must be maintained:
-- `claude-code/aiwf/en/` - MUST contain ONLY English content
-  - All code comments, documentation, and strings must be in English
-  - No Korean text should appear in any files under this directory
-- `claude-code/aiwf/ko/` - MUST contain ONLY Korean content
-  - All code comments, documentation, and strings must be in Korean
-  - No English text should appear except for:
-    - Technical terms (e.g., API, function names, variable names)
-    - Library/framework names
-    - File paths and URLs
+**IMPORTANT**: Language management approach:
+- The framework uses a unified codebase with language-specific resources
+- Language selection is handled at runtime through `config/language.json`
+- Documentation files use language suffixes:
+  - English: `GUIDE.md`
+  - Korean: `GUIDE.ko.md`
+- Code comments and inline documentation should be in English for maintainability
+- User-facing messages and prompts are loaded from language-specific resources
+- Technical terms, function names, and variable names remain in English
 
 ### Testing
 - Write tests for all new features
@@ -151,4 +226,29 @@ The system automatically detects system language on first install, with fallback
 
 ## Core Architecture
 
-[... rest of the existing content remains unchanged ...]
+AIWF is built on a modular architecture designed for extensibility and AI tool integration:
+
+### Command System
+- Commands are self-contained modules in the `commands/` directory
+- Each command exports a default function that handles the command logic
+- Commands can utilize utilities from `utils/` and libraries from `lib/`
+
+### AI Persona System
+- Personas are defined in JSON format in the `personas/` directory
+- Each persona has associated knowledge bases and best practices
+- The system supports dynamic persona switching and context application
+
+### Token Management
+- Built-in token tracking and optimization
+- Multiple compression strategies for context management
+- Real-time monitoring and reporting capabilities
+
+### Template System
+- Project templates are stored in the `templates/` directory
+- Each template is a complete, working project setup
+- Templates include AIWF integration out of the box
+
+### Multi-Language Support
+- Runtime language switching via `aiwf-lang` command
+- Localized documentation and user interfaces
+- Unified codebase with language-specific resources

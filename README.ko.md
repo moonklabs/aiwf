@@ -132,6 +132,31 @@ your_project/
 - 📈 **경량 평가 시스템** - 최소한의 부담으로 자동 백그라운드 품질 모니터링
 - 🚀 **Feature Ledger** - 개발 진행 상황 추적을 위한 기능 ID 시스템
 - 🔍 **AI 도구 템플릿** - GitHub Copilot, Cursor, Windsurf, Augment 지원
+- 🪝 **Git Hooks 통합** - git 커밋과 함께 자동 기능 추적
+
+## 📁 프로젝트 구조
+
+```
+aiwf/
+├── ai-tools/           # AI 도구별 구성
+├── commands/           # AIWF 명령어 구현
+├── config/             # 설정 파일
+├── docs/               # 프로젝트 문서
+├── feature-ledger/     # 기능 추적 JSON 파일
+├── hooks/              # 자동화된 워크플로우를 위한 Git hooks
+├── lib/                # 핵심 라이브러리 모듈
+├── personas/           # AI 페르소나 정의
+├── rules/              # 개발 규칙 및 가이드라인
+├── scripts/            # 빌드 및 유틸리티 스크립트
+├── templates/          # 프로젝트 템플릿 (api-server, npm-library, web-app)
+├── tests/              # 테스트 스위트
+└── utils/              # 유틸리티 모듈
+```
+
+### 주요 디렉토리
+
+- **feature-ledger/**: 기능 개발 상태 및 git 커밋 관계 추적
+- **hooks/**: 자동 기능 추적을 위한 git hooks (post-commit) 포함
 
 ## 🔧 요구사항
 

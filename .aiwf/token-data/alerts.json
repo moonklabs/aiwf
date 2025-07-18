@@ -289,5 +289,15 @@
     "current": 150,
     "timestamp": 1752017060091,
     "acknowledged": false
+  },
+  {
+    "id": "alert_1752877894466_yhlvn4fe7",
+    "type": "test_violation",
+    "level": "critical",
+    "message": "Test violation message",
+    "threshold": 100,
+    "current": 150,
+    "timestamp": 1752877894466,
+    "acknowledged": false
   }
 ]

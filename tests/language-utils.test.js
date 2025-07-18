@@ -18,7 +18,7 @@ import {
     SUPPORTED_LANGUAGES,
     DEFAULT_LANGUAGE,
     LANGUAGE_CONFIG_PATH
-} from '../language-utils.js';
+} from '../src/utils/language-utils.js';
 
 // 테스트용 임시 디렉토리
 const TEST_DIR = '.aiwf-test';
