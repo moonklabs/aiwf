@@ -6,6 +6,7 @@ import { installAIWF } from '../lib/installer.js';
 import AIToolCommand from '../commands/ai-tool.js';
 import PersonaCommand from '../commands/persona.js';
 import { CacheCLI } from './cache-cli.js';
+import { addTaskToSprint } from '../commands/sprint-task.js';
 
 // Parse version from package.json
 import { readFileSync } from 'fs';
@@ -200,6 +201,20 @@ persona
   .action(async () => {
     const personaCmd = new PersonaCommand();
     await personaCmd.resetPersona();
+  });
+
+// Sprint task management command
+program
+  .command('sprint-task <sprintId> <taskTitle>')
+  .alias('st')
+  .description('Add a task to an existing sprint / 스프린트에 태스크 추가')
+  .action(async (sprintId, taskTitle) => {
+    try {
+      await addTaskToSprint(sprintId, taskTitle);
+    } catch (error) {
+      console.error(chalk.red(`오류: ${error.message}`));
+      process.exit(1);
+    }
   });
 
 // Parse command line arguments
