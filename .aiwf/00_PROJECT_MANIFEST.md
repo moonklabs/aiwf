@@ -2,10 +2,10 @@
 
 **프로젝트명**: AIWF (AI Workflow Framework)  
 **생성일**: 2025-07-02  
-**마지막 업데이트**: 2025-07-10  
+**마지막 업데이트**: 2025-07-16  
 **프로젝트 유형**: Node.js NPM 패키지  
-**현재 버전**: 0.3.0
-**최고 마일스톤**: M02
+**현재 버전**: 0.3.1
+**최고 마일스톤**: M03
 **최고 스프린트**: S03
 
 ## 프로젝트 개요
@@ -66,9 +66,11 @@ AIWF는 Claude Code와의 통합을 위해 설계된 마크다운 기반 프로�
 | ID  | 이름                            | 상태    | 진행률 | 시작일     | 완료일 |
 | --- | ------------------------------- | ------- | ------ | ---------- | ------ |
 | M02 | Context_Engineering_Enhancement | 완료 | 100%   | 2025-07-08 | 2025-07-08 |
+| M03 | AIWF_Simplification_Reliability | 계획 중 | 0%    | TBD        | TBD    |
 
 ### 마일스톤 상세
 - [x] [M02: Context Engineering Enhancement](02_REQUIREMENTS/M02_Context_Engineering_Enhancement/M02_milestone_meta.md) - 상태: 완료
+- [ ] [M03: AIWF 단순화 및 신뢰성 강화](02_REQUIREMENTS/M03_Simone_Integration_Enhancement/M03_milestone_meta.md) - 상태: 계획 중
 
 ## 스프린트 목록
 
@@ -161,23 +163,35 @@ AIWF는 Claude Code와의 통합을 위해 설계된 마크다운 기반 프로�
 
 ## 향후 계획
 
+### M03: AIWF 단순화 및 신뢰성 강화 (계획 중)
+
+**목표**: 태스크 상태 불일치 해결 및 CLI 인터페이스 단순화
+
+1. **Week 1: 프로젝트 정리 및 기초 구축**:
+   - 프로젝트 구조 정리 (중복 파일 제거, 모듈화)
+   - JSON 기반 태스크 인덱스 시스템 설계
+   - CLI 실행 파일 기본 구현
+
+2. **Week 2: 핵심 기능 구현**:
+   - 태스크 무결성 검사 시스템
+   - 안전한 상태 변경 명령어
+   - 기본 AI 도우미 (research, plan)
+
+3. **Week 3: 통합 및 완성**:
+   - 향상된 사용자 경험 (컬러 출력, 에러 메시지)
+   - 테스트 및 문서화
+   - v0.4.0 릴리즈 준비
+
+**제거된 오버엔지니어링**: SQLite DB, MCP 서버 통합, 웹 대시보드, 병렬 처리
+
+### 레거시 목표
+
 1. **즉시 조치 필요 사항**:
    - Feature Ledger CLI 명령어 구현 (aiwf_create_feature_ledger, aiwf_update_feature_status 등)
    - AI 도구 템플릿 4개 추가 (GitHub Copilot, Cursor, Windsurf, Augment)
    - 프로젝트 템플릿 시스템 구현
    - `.aiwf/ai-tools/` 및 `.aiwf/07_AI_PERSONAS/` 디렉토리 생성
 
-2. **단기 목표 (1-2주)**:
-   - M02 DoD 항목 완전 충족
-   - 테스크 파일과 구현 상태 동기화
-   - 누락된 기능 구현 완료
-
-3. **중기 목표 (1개월)**:
-   - 다음 마일스톤 계획 수립
-   - 사용자 피드백 반영
-   - 프로덕션 준비
-
-4. **장기 목표 (분기)**:
+2. **장기 목표**:
    - 새로운 언어 지원 추가
-   - AI 도구 통합 확대
    - 커뮤니티 생태계 구축
