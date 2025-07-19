@@ -1,5 +1,5 @@
 {
-  "enabled": false,
+  "enabled": true,
   "thresholds": {
     "dailyTokenLimit": 5000,
     "sessionTokenLimit": 2000,
@@ -8,5 +8,5 @@
     "sessionsPerDayLimit": 20,
     "tokensPerCommandLimit": 500
   },
-  "lastUpdated": 1752877890640
+  "lastUpdated": 1752899982132
 }

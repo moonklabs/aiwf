@@ -8,7 +8,7 @@
     "current": 150,
     "timestamp": 1751994786470,
     "acknowledged": true,
-    "acknowledgedAt": 1752017060097
+    "acknowledgedAt": 1752899975770
   },
   {
     "id": "alert_1751994787038_en2si4bh0",
@@ -298,6 +298,246 @@
     "threshold": 100,
     "current": 150,
     "timestamp": 1752877894466,
+    "acknowledged": false
+  },
+  {
+    "id": "alert_1752899851197_gbzrghkh8",
+    "type": "test_violation",
+    "level": "critical",
+    "message": "Test violation message",
+    "threshold": 100,
+    "current": 150,
+    "timestamp": 1752899851197,
+    "acknowledged": false
+  },
+  {
+    "id": "alert_1752899854246_ujckoll66",
+    "type": "test_violation",
+    "level": "critical",
+    "message": "Test violation message",
+    "threshold": 100,
+    "current": 150,
+    "timestamp": 1752899854246,
+    "acknowledged": false
+  },
+  {
+    "id": "alert_1752899864438_6wb3u8ekm",
+    "type": "test_violation",
+    "level": "critical",
+    "message": "Test violation message",
+    "threshold": 100,
+    "current": 150,
+    "timestamp": 1752899864438,
+    "acknowledged": false
+  },
+  {
+    "id": "alert_1752899866374_wfogez5qf",
+    "type": "test_violation",
+    "level": "critical",
+    "message": "Test violation message",
+    "threshold": 100,
+    "current": 150,
+    "timestamp": 1752899866374,
+    "acknowledged": false
+  },
+  {
+    "id": "alert_1752899868376_969bnxe4v",
+    "type": "test_violation",
+    "level": "critical",
+    "message": "Test violation message",
+    "threshold": 100,
+    "current": 150,
+    "timestamp": 1752899868376,
+    "acknowledged": false
+  },
+  {
+    "id": "alert_1752899880129_oqmz0trhx",
+    "type": "test_violation",
+    "level": "critical",
+    "message": "Test violation message",
+    "threshold": 100,
+    "current": 150,
+    "timestamp": 1752899880129,
+    "acknowledged": false
+  },
+  {
+    "id": "alert_1752899885158_su21t02w0",
+    "type": "test_violation",
+    "level": "critical",
+    "message": "Test violation message",
+    "threshold": 100,
+    "current": 150,
+    "timestamp": 1752899885158,
+    "acknowledged": false
+  },
+  {
+    "id": "alert_1752899887906_dqvsl4wlt",
+    "type": "test_violation",
+    "level": "critical",
+    "message": "Test violation message",
+    "threshold": 100,
+    "current": 150,
+    "timestamp": 1752899887907,
+    "acknowledged": false
+  },
+  {
+    "id": "alert_1752899894329_79dzw8fjy",
+    "type": "test_violation",
+    "level": "critical",
+    "message": "Test violation message",
+    "threshold": 100,
+    "current": 150,
+    "timestamp": 1752899894329,
+    "acknowledged": false
+  },
+  {
+    "id": "alert_1752899898729_mb2o2r3ix",
+    "type": "test_violation",
+    "level": "critical",
+    "message": "Test violation message",
+    "threshold": 100,
+    "current": 150,
+    "timestamp": 1752899898729,
+    "acknowledged": false
+  },
+  {
+    "id": "alert_1752899907593_p4b5gjgek",
+    "type": "test_violation",
+    "level": "critical",
+    "message": "Test violation message",
+    "threshold": 100,
+    "current": 150,
+    "timestamp": 1752899907593,
+    "acknowledged": false
+  },
+  {
+    "id": "alert_1752899909827_mu7p3v143",
+    "type": "test_violation",
+    "level": "critical",
+    "message": "Test violation message",
+    "threshold": 100,
+    "current": 150,
+    "timestamp": 1752899909828,
+    "acknowledged": false
+  },
+  {
+    "id": "alert_1752899912046_g39rm6xqr",
+    "type": "test_violation",
+    "level": "critical",
+    "message": "Test violation message",
+    "threshold": 100,
+    "current": 150,
+    "timestamp": 1752899912046,
+    "acknowledged": false
+  },
+  {
+    "id": "alert_1752899923007_ldcnrzuj3",
+    "type": "test_violation",
+    "level": "critical",
+    "message": "Test violation message",
+    "threshold": 100,
+    "current": 150,
+    "timestamp": 1752899923007,
+    "acknowledged": false
+  },
+  {
+    "id": "alert_1752899928190_k2zam7gju",
+    "type": "test_violation",
+    "level": "critical",
+    "message": "Test violation message",
+    "threshold": 100,
+    "current": 150,
+    "timestamp": 1752899928205,
+    "acknowledged": false
+  },
+  {
+    "id": "alert_1752899931711_kpyffxf85",
+    "type": "test_violation",
+    "level": "critical",
+    "message": "Test violation message",
+    "threshold": 100,
+    "current": 150,
+    "timestamp": 1752899931711,
+    "acknowledged": false
+  },
+  {
+    "id": "alert_1752899937606_o5jxrg1n0",
+    "type": "test_violation",
+    "level": "critical",
+    "message": "Test violation message",
+    "threshold": 100,
+    "current": 150,
+    "timestamp": 1752899937606,
+    "acknowledged": false
+  },
+  {
+    "id": "alert_1752899944558_i534avgq0",
+    "type": "test_violation",
+    "level": "critical",
+    "message": "Test violation message",
+    "threshold": 100,
+    "current": 150,
+    "timestamp": 1752899944558,
+    "acknowledged": false
+  },
+  {
+    "id": "alert_1752899949496_lg3blllld",
+    "type": "test_violation",
+    "level": "critical",
+    "message": "Test violation message",
+    "threshold": 100,
+    "current": 150,
+    "timestamp": 1752899949496,
+    "acknowledged": false
+  },
+  {
+    "id": "alert_1752899953024_7kss16kft",
+    "type": "test_violation",
+    "level": "critical",
+    "message": "Test violation message",
+    "threshold": 100,
+    "current": 150,
+    "timestamp": 1752899953024,
+    "acknowledged": false
+  },
+  {
+    "id": "alert_1752899955997_78ckwam14",
+    "type": "test_violation",
+    "level": "critical",
+    "message": "Test violation message",
+    "threshold": 100,
+    "current": 150,
+    "timestamp": 1752899955997,
+    "acknowledged": false
+  },
+  {
+    "id": "alert_1752899968048_qt7prgvrp",
+    "type": "test_violation",
+    "level": "critical",
+    "message": "Test violation message",
+    "threshold": 100,
+    "current": 150,
+    "timestamp": 1752899968048,
+    "acknowledged": false
+  },
+  {
+    "id": "alert_1752899975695_sjyat78u5",
+    "type": "test_violation",
+    "level": "critical",
+    "message": "Test violation message",
+    "threshold": 100,
+    "current": 150,
+    "timestamp": 1752899975695,
+    "acknowledged": false
+  },
+  {
+    "id": "alert_1752899979969_vpf6sucfd",
+    "type": "test_violation",
+    "level": "critical",
+    "message": "Test violation message",
+    "threshold": 100,
+    "current": 150,
+    "timestamp": 1752899979969,
     "acknowledged": false
   }
 ]
