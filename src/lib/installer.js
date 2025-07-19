@@ -182,9 +182,14 @@ async function handleExistingInstallation(msg, options) {
 async function createDirectoryStructure() {
   const aiwfDirs = getAllAiwfDirectories();
 
+  // Create AIWF directories
   for (const dir of aiwfDirs) {
     await fs.mkdir(dir, { recursive: true });
   }
+
+  // Create tool-specific directories
+  await fs.mkdir(TOOL_DIRS.CURSOR_RULES, { recursive: true });
+  await fs.mkdir(TOOL_DIRS.WINDSURF_RULES, { recursive: true });
 }
 
 /**
@@ -301,7 +306,7 @@ async function downloadAndProcessRules(spinner, msg, debugLog) {
   // Try to download rules/global from GitHub
   try {
     await downloadDirectory(
-      `${GITHUB_CONTENT_PREFIX}/rules/global`,
+      `rules/global`,
       tmpRulesGlobal,
       spinner,
       debugLog
@@ -310,20 +315,25 @@ async function downloadAndProcessRules(spinner, msg, debugLog) {
   } catch (error) {
     logWithSpinner(spinner, `Failed to download rules/global from GitHub, trying local files`, debugLog);
     // Fallback to local files
-    const localRulesGlobal = 'rules/global';
+    const localRulesGlobal = path.join(process.cwd(), 'rules/global');
     try {
+      logWithSpinner(spinner, `Trying to access: ${localRulesGlobal}`, debugLog);
       await fs.access(localRulesGlobal);
+      logWithSpinner(spinner, `Successfully accessed local rules/global`, debugLog);
       // Copy local files to temp directory
       await fs.mkdir(tmpRulesGlobal, { recursive: true });
       const files = await fs.readdir(localRulesGlobal);
+      logWithSpinner(spinner, `Found ${files.length} files in rules/global: ${files.join(', ')}`, debugLog);
       for (const file of files) {
         const srcPath = path.join(localRulesGlobal, file);
         const destPath = path.join(tmpRulesGlobal, file);
         await fs.copyFile(srcPath, destPath);
+        logWithSpinner(spinner, `Copied: ${file}`, debugLog);
       }
       useLocalGlobal = true;
       logWithSpinner(spinner, `Using local rules/global directory`, debugLog);
     } catch (localError) {
+      logWithSpinner(spinner, `Local rules/global error: ${localError.message}`, debugLog);
       logWithSpinner(spinner, msg.rulesGlobalNotFound, debugLog);
     }
   }
@@ -331,7 +341,7 @@ async function downloadAndProcessRules(spinner, msg, debugLog) {
   // Try to download rules/manual from GitHub
   try {
     await downloadDirectory(
-      `${GITHUB_CONTENT_PREFIX}/rules/manual`,
+      `rules/manual`,
       tmpRulesManual,
       spinner,
       debugLog
@@ -340,7 +350,7 @@ async function downloadAndProcessRules(spinner, msg, debugLog) {
   } catch (error) {
     logWithSpinner(spinner, `Failed to download rules/manual from GitHub, trying local files`, debugLog);
     // Fallback to local files
-    const localRulesManual = 'rules/manual';
+    const localRulesManual = path.join(process.cwd(), 'rules/manual');
     try {
       await fs.access(localRulesManual);
       // Copy local files to temp directory

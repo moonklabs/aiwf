@@ -1,5 +1,6 @@
 import https from 'https';
 import { createWriteStream } from 'fs';
+import fs from 'fs/promises';
 import { pipeline } from 'stream/promises';
 import path from 'path';
 
@@ -109,6 +110,10 @@ async function fetchContent(url) {
  * @returns {Promise<void>}
  */
 async function downloadFile(url, destPath) {
+  // Ensure destination directory exists
+  const destDir = path.dirname(destPath);
+  await fs.mkdir(destDir, { recursive: true });
+  
   return new Promise((resolve, reject) => {
     https.get(url, { headers: { 'User-Agent': 'aiwf' } }, (response) => {
       if (response.statusCode !== 200) {

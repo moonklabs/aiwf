@@ -23,9 +23,9 @@ program
   .version(packageJson.version)
   .description('AIWF - AI Workflow Framework');
 
-// Install command (default action)
+// Install command
 program
-  .command('install', { isDefault: true })
+  .command('install')
   .description('Install AIWF framework')
   .option('-f, --force', 'Force install without prompts')
   .action((options) => installAIWF({ ...options, debugLog: true }));
