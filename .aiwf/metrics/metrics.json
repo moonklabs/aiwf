@@ -1,0 +1,18 @@
+{
+  "sessions": [],
+  "personaPerformance": {},
+  "taskOutcomes": [],
+  "aggregated": {
+    "eventCounts": {
+      "persona_switch": 1
+    },
+    "personaSwitches": [
+      {
+        "from": "developer",
+        "to": "architect",
+        "trigger": "auto",
+        "timestamp": 1752885541651
+      }
+    ]
+  }
+}
