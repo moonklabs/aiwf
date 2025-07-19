@@ -48,3 +48,6 @@ out/
 *.bak
 *.orig
 .cache/
+
+# AIWF 세션 파일
+.aiwf/sessions/
