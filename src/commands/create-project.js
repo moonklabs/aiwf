@@ -1,12 +1,15 @@
 #!/usr/bin/env node
 
-const fs = require('fs-extra');
-const path = require('path');
-const prompts = require('prompts');
-const chalk = require('chalk');
-const ora = require('ora');
+import fs from 'fs-extra';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import prompts from 'prompts';
+import chalk from 'chalk';
+import ora from 'ora';
 
-const TEMPLATES_DIR = path.join(__dirname, '../templates');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const TEMPLATES_DIR = path.join(__dirname, '../../templates');
 
 async function createProject() {
   console.log(chalk.cyan('\n🚀 AIWF 프로젝트 생성기\n'));
@@ -148,4 +151,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { createProject };
+export { createProject };

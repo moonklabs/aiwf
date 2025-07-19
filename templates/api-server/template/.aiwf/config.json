@@ -1,0 +1,56 @@
+{
+  "project_name": "{{projectName}}",
+  "project_type": "api-server",
+  "framework": "express",
+  "language": "typescript",
+  "created_at": "{{createdAt}}",
+  "version": "0.0.1",
+  "features": {
+    "feature_ledger": {
+      "enabled": true,
+      "auto_track": true,
+      "git_integration": true,
+      "api_endpoints": true
+    },
+    "ai_persona": {
+      "enabled": true,
+      "default": "backend-engineer",
+      "available": [
+        "backend-engineer",
+        "api-architect",
+        "database-specialist",
+        "security-auditor",
+        "performance-optimizer"
+      ]
+    },
+    "context_compression": {
+      "enabled": true,
+      "level": "balanced",
+      "token_limit": 100000,
+      "cache_enabled": true
+    },
+    "api_documentation": {
+      "enabled": true,
+      "swagger": true,
+      "postman_sync": false
+    }
+  },
+  "structure": {
+    "src_dir": "src",
+    "test_dir": "tests",
+    "build_dir": "dist",
+    "docs_dir": "docs"
+  },
+  "conventions": {
+    "routing": "restful",
+    "authentication": "jwt",
+    "validation": "express-validator",
+    "testing": "jest",
+    "linting": "eslint",
+    "database": "prepared"
+  },
+  "scripts": {
+    "pre_commit": "npm run lint && npm test",
+    "post_feature": "npm run aiwf:feature update && npm run aiwf:api docs"
+  }
+}
