@@ -4,6 +4,7 @@ import { program } from 'commander';
 import chalk from 'chalk';
 import { installAIWF } from '../lib/installer.js';
 import AIToolCommand from '../commands/ai-tool.js';
+import PersonaCommand from '../commands/persona.js';
 import { CacheCLI } from './cache-cli.js';
 
 // Parse version from package.json
@@ -159,6 +160,46 @@ lang
   .action(async () => {
     const { resetLanguage } = await import('./language-cli.js');
     await resetLanguage();
+  });
+
+// Persona management commands
+const persona = program.command('persona');
+persona.description('Manage AI personas / AI 페르소나 관리');
+
+persona
+  .command('status')
+  .alias('s')
+  .description('Show current persona status / 현재 페르소나 상태 표시')
+  .action(async () => {
+    const personaCmd = new PersonaCommand();
+    await personaCmd.showStatus();
+  });
+
+persona
+  .command('list')
+  .alias('ls')
+  .description('List available personas / 사용 가능한 페르소나 목록')
+  .action(async () => {
+    const personaCmd = new PersonaCommand();
+    await personaCmd.listPersonas();
+  });
+
+persona
+  .command('set <persona-name>')
+  .alias('switch')
+  .description('Switch to specific persona / 특정 페르소나로 전환')
+  .action(async (personaName) => {
+    const personaCmd = new PersonaCommand();
+    await personaCmd.setPersona(personaName);
+  });
+
+persona
+  .command('reset')
+  .alias('r')
+  .description('Reset to default persona / 기본 페르소나로 리셋')
+  .action(async () => {
+    const personaCmd = new PersonaCommand();
+    await personaCmd.resetPersona();
   });
 
 // Parse command line arguments

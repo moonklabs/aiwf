@@ -5,7 +5,7 @@
  * 다양한 개발 작업을 위한 AI 행동 페르소나 관리
  */
 
-import { AIPersonaManager } from '../../../../lib/ai-persona-manager.js';
+import { AIPersonaManager } from '../../../../src/lib/ai-persona-manager.js';
 import { getBackgroundMonitor } from '../utils/background-monitor.js';
 import path from 'path';
 import chalk from 'chalk';
