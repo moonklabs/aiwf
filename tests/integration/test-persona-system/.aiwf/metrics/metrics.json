@@ -1,0 +1,833 @@
+{
+  "sessions": [
+    {
+      "id": "session_1752899826320_2bnkqatod",
+      "persona": "debugger",
+      "task": {
+        "type": "general",
+        "description": "Users are getting 401 errors when trying to login",
+        "complexity": 1
+      },
+      "startTime": 1752899826320,
+      "events": [
+        {
+          "type": "interaction",
+          "timestamp": 1752899826320,
+          "data": {
+            "type": "code_analysis"
+          }
+        },
+        {
+          "type": "interaction",
+          "timestamp": 1752899826320,
+          "data": {
+            "type": "error_trace"
+          }
+        },
+        {
+          "type": "task_completed",
+          "timestamp": 1752899826320,
+          "data": {
+            "success": true
+          }
+        }
+      ],
+      "metrics": {
+        "tokenUsage": {
+          "start": 20,
+          "end": 20,
+          "contextSwitches": 0
+        },
+        "interactions": 2,
+        "errors": 0,
+        "completionStatus": "completed"
+      },
+      "endTime": 1752899826321,
+      "duration": 1,
+      "qualityMetrics": {
+        "completionTime": 1,
+        "tokenEfficiency": 1,
+        "errorRate": 0,
+        "interactionEfficiency": 1,
+        "overallScore": 1
+      }
+    },
+    {
+      "id": "session_1752899826356_hzmf84azi",
+      "persona": "architect",
+      "task": {
+        "type": "feature_development",
+        "description": "architect phase",
+        "complexity": 1
+      },
+      "startTime": 1752899826356,
+      "events": [
+        {
+          "type": "interaction",
+          "timestamp": 1752899826356,
+          "data": {
+            "persona": "architect"
+          }
+        }
+      ],
+      "metrics": {
+        "tokenUsage": {
+          "start": 0,
+          "end": 0,
+          "contextSwitches": 0
+        },
+        "interactions": 1,
+        "errors": 0,
+        "completionStatus": "completed"
+      },
+      "endTime": 1752899826356,
+      "duration": 0,
+      "qualityMetrics": {
+        "completionTime": 0,
+        "tokenEfficiency": 1,
+        "errorRate": 0,
+        "interactionEfficiency": 1,
+        "overallScore": 1
+      }
+    },
+    {
+      "id": "session_1752899826356_2pkwqetik",
+      "persona": "developer",
+      "task": {
+        "type": "feature_development",
+        "description": "developer phase",
+        "complexity": 1
+      },
+      "startTime": 1752899826356,
+      "events": [
+        {
+          "type": "interaction",
+          "timestamp": 1752899826356,
+          "data": {
+            "persona": "developer"
+          }
+        }
+      ],
+      "metrics": {
+        "tokenUsage": {
+          "start": 0,
+          "end": 0,
+          "contextSwitches": 0
+        },
+        "interactions": 1,
+        "errors": 0,
+        "completionStatus": "completed"
+      },
+      "endTime": 1752899826356,
+      "duration": 0,
+      "qualityMetrics": {
+        "completionTime": 0,
+        "tokenEfficiency": 1,
+        "errorRate": 0,
+        "interactionEfficiency": 1,
+        "overallScore": 1
+      }
+    },
+    {
+      "id": "session_1752899826357_y9yxnjf7i",
+      "persona": "reviewer",
+      "task": {
+        "type": "feature_development",
+        "description": "reviewer phase",
+        "complexity": 1
+      },
+      "startTime": 1752899826357,
+      "events": [
+        {
+          "type": "interaction",
+          "timestamp": 1752899826357,
+          "data": {
+            "persona": "reviewer"
+          }
+        }
+      ],
+      "metrics": {
+        "tokenUsage": {
+          "start": 0,
+          "end": 0,
+          "contextSwitches": 0
+        },
+        "interactions": 1,
+        "errors": 0,
+        "completionStatus": "completed"
+      },
+      "endTime": 1752899826357,
+      "duration": 0,
+      "qualityMetrics": {
+        "completionTime": 0,
+        "tokenEfficiency": 1,
+        "errorRate": 0,
+        "interactionEfficiency": 1,
+        "overallScore": 1
+      }
+    },
+    {
+      "id": "session_1752899826358_1f646h9jo",
+      "persona": "documenter",
+      "task": {
+        "type": "feature_development",
+        "description": "documenter phase",
+        "complexity": 1
+      },
+      "startTime": 1752899826358,
+      "events": [
+        {
+          "type": "interaction",
+          "timestamp": 1752899826358,
+          "data": {
+            "persona": "documenter"
+          }
+        }
+      ],
+      "metrics": {
+        "tokenUsage": {
+          "start": 0,
+          "end": 0,
+          "contextSwitches": 0
+        },
+        "interactions": 1,
+        "errors": 0,
+        "completionStatus": "completed"
+      },
+      "endTime": 1752899826358,
+      "duration": 0,
+      "qualityMetrics": {
+        "completionTime": 0,
+        "tokenEfficiency": 1,
+        "errorRate": 0,
+        "interactionEfficiency": 1,
+        "overallScore": 1
+      }
+    },
+    {
+      "id": "session_1752899826425_zrh7qnlc9",
+      "persona": "debugger",
+      "task": {
+        "type": "test",
+        "description": "fix bug",
+        "complexity": 1
+      },
+      "startTime": 1752899826425,
+      "events": [
+        {
+          "type": "task_completed",
+          "timestamp": 1752899826436,
+          "data": {}
+        }
+      ],
+      "metrics": {
+        "tokenUsage": {
+          "start": 0,
+          "end": 0,
+          "contextSwitches": 0
+        },
+        "interactions": 0,
+        "errors": 0,
+        "completionStatus": "completed"
+      },
+      "endTime": 1752899826436,
+      "duration": 11,
+      "qualityMetrics": {
+        "overallScore": 0.9
+      }
+    },
+    {
+      "id": "session_1752899826436_inc536jus",
+      "persona": "debugger",
+      "task": {
+        "type": "test",
+        "description": "trace error",
+        "complexity": 1
+      },
+      "startTime": 1752899826436,
+      "events": [
+        {
+          "type": "task_completed",
+          "timestamp": 1752899826446,
+          "data": {}
+        }
+      ],
+      "metrics": {
+        "tokenUsage": {
+          "start": 0,
+          "end": 0,
+          "contextSwitches": 0
+        },
+        "interactions": 0,
+        "errors": 0,
+        "completionStatus": "completed"
+      },
+      "endTime": 1752899826446,
+      "duration": 10,
+      "qualityMetrics": {
+        "overallScore": 0.8
+      }
+    },
+    {
+      "id": "session_1752899826447_6y8ynl0od",
+      "persona": "architect",
+      "task": {
+        "type": "test",
+        "description": "design api",
+        "complexity": 1
+      },
+      "startTime": 1752899826447,
+      "events": [
+        {
+          "type": "task_completed",
+          "timestamp": 1752899826459,
+          "data": {}
+        }
+      ],
+      "metrics": {
+        "tokenUsage": {
+          "start": 0,
+          "end": 0,
+          "contextSwitches": 0
+        },
+        "interactions": 0,
+        "errors": 0,
+        "completionStatus": "completed"
+      },
+      "endTime": 1752899826459,
+      "duration": 12,
+      "qualityMetrics": {
+        "overallScore": 0.95
+      }
+    },
+    {
+      "id": "session_1752899826460_lehp32dcy",
+      "persona": "optimizer",
+      "task": {
+        "type": "test",
+        "description": "improve speed",
+        "complexity": 1
+      },
+      "startTime": 1752899826460,
+      "events": [
+        {
+          "type": "task_completed",
+          "timestamp": 1752899826469,
+          "data": {}
+        }
+      ],
+      "metrics": {
+        "tokenUsage": {
+          "start": 0,
+          "end": 0,
+          "contextSwitches": 0
+        },
+        "interactions": 0,
+        "errors": 0,
+        "completionStatus": "completed"
+      },
+      "endTime": 1752899826469,
+      "duration": 9,
+      "qualityMetrics": {
+        "overallScore": 0.85
+      }
+    },
+    {
+      "id": "session_1752899893097_6p7ny8fsk",
+      "persona": "architect",
+      "task": {
+        "type": "feature_development",
+        "description": "architect phase",
+        "complexity": 1
+      },
+      "startTime": 1752899893097,
+      "events": [
+        {
+          "type": "interaction",
+          "timestamp": 1752899893098,
+          "data": {
+            "persona": "architect"
+          }
+        }
+      ],
+      "metrics": {
+        "tokenUsage": {
+          "start": 1,
+          "end": 1,
+          "contextSwitches": 0
+        },
+        "interactions": 1,
+        "errors": 0,
+        "completionStatus": "completed"
+      },
+      "endTime": 1752899893098,
+      "duration": 1,
+      "qualityMetrics": {
+        "completionTime": 1,
+        "tokenEfficiency": 1,
+        "errorRate": 0,
+        "interactionEfficiency": 1,
+        "overallScore": 1
+      }
+    },
+    {
+      "id": "session_1752899893099_lc2bnktxw",
+      "persona": "developer",
+      "task": {
+        "type": "feature_development",
+        "description": "developer phase",
+        "complexity": 1
+      },
+      "startTime": 1752899893099,
+      "events": [
+        {
+          "type": "interaction",
+          "timestamp": 1752899893099,
+          "data": {
+            "persona": "developer"
+          }
+        }
+      ],
+      "metrics": {
+        "tokenUsage": {
+          "start": 1,
+          "end": 1,
+          "contextSwitches": 0
+        },
+        "interactions": 1,
+        "errors": 0,
+        "completionStatus": "completed"
+      },
+      "endTime": 1752899893099,
+      "duration": 0,
+      "qualityMetrics": {
+        "completionTime": 0,
+        "tokenEfficiency": 1,
+        "errorRate": 0,
+        "interactionEfficiency": 1,
+        "overallScore": 1
+      }
+    },
+    {
+      "id": "session_1752899893100_gzf2vn6l9",
+      "persona": "reviewer",
+      "task": {
+        "type": "feature_development",
+        "description": "reviewer phase",
+        "complexity": 1
+      },
+      "startTime": 1752899893100,
+      "events": [
+        {
+          "type": "interaction",
+          "timestamp": 1752899893100,
+          "data": {
+            "persona": "reviewer"
+          }
+        }
+      ],
+      "metrics": {
+        "tokenUsage": {
+          "start": 1,
+          "end": 1,
+          "contextSwitches": 0
+        },
+        "interactions": 1,
+        "errors": 0,
+        "completionStatus": "completed"
+      },
+      "endTime": 1752899893100,
+      "duration": 0,
+      "qualityMetrics": {
+        "completionTime": 0,
+        "tokenEfficiency": 1,
+        "errorRate": 0,
+        "interactionEfficiency": 1,
+        "overallScore": 1
+      }
+    },
+    {
+      "id": "session_1752899893101_dk4zmyomr",
+      "persona": "documenter",
+      "task": {
+        "type": "feature_development",
+        "description": "documenter phase",
+        "complexity": 1
+      },
+      "startTime": 1752899893101,
+      "events": [
+        {
+          "type": "interaction",
+          "timestamp": 1752899893101,
+          "data": {
+            "persona": "documenter"
+          }
+        }
+      ],
+      "metrics": {
+        "tokenUsage": {
+          "start": 1,
+          "end": 1,
+          "contextSwitches": 0
+        },
+        "interactions": 1,
+        "errors": 0,
+        "completionStatus": "completed"
+      },
+      "endTime": 1752899893101,
+      "duration": 0,
+      "qualityMetrics": {
+        "completionTime": 0,
+        "tokenEfficiency": 1,
+        "errorRate": 0,
+        "interactionEfficiency": 1,
+        "overallScore": 1
+      }
+    },
+    {
+      "id": "session_1752899893221_x6dqg92n9",
+      "persona": "debugger",
+      "task": {
+        "type": "test",
+        "description": "fix bug",
+        "complexity": 1
+      },
+      "startTime": 1752899893221,
+      "events": [
+        {
+          "type": "task_completed",
+          "timestamp": 1752899893231,
+          "data": {}
+        }
+      ],
+      "metrics": {
+        "tokenUsage": {
+          "start": 0,
+          "end": 0,
+          "contextSwitches": 0
+        },
+        "interactions": 0,
+        "errors": 0,
+        "completionStatus": "completed"
+      },
+      "endTime": 1752899893231,
+      "duration": 10,
+      "qualityMetrics": {
+        "overallScore": 0.9
+      }
+    },
+    {
+      "id": "session_1752899893231_apnthl71i",
+      "persona": "debugger",
+      "task": {
+        "type": "test",
+        "description": "trace error",
+        "complexity": 1
+      },
+      "startTime": 1752899893231,
+      "events": [
+        {
+          "type": "task_completed",
+          "timestamp": 1752899893242,
+          "data": {}
+        }
+      ],
+      "metrics": {
+        "tokenUsage": {
+          "start": 0,
+          "end": 0,
+          "contextSwitches": 0
+        },
+        "interactions": 0,
+        "errors": 0,
+        "completionStatus": "completed"
+      },
+      "endTime": 1752899893242,
+      "duration": 11,
+      "qualityMetrics": {
+        "overallScore": 0.8
+      }
+    },
+    {
+      "id": "session_1752899893243_9ls0t87jl",
+      "persona": "architect",
+      "task": {
+        "type": "test",
+        "description": "design api",
+        "complexity": 1
+      },
+      "startTime": 1752899893243,
+      "events": [
+        {
+          "type": "task_completed",
+          "timestamp": 1752899893252,
+          "data": {}
+        }
+      ],
+      "metrics": {
+        "tokenUsage": {
+          "start": 0,
+          "end": 1,
+          "contextSwitches": 0
+        },
+        "interactions": 0,
+        "errors": 0,
+        "completionStatus": "completed"
+      },
+      "endTime": 1752899893252,
+      "duration": 9,
+      "qualityMetrics": {
+        "overallScore": 0.95
+      }
+    },
+    {
+      "id": "session_1752899893253_udfl9yuql",
+      "persona": "optimizer",
+      "task": {
+        "type": "test",
+        "description": "improve speed",
+        "complexity": 1
+      },
+      "startTime": 1752899893253,
+      "events": [
+        {
+          "type": "task_completed",
+          "timestamp": 1752899893263,
+          "data": {}
+        }
+      ],
+      "metrics": {
+        "tokenUsage": {
+          "start": 1,
+          "end": 1,
+          "contextSwitches": 0
+        },
+        "interactions": 0,
+        "errors": 0,
+        "completionStatus": "completed"
+      },
+      "endTime": 1752899893263,
+      "duration": 10,
+      "qualityMetrics": {
+        "overallScore": 0.85
+      }
+    }
+  ],
+  "personaPerformance": {
+    "debugger": {
+      "totalSessions": 5,
+      "completedSessions": 5,
+      "totalDuration": 43,
+      "totalTokens": 0,
+      "totalErrors": 0,
+      "qualityScores": [
+        1,
+        0.8,
+        0.8,
+        0.8,
+        0.8
+      ],
+      "taskTypes": {
+        "general": 1,
+        "test": 4
+      }
+    },
+    "architect": {
+      "totalSessions": 4,
+      "completedSessions": 4,
+      "totalDuration": 22,
+      "totalTokens": 1,
+      "totalErrors": 0,
+      "qualityScores": [
+        1,
+        0.8,
+        1,
+        0.8
+      ],
+      "taskTypes": {
+        "feature_development": 2,
+        "test": 2
+      }
+    },
+    "developer": {
+      "totalSessions": 2,
+      "completedSessions": 2,
+      "totalDuration": 0,
+      "totalTokens": 0,
+      "totalErrors": 0,
+      "qualityScores": [
+        1,
+        1
+      ],
+      "taskTypes": {
+        "feature_development": 2
+      }
+    },
+    "reviewer": {
+      "totalSessions": 2,
+      "completedSessions": 2,
+      "totalDuration": 0,
+      "totalTokens": 0,
+      "totalErrors": 0,
+      "qualityScores": [
+        1,
+        1
+      ],
+      "taskTypes": {
+        "feature_development": 2
+      }
+    },
+    "documenter": {
+      "totalSessions": 2,
+      "completedSessions": 2,
+      "totalDuration": 0,
+      "totalTokens": 0,
+      "totalErrors": 0,
+      "qualityScores": [
+        1,
+        1
+      ],
+      "taskTypes": {
+        "feature_development": 2
+      }
+    },
+    "optimizer": {
+      "totalSessions": 2,
+      "completedSessions": 2,
+      "totalDuration": 19,
+      "totalTokens": 0,
+      "totalErrors": 0,
+      "qualityScores": [
+        0.8,
+        0.8
+      ],
+      "taskTypes": {
+        "test": 2
+      }
+    }
+  },
+  "taskOutcomes": [],
+  "aggregated": {
+    "eventCounts": {
+      "persona_switch": 19,
+      "interaction": 10,
+      "task_completed": 9
+    },
+    "personaSwitches": [
+      {
+        "from": "developer",
+        "to": "debugger",
+        "trigger": "auto",
+        "timestamp": 1752899826316
+      },
+      {
+        "from": "developer",
+        "to": "architect",
+        "trigger": "manual",
+        "timestamp": 1752899826341
+      },
+      {
+        "from": "developer",
+        "to": "architect",
+        "trigger": "auto",
+        "timestamp": 1752899826356
+      },
+      {
+        "from": "architect",
+        "to": "developer",
+        "trigger": "auto",
+        "timestamp": 1752899826356
+      },
+      {
+        "from": "developer",
+        "to": "reviewer",
+        "trigger": "auto",
+        "timestamp": 1752899826357
+      },
+      {
+        "from": "reviewer",
+        "to": "documenter",
+        "trigger": "auto",
+        "timestamp": 1752899826358
+      },
+      {
+        "from": "developer",
+        "to": "debugger",
+        "trigger": "auto",
+        "timestamp": 1752899826425
+      },
+      {
+        "from": "debugger",
+        "to": "architect",
+        "trigger": "auto",
+        "timestamp": 1752899826447
+      },
+      {
+        "from": "architect",
+        "to": "optimizer",
+        "trigger": "auto",
+        "timestamp": 1752899826459
+      },
+      {
+        "from": "developer",
+        "to": "optimizer",
+        "trigger": "auto",
+        "timestamp": 1752899826501
+      },
+      {
+        "from": "developer",
+        "to": "architect",
+        "trigger": "manual",
+        "timestamp": 1752899892907
+      },
+      {
+        "from": "developer",
+        "to": "architect",
+        "trigger": "auto",
+        "timestamp": 1752899893097
+      },
+      {
+        "from": "architect",
+        "to": "developer",
+        "trigger": "auto",
+        "timestamp": 1752899893099
+      },
+      {
+        "from": "developer",
+        "to": "reviewer",
+        "trigger": "auto",
+        "timestamp": 1752899893100
+      },
+      {
+        "from": "reviewer",
+        "to": "documenter",
+        "trigger": "auto",
+        "timestamp": 1752899893100
+      },
+      {
+        "from": "developer",
+        "to": "debugger",
+        "trigger": "auto",
+        "timestamp": 1752899893221
+      },
+      {
+        "from": "debugger",
+        "to": "architect",
+        "trigger": "auto",
+        "timestamp": 1752899893243
+      },
+      {
+        "from": "architect",
+        "to": "optimizer",
+        "trigger": "auto",
+        "timestamp": 1752899893253
+      },
+      {
+        "from": "developer",
+        "to": "optimizer",
+        "trigger": "auto",
+        "timestamp": 1752899893487
+      }
+    ]
+  }
+}
