@@ -7,6 +7,51 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.5] - 2025-07-19
+
+### ✨ Features
+- **Persona Management**: Implement unified persona management system (`b913da0`)
+- **Runtime State**: Add runtime persona state and metrics tracking (`6e5ca2c`)
+- **Templates**: Add AIWF test instance and project templates (`3034bce`)
+- **Korean Support**: AIWF 한글 템플릿 추가 문서 및 파일 보완 (`5a24037`)
+- **Template Structure**: AIWF 한글 템플릿 구조 완성 (`f12fb76`)
+- **Template Manager**: 템플릿 관리자 구현 및 작업 템플릿 개선 (`feec001`)
+- **Context Compression**: Implement persona-aware context compression (`646fd4c`)
+- **Quality Evaluation**: Add persona quality evaluation system (`4b60a79`)
+- **Claude Commands**: Add Claude Code commands for 5 AI personas (`3ccdb7b`)
+- **Feature Ledger**: Implement Feature Ledger CLI with full CRUD operations (`97c15b3`)
+
+### 📝 Documentation
+- **Persona Docs**: Standardize persona command documentation (`a5a1a98`)
+- **README**: Update README with new persona features (`5dbafc6`)
+
+### ♻️ Refactoring
+- **Project Structure**: 완전한 src 폴더 구조 통합 및 정리 (`92fc7f0`)
+- **Evaluation System**: Replace complex evaluation with lightweight background monitoring (`b39da95`)
+
+### 🔧 Build/Config
+- **Dependencies**: Bump version to 0.3.4 and clean up dependencies (`66166cb`)
+- **Gitignore**: Add .aiwf/backup_*/ pattern to .gitignore (`2952457`)
+- **Development Rules**: Update .gitignore and add framework development rules to CLAUDE.md (`e58a4eb`)
+
+### 🔄 Other Changes
+- 버전 0.3.3으로 업데이트 및 불필요한 압축 관련 문서 삭제 (`9c7c67e`)
+- 설치 완료 플래그 파일 생성 및 기존 설치 확인 로직 수정 (`e956b59`)
+- 버전 업데이트 및 불필요한 CLI 명령어 제거 (`659e6b5`)
+
+## [0.3.4] - 2025-07-19
+
+### 🔧 Build/Config
+- Clean up dependencies and update package configuration
+
+## [0.3.3] - 2025-07-14
+
+### 🔄 Other Changes
+- Remove unnecessary compression-related documentation
+- Create installation completion flag file
+- Fix existing installation check logic
+- Remove unnecessary CLI commands
+
 ### Added
 - 📚 **Comprehensive Documentation Suite**
   - API Reference guide with complete module documentation
@@ -124,8 +169,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - GitHub repository download functionality
 - Simple installation script
 
-[Unreleased]: https://github.com/aiwf/aiwf/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/aiwf/aiwf/compare/v0.3.0...v1.0.0
-[0.3.0]: https://github.com/aiwf/aiwf/compare/v0.2.0...v0.3.0
-[0.2.0]: https://github.com/aiwf/aiwf/compare/v0.1.0...v0.2.0
-[0.1.0]: https://github.com/aiwf/aiwf/releases/tag/v0.1.0
+[Unreleased]: https://github.com/moonklabs/aiwf/compare/v0.3.5...HEAD
+[0.3.5]: https://github.com/moonklabs/aiwf/compare/v0.3.4...v0.3.5
+[0.3.4]: https://github.com/moonklabs/aiwf/compare/v0.3.3...v0.3.4
+[0.3.3]: https://github.com/moonklabs/aiwf/compare/v0.3.1...v0.3.3
+[0.3.1]: https://github.com/moonklabs/aiwf/compare/v1.0.0...v0.3.1
+[1.0.0]: https://github.com/moonklabs/aiwf/compare/v0.3.0...v1.0.0
+[0.3.0]: https://github.com/moonklabs/aiwf/compare/v0.2.0...v0.3.0
+[0.2.0]: https://github.com/moonklabs/aiwf/compare/v0.1.0...v0.2.0
+[0.1.0]: https://github.com/moonklabs/aiwf/releases/tag/v0.1.0
