@@ -6,28 +6,33 @@ import { fileURLToPath } from 'url';
 import prompts from 'prompts';
 import chalk from 'chalk';
 import ora from 'ora';
+import { ResourceLoader } from '../lib/resource-loader.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const TEMPLATES_DIR = path.join(__dirname, '../../templates');
+
+// ResourceLoader를 사용하여 템플릿 관리
+const resourceLoader = new ResourceLoader();
 
 async function createProject() {
   console.log(chalk.cyan('\n🚀 AIWF 프로젝트 생성기\n'));
 
-  // 사용 가능한 템플릿 찾기
-  const templates = fs.readdirSync(TEMPLATES_DIR)
-    .filter(dir => fs.existsSync(path.join(TEMPLATES_DIR, dir, 'config.json')));
-
-  const templateConfigs = templates.map(template => {
-    const config = JSON.parse(
-      fs.readFileSync(path.join(TEMPLATES_DIR, template, 'config.json'), 'utf8')
-    );
-    return {
-      value: template,
-      title: config.displayName,
-      description: config.description
-    };
-  });
+  // ResourceLoader를 사용하여 템플릿 찾기
+  const templates = await resourceLoader.listTemplates();
+  
+  const templateConfigs = [];
+  for (const template of templates) {
+    try {
+      const config = await resourceLoader.loadTemplateConfig(template);
+      templateConfigs.push({
+        value: template,
+        title: config.displayName,
+        description: config.description
+      });
+    } catch (error) {
+      console.error(`템플릿 ${template} 로드 실패:`, error.message);
+    }
+  }
 
   const questions = [
     {
@@ -85,7 +90,8 @@ async function createProject() {
   const spinner = ora('프로젝트 생성 중...').start();
 
   try {
-    const templatePath = path.join(TEMPLATES_DIR, answers.template, 'template');
+    // ResourceLoader를 사용하여 템플릿 경로 가져오기
+    const templatePath = await resourceLoader.getTemplatePath(answers.template);
     const targetPath = path.resolve(answers.directory);
 
     // 템플릿 복사
@@ -144,7 +150,7 @@ async function replacePlaceholders(dir, replacements) {
 }
 
 // CLI 실행
-if (require.main === module) {
+if (import.meta.url === `file://${process.argv[1]}`) {
   createProject().catch(error => {
     console.error(chalk.red('오류:', error.message));
     process.exit(1);

@@ -6,6 +6,7 @@
  */
 
 import { AIPersonaManager } from '../lib/ai-persona-manager.js';
+import { ResourceLoader } from '../lib/resource-loader.js';
 import path from 'path';
 import chalk from 'chalk';
 import { fileURLToPath } from 'url';
@@ -17,6 +18,7 @@ const __dirname = dirname(__filename);
 class PersonaCommand {
   constructor() {
     this.personaManager = null;
+    this.resourceLoader = new ResourceLoader();
   }
 
   /**
@@ -24,11 +26,15 @@ class PersonaCommand {
    */
   async initPersonaManager() {
     if (!this.personaManager) {
+      // 사용자 디렉토리 초기화
+      await this.resourceLoader.initUserDirectory();
+      
       this.personaManager = new AIPersonaManager({
         personaConfigPath: path.join(process.cwd(), '.aiwf', 'personas'),
         metricsPath: path.join(process.cwd(), '.aiwf', 'metrics'),
         metricsEnabled: true,
-        autoDetectionEnabled: true
+        autoDetectionEnabled: true,
+        resourceLoader: this.resourceLoader
       });
       
       await this.personaManager.init();
@@ -88,21 +94,36 @@ class PersonaCommand {
       console.log(chalk.cyan('🎭 사용 가능한 AI 페르소나'));
       console.log(chalk.gray('-'.repeat(50)));
       
-      // 기본 페르소나 목록을 하드코딩으로 표시 (초기화 문제 회피)
-      const defaultPersonas = [
-        { name: 'architect', description: '시스템 설계 및 아키텍처 전문가' },
-        { name: 'developer', description: '일반 개발자 (기본값)' },
-        { name: 'reviewer', description: '코드 리뷰 및 품질 관리 전문가' },
-        { name: 'debugger', description: '디버깅 및 문제 해결 전문가' },
-        { name: 'optimizer', description: '성능 최적화 전문가' },
-        { name: 'security', description: '보안 및 취약점 분석 전문가' },
-        { name: 'documenter', description: '문서화 및 기술 작성 전문가' }
-      ];
-      
-      defaultPersonas.forEach(persona => {
-        const displayName = chalk.yellow(persona.name);
-        console.log(`  ${displayName} - ${persona.description}`);
-      });
+      // ResourceLoader를 사용하여 페르소나 목록 가져오기
+      try {
+        const personas = await this.resourceLoader.listPersonas();
+        
+        for (const personaName of personas) {
+          try {
+            const persona = await this.resourceLoader.loadPersona(personaName);
+            const displayName = chalk.yellow(personaName);
+            const description = persona.description || '설명 없음';
+            console.log(`  ${displayName} - ${description}`);
+          } catch (error) {
+            // 개별 페르소나 로드 실패 시 건너뛰기
+            console.log(`  ${chalk.yellow(personaName)} - ${chalk.gray('(로드 실패)')}`);
+          }
+        }
+      } catch (error) {
+        // 페르소나 목록 가져오기 실패 시 기본 목록 표시
+        const defaultPersonas = [
+          { name: 'architect', description: '시스템 설계 및 아키텍처 전문가' },
+          { name: 'developer', description: '일반 개발자 (기본값)' },
+          { name: 'reviewer', description: '코드 리뷰 및 품질 관리 전문가' },
+          { name: 'analyst', description: '비즈니스 분석가' },
+          { name: 'tester', description: '테스트 엔지니어' }
+        ];
+        
+        defaultPersonas.forEach(persona => {
+          const displayName = chalk.yellow(persona.name);
+          console.log(`  ${displayName} - ${persona.description}`);
+        });
+      }
       
       console.log(chalk.gray('\n' + '-'.repeat(50)));
       console.log(chalk.gray('사용법: aiwf persona set <페르소나명>'));
