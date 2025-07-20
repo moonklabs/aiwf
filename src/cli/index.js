@@ -7,6 +7,11 @@ import AIToolCommand from '../commands/ai-tool.js';
 import PersonaCommand from '../commands/persona.js';
 import { CacheCLI } from './cache-cli.js';
 import { addTaskToSprint } from '../commands/sprint-task.js';
+import CompressCommand from '../commands/compress.js';
+import FeatureCommand from '../commands/feature.js';
+import TokenCommand from '../commands/token.js';
+import EvaluateCommand from '../commands/evaluate.js';
+import { createProject } from '../commands/create-project.js';
 
 // Parse version from package.json
 import { readFileSync } from 'fs';
@@ -215,6 +220,175 @@ program
       console.error(chalk.red(`오류: ${error.message}`));
       process.exit(1);
     }
+  });
+
+// Create project command
+program
+  .command('create-project')
+  .alias('create')
+  .description('Create a new AIWF project / 새 AIWF 프로젝트 생성')
+  .action(async () => {
+    try {
+      await createProject();
+    } catch (error) {
+      console.error(chalk.red(`오류: ${error.message}`));
+      process.exit(1);
+    }
+  });
+
+// Context compression command
+program
+  .command('compress [mode] [path]')
+  .description('Compress context for token optimization / 토큰 최적화를 위한 컨텍스트 압축')
+  .option('--persona, -p', 'Enable persona-aware compression / 페르소나 인식 압축 활성화')
+  .action(async (mode, path, options) => {
+    const compressCmd = new CompressCommand();
+    const args = [];
+    if (mode) args.push(mode);
+    if (path) args.push(path);
+    if (options.persona) args.push('--persona');
+    await compressCmd.execute(args);
+  });
+
+// Feature ledger management commands
+const feature = program.command('feature');
+feature.description('Manage feature development tracking / 기능 개발 추적 관리');
+
+feature
+  .command('list')
+  .alias('ls')
+  .description('List all features / 모든 기능 목록')
+  .action(async () => {
+    const featureCmd = new FeatureCommand();
+    await featureCmd.execute(['list']);
+  });
+
+feature
+  .command('create <name> [description...]')
+  .alias('add')
+  .description('Create a new feature / 새 기능 생성')
+  .action(async (name, description) => {
+    const featureCmd = new FeatureCommand();
+    const args = ['create', name];
+    if (description) args.push(...description);
+    await featureCmd.execute(args);
+  });
+
+feature
+  .command('update <featureId> <status>')
+  .description('Update feature status / 기능 상태 업데이트')
+  .action(async (featureId, status) => {
+    const featureCmd = new FeatureCommand();
+    await featureCmd.execute(['update', featureId, status]);
+  });
+
+feature
+  .command('status [featureId]')
+  .description('Show feature status / 기능 상태 표시')
+  .action(async (featureId) => {
+    const featureCmd = new FeatureCommand();
+    const args = ['status'];
+    if (featureId) args.push(featureId);
+    await featureCmd.execute(args);
+  });
+
+feature
+  .command('sync')
+  .description('Sync with git commits / Git 커밋과 동기화')
+  .action(async () => {
+    const featureCmd = new FeatureCommand();
+    await featureCmd.execute(['sync']);
+  });
+
+// Token tracking commands
+const token = program.command('token');
+token.description('Manage token usage tracking / 토큰 사용량 추적 관리');
+
+token
+  .command('status')
+  .alias('s')
+  .description('Show token usage status / 토큰 사용 현황 표시')
+  .action(async () => {
+    const tokenCmd = new TokenCommand();
+    await tokenCmd.execute(['status']);
+  });
+
+token
+  .command('report [period]')
+  .description('Generate usage report / 사용 리포트 생성')
+  .action(async (period) => {
+    const tokenCmd = new TokenCommand();
+    const args = ['report'];
+    if (period) args.push(period);
+    await tokenCmd.execute(args);
+  });
+
+token
+  .command('track <input> <output>')
+  .description('Manually track token usage / 토큰 사용량 수동 기록')
+  .action(async (input, output) => {
+    const tokenCmd = new TokenCommand();
+    await tokenCmd.execute(['track', input, output]);
+  });
+
+token
+  .command('limit <type> <value>')
+  .description('Set usage limits / 사용 한도 설정')
+  .action(async (type, value) => {
+    const tokenCmd = new TokenCommand();
+    await tokenCmd.execute(['limit', type, value]);
+  });
+
+token
+  .command('reset')
+  .description('Reset tracking data / 추적 데이터 초기화')
+  .action(async () => {
+    const tokenCmd = new TokenCommand();
+    await tokenCmd.execute(['reset']);
+  });
+
+// Evaluation commands
+const evaluate = program.command('evaluate');
+evaluate.description('Evaluate AI responses and code quality / AI 응답 및 코드 품질 평가');
+
+evaluate
+  .command('response <file>')
+  .description('Evaluate AI response quality / AI 응답 품질 평가')
+  .action(async (file) => {
+    const evaluateCmd = new EvaluateCommand();
+    await evaluateCmd.execute(['response', file]);
+  });
+
+evaluate
+  .command('code <file>')
+  .description('Evaluate code quality / 코드 품질 평가')
+  .action(async (file) => {
+    const evaluateCmd = new EvaluateCommand();
+    await evaluateCmd.execute(['code', file]);
+  });
+
+evaluate
+  .command('persona <file> <persona>')
+  .description('Evaluate persona appropriateness / 페르소나 적합성 평가')
+  .action(async (file, persona) => {
+    const evaluateCmd = new EvaluateCommand();
+    await evaluateCmd.execute(['persona', file, persona]);
+  });
+
+evaluate
+  .command('report')
+  .description('Generate evaluation report / 평가 리포트 생성')
+  .action(async () => {
+    const evaluateCmd = new EvaluateCommand();
+    await evaluateCmd.execute(['report']);
+  });
+
+evaluate
+  .command('criteria')
+  .description('Show evaluation criteria / 평가 기준 표시')
+  .action(async () => {
+    const evaluateCmd = new EvaluateCommand();
+    await evaluateCmd.execute(['criteria']);
   });
 
 // Parse command line arguments
