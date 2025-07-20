@@ -3,7 +3,7 @@
 AI를 기본 모드로 복원합니다.
 
 ```bash
-cd .aiwf && node ../claude-code/aiwf/ko/commands/ai-persona.js default
+aiwf persona default
 ```
 
 ## 설명

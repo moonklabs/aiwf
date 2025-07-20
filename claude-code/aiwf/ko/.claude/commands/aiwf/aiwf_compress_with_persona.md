@@ -10,8 +10,8 @@ const path = require('path');
 
 // .aiwf 디렉토리로 이동하여 명령 실행
 const cwd = path.join(process.cwd(), '.aiwf');
-const proc = spawn('node', [
-  '../claude-code/aiwf/ko/commands/compress-context.js',
+const proc = spawn('aiwf', [
+  'compress',
   'balanced',
   '--persona'
 ], { cwd, stdio: 'inherit' });

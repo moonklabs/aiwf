@@ -12,8 +12,8 @@ const path = require('path');
 const cwd = path.join(process.cwd(), '.aiwf');
 const args = process.argv.slice(2); // 추가 인자 전달
 
-const proc = spawn('node', [
-  '../claude-code/aiwf/ko/commands/evaluate.js',
+const proc = spawn('aiwf', [
+  'evaluate',
   ...args
 ], { cwd, stdio: 'inherit' });
 

@@ -5,56 +5,19 @@
 ## 실행
 
 ```javascript
-const fs = require('fs');
+const { spawn } = require('child_process');
 const path = require('path');
-const chalk = require('chalk');
 
-// PersonaAwareCompressor import
-const { PersonaAwareCompressor } = require(path.join(
-  process.cwd(), 
-  'claude-code/aiwf/ko/utils/persona-aware-compressor.js'
-));
+// .aiwf 디렉토리로 이동하여 명령 실행
+const cwd = path.join(process.cwd(), '.aiwf');
+const proc = spawn('aiwf', [
+  'compress',
+  '--stats'
+], { cwd, stdio: 'inherit' });
 
-try {
-  const compressor = new PersonaAwareCompressor();
-  const stats = compressor.getPersonaCompressionStats();
-  
-  console.log(chalk.cyan('📊 페르소나별 압축 통계'));
-  console.log(chalk.gray('━'.repeat(50)));
-  
-  if (stats.currentPersona) {
-    console.log(`현재 페르소나: ${chalk.yellow(stats.currentPersona)}`);
-    
-    if (stats.strategy) {
-      console.log('\n📋 현재 페르소나 압축 전략:');
-      console.log(`- 포커스 영역: ${stats.strategy.focusAreas.join(', ')}`);
-      console.log(`- 요약 초점: ${stats.strategy.summarizationFocus}`);
-      console.log(`- 보존 패턴: ${stats.strategy.preservePatterns.slice(0, 5).join(', ')}...`);
-    }
-  } else {
-    console.log(chalk.yellow('⚠️  활성화된 페르소나가 없습니다.'));
-  }
-  
-  const avgRatios = stats.averageRatioByPersona;
-  if (Object.keys(avgRatios).length > 0) {
-    console.log('\n📈 페르소나별 평균 압축률:');
-    Object.entries(avgRatios).forEach(([persona, ratio]) => {
-      const personaNames = {
-        architect: 'Architect',
-        security: 'Security Expert',
-        frontend: 'Frontend Developer',
-        backend: 'Backend Developer',
-        data_analyst: 'Data Analyst'
-      };
-      console.log(`- ${personaNames[persona] || persona}: ${chalk.green(ratio + '%')}`);
-    });
-  } else {
-    console.log('\n압축 히스토리가 없습니다.');
-  }
-  
-} catch (error) {
-  console.error(chalk.red('오류:'), error.message);
-}
+proc.on('error', (err) => {
+  console.error('명령 실행 실패:', err.message);
+});
 ```
 
 ## 설명

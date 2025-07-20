@@ -3,7 +3,7 @@
 새로운 Feature Ledger를 생성하여 기능 개발을 추적합니다.
 
 ```bash
-cd .aiwf && node ../claude-code/aiwf/ko/commands/feature-ledger.js create "$@"
+aiwf feature create "$@"
 ```
 
 ## 설명
