@@ -3,7 +3,7 @@
 Feature Ledger의 상태를 변경합니다.
 
 ```bash
-cd .aiwf && node ../claude-code/aiwf/ko/commands/feature-ledger.js update-status "$@"
+aiwf feature update-status "$@"
 ```
 
 ## 설명

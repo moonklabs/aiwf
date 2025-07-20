@@ -4,21 +4,8 @@
 
 ## 실행
 
-```javascript
-const { spawn } = require('child_process');
-const path = require('path');
-
-// .aiwf 디렉토리로 이동하여 명령 실행
-const cwd = path.join(process.cwd(), '.aiwf');
-const proc = spawn('node', [
-  '../claude-code/aiwf/ko/commands/compress-context.js',
-  'minimal',
-  '--persona'
-], { cwd, stdio: 'inherit' });
-
-proc.on('error', (err) => {
-  console.error('명령 실행 실패:', err.message);
-});
+```bash
+aiwf compress minimal --persona
 ```
 
 ## 설명

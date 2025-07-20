@@ -4,22 +4,9 @@ AI 응답 품질을 간단하게 평가합니다.
 
 ## 실행
 
-```javascript
-const { spawn } = require('child_process');
-const path = require('path');
-
-// .aiwf 디렉토리로 이동하여 명령 실행
-const cwd = path.join(process.cwd(), '.aiwf');
-const args = process.argv.slice(2); // 추가 인자 전달
-
-const proc = spawn('node', [
-  '../claude-code/aiwf/ko/commands/evaluate.js',
-  ...args
-], { cwd, stdio: 'inherit' });
-
-proc.on('error', (err) => {
-  console.error('명령 실행 실패:', err.message);
-});
+```bash
+# AIWF CLI를 사용하여 평가 실행
+aiwf evaluate [options]
 ```
 
 ## 설명

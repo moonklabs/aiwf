@@ -4,21 +4,8 @@
 
 ## 실행
 
-```javascript
-const { spawn } = require('child_process');
-const path = require('path');
-
-// .aiwf 디렉토리로 이동하여 명령 실행
-const cwd = path.join(process.cwd(), '.aiwf');
-const proc = spawn('node', [
-  '../claude-code/aiwf/ko/commands/compress-context.js',
-  'balanced',
-  '--persona'
-], { cwd, stdio: 'inherit' });
-
-proc.on('error', (err) => {
-  console.error('명령 실행 실패:', err.message);
-});
+```bash
+aiwf compress balanced --persona
 ```
 
 ## 설명
@@ -37,11 +24,11 @@ proc.on('error', (err) => {
 
 ```bash
 # 기본 모드 (balanced)로 페르소나 인식 압축
-aiwf compress-with-persona
+aiwf compress balanced --persona
 
 # 다른 압축 모드와 함께 사용
-aiwf compress-aggressive-persona  # aggressive 모드
-aiwf compress-minimal-persona     # minimal 모드
+aiwf compress aggressive --persona  # aggressive 모드
+aiwf compress minimal --persona     # minimal 모드
 ```
 
 ## 참고
