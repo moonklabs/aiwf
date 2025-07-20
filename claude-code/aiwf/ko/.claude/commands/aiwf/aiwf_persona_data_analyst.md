@@ -3,7 +3,7 @@
 AI를 데이터 분석 전문가 모드로 전환합니다.
 
 ```bash
-cd .aiwf && node ../claude-code/aiwf/ko/commands/ai-persona.js data_analyst
+aiwf persona set data_analyst
 ```
 
 ## 페르소나 컨텍스트 적용

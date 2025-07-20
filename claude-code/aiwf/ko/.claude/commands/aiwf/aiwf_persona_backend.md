@@ -3,7 +3,7 @@
 AI를 백엔드 개발 전문가 모드로 전환합니다.
 
 ```bash
-cd .aiwf && node ../claude-code/aiwf/ko/commands/ai-persona.js backend
+aiwf persona set backend
 ```
 
 ## 페르소나 컨텍스트 적용

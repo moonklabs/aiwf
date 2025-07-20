@@ -3,7 +3,7 @@
 Feature Ledger를 마일스톤 및 스프린트와 연결합니다.
 
 ```bash
-cd .aiwf && node ../claude-code/aiwf/ko/commands/feature-ledger.js link-milestone "$@"
+aiwf link-feature-to-milestone
 ```
 
 ## 설명

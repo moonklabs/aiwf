@@ -3,7 +3,7 @@
 특정 Feature Ledger의 상세 정보를 확인합니다.
 
 ```bash
-cd .aiwf && node ../claude-code/aiwf/ko/commands/feature-ledger.js details "$@"
+aiwf get-feature-details
 ```
 
 ## 설명

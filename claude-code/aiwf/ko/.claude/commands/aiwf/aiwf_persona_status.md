@@ -3,7 +3,7 @@
 현재 활성화된 AI 페르소나의 상태를 확인합니다.
 
 ```bash
-cd .aiwf && node ../claude-code/aiwf/ko/commands/ai-persona.js status
+aiwf persona status
 ```
 
 ## 설명

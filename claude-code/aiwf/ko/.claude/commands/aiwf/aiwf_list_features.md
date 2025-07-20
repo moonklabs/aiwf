@@ -3,7 +3,7 @@
 Feature Ledger 목록을 다양한 필터와 형식으로 조회합니다.
 
 ```bash
-cd .aiwf && node ../claude-code/aiwf/ko/commands/feature-ledger.js list "$@"
+aiwf list-feature
 ```
 
 ## 설명
