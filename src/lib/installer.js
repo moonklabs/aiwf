@@ -219,20 +219,46 @@ async function downloadManifest(languagePath, spinner, msg, debugLog) {
 async function downloadTemplates(languagePath, spinner, msg, debugLog) {
   try {
     logWithSpinner(spinner, msg.downloadingTemplates, debugLog);
+    
+    // .aiwf 전체 디렉토리를 동적으로 다운로드
+    logWithSpinner(spinner, `Downloading .aiwf directory structure...`, debugLog);
     await downloadDirectory(
-      `${GITHUB_CONTENT_PREFIX}/${languagePath}/.aiwf/98_PROMPTS`,
-      AIWF_DIRS.PROMPTS,
+      `${GITHUB_CONTENT_PREFIX}/${languagePath}/.aiwf`,
+      AIWF_DIRS.ROOT,
       spinner,
-      msg
+      msg,
+      languagePath,
+      true // useDynamicFetch = true
     );
-    await downloadDirectory(
-      `${GITHUB_CONTENT_PREFIX}/${languagePath}/.aiwf/99_TEMPLATES`,
-      AIWF_DIRS.TEMPLATES,
-      spinner,
-      msg
-    );
+    
+    logWithSpinner(spinner, `Successfully downloaded .aiwf directory`, debugLog);
   } catch (error) {
-    logWithSpinner(spinner, msg.templatesNotFound, debugLog);
+    logWithSpinner(spinner, `Error downloading .aiwf: ${error.message}`, debugLog);
+    
+    // Fallback: 개별 디렉토리 다운로드 시도
+    try {
+      logWithSpinner(spinner, `Trying individual directory downloads...`, debugLog);
+      
+      await downloadDirectory(
+        `${GITHUB_CONTENT_PREFIX}/${languagePath}/.aiwf/98_PROMPTS`,
+        AIWF_DIRS.PROMPTS,
+        spinner,
+        msg,
+        languagePath,
+        true
+      );
+      
+      await downloadDirectory(
+        `${GITHUB_CONTENT_PREFIX}/${languagePath}/.aiwf/99_TEMPLATES`,
+        AIWF_DIRS.TEMPLATES,
+        spinner,
+        msg,
+        languagePath,
+        true
+      );
+    } catch (fallbackError) {
+      logWithSpinner(spinner, msg.templatesNotFound, debugLog);
+    }
   }
 }
 
@@ -282,7 +308,8 @@ async function updateCommands(languagePath, spinner, msg, debugLog) {
       TOOL_DIRS.CLAUDE_COMMANDS,
       spinner,
       msg,
-      languagePath
+      languagePath,
+      false // commands는 기존 방식 유지 (파일 리스트 사용)
     );
   } catch (error) {
     logWithSpinner(spinner, msg.commandsNotFound, debugLog);
