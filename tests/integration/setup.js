@@ -39,11 +39,14 @@ export const testUtils = {
     const dirs = [
       '00_PROJECT_MANIFEST.md',
       '01_PROJECT',
+      '01_PROJECT_DOCS',
       '02_REQUIREMENTS', 
       '03_SPRINTS',
       '04_GENERAL_TASKS',
       '05_DOCUMENTATION',
+      '05_TEMPLATES',
       '06_FEATURE_LEDGERS',
+      '07_AI_PERSONAS',
       '07_BUG_REPORTS',
       '08_ADR',
       '09_AI_TOOLS',
@@ -149,6 +152,14 @@ export const testFixtures = {
   },
 
   persona: {
+    id: 'architect',
+    name: 'Software Architect',
+    description: 'AI 페르소나 for software architecture',
+    context: 'You are an expert software architect...',
+    commands: ['design', 'review', 'optimize']
+  },
+
+  aiPersona: {
     id: 'architect',
     name: 'Software Architect',
     description: 'AI 페르소나 for software architecture',
