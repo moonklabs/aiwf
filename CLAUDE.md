@@ -20,17 +20,31 @@ The AIWF project is organized as follows:
 
 ```
 aiwf/
+├── src/                  # Main source code directory
+│   ├── cli/             # CLI interface modules
+│   │   ├── index.js     # Main CLI entry point
+│   │   └── language-cli.js # Language management CLI
+│   ├── commands/        # AIWF command implementations
+│   │   ├── ai-tool.js   # AI tool integrations
+│   │   ├── compress.js  # Context compression
+│   │   ├── create-project.js # Project creation
+│   │   ├── evaluate.js  # AI response evaluation
+│   │   ├── feature.js   # Feature tracking
+│   │   ├── persona.js   # AI persona management
+│   │   └── token.js     # Token usage monitoring
+│   ├── lib/             # Core library modules
+│   │   ├── resource-loader.js # Resource management system
+│   │   ├── installer.js # AIWF installation
+│   │   └── resources/   # Bundled resources for NPM distribution
+│   │       ├── personas/    # AI persona definitions
+│   │       ├── templates/   # Project templates
+│   │       ├── commands/    # Command implementations
+│   │       └── utils/       # Utility modules
 ├── ai-tools/             # AI tool-specific configurations
 │   ├── claude-code/      # Claude Code specific settings
 │   ├── cursor/           # Cursor AI integration
 │   ├── windsurf/        # Windsurf integration
 │   └── github-copilot/   # GitHub Copilot integration
-├── commands/             # AIWF command implementations
-│   ├── ai-persona.js     # AI persona management
-│   ├── compress-context.js # Context compression
-│   ├── evaluate.js       # Evaluation functionality
-│   ├── feature-ledger.js # Feature tracking
-│   └── token-tracking.js # Token usage monitoring
 ├── config/               # Configuration files
 │   ├── commit-patterns.js # Git commit patterns
 │   └── language.json     # Language settings
@@ -41,20 +55,14 @@ aiwf/
 ├── hooks/                # Git hooks and installation scripts
 │   ├── install-hooks.sh  # Hook installation script
 │   └── post-commit       # Post-commit hook
-├── lib/                  # Core library modules
-├── personas/             # AI persona definitions and knowledge bases
-├── rules/                # Development rules and guidelines
-│   ├── global/          # Global development rules
-│   └── manual/          # Manual operation guides
-├── scripts/              # Build and utility scripts
-├── templates/            # Project templates
+├── templates/            # Project templates (development)
 │   ├── api-server/      # Express.js API server template
 │   ├── npm-library/     # NPM library template
 │   └── web-app/         # React web app template
 ├── tests/                # Test suites
 │   ├── integration/      # Integration tests
 │   └── unit/            # Unit tests
-├── utils/                # Utility modules
+├── utils/                # Utility modules (development)
 ├── package.json          # NPM package configuration
 ├── CLAUDE.md            # This file - Claude Code guidance
 └── README.md            # Project documentation
@@ -75,19 +83,37 @@ Each tool directory includes:
 - `template/`: Template files for that specific AI tool
 - `README.md`: Documentation for the integration
 
+## Resource Management System
+
+AIWF now uses a unified resource management system to ensure compatibility for NPM-installed users:
+
+### ResourceLoader Module
+The `src/lib/resource-loader.js` module manages resources for both development and production environments:
+
+- **Bundled Resources**: Resources packaged with NPM installation (`src/lib/resources/`)
+- **User Resources**: User-specific resources in `~/.aiwf/`
+- **Priority System**: User resources override bundled resources when available
+
+### Key Features
+- Dynamic resource loading from multiple sources
+- Template management for project creation
+- Persona definitions and knowledge bases
+- Utility functions and command implementations
+- Seamless fallback from user to bundled resources
+
 ## Commands Directory
 
-The `commands/` directory contains all AIWF command implementations:
+The `src/commands/` directory contains all AIWF command implementations:
 
-- **ai-persona.js**: Manages AI personas and their behaviors
-- **compress-context.js**: Compresses context to optimize token usage
-- **evaluate.js**: Evaluates code quality and AI responses
-- **feature-ledger.js**: Tracks features and their development status
-- **feature-commit-report.js**: Generates reports from git commits
-- **persona-context-apply.js**: Applies persona contexts to AI interactions
-- **scan-git-history.js**: Analyzes git history for insights
-- **sync-feature-commits.js**: Synchronizes feature commits with ledger
-- **token-tracking.js**: Monitors and reports token usage
+- **ai-tool.js**: Manages AI tool integrations
+- **compress.js**: Compresses context to optimize token usage
+- **create-project.js**: Creates new AIWF projects from templates
+- **evaluate.js**: Evaluates AI responses and code quality
+- **feature.js**: Tracks features and their development status
+- **persona.js**: Manages AI personas and their behaviors
+- **token.js**: Monitors and reports token usage
+
+All commands use the ResourceLoader system to access bundled resources, ensuring they work in both development and installed environments.
 
 ## Templates Directory
 
@@ -157,7 +183,42 @@ The `utils/` directory contains utility modules for various AIWF features:
   - `aiwf` - Main CLI command
   - `aiwf-lang` - Language management CLI
 
-### Available Scripts
+### Available Commands
+
+AIWF provides a comprehensive set of CLI commands:
+
+### Core Commands
+- `aiwf install` - Install AIWF framework in current project
+- `aiwf create-project` - Create a new AIWF project from templates
+- `aiwf compress [mode] [path]` - Compress context for token optimization
+- `aiwf feature <subcommand>` - Manage feature development tracking
+- `aiwf token <subcommand>` - Monitor and manage token usage
+- `aiwf evaluate <subcommand>` - Evaluate AI responses and code quality
+- `aiwf persona <subcommand>` - Manage AI personas
+- `aiwf lang <subcommand>` - Language settings management
+
+### Feature Commands
+- `aiwf feature list` - List all features
+- `aiwf feature create <name> [description]` - Create new feature
+- `aiwf feature update <id> <status>` - Update feature status
+- `aiwf feature status [id]` - Show feature status
+- `aiwf feature sync` - Sync with git commits
+
+### Token Commands
+- `aiwf token status` - Show token usage statistics
+- `aiwf token report [period]` - Generate usage reports
+- `aiwf token track <input> <output>` - Manually record token usage
+- `aiwf token limit <type> <value>` - Set usage limits
+- `aiwf token reset` - Reset tracking data
+
+### Evaluation Commands
+- `aiwf evaluate response <file>` - Evaluate AI response quality
+- `aiwf evaluate code <file>` - Evaluate code quality
+- `aiwf evaluate persona <file> <persona>` - Check persona appropriateness
+- `aiwf evaluate report` - Generate evaluation reports
+- `aiwf evaluate criteria` - Show evaluation criteria
+
+## Available Scripts
 - `npm test` - Run Jest tests with ES module support
 - `npm run lang:status` - Check language settings
 - `npm run lang:set` - Set language preference

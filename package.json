@@ -39,6 +39,27 @@
     "engines": {
         "node": ">=14.0.0"
     },
+    "files": [
+        "src/",
+        "docs/",
+        "config/",
+        "utils/",
+        "lib/",
+        "commands/",
+        "templates/",
+        "rules/",
+        "personas/",
+        "hooks/",
+        "scripts/",
+        "ai-tools/",
+        "feature-ledger/",
+        "index.js",
+        "README.md",
+        "README.ko.md",
+        "CHANGELOG.md",
+        "GUIDE.md",
+        "GUIDE.ko.md"
+    ],
     "dependencies": {
         "chalk": "^5.3.0",
         "commander": "^11.1.0",
