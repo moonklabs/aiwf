@@ -3,6 +3,13 @@ import { createWriteStream } from 'fs';
 import fs from 'fs/promises';
 import { pipeline } from 'stream/promises';
 import path from 'path';
+import {
+  COMMAND_FILES,
+  GLOBAL_RULES_FILES,
+  MANUAL_RULES_FILES,
+  TEMPLATE_FILES,
+  PROMPT_FILES
+} from '../config/file-lists.js';
 
 const GITHUB_RAW_URL = 'https://raw.githubusercontent.com/moonklabs/aiwf/main';
 const GITHUB_CONTENT_PREFIX = 'claude-code/aiwf';
@@ -10,78 +17,6 @@ const GITHUB_API_URL = 'https://api.github.com/repos/moonklabs/aiwf/contents';
 const GITHUB_OWNER = 'moonklabs';
 const GITHUB_REPO = 'aiwf';
 const GITHUB_BRANCH = 'main';
-
-// Pre-defined list of command files
-const COMMAND_FILES = [
-  'aiwf_changelog.md',
-  'aiwf_code_review.md',
-  'aiwf_commit.md',
-  'aiwf_compress_aggressive_persona.md',
-  'aiwf_compress_context.md',
-  'aiwf_compress_minimal_persona.md',
-  'aiwf_compress_stats.md',
-  'aiwf_compress_with_persona.md',
-  'aiwf_create_feature_ledger.md',
-  'aiwf_create_general_task.md',
-  'aiwf_create_milestone_plan.md',
-  'aiwf_create_prd.md',
-  'aiwf_create_sprint_tasks.md',
-  'aiwf_create_sprints_from_milestone.md',
-  'aiwf_default_mode.md',
-  'aiwf_discuss_review.md',
-  'aiwf_do_task.md',
-  'aiwf_docs.md',
-  'aiwf_evaluate.md',
-  'aiwf_get_feature_details.md',
-  'aiwf_infinite.md',
-  'aiwf_initialize.md',
-  'aiwf_issue_create.md',
-  'aiwf_link_feature_to_milestone.md',
-  'aiwf_list_features.md',
-  'aiwf_mermaid.md',
-  'aiwf_persona_architect.md',
-  'aiwf_persona_backend.md',
-  'aiwf_persona_data_analyst.md',
-  'aiwf_persona_frontend.md',
-  'aiwf_persona_security.md',
-  'aiwf_persona_status.md',
-  'aiwf_pr_create.md',
-  'aiwf_prime.md',
-  'aiwf_project_review.md',
-  'aiwf_switch_language.md',
-  'aiwf_test.md',
-  'aiwf_testing_review.md',
-  'aiwf_tm-run-all-subtask.md',
-  'aiwf_ultrathink_code_advanced.md',
-  'aiwf_ultrathink_code_basic.md',
-  'aiwf_ultrathink_general.md',
-  'aiwf_update_docs_kr.md',
-  'aiwf_update_feature_status.md',
-  'aiwf_yolo.md'
-];
-
-// Pre-defined list of global rules files
-const GLOBAL_RULES_FILES = [
-  'code-style-guide.md',
-  'coding-principles.md',
-  'development-process.md',
-  'global-rules.md'
-];
-
-// Pre-defined list of manual rules files
-const MANUAL_RULES_FILES = [
-  'generate-plan-docs.md'
-];
-
-// Pre-defined list of template files (these might not exist in the repo)
-const TEMPLATE_FILES = [
-  // Add template files here when they are available
-];
-
-// Pre-defined list of prompt files (these might not exist in the repo)
-const PROMPT_FILES = [
-  // Add prompt files here when they are available
-];
 
 /**
  * Fetch content from URL
