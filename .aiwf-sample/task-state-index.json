@@ -1,0 +1,174 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2025-01-22T15:30:00Z",
+  "last_updated_by": "aiwf-state-update",
+  
+  "project_info": {
+    "name": "Sample AIWF Project",
+    "current_milestone": "M01",
+    "current_sprint": "S02",
+    "phase": "implementation"
+  },
+  
+  "current_focus": {
+    "primary_task": "T03_S02_M01",
+    "secondary_tasks": ["T04_S02_M01"],
+    "blocked_tasks": [],
+    "last_worked_on": "T03_S02_M01",
+    "session_notes": "Implementing user authentication API endpoints"
+  },
+  
+  "tasks": {
+    "T01_S01_M01": {
+      "id": "T01_S01_M01",
+      "title": "프로젝트 초기 설정",
+      "status": "completed",
+      "sprint": "S01",
+      "milestone": "M01",
+      "location": ".aiwf/03_SPRINTS/S01_M01_Setup/T01_S01_M01_initial_setup.md",
+      "created": "2025-01-15T10:00:00Z",
+      "started": "2025-01-15T14:00:00Z",
+      "completed": "2025-01-16T18:00:00Z",
+      "actual_hours": 8,
+      "git_branch": "feature/initial-setup",
+      "commits": ["abc123", "def456"],
+      "tags": ["setup", "configuration"]
+    },
+    "T02_S01_M01": {
+      "id": "T02_S01_M01",
+      "title": "데이터베이스 스키마 설계",
+      "status": "completed",
+      "sprint": "S01",
+      "milestone": "M01",
+      "location": ".aiwf/03_SPRINTS/S01_M01_Setup/T02_S01_M01_db_schema.md",
+      "created": "2025-01-16T09:00:00Z",
+      "started": "2025-01-17T10:00:00Z",
+      "completed": "2025-01-18T17:00:00Z",
+      "actual_hours": 12,
+      "dependencies": ["T01_S01_M01"],
+      "outputs": ["database/schema.sql", "docs/db-design.md"],
+      "tags": ["database", "architecture"]
+    },
+    "T03_S02_M01": {
+      "id": "T03_S02_M01",
+      "title": "사용자 인증 API 구현",
+      "status": "in_progress",
+      "sprint": "S02",
+      "milestone": "M01",
+      "location": ".aiwf/03_SPRINTS/S02_M01_Core_Features/T03_S02_M01_user_auth_api.md",
+      "created": "2025-01-20T09:00:00Z",
+      "started": "2025-01-21T10:00:00Z",
+      "estimated_hours": 16,
+      "actual_hours": 6,
+      "progress_percentage": 40,
+      "progress_notes": "Login endpoint 완료, register endpoint 진행 중",
+      "dependencies": ["T02_S01_M01"],
+      "git_branch": "feature/user-auth",
+      "current_focus": "POST /api/auth/register 엔드포인트 구현",
+      "next_steps": [
+        "회원가입 유효성 검사 추가",
+        "비밀번호 암호화 구현",
+        "JWT 토큰 발급 로직"
+      ],
+      "blockers": [],
+      "tags": ["api", "authentication", "security"]
+    },
+    "T04_S02_M01": {
+      "id": "T04_S02_M01",
+      "title": "프론트엔드 인증 통합",
+      "status": "pending",
+      "sprint": "S02",
+      "milestone": "M01",
+      "location": ".aiwf/03_SPRINTS/S02_M01_Core_Features/T04_S02_M01_frontend_auth.md",
+      "created": "2025-01-20T09:00:00Z",
+      "estimated_hours": 12,
+      "dependencies": ["T03_S02_M01"],
+      "blocked_by": ["T03_S02_M01"],
+      "prerequisites": [
+        "API 엔드포인트 완성",
+        "API 문서 작성"
+      ],
+      "tags": ["frontend", "integration"]
+    },
+    "T05_S02_M01": {
+      "id": "T05_S02_M01",
+      "title": "인증 시스템 테스트",
+      "status": "pending",
+      "sprint": "S02",
+      "milestone": "M01",
+      "location": ".aiwf/03_SPRINTS/S02_M01_Core_Features/T05_S02_M01_auth_tests.md",
+      "created": "2025-01-20T09:00:00Z",
+      "estimated_hours": 8,
+      "dependencies": ["T03_S02_M01", "T04_S02_M01"],
+      "tags": ["testing", "qa"]
+    }
+  },
+  
+  "sprint_summary": {
+    "S01": {
+      "name": "프로젝트 설정",
+      "status": "completed",
+      "total_tasks": 2,
+      "completed_tasks": 2,
+      "completion_rate": 100
+    },
+    "S02": {
+      "name": "핵심 기능 개발",
+      "status": "active",
+      "total_tasks": 3,
+      "completed_tasks": 0,
+      "in_progress_tasks": 1,
+      "pending_tasks": 2,
+      "completion_rate": 13.3,
+      "estimated_completion": "2025-01-28"
+    }
+  },
+  
+  "next_actions": [
+    {
+      "priority": "high",
+      "action": "T03 register endpoint 유효성 검사 구현",
+      "task_id": "T03_S02_M01",
+      "estimated_time": "2 hours"
+    },
+    {
+      "priority": "medium",
+      "action": "T03 단위 테스트 작성",
+      "task_id": "T03_S02_M01",
+      "estimated_time": "3 hours"
+    },
+    {
+      "priority": "low",
+      "action": "T04 준비 - API 문서 검토",
+      "task_id": "T04_S02_M01",
+      "estimated_time": "1 hour"
+    }
+  ],
+  
+  "ai_context": {
+    "last_session": "2025-01-22T15:00:00Z",
+    "session_count": 12,
+    "learned_patterns": {
+      "preferred_testing": "jest with supertest",
+      "code_style": "eslint-airbnb",
+      "commit_pattern": "conventional-commits"
+    },
+    "working_hours": {
+      "daily_average": 6,
+      "most_productive": "10:00-12:00"
+    }
+  },
+  
+  "metrics": {
+    "total_tasks": 5,
+    "completed_tasks": 2,
+    "in_progress_tasks": 1,
+    "pending_tasks": 2,
+    "blocked_tasks": 0,
+    "overall_progress": 40,
+    "velocity": {
+      "last_week": 2,
+      "average": 1.5
+    }
+  }
+}

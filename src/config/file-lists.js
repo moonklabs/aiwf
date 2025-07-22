@@ -5,7 +5,7 @@
  * ⚠️  이 파일은 자동 생성됩니다. 수동으로 편집하지 마세요!
  * 업데이트하려면: npm run update:file-lists
  * 
- * Generated at: 2025-07-22T12:42:26.526Z
+ * Generated at: 2025-07-22T15:38:45.909Z
  */
 
 // Claude Code 명령어 파일 목록 (한국어와 영어 공통)
@@ -13,6 +13,7 @@ export const COMMAND_FILES = [
   'aiwf_add_sprint_task.md',
   'aiwf_analyze_milestone.md',
   'aiwf_changelog.md',
+  'aiwf_check_state.md',
   'aiwf_code_review.md',
   'aiwf_commit.md',
   'aiwf_compress_aggressive_persona.md',
@@ -52,6 +53,7 @@ export const COMMAND_FILES = [
   'aiwf_ultrathink_code_basic.md',
   'aiwf_ultrathink_general.md',
   'aiwf_update_docs.md',
+  'aiwf_update_state.md',
   'aiwf_yolo.md'
 ];
 

@@ -11,6 +11,7 @@ import CompressCommand from '../commands/compress.js';
 import TokenCommand from '../commands/token.js';
 import EvaluateCommand from '../commands/evaluate.js';
 import { createProject } from '../commands/create-project.js';
+import StateCommand from '../commands/state.js';
 
 // Parse version from package.json
 import { readFileSync } from 'fs';
@@ -339,6 +340,63 @@ evaluate
   .action(async () => {
     const evaluateCmd = new EvaluateCommand();
     await evaluateCmd.execute(['criteria']);
+  });
+
+// State management commands
+const state = program.command('state');
+state.description('Manage task state index / 태스크 상태 인덱스 관리');
+
+state
+  .command('init')
+  .description('Initialize state index / 상태 인덱스 초기화')
+  .action(async () => {
+    const stateCmd = new StateCommand();
+    await stateCmd.execute(['init']);
+  });
+
+state
+  .command('update')
+  .alias('u')
+  .description('Update state index / 상태 인덱스 업데이트')
+  .action(async () => {
+    const stateCmd = new StateCommand();
+    await stateCmd.execute(['update']);
+  });
+
+state
+  .command('show')
+  .alias('s')
+  .description('Show current state / 현재 상태 표시')
+  .action(async () => {
+    const stateCmd = new StateCommand();
+    await stateCmd.execute(['show']);
+  });
+
+state
+  .command('focus <task-id>')
+  .alias('f')
+  .description('Focus on a task / 태스크에 포커스')
+  .action(async (taskId) => {
+    const stateCmd = new StateCommand();
+    await stateCmd.execute(['focus', taskId]);
+  });
+
+state
+  .command('complete <task-id>')
+  .alias('c')
+  .description('Mark task as completed / 태스크 완료 처리')
+  .action(async (taskId) => {
+    const stateCmd = new StateCommand();
+    await stateCmd.execute(['complete', taskId]);
+  });
+
+state
+  .command('next')
+  .alias('n')
+  .description('Suggest next actions / 다음 작업 제안')
+  .action(async () => {
+    const stateCmd = new StateCommand();
+    await stateCmd.execute(['next']);
   });
 
 // Parse command line arguments
