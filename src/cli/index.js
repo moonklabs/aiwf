@@ -8,7 +8,6 @@ import PersonaCommand from '../commands/persona.js';
 import { CacheCLI } from './cache-cli.js';
 import { addTaskToSprint } from '../commands/sprint-task.js';
 import CompressCommand from '../commands/compress.js';
-import FeatureCommand from '../commands/feature.js';
 import TokenCommand from '../commands/token.js';
 import EvaluateCommand from '../commands/evaluate.js';
 import { createProject } from '../commands/create-project.js';
@@ -250,55 +249,6 @@ program
     await compressCmd.execute(args);
   });
 
-// Feature ledger management commands
-const feature = program.command('feature');
-feature.description('Manage feature development tracking / 기능 개발 추적 관리');
-
-feature
-  .command('list')
-  .alias('ls')
-  .description('List all features / 모든 기능 목록')
-  .action(async () => {
-    const featureCmd = new FeatureCommand();
-    await featureCmd.execute(['list']);
-  });
-
-feature
-  .command('create <name> [description...]')
-  .alias('add')
-  .description('Create a new feature / 새 기능 생성')
-  .action(async (name, description) => {
-    const featureCmd = new FeatureCommand();
-    const args = ['create', name];
-    if (description) args.push(...description);
-    await featureCmd.execute(args);
-  });
-
-feature
-  .command('update <featureId> <status>')
-  .description('Update feature status / 기능 상태 업데이트')
-  .action(async (featureId, status) => {
-    const featureCmd = new FeatureCommand();
-    await featureCmd.execute(['update', featureId, status]);
-  });
-
-feature
-  .command('status [featureId]')
-  .description('Show feature status / 기능 상태 표시')
-  .action(async (featureId) => {
-    const featureCmd = new FeatureCommand();
-    const args = ['status'];
-    if (featureId) args.push(featureId);
-    await featureCmd.execute(args);
-  });
-
-feature
-  .command('sync')
-  .description('Sync with git commits / Git 커밋과 동기화')
-  .action(async () => {
-    const featureCmd = new FeatureCommand();
-    await featureCmd.execute(['sync']);
-  });
 
 // Token tracking commands
 const token = program.command('token');

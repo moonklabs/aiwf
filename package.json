@@ -13,7 +13,10 @@
         "lang:status": "node src/cli/index.js lang status",
         "lang:set": "node src/cli/index.js lang set",
         "lang:reset": "node src/cli/index.js lang reset",
-        "validate:commands": "node scripts/validate-commands.js"
+        "validate:commands": "node scripts/validate-commands.js",
+        "update:file-lists": "node scripts/update-file-lists.js",
+        "update:file-lists:dry-run": "node scripts/update-file-lists.js --dry-run",
+        "update:file-lists:verbose": "node scripts/update-file-lists.js --verbose"
     },
     "keywords": [
         "aiwf",

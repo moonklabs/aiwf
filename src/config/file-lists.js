@@ -1,6 +1,11 @@
 /**
  * AIWF 설치 시 다운로드할 파일 목록들
  * 이 파일은 GitHub에서 다운로드할 파일들의 사전 정의된 목록을 포함합니다.
+ * 
+ * ⚠️  이 파일은 자동 생성됩니다. 수동으로 편집하지 마세요!
+ * 업데이트하려면: npm run update:file-lists
+ * 
+ * Generated at: 2025-07-22T10:58:25.564Z
  */
 
 // Claude Code 명령어 파일 목록 (한국어와 영어 공통)
@@ -14,7 +19,6 @@ export const COMMAND_FILES = [
   'aiwf_compress_minimal_persona.md',
   'aiwf_compress_stats.md',
   'aiwf_compress_with_persona.md',
-  'aiwf_create_feature_ledger.md',
   'aiwf_create_general_task.md',
   'aiwf_create_milestone_plan.md',
   'aiwf_create_prd.md',
@@ -26,12 +30,9 @@ export const COMMAND_FILES = [
   'aiwf_do_task.md',
   'aiwf_docs.md',
   'aiwf_evaluate.md',
-  'aiwf_get_feature_details.md',
   'aiwf_infinite.md',
   'aiwf_initialize.md',
   'aiwf_issue_create.md',
-  'aiwf_link_feature_to_milestone.md',
-  'aiwf_list_features.md',
   'aiwf_mermaid.md',
   'aiwf_persona_architect.md',
   'aiwf_persona_backend.md',
@@ -42,7 +43,6 @@ export const COMMAND_FILES = [
   'aiwf_pr_create.md',
   'aiwf_prime.md',
   'aiwf_project_review.md',
-  'aiwf_switch_language.md',
   'aiwf_test.md',
   'aiwf_testing_review.md',
   'aiwf_tm-run-all-subtask.md',
@@ -50,7 +50,6 @@ export const COMMAND_FILES = [
   'aiwf_ultrathink_code_basic.md',
   'aiwf_ultrathink_general.md',
   'aiwf_update_docs.md',
-  'aiwf_update_feature_status.md',
   'aiwf_yolo.md'
 ];
 
