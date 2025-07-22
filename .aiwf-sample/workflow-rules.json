@@ -1,0 +1,263 @@
+{
+  "version": "1.0.0",
+  "description": "AIWF 워크플로우 규칙 정의",
+  "last_updated": "2025-01-22T17:00:00Z",
+  
+  "workflow_rules": {
+    "milestone_rules": {
+      "completion_threshold": 100,
+      "auto_advance": false,
+      "require_review": true,
+      "rules": [
+        "모든 Sprint가 완료되어야 Milestone 완료",
+        "Milestone 목표가 달성되어야 완료",
+        "다음 Milestone은 수동으로 시작",
+        "Milestone 간 의존성 확인 필수"
+      ]
+    },
+    
+    "sprint_rules": {
+      "completion_threshold": 100,
+      "auto_advance": true,
+      "next_sprint_threshold": 80,
+      "rules": [
+        "순차적 진행 (S01 → S02 → S03)",
+        "이전 Sprint 80% 완료 시 다음 Sprint 준비 가능",
+        "Sprint 100% 완료 시 자동으로 다음 Sprint 활성화",
+        "동일 Milestone 내에서만 Sprint 전환",
+        "필수 Task는 반드시 완료되어야 함"
+      ]
+    },
+    
+    "task_rules": {
+      "parallel_execution": true,
+      "dependency_check": true,
+      "auto_start": true,
+      "rules": [
+        "의존성이 해결된 Task만 시작 가능",
+        "같은 Sprint 내 Task만 동시 실행",
+        "우선순위 높은 Task 먼저 실행",
+        "차단된 Task는 해결 후 재개",
+        "Task 완료 시 의존 Task 자동 활성화 검토"
+      ]
+    }
+  },
+  
+  "state_transitions": {
+    "task_states": {
+      "pending": {
+        "allowed_next": ["assigned", "cancelled"],
+        "conditions": ["Sprint가 활성 상태", "의존성 해결됨"]
+      },
+      "assigned": {
+        "allowed_next": ["in_progress", "pending"],
+        "conditions": ["담당자 할당됨"]
+      },
+      "in_progress": {
+        "allowed_next": ["review", "blocked", "paused"],
+        "conditions": ["작업 시작됨"]
+      },
+      "review": {
+        "allowed_next": ["completed", "in_progress"],
+        "conditions": ["구현 완료", "테스트 통과"]
+      },
+      "completed": {
+        "allowed_next": ["archived"],
+        "conditions": ["리뷰 승인", "문서 업데이트"]
+      },
+      "blocked": {
+        "allowed_next": ["in_progress", "cancelled"],
+        "conditions": ["블로킹 이슈 해결됨"]
+      }
+    },
+    
+    "sprint_states": {
+      "planning": {
+        "allowed_next": ["active"],
+        "conditions": ["Task 생성 완료", "목표 설정됨"]
+      },
+      "active": {
+        "allowed_next": ["completed", "paused"],
+        "conditions": ["이전 Sprint 80% 이상 완료"]
+      },
+      "completed": {
+        "allowed_next": ["archived"],
+        "conditions": ["모든 필수 Task 완료", "Sprint 리뷰 완료"]
+      }
+    },
+    
+    "milestone_states": {
+      "planning": {
+        "allowed_next": ["active"],
+        "conditions": ["Sprint 계획 완료", "목표 명확화"]
+      },
+      "active": {
+        "allowed_next": ["completed", "on_hold"],
+        "conditions": ["프로젝트 시작됨"]
+      },
+      "completed": {
+        "allowed_next": ["archived"],
+        "conditions": ["모든 Sprint 완료", "목표 달성", "최종 리뷰 완료"]
+      }
+    }
+  },
+  
+  "priority_matrix": {
+    "calculation": "Score = (Priority × 3) + (Dependencies × 2) + (Sprint_Goal × 2) + (Urgency × 1)",
+    "factors": {
+      "priority": {
+        "high": 3,
+        "medium": 2,
+        "low": 1
+      },
+      "dependencies": {
+        "blocking_others": 3,
+        "independent": 2,
+        "dependent": 1
+      },
+      "sprint_goal": {
+        "critical": 3,
+        "important": 2,
+        "nice_to_have": 1
+      },
+      "urgency": {
+        "immediate": 3,
+        "soon": 2,
+        "later": 1
+      }
+    }
+  },
+  
+  "workflow_patterns": {
+    "standard_flow": {
+      "name": "표준 개발 플로우",
+      "sequence": [
+        "requirement_analysis",
+        "design",
+        "implementation",
+        "testing",
+        "review",
+        "deployment"
+      ]
+    },
+    "fast_track": {
+      "name": "빠른 반복 플로우",
+      "sequence": [
+        "prototype",
+        "feedback",
+        "iterate",
+        "finalize"
+      ]
+    },
+    "bugfix_flow": {
+      "name": "버그 수정 플로우",
+      "sequence": [
+        "reproduce",
+        "analyze",
+        "fix",
+        "verify",
+        "deploy"
+      ]
+    }
+  },
+  
+  "automation_rules": {
+    "task_completion": {
+      "triggers": ["task.status = completed"],
+      "actions": [
+        "update_sprint_progress",
+        "check_dependent_tasks",
+        "update_state_index",
+        "notify_next_assignee"
+      ]
+    },
+    "sprint_completion": {
+      "triggers": ["sprint.progress = 100"],
+      "actions": [
+        "generate_sprint_report",
+        "archive_completed_tasks",
+        "activate_next_sprint",
+        "update_milestone_progress"
+      ]
+    },
+    "milestone_completion": {
+      "triggers": ["milestone.progress = 100", "milestone.goals_met = true"],
+      "actions": [
+        "generate_milestone_report",
+        "conduct_retrospective",
+        "prepare_next_milestone",
+        "update_project_status"
+      ]
+    },
+    "blocker_detected": {
+      "triggers": ["task.status = blocked"],
+      "actions": [
+        "log_blocker_reason",
+        "notify_stakeholders",
+        "suggest_alternatives",
+        "escalate_if_critical"
+      ]
+    }
+  },
+  
+  "validation_rules": {
+    "task_validation": [
+      "Task는 반드시 하나의 Sprint에 속해야 함",
+      "Task ID는 T##_S##_M## 형식을 따라야 함",
+      "의존성은 같은 Milestone 내에서만 가능",
+      "우선순위는 필수 필드"
+    ],
+    "sprint_validation": [
+      "Sprint는 반드시 하나의 Milestone에 속해야 함",
+      "Sprint ID는 S##_M## 형식을 따라야 함",
+      "최소 1개 이상의 Task 필요",
+      "목표와 완료 조건 명시 필수"
+    ],
+    "milestone_validation": [
+      "Milestone ID는 M## 형식을 따라야 함",
+      "명확한 비즈니스 목표 필요",
+      "최소 1개 이상의 Sprint 필요",
+      "성공 지표 정의 필수"
+    ]
+  },
+  
+  "decision_tree": {
+    "next_action_logic": {
+      "1_check_current_task": {
+        "condition": "현재 진행 중인 Task가 있는가?",
+        "true": "해당 Task 계속 진행",
+        "false": "2_check_blocked_tasks"
+      },
+      "2_check_blocked_tasks": {
+        "condition": "차단된 Task가 있는가?",
+        "true": "차단 해결 방안 모색",
+        "false": "3_check_pending_tasks"
+      },
+      "3_check_pending_tasks": {
+        "condition": "현재 Sprint에 대기 중 Task가 있는가?",
+        "true": "4_check_dependencies",
+        "false": "5_check_sprint_completion"
+      },
+      "4_check_dependencies": {
+        "condition": "의존성이 해결된 Task가 있는가?",
+        "true": "우선순위 높은 Task 시작",
+        "false": "의존성 해결 필요"
+      },
+      "5_check_sprint_completion": {
+        "condition": "현재 Sprint가 완료되었는가?",
+        "true": "6_prepare_next_sprint",
+        "false": "Sprint 완료 작업 필요"
+      },
+      "6_prepare_next_sprint": {
+        "condition": "다음 Sprint가 준비되었는가?",
+        "true": "다음 Sprint 활성화",
+        "false": "Sprint 계획 수립 필요"
+      },
+      "7_check_milestone_completion": {
+        "condition": "현재 Milestone이 완료되었는가?",
+        "true": "Milestone 리뷰 및 다음 준비",
+        "false": "Milestone 목표 달성 필요"
+      }
+    }
+  }
+}
