@@ -41,12 +41,19 @@
 시작하기 전에:
 
 1. **시간 기록**: 시스템에서 현재 datetime 스탬프를 가져와서 기억
-2. **테스트 기준선**: test.md 명령(@.claude/commands/aiwf/aiwf_test.md)을 사용하여 깨끗한 기준선 확인
+2. **상태 인덱스 초기화**:
+   ```bash
+   # 상태 인덱스 초기화 또는 업데이트
+   aiwf state update
+   # 현재 워크플로우 컨텍스트 확인
+   aiwf state show
+   ```
+3. **테스트 기준선**: test.md 명령(@.claude/commands/aiwf/aiwf_test.md)을 사용하여 깨끗한 기준선 확인
    - **만약** 실패율이 10%를 초과하면 수정 가능성 평가 후 진행
-3. **Git 상태 확인**: 깨끗한 작업 디렉토리 보장
+4. **Git 상태 확인**: 깨끗한 작업 디렉토리 보장
    - **만약** git 상태가 깨끗하지 않다면 기록 후 진행
-4. **마일스톤 변경 감지**: 이전 실행과 비교하여 마일스톤 변경 확인
-5. **인수 분석**: <$ARGUMENTS> 고려하여 실행 모드 결정
+5. **마일스톤 변경 감지**: 이전 실행과 비교하여 마일스톤 변경 확인
+6. **인수 분석**: <$ARGUMENTS> 고려하여 실행 모드 결정
 
 ## 마일스톤 변경 감지 및 처리
 
@@ -72,130 +79,422 @@
 
 5. **실행 시작**: `### 열린 작업 찾기`로 이동
 
-### 열린 작업 찾기
+### 워크플로우 기반 지능적 작업 찾기
 
-모드에 따라 실행:
+**1단계: 워크플로우 상태 분석**
+```bash
+# 워크플로우 검증 실행
+aiwf state validate
+
+# 다음 작업 추천 받기
+aiwf state next
+```
+
+**2단계: 모드별 실행 전략**
 
 **인수에 스프린트 ID가 제공된 경우:**
-
-- .aiwf/03_SPRINTS/{sprint_id}/로 이동
-- 스프린트에 태스크가 있는지 확인 (T\*.md 파일)
-- 태스크가 존재하지 않는 경우:
-  - 스프린트 메타 파일 확인
-  - 메타가 존재하면: ### 스프린트 태스크 생성으로 이동
-  - 메타가 없으면: 오류로 종료 - 스프린트가 존재하지 않음
-- 태스크가 존재하면: 아래 **태스크 선택** 섹션으로 계속
+- 지정된 스프린트 범위 내에서 워크플로우 기반 태스크 선택
+- 스프린트 내 우선순위 순서로 태스크 실행
+- 의존성 확인 후 차단되지 않은 태스크만 선택
 
 **인수에 `sprint-all`이 있는 경우:**
-
-- .aiwf/03_SPRINTS/ 디렉토리의 모든 스프린트 스캔
-- 모든 스프린트의 순서 목록 생성 (S01, S02, S03, ...)
-- 각 스프린트를 순서대로:
-  - 스프린트에 태스크가 있는지 확인, 없으면 생성
-  - 다음으로 이동하기 전에 현재 스프린트의 모든 태스크 실행
-  - 모든 태스크가 완료되면 스프린트를 완료로 표시
-- 모든 스프린트가 100% 완료될 때까지 계속
-- 우선순위: 다음을 시작하기 전에 현재 스프린트를 완전히 완료
+- **적응적 스프린트 관리** 모드
+- 각 스프린트 80% 완료 시 다음 스프린트 동적 생성
+- 워크플로우 규칙 기반 전환 조건 확인
 
 **인수에 `milestone-all`이 있는 경우:**
+- **적응적 마일스톤 관리** 모드  
+- 마일스톤별 워크플로우 규칙 적용
+- 전환 시점에서 자동 리뷰 및 승인 프로세스
 
-- .aiwf/01_MILESTONES/ 디렉토리의 모든 마일스톤 스캔
-- 각 마일스톤을 순서대로:
-  - 이 마일스톤과 관련된 모든 스프린트 식별
-  - 현재 마일스톤과 관련된 모든 스프린트 실행
-  - 각 스프린트의 모든 태스크 실행
-  - 관련된 모든 작업이 완료되면 마일스톤을 완료로 표시
-- 모든 마일스톤이 100% 완료될 때까지 계속
-- 우선순위: 다음을 시작하기 전에 현재 마일스톤을 완전히 완료
+**인수가 없는 경우 (워크플로우 최적화 모드):**
+- **AI 의사결정 엔진** 활용
+- 우선순위 매트릭스 기반 최적 태스크 선택:
+  1. 진행 중인 태스크 (연속성 보장)
+  2. 높은 우선순위 점수 태스크 (80+ 점수)
+  3. 블로킹 해제 효과가 큰 태스크
+  4. 병렬 작업이 가능한 태스크
 
-**인수가 없는 경우 (일반 모드):**
+**3단계: 지능적 태스크 선택 알고리즘**
 
-- 병렬 서브에이전트를 사용하여 확인:
-  - 열린 일반 태스크를 위한 .aiwf/04_GENERAL_TASKS
-  - 현재 활성 스프린트를 위한 .aiwf/00_PROJECT_MANIFEST.md
-  - 메타 파일만 있는 스프린트를 위한 .aiwf/03_SPRINTS/
-- 우선순위 순서:
-  1. 일반 태스크 (열린 것이 있다면)
-  2. 활성 스프린트 태스크 (열린 것이 있다면)
-  3. 태스크 생성이 필요한 스프린트 (발견되면) - 스프린트 순서 유지
+```bash
+# 워크플로우 기반 태스크 추천 로드
+NEXT_ACTIONS=$(aiwf state next --format=json)
+```
 
-**태스크 선택:**
+**선택 우선순위:**
+1. **연속성 우선**: 진행 중인 태스크 (in_progress)
+2. **우선순위 점수**: 70점 이상 high, 40-69점 medium, 40점 미만 low
+3. **의존성 해제**: 다른 태스크를 차단하는 수 (blocks 배열 길이)
+4. **병렬 작업**: 의존성 충돌이 없는 독립적 태스크
 
-- 발견된 태스크에서 완료되지 않은 하나를 선택. 스프린트나 일반 태스크에서 가장 낮은 ID를 선택
-- 이전에 시도한 태스크는 건너뛰기 (OUTPUT LOG 확인)
-- 적합한 태스크를 찾지 못하고 스프린트가 태스크를 필요로 하지 않으면: 우아하게 종료
+**자동 선택 로직:**
+```
+FOR each recommended_action in NEXT_ACTIONS:
+  IF action.priority != 'blocked' AND 
+     action.task_id not in ATTEMPTED_TASKS AND
+     action.score >= MINIMUM_SCORE:
+    SELECT action.task_id
+    BREAK
+```
 
-### 적응적 스프린트 태스크 생성
+**실패 안전장치:**
+- 워크플로우 추천이 없으면 기존 방식으로 폴백
+- 모든 추천 태스크가 차단되면 일반 태스크로 전환
+- 순환 참조나 교착 상태 감지 시 수동 개입 요청
 
-**스프린트 완료 후 다음 스프린트 생성 프로세스:**
+### 워크플로우 기반 적응적 스프린트 관리
 
-1. **현재 코드베이스 분석**:
+**1단계: 스프린트 완료 조건 워크플로우 검증**
+```bash
+# 현재 스프린트 완료율 확인
+aiwf state show | grep "completion_rate"
+
+# 80% 규칙 확인
+aiwf state validate | grep "SPRINT_PREPARATION"
+```
+
+**2단계: 적응적 전환 결정 매트릭스**
+
+**80% 완료 시 (다음 스프린트 준비):**
+1. **현재 스프린트 분석**:
    - 완료된 작업들의 실제 구현 결과 분석
    - 변경된 아키텍처나 설계 결정사항 파악
    - 예상과 다른 구현 결과 식별
+   - **의존성 체인 재분석**: 
+     ```bash
+     aiwf state validate --focus=dependencies
+     ```
 
-2. **다음 스프린트 계획 조정**:
-   - 실제 구현 결과를 반영하여 다음 스프린트 계획 수정
-   - 새로운 의존성이나 전제조건 고려
-   - 우선순위 재조정
+2. **워크플로우 규칙 기반 전환 평가**:
+   - 전환 조건 충족 여부 확인 (transition_rules.sprint_to_sprint)
+   - 리스크 허용도 평가 (ai_behavior.risk_tolerance)
+   - 자동 승인 vs 수동 리뷰 결정
 
-3. **단일 스프린트 생성**:
-   - **중요**: 다음 하나의 스프린트만 생성
-   - **서브에이전트 사용**하여 조정된 계획으로 @.claude/commands/aiwf/aiwf_create_sprint_tasks.md 포함
-   - 생성 완료 후 `### 열린 작업 찾기`로 이동
+3. **지능적 다음 스프린트 계획**:
+   - **AI 의사결정 엔진** 활용:
+     ```bash
+     # 다음 스프린트 우선순위 계산
+     aiwf state next --mode=sprint-planning --current-progress=80
+     ```
+   - 실제 구현 결과를 반영하여 계획 수정
+   - 새로운 의존성이나 전제조건 동적 적용
+   - 블로킹 해제된 태스크 우선순위 재계산
 
-**초기 스프린트 생성 (마일스톤 시작 시):**
-- **오직** 스프린트가 태스크 생성을 필요로 하는 경우에만 실행
-- **서브에이전트 사용**하여 스프린트 ID를 인수로 하여 @.claude/commands/aiwf/aiwf_create_sprint_tasks.md 포함
-- 완료 후 `### 열린 작업 찾기`로 이동
+**3단계: 워크플로우 승인 기반 스프린트 생성**
 
-### 태스크 작업
+**자동 승인 조건** (workflow_rules.transition_rules.sprint_to_sprint):
+- current_80_percent: ✓
+- next_planned: 계획 존재
+- no_critical_blockers: 치명적 차단 없음
+- risk_tolerance: conservative 모드에서 허용 범위
 
-- 이전에 이 태스크를 건드린 적이 있다면 무시하고 다음 태스크로 이동
-- 이전에 수정을 시도하지 않은 태스크를 찾을 수 없다면 ### 프로젝트 리뷰 실행으로 이동
-- 작업이 이미 완료되어 수정할 수 없는 태스크를 발견하면, 태스크를 닫고 태스크의 Output Log에 기록.
-- **시작하기 전에**:
-  - **만약** 인수에 `worktree`가 없다면: 태스크를 위한 git 브랜치 생성: `git checkout -b task/<task-id>`
-  - **만약** 인수에 `worktree`가 있다면: 브랜치 생성 건너뛰기 (워크트리 모드)
-- **GitHub 이슈 생성 (선택사항):**
-  - 태스크에 `github_issue` 필드가 없는 경우
-  - 서브에이전트를 사용하여 이슈 생성을 위해 @.claude/commands/aiwf/aiwf_issue_create.md 포함
-- **서브에이전트 사용**하여 태스크를 실행하기 위해 태스크 ID를 인수로 하여 @.claude/commands/aiwf/aiwf_do_task.md를 포함하도록 함.
-- **태스크 완료 후**: test.md 명령(@.claude/commands/aiwf/aiwf_test.md)을 사용하여 아무것도 깨지지 않았는지 확인하기 위해 테스트 실행
-- 태스크 실행에서 실패 시 오류의 심각성 평가:
-  - 치명적 오류 (테스트 중단, 보안 문제, 데이터 손실 위험): **문제 수정**
-  - 비치명적 오류 (린팅, 포맷팅, 사소한 문제): OUTPUT LOG에 기록하고 계속
-- 성공 시 계속 진행
+**수동 승인 필요 시**:
+- 아키텍처 결정 변경 감지
+- 의존성 순환 또는 복잡한 차단 상황
+- 예상 일정 대비 20% 이상 지연
 
-### 작업 커밋 및 체크포인트 관리
+**스프린트 생성 실행**:
+```bash
+# 워크플로우 규칙 확인
+if [[ $(aiwf state validate --check=sprint-transition) == "approved" ]]; then
+  # 자동 생성
+  @.claude/commands/aiwf/aiwf_create_sprint_tasks.md
+else
+  # 수동 승인 요청
+  echo "⚠️ Manual approval required for sprint transition"
+  echo "Reason: [detected issues]"
+  echo "Continue? (y/n)"
+fi
+```
 
-**일반 태스크 커밋:**
+**4단계: 적응적 태스크 우선순위 조정**
+
+**새 스프린트 태스크 생성 시**:
+- 이전 스프린트 학습 반영
+- 실제 구현 시간 vs 예상 시간 패턴 적용
+- 팀 속도(velocity) 자동 조정
+- 의존성 최적화 (병렬 작업 극대화)
+
+**상태 인덱스 실시간 업데이트**:
+```bash
+# 새 스프린트 반영
+aiwf state update
+
+# 우선순위 재계산
+aiwf state next --recalculate-priorities
+
+# 워크플로우 재검증
+aiwf state validate
+```
+
+**5단계: 연속 실행 준비**
+- 새 스프린트 태스크가 생성되면 `### 워크플로우 기반 지능적 작업 찾기`로 복귀
+- 적응적 우선순위 기반으로 최적 태스크 자동 선택
+- 실행 전 의존성 재확인
+
+### 워크플로우 기반 지능적 태스크 실행
+
+**1단계: 태스크 실행 전 워크플로우 검증**
+```bash
+# 선택된 태스크의 실행 조건 재검증
+aiwf state validate --task={task_id}
+
+# 의존성 충족 여부 확인
+aiwf state show --focus={task_id} --check-dependencies
+```
+
+**2단계: 실행 전 조건부 확인**
+- **실행 이력 확인**: 이전에 시도한 태스크는 건너뛰기 (OUTPUT LOG 확인)
+- **상태 유효성**: 태스크가 여전히 실행 가능한 상태인지 확인
+- **의존성 재확인**: 다른 태스크 완료로 인한 차단 해제 확인
+- **병렬 작업 충돌**: 동시 실행 중인 태스크와의 리소스 충돌 확인
+
+**3단계: 지능적 실행 준비**
+- **브랜치 전략**:
+  ```bash
+  # 워크트리 모드가 아닌 경우
+  if [[ "$ARGUMENTS" != *"worktree"* ]]; then
+    git checkout -b task/{task_id}
+  fi
+  ```
+
+- **상태 포커스 설정**:
+  ```bash
+  # AI 컨텍스트 동기화
+  aiwf state focus {task_id}
+  
+  # 작업 시작 타임스탬프 기록
+  aiwf state update --start-work={task_id}
+  ```
+
+- **의존성 상태 동결**: 실행 중 의존성 변경 방지를 위한 스냅샷 생성
+
+**4단계: 워크플로우 통합 태스크 실행**
+
+**스마트 태스크 실행**:
+- **서브에이전트로 스마트 시작**: @.claude/commands/aiwf/aiwf_smart_start.md {task_id} 사용
+- 기존 aiwf_do_task.md 대신 워크플로우 인식 버전 활용
+- 실행 중 실시간 상태 모니터링
+
+**실행 중 지능적 모니터링**:
+```bash
+# 5분마다 상태 업데이트 (백그라운드)
+while task_in_progress; do
+  sleep 300
+  aiwf state update --silent
+  check_blocking_conflicts
+done
+```
+
+**5단계: 실행 후 워크플로우 통합 검증**
+
+**완료 검증**:
+- test.md 명령(@.claude/commands/aiwf/aiwf_test.md) 실행
+- **워크플로우 기반 품질 검증**:
+  ```bash
+  # 워크플로우 일관성 재확인
+  aiwf state validate --post-task={task_id}
+  
+  # 다음 태스크들 차단 해제 확인
+  aiwf state next --check-unblocked
+  ```
+
+**지능적 오류 처리**:
+- **치명적 오류 감지**: 
+  - AI 의사결정으로 수정 가능성 평가
+  - 자동 수정 시도 vs 수동 개입 요청 결정
+- **비치명적 오류**: 
+  - 워크플로우 진행에 미치는 영향 평가
+  - 후속 태스크에 대한 리스크 계산
+- **학습 반영**: 오류 패턴을 향후 우선순위 계산에 반영
+
+**6단계: 적응적 다음 작업 준비**
+
+**성공 시 자동 전환**:
+```bash
+# 태스크 완료 처리
+aiwf state complete {task_id}
+
+# 워크플로우 기반 다음 작업 계산
+NEXT_TASK=$(aiwf state next --auto-select --exclude-attempted)
+
+# 즉시 다음 작업으로 전환 (연속 실행)
+if [[ -n "$NEXT_TASK" ]]; then
+  echo "🚀 Auto-transitioning to next priority task: $NEXT_TASK"
+  # 다음 태스크로 즉시 진행
+fi
+```
+
+**실패 시 적응적 대응**:
+- 차단된 태스크를 다른 태스크로 자동 교체
+- 의존성 체인 재분석으로 우선순위 재계산
+- 병렬 작업 기회 재탐색
+
+### 워크플로우 기반 스마트 커밋 및 체크포인트 관리
+
+**1단계: 워크플로우 사전 검증**
+```bash
+# 커밋 전 워크플로우 상태 확인
+aiwf state validate --pre-commit
+
+# 완료된 태스크의 후속 태스크 차단 해제 확인
+aiwf state next --check-unblocked={task_id}
+```
+
+**2단계: 지능적 일반 태스크 커밋**
+
+**커밋 조건 평가 (워크플로우 기반):**
 - **오직** 테스트가 통과하고 치명적 문제가 없는 경우에만
-- **서브에이전트 사용**하여 태스크 ID를 인수로 하고 YOLO를 추가 인수로 하여 @.claude/commands/aiwf/aiwf_commit.md 포함
-- 커밋 실패 시 OUTPUT LOG에 문제 기록 후 계속
-- 성공적인 커밋 후:
-  - **만약** 인수에 `worktree`가 없다면: main으로 병합: `git checkout main && git merge task/<task-id>`
-  - **만약** 인수에 `worktree`가 있다면: 변경사항 푸시: `git push`
-- **즉시** `### 열린 작업 찾기`로 이동
+- **워크플로우 일관성 검증**: 완료된 태스크가 다른 태스크를 차단하지 않는지 확인
+- **의존성 체인 영향 분석**: 완료가 후속 작업에 미치는 영향 계산
 
-**스프린트 완료 시 체크포인트:**
-- 스프린트의 모든 태스크 완료 확인
-- **전체 스프린트 커밋 및 푸시**:
-  - 모든 변경사항 커밋
-  - 원격 저장소로 푸시
-  - 스프린트 완료 태그 생성
-- **사용자 알림**: 스프린트 완료 및 다음 스프린트 생성 예정 알림
-- **다음 스프린트 준비**: `### 적응적 스프린트 태스크 생성`으로 이동
+**스마트 커밋 실행:**
+```bash
+# 워크플로우 통합 커밋 (기존 aiwf_commit.md 대신)
+@.claude/commands/aiwf/aiwf_smart_complete.md {task_id} YOLO
 
-**마일스톤 완료 시 체크포인트:**
-- 마일스톤의 모든 스프린트 완료 확인
-- **전체 마일스톤 커밋 및 푸시**
-- **리뷰 요청**: 마일스톤 완료에 대한 전체 리뷰 요청
-- **사용자 알림**: 마일스톤 완료 및 성과 요약 제공
+# 커밋 후 상태 동기화
+aiwf state complete {task_id}
+aiwf state update
+```
 
-**풀 리퀘스트 생성 (선택사항):**
+**커밋 성공 시 적응적 처리:**
+- **만약** 인수에 `worktree`가 없다면: main으로 병합 후 워크플로우 업데이트
+  ```bash
+  git checkout main && git merge task/<task-id>
+  aiwf state update  # 병합 후 상태 재계산
+  ```
+- **만약** 인수에 `worktree`가 있다면: 직접 푸시 후 상태 업데이트
+  ```bash
+  git push
+  aiwf state update
+  ```
+
+**커밋 실패 시 적응적 대응:**
+- OUTPUT LOG에 문제 기록
+- **워크플로우 기반 대안 탐색**:
+  ```bash
+  # 대안 태스크 추천 받기
+  ALTERNATIVE_TASKS=$(aiwf state next --exclude={failed_task_id} --auto-select)
+  echo "🔄 Switching to alternative task: $ALTERNATIVE_TASKS"
+  ```
+
+**3단계: 워크플로우 기반 적응적 스프린트 체크포인트**
+
+**스프린트 완료 조건 재검증:**
+```bash
+# 스프린트 완료율 확인 (80% → 100% 전환)
+aiwf state show | grep "sprint_completion"
+
+# 워크플로우 일관성 최종 확인
+aiwf state validate --focus=sprint-completion
+```
+
+**지능적 스프린트 완료 처리:**
+- **상태 인덱스 실시간 업데이트**:
+  ```bash
+  # 전체 상태 업데이트
+  aiwf state update
+  
+  # 다음 스프린트 준비 상태 확인
+  aiwf state next --mode=sprint-transition
+  
+  # 차단 해제된 태스크 식별
+  aiwf state next --check-unblocked
+  ```
+  
+- **워크플로우 승인 기반 전체 스프린트 커밋**:
+  ```bash
+  # 스프린트 레벨 상태 일관성 확인
+  if [[ $(aiwf state validate --check=sprint-consistency) == "passed" ]]; then
+    # 자동 커밋 및 푸시
+    git add -A
+    git commit -m "✅ Sprint completed with workflow validation"
+    git push
+    
+    # 스프린트 완료 태그 생성 (워크플로우 메타데이터 포함)
+    SPRINT_TAG="sprint-$(date +%Y%m%d-%H%M%S)-workflow-validated"
+    git tag -a "$SPRINT_TAG" -m "Sprint completed: $(aiwf state show | grep current_sprint)"
+    git push --tags
+  else
+    echo "⚠️ Workflow inconsistency detected. Manual review required."
+  fi
+  ```
+
+**적응적 다음 스프린트 전환:**
+- **사용자 알림**: 스프린트 완료 및 워크플로우 기반 다음 단계 알림
+- **지능적 다음 스프린트 준비**: 
+  ```bash
+  # 워크플로우 규칙 기반 자동 결정
+  if [[ $(aiwf state next --check=auto-sprint-generation) == "approved" ]]; then
+    # 자동으로 다음 스프린트로 전환
+    echo "🚀 Auto-transitioning to next sprint based on workflow rules"
+    # `### 워크플로우 기반 적응적 스프린트 관리`로 이동
+  else
+    # 수동 검토 후 전환
+    echo "🔍 Manual review required for next sprint"
+  fi
+  ```
+
+**4단계: 워크플로우 기반 마일스톤 체크포인트**
+
+**마일스톤 완료 워크플로우 검증:**
+- 마일스톤의 모든 스프린트 완료 및 상태 일관성 확인
+- **전체 워크플로우 상태 검증**:
+  ```bash
+  # 전체 상태 업데이트
+  aiwf state update
+  
+  # 마일스톤 레벨 워크플로우 검증
+  aiwf state validate --level=milestone
+  
+  # 다음 마일스톤 전환 조건 확인
+  aiwf state next --mode=milestone-transition
+  ```
+
+**지능적 마일스톤 완료 처리:**
+- **워크플로우 승인 기반 전체 마일스톤 커밋**:
+  ```bash
+  # 마일스톤 레벨 최종 검증
+  if [[ $(aiwf state validate --check=milestone-completion) == "passed" ]]; then
+    # 마일스톤 완료 커밋
+    git add -A
+    git commit -m "🎯 Milestone completed with full workflow validation"
+    git push
+    
+    # 마일스톤 완료 태그 생성
+    MILESTONE_TAG="milestone-$(date +%Y%m%d-%H%M%S)-completed"
+    git tag -a "$MILESTONE_TAG" -m "Milestone completed: $(aiwf state show | grep current_milestone)"
+    git push --tags
+  fi
+  ```
+
+**적응적 리뷰 및 전환:**
+- **워크플로우 기반 리뷰 요청**: 
+  - AI 의사결정 엔진으로 리뷰 필요성 판단
+  - 자동 승인 vs 수동 리뷰 결정
+- **지능적 사용자 알림**: 
+  - 마일스톤 완료 성과 요약 (워크플로우 메트릭 포함)
+  - 다음 마일스톤 전환 계획 자동 생성
+
+**5단계: 워크플로우 통합 풀 리퀘스트 생성**
+
+**지능적 PR 생성 조건:**
 - GitHub 이슈가 태스크에 연결된 경우
-- 서브에이전트를 사용하여 PR 생성을 위해 @.claude/commands/aiwf/aiwf_pr_create.md 포함
+- **워크플로우 상태 기반 자동 결정**:
+  ```bash
+  # PR 생성 필요성 워크플로우 기반 판단
+  if [[ $(aiwf state validate --check=pr-required) == "true" ]]; then
+    # 워크플로우 메타데이터 포함한 PR 생성
+    @.claude/commands/aiwf/aiwf_pr_create.md --include-workflow-metadata
+  fi
+  ```
+
+**PR 내용 자동 최적화:**
+- 완료된 태스크들의 워크플로우 영향 분석 포함
+- 차단 해제된 후속 작업 목록 자동 생성
+- 의존성 변경사항 및 영향 범위 자동 문서화
 
 ### 연속 실행 루프
 

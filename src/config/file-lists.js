@@ -47,6 +47,8 @@ export const COMMAND_FILES = [
   'aiwf_prime.md',
   'aiwf_project_review.md',
   'aiwf_project_status.md',
+  'aiwf_smart_complete.md',
+  'aiwf_smart_start.md',
   'aiwf_test.md',
   'aiwf_testing_review.md',
   'aiwf_tm-run-all-subtask.md',
@@ -56,6 +58,7 @@ export const COMMAND_FILES = [
   'aiwf_ultrathink_general.md',
   'aiwf_update_docs.md',
   'aiwf_update_state.md',
+  'aiwf_validate_state.md',
   'aiwf_validate_workflow.md',
   'aiwf_workflow_context.md',
   'aiwf_yolo.md'

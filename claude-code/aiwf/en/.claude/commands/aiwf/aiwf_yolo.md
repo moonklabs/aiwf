@@ -44,9 +44,20 @@ Also consider <$ARGUMENTS> - if anything between <> can be considered additional
 
 Get the current datetime stamp from the system and remember it
 
-### FIND OPEN WORK
+### FIND OPEN WORK - WORKFLOW-BASED INTELLIGENT TASK SELECTION
 
-Execute based on mode:
+**Step 1: Workflow State Analysis**
+```bash
+# Execute workflow validation
+aiwf state validate
+
+# Get next task recommendations
+aiwf state next
+```
+
+**Step 2: Mode-specific Execution Strategy**
+
+Execute based on mode with workflow intelligence:
 
 **If Sprint ID provided in arguments:**
 
@@ -103,6 +114,11 @@ Execute based on mode:
 
 - Use a **SUBAGENT** and have it include @.claude/commands/aiwf/aiwf_create_sprint_tasks.md with Sprint ID as argument
 - Wait for completion
+- **State Index Update**:
+  ```bash
+  # Update state to reflect new tasks
+  aiwf state update
+  ```
 - After task creation move back to `### FIND OPEN WORK`
 
 ### WORK ON TASK
@@ -116,24 +132,50 @@ Execute based on mode:
 - **GitHub Issue Creation (Optional):**
   - If task doesn't have a `github_issue` field
   - Use SUBAGENT to include @.claude/commands/aiwf/aiwf_issue_create.md to create issue
-- **USE A SUBAGENT** and have it include @.claude/commands/aiwf/aiwf_do_task.md with the Task ID as Argument to execute the Task.
+- **WORKFLOW-BASED TASK EXECUTION**: USE A SUBAGENT and have it include @.claude/commands/aiwf/aiwf_smart_start.md with the Task ID as Argument to execute the Task with workflow intelligence.
+- **FALLBACK**: If smart_start is not available, use @.claude/commands/aiwf/aiwf_do_task.md with the Task ID as Argument.
 - **AFTER TASK COMPLETION**: Run tests to verify nothing broke using test.md command (@.claude/commands/aiwf/aiwf_test.md)
 - on any failure in the task execution assess the severity of the error:
   - CRITICAL errors (breaking tests, security issues, data loss risk): **FIX PROBLEMS**
   - NON-CRITICAL errors (linting, formatting, minor issues): note in OUTPUT LOG and continue
 - on success move on
 
-### COMMIT WORK
+### COMMIT WORK - WORKFLOW-BASED SMART COMMIT
 
-- **ONLY IF** tests are passing and no critical issues exist
-- **USE A SUBAGENT** and have it include @.claude/commands/aiwf/aiwf_commit.md with the Task ID as Argument and YOLO as additional argument
+**Step 1: Workflow Pre-validation**
+```bash
+# Validate workflow state before commit
+aiwf state validate --pre-commit
+```
+
+**Step 2: Smart Commit Execution**
+- **ONLY IF** tests are passing and no critical issues exist AND workflow validation passes
+- **WORKFLOW-INTEGRATED COMMIT**: USE A SUBAGENT and have it include @.claude/commands/aiwf/aiwf_smart_complete.md with the Task ID as Argument and YOLO as additional argument
+- **FALLBACK**: If smart_complete is not available, use @.claude/commands/aiwf/aiwf_commit.md with the Task ID as Argument and YOLO as additional argument
+
+**Step 3: Post-commit Workflow Update**
 - on any failure when committing, note the problem in the OUTPUT LOG of the task and continue
-- after successful commit,
-  - **If** `worktree` NOT in arguments: after successful commit, merge to main: `git checkout main && git merge task/<task-id>`
-  - **If** `worktree` in arguments: after successful commit, push changes: `git push`
+- after successful commit:
+  ```bash
+  # Update workflow state
+  aiwf state complete {task_id}
+  aiwf state update
+  ```
+  - **If** `worktree` NOT in arguments: merge to main and update workflow: 
+    ```bash
+    git checkout main && git merge task/<task-id>
+    aiwf state update  # Recalculate after merge
+    ```
+  - **If** `worktree` in arguments: push changes and update workflow:
+    ```bash
+    git push
+    aiwf state update
+    ```
+
+**Step 4: Intelligent Pull Request Creation**
 - **Pull Request Creation (Optional):**
   - If GitHub issue is linked to the task
-  - Use SUBAGENT to include @.claude/commands/aiwf/aiwf_pr_create.md to create PR
+  - Use SUBAGENT to include @.claude/commands/aiwf/aiwf_pr_create.md to create PR with workflow metadata
 - **IMMEDIATELY** go back to `### FIND OPEN WORK` to continue with next task
 
 ### CONTINUOUS EXECUTION LOOP

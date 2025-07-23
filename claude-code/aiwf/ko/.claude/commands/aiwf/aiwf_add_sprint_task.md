@@ -235,6 +235,14 @@ T##_S##_M##_task_description.md
 
 ### 7. 확인 및 피드백
 
+**상태 인덱스 동기화:**
+```bash
+# 새 태스크를 반영하여 상태 업데이트
+aiwf state update
+# 워크플로우 컨텍스트 확인
+aiwf state show
+```
+
 **생성 결과 확인:**
 ```
 ✅ 태스크 추가 완료!

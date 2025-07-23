@@ -46,6 +46,13 @@ Read the task description. If anything is unclear, ask clarifying questions befo
 - Find out the current local timestamp (YYYY-MM-DD HH:MM).
 - Update front-matter to **status: in_progress** and set Updated time
 - Update ./aiwf/00_PROJECT_MANIFEST.md to set task in progress, updated time and current Sprint Status.
+- **State Index Synchronization:**
+  ```bash
+  # Update overall state
+  aiwf state update
+  # Set focus to current task
+  aiwf state focus {task_id}
+  ```
 - **GitHub Issue Update (if exists):**
   ```bash
   gh issue comment {issue_number} --body "🚀 Task work has started."
@@ -87,6 +94,15 @@ Follow these steps for a Code Review (in order)
 - set the Task status to **completed**
 - Rename the Task file accordingly to enable proper Completed recognition from the filename (TX[TASK_ID]...)
 - Update .aiwf/00_PROJECT_MANIFEST.md to reflect the new status
+- **State Index Synchronization:**
+  ```bash
+  # Mark task as completed
+  aiwf state complete {task_id}
+  # Update overall state
+  aiwf state update
+  # Check next recommended actions
+  aiwf state next
+  ```
 - **GitHub Issue Update (if exists):**
   ```bash
   gh issue comment {issue_number} --body "✅ Task has been completed."

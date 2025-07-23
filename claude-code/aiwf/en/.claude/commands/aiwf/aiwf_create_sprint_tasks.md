@@ -160,6 +160,13 @@ Review all created tasks for complexity and split any High complexity tasks:
 - CHECK task numbering is sequential (T01, T02, T03...)
 - UPDATE sprint meta file with final task list
 - UPDATE project manifest sprint section to reflect actual tasks created
+- **State Index Synchronization:**
+  ```bash
+  # Update overall state to reflect new tasks
+  aiwf state update
+  # Check workflow context
+  aiwf state show
+  ```
 - GENERATE completion report
 
 **Output format:**

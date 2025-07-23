@@ -155,6 +155,59 @@ For a complete list of AIWF commands and detailed usage, see [COMMANDS_GUIDE.md]
 - 🚀 **Feature Ledger** - Feature ID system for development progress tracking
 - 🔍 **AI Tool Templates** - Support for GitHub Copilot, Cursor, Windsurf, and Augment
 - 🪝 **Git Hooks Integration** - Automated feature tracking with git commits
+- 🤖 **Workflow-Based State Management** - Intelligent task prioritization and dependency tracking
+- 🎯 **Smart Task Recommendations** - AI-powered next action suggestions based on project state
+- 🔄 **Adaptive Sprint Management** - Automatic sprint generation at 80% completion
+- 🔍 **Dependency Analysis** - Circular dependency detection and blocking task identification
+
+## 🤖 Workflow-Based State Management (NEW!)
+
+AIWF now includes an advanced state management system that helps AI maintain project context:
+
+### State Management Commands
+
+```bash
+# Update project state index
+aiwf state update
+
+# Show current state and recommendations
+aiwf state show
+
+# Get AI-powered next task recommendations
+aiwf state next
+
+# Validate workflow consistency
+aiwf state validate
+
+# Mark task as started
+aiwf state start <task-id>
+
+# Mark task as completed  
+aiwf state complete <task-id>
+```
+
+### Key Features
+
+- **Priority Matrix**: Tasks are scored based on urgency (40%), importance (30%), dependencies (20%), and effort (10%)
+- **Dependency Tracking**: Automatically identifies blocking tasks and circular dependencies
+- **80% Rule**: Recommends preparing next sprint when current sprint reaches 80% completion
+- **Workflow Validation**: Ensures state consistency across milestones, sprints, and tasks
+- **Smart Recommendations**: AI suggests optimal next actions based on project state
+
+### Integration with YOLO Mode
+
+The enhanced YOLO mode now uses workflow intelligence:
+
+```bash
+# Run YOLO with workflow-based task selection
+/project:aiwf:yolo
+
+# Sprint-specific with workflow optimization
+/project:aiwf:yolo S03
+
+# Adaptive sprint management
+/project:aiwf:yolo sprint-all
+```
 
 ## 📁 Project Structure
 

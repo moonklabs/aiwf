@@ -235,6 +235,14 @@ T##_S##_M##_task_description.md
 
 ### 7. Confirmation and Feedback
 
+**State Index Synchronization:**
+```bash
+# Update state to reflect new task
+aiwf state update
+# Check workflow context
+aiwf state show
+```
+
 **Creation Result Confirmation:**
 ```
 ✅ Task addition completed!

@@ -134,6 +134,14 @@ Populate the task file with:
 - Technical guidance references actual files and patterns
 - No scope creep or architecture violations
 
+**State Index Synchronization**:
+```bash
+# Update state to reflect new task
+aiwf state update
+# Check workflow context
+aiwf state show
+```
+
 **OUTPUT FORMAT**:
 
 ```markdown

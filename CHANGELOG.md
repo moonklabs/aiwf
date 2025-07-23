@@ -7,6 +7,52 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.9] - 2025-07-23
+
+### ✨ Added
+- **Workflow-Based State Management**: Revolutionary state management system for AI context preservation
+  - Central state index (`task-state-index.json`) for persistent AI memory
+  - Workflow rules engine with priority matrix calculation
+  - Dependency tracking with circular dependency detection
+  - 80% rule implementation for adaptive sprint management
+  
+- **State Management CLI Commands**: New `aiwf state` command suite
+  - `aiwf state update` - Sync project state with file system
+  - `aiwf state show` - Display current state and recommendations
+  - `aiwf state next` - Get AI-powered next action suggestions
+  - `aiwf state validate` - Check workflow consistency
+  - `aiwf state start/complete` - Track task progress
+  
+- **Smart Task Prioritization**: Intelligent task scoring algorithm
+  - Urgency (40%) - deadline-based scoring
+  - Importance (30%) - priority level weighting
+  - Dependencies (20%) - blocking task analysis
+  - Effort (10%) - inverse effort scoring
+  
+- **Enhanced YOLO Mode**: Workflow-integrated autonomous execution
+  - Automatic task selection based on workflow rules
+  - Adaptive sprint generation at 80% completion
+  - Real-time state monitoring during execution
+  - Smart commit and checkpoint management
+
+### 🔄 Changed
+- **Command Updates**: Enhanced existing commands with state synchronization
+  - `aiwf_do_task.md` - Auto-updates state on task completion
+  - `aiwf_create_sprint_tasks.md` - Syncs new tasks to state index
+  - `aiwf_commit.md` - Updates state after successful commits
+  - `aiwf_yolo.md` - Complete workflow intelligence integration
+
+### 📝 Added Commands
+- `aiwf_smart_start.md` - Workflow-aware task initialization
+- `aiwf_smart_complete.md` - Intelligent task completion with state sync
+- `aiwf_validate_state.md` - Comprehensive workflow validation
+
+### 🐛 Fixed
+- AI losing track of current work context between sessions
+- Manual state updates causing synchronization issues
+- Simple task selection missing dependency relationships
+- Sprint transitions lacking intelligent decision making
+
 ## [0.3.5] - 2025-07-19
 
 ### ✨ Features

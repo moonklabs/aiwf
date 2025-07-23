@@ -147,6 +147,14 @@ Provide summary:
 - **Remaining Changes**: Any uncommitted changes still pending
 - **Repository Status**: Current git status after commits
 
+**State Index Synchronization**:
+```bash
+# Update state after commits
+aiwf state update
+# Check workflow context
+aiwf state show
+```
+
 ## 7 · Generate Changelog (Optional)
 
 After successful commits:
