@@ -50,4 +50,6 @@ out/
 .cache/
 
 # AIWF 세션 파일
+/.aiwf
 .aiwf/sessions/
+/.claude

@@ -399,5 +399,51 @@ state
     await stateCmd.execute(['next']);
   });
 
+// GitHub integration commands
+const github = program.command('github');
+github.description('GitHub integration / GitHub 통합');
+
+github
+  .command('issue <task-id>')
+  .description('Create GitHub issue from task / 태스크에서 GitHub 이슈 생성')
+  .action(async (taskId) => {
+    try {
+      const { GitHubIntegration } = await import('../lib/github-integration.js');
+      const ghIntegration = new GitHubIntegration();
+      await ghIntegration.createIssue(taskId);
+    } catch (error) {
+      console.error(chalk.red(`GitHub issue creation failed: ${error.message}`));
+      process.exit(1);
+    }
+  });
+
+github
+  .command('pr [task-id]')
+  .description('Create pull request for completed task / 완료된 태스크로 PR 생성')
+  .action(async (taskId) => {
+    try {
+      const { GitHubIntegration } = await import('../lib/github-integration.js');
+      const ghIntegration = new GitHubIntegration();
+      await ghIntegration.createPullRequest(taskId);
+    } catch (error) {
+      console.error(chalk.red(`Pull request creation failed: ${error.message}`));
+      process.exit(1);
+    }
+  });
+
+github
+  .command('sync')
+  .description('Sync GitHub issues with AIWF tasks / GitHub 이슈와 AIWF 태스크 동기화')
+  .action(async () => {
+    try {
+      const { GitHubIntegration } = await import('../lib/github-integration.js');
+      const ghIntegration = new GitHubIntegration();
+      await ghIntegration.syncIssues();
+    } catch (error) {
+      console.error(chalk.red(`GitHub sync failed: ${error.message}`));
+      process.exit(1);
+    }
+  });
+
 // Parse command line arguments
 program.parse(process.argv);
