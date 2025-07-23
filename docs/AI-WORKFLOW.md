@@ -85,9 +85,30 @@ That's the basic workflow to get started! You can also:
 - Use YOLO mode to autonomously execute entire sprints or milestones
 - Explore other commands in `.claude/commands/aiwf/`
 
-### 7. YOLO Mode - Autonomous Execution
+### 7. YOLO Mode - The Core of AIWF
 
-YOLO mode is a powerful feature that executes tasks continuously without user intervention:
+YOLO mode is the heart of AIWF, enabling autonomous task execution. It's not just a feature - it's the reason AIWF exists.
+
+#### Independent Sprint Creation (NEW!)
+
+Create sprints without needing milestones:
+
+```bash
+# Create sprint from README TODOs
+aiwf sprint-independent --from-readme
+
+# Create sprint from GitHub issue
+aiwf sprint-independent --from-issue 123
+
+# Create minimal sprint with custom name
+aiwf sprint-independent "Quick Feature" --minimal
+
+# Different engineering levels
+aiwf sprint-independent "API Feature" --balanced
+aiwf sprint-independent "Complex System" --complete
+```
+
+#### YOLO Execution Modes
 
 **Basic YOLO mode:**
 
@@ -95,7 +116,7 @@ YOLO mode is a powerful feature that executes tasks continuously without user in
 /project:aiwf:yolo
 ```
 
-Processes general tasks first, then executes active sprint tasks.
+Processes general tasks first, then sprint tasks.
 
 **Sprint-specific execution:**
 
@@ -103,25 +124,25 @@ Processes general tasks first, then executes active sprint tasks.
 /project:aiwf:yolo S03
 ```
 
-Runs until all tasks in the specified sprint (S03) are complete.
+Runs all tasks for the specified sprint (S03) until complete.
 
-**🚀 NEW: Full Sprint Execution:**
+**Full Sprint Execution:**
 
 ```
 /project:aiwf:yolo sprint-all
 ```
 
-Runs continuously without stopping until all sprints are completed sequentially.
+Runs all sprints sequentially without stopping until all are complete.
 
-**🚀 NEW: Full Milestone Execution:**
+**Full Milestone Execution:**
 
 ```
 /project:aiwf:yolo milestone-all
 ```
 
-Runs until all milestones and their associated sprints and tasks are complete.
+Runs all milestones and their related sprints and tasks until complete.
 
-**🔧 Worktree Mode:**
+**Worktree Mode:**
 
 ```
 /project:aiwf:yolo S03 worktree
@@ -130,19 +151,100 @@ Runs until all milestones and their associated sprints and tasks are complete.
 
 When running in a Git worktree environment, pushes directly without creating branches.
 
-**YOLO Mode Features:**
+#### YOLO Configuration
 
-- ⚡ Continuous execution: Moves to next task immediately after each completion
-- 🎯 Fully autonomous: Proceeds without user input or confirmation
-- 📊 Progress tracking: Reports current progress in real-time
-- 🛡️ Safety guards: Stops on test failures or critical errors
-- 📈 Detailed reports: Provides comprehensive project status report on completion
+Create `.aiwf/yolo-config.yaml` to control YOLO behavior:
 
-**⚠️ Cautions:**
+```yaml
+engineering_level: minimal  # minimal, balanced, complete
 
-- Stops when modifying critical files (.env, migrations)
-- Evaluates whether to continue if tests fail by more than 10%
-- Stops if database schema changes are required
+focus_rules:
+  requirement_first: true   # Only implement what's required
+  simple_solution: true     # Prefer simple over complex
+  no_gold_plating: true    # No unnecessary features
+  stay_on_track: true      # Don't deviate from goals
+
+execution:
+  smart_mode: false        # Context-based decisions
+  fast_mode: true          # Minimal validation
+  run_tests: true          # Test after each task
+  auto_commit: false       # Auto-commit on completion
+
+breakpoints:
+  critical_files:
+    - .env
+    - database/migrations/*
+  test_failure_threshold: 10
+  schema_changes: true
+  security_changes: true
+
+overengineering_prevention:
+  max_file_lines: 300
+  max_function_lines: 50
+  max_nesting_depth: 4
+  no_future_proofing: true
+```
+
+#### YOLO Mode Features
+
+- ⚡ **Continuous execution**: Immediately moves to next task after completion
+- 🎯 **Fully autonomous**: Proceeds without user input or confirmation
+- 📊 **Progress tracking**: Real-time progress reporting with checkpoints
+- 🛡️ **Overengineering prevention**: Built-in guards against complexity
+- 💾 **Checkpoint/Recovery**: Resume from last checkpoint if interrupted
+- 🔍 **Smart task selection**: Workflow-based prioritization
+- 📈 **Detailed reports**: Full project status report on completion
+
+#### Overengineering Prevention
+
+YOLO mode actively prevents overengineering through:
+
+1. **Code Complexity Checks**
+   - File size limits (300 lines default)
+   - Function size limits (50 lines default)
+   - Nesting depth limits (4 levels default)
+
+2. **Design Pattern Restrictions**
+   - Limits excessive abstraction
+   - Prevents unnecessary patterns
+   - Enforces YAGNI principle
+
+3. **Focus Rules**
+   - Requirement-first approach
+   - Simple solutions preferred
+   - No gold plating allowed
+   - Stay on track enforcement
+
+4. **Real-time Feedback**
+   - Warnings when approaching limits
+   - Suggestions for simplification
+   - Automatic complexity reports
+
+#### Checkpoint System
+
+YOLO mode includes automatic checkpointing:
+
+```bash
+# List available checkpoints
+aiwf checkpoint list
+
+# Restore from checkpoint
+aiwf checkpoint restore cp_1234567890
+
+# Manual checkpoint creation
+aiwf checkpoint create "Before major refactor"
+
+# Clean old checkpoints
+aiwf checkpoint clean --keep-last 10
+```
+
+#### Safety Features
+
+- **Critical File Protection**: Stops when modifying .env, migrations, etc.
+- **Test Failure Handling**: Evaluates continuation when tests fail >10%
+- **Schema Change Detection**: Pauses for database changes
+- **Security Alerts**: Stops for security-related modifications
+- **Backup Creation**: Automatic backups before major changes
 
 **Important**: AIWF is a complex system, not a simple set-and-forget tool. It works most effectively when you understand how it operates. Take time to read through the commands and adjust them to your workflow.
 

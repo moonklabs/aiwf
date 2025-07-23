@@ -133,6 +133,29 @@ After installation:
 - **GitHub Integration**: `/project:aiwf:issue_create`, `/project:aiwf:pr_create`
 - **AI Personas**: `/project:aiwf:ai_persona:architect`, `/project:aiwf:ai_persona:debugger`, etc.
 
+### 🚀 YOLO Mode - The Core Feature
+
+YOLO mode is the heart of AIWF, enabling autonomous task execution:
+
+```bash
+# Basic YOLO - processes general tasks then sprint tasks
+/project:aiwf:yolo
+
+# Sprint-specific execution
+/project:aiwf:yolo S03
+
+# Execute all sprints continuously
+/project:aiwf:yolo sprint-all
+
+# Execute all milestones
+/project:aiwf:yolo milestone-all
+
+# Independent sprint creation (no milestone required)
+aiwf sprint-independent --from-readme
+aiwf sprint-independent --from-issue 123
+aiwf sprint-independent "Quick Feature" --minimal
+```
+
 ## 📚 Documentation
 
 For a complete list of AIWF commands and detailed usage, see [COMMANDS_GUIDE.md](docs/COMMANDS_GUIDE.md).
@@ -159,6 +182,9 @@ For a complete list of AIWF commands and detailed usage, see [COMMANDS_GUIDE.md]
 - 🎯 **Smart Task Recommendations** - AI-powered next action suggestions based on project state
 - 🔄 **Adaptive Sprint Management** - Automatic sprint generation at 80% completion
 - 🔍 **Dependency Analysis** - Circular dependency detection and blocking task identification
+- 🏃 **Independent Sprints** - Create and run sprints without milestone dependencies
+- 🛡️ **Overengineering Prevention** - Built-in guards to maintain simplicity and focus
+- 💾 **Checkpoint System** - Save and restore YOLO execution state for resilience
 
 ## 🤖 Workflow-Based State Management (NEW!)
 
@@ -207,6 +233,26 @@ The enhanced YOLO mode now uses workflow intelligence:
 
 # Adaptive sprint management
 /project:aiwf:yolo sprint-all
+```
+
+### 🛡️ Overengineering Prevention
+
+AIWF includes built-in guards to prevent overengineering:
+
+- **Configurable Engineering Levels**: minimal, balanced, complete
+- **Focus Rules**: requirement_first, simple_solution, no_gold_plating
+- **Code Complexity Checks**: file size, function length, nesting depth limits
+- **Design Pattern Limits**: prevents excessive abstraction
+- **YAGNI Enforcement**: no future-proofing without current need
+
+Configure in `.aiwf/yolo-config.yaml`:
+
+```yaml
+engineering_level: minimal
+focus_rules:
+  requirement_first: true
+  simple_solution: true
+  no_gold_plating: true
 ```
 
 ## 📁 Project Structure

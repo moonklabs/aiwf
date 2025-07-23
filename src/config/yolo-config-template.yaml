@@ -1,0 +1,168 @@
+# YOLO Mode Configuration Template
+# AIWF 자율 실행 모드 설정
+# 이 파일을 .aiwf/yolo-config.yaml에 복사하여 사용하세요
+
+# 엔지니어링 레벨 설정
+engineering_level: minimal  # minimal, balanced, complete
+
+# 포커스 규칙 - 곁길로 빠지지 않도록 제어
+focus_rules:
+  # 요구사항 우선 - 명시된 요구사항만 구현
+  requirement_first: true
+  
+  # 간단한 해결책 선호
+  simple_solution: true
+  
+  # 골드 플레이팅 방지 - 필요 이상의 기능 추가 금지
+  no_gold_plating: true
+  
+  # 트랙 유지 - 원래 목표에서 벗어나지 않음
+  stay_on_track: true
+  
+  # 리팩토링 제한 - 필수적인 경우만 허용
+  limit_refactoring: false
+
+# 실행 모드 설정
+execution:
+  # 스마트 모드 - 컨텍스트 기반 의사결정
+  smart_mode: false
+  
+  # 빠른 실행 - 최소한의 검증만 수행
+  fast_mode: true
+  
+  # 테스트 실행 - 각 태스크 완료 후 테스트
+  run_tests: true
+  
+  # 커밋 자동화 - 태스크 완료 시 자동 커밋
+  auto_commit: false
+  
+  # 브랜치 전략
+  branch_strategy: feature  # feature, direct, worktree
+
+# 중단 조건 - 이러한 상황에서 YOLO 모드 중단
+breakpoints:
+  # 중요 파일 수정 시
+  critical_files:
+    - .env
+    - database/migrations/*
+    - config/production.js
+  
+  # 테스트 실패 임계값 (%)
+  test_failure_threshold: 10
+  
+  # 데이터베이스 스키마 변경 시
+  schema_changes: true
+  
+  # 보안 관련 변경 시
+  security_changes: true
+  
+  # 외부 API 통합 시
+  external_api: false
+
+# 진행률 리포트 설정
+reporting:
+  # 상세 레벨
+  verbosity: normal  # quiet, normal, verbose
+  
+  # 진행률 업데이트 빈도 (태스크 단위)
+  update_frequency: 1
+  
+  # 요약 리포트 생성
+  generate_summary: true
+  
+  # 메트릭 추적
+  track_metrics: true
+
+# 오버엔지니어링 방지 규칙
+overengineering_prevention:
+  # 최대 파일 크기 (줄)
+  max_file_lines: 300
+  
+  # 최대 함수 크기 (줄)
+  max_function_lines: 50
+  
+  # 최대 중첩 깊이
+  max_nesting_depth: 4
+  
+  # 추상화 레벨 제한
+  max_abstraction_layers: 3
+  
+  # 디자인 패턴 사용 제한
+  limit_design_patterns: true
+  
+  # 미래를 위한 코드 금지
+  no_future_proofing: true
+
+# 체크포인트 설정
+checkpoint:
+  # 체크포인트 활성화
+  enabled: true
+  
+  # 체크포인트 간격 (태스크 수)
+  interval: 5
+  
+  # 복구 모드
+  recovery_mode: auto  # auto, manual, disabled
+  
+  # 상태 저장 위치
+  state_file: .aiwf/yolo-state.json
+
+# 태스크 우선순위 설정
+priority:
+  # 우선순위 가중치
+  weights:
+    urgency: 0.4
+    importance: 0.3
+    dependencies: 0.2
+    effort: 0.1
+  
+  # 의존성 우선 실행
+  dependency_first: true
+  
+  # 블로커 태스크 즉시 처리
+  handle_blockers: true
+
+# AI 페르소나 설정
+persona:
+  # 기본 페르소나
+  default: developer
+  
+  # 태스크별 페르소나 자동 선택
+  auto_select: true
+  
+  # 페르소나 전환 규칙
+  rules:
+    - pattern: "API|백엔드|서버"
+      persona: backend
+    - pattern: "UI|프론트|컴포넌트"
+      persona: frontend
+    - pattern: "테스트|검증|QA"
+      persona: tester
+
+# 성능 최적화
+performance:
+  # 병렬 실행 (실험적)
+  parallel_tasks: false
+  
+  # 캐시 활용
+  use_cache: true
+  
+  # 불필요한 파일 읽기 스킵
+  skip_unchanged: true
+  
+  # 압축 모드 사용
+  compression_mode: auto
+
+# 안전 장치
+safety:
+  # 드라이런 모드 - 실제 변경 없이 시뮬레이션
+  dry_run: false
+  
+  # 백업 생성
+  create_backup: true
+  
+  # 최대 실행 시간 (분)
+  max_runtime: 120
+  
+  # 확인 프롬프트 표시
+  confirmation_prompts: false
