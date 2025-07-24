@@ -1,21 +1,35 @@
-# YOLO 모드 - 적응적 프로젝트 관리 시스템
+# YOLO 모드 - AIWF의 핵심 자율 실행 시스템
 
-이 모드는 마일스톤 기반의 지능적이고 적응적인 프로젝트 관리를 수행합니다.
-사용자 상호작용 없이 실행되지만, 중요한 단계에서는 알림과 리뷰를 제공합니다.
-의심스러울 때는 최선의 해결책에 대해 **RESEARCH**하고 **ULTRATHINK**하세요.
+**YOLO는 AIWF의 심장입니다** - 단순한 기능이 아니라 존재 이유입니다.
+이 모드는 오버엔지니어링을 방지하고 요구사항에 집중하는 지능적 자율 실행을 수행합니다.
+사용자 상호작용 없이 실행되지만, 중요한 단계에서는 체크포인트와 복구 기능을 제공합니다.
 
-**핵심 원칙:**
-- 마일스톤 변경 시 체계적인 계획 수립
-- 한 번에 하나의 스프린트만 생성 (적응적 계획)
-- 완료된 작업을 다음 계획에 반영
-- 중요 단계마다 커밋/푸시/리뷰
+**핵심 원칙 (YOLO 중심):**
+- **요구사항 우선**: 명시된 요구사항만 구현 (requirement_first)
+- **간단한 해결책**: 복잡한 솔루션보다 단순한 솔루션 선호 (simple_solution)
+- **골드 플레이팅 금지**: 필요 이상의 기능 추가 방지 (no_gold_plating)
+- **트랙 유지**: 원래 목표에서 벗어나지 않음 (stay_on_track)
+- **독립 스프린트**: 마일스톤 없이도 빠른 실행 가능
+- **체크포인트 복구**: 중단 시 안전한 복구 보장
 
-우선순위는 지속 가능하고 품질 높은 작업 완료입니다.
+**오버엔지니어링 방지 시스템:**
+- 파일 크기 제한 (300줄), 함수 크기 제한 (50줄), 중첩 깊이 제한 (4레벨)
+- 디자인 패턴 과용 방지, YAGNI 원칙 강제 적용
+- 실시간 복잡도 모니터링 및 피드백
 
 ## 모드 선택
 
 <$ARGUMENTS> 확인:
 
+### 🚀 독립 스프린트 모드 (NEW!)
+- `--create-independent`: 독립 스프린트를 생성하고 즉시 실행
+- `--from-readme`: README TODO를 추출하여 독립 스프린트 생성
+- `--from-issue N`: GitHub 이슈 #N을 기반으로 독립 스프린트 생성
+- `--minimal`: 최소 엔지니어링 레벨로 설정
+- `--balanced`: 균형 엔지니어링 레벨로 설정
+- `--complete`: 완전 엔지니어링 레벨로 설정
+
+### 기존 실행 모드
 - 스프린트 ID가 제공된 경우 (예: S03): 해당 스프린트에서만 작업
 - `sprint-all`이 제공된 경우: 완료될 때까지 모든 스프린트를 순차적으로 실행
 - `milestone-all`이 제공된 경우: 완료될 때까지 모든 마일스톤(모든 스프린트 포함) 실행
@@ -41,19 +55,138 @@
 시작하기 전에:
 
 1. **시간 기록**: 시스템에서 현재 datetime 스탬프를 가져와서 기억
-2. **상태 인덱스 초기화**:
+
+2. **YOLO 설정 확인 및 초기화**:
+   ```bash
+   # YOLO 설정 파일이 있는지 확인
+   if [[ ! -f ".aiwf/yolo-config.yaml" ]]; then
+     echo "🔧 YOLO 설정 파일 생성 중..."
+     cp src/config/yolo-config-template.yaml .aiwf/yolo-config.yaml
+   fi
+   
+   # 설정 파일 내용 확인
+   cat .aiwf/yolo-config.yaml | grep "engineering_level\|focus_rules" -A 5
+   ```
+
+3. **체크포인트 매니저 초기화**:
+   ```bash
+   # 체크포인트 디렉토리 확인 및 생성
+   mkdir -p .aiwf/checkpoints
+   
+   # 이전 세션이 있는지 확인
+   if [[ -f ".aiwf/yolo-state.json" ]]; then
+     echo "📊 이전 YOLO 세션 발견. 복구할까요? (y/n)"
+     # 자동으로 'y'로 진행하거나 복구 가능한 체크포인트 확인
+   fi
+   ```
+
+4. **오버엔지니어링 가드 활성화**:
+   ```bash
+   # 프로젝트 초기 복잡도 측정
+   node -e "
+   import('./src/utils/engineering-guard.js').then(({ getEngineeringGuard }) => {
+     const guard = getEngineeringGuard('.aiwf/yolo-config.yaml');
+     guard.checkProject('.').then(report => {
+       console.log('🛡️ 초기 복잡도 상태:', report.summary);
+     });
+   });
+   "
+   ```
+
+5. **상태 인덱스 초기화**:
    ```bash
    # 상태 인덱스 초기화 또는 업데이트
    aiwf state update
    # 현재 워크플로우 컨텍스트 확인
    aiwf state show
    ```
-3. **테스트 기준선**: test.md 명령(@.claude/commands/aiwf/aiwf_test.md)을 사용하여 깨끗한 기준선 확인
+
+6. **테스트 기준선**: test.md 명령(@.claude/commands/aiwf/aiwf_test.md)을 사용하여 깨끗한 기준선 확인
    - **만약** 실패율이 10%를 초과하면 수정 가능성 평가 후 진행
-4. **Git 상태 확인**: 깨끗한 작업 디렉토리 보장
+
+7. **Git 상태 확인**: 깨끗한 작업 디렉토리 보장
    - **만약** git 상태가 깨끗하지 않다면 기록 후 진행
-5. **마일스톤 변경 감지**: 이전 실행과 비교하여 마일스톤 변경 확인
-6. **인수 분석**: <$ARGUMENTS> 고려하여 실행 모드 결정
+
+8. **독립 스프린트 처리**: `--create-independent`, `--from-readme`, `--from-issue` 플래그 확인
+   - 해당 플래그가 있으면 독립 스프린트 생성 후 즉시 실행 모드로 전환
+
+9. **마일스톤 변경 감지**: 이전 실행과 비교하여 마일스톤 변경 확인
+
+10. **인수 분석**: <$ARGUMENTS> 고려하여 실행 모드 결정
+
+## 독립 스프린트 생성 및 실행 (NEW!)
+
+**독립 스프린트 플래그가 감지된 경우:**
+
+### 1. 독립 스프린트 자동 생성
+```bash
+# --from-readme 플래그가 있는 경우
+if [[ "$ARGUMENTS" == *"--from-readme"* ]]; then
+  echo "📋 README에서 TODO 추출하여 독립 스프린트 생성 중..."
+  node src/commands/sprint-independent.js --from-readme --minimal
+fi
+
+# --from-issue N 플래그가 있는 경우
+if [[ "$ARGUMENTS" =~ --from-issue[[:space:]]+([0-9]+) ]]; then
+  ISSUE_NUMBER="${BASH_REMATCH[1]}"
+  echo "🔗 GitHub 이슈 #$ISSUE_NUMBER 기반 독립 스프린트 생성 중..."
+  node src/commands/sprint-independent.js --from-issue "$ISSUE_NUMBER" --minimal
+fi
+
+# --create-independent 플래그가 있는 경우
+if [[ "$ARGUMENTS" == *"--create-independent"* ]]; then
+  echo "🚀 인터랙티브 독립 스프린트 생성 중..."
+  node src/commands/sprint-independent.js --minimal
+fi
+```
+
+### 2. 엔지니어링 레벨 설정
+```bash
+# 엔지니어링 레벨 플래그 확인
+ENGINEERING_LEVEL="minimal"  # 기본값
+if [[ "$ARGUMENTS" == *"--balanced"* ]]; then
+  ENGINEERING_LEVEL="balanced"
+elif [[ "$ARGUMENTS" == *"--complete"* ]]; then
+  ENGINEERING_LEVEL="complete"
+fi
+
+# YOLO 설정에 엔지니어링 레벨 적용
+sed -i "s/engineering_level: .*/engineering_level: $ENGINEERING_LEVEL/" .aiwf/yolo-config.yaml
+echo "🔧 엔지니어링 레벨을 '$ENGINEERING_LEVEL'로 설정했습니다."
+```
+
+### 3. 체크포인트 세션 시작
+```bash
+# 독립 스프린트 실행을 위한 체크포인트 세션 시작
+CREATED_SPRINT_ID=$(ls .aiwf/03_SPRINTS/ | grep "^S" | sort | tail -1 | cut -d'_' -f1)
+echo "📊 체크포인트 세션 시작: $CREATED_SPRINT_ID"
+
+# 체크포인트 매니저로 세션 초기화
+node -e "
+import('./src/utils/checkpoint-manager.js').then(({ CheckpointManager }) => {
+  const manager = new CheckpointManager('.');
+  manager.initialize().then(() => {
+    manager.startSession('$CREATED_SPRINT_ID', 'independent-sprint');
+    console.log('✅ 독립 스프린트 체크포인트 세션 시작됨');
+  });
+});
+"
+```
+
+### 4. 오버엔지니어링 가드 활성화
+```bash
+# 독립 스프린트 전용 오버엔지니어링 가드 설정
+echo "🛡️ 오버엔지니어링 방지 가드 활성화 중..."
+echo "  - 요구사항 우선 모드: ON"
+echo "  - 간단한 해결책 선호: ON"  
+echo "  - 골드 플레이팅 방지: ON"
+echo "  - 트랙 유지 강제: ON"
+```
+
+### 5. 독립 스프린트 실행으로 전환
+- 생성된 스프린트 ID를 사용하여 즉시 실행 모드로 전환
+- `### 워크플로우 기반 지능적 작업 찾기`로 이동
+- 독립 스프린트 모드에서는 해당 스프린트 태스크만 실행
 
 ## 마일스톤 변경 감지 및 처리
 
@@ -270,24 +403,103 @@ aiwf state show --focus={task_id} --check-dependencies
 
 - **의존성 상태 동결**: 실행 중 의존성 변경 방지를 위한 스냅샷 생성
 
-**4단계: 워크플로우 통합 태스크 실행**
+**4단계: 워크플로우 통합 태스크 실행 (오버엔지니어링 방지 강화)**
 
-**스마트 태스크 실행**:
+**🛡️ 태스크 시작 전 오버엔지니어링 가드 체크**:
+```bash
+# 태스크 시작 시 체크포인트 생성
+node -e "
+import('./src/utils/checkpoint-manager.js').then(({ CheckpointManager }) => {
+  const manager = new CheckpointManager('.');
+  manager.startTask('${task_id}', { 
+    engineering_level: '$(grep engineering_level .aiwf/yolo-config.yaml | cut -d: -f2 | xargs)',
+    focus_rules: ['requirement_first', 'simple_solution', 'no_gold_plating']
+  });
+});
+"
+
+# 오버엔지니어링 가드 사전 체크
+node -e "
+import('./src/utils/engineering-guard.js').then(({ getEngineeringGuard }) => {
+  const guard = getEngineeringGuard('.aiwf/yolo-config.yaml');
+  guard.provideFeedback('current_task_area').then(feedback => {
+    feedback.forEach(f => console.log(\`\${f.level}: \${f.message}\`));
+  });
+});
+"
+```
+
+**스마트 태스크 실행 (YOLO 최적화)**:
 - **서브에이전트로 스마트 시작**: @.claude/commands/aiwf/aiwf_smart_start.md {task_id} 사용
+- **오버엔지니어링 방지 규칙 적용**: 
+  - 파일 크기 300줄 이하 유지
+  - 함수 크기 50줄 이하 유지
+  - 중첩 깊이 4레벨 이하 유지
+  - YAGNI 원칙 강제 적용
 - 기존 aiwf_do_task.md 대신 워크플로우 인식 버전 활용
 - 실행 중 실시간 상태 모니터링
 
-**실행 중 지능적 모니터링**:
+**실행 중 지능적 모니터링 (복잡도 추적 포함)**:
 ```bash
-# 5분마다 상태 업데이트 (백그라운드)
+# 1분마다 복잡도 체크 (백그라운드)
 while task_in_progress; do
-  sleep 300
+  sleep 60
+  
+  # 오버엔지니어링 가드 실시간 체크
+  node -e "
+  import('./src/utils/engineering-guard.js').then(({ quickCheck }) => {
+    quickCheck('.').then(report => {
+      if (report.summary.high_severity > 0) {
+        console.log('⚠️ 오버엔지니어링 위험 감지!');
+        console.log('권장사항:', report.recommendations);
+      }
+    });
+  });
+  "
+  
+  # 상태 업데이트
   aiwf state update --silent
   check_blocking_conflicts
 done
 ```
 
-**5단계: 실행 후 워크플로우 통합 검증**
+**5단계: 실행 후 워크플로우 통합 검증 (오버엔지니어링 방지 검증 포함)**
+
+**🛡️ 오버엔지니어링 방지 최종 검증**:
+```bash
+# 태스크 완료 후 복잡도 체크
+echo "🔍 태스크 완료 후 오버엔지니어링 검증 중..."
+node -e "
+import('./src/utils/engineering-guard.js').then(({ getEngineeringGuard }) => {
+  const guard = getEngineeringGuard('.aiwf/yolo-config.yaml');
+  guard.checkProject('.').then(report => {
+    console.log('📊 최종 복잡도 상태:', report.summary);
+    
+    if (report.summary.high_severity > 0) {
+      console.log('🚨 오버엔지니어링 발견!');
+      report.recommendations.forEach(rec => console.log('  💡', rec));
+      console.log('⚠️ 리팩토링을 고려하세요.');
+    } else {
+      console.log('✅ 복잡도 기준 통과');
+    }
+  });
+});
+"
+
+# 체크포인트 매니저로 태스크 완료 기록
+node -e "
+import('./src/utils/checkpoint-manager.js').then(({ CheckpointManager }) => {
+  const manager = new CheckpointManager('.');
+  manager.completeTask('${task_id}', {
+    complexity_check: 'passed',
+    engineering_level: 'minimal',
+    focus_maintained: true
+  }).then(() => {
+    console.log('📊 태스크 완료 체크포인트 생성됨');
+  });
+});
+"
+```
 
 **완료 검증**:
 - test.md 명령(@.claude/commands/aiwf/aiwf_test.md) 실행
@@ -625,6 +837,57 @@ aiwf state validate --focus=sprint-completion
 
 - 시스템에서 현재 datetime 스탬프를 가져와서 처음에 기억한 타임스탬프와 비교. 프로세스 지속시간 계산.
 
+### 🛡️ YOLO 세션 종료 및 체크포인트 리포트 생성
+
+**체크포인트 매니저 최종 리포트**:
+```bash
+# 체크포인트 매니저로 세션 종료 및 리포트 생성
+node -e "
+import('./src/utils/checkpoint-manager.js').then(({ CheckpointManager }) => {
+  const manager = new CheckpointManager('.');
+  manager.endSession({
+    mode: 'YOLO',
+    engineering_level: 'minimal',
+    overengineering_prevented: true,
+    focus_maintained: true
+  }).then(report => {
+    console.log('📊 YOLO 세션 최종 리포트:');
+    console.log('  완료된 태스크:', report.progress.completed);
+    console.log('  실패한 태스크:', report.progress.failed);
+    console.log('  총 실행 시간:', report.performance.total_time);
+    console.log('  평균 태스크 시간:', report.performance.avg_task_time);
+    console.log('  성공률:', report.performance.success_rate);
+    console.log('📁 상세 리포트:', \`checkpoints/session_\${report.session.id}_report.json\`);
+  });
+});
+"
+```
+
+**오버엔지니어링 방지 최종 보고서**:
+```bash
+# 프로젝트 전체 복잡도 최종 분석
+echo "🛡️ 오버엔지니어링 방지 최종 보고서 생성 중..."
+node -e "
+import('./src/utils/engineering-guard.js').then(({ getEngineeringGuard }) => {
+  const guard = getEngineeringGuard('.aiwf/yolo-config.yaml');
+  guard.checkProject('.').then(report => {
+    console.log('📊 복잡도 분석 결과:');
+    console.log('  총 위반사항:', report.summary.total_violations);
+    console.log('  높은 심각도:', report.summary.high_severity);
+    console.log('  중간 심각도:', report.summary.medium_severity);
+    console.log('  경고사항:', report.summary.warnings);
+    
+    if (report.recommendations.length > 0) {
+      console.log('💡 권장사항:');
+      report.recommendations.forEach(rec => console.log('  -', rec));
+    }
+    
+    console.log(report.passed ? '✅ 프로젝트 복잡도 기준 통과' : '⚠️ 일부 복잡도 이슈 발견');
+  });
+});
+"
+```
+
 ### 프로젝트 상태 보고서 생성
 
 **프로젝트 상태 데이터 수집:**
@@ -662,10 +925,14 @@ S05: ⏳ 계획됨 (0/0 태스크)
 [▓▓▓▓▓▓▓░░░] 73% 완료
 ```
 
-**다음을 포함한 적응적 관리 요약 보고서 생성:**
+**다음을 포함한 YOLO 중심 적응적 관리 요약 보고서 생성:**
 
-**실행 모드 및 전략:**
-- 실행된 모드 (스프린트별, Sprint-all 적응적, Milestone-all 적응적, 또는 하이브리드 일반)
+**🚀 YOLO 실행 모드 및 전략:**
+- 실행된 모드 (독립 스프린트, 스프린트별, Sprint-all 적응적, Milestone-all 적응적, 또는 하이브리드 일반)
+- 독립 스프린트 생성 여부 (README/GitHub 이슈 기반)
+- 적용된 엔지니어링 레벨 (minimal/balanced/complete)
+- 오버엔지니어링 방지 규칙 적용 횟수
+- 체크포인트 생성 및 복구 횟수
 - 적용된 적응적 관리 전략
 - 마일스톤 변경 감지 및 처리 횟수
 
@@ -681,11 +948,20 @@ S05: ⏳ 계획됨 (0/0 태스크)
 - 커밋/푸시 작업 횟수
 - 리뷰 요청 및 승인 상태
 
-**성과 지표:**
+**🛡️ YOLO 성과 지표:**
 - YOLO 세션의 총 지속시간
 - 현재 프로젝트 완료 백분율
-- 완료된 스프린트 수 및 상세 내역
+- 완료된 스프린트 수 및 상세 내역 (독립 스프린트 포함)
 - 달성된 마일스톤 수 및 상세 내역
+- **오버엔지니어링 방지 성과**:
+  - 복잡도 기준 위반 방지 횟수
+  - 간단한 해결책 선택 사례
+  - 골드 플레이팅 방지 사례
+  - YAGNI 원칙 적용 사례
+- **체크포인트 시스템 성과**:
+  - 생성된 체크포인트 수
+  - 복구 실행 횟수
+  - 세션 연속성 유지율
 - 적응적 계획 조정으로 인한 효율성 개선 사례
 
 **문제 및 해결:**
@@ -693,10 +969,18 @@ S05: ⏳ 계획됨 (0/0 태스크)
 - 현재 테스트 상태
 - 적응적 계획 조정으로 해결된 문제들
 
-**미래 계획:**
+**🚀 YOLO 미래 계획:**
 - 다음 권장 조치
 - 다음 세션을 위한 상위 3개 우선순위 항목
+- **독립 스프린트 추천**:
+  - 빠른 프로토타입 기회
+  - README TODO 활용 가능성
+  - GitHub 이슈 기반 스프린트 후보
 - 예상 다음 스프린트 방향성
+- **오버엔지니어링 방지 개선사항**:
+  - 복잡도 임계값 조정 제안
+  - 추가 가드 규칙 필요 영역
+  - 엔지니어링 레벨 최적화 제안
 - 적응적 관리 개선 제안사항
 
 **다음을 포함하여 사용자에게 완전한 상태 보고:**

@@ -158,7 +158,24 @@ aiwf sprint-independent "Quick Feature" --minimal
 
 ## 📚 Documentation
 
-For a complete list of AIWF commands and detailed usage, see [COMMANDS_GUIDE.md](docs/COMMANDS_GUIDE.md).
+### Core Documentation
+- [Commands Guide](docs/COMMANDS_GUIDE.md) - Complete list of AIWF commands
+- [CLI Usage Guide](docs/CLI_USAGE_GUIDE.md) - Detailed CLI tool documentation
+- [Getting Started](docs/GETTING_STARTED.md) - Quick start guide for new users
+- [Development Guide](docs/DEVELOPMENT_GUIDE.md) - Contributing to AIWF
+
+### Feature Guides
+- [Independent Sprint Guide](docs/guides/independent-sprint-guide.md) - YOLO-focused sprint creation
+- [Checkpoint System Guide](docs/guides/checkpoint-system-guide.md) - Recovery and progress tracking
+- [AI Personas Guide](docs/guides/ai-personas-guide.md) - Using specialized AI personas
+- [Context Compression Guide](docs/guides/context-compression-guide.md) - Token optimization strategies
+- [Feature Git Integration Guide](docs/guides/feature-git-integration-guide.md) - Git hooks and tracking
+
+### Technical Documentation
+- [State Management Guide](docs/STATE_MANAGEMENT_GUIDE.md) - Workflow-based state system
+- [AI Workflow](docs/AI-WORKFLOW.md) - AI integration patterns
+- [API Reference](docs/API_REFERENCE.md) - Programmatic usage
+- [Troubleshooting](docs/TROUBLESHOOTING.md) - Common issues and solutions
 
 ## ✨ Features
 

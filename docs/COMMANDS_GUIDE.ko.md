@@ -654,21 +654,320 @@ AIWF에는 다음과 같은 포괄적인 언어 관리 시스템이 포함되어
 4. 컨텍스트 정보 로드
 5. 작업 준비 상태 설정
 
+## CLI 명령어 (v0.3.12 신규!)
+
+### 🚀 `aiwf sprint independent`
+
+**목적**: 빠른 YOLO 실행을 위한 마일스톤 없이 독립 스프린트 생성
+
+**사용법**:
+```bash
+# README TODO에서 추출
+aiwf sprint independent --from-readme
+
+# GitHub 이슈에서 생성
+aiwf sprint independent --from-issue 123
+
+# 엔지니어링 레벨과 함께 대화형 생성
+aiwf sprint independent "빠른 기능" --minimal
+aiwf sprint independent "API 개발" --balanced
+aiwf sprint independent "복잡한 시스템" --complete
+```
+
+**기능**:
+- 마일스톤 종속성 불필요
+- README/이슈에서 자동 태스크 추출
+- 설정 가능한 엔지니어링 레벨
+- YOLO 최적화된 스프린트 구조
+
+### 💾 `aiwf checkpoint`
+
+**목적**: 복구 및 추적을 위한 YOLO 실행 체크포인트 관리
+
+**사용법**:
+```bash
+# 체크포인트 목록
+aiwf checkpoint list
+aiwf checkpoint list --limit 20
+
+# 현재 세션 상태 확인
+aiwf checkpoint status
+
+# 체크포인트에서 복원
+aiwf checkpoint restore cp_1234567890
+
+# 수동 체크포인트 생성
+aiwf checkpoint create "주요 리팩토링 전"
+
+# 오래된 체크포인트 정리
+aiwf checkpoint clean --keep 10
+```
+
+**기능**:
+- YOLO 중 자동 체크포인트 생성
+- Git 상태 추적
+- 세션 메트릭 및 성능 데이터
+- 중단으로부터 안전한 복구
+
+### 🛠️ `aiwf yolo-config`
+
+**목적**: YOLO 동작 및 오버엔지니어링 방지 구성
+
+**사용법**:
+```bash
+# 기본 설정 초기화
+aiwf yolo-config init
+
+# 대화형 구성 마법사
+aiwf yolo-config wizard
+
+# 현재 구성 표시
+aiwf yolo-config show
+```
+
+**구성 옵션**:
+- 엔지니어링 레벨 (minimal/balanced/complete)
+- 포커스 규칙 (requirement_first, simple_solution 등)
+- 실행 모드 (fast/smart/safe)
+- 오버엔지니어링 방지 제한
+- 체크포인트 간격
+
+### 📊 `aiwf-sprint` (전용 CLI)
+
+**목적**: 포괄적인 스프린트 관리 도구
+
+**사용법**:
+```bash
+# 독립 스프린트 생성
+aiwf-sprint independent --from-readme --minimal
+
+# 모든 스프린트 목록
+aiwf-sprint list
+aiwf-sprint list --status active
+
+# 스프린트 상태 확인
+aiwf-sprint status S01
+
+# 도움말 받기
+aiwf-sprint help
+```
+
+### 🔄 `aiwf-checkpoint` (전용 CLI)
+
+**목적**: 고급 체크포인트 관리
+
+**사용법**:
+```bash
+# 진행 상황 리포트 생성
+aiwf-checkpoint report
+
+# 상세 정보와 함께 목록
+aiwf-checkpoint list
+
+# 드라이 런으로 정리
+aiwf-checkpoint clean --keep 5 --dry-run
+
+# 도움말 받기
+aiwf-checkpoint help
+```
+
+## AI 페르소나 명령어
+
+### 🎭 `/project:aiwf:ai_persona:switch`
+
+**목적**: 집중된 개발 작업을 위한 특정 AI 페르소나로 전환
+
+**사용법**:
+
+```
+/project:aiwf:ai_persona:switch architect
+# 아키텍트 페르소나로 전환
+
+/project:aiwf:ai_persona:switch debugger
+# 디버거 페르소나로 전환
+```
+
+**사용 가능한 페르소나**:
+- `architect` - 시스템 설계 및 아키텍처
+- `debugger` - 버그 감지 및 문제 해결
+- `reviewer` - 코드 품질 및 표준
+- `documenter` - 문서화 및 가이드
+- `optimizer` - 성능 최적화
+- `developer` - 일반 개발 (기본값)
+
+### 🎭 `/project:aiwf:ai_persona:architect`
+
+**목적**: 아키텍트 페르소나로 전환하는 단축키
+
+**사용법**:
+
+```
+/project:aiwf:ai_persona:architect
+```
+
+**사용 시기**: 시스템 아키텍처 설계, 모듈 계획, 기술 설계 생성 시
+
+### 🎭 `/project:aiwf:ai_persona:debugger`
+
+**목적**: 디버거 페르소나로 전환하는 단축키
+
+**사용법**:
+
+```
+/project:aiwf:ai_persona:debugger
+```
+
+**사용 시기**: 버그 수정, 오류 추적, 문제 조사 시
+
+### 🎭 `/project:aiwf:ai_persona:reviewer`
+
+**목적**: 리뷰어 페르소나로 전환하는 단축키
+
+**사용법**:
+
+```
+/project:aiwf:ai_persona:reviewer
+```
+
+**사용 시기**: 코드 리뷰, 보안 확인, 표준 준수 확인 시
+
+### 🎭 `/project:aiwf:ai_persona:documenter`
+
+**목적**: 문서 작성자 페르소나로 전환하는 단축키
+
+**사용법**:
+
+```
+/project:aiwf:ai_persona:documenter
+```
+
+**사용 시기**: 문서 작성, 가이드 생성, 기능 설명 시
+
+### 🎭 `/project:aiwf:ai_persona:optimizer`
+
+**목적**: 최적화 전문가 페르소나로 전환하는 단축키
+
+**사용법**:
+
+```
+/project:aiwf:ai_persona:optimizer
+```
+
+**사용 시기**: 성능 최적화, 리소스 사용 감소, 효율성 개선 시
+
+### 🔄 `/project:aiwf:ai_persona:auto`
+
+**목적**: 자동 페르소나 감지 활성화 또는 비활성화
+
+**사용법**:
+
+```
+/project:aiwf:ai_persona:auto on
+# 자동 감지 활성화
+
+/project:aiwf:ai_persona:auto off
+# 자동 감지 비활성화
+```
+
+**동작**: 활성화 시 Claude가 태스크 컨텍스트에 따라 자동으로 페르소나 전환
+
+### 📊 `/project:aiwf:ai_persona:status`
+
+**목적**: 현재 페르소나 및 세션 메트릭 표시
+
+**사용법**:
+
+```
+/project:aiwf:ai_persona:status
+```
+
+**출력**: 현재 페르소나, 동작, 세션 기간, 상호작용, 토큰 사용량 표시
+
+### 📋 `/project:aiwf:ai_persona:list`
+
+**목적**: 사용 가능한 모든 AI 페르소나 목록 표시
+
+**사용법**:
+
+```
+/project:aiwf:ai_persona:list
+```
+
+**출력**: 설명 및 집중 영역과 함께 모든 페르소나 표시
+
+### 🔍 `/project:aiwf:ai_persona:detect`
+
+**목적**: 특정 작업에 최적의 페르소나 감지
+
+**사용법**:
+
+```
+/project:aiwf:ai_persona:detect "인증 버그 수정"
+# 디버거 페르소나 감지
+
+/project:aiwf:ai_persona:detect "API 구조 설계"
+# 아키텍트 페르소나 감지
+```
+
+### 📈 `/project:aiwf:ai_persona:report`
+
+**목적**: 페르소나 사용에 대한 성능 리포트 생성
+
+**사용법**:
+
+```
+/project:aiwf:ai_persona:report
+# 전체 기간 리포트 생성
+
+/project:aiwf:ai_persona:report week
+# 지난 주 리포트 생성
+```
+
+**출력**: 성능 메트릭, 페르소나 사용 통계, 권장사항
+
+### 📊 `/project:aiwf:ai_persona:stats`
+
+**목적**: 특정 페르소나의 상세 통계 보기
+
+**사용법**:
+
+```
+/project:aiwf:ai_persona:stats debugger
+# 디버거 페르소나 통계 보기
+
+/project:aiwf:ai_persona:stats
+# 현재 페르소나 통계 보기
+```
+
+### 🔄 `/project:aiwf:ai_persona:reset`
+
+**목적**: 페르소나 시스템을 기본값(developer)으로 리셋
+
+**사용법**:
+
+```
+/project:aiwf:ai_persona:reset
+```
+
 ## 모범 사례
 
 ### 일일 워크플로
 
 ```bash
-# Start of day
+# 하루 시작
 /aiwf_prime
 
-# Work on tasks
+# AI 페르소나 자동 감지 활성화
+/project:aiwf:ai_persona:auto on
+
+# 작업 수행
 /aiwf_do_task
 /aiwf_test
 /aiwf_commit
 
-# End of day
+# 하루 마무리
 /aiwf_project_review
+/project:aiwf:ai_persona:report
 ```
 
 ### 스프린트 워크플로
@@ -704,6 +1003,11 @@ AIWF에는 다음과 같은 포괄적인 언어 관리 시스템이 포함되어
 3. **주요 커밋 전 검토**: 문제를 조기에 발견
 4. **버그는 일반 작업으로 생성**: 추적 가능하게 유지
 5. **작업별 커밋 사용**: 더 나은 추적성
+6. **AI 페르소나 자동 감지 활성화**: Claude가 자동으로 올바른 모드로 전환하도록 허용
+7. **계획 시 아키텍트 페르소나 사용**: 더 나은 시스템 설계 결정
+8. **버그 수정 시 디버거로 전환**: 더 체계적인 오류 분석
+9. **최적화 페르소나는 신중히 사용**: 실제 병목 현상에 집중
+10. **주간 페르소나 리포트 확인**: 개발 패턴 이해
 
 ## 명령어 안전 장치
 
@@ -730,4 +1034,4 @@ AIWF 명령어에는 다음과 같은 안전 기능이 포함되어 있습니다
 
 **언어 버전**: 이 가이드의 영어 및 한국어 버전은 언어 설치 간 일관성을 보장하기 위해 동시에 유지되고 업데이트됩니다.
 
-**최종 업데이트**: 2025-07-03 - 언어 관리 시스템 및 한국어 명령어 표준화
+**최종 업데이트**: 2025-07-09 - AI 페르소나 시스템 통합 및 문서화

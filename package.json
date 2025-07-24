@@ -1,12 +1,14 @@
 {
     "name": "aiwf",
-    "version": "0.3.10",
+    "version": "0.3.12",
     "description": "AI Workflow Framework for Claude Code with multi-language support (Korean/English)",
     "main": "index.js",
     "type": "module",
     "bin": {
         "aiwf": "./src/cli/index.js",
-        "aiwf-lang": "./src/cli/language-cli.js"
+        "aiwf-lang": "./src/cli/language-cli.js",
+        "aiwf-sprint": "./src/cli/sprint-cli.js",
+        "aiwf-checkpoint": "./src/cli/checkpoint-cli.js"
     },
     "scripts": {
         "test": "node --experimental-vm-modules node_modules/.bin/jest",
@@ -67,6 +69,7 @@
         "chalk": "^5.3.0",
         "commander": "^11.1.0",
         "fs-extra": "^11.3.0",
+        "js-yaml": "^4.1.0",
         "ora": "^8.0.1",
         "prompts": "^2.4.2",
         "tar": "^6.2.1",

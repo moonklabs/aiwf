@@ -12,6 +12,9 @@ import TokenCommand from '../commands/token.js';
 import EvaluateCommand from '../commands/evaluate.js';
 import { createProject } from '../commands/create-project.js';
 import StateCommand from '../commands/state.js';
+import { createIndependentSprint } from '../commands/sprint-independent.js';
+import { CheckpointManager } from '../utils/checkpoint-manager.js';
+import { createYoloConfig, createInteractiveYoloConfig, showYoloConfig } from '../commands/yolo-config.js';
 
 // Parse version from package.json
 import { readFileSync } from 'fs';
@@ -397,6 +400,236 @@ state
   .action(async () => {
     const stateCmd = new StateCommand();
     await stateCmd.execute(['next']);
+  });
+
+// Sprint management commands (YOLO focused)
+const sprint = program.command('sprint');
+sprint.description('Independent sprint management / 독립 스프린트 관리');
+
+sprint
+  .command('independent [name]')
+  .alias('ind')
+  .description('Create independent sprint / 독립 스프린트 생성')
+  .option('--from-readme', 'Extract from README TODOs / README TODO에서 추출')
+  .option('--from-issue <number>', 'Create from GitHub issue / GitHub 이슈에서 생성')
+  .option('--minimal', 'Minimal engineering level / 최소 엔지니어링 레벨')
+  .option('--balanced', 'Balanced engineering level / 균형 엔지니어링 레벨')
+  .option('--complete', 'Complete engineering level / 완전 엔지니어링 레벨')
+  .option('--description <desc>', 'Sprint description / 스프린트 설명')
+  .action(async (name, options) => {
+    try {
+      console.log(chalk.blue('🚀 독립 스프린트 생성 중...'));
+      
+      // 엔지니어링 레벨 결정
+      let engineeringLevel = 'minimal';
+      if (options.balanced) engineeringLevel = 'balanced';
+      else if (options.complete) engineeringLevel = 'complete';
+      
+      const sprintOptions = {
+        name,
+        description: options.description,
+        engineeringLevel,
+        fromReadme: options.fromReadme,
+        fromIssue: options.fromIssue,
+        minimal: engineeringLevel === 'minimal'
+      };
+      
+      const result = await createIndependentSprint(sprintOptions);
+      
+      if (result.success) {
+        console.log('');
+        console.log(chalk.green('✅ 독립 스프린트 생성 완료!'));
+        console.log(`  스프린트 ID: ${chalk.cyan(result.sprintId)}`);
+        console.log(`  태스크 수: ${chalk.blue(result.tasks)}개`);
+        console.log('');
+        console.log(chalk.bold('🚀 다음 단계:'));
+        console.log(`  Claude Code에서 ${chalk.cyan(`/project:aiwf:yolo ${result.sprintId}`)} 실행`);
+      }
+    } catch (error) {
+      console.error(chalk.red('❌ 독립 스프린트 생성 실패:'), error.message);
+      process.exit(1);
+    }
+  });
+
+// YOLO configuration commands  
+const yoloConfig = program.command('yolo-config');
+yoloConfig.description('YOLO configuration management / YOLO 설정 관리');
+
+yoloConfig
+  .command('init')
+  .description('Initialize YOLO configuration / YOLO 설정 초기화')
+  .option('-f, --force', 'Force overwrite existing config / 기존 설정 덮어쓰기')
+  .action(async (options) => {
+    try {
+      const result = await createYoloConfig(options);
+      if (result.success) {
+        console.log(chalk.green('✅ YOLO 설정이 초기화되었습니다!'));
+        console.log(`📁 위치: ${chalk.cyan(result.configPath)}`);
+      } else if (result.skipped) {
+        console.log(chalk.yellow('⏭️ 설정 파일이 이미 존재합니다.'));
+      }
+    } catch (error) {
+      console.error(chalk.red('❌ YOLO 설정 초기화 실패:'), error.message);
+      process.exit(1);
+    }
+  });
+
+yoloConfig
+  .command('wizard')
+  .alias('interactive')
+  .description('Interactive YOLO configuration wizard / 대화형 YOLO 설정 마법사')
+  .action(async () => {
+    try {
+      const result = await createInteractiveYoloConfig();
+      if (!result.success && result.cancelled) {
+        process.exit(0);
+      }
+    } catch (error) {
+      console.error(chalk.red('❌ YOLO 설정 마법사 실패:'), error.message);
+      process.exit(1);
+    }
+  });
+
+yoloConfig
+  .command('show')
+  .alias('status')
+  .description('Show current YOLO configuration / 현재 YOLO 설정 확인')
+  .action(async () => {
+    try {
+      await showYoloConfig();
+    } catch (error) {
+      console.error(chalk.red('❌ YOLO 설정 확인 실패:'), error.message);
+      process.exit(1);
+    }
+  });
+
+// Checkpoint management commands (YOLO recovery)
+const checkpoint = program.command('checkpoint');
+checkpoint.description('YOLO checkpoint management / YOLO 체크포인트 관리');
+
+checkpoint
+  .command('list')
+  .alias('ls')
+  .description('List available checkpoints / 사용 가능한 체크포인트 목록')
+  .option('--limit <n>', 'Limit number of checkpoints / 체크포인트 수 제한', '10')
+  .action(async (options) => {
+    try {
+      // 프로젝트 루트 찾기
+      const fs = await import('fs/promises');
+      const path = await import('path');
+      let currentDir = process.cwd();
+      
+      while (currentDir !== path.parse(currentDir).root) {
+        try {
+          await fs.access(path.join(currentDir, '.aiwf'));
+          break;
+        } catch {
+          currentDir = path.dirname(currentDir);
+        }
+      }
+      
+      const manager = new CheckpointManager(currentDir);
+      const checkpoints = await manager.listCheckpoints();
+      
+      console.log(chalk.bold('📊 체크포인트 목록:'));
+      console.log('');
+      
+      if (checkpoints.length === 0) {
+        console.log(chalk.yellow('📭 체크포인트가 없습니다.'));
+        return;
+      }
+      
+      const limit = parseInt(options.limit);
+      const limitedCheckpoints = checkpoints.slice(0, limit);
+      
+      for (const cp of limitedCheckpoints) {
+        const typeIcon = cp.type === 'session_start' ? '🚀' :
+                        cp.type === 'task_complete' ? '✅' : '🔄';
+        console.log(`${typeIcon} ${chalk.cyan(cp.id)} - ${chalk.yellow(cp.type)}`);
+        console.log(`    태스크: ${chalk.blue(cp.tasks_completed)}개 완료`);
+        console.log('');
+      }
+    } catch (error) {
+      console.error(chalk.red('❌ 체크포인트 목록 조회 실패:'), error.message);
+      process.exit(1);
+    }
+  });
+
+checkpoint
+  .command('restore <checkpointId>')
+  .description('Restore from checkpoint / 체크포인트에서 복구')
+  .action(async (checkpointId) => {
+    try {
+      const fs = await import('fs/promises');
+      const path = await import('path');
+      let currentDir = process.cwd();
+      
+      while (currentDir !== path.parse(currentDir).root) {
+        try {
+          await fs.access(path.join(currentDir, '.aiwf'));
+          break;
+        } catch {
+          currentDir = path.dirname(currentDir);
+        }
+      }
+      
+      const manager = new CheckpointManager(currentDir);
+      await manager.initialize();
+      
+      console.log(chalk.blue(`🔄 체크포인트 ${checkpointId}에서 복구 중...`));
+      
+      const result = await manager.restoreFromCheckpoint(checkpointId);
+      
+      if (result.success) {
+        console.log(chalk.green('✅ 체크포인트 복구 성공!'));
+        console.log(`  세션 ID: ${chalk.cyan(result.checkpoint.state_snapshot.session_id)}`);
+        console.log(`  스프린트: ${chalk.blue(result.checkpoint.state_snapshot.sprint_id || 'N/A')}`);
+        console.log('');
+        console.log(chalk.green('🚀 복구 완료! YOLO 모드를 다시 실행할 수 있습니다.'));
+      }
+    } catch (error) {
+      console.error(chalk.red('❌ 체크포인트 복구 실패:'), error.message);
+      process.exit(1);
+    }
+  });
+
+checkpoint
+  .command('status')
+  .description('Show current YOLO session status / 현재 YOLO 세션 상태')
+  .action(async () => {
+    try {
+      const fs = await import('fs/promises');
+      const path = await import('path');
+      let currentDir = process.cwd();
+      
+      while (currentDir !== path.parse(currentDir).root) {
+        try {
+          await fs.access(path.join(currentDir, '.aiwf'));
+          break;
+        } catch {
+          currentDir = path.dirname(currentDir);
+        }
+      }
+      
+      const manager = new CheckpointManager(currentDir);
+      await manager.loadState();
+      
+      console.log(chalk.bold('📊 YOLO 세션 상태:'));
+      console.log('');
+      
+      if (!manager.currentState.session_id) {
+        console.log(chalk.yellow('📭 활성 YOLO 세션이 없습니다.'));
+        return;
+      }
+      
+      console.log(`세션 ID: ${chalk.cyan(manager.currentState.session_id)}`);
+      console.log(`스프린트: ${chalk.blue(manager.currentState.sprint_id || 'N/A')}`);
+      console.log(`완료된 태스크: ${chalk.green(manager.currentState.completed_tasks.length)}개`);
+      console.log(`체크포인트: ${chalk.blue(manager.currentState.checkpoints.length)}개`);
+    } catch (error) {
+      console.error(chalk.red('❌ 상태 확인 실패:'), error.message);
+      process.exit(1);
+    }
   });
 
 // GitHub integration commands

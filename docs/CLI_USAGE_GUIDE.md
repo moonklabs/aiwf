@@ -6,10 +6,13 @@
 3. [AI 도구 관리](#ai-도구-관리)
 4. [캐시 관리](#캐시-관리)
 5. [언어 관리](#언어-관리)
-6. [Claude Code 통합 명령어](#claude-code-통합-명령어)
-7. [Git 통합 및 Feature Tracking](#git-통합-및-feature-tracking)
-8. [일반적인 워크플로우](#일반적인-워크플로우)
-9. [문제 해결](#문제-해결)
+6. [독립 스프린트 관리 (YOLO 중심)](#독립-스프린트-관리-yolo-중심)
+7. [체크포인트 시스템 (YOLO 복구)](#체크포인트-시스템-yolo-복구)
+8. [YOLO 설정 관리](#yolo-설정-관리)
+9. [Claude Code 통합 명령어](#claude-code-통합-명령어)
+10. [Git 통합 및 Feature Tracking](#git-통합-및-feature-tracking)
+11. [일반적인 워크플로우](#일반적인-워크플로우)
+12. [문제 해결](#문제-해결)
 
 ---
 
@@ -235,6 +238,156 @@ aiwf-lang set --auto-detect false
 # 자동 감지 모드로 리셋
 aiwf-lang reset
 aiwf-lang r  # 별칭
+```
+
+---
+
+## 🚀 독립 스프린트 관리 (YOLO 중심)
+
+### 독립 스프린트 생성
+```bash
+# README TODO에서 자동 추출
+aiwf sprint independent --from-readme
+
+# GitHub 이슈에서 생성
+aiwf sprint independent --from-issue 123
+
+# 대화형 생성
+aiwf sprint independent "빠른 프로토타입"
+
+# 엔지니어링 레벨 지정
+aiwf sprint independent "API 개발" --minimal    # 최소 구현
+aiwf sprint independent "API 개발" --balanced   # 균형잡힌 구현
+aiwf sprint independent "API 개발" --complete   # 완전한 구현
+```
+
+### 스프린트 목록 및 상태
+```bash
+# 모든 스프린트 목록
+aiwf-sprint list
+aiwf-sprint ls
+
+# 상태별 필터링
+aiwf-sprint list --status active
+aiwf-sprint list --status completed
+
+# 특정 스프린트 상태 확인
+aiwf-sprint status S01
+```
+
+### 전용 CLI 도구 (aiwf-sprint)
+```bash
+# 도움말
+aiwf-sprint help
+
+# 독립 스프린트 생성
+aiwf-sprint independent --from-readme --minimal
+aiwf-sprint ind "빠른 기능" --balanced
+```
+
+출력 예시:
+```
+🚀 독립 스프린트 생성 중...
+
+✅ 독립 스프린트 생성 완료!
+  스프린트 ID: S03
+  태스크 수: 5개
+
+🚀 다음 단계:
+  Claude Code에서 /project:aiwf:yolo S03 실행
+```
+
+---
+
+## 💾 체크포인트 시스템 (YOLO 복구)
+
+### 체크포인트 관리
+```bash
+# 체크포인트 목록 보기
+aiwf checkpoint list
+aiwf checkpoint ls
+aiwf checkpoint list --limit 20
+
+# 현재 YOLO 세션 상태
+aiwf checkpoint status
+
+# 체크포인트에서 복구
+aiwf checkpoint restore cp_1234567890
+
+# 수동 체크포인트 생성
+aiwf checkpoint create "주요 리팩토링 전"
+
+# 오래된 체크포인트 정리
+aiwf checkpoint clean --keep 10
+aiwf checkpoint clean --keep 5 --dry-run  # 실제 삭제 없이 미리보기
+```
+
+### 전용 CLI 도구 (aiwf-checkpoint)
+```bash
+# 도움말
+aiwf-checkpoint help
+
+# 진행 상황 리포트
+aiwf-checkpoint report
+
+# 체크포인트 상세 정보
+aiwf-checkpoint show cp_1234567890
+```
+
+출력 예시:
+```
+📊 체크포인트 목록:
+
+🚀 cp_1703123456789 - session_start
+    태스크: 0개 완료
+
+✅ cp_1703123556789 - task_complete
+    태스크: 5개 완료
+
+🔄 cp_1703123656789 - auto
+    태스크: 10개 완료
+```
+
+---
+
+## 🛠️ YOLO 설정 관리
+
+### YOLO 설정 초기화
+```bash
+# 기본 설정 파일 생성
+aiwf yolo-config init
+
+# 기존 파일 덮어쓰기
+aiwf yolo-config init --force
+
+# 대화형 설정 마법사
+aiwf yolo-config wizard
+aiwf yolo-config interactive
+
+# 현재 설정 확인
+aiwf yolo-config show
+aiwf yolo-config status
+```
+
+### 설정 마법사 옵션
+대화형 마법사에서 설정할 수 있는 항목:
+- 엔지니어링 레벨 (minimal/balanced/complete)
+- 포커스 규칙 (요구사항 우선, 간단한 해결책 등)
+- 실행 모드 (빠른/스마트/안전)
+- 체크포인트 설정
+- 오버엔지니어링 방지 규칙
+
+출력 예시:
+```
+🛠️ YOLO 설정 마법사
+
+엔지니어링 레벨을 선택하세요:
+❯ 최소 (Minimal) - 빠른 프로토타입, 최소 구현
+  균형 (Balanced) - 품질과 속도의 균형
+  완전 (Complete) - 완전한 구현, 높은 품질
+
+✅ 커스텀 YOLO 설정이 생성되었습니다!
+📁 위치: .aiwf/yolo-config.yaml
 ```
 
 ---

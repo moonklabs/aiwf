@@ -415,6 +415,123 @@ AIWF includes a comprehensive language management system with:
 
 **When to Use**: When you want autonomous progress
 
+## CLI Commands (New in v0.3.12)
+
+### 🚀 `aiwf sprint independent`
+
+**Purpose**: Create independent sprints without milestones for rapid YOLO execution
+
+**Usage**:
+```bash
+# Extract from README TODOs
+aiwf sprint independent --from-readme
+
+# Create from GitHub issue
+aiwf sprint independent --from-issue 123
+
+# Interactive creation with engineering level
+aiwf sprint independent "Quick Feature" --minimal
+aiwf sprint independent "API Development" --balanced
+aiwf sprint independent "Complex System" --complete
+```
+
+**Features**:
+- No milestone dependency required
+- Automatic task extraction from README/Issues
+- Configurable engineering levels
+- YOLO-optimized sprint structure
+
+### 💾 `aiwf checkpoint`
+
+**Purpose**: Manage YOLO execution checkpoints for recovery and tracking
+
+**Usage**:
+```bash
+# List checkpoints
+aiwf checkpoint list
+aiwf checkpoint list --limit 20
+
+# Check current session status
+aiwf checkpoint status
+
+# Restore from checkpoint
+aiwf checkpoint restore cp_1234567890
+
+# Create manual checkpoint
+aiwf checkpoint create "Before major refactor"
+
+# Clean old checkpoints
+aiwf checkpoint clean --keep 10
+```
+
+**Features**:
+- Automatic checkpoint creation during YOLO
+- Git state tracking
+- Session metrics and performance data
+- Safe recovery from interruptions
+
+### 🛠️ `aiwf yolo-config`
+
+**Purpose**: Configure YOLO behavior and overengineering prevention
+
+**Usage**:
+```bash
+# Initialize default config
+aiwf yolo-config init
+
+# Interactive configuration wizard
+aiwf yolo-config wizard
+
+# Show current configuration
+aiwf yolo-config show
+```
+
+**Configuration Options**:
+- Engineering levels (minimal/balanced/complete)
+- Focus rules (requirement_first, simple_solution, etc.)
+- Execution modes (fast/smart/safe)
+- Overengineering prevention limits
+- Checkpoint intervals
+
+### 📊 `aiwf-sprint` (Dedicated CLI)
+
+**Purpose**: Comprehensive sprint management tool
+
+**Usage**:
+```bash
+# Create independent sprint
+aiwf-sprint independent --from-readme --minimal
+
+# List all sprints
+aiwf-sprint list
+aiwf-sprint list --status active
+
+# Check sprint status
+aiwf-sprint status S01
+
+# Get help
+aiwf-sprint help
+```
+
+### 🔄 `aiwf-checkpoint` (Dedicated CLI)
+
+**Purpose**: Advanced checkpoint management
+
+**Usage**:
+```bash
+# Generate progress report
+aiwf-checkpoint report
+
+# List with details
+aiwf-checkpoint list
+
+# Clean with dry-run
+aiwf-checkpoint clean --keep 5 --dry-run
+
+# Get help
+aiwf-checkpoint help
+```
+
 ## Additional/Advanced Commands
 
 ### 📌 `/aiwf_pr_create`

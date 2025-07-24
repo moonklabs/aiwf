@@ -1,6 +1,6 @@
 # AIWF (AI Workflow Framework)
 
-[Read in Korean (한국어로 보기)](README.ko.md)
+[Read in English](README.md)
 
 [![NPM Version](https://img.shields.io/npm/v/aiwf.svg)](https://www.npmjs.com/package/aiwf)
 [![License](https://img.shields.io/npm/l/aiwf.svg)](https://github.com/aiwf/aiwf/blob/main/LICENSE)
@@ -111,9 +111,26 @@ your_project/
 - **리뷰**: `/project:aiwf:code_review` - 코드 리뷰
 - **GitHub 연동**: `/project:aiwf:issue_create`, `/project:aiwf:pr_create`
 
-## 📚 문서 참조
+## 📚 문서
 
-전체 AIWF 명령어 목록과 자세한 사용법은 [COMMANDS_GUIDE.md](docs/COMMANDS_GUIDE.md)를 참조하세요.
+### 핵심 문서
+- [명령어 가이드](docs/COMMANDS_GUIDE.ko.md) - 전체 AIWF 명령어 목록
+- [CLI 사용 가이드](docs/CLI_USAGE_GUIDE.md) - 상세한 CLI 도구 문서
+- [시작하기](docs/GETTING_STARTED.md) - 새 사용자를 위한 빠른 시작 가이드
+- [개발 가이드](docs/DEVELOPMENT_GUIDE.ko.md) - AIWF에 기여하기
+
+### 기능 가이드
+- [독립 스프린트 가이드](docs/guides/independent-sprint-guide-ko.md) - YOLO 중심 스프린트 생성
+- [체크포인트 시스템 가이드](docs/guides/checkpoint-system-guide-ko.md) - 복구 및 진행 상황 추적
+- [AI 페르소나 가이드](docs/guides/ai-personas-guide-ko.md) - 전문 AI 페르소나 사용
+- [컨텍스트 압축 가이드](docs/guides/context-compression-guide-ko.md) - 토큰 최적화 전략
+- [기능 Git 통합 가이드](docs/guides/feature-git-integration-guide-ko.md) - Git hooks 및 추적
+
+### 기술 문서
+- [상태 관리 가이드](docs/STATE_MANAGEMENT_GUIDE.ko.md) - 워크플로우 기반 상태 시스템
+- [AI 워크플로우](docs/AI-WORKFLOW.ko.md) - AI 통합 패턴
+- [API 참조](docs/API_REFERENCE.md) - 프로그래머틱 사용
+- [문제 해결](docs/TROUBLESHOOTING.md) - 일반적인 문제 및 해결책
 
 ## ✨ 주요 기능
 
