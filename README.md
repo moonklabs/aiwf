@@ -3,7 +3,7 @@
 [Read in Korean (한국어로 보기)](README.ko.md)
 
 [![NPM Version](https://img.shields.io/npm/v/aiwf.svg)](https://www.npmjs.com/package/aiwf)
-[![License](https://img.shields.io/npm/l/aiwf.svg)](https://github.com/aiwf/aiwf/blob/main/LICENSE)
+[![License](https://img.shields.io/npm/l/aiwf.svg)](https://github.com/moonklabs/aiwf/blob/main/LICENSE)
 [![Downloads](https://img.shields.io/npm/dm/aiwf.svg)](https://www.npmjs.com/package/aiwf)
 
 ## What is AIWF?
@@ -304,7 +304,7 @@ aiwf/
 ## 📖 Source
 
 This installer fetches the AIWF framework from:
-<https://github.com/aiwf/aiwf>
+<https://github.com/moonklabs/aiwf>
 
 ## 📝 License
 

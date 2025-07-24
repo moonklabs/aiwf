@@ -46,14 +46,14 @@ We follow these principles to create a respectful and inclusive environment:
 
 ```bash
 # 1. Fork the repository
-# Fork https://github.com/aiwf/aiwf on GitHub
+# Fork https://github.com/moonklabs/aiwf on GitHub
 
 # 2. Clone locally
 git clone https://github.com/YOUR_USERNAME/aiwf.git
 cd aiwf
 
 # 3. Add upstream remote
-git remote add upstream https://github.com/aiwf/aiwf.git
+git remote add upstream https://github.com/moonklabs/aiwf.git
 
 # 4. Install dependencies
 npm install
@@ -70,7 +70,7 @@ npm run lint          # Check code style
 
 The recommended way to contribute:
 
-1. **Find an Issue**: Select from [GitHub Issues](https://github.com/aiwf/aiwf/issues)
+1. **Find an Issue**: Select from [GitHub Issues](https://github.com/moonklabs/aiwf/issues)
 2. **Assign Yourself**: Comment to express interest
 3. **Create Branch**: Use format `feature/issue-number-brief-description`
 
@@ -398,11 +398,11 @@ AIWF follows [Semantic Versioning](https://semver.org/):
 
 Thank you to all contributors! Key contributors can be found at:
 
-- [Contributors page](https://github.com/aiwf/aiwf/graphs/contributors)
-- [Release notes](https://github.com/aiwf/aiwf/releases) mention contributors per release
+- [Contributors page](https://github.com/moonklabs/aiwf/graphs/contributors)
+- [Release notes](https://github.com/moonklabs/aiwf/releases) mention contributors per release
 
 ---
 
-If you have questions, feel free to [create an issue](https://github.com/aiwf/aiwf/issues/new) or join the [discussions](https://github.com/aiwf/aiwf/discussions)!
+If you have questions, feel free to [create an issue](https://github.com/moonklabs/aiwf/issues/new) or join the [discussions](https://github.com/moonklabs/aiwf/discussions)!
 
 Let's build a better AIWF together! 🚀

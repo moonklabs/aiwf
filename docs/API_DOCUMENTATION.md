@@ -927,6 +927,6 @@ async function personaBasedWorkflow(taskType) {
 
 ## 지원 및 문의
 
-- GitHub Issues: https://github.com/aiwf/aiwf/issues
+- GitHub Issues: https://github.com/moonklabs/aiwf/issues
 - 문서: https://aiwf.github.io/docs
 - 이메일: support@aiwf.dev

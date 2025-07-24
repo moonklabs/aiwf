@@ -30,7 +30,7 @@ aiwf 프로젝트 개발을 위해 다음 도구들이 필요합니다:
 
 ```bash
 # 1. 리포지토리 클론
-git clone https://github.com/aiwf/aiwf.git
+git clone https://github.com/moonklabs/aiwf.git
 cd aiwf
 
 # 2. 의존성 설치
@@ -430,7 +430,7 @@ console.timeEnd('operation');
 
 ## 추가 리소스
 
-- [AIWF 공식 문서](https://github.com/aiwf/aiwf/docs)
+- [AIWF 공식 문서](https://github.com/moonklabs/aiwf/docs)
 - [Node.js ES 모듈 가이드](https://nodejs.org/api/esm.html)
 - [Jest 테스팅 가이드](https://jestjs.io/docs/getting-started)
 - [GitHub Actions 문서](https://docs.github.com/en/actions)

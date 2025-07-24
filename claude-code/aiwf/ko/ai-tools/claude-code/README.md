@@ -143,7 +143,7 @@ aiwf ai-tool update claude-code
 ## Support
 
 - Documentation: [AIWF Docs](https://aiwf.dev/docs)
-- Issues: [GitHub Issues](https://github.com/aiwf/aiwf/issues)
+- Issues: [GitHub Issues](https://github.com/moonklabs/aiwf/issues)
 - Community: [Discord Server](https://discord.gg/aiwf)
 
 ---

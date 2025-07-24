@@ -688,4 +688,4 @@ These examples demonstrate AIWF's flexibility and power in real-world scenarios.
 4. **Proactive management**: Monitor tokens, performance, and progress
 5. **Team alignment**: Document and share conventions
 
-For more examples and community contributions, visit our [GitHub repository](https://github.com/aiwf/aiwf/tree/main/examples).
+For more examples and community contributions, visit our [GitHub repository](https://github.com/moonklabs/aiwf/tree/main/examples).

@@ -167,7 +167,7 @@ aiwf upgrade
 ## 📞 Support
 
 - Documentation: https://aiwf.dev/docs
-- Issues: https://github.com/aiwf/aiwf/issues
+- Issues: https://github.com/moonklabs/aiwf/issues
 - Discord: https://discord.gg/aiwf
 
 ---

@@ -416,7 +416,7 @@ import { PerformanceBenchmark } from '@aiwf/performance';
 
 ### 3. Join the Community
 
-- **GitHub**: [github.com/aiwf/aiwf](https://github.com/aiwf/aiwf)
+- **GitHub**: [github.com/moonklabs/aiwf](https://github.com/moonklabs/aiwf)
 - **Discord**: [discord.gg/aiwf](https://discord.gg/aiwf)
 - **Discussions**: Share your experiences and learn from others
 

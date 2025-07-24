@@ -1,6 +1,6 @@
 # AIWF Troubleshooting Guide
 
-This guide helps you resolve common issues when using AIWF (AI Workflow Framework). If you can't find a solution here, please check our [GitHub Issues](https://github.com/aiwf/aiwf/issues) or create a new issue.
+This guide helps you resolve common issues when using AIWF (AI Workflow Framework). If you can't find a solution here, please check our [GitHub Issues](https://github.com/moonklabs/aiwf/issues) or create a new issue.
 
 ## Table of Contents
 
@@ -679,7 +679,7 @@ tail -f .aiwf/logs/commands.log
 If you can't resolve your issue:
 
 1. **Search existing issues:**
-   - [GitHub Issues](https://github.com/aiwf/aiwf/issues)
+   - [GitHub Issues](https://github.com/moonklabs/aiwf/issues)
 
 2. **Create a new issue with:**
    - AIWF version: `npx aiwf --version`
@@ -690,7 +690,7 @@ If you can't resolve your issue:
 
 3. **Join the community:**
    - Discord: [discord.gg/aiwf](https://discord.gg/aiwf)
-   - Discussions: [GitHub Discussions](https://github.com/aiwf/aiwf/discussions)
+   - Discussions: [GitHub Discussions](https://github.com/moonklabs/aiwf/discussions)
 
 4. **Emergency support:**
    - Email: support@aiwf.dev (for critical issues only)

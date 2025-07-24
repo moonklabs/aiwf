@@ -973,7 +973,7 @@ class FileSystemError extends Error {
 
 ## Support
 
-- **GitHub Issues**: [github.com/aiwf/aiwf/issues](https://github.com/aiwf/aiwf/issues)
+- **GitHub Issues**: [github.com/moonklabs/aiwf/issues](https://github.com/moonklabs/aiwf/issues)
 - **Documentation**: [aiwf.github.io/docs](https://aiwf.github.io/docs)
 - **Discord**: [discord.gg/aiwf](https://discord.gg/aiwf)
 - **Email**: support@aiwf.dev

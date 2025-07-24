@@ -602,8 +602,8 @@ cp -r .aiwf/backup_2024-01-20_143052/* .aiwf/
 
 ## 📚 추가 리소스
 
-- **GitHub 저장소**: https://github.com/aiwf/aiwf
-- **문제 보고**: https://github.com/aiwf/aiwf/issues
+- **GitHub 저장소**: https://github.com/moonklabs/aiwf
+- **문제 보고**: https://github.com/moonklabs/aiwf/issues
 - **문서**: [COMMANDS_GUIDE.md](docs/COMMANDS_GUIDE.md)
 - **한국어 문서**: [COMMANDS_GUIDE.ko.md](docs/COMMANDS_GUIDE.ko.md)
 

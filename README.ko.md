@@ -3,7 +3,7 @@
 [Read in English](README.md)
 
 [![NPM Version](https://img.shields.io/npm/v/aiwf.svg)](https://www.npmjs.com/package/aiwf)
-[![License](https://img.shields.io/npm/l/aiwf.svg)](https://github.com/aiwf/aiwf/blob/main/LICENSE)
+[![License](https://img.shields.io/npm/l/aiwf.svg)](https://github.com/moonklabs/aiwf/blob/main/LICENSE)
 [![Downloads](https://img.shields.io/npm/dm/aiwf.svg)](https://www.npmjs.com/package/aiwf)
 
 ## AIWF란?
@@ -236,7 +236,7 @@ aiwf/
 ## 📖 소스
 
 이 설치 프로그램은 다음에서 AIWF 프레임워크를 가져옵니다:
-https://github.com/aiwf/aiwf
+https://github.com/moonklabs/aiwf
 
 ## 📝 라이선스
 

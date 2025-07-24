@@ -607,8 +607,8 @@ cp -r .aiwf/backup_2024-01-20_143052/* .aiwf/
 
 ## 📚 Additional Resources
 
-- **GitHub Repository**: https://github.com/aiwf/aiwf
-- **Issue Reporting**: https://github.com/aiwf/aiwf/issues
+- **GitHub Repository**: https://github.com/moonklabs/aiwf
+- **Issue Reporting**: https://github.com/moonklabs/aiwf/issues
 - **Documentation**: [COMMANDS_GUIDE.md](docs/COMMANDS_GUIDE.md)
 - **Korean Documentation**: [COMMANDS_GUIDE.ko.md](docs/COMMANDS_GUIDE.ko.md)
 
