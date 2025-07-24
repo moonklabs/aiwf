@@ -14,69 +14,65 @@ This project is an updated version of [Simone](https://github.com/Helmi/claude-s
 
 ## 📦 Installation
 
-Install AIWF in any project directory:
+### Global Installation (Recommended)
 
 ```bash
-npx aiwf
+npm install -g aiwf
 ```
 
-The installer will:
+### First Time Setup
 
-1. **Intelligent Language Detection**: Automatically detect your system language or let you choose
-2. **Language Preference Storage**: Save your language preference for future installations
-3. **Directory Setup**: Create the `.aiwf/` directory structure for project management
-4. **Commands**: Set up `.claude/commands/aiwf/` with localized Claude commands
-5. **Content**: Download the latest templates and documentation in your selected language
+After global installation, navigate to your project directory and run:
+
+```bash
+aiwf install
+```
+
+The installer will guide you through:
+
+1. **Language Selection**: Choose between English and Korean
+2. **Project Setup**: Initialize AIWF in your current directory
+3. **Claude Commands**: Install language-specific commands
+4. **Documentation**: Download guides and templates
 
 ## 🚀 Usage
 
-### First Time Installation
+### Basic Commands
 
 ```bash
-npx aiwf
+# Install AIWF in current project
+aiwf install
+
+# Force installation (skip prompts)
+aiwf install --force
+
+# Show help
+aiwf --help
+
+# Check version
+aiwf --version
 ```
-
-### Update Existing Installation
-
-If AIWF is already installed, the installer will automatically detect it and offer options to:
-
-- Update (with automatic backup)
-- Skip installation
-- Cancel
 
 ### Language Management
 
-AIWF includes a sophisticated language management system:
-
 ```bash
-# Check current language settings
+# Check current language
 aiwf-lang status
 
-# Change language interactively
-aiwf-lang set
-
-# Set specific language
-aiwf-lang set ko    # Korean
+# Change language
 aiwf-lang set en    # English
+aiwf-lang set ko    # Korean
 
 # Reset to auto-detection
 aiwf-lang reset
 ```
 
-### Force Installation
+### Update Existing Installation
 
-Skip all prompts and force installation (uses auto-detected language):
-
-```bash
-npx aiwf --force
-```
-
-### Language-Specific Installation
-
-The installer automatically selects the appropriate language version based on your choice:
-
-- English version: English commands and documentation (default)
-- Korean version: Korean commands and documentation
+When running `aiwf install` in a project with existing AIWF:
+- Automatic backup creation
+- Option to update or skip
+- Preserves your settings
 
 ## 📁 What Gets Installed
 

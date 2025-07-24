@@ -18,21 +18,20 @@
 
 ## 🚀 설치 및 초기 설정
 
-### 최초 설치
+### 설치
 ```bash
-# 프로젝트 디렉토리에서 실행
-cd my-project
-npx aiwf
-
-# 또는 전역 설치
+# 전역 설치 (권장)
 npm install -g aiwf
-aiwf
+
+# 프로젝트 디렉토리에서
+cd my-project
+aiwf install
 ```
 
-설치 과정:
+설치 과정에서 안내하는 내용:
 1. 언어 선택 (한국어/English)
-2. 자동으로 필요한 파일 다운로드
-3. 프로젝트 구조 생성
+2. 프로젝트 구조 생성
+3. Claude 명령어 설치
 
 ### 강제 설치 (프롬프트 없이)
 ```bash
@@ -490,7 +489,7 @@ mkdir my-awesome-project
 cd my-awesome-project
 
 # 2. AIWF 설치
-npx aiwf
+aiwf install
 
 # 3. Git hooks 설치
 git init
@@ -510,7 +509,7 @@ aiwf ai-tool install cursor
 cd existing-project
 
 # 2. AIWF 설치
-npx aiwf
+aiwf install
 
 # 3. 기존 구조와 통합
 /aiwf_prime  # Claude Code에서
@@ -612,8 +611,11 @@ cp -r .aiwf/backup_2024-01-20_143052/* .aiwf/
 ## 🎯 빠른 참조
 
 ```bash
-# 설치
-npx aiwf
+# 전역 설치
+npm install -g aiwf
+
+# 프로젝트 설정
+aiwf install
 
 # AI 도구
 aiwf ai-tool install claude-code

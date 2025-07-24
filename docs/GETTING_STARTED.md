@@ -41,11 +41,14 @@ Before you begin, ensure you have:
 ### 1. Install AIWF
 
 ```bash
+# Install globally (if not already installed)
+npm install -g aiwf
+
 # Navigate to your project directory
 cd my-project
 
-# Install AIWF
-npx aiwf
+# Initialize AIWF in your project
+aiwf install
 ```
 
 ### 2. Choose Your Language

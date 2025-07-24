@@ -617,8 +617,11 @@ cp -r .aiwf/backup_2024-01-20_143052/* .aiwf/
 ## 🎯 Quick Reference
 
 ```bash
-# Installation
-npx aiwf
+# Global installation
+npm install -g aiwf
+
+# Project setup
+aiwf install
 
 # AI Tools
 aiwf ai-tool install claude-code

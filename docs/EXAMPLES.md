@@ -29,7 +29,7 @@ mkdir my-ecommerce
 cd my-ecommerce
 
 # Initialize AIWF
-npx aiwf
+aiwf install
 
 # Initialize project with AIWF
 /project:aiwf:initialize
@@ -445,7 +445,9 @@ jobs:
         node-version: '18'
     
     - name: Install AIWF
-      run: npx aiwf --ci
+      run: |
+        npm install -g aiwf
+        aiwf install --ci
     
     - name: Run Performance Benchmark
       run: |
@@ -453,11 +455,11 @@ jobs:
         
     - name: Check Feature Completion
       run: |
-        npx aiwf check-feature-status ${{ github.event.pull_request.title }}
+        aiwf check-feature-status ${{ github.event.pull_request.title }}
         
     - name: Generate Reports
       run: |
-        npx aiwf generate-ci-report
+        aiwf generate-ci-report
         
     - name: Comment on PR
       uses: actions/github-script@v6
@@ -494,7 +496,7 @@ fi
 npm run test:quick
 
 # Check code quality
-npx aiwf code-quality-check
+aiwf code-quality-check
 EOF
 
 chmod +x .git/hooks/pre-commit

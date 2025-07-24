@@ -30,9 +30,10 @@ npm ERR! path /usr/local/lib/node_modules/aiwf
 
 **Solutions:**
 
-1. **Use npx instead of global install (Recommended):**
+1. **Install globally:**
    ```bash
-   npx aiwf
+   npm install -g aiwf
+   aiwf install
    ```
 
 2. **Fix npm permissions:**
@@ -100,7 +101,7 @@ Error: Cannot find module 'ora'
 
 4. **Try offline installation:**
    ```bash
-   npx aiwf --offline
+   aiwf install --offline
    ```
 
 ---
@@ -123,7 +124,7 @@ Command not found: /project:aiwf:initialize
 
 2. **Reinstall AIWF commands:**
    ```bash
-   npx aiwf --force
+   aiwf install --force
    ```
 
 3. **Check Claude Code settings:**
@@ -571,7 +572,7 @@ Jest: "global" coverage threshold for statements (80%) not met: 0%
 
 1. **Update language files:**
    ```bash
-   npx aiwf --update-lang
+   aiwf install --update-lang
    ```
 
 2. **Check translation files:**
@@ -595,7 +596,7 @@ Jest: "global" coverage threshold for statements (80%) not met: 0%
 **Solution:**
 ```bash
 # Recreate AIWF structure
-npx aiwf --repair
+aiwf install --repair
 ```
 
 ### "EPERM: operation not permitted"
@@ -615,7 +616,7 @@ chmod -R u+rw .aiwf/
 **Solution:**
 ```bash
 # Force overwrite
-npx aiwf --force
+aiwf install --force
 ```
 
 ### "ValidationError: Invalid feature ID"
@@ -639,7 +640,7 @@ npx aiwf --force
 export AIWF_DEBUG=true
 
 # Run with verbose output
-npx aiwf --verbose
+aiwf install --verbose
 ```
 
 ### Check System Information
@@ -682,7 +683,7 @@ If you can't resolve your issue:
    - [GitHub Issues](https://github.com/moonklabs/aiwf/issues)
 
 2. **Create a new issue with:**
-   - AIWF version: `npx aiwf --version`
+   - AIWF version: `aiwf --version`
    - Node.js version: `node --version`
    - Operating system
    - Error messages
@@ -701,7 +702,7 @@ If you can't resolve your issue:
 
 1. **Keep AIWF updated:**
    ```bash
-   npx aiwf --check-updates
+   aiwf --check-updates
    ```
 
 2. **Regular backups:**
