@@ -115,7 +115,7 @@ your_project/
 
 ### 핵심 문서
 - [명령어 가이드](docs/COMMANDS_GUIDE.ko.md) - 전체 AIWF 명령어 목록
-- [CLI 사용 가이드](docs/CLI_USAGE_GUIDE.md) - 상세한 CLI 도구 문서
+- [CLI 사용 가이드](docs/CLI_USAGE_GUIDE.ko.md) - 상세한 CLI 도구 문서
 - [시작하기](docs/GETTING_STARTED.md) - 새 사용자를 위한 빠른 시작 가이드
 - [개발 가이드](docs/DEVELOPMENT_GUIDE.ko.md) - AIWF에 기여하기
 

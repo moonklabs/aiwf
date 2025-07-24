@@ -1,85 +1,85 @@
-# AIWF CLI 사용 가이드
+# AIWF CLI Usage Guide
 
-## 📋 목차
-1. [설치 및 초기 설정](#설치-및-초기-설정)
-2. [기본 명령어](#기본-명령어)
-3. [AI 도구 관리](#ai-도구-관리)
-4. [캐시 관리](#캐시-관리)
-5. [언어 관리](#언어-관리)
-6. [독립 스프린트 관리 (YOLO 중심)](#독립-스프린트-관리-yolo-중심)
-7. [체크포인트 시스템 (YOLO 복구)](#체크포인트-시스템-yolo-복구)
-8. [YOLO 설정 관리](#yolo-설정-관리)
-9. [Claude Code 통합 명령어](#claude-code-통합-명령어)
-10. [Git 통합 및 Feature Tracking](#git-통합-및-feature-tracking)
-11. [일반적인 워크플로우](#일반적인-워크플로우)
-12. [문제 해결](#문제-해결)
+## 📋 Table of Contents
+1. [Installation and Initial Setup](#installation-and-initial-setup)
+2. [Basic Commands](#basic-commands)
+3. [AI Tool Management](#ai-tool-management)
+4. [Cache Management](#cache-management)
+5. [Language Management](#language-management)
+6. [Independent Sprint Management (YOLO-focused)](#independent-sprint-management-yolo-focused)
+7. [Checkpoint System (YOLO Recovery)](#checkpoint-system-yolo-recovery)
+8. [YOLO Configuration Management](#yolo-configuration-management)
+9. [Claude Code Integration Commands](#claude-code-integration-commands)
+10. [Git Integration and Feature Tracking](#git-integration-and-feature-tracking)
+11. [Common Workflows](#common-workflows)
+12. [Troubleshooting](#troubleshooting)
 
 ---
 
-## 🚀 설치 및 초기 설정
+## 🚀 Installation and Initial Setup
 
-### 최초 설치
+### First Installation
 ```bash
-# 프로젝트 디렉토리에서 실행
+# Run in your project directory
 cd my-project
 npx aiwf
 
-# 또는 전역 설치
+# Or global installation
 npm install -g aiwf
 aiwf
 ```
 
-설치 과정:
-1. 언어 선택 (한국어/English)
-2. 자동으로 필요한 파일 다운로드
-3. 프로젝트 구조 생성
+Installation process:
+1. Language selection (Korean/English)
+2. Automatic download of necessary files
+3. Project structure creation
 
-### 강제 설치 (프롬프트 없이)
+### Force Installation (without prompts)
 ```bash
 aiwf install --force
-# 또는
+# or
 aiwf install -f
 ```
 
-### 설치 후 생성되는 구조
+### Structure Created After Installation
 ```
 your-project/
-├── .aiwf/                    # AIWF 프로젝트 관리
-├── .claude/commands/aiwf/    # Claude Code 명령어
-├── .cursor/rules/            # Cursor IDE 규칙
-├── .windsurf/rules/          # Windsurf IDE 규칙
-└── [기존 프로젝트 파일들]
+├── .aiwf/                    # AIWF project management
+├── .claude/commands/aiwf/    # Claude Code commands
+├── .cursor/rules/            # Cursor IDE rules
+├── .windsurf/rules/          # Windsurf IDE rules
+└── [existing project files]
 ```
 
 ---
 
-## 📌 기본 명령어
+## 📌 Basic Commands
 
-### aiwf 메인 명령어
+### aiwf Main Commands
 ```bash
-# 기본 설치 (install이 기본 동작)
+# Basic installation (install is the default action)
 aiwf
 
-# 명시적 설치
+# Explicit installation
 aiwf install
 
-# 강제 설치
+# Force installation
 aiwf install --force
 
-# 도움말
+# Help
 aiwf --help
 
-# 버전 확인
+# Version check
 aiwf --version
 ```
 
 ---
 
-## 🤖 AI 도구 관리
+## 🤖 AI Tool Management
 
-### AI 도구 설치
+### Installing AI Tools
 ```bash
-# 특정 AI 도구 템플릿 설치
+# Install specific AI tool templates
 aiwf ai-tool install claude-code
 aiwf ai-tool install cursor
 aiwf ai-tool install windsurf
@@ -87,13 +87,13 @@ aiwf ai-tool install github-copilot
 aiwf ai-tool install augment
 ```
 
-### AI 도구 목록 확인
+### List AI Tools
 ```bash
-# 설치 가능한 도구와 설치된 도구 목록
+# List available and installed tools
 aiwf ai-tool list
 ```
 
-출력 예시:
+Example output:
 ```
 🤖 AI Tool Templates
 
@@ -113,80 +113,80 @@ windsurf
   Features: ai_assistance, code_generation, context_awareness
 ```
 
-### AI 도구 업데이트
+### Update AI Tools
 ```bash
-# 특정 도구 업데이트
+# Update specific tool
 aiwf ai-tool update claude-code
 
-# 업데이트 확인
+# Check for updates
 aiwf ai-tool check
-aiwf ai-tool check claude-code  # 특정 도구만
+aiwf ai-tool check claude-code  # Specific tool only
 ```
 
-### AI 도구 검증
+### Verify AI Tools
 ```bash
-# 설치 상태 검증
+# Verify installation status
 aiwf ai-tool verify claude-code
 ```
 
-### AI 도구 버전 확인
+### Check AI Tool Version
 ```bash
 aiwf ai-tool version claude-code
 ```
 
 ---
 
-## 💾 캐시 관리
+## 💾 Cache Management
 
-### 템플릿 다운로드 (오프라인 사용)
+### Download Templates (Offline Use)
 ```bash
-# 대화형 선택
+# Interactive selection
 aiwf cache download
 
-# 모든 템플릿 다운로드
+# Download all templates
 aiwf cache download --all
 
-# 특정 타입만 다운로드
+# Download specific type only
 aiwf cache download --type ai-tools
 aiwf cache download --type projects
 ```
 
-### 캐시 목록 확인
+### List Cache
 ```bash
-# 전체 캐시 목록
+# Full cache list
 aiwf cache list
 
-# 타입별 필터
+# Filter by type
 aiwf cache list --type ai-tools
 ```
 
-### 캐시 정리
+### Clean Cache
 ```bash
-# 만료된 캐시만 정리 (기본 7일)
+# Clean only expired cache (default 7 days)
 aiwf cache clean
 
-# 모든 캐시 삭제
+# Delete all cache
 aiwf cache clean --all
 
-# 특정 기간 이상된 캐시 삭제
-aiwf cache clean --max-age 30  # 30일 이상
+# Delete cache older than specific period
+aiwf cache clean --max-age 30  # 30 days or older
 ```
 
-### 캐시 업데이트
+### Update Cache
 ```bash
-# 업데이트 확인
+# Check for updates
 aiwf cache update
 
-# 업데이트 확인 후 자동 설치
+# Check for updates and auto-install
 aiwf cache update --install
 ```
 
-### 캐시 상태 확인
+### Check Cache Status
 ```bash
 aiwf cache status
 ```
 
-출력 예시:
+Example output:
 ```
 📊 AIWF Cache Status
 
@@ -207,424 +207,429 @@ By Status:
 
 ---
 
-## 🌐 언어 관리
+## 🌐 Language Management
 
-### 언어 상태 확인
+### Check Language Status
 ```bash
-# 현재 언어 설정 확인
+# Check current language settings
 aiwf-lang
 aiwf-lang status
-aiwf-lang s  # 별칭
+aiwf-lang s  # Alias
 ```
 
-### 언어 변경
+### Change Language
 ```bash
-# 한국어로 변경
+# Change to Korean
 aiwf-lang set ko
 
-# 영어로 변경
+# Change to English
 aiwf-lang set en
 
-# 대화형 선택
+# Interactive selection
 aiwf-lang set
 
-# 자동 감지 설정
+# Auto-detection settings
 aiwf-lang set --auto-detect true
 aiwf-lang set --auto-detect false
 ```
 
-### 언어 초기화
+### Reset Language
 ```bash
-# 자동 감지 모드로 리셋
+# Reset to auto-detection mode
 aiwf-lang reset
-aiwf-lang r  # 별칭
+aiwf-lang r  # Alias
 ```
 
 ---
 
-## 🚀 독립 스프린트 관리 (YOLO 중심)
+## 🚀 Independent Sprint Management (YOLO-focused)
 
-### 독립 스프린트 생성
+### Create Independent Sprint
 ```bash
-# README TODO에서 자동 추출
+# Auto-extract from README TODOs
 aiwf sprint independent --from-readme
 
-# GitHub 이슈에서 생성
+# Create from GitHub issue
 aiwf sprint independent --from-issue 123
 
-# 대화형 생성
-aiwf sprint independent "빠른 프로토타입"
+# Interactive creation
+aiwf sprint independent "Quick Prototype"
 
-# 엔지니어링 레벨 지정
-aiwf sprint independent "API 개발" --minimal    # 최소 구현
-aiwf sprint independent "API 개발" --balanced   # 균형잡힌 구현
-aiwf sprint independent "API 개발" --complete   # 완전한 구현
+# Specify engineering level
+aiwf sprint independent "API Development" --minimal    # Minimal implementation
+aiwf sprint independent "API Development" --balanced   # Balanced implementation
+aiwf sprint independent "API Development" --complete   # Complete implementation
 ```
 
-### 스프린트 목록 및 상태
+### Sprint List and Status
 ```bash
-# 모든 스프린트 목록
+# List all sprints
 aiwf-sprint list
 aiwf-sprint ls
 
-# 상태별 필터링
+# Filter by status
 aiwf-sprint list --status active
 aiwf-sprint list --status completed
 
-# 특정 스프린트 상태 확인
+# Check specific sprint status
 aiwf-sprint status S01
 ```
 
-### 전용 CLI 도구 (aiwf-sprint)
+### Dedicated CLI Tool (aiwf-sprint)
 ```bash
-# 도움말
+# Help
 aiwf-sprint help
 
-# 독립 스프린트 생성
+# Create independent sprint
 aiwf-sprint independent --from-readme --minimal
-aiwf-sprint ind "빠른 기능" --balanced
+aiwf-sprint ind "Quick Feature" --balanced
 ```
 
-출력 예시:
+Example output:
 ```
-🚀 독립 스프린트 생성 중...
+🚀 Creating independent sprint...
 
-✅ 독립 스프린트 생성 완료!
-  스프린트 ID: S03
-  태스크 수: 5개
+✅ Independent sprint created successfully!
+  Sprint ID: S03
+  Tasks: 5
 
-🚀 다음 단계:
-  Claude Code에서 /project:aiwf:yolo S03 실행
+🚀 Next steps:
+  Run /project:aiwf:yolo S03 in Claude Code
 ```
 
 ---
 
-## 💾 체크포인트 시스템 (YOLO 복구)
+## 💾 Checkpoint System (YOLO Recovery)
 
-### 체크포인트 관리
+### Checkpoint Management
 ```bash
-# 체크포인트 목록 보기
+# List checkpoints
 aiwf checkpoint list
 aiwf checkpoint ls
 aiwf checkpoint list --limit 20
 
-# 현재 YOLO 세션 상태
+# Current YOLO session status
 aiwf checkpoint status
 
-# 체크포인트에서 복구
+# Restore from checkpoint
 aiwf checkpoint restore cp_1234567890
 
-# 수동 체크포인트 생성
-aiwf checkpoint create "주요 리팩토링 전"
+# Create manual checkpoint
+aiwf checkpoint create "Before major refactoring"
 
-# 오래된 체크포인트 정리
+# Clean old checkpoints
 aiwf checkpoint clean --keep 10
-aiwf checkpoint clean --keep 5 --dry-run  # 실제 삭제 없이 미리보기
+aiwf checkpoint clean --keep 5 --dry-run  # Preview without actual deletion
 ```
 
-### 전용 CLI 도구 (aiwf-checkpoint)
+### Dedicated CLI Tool (aiwf-checkpoint)
 ```bash
-# 도움말
+# Help
 aiwf-checkpoint help
 
-# 진행 상황 리포트
+# Progress report
 aiwf-checkpoint report
 
-# 체크포인트 상세 정보
+# Checkpoint details
 aiwf-checkpoint show cp_1234567890
 ```
 
-출력 예시:
+Example output:
 ```
-📊 체크포인트 목록:
+📊 Checkpoint List:
 
 🚀 cp_1703123456789 - session_start
-    태스크: 0개 완료
+    Tasks: 0 completed
 
 ✅ cp_1703123556789 - task_complete
-    태스크: 5개 완료
+    Tasks: 5 completed
 
 🔄 cp_1703123656789 - auto
-    태스크: 10개 완료
+    Tasks: 10 completed
 ```
 
 ---
 
-## 🛠️ YOLO 설정 관리
+## 🛠️ YOLO Configuration Management
 
-### YOLO 설정 초기화
+### Initialize YOLO Configuration
 ```bash
-# 기본 설정 파일 생성
+# Create default configuration file
 aiwf yolo-config init
 
-# 기존 파일 덮어쓰기
+# Overwrite existing file
 aiwf yolo-config init --force
 
-# 대화형 설정 마법사
+# Interactive configuration wizard
 aiwf yolo-config wizard
 aiwf yolo-config interactive
 
-# 현재 설정 확인
+# Show current configuration
 aiwf yolo-config show
 aiwf yolo-config status
 ```
 
-### 설정 마법사 옵션
-대화형 마법사에서 설정할 수 있는 항목:
-- 엔지니어링 레벨 (minimal/balanced/complete)
-- 포커스 규칙 (요구사항 우선, 간단한 해결책 등)
-- 실행 모드 (빠른/스마트/안전)
-- 체크포인트 설정
-- 오버엔지니어링 방지 규칙
+### Configuration Wizard Options
+Items you can configure in the interactive wizard:
+- Engineering level (minimal/balanced/complete)
+- Focus rules (requirement first, simple solution, etc.)
+- Execution mode (fast/smart/safe)
+- Checkpoint settings
+- Overengineering prevention rules
 
-출력 예시:
+Example output:
 ```
-🛠️ YOLO 설정 마법사
+🛠️ YOLO Configuration Wizard
 
-엔지니어링 레벨을 선택하세요:
-❯ 최소 (Minimal) - 빠른 프로토타입, 최소 구현
-  균형 (Balanced) - 품질과 속도의 균형
-  완전 (Complete) - 완전한 구현, 높은 품질
+Select engineering level:
+❯ Minimal - Fast prototype, minimal implementation
+  Balanced - Balance between quality and speed
+  Complete - Complete implementation, high quality
 
-✅ 커스텀 YOLO 설정이 생성되었습니다!
-📁 위치: .aiwf/yolo-config.yaml
-```
-
----
-
-## 🤝 Claude Code 통합 명령어
-
-Claude Code에서 사용할 수 있는 `/aiwf_*` 명령어들:
-
-### 프로젝트 초기화
-```
-/aiwf_initialize          # 프로젝트 초기 설정
-/aiwf_prime              # 프로젝트 컨텍스트 로드
-```
-
-### 계획 및 작업 관리
-```
-/aiwf_create_milestone_plan      # 마일스톤 계획 생성
-/aiwf_create_sprints_from_milestone  # 스프린트 생성
-/aiwf_create_sprint_tasks        # 스프린트 작업 생성
-/aiwf_create_general_task        # 일반 작업 생성
-/aiwf_create_prd                 # 제품 요구사항 문서 생성
-```
-
-### 개발 작업
-```
-/aiwf_do_task                    # 작업 실행
-/aiwf_commit                     # Git 커밋 생성
-/aiwf_test                       # 테스트 실행
-```
-
-### 코드 리뷰
-```
-/aiwf_code_review                # 코드 리뷰
-/aiwf_project_review             # 프로젝트 전체 리뷰
-/aiwf_testing_review             # 테스트 커버리지 리뷰
-/aiwf_discuss_review             # 리뷰 결과 토론
-```
-
-### AI 페르소나
-```
-/project:aiwf:ai_persona:architect      # 아키텍트 페르소나
-/project:aiwf:ai_persona:backend        # 백엔드 개발자
-/project:aiwf:ai_persona:frontend       # 프론트엔드 개발자
-/project:aiwf:ai_persona:security       # 보안 전문가
-/project:aiwf:ai_persona:data_analyst   # 데이터 분석가
-/project:aiwf:ai_persona:status         # 현재 페르소나 상태
-/project:aiwf:ai_persona:auto on        # 자동 페르소나 전환
-```
-
-### GitHub 통합
-```
-/aiwf_pr_create                  # Pull Request 생성
-/aiwf_issue_create               # GitHub Issue 생성
-```
-
-### 고급 기능
-```
-/aiwf_yolo                       # 자동 작업 실행
-/aiwf_infinite                   # 연속 작업 모드
-/aiwf_ultrathink_code_advanced   # 고급 코드 분석
+✅ Custom YOLO configuration created!
+📁 Location: .aiwf/yolo-config.yaml
 ```
 
 ---
 
-## 🔗 Git 통합 및 Feature Tracking
+## 🤝 Claude Code Integration Commands
 
-### Git Hooks 설치
+Available `/aiwf_*` commands in Claude Code:
+
+### Project Initialization
+```
+/aiwf_initialize          # Initial project setup
+/aiwf_prime              # Load project context
+```
+
+### Planning and Task Management
+```
+/aiwf_create_milestone_plan      # Create milestone plan
+/aiwf_create_sprints_from_milestone  # Create sprints
+/aiwf_create_sprint_tasks        # Create sprint tasks
+/aiwf_create_general_task        # Create general task
+/aiwf_create_prd                 # Create product requirements document
+```
+
+### Development Tasks
+```
+/aiwf_do_task                    # Execute task
+/aiwf_commit                     # Create Git commit
+/aiwf_test                       # Run tests
+```
+
+### Code Review
+```
+/aiwf_code_review                # Code review
+/aiwf_project_review             # Full project review
+/aiwf_testing_review             # Test coverage review
+/aiwf_discuss_review             # Discuss review results
+```
+
+### AI Personas
+```
+/project:aiwf:ai_persona:architect      # Architect persona
+/project:aiwf:ai_persona:backend        # Backend developer
+/project:aiwf:ai_persona:frontend       # Frontend developer
+/project:aiwf:ai_persona:security       # Security expert
+/project:aiwf:ai_persona:data_analyst   # Data analyst
+/project:aiwf:ai_persona:status         # Current persona status
+/project:aiwf:ai_persona:auto on        # Auto persona switching
+```
+
+### GitHub Integration
+```
+/aiwf_pr_create                  # Create Pull Request
+/aiwf_issue_create               # Create GitHub Issue
+```
+
+### Advanced Features
+```
+/aiwf_yolo                       # Automated task execution
+/aiwf_infinite                   # Continuous task mode
+/aiwf_ultrathink_code_advanced   # Advanced code analysis
+```
+
+---
+
+## 🔗 Git Integration and Feature Tracking
+
+### Install Git Hooks
 ```bash
-# 프로젝트 루트에서 실행
+# Run from project root
 ./hooks/install-hooks.sh
+
+# Or manual installation
+cp hooks/pre-commit .git/hooks/
+cp hooks/post-commit .git/hooks/
+chmod +x .git/hooks/*
 ```
 
-### Feature 관련 스크립트
+### Feature-Related Scripts
 ```bash
-# Git 히스토리에서 Feature ID 스캔
+# Scan Feature IDs from Git history
 node commands/scan-git-history.js --since 2025-01-01
 
-# 특정 Feature의 커밋 동기화
+# Sync commits for specific Feature
 node commands/sync-feature-commits.js FL001
 
-# Feature 커밋 리포트 생성
+# Generate Feature commit report
 node commands/feature-commit-report.js --format markdown
 ```
 
-### Git 커밋 시 자동 Feature 추적
+### Automatic Feature Tracking with Git Commits
 ```bash
-# Feature ID가 포함된 커밋
-git commit -m "feat(FL001): 인증 시스템 구현"
-# post-commit hook이 자동으로 Feature Ledger 업데이트
+# Commit with Feature ID
+git commit -m "feat(FL001): Implement authentication system"
+# post-commit hook automatically updates Feature Ledger
 ```
 
 ---
 
-## 💡 일반적인 워크플로우
+## 💡 Common Workflows
 
-### 1. 새 프로젝트 시작
+### 1. Starting a New Project
 ```bash
-# 1. 프로젝트 생성
+# 1. Create project
 mkdir my-awesome-project
 cd my-awesome-project
 
-# 2. AIWF 설치
+# 2. Install AIWF
 npx aiwf
 
-# 3. Git hooks 설치
+# 3. Install Git hooks
 git init
 ./hooks/install-hooks.sh
 
-# 4. AI 도구 설정
+# 4. Set up AI tools
 aiwf ai-tool install claude-code
 aiwf ai-tool install cursor
 
-# 5. Claude Code에서 프로젝트 열기
-# 그 후 /aiwf_initialize 실행
+# 5. Open project in Claude Code
+# Then run /aiwf_initialize
 ```
 
-### 2. 기존 프로젝트에 추가
+### 2. Adding to Existing Project
 ```bash
-# 1. 프로젝트 디렉토리로 이동
+# 1. Navigate to project directory
 cd existing-project
 
-# 2. AIWF 설치
+# 2. Install AIWF
 npx aiwf
 
-# 3. 기존 구조와 통합
-/aiwf_prime  # Claude Code에서
+# 3. Integrate with existing structure
+/aiwf_prime  # In Claude Code
 ```
 
-### 3. 팀 협업 설정
+### 3. Team Collaboration Setup
 ```bash
-# 1. 언어 설정 통일
-aiwf-lang set ko  # 또는 en
+# 1. Unify language settings
+aiwf-lang set en  # or ko
 
-# 2. AI 도구 표준화
+# 2. Standardize AI tools
 aiwf ai-tool install claude-code
 aiwf ai-tool install cursor
 
-# 3. Git hooks 설정
+# 3. Set up Git hooks
 ./hooks/install-hooks.sh
 
-# 4. .gitignore에 추가
+# 4. Add to .gitignore
 echo ".aiwf/backup_*" >> .gitignore
 echo "token-data/" >> .gitignore
 ```
 
-### 4. 오프라인 개발 준비
+### 4. Preparing for Offline Development
 ```bash
-# 1. 모든 템플릿 다운로드
+# 1. Download all templates
 aiwf cache download --all
 
-# 2. 캐시 상태 확인
+# 2. Check cache status
 aiwf cache status
 
-# 3. 오프라인에서도 정상 작동
-# 캐시된 템플릿 자동 사용
+# 3. Works normally offline
+# Cached templates are used automatically
 ```
 
 ---
 
-## 🔧 문제 해결
+## 🔧 Troubleshooting
 
-### 설치 실패 시
+### Installation Failure
 ```bash
-# 1. 강제 재설치
+# 1. Force reinstall
 aiwf install --force
 
-# 2. 캐시 정리 후 재시도
+# 2. Clean cache and retry
 aiwf cache clean --all
 aiwf install
 
-# 3. 수동 정리
+# 3. Manual cleanup
 rm -rf .aiwf .claude .cursor .windsurf
 aiwf install
 ```
 
-### 언어 관련 문제
+### Language Issues
 ```bash
-# 언어 설정 초기화
+# Reset language settings
 aiwf-lang reset
 
-# 수동으로 언어 설정
-aiwf-lang set ko --auto-detect false
+# Manually set language
+aiwf-lang set en --auto-detect false
 ```
 
-### 네트워크 문제
+### Network Issues
 ```bash
-# 1. 캐시 모드 사용
-aiwf cache download --all  # 온라인일 때 미리 실행
+# 1. Use cache mode
+aiwf cache download --all  # Run while online
 
-# 2. 프록시 설정 (필요시)
+# 2. Proxy settings (if needed)
 export HTTPS_PROXY=http://proxy.company.com:8080
 aiwf install
 ```
 
-### 권한 문제
+### Permission Issues
 ```bash
-# 실행 권한 부여
+# Grant execution permissions
 chmod +x hooks/install-hooks.sh
 chmod +x hooks/post-commit
 chmod +x index.js
 chmod +x language-cli.js
 ```
 
-### 업데이트 후 문제 발생
+### Issues After Update
 ```bash
-# 백업에서 복원
-# 백업 위치: .aiwf/backup_YYYY-MM-DD_HHMMSS
+# Restore from backup
+# Backup location: .aiwf/backup_YYYY-MM-DD_HHMMSS
 cp -r .aiwf/backup_2024-01-20_143052/* .aiwf/
 ```
 
 ---
 
-## 📚 추가 리소스
+## 📚 Additional Resources
 
-- **GitHub 저장소**: https://github.com/aiwf/aiwf
-- **문제 보고**: https://github.com/aiwf/aiwf/issues
-- **문서**: [COMMANDS_GUIDE.md](docs/COMMANDS_GUIDE.md)
-- **한국어 문서**: [COMMANDS_GUIDE.ko.md](docs/COMMANDS_GUIDE.ko.md)
+- **GitHub Repository**: https://github.com/aiwf/aiwf
+- **Issue Reporting**: https://github.com/aiwf/aiwf/issues
+- **Documentation**: [COMMANDS_GUIDE.md](docs/COMMANDS_GUIDE.md)
+- **Korean Documentation**: [COMMANDS_GUIDE.ko.md](docs/COMMANDS_GUIDE.ko.md)
 
 ---
 
-## 🎯 빠른 참조
+## 🎯 Quick Reference
 
 ```bash
-# 설치
+# Installation
 npx aiwf
 
-# AI 도구
+# AI Tools
 aiwf ai-tool install claude-code
 aiwf ai-tool list
 
-# 캐시
+# Cache
 aiwf cache download --all
 aiwf cache status
 
-# 언어
-aiwf-lang set ko
+# Language
+aiwf-lang set en
 aiwf-lang status
 
 # Git hooks
