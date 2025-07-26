@@ -178,9 +178,11 @@ aiwf sprint-independent "Quick Feature" --minimal
 - [Feature Git Integration Guide](docs/guides/feature-git-integration-guide.md) - Git hooks and tracking
 
 ### Technical Documentation
+- [Architecture](docs/ARCHITECTURE.md) - System architecture and design
 - [State Management Guide](docs/STATE_MANAGEMENT_GUIDE.md) - Workflow-based state system
 - [AI Workflow](docs/AI-WORKFLOW.md) - AI integration patterns
 - [API Reference](docs/API_REFERENCE.md) - Programmatic usage
+- [Complete API Reference](docs/API_REFERENCE_FULL.md) - Comprehensive API documentation
 - [Troubleshooting](docs/TROUBLESHOOTING.md) - Common issues and solutions
 
 ## ✨ Features

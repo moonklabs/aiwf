@@ -1,0 +1,102 @@
+{
+    "permissions": {
+        "allow": [
+            "Bash(deno task *)",
+            "Bash(npm run *)",
+            "Bash(cargo *)",
+            "Bash(go *)",
+            "Bash(git *)",
+            "Bash(git worktree *)",
+            "Bash(gh *)",
+            "Bash(docker *)",
+            "Bash(kubectl *)",
+            "Bash(terraform *)",
+            "Bash(rg *)",
+            "Bash(ripgrep *)",
+            "Bash(fd *)",
+            "Bash(fzf *)",
+            "Bash(bat *)",
+            "Bash(exa *)",
+            "Bash(eza *)",
+            "Bash(delta *)",
+            "Bash(zoxide *)",
+            "Bash(duf *)",
+            "Bash(htop *)",
+            "Bash(btop *)",
+            "Bash(jq *)",
+            "Bash(yq *)",
+            "Bash(hexyl *)",
+            "Bash(prettier *)",
+            "Bash(eslint *)",
+            "Bash(tsc *)",
+            "Bash(pnpm *)",
+            "Bash(yarn *)",
+            "Bash(mkdir -p /tmp/claude-scratch*)",
+            "Bash(touch /tmp/claude-*)",
+            "Bash(echo * > /tmp/claude-*)",
+            "Bash(cat /tmp/claude-*)"
+        ],
+        "deny": [
+            "Bash(rm -rf /)",
+            "Bash(:(){ :|:& };:)",
+            "Bash(dd if=/dev/zero of=/dev/*)",
+            "Bash(mkfs.*)",
+            "Bash(> /dev/sda*)"
+        ]
+    },
+    "env": {
+        "CLAUDE_CODE_ENABLE_TELEMETRY": "0",
+        "EDITOR": "zed",
+        "GIT_EDITOR": "zed --wait"
+    },
+    "preferredNotifChannel": "terminal_bell",
+    "verbose": true,
+    "cleanupPeriodDays": 90,
+    "includeCoAuthoredBy": false,
+    "hooks": {
+        "beforeFileEdit": [
+            {
+                "command": "npm run lint:fix --silent || true",
+                "description": "Auto lint fix before file edit"
+            }
+        ],
+        "afterFileEdit": [
+            {
+                "command": "prettier --write {file} || true",
+                "description": "Auto format after file edit"
+            }
+        ],
+        "beforeCommit": [
+            {
+                "command": "npm run lint || echo 'Lint check failed'",
+                "description": "Lint check before commit"
+            },
+            {
+                "command": "npm run test || echo 'Test failed'",
+                "description": "Run tests before commit"
+            }
+        ],
+        "Stop": [
+            {
+                "matcher": "",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "afplay /System/Library/Sounds/Glass.aiff"
+                    }
+                ]
+            }
+        ],
+        "PostToolUse": [
+            {
+                "matcher": "Write|Edit|MultiEdit",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "aiwf_test"
+                    }
+                ]
+            }
+        ]
+    }
+}

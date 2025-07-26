@@ -36,6 +36,7 @@ import {
   TOOL_DIRS,
   TEMP_DIRS,
   AIWF_DIRS,
+  BASE_DIRS,
   getAllAiwfDirectories,
   getAllClaudeMdFiles
 } from '../utils/paths.js';

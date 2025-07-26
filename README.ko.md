@@ -153,9 +153,11 @@ your_project/
 - [기능 Git 통합 가이드](docs/guides/feature-git-integration-guide-ko.md) - Git hooks 및 추적
 
 ### 기술 문서
+- [아키텍처](docs/ARCHITECTURE.ko.md) - 시스템 아키텍처 및 설계
 - [상태 관리 가이드](docs/STATE_MANAGEMENT_GUIDE.ko.md) - 워크플로우 기반 상태 시스템
 - [AI 워크플로우](docs/AI-WORKFLOW.ko.md) - AI 통합 패턴
 - [API 참조](docs/API_REFERENCE.md) - 프로그래머틱 사용
+- [전체 API 참조](docs/API_REFERENCE_FULL.ko.md) - 포괄적인 API 문서
 - [문제 해결](docs/TROUBLESHOOTING.md) - 일반적인 문제 및 해결책
 
 ## ✨ 주요 기능
