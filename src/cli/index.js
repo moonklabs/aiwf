@@ -35,7 +35,7 @@ program
 program
   .command('install')
   .description('Install AIWF framework')
-  .option('-f, --force', 'Force install without prompts')
+  .option('-f, --force', 'Force complete reinstall without prompts')
   .action((options) => installAIWF({ ...options, debugLog: true }));
 
 // AI Tool command

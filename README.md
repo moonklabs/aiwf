@@ -43,7 +43,7 @@ The installer will guide you through:
 # Install AIWF in current project
 aiwf install
 
-# Force installation (skip prompts)
+# Force complete reinstall (skip prompts, overwrite everything)
 aiwf install --force
 
 # Show help
@@ -69,10 +69,20 @@ aiwf-lang reset
 
 ### Update Existing Installation
 
-When running `aiwf install` in a project with existing AIWF:
-- Automatic backup creation
-- Option to update or skip
-- Preserves your settings
+When running `aiwf install` in a project with existing AIWF, you'll get these options:
+
+#### Interactive Mode
+1. **Update**: Updates commands and docs only, preserves work content
+2. **Complete Reinstall**: Fresh installation, overwrites existing project
+3. **Skip**: Cancel installation
+
+#### Command Line Options
+- `--force`: Skip all prompts and perform complete reinstall
+
+#### What Gets Preserved/Updated
+- **Always Preserved**: Your work files, sprints, tasks, and project content
+- **Always Updated**: Claude commands, documentation, templates, and rules
+- **Backup Created**: Automatic backup of updated files (*.bak)
 
 ## 📁 What Gets Installed
 

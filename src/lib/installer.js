@@ -53,6 +53,61 @@ async function checkExistingInstallation() {
 }
 
 /**
+ * Check if existing project files exist
+ * @returns {Promise<{hasProject: boolean, projectFiles: string[]}>} Project status
+ */
+async function checkExistingProject() {
+  const projectFiles = [];
+  let hasProject = false;
+
+  // Check for key project files
+  const keyFiles = [
+    FILES.PROJECT_MANIFEST,
+    path.join(AIWF_DIRS.PROJECT_DOCS, 'README.md'),
+    path.join(AIWF_DIRS.REQUIREMENTS, 'requirements.md'),
+    path.join(AIWF_DIRS.SPRINTS, 'sprint-01.md'),
+    path.join(AIWF_DIRS.GENERAL_TASKS, 'tasks.md'),
+    path.join(AIWF_DIRS.ARCHITECTURE_DECISIONS, 'decisions.md'),
+    path.join(AIWF_DIRS.STATE_OF_PROJECT, 'current-state.md')
+  ];
+
+  for (const file of keyFiles) {
+    try {
+      await fs.access(file);
+      projectFiles.push(file);
+      hasProject = true;
+    } catch (error) {
+      // File doesn't exist, continue
+    }
+  }
+
+  // Check for any .md files in project directories
+  const projectDirs = [
+    AIWF_DIRS.PROJECT_DOCS,
+    AIWF_DIRS.REQUIREMENTS,
+    AIWF_DIRS.SPRINTS,
+    AIWF_DIRS.GENERAL_TASKS,
+    AIWF_DIRS.ARCHITECTURE_DECISIONS,
+    AIWF_DIRS.STATE_OF_PROJECT
+  ];
+
+  for (const dir of projectDirs) {
+    try {
+      const files = await fs.readdir(dir);
+      const mdFiles = files.filter(file => file.endsWith('.md'));
+      if (mdFiles.length > 0) {
+        hasProject = true;
+        projectFiles.push(...mdFiles.map(file => path.join(dir, file)));
+      }
+    } catch (error) {
+      // Directory doesn't exist, continue
+    }
+  }
+
+  return { hasProject, projectFiles };
+}
+
+/**
  * Log with spinner for debug mode
  * @param {Object} spinner - Ora spinner instance
  * @param {string} message - Message to log
@@ -146,34 +201,145 @@ async function selectLanguage(options) {
  * Handle existing installation
  * @param {Object} msg - Localized messages
  * @param {Object} options - Installation options
- * @returns {Promise<boolean>} Continue with installation
+ * @returns {Promise<{continue: boolean, installType: string, preserveProject: boolean}>} Installation decision
  */
 async function handleExistingInstallation(msg, options) {
+
   if (options.force) {
-    return true;
+    return { continue: true, installType: 'reinstall', preserveProject: false };
   }
 
-  const response = await prompts({
+  // First, ask about installation type
+  const installResponse = await prompts({
     type: 'select',
     name: 'action',
     message: msg.existingDetected,
     choices: [
       { title: msg.updateOption, value: 'update' },
+      { title: msg.reinstallOption, value: 'reinstall' },
       { title: msg.skipOption, value: 'skip' },
       { title: msg.cancelOption, value: 'cancel' }
     ]
   });
 
-  if (response.action === 'skip' || response.action === 'cancel') {
+
+
+  if (installResponse.action === 'skip' || installResponse.action === 'cancel') {
     console.log(chalk.yellow(msg.installCancelled));
     process.exit(0);
   }
 
-  if (response.action === 'update') {
+  let preserveProject = true; // Default to preserve
+  
+  // If reinstalling, don't preserve project (complete fresh install)
+  if (installResponse.action === 'reinstall') {
+    preserveProject = false;
+  }
+
+  // Backup if updating
+  if (installResponse.action === 'update') {
     await backupCommandsAndDocs(msg);
   }
 
-  return true;
+  return {
+    continue: true,
+    installType: installResponse.action,
+    preserveProject
+  };
+}
+
+/**
+ * Backup project files
+ * @param {string[]} projectFiles - List of project files to backup
+ * @param {Object} msg - Localized messages
+ * @returns {Promise<string>} Backup directory path
+ */
+async function backupProjectFiles(projectFiles, msg) {
+  if (projectFiles.length === 0) {
+    return null;
+  }
+
+  const backupDir = path.join(os.tmpdir(), `aiwf-project-backup-${Date.now()}`);
+  await fs.mkdir(backupDir, { recursive: true });
+
+  console.log(chalk.cyan('💾 Backing up project files...'));
+  
+  for (const file of projectFiles) {
+    try {
+      const relativePath = path.relative(process.cwd(), file);
+      const backupPath = path.join(backupDir, relativePath);
+      const backupDirPath = path.dirname(backupPath);
+      
+      await fs.mkdir(backupDirPath, { recursive: true });
+      await fs.copyFile(file, backupPath);
+    } catch (error) {
+      console.log(chalk.yellow(`Warning: Could not backup ${file}: ${error.message}`));
+    }
+  }
+
+  console.log(chalk.green(`✅ Project files backed up to: ${backupDir}`));
+  return backupDir;
+}
+
+/**
+ * Restore project files from backup
+ * @param {string} backupDir - Backup directory path
+ * @param {Object} msg - Localized messages
+ */
+async function restoreProjectFiles(backupDir, msg) {
+  if (!backupDir) {
+    return;
+  }
+
+  console.log(chalk.cyan('🔄 Restoring project files...'));
+  
+  try {
+    const backupFiles = await fs.readdir(backupDir, { recursive: true });
+    
+    for (const file of backupFiles) {
+      const backupFilePath = path.join(backupDir, file);
+      const stat = await fs.stat(backupFilePath);
+      
+      if (stat.isFile()) {
+        const targetPath = path.join(process.cwd(), file);
+        const targetDir = path.dirname(targetPath);
+        
+        await fs.mkdir(targetDir, { recursive: true });
+        await fs.copyFile(backupFilePath, targetPath);
+      }
+    }
+    
+    console.log(chalk.green(msg.projectPreserved));
+    
+    // Clean up backup directory
+    await fs.rm(backupDir, { recursive: true, force: true });
+  } catch (error) {
+    console.log(chalk.yellow(`Warning: Could not restore some project files: ${error.message}`));
+    console.log(chalk.yellow(`Backup preserved at: ${backupDir}`));
+  }
+}
+
+/**
+ * Remove project files
+ * @param {string[]} projectFiles - List of project files to remove
+ * @param {Object} msg - Localized messages
+ */
+async function removeProjectFiles(projectFiles, msg) {
+  if (projectFiles.length === 0) {
+    return;
+  }
+
+  console.log(chalk.cyan('🗑️  Removing existing project files...'));
+  
+  for (const file of projectFiles) {
+    try {
+      await fs.unlink(file);
+    } catch (error) {
+      // File might already be deleted, continue
+    }
+  }
+  
+  console.log(chalk.green(msg.projectOverwritten));
 }
 
 /**
@@ -609,9 +775,22 @@ export async function installAIWF(options = {}) {
   // Check existing installation
   const hasExisting = await checkExistingInstallation();
 
+  let installDecision = { continue: true, installType: 'fresh', preserveProject: false };
+  let projectBackupDir = null;
+
   if (hasExisting) {
-    const shouldContinue = await handleExistingInstallation(msg, options);
-    if (!shouldContinue) return;
+
+    installDecision = await handleExistingInstallation(msg, options);
+
+    if (!installDecision.continue) return;
+    
+    // If reinstalling and preserving project, backup project files
+    if (installDecision.installType === 'reinstall' && installDecision.preserveProject) {
+      const { hasProject, projectFiles } = await checkExistingProject();
+      if (hasProject) {
+        projectBackupDir = await backupProjectFiles(projectFiles, msg);
+      }
+    }
   }
 
   const spinner = ora(msg.fetching).start();
@@ -620,16 +799,20 @@ export async function installAIWF(options = {}) {
     // Create directory structure
     await createDirectoryStructure();
 
-    // Download manifest (fresh installs only)
-    if (!hasExisting) {
+    // Download manifest (fresh installs only or complete reinstall)
+    if (!hasExisting || installDecision.installType === 'reinstall') {
       await downloadManifest(languagePath, spinner, msg, debugLog);
     }
 
-    // Download templates
-    await downloadTemplates(languagePath, spinner, msg, debugLog);
+    // Download templates (fresh installs and complete reinstall only)
+    if (!hasExisting || installDecision.installType === 'reinstall') {
+      await downloadTemplates(languagePath, spinner, msg, debugLog);
+    }
 
-    // Update documentation
-    await updateDocumentation(languagePath, spinner, msg, debugLog);
+    // Update documentation (fresh installs and complete reinstall only)
+    if (!hasExisting || installDecision.installType === 'reinstall') {
+      await updateDocumentation(languagePath, spinner, msg, debugLog);
+    }
 
     // Update commands
     await updateCommands(languagePath, spinner, msg, debugLog);
@@ -637,8 +820,13 @@ export async function installAIWF(options = {}) {
     // Download and process rules
     await downloadAndProcessRules(spinner, msg, debugLog);
 
+    // Restore project files if needed
+    if (projectBackupDir) {
+      await restoreProjectFiles(projectBackupDir, msg);
+    }
+
     // Success
-    if (hasExisting) {
+    if (hasExisting && installDecision.installType === 'update') {
       spinner.succeed(chalk.green(msg.updateSuccess));
     } else {
       spinner.succeed(chalk.green(msg.installSuccess));
