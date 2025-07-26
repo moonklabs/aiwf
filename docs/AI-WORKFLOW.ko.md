@@ -250,7 +250,7 @@ AIWF 워크플로를 구동하는 맞춤형 Claude Code 명령어:
 │   ├── TX001_Refactor_Logging_Module.md  # Completed task
 │   ├── T002_API_Rate_Limiting.md          # Open task
 │   └── ...
-├── 05_ARCHITECTURE_DECISIONS/
+├── 05_ARCHITECTURAL_DECISIONS/
 │   ├── ADR001_Database_Selection.md
 │   └── ...
 ├── 10_STATE_OF_PROJECT/         # Project review snapshots

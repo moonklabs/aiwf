@@ -352,7 +352,7 @@ Custom Claude Code commands that drive the AIWF workflow:
 │   ├── TX001_Refactor_Logging_Module.md  # Completed task
 │   ├── T002_API_Rate_Limiting.md          # Open task
 │   └── ...
-├── 05_ARCHITECTURE_DECISIONS/
+├── 05_ARCHITECTURAL_DECISIONS/
 │   ├── ADR001_Database_Selection.md
 │   └── ...
 ├── 10_STATE_OF_PROJECT/         # Project review snapshots

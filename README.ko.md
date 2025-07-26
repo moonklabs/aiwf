@@ -95,7 +95,7 @@ your_project/
 │   ├── 02_REQUIREMENTS/          # 마일스톤 요구사항
 │   ├── 03_SPRINTS/              # 스프린트 실행 추적
 │   ├── 04_GENERAL_TASKS/        # 독립 작업
-│   ├── 05_ARCHITECTURE_DECISIONS/ # ADR 문서
+│   ├── 05_ARCHITECTURAL_DECISIONS/ # ADR 문서
 │   ├── 10_STATE_OF_PROJECT/     # 프로젝트 상태 스냅샷
 │   ├── 98_PROMPTS/              # 유용한 AI 프롬프트
 │   └── 99_TEMPLATES/            # 문서 템플릿

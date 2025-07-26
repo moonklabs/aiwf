@@ -96,7 +96,7 @@ your_project/
 │   ├── 02_REQUIREMENTS/          # Milestone requirements
 │   ├── 03_SPRINTS/              # Sprint execution tracking
 │   ├── 04_GENERAL_TASKS/        # Standalone tasks
-│   ├── 05_ARCHITECTURE_DECISIONS/ # ADR documents
+│   ├── 05_ARCHITECTURAL_DECISIONS/ # ADR documents
 │   ├── 10_STATE_OF_PROJECT/     # Project state snapshots
 │   ├── 98_PROMPTS/              # Useful AI prompts
 │   └── 99_TEMPLATES/            # Document templates

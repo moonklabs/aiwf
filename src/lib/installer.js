@@ -67,7 +67,7 @@ async function checkExistingProject() {
     path.join(AIWF_DIRS.REQUIREMENTS, 'requirements.md'),
     path.join(AIWF_DIRS.SPRINTS, 'sprint-01.md'),
     path.join(AIWF_DIRS.GENERAL_TASKS, 'tasks.md'),
-    path.join(AIWF_DIRS.ARCHITECTURE_DECISIONS, 'decisions.md'),
+    path.join(AIWF_DIRS.ARCHITECTURAL_DECISIONS, 'decisions.md'),
     path.join(AIWF_DIRS.STATE_OF_PROJECT, 'current-state.md')
   ];
 
@@ -87,7 +87,7 @@ async function checkExistingProject() {
     AIWF_DIRS.REQUIREMENTS,
     AIWF_DIRS.SPRINTS,
     AIWF_DIRS.GENERAL_TASKS,
-    AIWF_DIRS.ARCHITECTURE_DECISIONS,
+    AIWF_DIRS.ARCHITECTURAL_DECISIONS,
     AIWF_DIRS.STATE_OF_PROJECT
   ];
 
