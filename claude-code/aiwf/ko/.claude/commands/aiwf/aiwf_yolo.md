@@ -708,6 +708,46 @@ aiwf state validate --focus=sprint-completion
 - 차단 해제된 후속 작업 목록 자동 생성
 - 의존성 변경사항 및 영향 범위 자동 문서화
 
+**📋 ADR (Architecture Decision Record) 자동 관리:**
+```bash
+# 아키텍처 변경사항 감지 및 ADR 업데이트
+echo "🏗️ 아키텍처 변경사항 검사 중..."
+
+# 주요 변경사항 검사 (패키지, 설정, 구조 등)
+ARCH_CHANGES=$(git diff HEAD~1 --name-only | grep -E "(package\.json|\.env|config/|src/.*\.config\.|docker|infrastructure/)" | wc -l)
+
+if [ $ARCH_CHANGES -gt 0 ]; then
+  echo "🔍 아키텍처 관련 변경 감지 ($ARCH_CHANGES 파일)"
+  
+  # 관련 ADR 찾기
+  RELATED_ADRS=$(find .aiwf/05_ARCHITECTURAL_DECISIONS/ -name "ADR*.md" -exec grep -l "$(git log -1 --pretty=%s)" {} \;)
+  
+  if [ -n "$RELATED_ADRS" ]; then
+    echo "📝 관련 ADR 업데이트 중..."
+    for adr in $RELATED_ADRS; do
+      # ADR에 구현 경험 추가
+      echo -e "\n### Implementation Update ($(date +%Y-%m-%d))" >> "$adr"
+      echo "- 태스크: $(git log -1 --pretty=%s)" >> "$adr"
+      echo "- 변경 파일: $(git diff HEAD~1 --name-only | tr '\n' ', ')" >> "$adr"
+      echo "- 구현 노트: YOLO 모드에서 자동 적용됨" >> "$adr"
+      
+      echo "✅ ADR 업데이트: $(basename $adr)"
+    done
+  else
+    # 새로운 ADR 필요성 검사
+    MAJOR_CHANGES=$(git diff HEAD~1 --name-only | grep -E "(package\.json|docker|infrastructure/)" | wc -l)
+    if [ $MAJOR_CHANGES -gt 0 ]; then
+      echo "⚠️ 중요한 아키텍처 변경 감지 - ADR 생성 고려 필요"
+      echo "📋 변경된 파일들:"
+      git diff HEAD~1 --name-only | grep -E "(package\.json|docker|infrastructure/)"
+      
+      # 체크포인트에 ADR 생성 권고 기록
+      echo "$(date): ADR 생성 권고 - $(git log -1 --pretty=%s)" >> .aiwf/checkpoints/adr-recommendations.log
+    fi
+  fi
+fi
+```
+
 ### 연속 실행 루프
 
 **⚡ YOLO 모드: 완료까지 중단 없음**
