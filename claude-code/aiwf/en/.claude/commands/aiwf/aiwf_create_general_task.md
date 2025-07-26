@@ -35,7 +35,7 @@ Use PARALLEL SUBAGENTS to READ and UNDERSTAND the project's context:
 - READ `.aiwf/01_PROJECT_DOCS/ARCHITECTURE.md` - Understand system constraints
 - READ `.aiwf/01_PROJECT_DOCS/LONG_TERM_VISION.md` - Understand future direction
 - READ latest files in `.aiwf/10_STATE_OF_PROJECT/` - Review current state
-- SCAN `.aiwf/05_ARCHITECTURE_DECISIONS/` for relevant ADRs
+- SCAN `.aiwf/05_ARCHITECTURAL_DECISIONS/` for relevant ADRs
 - **IMPORTANT:** General tasks must align with documented architecture
 
 ### 3. Verify task doesn't duplicate existing work

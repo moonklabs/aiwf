@@ -77,7 +77,7 @@
 
 - READ all core documents in `.aiwf/01_PROJECT_DOCS/` especially ARCHITECTURE.md
 - READ current milestone requirements in `.aiwf/02_REQUIREMENTS/`
-- READ architecture decisions in `.aiwf/05_ARCHITECTURE_DECISIONS` as they might extend/contradict other documents
+- READ architecture decisions in `.aiwf/05_ARCHITECTURAL_DECISIONS` as they might extend/contradict other documents
 - IDENTIFY any gaps between documentation and current implementation
 - CHECK if the project is still following the documented architecture vision
 - VERIFY that current code structure matches documented patterns

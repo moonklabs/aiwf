@@ -35,7 +35,7 @@
 - `.aiwf/01_PROJECT_DOCS/ARCHITECTURE.md` 읽기 - 시스템 제약사항 이해
 - `.aiwf/01_PROJECT_DOCS/LONG_TERM_VISION.md` 읽기 - 미래 방향성 이해
 - `.aiwf/10_STATE_OF_PROJECT/`의 최신 파일들 읽기 - 현재 상태 검토
-- `.aiwf/05_ARCHITECTURE_DECISIONS/`에서 관련 ADR 스캔
+- `.aiwf/05_ARCHITECTURAL_DECISIONS/`에서 관련 ADR 스캔
 - **중요**: 일반 태스크는 문서화된 아키텍처와 일치해야 합니다
 
 ### 3. 중복 작업이 없는지 확인

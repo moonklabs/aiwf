@@ -73,7 +73,7 @@ Built-in review processes maintain standards:
 - `02_REQUIREMENTS/` - Business requirements organized by milestone
 - `03_SPRINTS/` - Sprint organization and task definitions
 - `04_GENERAL_TASKS/` - Non-sprint specific tasks
-- `05_ARCHITECTURE_DECISIONS/` - ADRs for key decisions
+- `05_ARCHITECTURAL_DECISIONS/` - ADRs for key decisions
 - `10_STATE_OF_PROJECT/` - Project review history
 - `99_TEMPLATES/` - Standardized file templates
 

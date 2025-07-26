@@ -44,7 +44,7 @@
 
 **병렬 서브에이전트 사용**하여 다음 명령 실행:
 
-- 스프린트 ID와 일치하는 ADR을 위해 `.aiwf/05_ARCHITECTURE_DECISIONS/` 검색 (예: `ADR*_S02_*.md`)
+- 스프린트 ID와 일치하는 ADR을 위해 `.aiwf/05_ARCHITECTURAL_DECISIONS/` 검색 (예: `ADR*_S02_*.md`)
 - 기술적 결정을 이해하기 위해 발견된 모든 ADR 읽기
 - ADR 참조 섹션에 대한 스프린트 메타 확인
 - 태스크 구현에 영향을 줄 기술적 결정 주목

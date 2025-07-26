@@ -44,7 +44,7 @@ Use PARALLEL SUBAGENTS to READ and UNDERSTAND the project's context:
 
 **USE PARALLEL SUBAGENTS** to execute these commands:
 
-- SEARCH `.aiwf/05_ARCHITECTURE_DECISIONS/` for ADRs matching sprint ID (e.g., `ADR*_S02_*.md`)
+- SEARCH `.aiwf/05_ARCHITECTURAL_DECISIONS/` for ADRs matching sprint ID (e.g., `ADR*_S02_*.md`)
 - READ all found ADRs to understand technical decisions
 - CHECK sprint meta for ADR references section
 - NOTE which technical decisions will affect task implementation
