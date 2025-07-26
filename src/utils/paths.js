@@ -37,6 +37,7 @@ export const AIWF_DIRS = {
 // Tool-specific directories
 export const TOOL_DIRS = {
   CLAUDE_COMMANDS: path.join(BASE_DIRS.CLAUDE, 'commands', 'aiwf'),
+  CLAUDE_AGENTS: path.join(BASE_DIRS.CLAUDE, 'agents'),
   GEMINI_PROMPTS: path.join(BASE_DIRS.GEMINI, 'prompts', 'aiwf'),
   CURSOR_RULES: path.join(BASE_DIRS.CURSOR, 'rules'),
   WINDSURF_RULES: path.join(BASE_DIRS.WINDSURF, 'rules')

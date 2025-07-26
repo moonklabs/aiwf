@@ -190,6 +190,7 @@ async function createDirectoryStructure() {
   // Create tool-specific directories
   await fs.mkdir(TOOL_DIRS.CURSOR_RULES, { recursive: true });
   await fs.mkdir(TOOL_DIRS.WINDSURF_RULES, { recursive: true });
+  await fs.mkdir(TOOL_DIRS.CLAUDE_AGENTS, { recursive: true });
 }
 
 /**
@@ -285,7 +286,7 @@ async function updateDocumentation(languagePath, spinner, msg, debugLog) {
 }
 
 /**
- * Update commands
+ * Update Claude commands and agents
  * @param {string} languagePath - Language path
  * @param {Object} spinner - Ora spinner instance
  * @param {Object} msg - Localized messages
@@ -298,7 +299,14 @@ async function updateCommands(languagePath, spinner, msg, debugLog) {
     await fs.rm(TOOL_DIRS.CLAUDE_COMMANDS, { recursive: true, force: true });
   }
 
+  // Delete existing agents folder if it exists
+  if (await fs.access(TOOL_DIRS.CLAUDE_AGENTS).then(() => true).catch(() => false)) {
+    logWithSpinner(spinner, 'Deleting old agents...', debugLog);
+    await fs.rm(TOOL_DIRS.CLAUDE_AGENTS, { recursive: true, force: true });
+  }
+
   await fs.mkdir(TOOL_DIRS.CLAUDE_COMMANDS, { recursive: true });
+  await fs.mkdir(TOOL_DIRS.CLAUDE_AGENTS, { recursive: true });
 
   // Download commands
   logWithSpinner(spinner, msg.downloadingCommands, debugLog);
@@ -314,11 +322,28 @@ async function updateCommands(languagePath, spinner, msg, debugLog) {
   } catch (error) {
     logWithSpinner(spinner, msg.commandsNotFound, debugLog);
   }
+
+  // Download agents
+  logWithSpinner(spinner, 'Downloading agents...', debugLog);
+  try {
+    await downloadDirectory(
+      `${GITHUB_CONTENT_PREFIX}/${languagePath}/${TOOL_DIRS.CLAUDE_AGENTS}`,
+      TOOL_DIRS.CLAUDE_AGENTS,
+      spinner,
+      msg,
+      languagePath,
+      false // agents도 기존 방식 유지 (파일 리스트 사용)
+    );
+    logWithSpinner(spinner, 'Successfully downloaded agents', debugLog);
+  } catch (error) {
+    logWithSpinner(spinner, 'Agents not found or failed to download', debugLog);
+  }
 }
 
 /**
  * Download and process rules
  * @param {Object} spinner - Ora spinner instance
+{{ ... }}
  * @param {Object} msg - Localized messages
  * @param {boolean} debugLog - Debug mode flag
  */
