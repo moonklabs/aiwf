@@ -491,6 +491,78 @@ async createInteractiveYoloConfig(): Promise<void>
 
 ## Utility APIs
 
+### Engineering Guard
+
+Prevents over-engineering and maintains code quality during autonomous execution.
+
+#### Class: `EngineeringGuard`
+
+```javascript
+import { EngineeringGuard } from 'aiwf/utils/engineering-guard';
+```
+
+##### Constructor
+
+```javascript
+new EngineeringGuard(configPath?: string)
+```
+
+##### Methods
+
+###### `checkFileComplexity(filePath)`
+
+Checks a single file for complexity violations.
+
+```javascript
+async checkFileComplexity(filePath: string): Promise<void>
+```
+
+###### `checkProject(projectPath, filePatterns)`
+
+Performs comprehensive project-wide complexity analysis.
+
+```javascript
+async checkProject(
+  projectPath: string,
+  filePatterns?: string[]
+): Promise<GuardReport>
+```
+
+**Returns:**
+```typescript
+interface GuardReport {
+  passed: boolean;
+  violations: Violation[];
+  warnings: Warning[];
+  summary: {
+    total_violations: number;
+    high_severity: number;
+    medium_severity: number;
+    warnings: number;
+  };
+  recommendations: string[];
+}
+```
+
+###### `provideFeedback(filePath, content)`
+
+Provides real-time feedback during development.
+
+```javascript
+async provideFeedback(
+  filePath: string,
+  content?: string
+): Promise<Feedback[]>
+```
+
+###### `generateReport()`
+
+Generates comprehensive analysis report.
+
+```javascript
+generateReport(): GuardReport
+```
+
 ### Checkpoint Manager
 
 Manages state checkpoints and recovery.
@@ -501,15 +573,45 @@ Manages state checkpoints and recovery.
 import { CheckpointManager } from 'aiwf/utils/checkpoint-manager';
 ```
 
+##### Constructor
+
+```javascript
+new CheckpointManager(projectRoot: string)
+```
+
 ##### Methods
 
-###### `createCheckpoint(state, metadata)`
+###### `startSession(sprintId, mode)`
+
+Starts a new YOLO session with tracking.
+
+```javascript
+async startSession(sprintId: string, mode?: string): Promise<void>
+```
+
+###### `startTask(taskId, taskInfo)`
+
+Begins tracking a specific task.
+
+```javascript
+async startTask(taskId: string, taskInfo?: any): Promise<void>
+```
+
+###### `completeTask(taskId, result)`
+
+Marks a task as completed with results.
+
+```javascript
+async completeTask(taskId: string, result?: any): Promise<void>
+```
+
+###### `createCheckpoint(type, metadata)`
 
 Creates a new checkpoint.
 
 ```javascript
 async createCheckpoint(
-  state: any,
+  type?: string,
   metadata?: CheckpointMetadata
 ): Promise<string>
 ```
@@ -522,12 +624,66 @@ Lists all available checkpoints.
 async listCheckpoints(): Promise<CheckpointInfo[]>
 ```
 
-###### `restoreCheckpoint(checkpointId)`
+###### `restoreFromCheckpoint(checkpointId)`
 
 Restores from a specific checkpoint.
 
 ```javascript
-async restoreCheckpoint(checkpointId: string): Promise<any>
+async restoreFromCheckpoint(checkpointId: string): Promise<RestoreResult>
+```
+
+**Returns:**
+```typescript
+interface RestoreResult {
+  success: boolean;
+  checkpoint: Checkpoint;
+  tasks_to_resume: {
+    completed: string[];
+    current: string | null;
+    next_task_hint: string;
+  };
+}
+```
+
+###### `generateProgressReport()`
+
+Generates comprehensive progress report.
+
+```javascript
+async generateProgressReport(): Promise<ProgressReport>
+```
+
+**Returns:**
+```typescript
+interface ProgressReport {
+  session: {
+    id: string;
+    started: string;
+    sprint: string;
+    mode: string;
+  };
+  progress: {
+    completed: number;
+    failed: number;
+    skipped: number;
+    current: string;
+  };
+  performance: {
+    total_time: string;
+    avg_task_time: string;
+    success_rate: string;
+  };
+  checkpoints: CheckpointInfo[];
+  recommendations: string[];
+}
+```
+
+###### `endSession(summary)`
+
+Ends the current session and generates final report.
+
+```javascript
+async endSession(summary?: any): Promise<ProgressReport>
 ```
 
 ### Git Utilities

@@ -491,6 +491,78 @@ async createInteractiveYoloConfig(): Promise<void>
 
 ## 유틸리티 API
 
+### 엔지니어링 가드
+
+자율 실행 중 오버엔지니어링을 방지하고 코드 품질을 유지합니다.
+
+#### 클래스: `EngineeringGuard`
+
+```javascript
+import { EngineeringGuard } from 'aiwf/utils/engineering-guard';
+```
+
+##### 생성자
+
+```javascript
+new EngineeringGuard(configPath?: string)
+```
+
+##### 메서드
+
+###### `checkFileComplexity(filePath)`
+
+단일 파일의 복잡성 위반을 검사합니다.
+
+```javascript
+async checkFileComplexity(filePath: string): Promise<void>
+```
+
+###### `checkProject(projectPath, filePatterns)`
+
+프로젝트 전체의 포괄적인 복잡성 분석을 수행합니다.
+
+```javascript
+async checkProject(
+  projectPath: string,
+  filePatterns?: string[]
+): Promise<GuardReport>
+```
+
+**반환값:**
+```typescript
+interface GuardReport {
+  passed: boolean;
+  violations: Violation[];
+  warnings: Warning[];
+  summary: {
+    total_violations: number;
+    high_severity: number;
+    medium_severity: number;
+    warnings: number;
+  };
+  recommendations: string[];
+}
+```
+
+###### `provideFeedback(filePath, content)`
+
+개발 중 실시간 피드백을 제공합니다.
+
+```javascript
+async provideFeedback(
+  filePath: string,
+  content?: string
+): Promise<Feedback[]>
+```
+
+###### `generateReport()`
+
+포괄적인 분석 리포트를 생성합니다.
+
+```javascript
+generateReport(): GuardReport
+```
+
 ### 체크포인트 관리자
 
 상태 체크포인트와 복구를 관리합니다.
@@ -501,15 +573,45 @@ async createInteractiveYoloConfig(): Promise<void>
 import { CheckpointManager } from 'aiwf/utils/checkpoint-manager';
 ```
 
+##### 생성자
+
+```javascript
+new CheckpointManager(projectRoot: string)
+```
+
 ##### 메서드
 
-###### `createCheckpoint(state, metadata)`
+###### `startSession(sprintId, mode)`
+
+추적과 함께 새 YOLO 세션을 시작합니다.
+
+```javascript
+async startSession(sprintId: string, mode?: string): Promise<void>
+```
+
+###### `startTask(taskId, taskInfo)`
+
+특정 태스크 추적을 시작합니다.
+
+```javascript
+async startTask(taskId: string, taskInfo?: any): Promise<void>
+```
+
+###### `completeTask(taskId, result)`
+
+태스크를 결과와 함께 완료된 것으로 표시합니다.
+
+```javascript
+async completeTask(taskId: string, result?: any): Promise<void>
+```
+
+###### `createCheckpoint(type, metadata)`
 
 새 체크포인트를 생성합니다.
 
 ```javascript
 async createCheckpoint(
-  state: any,
+  type?: string,
   metadata?: CheckpointMetadata
 ): Promise<string>
 ```
@@ -522,12 +624,66 @@ async createCheckpoint(
 async listCheckpoints(): Promise<CheckpointInfo[]>
 ```
 
-###### `restoreCheckpoint(checkpointId)`
+###### `restoreFromCheckpoint(checkpointId)`
 
 특정 체크포인트에서 복원합니다.
 
 ```javascript
-async restoreCheckpoint(checkpointId: string): Promise<any>
+async restoreFromCheckpoint(checkpointId: string): Promise<RestoreResult>
+```
+
+**반환값:**
+```typescript
+interface RestoreResult {
+  success: boolean;
+  checkpoint: Checkpoint;
+  tasks_to_resume: {
+    completed: string[];
+    current: string | null;
+    next_task_hint: string;
+  };
+}
+```
+
+###### `generateProgressReport()`
+
+포괄적인 진행률 리포트를 생성합니다.
+
+```javascript
+async generateProgressReport(): Promise<ProgressReport>
+```
+
+**반환값:**
+```typescript
+interface ProgressReport {
+  session: {
+    id: string;
+    started: string;
+    sprint: string;
+    mode: string;
+  };
+  progress: {
+    completed: number;
+    failed: number;
+    skipped: number;
+    current: string;
+  };
+  performance: {
+    total_time: string;
+    avg_task_time: string;
+    success_rate: string;
+  };
+  checkpoints: CheckpointInfo[];
+  recommendations: string[];
+}
+```
+
+###### `endSession(summary)`
+
+현재 세션을 종료하고 최종 리포트를 생성합니다.
+
+```javascript
+async endSession(summary?: any): Promise<ProgressReport>
 ```
 
 ### Git 유틸리티
