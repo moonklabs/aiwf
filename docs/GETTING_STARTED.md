@@ -169,7 +169,6 @@ my-project/
 │   │   └── S03_M01_integration_testing/
 │   ├── 04_GENERAL_TASKS/           # Non-sprint tasks
 │   ├── 05_ARCHITECTURAL_DECISIONS/  # ADRs
-│   ├── 06_FEATURE_LEDGERS/         # Feature tracking
 │   └── 99_TEMPLATES/               # Reusable templates
 ├── .claude/commands/aiwf/          # Claude commands
 ├── src/                            # Your source code

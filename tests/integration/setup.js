@@ -38,17 +38,13 @@ export const testUtils = {
     const aiwfDir = path.join(baseDir, '.aiwf');
     const dirs = [
       '00_PROJECT_MANIFEST.md',
-      '01_PROJECT',
+      '01_PROJECT_DOCS',
       '02_REQUIREMENTS', 
       '03_SPRINTS',
       '04_GENERAL_TASKS',
-      '05_DOCUMENTATION',
-      '06_FEATURE_LEDGERS',
-      '07_BUG_REPORTS',
-      '08_ADR',
-      '09_AI_TOOLS',
-      '10_PERSONAS',
-      '11_CONTEXT_COMPRESSION',
+      '05_ARCHITECTURAL_DECISIONS',
+      '10_STATE_OF_PROJECT',
+      '98_PROMPTS',
       '99_TEMPLATES'
     ];
 
@@ -137,17 +133,6 @@ export const testUtils = {
 
 // 테스트 픽스처 데이터
 export const testFixtures = {
-  featureLedger: {
-    id: 'TEST_FEATURE_001',
-    title: 'Test Feature',
-    description: 'Test feature description',
-    status: 'planned',
-    priority: 'medium',
-    milestone: 'M01',
-    created_at: '2025-07-09T02:55:00Z',
-    updated_at: '2025-07-09T02:55:00Z'
-  },
-
   persona: {
     id: 'architect',
     name: 'Software Architect',

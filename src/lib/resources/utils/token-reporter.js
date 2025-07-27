@@ -37,9 +37,8 @@ export class TokenReporter {
         '.aiwf/02_REQUIREMENTS',
         '.aiwf/03_SPRINTS',
         '.aiwf/04_GENERAL_TASKS',
-        '.aiwf/05_COMPLETED_TASKS',
-        '.aiwf/06_FEATURE_LEDGERS',
-        '.aiwf/07_AI_PERSONAS'
+        '.aiwf/05_ARCHITECTURAL_DECISIONS',
+        '.aiwf/10_STATE_OF_PROJECT'
       ];
 
       // 각 디렉토리별 토큰 수 분석
