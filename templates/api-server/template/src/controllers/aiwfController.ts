@@ -3,20 +3,6 @@ import fs from 'fs/promises';
 import path from 'path';
 
 export const aiwfController = {
-  getFeatures: async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const ledgerPath = path.join(process.cwd(), '.aiwf', 'feature-ledger.json');
-      const ledgerData = await fs.readFile(ledgerPath, 'utf-8');
-      const ledger = JSON.parse(ledgerData);
-
-      res.json({
-        success: true,
-        data: ledger,
-      });
-    } catch (error) {
-      next(error);
-    }
-  },
 
   getTokenUsage: async (req: Request, res: Response, next: NextFunction) => {
     try {

@@ -1,19 +1,17 @@
 import { useState, useEffect } from 'react'
 import { useAiwfStore } from '@/stores/aiwfStore'
-import FeatureLedger from '@/components/aiwf/FeatureLedger'
 import TokenUsage from '@/components/aiwf/TokenUsage'
 import ContextStatus from '@/components/aiwf/ContextStatus'
 
 export default function AiwfDashboard() {
-  const { features, tokenUsage, contextStatus, loadDashboardData } = useAiwfStore()
-  const [activeTab, setActiveTab] = useState('features')
+  const { tokenUsage, contextStatus, loadDashboardData } = useAiwfStore()
+  const [activeTab, setActiveTab] = useState('tokens')
 
   useEffect(() => {
     loadDashboardData()
   }, [loadDashboardData])
 
   const tabs = [
-    { id: 'features', name: 'Feature Ledger', icon: '📋' },
     { id: 'tokens', name: '토큰 사용량', icon: '🪙' },
     { id: 'context', name: 'Context 상태', icon: '📊' },
   ]
@@ -51,7 +49,6 @@ export default function AiwfDashboard() {
       </div>
 
       <div className="mt-8">
-        {activeTab === 'features' && <FeatureLedger features={features} />}
         {activeTab === 'tokens' && <TokenUsage usage={tokenUsage} />}
         {activeTab === 'context' && <ContextStatus status={contextStatus} />}
       </div>

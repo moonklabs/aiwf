@@ -3,17 +3,6 @@ import { aiwfController } from '@controllers/aiwfController';
 
 const router = Router();
 
-/**
- * @swagger
- * /api/aiwf/features:
- *   get:
- *     summary: Feature Ledger 조회
- *     tags: [AIWF]
- *     responses:
- *       200:
- *         description: Feature 목록
- */
-router.get('/features', aiwfController.getFeatures);
 
 /**
  * @swagger

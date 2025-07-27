@@ -59,7 +59,6 @@
         "hooks/",
         "scripts/",
         "ai-tools/",
-        "feature-ledger/",
         "index.js",
         "README.md",
         "README.ko.md",

@@ -90,6 +90,37 @@ actual_time: [실제 소요 시간]
 
 ### 5. 변경사항 커밋
 
+**아키텍처 변경 감지 및 ADR 프롬프트:**
+```bash
+# 아키텍처 관련 변경사항 감지
+ARCH_CHANGES=$(git diff --cached --name-only | grep -E "(package\.json|\.env|config/|src/.*\.config\.|docker|infrastructure/|.*\.yaml|.*\.yml)" | wc -l)
+
+if [ $ARCH_CHANGES -gt 0 ]; then
+  echo "🏗️ 아키텍처 변경사항 감지!"
+  echo "변경된 파일:"
+  git diff --cached --name-only | grep -E "(package\.json|\.env|config/|src/.*\.config\.|docker|infrastructure/|.*\.yaml|.*\.yml)"
+  
+  # ADR 생성 제안
+  echo -e "\n💡 ADR 생성을 고려하세요:"
+  echo "다음 중 하나라도 해당되면 ADR을 생성해야 합니다:"
+  echo "- [ ] 새로운 기술 스택이나 라이브러리 도입"
+  echo "- [ ] 기존 아키텍처 패턴 변경"
+  echo "- [ ] 중요한 설정 변경"
+  echo "- [ ] 인프라 구조 변경"
+  
+  # 관련 ADR 검색
+  RELATED_ADRS=$(find .aiwf/05_ARCHITECTURAL_DECISIONS/ -name "ADR*.md" -exec grep -l "$(git log -1 --pretty=%s)" {} \; 2>/dev/null)
+  if [ -n "$RELATED_ADRS" ]; then
+    echo -e "\n📋 관련 ADR 발견:"
+    echo "$RELATED_ADRS"
+    echo "→ /update_adr 명령어로 업데이트하세요"
+  else
+    echo -e "\n📝 새 ADR 생성 권장:"
+    echo "→ /create_adr \"[결정 제목]\" 명령어 사용"
+  fi
+fi
+```
+
 **스마트 커밋:**
 ```bash
 # 서브에이전트로 커밋 실행

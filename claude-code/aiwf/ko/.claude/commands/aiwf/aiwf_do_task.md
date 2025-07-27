@@ -118,8 +118,21 @@
 
   ⏭️ **다음 단계**: 권장 후속 조치
 
+- **아키텍처 변경사항 확인**:
+  ```bash
+  # 아키텍처 관련 파일 변경 감지
+  ARCH_CHANGES=$(git diff --name-only | grep -E "(package\.json|config/|docker|infrastructure/|.*\.yaml)" | wc -l)
+  if [ $ARCH_CHANGES -gt 0 ]; then
+    echo "🏗️ 아키텍처 변경사항이 감지되었습니다!"
+    echo "💡 ADR(Architecture Decision Record) 작성을 고려하세요:"
+    echo "   /create_adr \"[결정 제목]\" - 새로운 아키텍처 결정 문서화"
+    echo "   /update_adr [ADR번호] - 기존 ADR 업데이트"
+  fi
+  ```
+
 - 사용자를 위한 **제안**:
 
   - 🛠️ /project:aiwf:commit `TASK_ID`를 사용하여 변경사항을 git에 커밋
   - 🔀 /project:aiwf:pr_create `TASK_ID`를 사용하여 Pull Request 생성
+  - 📋 /create_adr 또는 /update_adr로 아키텍처 결정 문서화 (필요시)
   - 🧹 /clear를 사용하여 다음 태스크 시작 전 컨텍스트 정리

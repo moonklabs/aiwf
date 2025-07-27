@@ -200,7 +200,6 @@ aiwf sprint-independent "Quick Feature" --minimal
 - 🎭 **AI Personas** - 5 specialized personas (Architect, Security, Frontend, Backend, Data Analyst)
 - 🧠 **Persona-Aware Compression** - Intelligent context compression optimized for active persona
 - 📈 **Lightweight Evaluation** - Automatic background quality monitoring with minimal overhead
-- 🚀 **Feature Ledger** - Feature ID system for development progress tracking
 - 🔍 **AI Tool Templates** - Support for GitHub Copilot, Cursor, Windsurf, and Augment
 - 🪝 **Git Hooks Integration** - Automated feature tracking with git commits
 - 🤖 **Workflow-Based State Management** - Intelligent task prioritization and dependency tracking
@@ -288,7 +287,6 @@ aiwf/
 ├── commands/           # AIWF command implementations
 ├── config/             # Configuration files
 ├── docs/               # Project documentation
-├── feature-ledger/     # Feature tracking JSON files
 ├── hooks/              # Git hooks for automated workflows
 ├── lib/                # Core library modules
 ├── personas/           # AI persona definitions
@@ -301,7 +299,6 @@ aiwf/
 
 ### Key Directories
 
-- **feature-ledger/**: Tracks feature development status and git commit relationships
 - **hooks/**: Contains git hooks (post-commit) for automatic feature tracking
 
 ## 🔧 Requirements

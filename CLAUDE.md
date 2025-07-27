@@ -49,9 +49,6 @@ aiwf/
 │   ├── commit-patterns.js # Git commit patterns
 │   └── language.json     # Language settings
 ├── docs/                 # Project documentation
-├── feature-ledger/       # Feature tracking JSON files
-│   ├── FL-001-authentication.json
-│   └── feature-index.json
 ├── hooks/                # Git hooks and installation scripts
 │   ├── install-hooks.sh  # Hook installation script
 │   └── post-commit       # Post-commit hook
@@ -109,7 +106,6 @@ The `src/commands/` directory contains all AIWF command implementations:
 - **compress.js**: Compresses context to optimize token usage
 - **create-project.js**: Creates new AIWF projects from templates
 - **evaluate.js**: Evaluates AI responses and code quality
-- **feature.js**: Tracks features and their development status
 - **persona.js**: Manages AI personas and their behaviors
 - **token.js**: Monitors and reports token usage
 
@@ -134,25 +130,12 @@ The `templates/` directory provides starter templates for different project type
   - AIWF dashboard components
   - State management setup
 
-## Feature Ledger Directory
-
-The `feature-ledger/` directory contains JSON files for tracking feature development:
-
-- **FL-001-authentication.json**: Authentication feature tracking
-- **feature-index.json**: Index of all features and their status
-
-Feature ledgers help track:
-- Feature status (planned, in-progress, completed)
-- Related git commits
-- Development milestones
-- Integration with git workflow through hooks
-
 ## Hooks Directory
 
 The `hooks/` directory contains Git hooks for automated workflow:
 
 - **install-hooks.sh**: Script to install git hooks into the project
-- **post-commit**: Automatically syncs feature ledger with git commits
+- **post-commit**: Automatically tracks commits for workflow integration
 
 To install hooks:
 ```bash
@@ -160,8 +143,7 @@ To install hooks:
 ```
 
 The post-commit hook automatically:
-- Parses commit messages for feature references
-- Updates feature status in the ledger
+- Parses commit messages for references
 - Maintains feature-commit relationships
 
 ## Utils Directory

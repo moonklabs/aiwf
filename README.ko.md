@@ -175,7 +175,6 @@ your_project/
 - 🎭 **AI 페르소나** - 5가지 전문 페르소나 (Architect, Security, Frontend, Backend, Data Analyst)
 - 🧠 **페르소나 인식 압축** - 활성 페르소나에 최적화된 지능형 컨텍스트 압축
 - 📈 **경량 평가 시스템** - 최소한의 부담으로 자동 백그라운드 품질 모니터링
-- 🚀 **Feature Ledger** - 개발 진행 상황 추적을 위한 기능 ID 시스템
 - 🔍 **AI 도구 템플릿** - GitHub Copilot, Cursor, Windsurf, Augment 지원
 - 🪝 **Git Hooks 통합** - git 커밋과 함께 자동 기능 추적
 - 🤖 **워크플로우 기반 상태 관리** - 지능적 작업 우선순위 지정 및 의존성 추적
@@ -240,7 +239,6 @@ aiwf/
 ├── commands/           # AIWF 명령어 구현
 ├── config/             # 설정 파일
 ├── docs/               # 프로젝트 문서
-├── feature-ledger/     # 기능 추적 JSON 파일
 ├── hooks/              # 자동화된 워크플로우를 위한 Git hooks
 ├── lib/                # 핵심 라이브러리 모듈
 ├── personas/           # AI 페르소나 정의
@@ -253,8 +251,7 @@ aiwf/
 
 ### 주요 디렉토리
 
-- **feature-ledger/**: 기능 개발 상태 및 git 커밋 관계 추적
-- **hooks/**: 자동 기능 추적을 위한 git hooks (post-commit) 포함
+- **hooks/**: 자동화 워크플로우를 위한 git hooks (post-commit) 포함
 
 ## 🔧 요구사항
 
