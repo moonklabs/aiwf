@@ -301,6 +301,42 @@ aiwf/
 
 - **hooks/**: Contains git hooks (post-commit) for automatic feature tracking
 
+## 🔧 Module Management Guide
+
+### 삭제하기 전 확인사항
+
+1. **의존성 확인**: `/src/DEPENDENCY_MAP.md` 파일 확인
+2. **파일 헤더 확인**: `@warning 삭제 금지` 주석 확인  
+3. **YOLO 모듈 확인**: YOLO 전용 모듈인지 확인
+4. **동적 import 확인**: `import()` 구문으로 로드되는지 확인
+
+### ⚠️ YOLO 핵심 모듈들 (삭제 금지)
+
+- **`engineering-guard.js`** - 오버엔지니어링 방지 (동적 로드됨)
+- **`checkpoint-manager.js`** - YOLO 상태 관리
+
+### 🔍 모듈 카테고리 확인
+
+package.json의 `aiwf.moduleCategories`에서 모듈 분류를 확인할 수 있습니다:
+
+- **core**: 핵심 유틸리티 (경로, 메시지, 언어)
+- **yolo**: YOLO 시스템 전용
+- **persona**: AI 페르소나 시스템
+- **installer**: 설치/백업 시스템  
+- **cache**: 템플릿 캐시 시스템
+- **github**: GitHub 통합
+- **common**: 공통 리소스
+
+### 📋 의존성 검사
+
+```bash
+# 특정 모듈의 사용처 확인
+grep -r "모듈명" src/
+
+# 동적 import 확인  
+grep -r "import.*engineering-guard" claude-code/
+```
+
 ## 🔧 Requirements
 
 - Node.js 14.0.0 or higher

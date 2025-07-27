@@ -1,6 +1,16 @@
 /**
- * 오버엔지니어링 방지 가드
+ * Engineering Guard - 오버엔지니어링 방지 가드
+ * 
+ * @usage YOLO 모드 전용 - 동적 import로 사용됨
+ * @used_by /claude-code/aiwf/ko/.claude/commands/aiwf/aiwf_yolo.md
+ * @phase 프로젝트 복잡도 모니터링 (5단계)
+ * @warning 삭제 금지 - YOLO 시스템 핵심 구성 요소
+ * 
  * YOLO 모드에서 과도한 복잡성을 방지하는 유틸리티
+ * - 초기 복잡도 측정
+ * - 사전 체크 및 실시간 모니터링  
+ * - 태스크 완료 후 검증
+ * - 최종 보고서 생성
  */
 
 import fs from 'fs/promises';

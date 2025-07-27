@@ -82,5 +82,54 @@
     },
     "devDependencies": {
         "jest": "^30.0.3"
+    },
+    "aiwf": {
+        "moduleCategories": {
+            "core": [
+                "utils/paths.js",
+                "utils/messages.js",
+                "utils/language-utils.js"
+            ],
+            "yolo": [
+                "utils/engineering-guard.js",
+                "utils/checkpoint-manager.js"
+            ],
+            "persona": [
+                "lib/ai-persona-manager.js",
+                "lib/context-engine.js",
+                "lib/metrics-collector.js",
+                "lib/task-analyzer.js",
+                "lib/token-optimizer.js"
+            ],
+            "installer": [
+                "lib/installer.js",
+                "lib/backup-manager.js",
+                "lib/file-downloader.js",
+                "lib/rollback-manager.js",
+                "lib/validator.js"
+            ],
+            "cache": [
+                "lib/template-cache-system.js",
+                "lib/offline-detector.js",
+                "lib/template-downloader.js",
+                "lib/template-version-manager.js"
+            ],
+            "github": [
+                "lib/github-integration.js",
+                "lib/state/state-index.js",
+                "lib/state/priority-calculator.js",
+                "lib/state/task-scanner.js"
+            ],
+            "common": [
+                "lib/resource-loader.js"
+            ]
+        },
+        "criticalModules": [
+            "utils/engineering-guard.js",
+            "utils/checkpoint-manager.js"
+        ],
+        "dynamicImports": [
+            "utils/engineering-guard.js"
+        ]
     }
 }

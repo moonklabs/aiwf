@@ -1,6 +1,16 @@
 /**
- * YOLO 모드 체크포인트 매니저
+ * Checkpoint Manager - YOLO 모드 체크포인트 매니저
+ * 
+ * @usage YOLO 모드 및 CLI 명령어에서 사용
+ * @used_by src/cli/index.js, src/cli/checkpoint-cli.js
+ * @commands aiwf checkpoint, aiwf-checkpoint
+ * @warning 삭제 금지 - YOLO 시스템 핵심 구성 요소
+ * 
  * 진행 상황을 저장하고 복구할 수 있는 시스템
+ * - 세션 상태 관리
+ * - 체크포인트 생성/복구
+ * - 진행률 추적
+ * - 복구 가능한 상태 유지
  */
 
 import fs from 'fs/promises';
