@@ -12,6 +12,17 @@ AIWF is an AI-powered workflow framework that enables autonomous software develo
 
 This project is an updated version of [Simone](https://github.com/Helmi/claude-simone).
 
+## ✨ Core Features
+
+### 🤖 **AI-Powered Workflow Automation**
+YOLO mode enables completely autonomous development - AI handles planning, coding, testing, and deployment without human intervention. Built-in checkpoint system ensures resilience and recovery.
+
+### 🧠 **Intelligent Task Management**  
+Workflow-based state management with dependency tracking, priority calculation, and smart task recommendations. AI understands project context and suggests optimal next actions.
+
+### 🎭 **Specialized AI Personas**
+Five expert personas (Architect, Security, Frontend, Backend, Data Analyst) with specialized knowledge bases and context-aware compression for domain-specific optimization.
+
 ## 📦 Installation
 
 ### Global Installation (Recommended)
@@ -118,55 +129,6 @@ The revolutionary feature that enables AI to manage complete development workflo
 
 AI analyzes requirements, creates tasks, writes code, runs tests, and commits changes - achieving true autonomous software development.
 
-## 🚀 Usage
-
-### Basic Commands
-
-```bash
-# Install AIWF in current project
-aiwf install
-
-# Force complete reinstall (skip prompts, overwrite everything)
-aiwf install --force
-
-# Show help
-aiwf --help
-
-# Check version
-aiwf --version
-```
-
-### Language Management
-
-```bash
-# Check current language
-aiwf-lang status
-
-# Change language
-aiwf-lang set en    # English
-aiwf-lang set ko    # Korean
-
-# Reset to auto-detection
-aiwf-lang reset
-```
-
-### Update Existing Installation
-
-When running `aiwf install` in a project with existing AIWF, you'll get these options:
-
-#### Interactive Mode
-1. **Update**: Updates commands and docs only, preserves work content
-2. **Complete Reinstall**: Fresh installation, overwrites existing project
-3. **Skip**: Cancel installation
-
-#### Command Line Options
-- `--force`: Skip all prompts and perform complete reinstall
-
-#### What Gets Preserved/Updated
-- **Always Preserved**: Your work files, sprints, tasks, and project content
-- **Always Updated**: Claude commands, documentation, templates, and rules
-- **Backup Created**: Automatic backup of updated files (*.bak)
-
 ## 📁 What Gets Installed
 
 ### Directory Structure
@@ -226,56 +188,6 @@ Based on your language selection, you'll get:
 - [API Reference](docs/API_REFERENCE.md) - Programmatic usage
 - [Complete API Reference](docs/API_REFERENCE_FULL.md) - Comprehensive API documentation
 - [Troubleshooting](docs/TROUBLESHOOTING.md) - Common issues and solutions
-
-## ✨ Core Features
-
-### 🤖 **AI-Powered Workflow Automation**
-YOLO mode enables completely autonomous development - AI handles planning, coding, testing, and deployment without human intervention. Built-in checkpoint system ensures resilience and recovery.
-
-### 🧠 **Intelligent Task Management**  
-Workflow-based state management with dependency tracking, priority calculation, and smart task recommendations. AI understands project context and suggests optimal next actions.
-
-### 🎭 **Specialized AI Personas**
-Five expert personas (Architect, Security, Frontend, Backend, Data Analyst) with specialized knowledge bases and context-aware compression for domain-specific optimization.
-
-### 💡 **Smart Context Management**
-Intelligent context compression and token optimization strategies ensure efficient AI operation while maintaining comprehensive project understanding.
-
-```bash
-# Update project state index
-aiwf state update
-
-# Show current state and recommendations
-aiwf state show
-
-# Get AI-powered next task recommendations
-aiwf state next
-
-# Validate workflow consistency
-aiwf state validate
-
-# Mark task as started
-aiwf state start <task-id>
-
-# Mark task as completed  
-aiwf state complete <task-id>
-```
-
-### 🛡️ Simplicity Guards
-
-Built-in protection against overengineering ensures AI maintains focus on delivering value:
-
-- **Engineering Level Controls** - Configurable complexity boundaries (minimal/balanced/complete)
-- **YAGNI Enforcement** - Prevents unnecessary future-proofing and gold-plating
-- **Complexity Limits** - Automatic detection of overcomplicated solutions
-
-AI is guided to deliver simple, requirement-focused solutions that work.
-
-
-## 🔧 Requirements
-
-- Node.js 14.0.0 or higher
-- Internet connection to download from GitHub
 
 ## 📖 Source
 
