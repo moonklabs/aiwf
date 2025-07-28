@@ -66,15 +66,15 @@ export const COMMAND_FILES = [
 
 // 글로벌 룰 파일 목록
 export const GLOBAL_RULES_FILES = [
-  'code-style-guide.md',
-  'coding-principles.md',
-  'development-process.md',
-  'global-rules.md'
+  'aiwf-code-style-guide.md',
+  'aiwf-coding-principles.md',
+  'aiwf-development-process.md',
+  'aiwf-global-rules.md'
 ];
 
 // 수동 룰 파일 목록
 export const MANUAL_RULES_FILES = [
-  'generate-plan-docs.md'
+  'aiwf-generate-plan-docs.md'
 ];
 
 // 템플릿 파일 목록 (향후 추가 예정)
