@@ -452,13 +452,80 @@ import('./src/utils/engineering-guard.js').then(({ getEngineeringGuard }) => {
 "
 ```
 
-**스마트 태스크 실행 (YOLO 최적화)**:
-- **서브에이전트로 스마트 시작**: @.claude/commands/aiwf/aiwf_smart_start.md {task_id} 사용
+**스마트 태스크 실행 (YOLO 최적화 with Subagents)**:
+
+- **전문 서브에이전트 활용 전략**:
+  ```
+  태스크 유형 분석 → 적절한 서브에이전트 선택 → 병렬 실행
+  ```
+
+- **서브에이전트 자동 선택 로직**:
+  ```bash
+  # 태스크 유형에 따라 적절한 서브에이전트 선택
+  TASK_TYPE=$(grep -E "type:|category:" "${TASK_FILE}" | head -1 | cut -d: -f2 | xargs)
+  
+  case "$TASK_TYPE" in
+    "frontend"|"ui"|"react")
+      echo "🎨 프론트엔드 태스크 감지 → react-ai-frontend-developer 서브에이전트 활용"
+      SUBAGENT_TYPE="react-ai-frontend-developer"
+      ;;
+    "backend"|"api"|"nestjs")
+      echo "⚙️ 백엔드 태스크 감지 → nestjs-backend-specialist 서브에이전트 활용"
+      SUBAGENT_TYPE="nestjs-backend-specialist"
+      ;;
+    "architecture"|"design")
+      echo "🏗️ 아키텍처 태스크 감지 → backend-clean-architect 서브에이전트 활용"
+      SUBAGENT_TYPE="backend-clean-architect"
+      ;;
+    "aws"|"lambda"|"serverless")
+      echo "☁️ AWS 태스크 감지 → aws-serverless-architect 서브에이전트 활용"
+      SUBAGENT_TYPE="aws-serverless-architect"
+      ;;
+    "data"|"analytics"|"bigquery")
+      echo "📊 데이터 태스크 감지 → data-analyst 서브에이전트 활용"
+      SUBAGENT_TYPE="data-analyst"
+      ;;
+    "security"|"vulnerability")
+      echo "🔒 보안 태스크 감지 → security-vulnerability-scanner 서브에이전트 활용"
+      SUBAGENT_TYPE="security-vulnerability-scanner"
+      ;;
+    "debug"|"error"|"issue")
+      echo "🐛 디버깅 태스크 감지 → debug-specialist 서브에이전트 활용"
+      SUBAGENT_TYPE="debug-specialist"
+      ;;
+    *)
+      echo "🤖 일반 태스크 → general-purpose 서브에이전트 활용"
+      SUBAGENT_TYPE="general-purpose"
+      ;;
+  esac
+  ```
+
+- **서브에이전트 병렬 실행**: 
+  - Task 도구로 전문 서브에이전트 실행
+  - 각 서브에이전트가 특화된 영역 처리
+  - 결과 통합하여 최적 솔루션 도출
+
 - **오버엔지니어링 방지 규칙 적용**: 
   - 파일 크기 300줄 이하 유지
   - 함수 크기 50줄 이하 유지
   - 중첩 깊이 4레벨 이하 유지
   - YAGNI 원칙 강제 적용
+
+- **서브에이전트 실행 예시**:
+  ```
+  # React 컴포넌트 개발 태스크
+  Task 도구로 react-ai-frontend-developer 서브에이전트 실행:
+  - Firebase 인증 통합
+  - TypeScript 타입 안전성 보장
+  - 테스트 코드 작성
+  
+  # NestJS API 개발 태스크  
+  Task 도구로 nestjs-backend-specialist 서브에이전트 실행:
+  - RESTful API 엔드포인트 구현
+  - 인증 가드 설정
+  - BigQuery 통합
+  ```
+
 - 기존 aiwf_do_task.md 대신 워크플로우 인식 버전 활용
 - 실행 중 실시간 상태 모니터링
 
@@ -524,16 +591,50 @@ import('./src/utils/checkpoint-manager.js').then(({ CheckpointManager }) => {
 "
 ```
 
-**완료 검증**:
-- test.md 명령(@.claude/commands/aiwf/aiwf_test.md) 실행
-- **워크플로우 기반 품질 검증**:
-  ```bash
-  # 워크플로우 일관성 재확인
-  aiwf state validate --post-task={task_id}
-  
-  # 다음 태스크들 차단 해제 확인
-  aiwf state next --check-unblocked
-  ```
+**완료 검증 (전문 서브에이전트 활용)**:
+
+**🔍 최종 품질 검증 프로세스:**
+
+1. **자동 테스트 실행:**
+   ```
+   # 태스크 유형에 따른 테스트 전략
+   if [[ "$TASK_TYPE" =~ (frontend|react) ]]; then
+     echo "🎨 프론트엔드 테스트 실행"
+     Task 도구로 react-ai-frontend-developer 서브에이전트 실행:
+     - 컴포넌트 테스트, 스냅샷 테스트, E2E 테스트
+   elif [[ "$TASK_TYPE" =~ (backend|api) ]]; then
+     echo "⚙️ 백엔드 테스트 실행"
+     Task 도구로 nestjs-backend-specialist 서브에이전트 실행:
+     - 유닛 테스트, 통합 테스트, API 테스트
+   fi
+   ```
+
+2. **보안 최종 검증:**
+   ```
+   # 보안이 중요한 코드 변경사항이 있는 경우
+   Task 도구로 security-vulnerability-scanner 서브에이전트 실행:
+   - 최종 보안 스캔
+   - 새로운 취약점 확인
+   - 보안 정책 준수 검증
+   ```
+
+3. **문서화 자동 업데이트:**
+   ```
+   # 코드 변경사항에 대한 문서 업데이트 필요 확인
+   Task 도구로 technical-documentation-writer 서브에이전트 실행:
+   - API 문서 업데이트
+   - README 변경사항 반영
+   - 기술 가이드 최신화
+   ```
+
+4. **워크플로우 기반 품질 검증:**
+   ```bash
+   # 워크플로우 일관성 재확인
+   aiwf state validate --post-task={task_id}
+   
+   # 다음 태스크들 차단 해제 확인
+   aiwf state next --check-unblocked
+   ```
 
 **지능적 오류 처리**:
 - **치명적 오류 감지**: 
