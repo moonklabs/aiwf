@@ -8,7 +8,7 @@
 
 ## What is AIWF?
 
-AIWF is a markdown-based project management framework designed specifically for AI-assisted development with Claude Code. It helps break down software projects into manageable units that AI can effectively handle, maximizing productivity.
+AIWF is an AI-powered workflow framework that enables autonomous software development with Claude Code. It provides intelligent command sets and workflow definitions that allow AI to manage entire project lifecycles - from planning to deployment - with minimal human intervention.
 
 This project is an updated version of [Simone](https://github.com/Helmi/claude-simone).
 
@@ -34,6 +34,89 @@ The installer will guide you through:
 2. **Project Setup**: Initialize AIWF in your current directory
 3. **Claude Commands**: Install language-specific commands
 4. **Documentation**: Download guides and templates
+
+## 🚀 Getting Started Guide
+
+### Step 1: Installation
+```bash
+# Install globally
+npm install -g aiwf
+
+# Setup in your project directory
+cd your-project
+aiwf install
+```
+
+### Step 2: Project Planning Phase
+Enter **Plan Mode** - describe what you want to build and your project goals. **Do not start coding yet.**
+- Engage in thorough Q&A to clarify objectives
+- Define project scope and requirements
+- Set clear success criteria
+
+### Step 3: Initialize Project Framework
+```bash
+# Create/update Claude configuration
+/init
+
+# Initialize AIWF framework (creates first milestone)
+/project:aiwf:aiwf_initialize
+```
+
+### Step 4: Create Sprint Plans
+```bash
+# Generate sprints from milestone (first sprint becomes active)
+/project:aiwf:aiwf_create_sprints_from_milestone M01
+
+# If only one milestone exists, you can omit the milestone code
+/project:aiwf:aiwf_create_sprints_from_milestone
+```
+
+### Step 5: Review and Refine
+Review generated plans and refine through Q&A until satisfied with the approach.
+
+### Step 6: Generate Task Lists
+```bash
+# Create detailed tasks for active sprint (first task becomes active)
+/project:aiwf:aiwf_create_sprint_tasks
+```
+
+### Step 7: Execute Development
+```bash
+# Execute individual task
+/project:aiwf:aiwf_do_task [task-id]
+
+# OR run autonomous development for entire sprint
+/project:aiwf:aiwf_yolo
+```
+
+**YOLO Mode** executes all sprint tasks continuously without interruption, handling coding, testing, and commits automatically.
+
+### Key Commands
+
+- **Initialize**: `/project:aiwf:aiwf_initialize` - Initial project setup
+- **Plan**: `/project:aiwf:aiwf_create_milestone_plan` - Create milestone plans
+- **Sprint**: `/project:aiwf:aiwf_create_sprints_from_milestone` - Generate sprints
+- **Task**: `/project:aiwf:aiwf_do_task` - Execute tasks
+- **Review**: `/project:aiwf:aiwf_code_review` - Code review
+- **GitHub Integration**: `/project:aiwf:aiwf_issue_create`, `/project:aiwf:aiwf_pr_create`
+- **AI Personas**: `/project:aiwf:aiwf_ai_persona_architect`, `/project:aiwf:aiwf_ai_persona_debugger`, etc.
+
+### 🚀 YOLO Mode - Autonomous AI Development
+
+The revolutionary feature that enables AI to manage complete development workflows autonomously:
+
+```bash
+# Full autonomous development - AI handles everything
+/project:aiwf:aiwf_yolo
+
+# Target specific sprint execution  
+/project:aiwf:aiwf_yolo S03
+
+# Continuous multi-sprint development
+/project:aiwf:aiwf_yolo sprint-all
+```
+
+AI analyzes requirements, creates tasks, writes code, runs tests, and commits changes - achieving true autonomous software development.
 
 ## 🚀 Usage
 
@@ -121,47 +204,6 @@ Based on your language selection, you'll get:
 - Korean documentation and templates
 - Localized project management content
 
-## 🎯 Getting Started
-
-After installation:
-
-1. Open your project in Claude Code
-2. Use `/project:aiwf` commands to manage your project
-3. Start with `/project:aiwf:initialize` to set up your project
-
-### Key Commands
-
-- **Initialize**: `/project:aiwf:initialize` - Initial project setup
-- **Plan**: `/project:aiwf:plan_milestone` - Create milestone plans
-- **Sprint**: `/project:aiwf:create_sprints_from_milestone` - Generate sprints
-- **Task**: `/project:aiwf:do_task` - Execute tasks
-- **Review**: `/project:aiwf:code_review` - Code review
-- **GitHub Integration**: `/project:aiwf:issue_create`, `/project:aiwf:pr_create`
-- **AI Personas**: `/project:aiwf:ai_persona:architect`, `/project:aiwf:ai_persona:debugger`, etc.
-
-### 🚀 YOLO Mode - The Core Feature
-
-YOLO mode is the heart of AIWF, enabling autonomous task execution:
-
-```bash
-# Basic YOLO - processes general tasks then sprint tasks
-/project:aiwf:yolo
-
-# Sprint-specific execution
-/project:aiwf:yolo S03
-
-# Execute all sprints continuously
-/project:aiwf:yolo sprint-all
-
-# Execute all milestones
-/project:aiwf:yolo milestone-all
-
-# Independent sprint creation (no milestone required)
-aiwf sprint-independent --from-readme
-aiwf sprint-independent --from-issue 123
-aiwf sprint-independent "Quick Feature" --minimal
-```
-
 ## 📚 Documentation
 
 ### Core Documentation
@@ -185,36 +227,19 @@ aiwf sprint-independent "Quick Feature" --minimal
 - [Complete API Reference](docs/API_REFERENCE_FULL.md) - Comprehensive API documentation
 - [Troubleshooting](docs/TROUBLESHOOTING.md) - Common issues and solutions
 
-## ✨ Features
+## ✨ Core Features
 
-- 🌍 **Multi-language Support** - Complete English and Korean support
-- 🎨 **Beautiful CLI** - User-friendly interface with colors and progress indicators
-- 🔄 **Smart Updates** - Intelligent update detection with automatic backups
-- 📦 **Direct Download** - Downloads directly from official GitHub repository
-- 🚀 **Easy to Use** - Works with `npx` - no global installation needed
-- 💾 **Safe Backups** - Creates timestamped backups when updating
-- 🎯 **Language-Specific** - Language-specific commands and documentation
-- 🔧 **IDE Integration** - Cursor and Windsurf development rules support
-- 🔗 **GitHub Integration** - Automated issue and PR creation
-- 📊 **Project Tracking** - Systematic management of milestones, sprints, and tasks
-- 🎭 **AI Personas** - 5 specialized personas (Architect, Security, Frontend, Backend, Data Analyst)
-- 🧠 **Persona-Aware Compression** - Intelligent context compression optimized for active persona
-- 📈 **Lightweight Evaluation** - Automatic background quality monitoring with minimal overhead
-- 🔍 **AI Tool Templates** - Support for GitHub Copilot, Cursor, Windsurf, and Augment
-- 🪝 **Git Hooks Integration** - Automated feature tracking with git commits
-- 🤖 **Workflow-Based State Management** - Intelligent task prioritization and dependency tracking
-- 🎯 **Smart Task Recommendations** - AI-powered next action suggestions based on project state
-- 🔄 **Adaptive Sprint Management** - Automatic sprint generation at 80% completion
-- 🔍 **Dependency Analysis** - Circular dependency detection and blocking task identification
-- 🏃 **Independent Sprints** - Create and run sprints without milestone dependencies
-- 🛡️ **Overengineering Prevention** - Built-in guards to maintain simplicity and focus
-- 💾 **Checkpoint System** - Save and restore YOLO execution state for resilience
+### 🤖 **AI-Powered Workflow Automation**
+YOLO mode enables completely autonomous development - AI handles planning, coding, testing, and deployment without human intervention. Built-in checkpoint system ensures resilience and recovery.
 
-## 🤖 Workflow-Based State Management (NEW!)
+### 🧠 **Intelligent Task Management**  
+Workflow-based state management with dependency tracking, priority calculation, and smart task recommendations. AI understands project context and suggests optimal next actions.
 
-AIWF now includes an advanced state management system that helps AI maintain project context:
+### 🎭 **Specialized AI Personas**
+Five expert personas (Architect, Security, Frontend, Backend, Data Analyst) with specialized knowledge bases and context-aware compression for domain-specific optimization.
 
-### State Management Commands
+### 💡 **Smart Context Management**
+Intelligent context compression and token optimization strategies ensure efficient AI operation while maintaining comprehensive project understanding.
 
 ```bash
 # Update project state index
@@ -236,106 +261,16 @@ aiwf state start <task-id>
 aiwf state complete <task-id>
 ```
 
-### Key Features
+### 🛡️ Simplicity Guards
 
-- **Priority Matrix**: Tasks are scored based on urgency (40%), importance (30%), dependencies (20%), and effort (10%)
-- **Dependency Tracking**: Automatically identifies blocking tasks and circular dependencies
-- **80% Rule**: Recommends preparing next sprint when current sprint reaches 80% completion
-- **Workflow Validation**: Ensures state consistency across milestones, sprints, and tasks
-- **Smart Recommendations**: AI suggests optimal next actions based on project state
+Built-in protection against overengineering ensures AI maintains focus on delivering value:
 
-### Integration with YOLO Mode
+- **Engineering Level Controls** - Configurable complexity boundaries (minimal/balanced/complete)
+- **YAGNI Enforcement** - Prevents unnecessary future-proofing and gold-plating
+- **Complexity Limits** - Automatic detection of overcomplicated solutions
 
-The enhanced YOLO mode now uses workflow intelligence:
+AI is guided to deliver simple, requirement-focused solutions that work.
 
-```bash
-# Run YOLO with workflow-based task selection
-/project:aiwf:yolo
-
-# Sprint-specific with workflow optimization
-/project:aiwf:yolo S03
-
-# Adaptive sprint management
-/project:aiwf:yolo sprint-all
-```
-
-### 🛡️ Overengineering Prevention
-
-AIWF includes built-in guards to prevent overengineering:
-
-- **Configurable Engineering Levels**: minimal, balanced, complete
-- **Focus Rules**: requirement_first, simple_solution, no_gold_plating
-- **Code Complexity Checks**: file size, function length, nesting depth limits
-- **Design Pattern Limits**: prevents excessive abstraction
-- **YAGNI Enforcement**: no future-proofing without current need
-
-Configure in `.aiwf/yolo-config.yaml`:
-
-```yaml
-engineering_level: minimal
-focus_rules:
-  requirement_first: true
-  simple_solution: true
-  no_gold_plating: true
-```
-
-## 📁 Project Structure
-
-```
-aiwf/
-├── ai-tools/           # AI tool-specific configurations
-├── commands/           # AIWF command implementations
-├── config/             # Configuration files
-├── docs/               # Project documentation
-├── hooks/              # Git hooks for automated workflows
-├── lib/                # Core library modules
-├── personas/           # AI persona definitions
-├── rules/              # Development rules and guidelines
-├── scripts/            # Build and utility scripts
-├── templates/          # Project templates (api-server, npm-library, web-app)
-├── tests/              # Test suites
-└── utils/              # Utility modules
-```
-
-### Key Directories
-
-- **hooks/**: Contains git hooks (post-commit) for automatic feature tracking
-
-## 🔧 Module Management Guide
-
-### 삭제하기 전 확인사항
-
-1. **의존성 확인**: `/src/DEPENDENCY_MAP.md` 파일 확인
-2. **파일 헤더 확인**: `@warning 삭제 금지` 주석 확인  
-3. **YOLO 모듈 확인**: YOLO 전용 모듈인지 확인
-4. **동적 import 확인**: `import()` 구문으로 로드되는지 확인
-
-### ⚠️ YOLO 핵심 모듈들 (삭제 금지)
-
-- **`engineering-guard.js`** - 오버엔지니어링 방지 (동적 로드됨)
-- **`checkpoint-manager.js`** - YOLO 상태 관리
-
-### 🔍 모듈 카테고리 확인
-
-package.json의 `aiwf.moduleCategories`에서 모듈 분류를 확인할 수 있습니다:
-
-- **core**: 핵심 유틸리티 (경로, 메시지, 언어)
-- **yolo**: YOLO 시스템 전용
-- **persona**: AI 페르소나 시스템
-- **installer**: 설치/백업 시스템  
-- **cache**: 템플릿 캐시 시스템
-- **github**: GitHub 통합
-- **common**: 공통 리소스
-
-### 📋 의존성 검사
-
-```bash
-# 특정 모듈의 사용처 확인
-grep -r "모듈명" src/
-
-# 동적 import 확인  
-grep -r "import.*engineering-guard" claude-code/
-```
 
 ## 🔧 Requirements
 
