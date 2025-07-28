@@ -53,3 +53,5 @@ out/
 /.aiwf
 .aiwf/sessions/
 /.claude
+/.cursor
+/.windsurf
