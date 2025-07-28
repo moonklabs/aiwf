@@ -90,7 +90,7 @@ your_project/
 ├── .claude/commands/aiwf/              # Claude Code custom commands
 │   ├── initialize.md                   # Project initialization
 │   ├── prime_context.md                # Context loading
-│   ├── plan_milestone.md               # Milestone planning
+│   ├── aiwf_create_milestone_plan.md   # Milestone planning
 │   ├── create_sprints_from_milestone.md # Sprint creation
 │   ├── do_task.md                      # Task execution
 │   ├── commit.md                       # Git commit workflow
@@ -117,7 +117,7 @@ your_project/
 ### Command System
 The framework includes 25+ specialized commands for AI-assisted development:
 - **Setup**: `initialize`, `prime`, `prime_context`
-- **Planning**: `plan_milestone`, `create_sprints_from_milestone`, `create_sprint_tasks`
+- **Planning**: `aiwf_create_milestone_plan`, `aiwf_create_sprints_from_milestone`, `aiwf_create_sprint_tasks`
 - **Development**: `do_task`, `commit`, `test`, `code_review`
 - **Automation**: `yolo` (autonomous task execution)
 - **GitHub Integration**: `issue_create`, `pr_create`

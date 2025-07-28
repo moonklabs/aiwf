@@ -26,6 +26,31 @@
                 "-y",
                 "@modelcontextprotocol/server-memory"
             ]
+        },
+        "mcp-playwright": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@executeautomation/playwright-mcp-server"
+            ],
+            "env": {},
+            "disabled": false
+        },
+        "magic": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@magicuidesign/cli@latest"
+            ],
+            "env": {},
+            "disabled": false
+        },
+        "context7": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@upstash/context7-mcp"
+            ]
         }
     }
 }

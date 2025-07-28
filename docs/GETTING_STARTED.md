@@ -92,7 +92,7 @@ Claude will help you set up the project structure and create initial documentati
 ### Step 2: Define Your Project Vision
 
 ```bash
-/project:aiwf:create_project_doc "Task Manager" "A simple task management app with CRUD operations"
+/project:aiwf:aiwf_create_prd "Task Manager" "A simple task management app with CRUD operations"
 ```
 
 This creates:
@@ -102,7 +102,7 @@ This creates:
 ### Step 3: Plan Your First Milestone
 
 ```bash
-/project:aiwf:plan_milestone "Basic Task Management"
+/project:aiwf:aiwf_create_milestone_plan "Basic Task Management"
 ```
 
 Claude will guide you through:
@@ -197,7 +197,7 @@ my-project/
 
 | Command | Description |
 |---------|-------------|
-| `/project:aiwf:plan_milestone` | Create a new milestone |
+| `/project:aiwf:aiwf_create_milestone_plan` | Create a new milestone |
 | `/project:aiwf:create_sprints_from_milestone` | Generate sprints |
 | `/project:aiwf:sprint_status` | Check sprint progress |
 
@@ -210,13 +210,12 @@ my-project/
 | `/project:aiwf:list_tasks` | List tasks in sprint |
 | `/project:aiwf:complete_task` | Mark task as done |
 
-### Feature Management
+### GitHub Integration
 
 | Command | Description |
 |---------|-------------|
-| `/project:aiwf:create_feature_ledger` | Create feature entry |
-| `/project:aiwf:update_feature_status` | Update feature status |
-| `/project:aiwf:feature_changelog` | Generate feature changelog |
+| `/project:aiwf:aiwf_issue_create` | Create GitHub issue |
+| `/project:aiwf:aiwf_pr_create` | Create pull request |
 
 ### AI Personas
 
@@ -224,25 +223,20 @@ AIWF includes an AI Persona system that optimizes Claude Code's behavior for dif
 
 | Command | Description |
 |---------|-------------|
-| `/project:aiwf:ai_persona:architect` | System design mode |
-| `/project:aiwf:ai_persona:debugger` | Debugging mode |
-| `/project:aiwf:ai_persona:reviewer` | Code review mode |
-| `/project:aiwf:ai_persona:documenter` | Documentation mode |
-| `/project:aiwf:ai_persona:optimizer` | Performance optimization |
-| `/project:aiwf:ai_persona:developer` | General development (default) |
+| `/project:aiwf:aiwf_persona_architect` | System design and architecture |
+| `/project:aiwf:aiwf_persona_security` | Security-focused development |
+| `/project:aiwf:aiwf_persona_frontend` | Frontend development |
+| `/project:aiwf:aiwf_persona_backend` | Backend development |
+| `/project:aiwf:aiwf_persona_data_analyst` | Data analysis and insights |
 
-#### Additional Persona Commands
+#### Core Workflow Commands
 
 | Command | Description |
 |---------|-------------|
-| `/project:aiwf:ai_persona:switch <name>` | Switch to specific persona |
-| `/project:aiwf:ai_persona:status` | View current persona |
-| `/project:aiwf:ai_persona:list` | List all available personas |
-| `/project:aiwf:ai_persona:auto on/off` | Enable/disable auto-detection |
-| `/project:aiwf:ai_persona:detect <task>` | Detect optimal persona for task |
-| `/project:aiwf:ai_persona:report` | Generate performance report |
-| `/project:aiwf:ai_persona:stats [persona]` | View persona statistics |
-| `/project:aiwf:ai_persona:reset` | Reset to default persona |
+| `/project:aiwf:aiwf_yolo` | Autonomous task execution |
+| `/project:aiwf:aiwf_code_review` | Automated code review |
+| `/project:aiwf:aiwf_test` | Run project tests |
+| `/project:aiwf:aiwf_validate_state` | Validate workflow state |
 
 See the [AI Personas Guide](guides/ai-personas-guide.md) for detailed information.
 
@@ -436,9 +430,9 @@ echo "Custom rules" > .aiwf/personas/custom.json
 ## Quick Reference Card
 
 ```bash
-# Start new feature
-/project:aiwf:create_feature_ledger "Feature Name"  # → FL001
-git checkout -b feature/FL001-feature-name
+# Start new task
+/project:aiwf:aiwf_create_general_task "Feature Name"  # → T001
+git checkout -b feature/T001-feature-name
 
 # Work on tasks
 /project:aiwf:list_tasks S01

@@ -88,7 +88,7 @@ your_project/
 ├── .claude/commands/aiwf/              # Claude Code 사용자 정의 명령어
 │   ├── initialize.md                   # 프로젝트 초기화
 │   ├── prime_context.md                # 컨텍스트 로딩
-│   ├── plan_milestone.md               # 마일스톤 계획
+│   ├── aiwf_create_milestone_plan.md   # 마일스톤 계획
 │   ├── create_sprints_from_milestone.md # 스프린트 생성
 │   ├── do_task.md                      # 태스크 실행
 │   ├── commit.md                       # Git 커밋 워크플로우
@@ -115,7 +115,7 @@ your_project/
 ### 명령어 시스템
 이 프레임워크는 AI 지원 개발을 위한 25개 이상의 전문 명령어를 포함합니다:
 - **설정**: `initialize`, `prime`, `prime_context`
-- **계획**: `plan_milestone`, `create_sprints_from_milestone`, `create_sprint_tasks`
+- **계획**: `aiwf_create_milestone_plan`, `aiwf_create_sprints_from_milestone`, `aiwf_create_sprint_tasks`
 - **개발**: `do_task`, `commit`, `test`, `code_review`
 - **자동화**: `yolo` (자율 태스크 실행)
 - **GitHub 통합**: `issue_create`, `pr_create`

@@ -14,14 +14,26 @@ This project is an updated version of [Simone](https://github.com/Helmi/claude-s
 
 ## ✨ Core Features
 
-### 🤖 **AI-Powered Workflow Automation**
-YOLO mode enables completely autonomous development - AI handles planning, coding, testing, and deployment without human intervention. Built-in checkpoint system ensures resilience and recovery.
+### 🤖 **Agent-Based Autonomous Development**
+Multi-agent architecture where AIWF acts as the master orchestrator managing entire development workflows, while Claude Code operates as specialized subagents handling specific tasks. YOLO mode enables completely autonomous development - AI handles planning, coding, testing, and deployment without human intervention. Built-in checkpoint system ensures resilience and recovery.
 
 ### 🧠 **Intelligent Task Management**  
 Workflow-based state management with dependency tracking, priority calculation, and smart task recommendations. AI understands project context and suggests optimal next actions.
 
 ### 🎭 **Specialized AI Personas**
 Five expert personas (Architect, Security, Frontend, Backend, Data Analyst) with specialized knowledge bases and context-aware compression for domain-specific optimization.
+
+### 🧬 **Advanced Context Engineering**
+Intelligent context construction and optimization that maximizes AI effectiveness while minimizing token usage. Dynamic context compression, workflow-aware prompt engineering, and automatic relevance filtering ensure AI always has the right information at the right time.
+
+### 💡 **Smart Context Management**
+Token-efficient context strategies with automatic compression, intelligent chunking, and relevance scoring. Maintains comprehensive project understanding while optimizing for AI model limits and performance.
+
+### 🔄 **Multi-Agent Architecture** 
+AIWF operates as the master orchestration agent that coordinates complex development workflows. Claude Code instances function as specialized subagents, each handling specific domains like coding, testing, or documentation. This distributed approach enables parallel processing, fault tolerance, and specialized expertise application.
+
+### 🔗 **Seamless Integration**
+Native support for Claude Code, Cursor, Windsurf, GitHub, and Git with automated hooks, issue creation, and PR management.
 
 ## 📦 Installation
 
@@ -100,7 +112,7 @@ Review generated plans and refine through Q&A until satisfied with the approach.
 /project:aiwf:aiwf_yolo
 ```
 
-**YOLO Mode** executes all sprint tasks continuously without interruption, handling coding, testing, and commits automatically.
+**YOLO Mode** orchestrates multiple Claude Code subagents to execute all sprint tasks continuously without interruption. The master agent coordinates planning while specialized subagents handle coding, testing, documentation, and commits automatically.
 
 ### Key Commands
 
@@ -114,7 +126,7 @@ Review generated plans and refine through Q&A until satisfied with the approach.
 
 ### 🚀 YOLO Mode - Autonomous AI Development
 
-The revolutionary feature that enables AI to manage complete development workflows autonomously:
+Revolutionary multi-agent orchestration that enables completely autonomous development workflows. AIWF acts as the master agent coordinating multiple Claude Code subagents:
 
 ```bash
 # Full autonomous development - AI handles everything
@@ -127,7 +139,7 @@ The revolutionary feature that enables AI to manage complete development workflo
 /project:aiwf:aiwf_yolo sprint-all
 ```
 
-AI analyzes requirements, creates tasks, writes code, runs tests, and commits changes - achieving true autonomous software development.
+Master agent analyzes requirements and coordinates specialized subagents that create tasks, write code, run tests, and commit changes - achieving true multi-agent autonomous software development.
 
 ## 📁 What Gets Installed
 

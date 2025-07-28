@@ -38,13 +38,13 @@ aiwf install
 #### Step 2: Define Project Vision
 
 ```bash
-/project:aiwf:create_project_doc "E-commerce Platform" "Modern e-commerce solution with AI-powered recommendations"
+/project:aiwf:aiwf_create_prd "E-commerce Platform" "Modern e-commerce solution with AI-powered recommendations"
 ```
 
 #### Step 3: Plan First Milestone
 
 ```bash
-/project:aiwf:plan_milestone "MVP Core Features"
+/project:aiwf:aiwf_create_milestone_plan "MVP Core Features"
 ```
 
 **Claude Code will help you define:**
@@ -75,7 +75,7 @@ aiwf install
 "Please design the overall architecture for our e-commerce platform"
 
 # Create feature for authentication
-/project:aiwf:create_feature_ledger "User Authentication System"
+/project:aiwf:aiwf_create_general_task "User Authentication System"
 # Returns: FL001
 
 # Create Git branch
@@ -94,7 +94,7 @@ git checkout -b feature/FL001-user-authentication
 #### Step 1: Create Feature Entry
 
 ```bash
-/project:aiwf:create_feature_ledger "Real-time Notification System"
+/project:aiwf:aiwf_create_general_task "Real-time Notification System"
 # Returns: FL002
 
 # Create detailed feature specification
@@ -159,7 +159,7 @@ npm test
 "Create API documentation for the notification endpoints"
 
 # Generate feature changelog
-/project:aiwf:feature_changelog FL002
+# Feature changelog command has been removed - use aiwf_project_review instead
 ```
 
 #### Step 7: Complete Feature
@@ -174,7 +174,7 @@ gh pr create --title "[FL002] Real-time Notification System" \
   --body "Implements WebSocket-based real-time notifications"
 
 # Update feature status
-/project:aiwf:update_feature_status FL002 completed
+# Feature status commands have been removed - use aiwf_smart_complete instead
 ```
 
 ---
@@ -219,7 +219,7 @@ EOF
 **Developer A: Authentication Service**
 ```bash
 # Create feature
-/project:aiwf:create_feature_ledger "Authentication Microservice"
+/project:aiwf:aiwf_create_general_task "Authentication Microservice"
 # FL003
 
 # Work on auth service
@@ -231,7 +231,7 @@ git checkout -b feature/FL003-auth-service
 **Developer B: Product Service**
 ```bash
 # Create feature
-/project:aiwf:create_feature_ledger "Product Catalog Microservice"
+/project:aiwf:aiwf_create_general_task "Product Catalog Microservice"
 # FL004
 
 # Work on product service
@@ -375,12 +375,12 @@ if (regression.hasRegression) {
 
 ```bash
 # Create milestone for modernization
-/project:aiwf:plan_milestone "Legacy System Modernization"
+/project:aiwf:aiwf_create_milestone_plan "Legacy System Modernization"
 
 # Break down into features
-/project:aiwf:create_feature_ledger "Database Migration"      # FL005
-/project:aiwf:create_feature_ledger "API Modernization"       # FL006
-/project:aiwf:create_feature_ledger "Frontend Refactoring"    # FL007
+/project:aiwf:aiwf_create_general_task "Database Migration"      # T001
+/project:aiwf:aiwf_create_general_task "API Modernization"       # T002
+/project:aiwf:aiwf_create_general_task "Frontend Refactoring"    # T003
 ```
 
 #### Step 3: Incremental Refactoring

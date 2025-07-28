@@ -81,7 +81,7 @@ Built-in review processes maintain standards:
 
 AIWF commands (`/project:AIWF:command`) automate the workflow:
 
-- Planning: `plan_milestone`, `create_sprint`
+- Planning: `aiwf_create_milestone_plan`, `aiwf_create_sprints_from_milestone`
 - Execution: `create_task`, `do_task`, `code_review`
 - Maintenance: `commit`, `project_review`, `discuss_review`
 - Utilities: `initialize`

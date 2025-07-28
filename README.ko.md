@@ -131,7 +131,7 @@ your_project/
 ### 주요 명령어
 
 - **초기화**: `/project:aiwf:initialize` - 프로젝트 초기 설정
-- **계획**: `/project:aiwf:plan_milestone` - 마일스톤 계획 수립
+- **계획**: `/project:aiwf:aiwf_create_milestone_plan` - 마일스톤 계획 수립
 - **스프린트**: `/project:aiwf:create_sprints_from_milestone` - 스프린트 생성
 - **작업**: `/project:aiwf:do_task` - 작업 실행
 - **리뷰**: `/project:aiwf:code_review` - 코드 리뷰

@@ -40,13 +40,13 @@ aiwf install
 #### 2단계: 프로젝트 비전 정의
 
 ```bash
-/project:aiwf:create_project_doc "이커머스 플랫폼" "AI 기반 추천 시스템을 갖춘 현대적인 이커머스 솔루션"
+/project:aiwf:aiwf_create_prd "이커머스 플랫폼" "AI 기반 추천 시스템을 갖춘 현대적인 이커머스 솔루션"
 ```
 
 #### 3단계: 첫 마일스톤 계획
 
 ```bash
-/project:aiwf:plan_milestone "MVP 핵심 기능"
+/project:aiwf:aiwf_create_milestone_plan "MVP 핵심 기능"
 ```
 
 **Claude Code가 다음을 정의해줍니다:**
@@ -77,7 +77,7 @@ aiwf install
 "이커머스 플랫폼의 전체 아키텍처를 설계해주세요"
 
 # 인증을 위한 기능 생성
-/project:aiwf:create_feature_ledger "사용자 인증 시스템"
+/project:aiwf:aiwf_create_general_task "사용자 인증 시스템"
 # 반환: FL001
 
 # Git 브랜치 생성
@@ -96,7 +96,7 @@ git checkout -b feature/FL001-user-authentication
 #### 1단계: 기능 항목 생성
 
 ```bash
-/project:aiwf:create_feature_ledger "실시간 알림 시스템"
+/project:aiwf:aiwf_create_general_task "실시간 알림 시스템"
 # 반환: FL002
 
 # 상세한 기능 명세 생성
@@ -161,7 +161,7 @@ npm test
 "알림 엔드포인트를 위한 API 문서를 작성해주세요"
 
 # 기능 변경 로그 생성
-/project:aiwf:feature_changelog FL002
+# Feature changelog 명령어가 제거됨 - 대신 aiwf_project_review 사용
 ```
 
 #### 7단계: 기능 완료
@@ -176,7 +176,7 @@ gh pr create --title "[FL002] 실시간 알림 시스템" \
   --body "WebSocket 기반 실시간 알림 구현"
 
 # 기능 상태 업데이트
-/project:aiwf:update_feature_status FL002 completed
+# Feature status 명령어가 제거됨 - 대신 aiwf_smart_complete 사용
 ```
 
 ---
@@ -221,7 +221,7 @@ EOF
 **개발자 A: 인증 서비스**
 ```bash
 # 기능 생성
-/project:aiwf:create_feature_ledger "인증 마이크로서비스"
+/project:aiwf:aiwf_create_general_task "인증 마이크로서비스"
 # FL003
 
 # 인증 서비스 작업
@@ -233,7 +233,7 @@ git checkout -b feature/FL003-auth-service
 **개발자 B: 상품 서비스**
 ```bash
 # 기능 생성
-/project:aiwf:create_feature_ledger "상품 카탈로그 마이크로서비스"
+/project:aiwf:aiwf_create_general_task "상품 카탈로그 마이크로서비스"
 # FL004
 
 # 상품 서비스 작업
@@ -377,12 +377,12 @@ if (regression.hasRegression) {
 
 ```bash
 # 현대화를 위한 마일스톤 생성
-/project:aiwf:plan_milestone "레거시 시스템 현대화"
+/project:aiwf:aiwf_create_milestone_plan "레거시 시스템 현대화"
 
 # 기능별로 세분화
-/project:aiwf:create_feature_ledger "데이터베이스 마이그레이션"      # FL005
-/project:aiwf:create_feature_ledger "API 현대화"                 # FL006
-/project:aiwf:create_feature_ledger "프론트엔드 리팩토링"          # FL007
+/project:aiwf:aiwf_create_general_task "데이터베이스 마이그레이션"      # T001
+/project:aiwf:aiwf_create_general_task "API 현대화"                 # T002
+/project:aiwf:aiwf_create_general_task "프론트엔드 리팩토링"          # T003
 ```
 
 #### 3단계: 점진적 리팩토링
