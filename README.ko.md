@@ -120,6 +120,42 @@ your_project/
 - English documentation and templates
 - Standard project management content
 
+## 🛠️ CLI 도구
+
+AIWF는 프로젝트 관리의 다양한 측면을 위한 여러 전문 CLI 도구를 제공합니다:
+
+### 주요 CLI 명령어
+- `aiwf install` - 현재 프로젝트에 AIWF 프레임워크 설치
+- `aiwf create-project` - 템플릿에서 새 프로젝트 생성
+- `aiwf compress` - 토큰 최적화를 위한 컨텍스트 압축
+- `aiwf token` - 토큰 사용량 모니터링 및 관리
+- `aiwf persona` - AI 페르소나 관리
+- `aiwf evaluate` - AI 응답 및 코드 품질 평가
+
+### 스프린트 관리 (`aiwf-sprint`)
+- `aiwf-sprint create` - 새로운 독립 스프린트 생성
+- `aiwf-sprint list` - 모든 스프린트 목록 조회
+- `aiwf-sprint status` - 스프린트 상태 및 진행상황 표시
+- `aiwf-sprint task create` - 스프린트에 작업 추가
+- `aiwf-sprint task execute` - 스프린트 작업 실행
+
+### 체크포인트 시스템 (`aiwf-checkpoint`)
+- `aiwf-checkpoint create` - 롤백을 위한 프로젝트 체크포인트 생성
+- `aiwf-checkpoint list` - 사용 가능한 모든 체크포인트 목록
+- `aiwf-checkpoint restore` - 이전 체크포인트로 프로젝트 복원
+
+### 언어 관리 (`aiwf-lang`)
+- `aiwf-lang status` - 현재 언어 설정 확인
+- `aiwf-lang set ko` - 한국어로 전환
+- `aiwf-lang set en` - 영어로 전환
+
+### 캐시 관리 (`aiwf-cache`)
+- `aiwf-cache download` - 템플릿을 로컬 캐시에 다운로드
+- `aiwf-cache list` - 캐시된 모든 템플릿 목록
+- `aiwf-cache clean` - 캐시 저장소 정리
+- `aiwf-cache update` - 캐시된 템플릿 업데이트
+- `aiwf-cache status` - 캐시 상태 및 사용량 확인
+
 ## 🎯 시작하기
 
 설치 후 다음 단계:

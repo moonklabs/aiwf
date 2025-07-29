@@ -108,6 +108,10 @@ The `src/commands/` directory contains all AIWF command implementations:
 - **evaluate.js**: Evaluates AI responses and code quality
 - **persona.js**: Manages AI personas and their behaviors
 - **token.js**: Monitors and reports token usage
+- **sprint-independent.js**: Independent sprint management
+- **sprint-task.js**: Sprint task execution and management
+- **state.js**: Project state management
+- **yolo-config.js**: YOLO mode configuration management
 
 All commands use the ResourceLoader system to access bundled resources, ensuring they work in both development and installed environments.
 
@@ -160,10 +164,13 @@ The `utils/` directory contains utility modules for various AIWF features:
 
 ### package.json Configuration
 - **Type**: ES Module (`"type": "module"`)
-- **Version**: 0.3.3
+- **Version**: 0.3.18
 - **Main binaries**:
   - `aiwf` - Main CLI command
   - `aiwf-lang` - Language management CLI
+  - `aiwf-sprint` - Sprint management CLI
+  - `aiwf-checkpoint` - Checkpoint management CLI
+  - `aiwf-cache` - Template cache management CLI
 
 ### Available Commands
 
@@ -178,6 +185,26 @@ AIWF provides a comprehensive set of CLI commands:
 - `aiwf evaluate <subcommand>` - Evaluate AI responses and code quality
 - `aiwf persona <subcommand>` - Manage AI personas
 - `aiwf lang <subcommand>` - Language settings management
+- `aiwf state <subcommand>` - Project state management
+- `aiwf yolo-config <subcommand>` - YOLO mode configuration
+
+### Sprint Management Commands
+- `aiwf-sprint create` - Create new independent sprint
+- `aiwf-sprint list` - List all sprints
+- `aiwf-sprint status` - Show sprint status
+- `aiwf-sprint task <subcommand>` - Manage sprint tasks
+
+### Checkpoint Commands
+- `aiwf-checkpoint create` - Create project checkpoint
+- `aiwf-checkpoint list` - List all checkpoints
+- `aiwf-checkpoint restore` - Restore from checkpoint
+
+### Cache Management Commands
+- `aiwf-cache download` - Download templates to cache
+- `aiwf-cache list` - List cached templates
+- `aiwf-cache clean` - Clean cache storage
+- `aiwf-cache update` - Update cached templates
+- `aiwf-cache status` - Show cache status
 
 ### Feature Commands
 - `aiwf feature list` - List all features
@@ -202,10 +229,14 @@ AIWF provides a comprehensive set of CLI commands:
 
 ## Available Scripts
 - `npm test` - Run Jest tests with ES module support
+- `npm run check:deps` - Check dependencies compatibility
 - `npm run lang:status` - Check language settings
 - `npm run lang:set` - Set language preference
 - `npm run lang:reset` - Reset to auto-detection
 - `npm run validate:commands` - Validate command implementations
+- `npm run update:file-lists` - Update file lists configuration
+- `npm run update:file-lists:dry-run` - Preview file list updates
+- `npm run update:file-lists:verbose` - Update with verbose output
 
 ## AIWF Framework Development Rules
 

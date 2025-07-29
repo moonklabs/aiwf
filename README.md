@@ -141,6 +141,42 @@ Revolutionary multi-agent orchestration that enables completely autonomous devel
 
 Master agent analyzes requirements and coordinates specialized subagents that create tasks, write code, run tests, and commit changes - achieving true multi-agent autonomous software development.
 
+## 🛠️ CLI Tools
+
+AIWF provides several specialized CLI tools for different aspects of project management:
+
+### Main CLI Commands
+- `aiwf install` - Install AIWF framework in current project
+- `aiwf create-project` - Create new project from templates
+- `aiwf compress` - Context compression for token optimization
+- `aiwf token` - Token usage monitoring and management
+- `aiwf persona` - AI persona management
+- `aiwf evaluate` - AI response and code quality evaluation
+
+### Sprint Management (`aiwf-sprint`)
+- `aiwf-sprint create` - Create new independent sprint
+- `aiwf-sprint list` - List all sprints
+- `aiwf-sprint status` - Show sprint status and progress
+- `aiwf-sprint task create` - Add tasks to sprint
+- `aiwf-sprint task execute` - Execute sprint tasks
+
+### Checkpoint System (`aiwf-checkpoint`)
+- `aiwf-checkpoint create` - Create project checkpoint for rollback
+- `aiwf-checkpoint list` - List all available checkpoints
+- `aiwf-checkpoint restore` - Restore project to previous checkpoint
+
+### Language Management (`aiwf-lang`)
+- `aiwf-lang status` - Check current language settings
+- `aiwf-lang set ko` - Switch to Korean
+- `aiwf-lang set en` - Switch to English
+
+### Cache Management (`aiwf-cache`)
+- `aiwf-cache download` - Download templates to local cache
+- `aiwf-cache list` - List all cached templates
+- `aiwf-cache clean` - Clean cache storage
+- `aiwf-cache update` - Update cached templates
+- `aiwf-cache status` - Check cache status and usage
+
 ## 📁 What Gets Installed
 
 ### Directory Structure

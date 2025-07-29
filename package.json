@@ -8,7 +8,8 @@
         "aiwf": "./src/cli/index.js",
         "aiwf-lang": "./src/cli/language-cli.js",
         "aiwf-sprint": "./src/cli/sprint-cli.js",
-        "aiwf-checkpoint": "./src/cli/checkpoint-cli.js"
+        "aiwf-checkpoint": "./src/cli/checkpoint-cli.js",
+        "aiwf-cache": "./src/cli/cache-cli.js"
     },
     "scripts": {
         "test": "node --experimental-vm-modules node_modules/.bin/jest",
