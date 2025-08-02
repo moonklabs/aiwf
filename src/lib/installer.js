@@ -34,7 +34,6 @@ import {
 import {
   FILES,
   TOOL_DIRS,
-  TEMP_DIRS,
   AIWF_DIRS,
   BASE_DIRS,
   getAllAiwfDirectories,

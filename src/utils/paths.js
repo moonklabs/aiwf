@@ -56,11 +56,6 @@ export const FILES = {
   }
 };
 
-// Temporary directories
-export const TEMP_DIRS = {
-  RULES_GLOBAL: path.join(AIWF_DIRS.ROOT, '_tmp_rules_global'),
-  RULES_MANUAL: path.join(AIWF_DIRS.ROOT, '_tmp_rules_manual')
-};
 
 // User cache directory (for global cache)
 export const USER_CACHE_DIR = path.join(
@@ -103,18 +98,6 @@ export function getToolDirectory(tool) {
   return mapping[tool] || null;
 }
 
-// Get backup directory name with timestamp
-export function getBackupDirName() {
-  const now = new Date();
-  const pad = n => n.toString().padStart(2, '0');
-  const y = now.getFullYear();
-  const m = pad(now.getMonth() + 1);
-  const d = pad(now.getDate());
-  const h = pad(now.getHours());
-  const min = pad(now.getMinutes());
-  const s = pad(now.getSeconds());
-  return path.join(AIWF_DIRS.ROOT, `backup_${y}${m}${d}_${h}${min}${s}`);
-}
 
 // Export all for convenience
 export default {
@@ -122,10 +105,8 @@ export default {
   AIWF_DIRS,
   TOOL_DIRS,
   FILES,
-  TEMP_DIRS,
   USER_CACHE_DIR,
   getAllAiwfDirectories,
   getAllClaudeMdFiles,
-  getToolDirectory,
-  getBackupDirName
+  getToolDirectory
 };

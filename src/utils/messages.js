@@ -77,9 +77,6 @@ export const messages = {
     toolBackupCreated: '도구 파일 백업이 생성되었습니다',
     installingToolRules: '도구 규칙을 설치하는 중...',
     toolRulesInstalled: '도구 규칙이 성공적으로 설치되었습니다',
-    validatingToolInstall: '도구 설치를 검증하는 중...',
-    toolValidationPassed: '도구 검증이 통과되었습니다',
-    toolValidationFailed: '도구 검증이 실패했습니다'
   },
   en: {
     welcome: '\n🎉 Welcome to AIWF!\n',
@@ -156,9 +153,6 @@ export const messages = {
     toolBackupCreated: 'Tool files backup created',
     installingToolRules: 'Installing tool rules...',
     toolRulesInstalled: 'Tool rules installed successfully',
-    validatingToolInstall: 'Validating tool installation...',
-    toolValidationPassed: 'Tool validation passed',
-    toolValidationFailed: 'Tool validation failed'
   }
 };
 
