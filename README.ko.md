@@ -33,6 +33,7 @@ aiwf install
 2. **프로젝트 설정**: 현재 디렉토리에 AIWF 초기화
 3. **Claude 명령어**: 언어별 명령어 설치
 4. **문서화**: 가이드 및 템플릿 다운로드
+5. **검증**: 포괄적인 설치 검증 및 문제 해결
 
 ## 🚀 사용법
 
@@ -173,6 +174,51 @@ AIWF는 프로젝트 관리의 다양한 측면을 위한 여러 전문 CLI 도�
 - **리뷰**: `/project:aiwf:code_review` - 코드 리뷰
 - **GitHub 연동**: `/project:aiwf:issue_create`, `/project:aiwf:pr_create`
 
+## 🏗️ 코드 아키텍처
+
+### 최적화된 검증 시스템
+
+AIWF는 안정적인 설치와 운영을 보장하는 크게 개선된 검증 시스템을 특징으로 합니다:
+
+#### v0.3.18+의 주요 개선사항
+- **86% 코드 감소**: validator.js를 348줄에서 48줄로 간소화
+- **통합 인터페이스**: 3개의 중복 메서드를 대체하는 단일 `validateInstallation()` 함수
+- **상수 기반 구성**: 모든 검증 매개변수가 `VALIDATION_CONSTANTS`에 중앙화됨
+- **향상된 오류 보고**: 상세한 진단을 포함한 구체적이고 실행 가능한 오류 메시지
+
+#### VALIDATION_CONSTANTS 구조
+```javascript
+const VALIDATION_CONSTANTS = {
+  MIN_FILE_SIZE: 10,              // 최소 파일 크기 요구사항
+  MIN_RULE_FILE_SIZE: 50,         // AI 도구 규칙 파일의 최소 크기
+  MIN_FILE_COUNT: {
+    CURSOR_MDC: 2,                // Cursor용 필수 .mdc 파일
+    WINDSURF_MD: 2,               // Windsurf용 필수 .md 파일  
+    CLAUDE_COMMANDS: 4            // Claude용 필수 명령 파일
+  }
+};
+```
+
+#### 검증 기능
+- **다중 도구 지원**: Claude Code, Cursor, Windsurf, Gemini CLI 검증
+- **파일 무결성 검사**: 크기 검증, 접근성 확인, 구조 검증
+- **지능적 오류 복구**: 실패한 검증에 대한 상세한 문제 해결 가이드
+- **성능 최적화**: 감소된 메모리 사용량으로 더 빠른 실행
+
+### 클린 아키텍처 원칙
+
+코드베이스는 유지보수성과 확장성을 위한 클린 아키텍처 원칙을 따릅니다:
+
+#### 코드 중복 제거
+- **통합된 검증 로직**: 통합된 검증 함수가 중복성을 제거함
+- **공유 상수**: 중앙화된 구성이 유지보수 오버헤드를 줄임
+- **간소화된 오류 처리**: 모든 검증 유형에 걸쳐 일관된 오류 보고
+
+#### 개선된 개발자 경험
+- **명확한 관심사 분리**: 검증, 파일 관리, 오류 보고가 적절히 분리됨
+- **유지보수 가능한 코드 구조**: 감소된 복잡성으로 코드베이스 이해와 수정이 더 쉬워짐
+- **성능 이점**: 최적화된 코드 경로가 설치 속도와 안정성을 향상시킴
+
 ## 📚 문서
 
 ### 핵심 문서
@@ -194,6 +240,8 @@ AIWF는 프로젝트 관리의 다양한 측면을 위한 여러 전문 CLI 도�
 - [AI 워크플로우](docs/AI-WORKFLOW.ko.md) - AI 통합 패턴
 - [API 참조](docs/API_REFERENCE.md) - 프로그래머틱 사용
 - [전체 API 참조](docs/API_REFERENCE_FULL.ko.md) - 포괄적인 API 문서
+- [Validator API 참조](docs/VALIDATOR_API.ko.md) - 검증 시스템 API 문서
+- [코드 정리 가이드](docs/CODE_CLEANUP_GUIDE.ko.md) - 코드 정리 원칙과 패턴
 - [문제 해결](docs/TROUBLESHOOTING.md) - 일반적인 문제 및 해결책
 
 ## ✨ 주요 기능
