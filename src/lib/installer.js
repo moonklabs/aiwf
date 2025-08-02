@@ -508,13 +508,111 @@ async function updateCommands(languagePath, spinner, msg, debugLog) {
 }
 
 /**
+ * Check if tool directories exist and handle them
+ * @param {Object} spinner - Ora spinner instance
+ * @param {Object} msg - Localized messages
+ * @param {boolean} debugLog - Debug mode flag
+ * @returns {Promise<Object>} Directory status info
+ */
+async function checkAndHandleExistingToolDirs(spinner, msg, debugLog) {
+  const toolDirStatus = {
+    cursor: {
+      exists: false,
+      hadFiles: false,
+      backedUp: false
+    },
+    windsurf: {
+      exists: false,
+      hadFiles: false,
+      backedUp: false
+    }
+  };
+
+  // Check Cursor directory
+  try {
+    await fs.access(TOOL_DIRS.CURSOR_RULES);
+    toolDirStatus.cursor.exists = true;
+    
+    const cursorFiles = await fs.readdir(TOOL_DIRS.CURSOR_RULES);
+    const mdcFiles = cursorFiles.filter(file => file.endsWith('.mdc'));
+    
+    if (mdcFiles.length > 0) {
+      toolDirStatus.cursor.hadFiles = true;
+      logWithSpinner(spinner, `${msg.foundExistingCursor} (${mdcFiles.length} files)`, debugLog);
+      
+      // Backup existing files
+      logWithSpinner(spinner, msg.backingUpToolFiles, debugLog);
+      const backupDir = path.join(TOOL_DIRS.CURSOR_RULES, `backup_${Date.now()}`);
+      await fs.mkdir(backupDir, { recursive: true });
+      
+      for (const file of mdcFiles) {
+        const srcPath = path.join(TOOL_DIRS.CURSOR_RULES, file);
+        const backupPath = path.join(backupDir, file);
+        await fs.copyFile(srcPath, backupPath);
+      }
+      
+      toolDirStatus.cursor.backedUp = true;
+      logWithSpinner(spinner, `${msg.toolBackupCreated}: ${backupDir}`, debugLog);
+      
+      // Remove existing files
+      for (const file of mdcFiles) {
+        await fs.unlink(path.join(TOOL_DIRS.CURSOR_RULES, file));
+      }
+    }
+  } catch (error) {
+    // Directory doesn't exist, that's fine
+    logWithSpinner(spinner, `Cursor rules directory not found, will create new`, debugLog);
+  }
+
+  // Check Windsurf directory
+  try {
+    await fs.access(TOOL_DIRS.WINDSURF_RULES);
+    toolDirStatus.windsurf.exists = true;
+    
+    const windsurfFiles = await fs.readdir(TOOL_DIRS.WINDSURF_RULES);
+    const mdFiles = windsurfFiles.filter(file => file.endsWith('.md'));
+    
+    if (mdFiles.length > 0) {
+      toolDirStatus.windsurf.hadFiles = true;
+      logWithSpinner(spinner, `${msg.foundExistingWindsurf} (${mdFiles.length} files)`, debugLog);
+      
+      // Backup existing files
+      logWithSpinner(spinner, msg.backingUpToolFiles, debugLog);
+      const backupDir = path.join(TOOL_DIRS.WINDSURF_RULES, `backup_${Date.now()}`);
+      await fs.mkdir(backupDir, { recursive: true });
+      
+      for (const file of mdFiles) {
+        const srcPath = path.join(TOOL_DIRS.WINDSURF_RULES, file);
+        const backupPath = path.join(backupDir, file);
+        await fs.copyFile(srcPath, backupPath);
+      }
+      
+      toolDirStatus.windsurf.backedUp = true;
+      logWithSpinner(spinner, `${msg.toolBackupCreated}: ${backupDir}`, debugLog);
+      
+      // Remove existing files
+      for (const file of mdFiles) {
+        await fs.unlink(path.join(TOOL_DIRS.WINDSURF_RULES, file));
+      }
+    }
+  } catch (error) {
+    // Directory doesn't exist, that's fine
+    logWithSpinner(spinner, `Windsurf rules directory not found, will create new`, debugLog);
+  }
+
+  return toolDirStatus;
+}
+
+/**
  * Download and process rules
  * @param {Object} spinner - Ora spinner instance
-{{ ... }}
  * @param {Object} msg - Localized messages
  * @param {boolean} debugLog - Debug mode flag
  */
 async function downloadAndProcessRules(spinner, msg, debugLog) {
+  // Check and handle existing tool directories first
+  logWithSpinner(spinner, msg.checkingExistingTools, debugLog);
+  const toolDirStatus = await checkAndHandleExistingToolDirs(spinner, msg, debugLog);
   // Try to download from GitHub first, fallback to local files
   const tmpRulesGlobal = path.join(os.tmpdir(), 'aiwf-rules-global');
   const tmpRulesManual = path.join(os.tmpdir(), 'aiwf-rules-manual');
@@ -670,6 +768,32 @@ async function downloadAndProcessRules(spinner, msg, debugLog) {
   } catch (error) {
     logWithSpinner(spinner, `No rules/manual directory found`, debugLog);
   }
+
+  // Success message for tool rules installation
+  logWithSpinner(spinner, msg.toolRulesInstalled, debugLog);
+
+  // Display installation results for tool directories
+  if (toolDirStatus.cursor.backedUp || toolDirStatus.windsurf.backedUp) {
+    console.log(chalk.cyan(`\n📂 Tool Directory Installation Results:`));
+    
+    if (toolDirStatus.cursor.backedUp) {
+      console.log(chalk.yellow(`   • Cursor: Existing rules backed up and replaced`));
+    } else if (toolDirStatus.cursor.exists) {
+      console.log(chalk.green(`   • Cursor: Rules installed (directory was empty)`));
+    } else {
+      console.log(chalk.green(`   • Cursor: Rules installed (new directory)`));
+    }
+    
+    if (toolDirStatus.windsurf.backedUp) {
+      console.log(chalk.yellow(`   • Windsurf: Existing rules backed up and replaced`));
+    } else if (toolDirStatus.windsurf.exists) {
+      console.log(chalk.green(`   • Windsurf: Rules installed (directory was empty)`));
+    } else {
+      console.log(chalk.green(`   • Windsurf: Rules installed (new directory)`));
+    }
+  }
+
+  return toolDirStatus;
 }
 
 /**
@@ -819,7 +943,7 @@ export async function installAIWF(options = {}) {
     await updateCommands(languagePath, spinner, msg, debugLog);
 
     // Download and process rules
-    await downloadAndProcessRules(spinner, msg, debugLog);
+    const toolDirStatus = await downloadAndProcessRules(spinner, msg, debugLog);
 
     // Restore project files if needed
     if (projectBackupDir) {

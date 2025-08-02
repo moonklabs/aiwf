@@ -69,7 +69,17 @@ export const messages = {
     checkingInstallation: 'AIWF 설치 상태를 확인하는 중...',
     creatingDirectories: 'AIWF 디렉토리 구조를 생성하는 중...',
     restoringBackup: '백업에서 파일을 복원하는 중...',
-    backupRestored: '{count}개 파일이 복원되었습니다'
+    backupRestored: '{count}개 파일이 복원되었습니다',
+    checkingExistingTools: '기존 도구 디렉토리를 확인하는 중...',
+    foundExistingCursor: 'Cursor 규칙 파일이 발견되었습니다',
+    foundExistingWindsurf: 'Windsurf 규칙 파일이 발견되었습니다',
+    backingUpToolFiles: '기존 도구 파일을 백업하는 중...',
+    toolBackupCreated: '도구 파일 백업이 생성되었습니다',
+    installingToolRules: '도구 규칙을 설치하는 중...',
+    toolRulesInstalled: '도구 규칙이 성공적으로 설치되었습니다',
+    validatingToolInstall: '도구 설치를 검증하는 중...',
+    toolValidationPassed: '도구 검증이 통과되었습니다',
+    toolValidationFailed: '도구 검증이 실패했습니다'
   },
   en: {
     welcome: '\n🎉 Welcome to AIWF!\n',
@@ -138,7 +148,17 @@ export const messages = {
     checkingInstallation: 'Checking AIWF installation status...',
     creatingDirectories: 'Creating AIWF directory structure...',
     restoringBackup: 'Restoring files from backup...',
-    backupRestored: '{count} files restored'
+    backupRestored: '{count} files restored',
+    checkingExistingTools: 'Checking existing tool directories...',
+    foundExistingCursor: 'Found existing Cursor rules',
+    foundExistingWindsurf: 'Found existing Windsurf rules',
+    backingUpToolFiles: 'Backing up existing tool files...',
+    toolBackupCreated: 'Tool files backup created',
+    installingToolRules: 'Installing tool rules...',
+    toolRulesInstalled: 'Tool rules installed successfully',
+    validatingToolInstall: 'Validating tool installation...',
+    toolValidationPassed: 'Tool validation passed',
+    toolValidationFailed: 'Tool validation failed'
   }
 };
 

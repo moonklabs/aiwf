@@ -485,6 +485,36 @@ async function validateCursorTool() {
       return { success: false, reason: `Missing Cursor rules directory: ${TOOL_DIRS.CURSOR_RULES}` };
     }
 
+    // Enhanced validation: Check file count and types
+    const files = await fs.readdir(TOOL_DIRS.CURSOR_RULES);
+    const mdcFiles = files.filter(file => file.endsWith('.mdc'));
+    
+    if (mdcFiles.length < 2) {
+      return { 
+        success: false, 
+        reason: `Cursor rules: Expected at least 2 .mdc files, found ${mdcFiles.length}` 
+      };
+    }
+
+    // Validate file sizes
+    for (const file of mdcFiles) {
+      const filePath = path.join(TOOL_DIRS.CURSOR_RULES, file);
+      try {
+        const stats = await fs.stat(filePath);
+        if (stats.size < 50) {
+          return { 
+            success: false, 
+            reason: `Cursor rules file ${file} is too small (${stats.size} bytes, minimum 50)` 
+          };
+        }
+      } catch (error) {
+        return { 
+          success: false, 
+          reason: `Cannot read Cursor rules file ${file}: ${error.message}` 
+        };
+      }
+    }
+
     return { success: true };
   } catch (error) {
     return { success: false, reason: `Cursor validation error: ${error.message}` };
@@ -503,6 +533,36 @@ async function validateWindsurfTool() {
       .catch(() => false);
     if (!dirExists) {
       return { success: false, reason: `Missing Windsurf rules directory: ${TOOL_DIRS.WINDSURF_RULES}` };
+    }
+
+    // Enhanced validation: Check file count and types
+    const files = await fs.readdir(TOOL_DIRS.WINDSURF_RULES);
+    const mdFiles = files.filter(file => file.endsWith('.md'));
+    
+    if (mdFiles.length < 2) {
+      return { 
+        success: false, 
+        reason: `Windsurf rules: Expected at least 2 .md files, found ${mdFiles.length}` 
+      };
+    }
+
+    // Validate file sizes
+    for (const file of mdFiles) {
+      const filePath = path.join(TOOL_DIRS.WINDSURF_RULES, file);
+      try {
+        const stats = await fs.stat(filePath);
+        if (stats.size < 50) {
+          return { 
+            success: false, 
+            reason: `Windsurf rules file ${file} is too small (${stats.size} bytes, minimum 50)` 
+          };
+        }
+      } catch (error) {
+        return { 
+          success: false, 
+          reason: `Cannot read Windsurf rules file ${file}: ${error.message}` 
+        };
+      }
     }
 
     return { success: true };
