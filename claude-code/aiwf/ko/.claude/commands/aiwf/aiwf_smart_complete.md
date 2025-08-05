@@ -278,7 +278,7 @@ aiwf state next
 ## 워크플로우 통합
 
 연관 명령어:
-- `/aiwf:smart_start` - 지능형 태스크 시작
+- `/aiwf:aiwf_smart_start` - 지능형 태스크 시작
 - `/aiwf:transition` - 수동 전환
 - `/aiwf:project_status` - 전체 상태 확인
 - `/aiwf:sprint_review` - 스프린트 리뷰

@@ -256,13 +256,13 @@ aiwf state show
 
 📝 다음 단계:
 1. 태스크 파일을 열어 세부사항 검토 및 수정
-2. /aiwf:do_task T03 으로 작업 시작
-3. 필요시 /aiwf:update_task_status T03 in_progress 로 상태 변경
+2. /aiwf:aiwf_do_task T03 으로 작업 시작
+3. 필요시 /aiwf:aiwf_update_task_status T03 in_progress 로 상태 변경
 
 💡 유용한 명령어:
-- /aiwf:list_sprint_tasks S02 - 스프린트 태스크 목록 보기
-- /aiwf:project_status - 전체 프로젝트 현황 확인
-- /aiwf:task_dependencies T03 - 태스크 의존성 관리
+- /aiwf:aiwf_list_sprint_tasks S02 - 스프린트 태스크 목록 보기
+- /aiwf:aiwf_project_status - 전체 프로젝트 현황 확인
+- /aiwf:aiwf_task_dependencies T03 - 태스크 의존성 관리
 ```
 
 **검증 및 정리:**
