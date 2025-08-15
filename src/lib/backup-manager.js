@@ -5,8 +5,7 @@ import chalk from 'chalk';
 import { 
   TOOL_DIRS, 
   AIWF_DIRS, 
-  FILES,
-  getBackupDirName as getBackupDirNamePath 
+  FILES
 } from '../utils/paths.js';
 
 let BACKUP_DIR = null;
@@ -16,7 +15,9 @@ let BACKUP_DIR = null;
  * @returns {string} Backup directory name
  */
 function getBackupDirName() {
-  return getBackupDirNamePath();
+  const now = new Date();
+  const timestamp = now.toISOString().replace(/[:.]/g, '-').slice(0, -5);
+  return `backup-${timestamp}`;
 }
 
 /**

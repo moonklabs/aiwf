@@ -82,7 +82,8 @@
    # YOLO 설정 파일이 있는지 확인
    if [[ ! -f ".aiwf/yolo-config.yaml" ]]; then
      echo "🔧 YOLO 설정 파일 생성 중..."
-     cp src/config/yolo-config-template.yaml .aiwf/yolo-config.yaml
+     # CLI 명령어로 초기화 (오버엔지니어링 방지 설정 포함)
+     aiwf guard init
    fi
    
    # 설정 파일 내용 확인
@@ -94,24 +95,25 @@
    # 체크포인트 디렉토리 확인 및 생성
    mkdir -p .aiwf/checkpoints
    
-   # 이전 세션이 있는지 확인
+   # CLI로 현재 세션 상태 확인
+   aiwf checkpoint status
+   
+   # 이전 세션이 있는지 확인하고 체크포인트 목록 보기
    if [[ -f ".aiwf/yolo-state.json" ]]; then
-     echo "📊 이전 YOLO 세션 발견. 복구할까요? (y/n)"
-     # 자동으로 'y'로 진행하거나 복구 가능한 체크포인트 확인
+     echo "📊 이전 YOLO 세션 발견. 체크포인트 목록:"
+     aiwf checkpoint list --limit 5
+     # 필요시 복구: aiwf checkpoint restore <checkpoint-id>
    fi
    ```
 
 4. **오버엔지니어링 가드 활성화**:
    ```bash
-   # 프로젝트 초기 복잡도 측정
-   node -e "
-   import('./src/utils/engineering-guard.js').then(({ getEngineeringGuard }) => {
-     const guard = getEngineeringGuard('.aiwf/yolo-config.yaml');
-     guard.checkProject('.').then(report => {
-       console.log('🛡️ 초기 복잡도 상태:', report.summary);
-     });
-   });
-   "
+   # CLI로 프로젝트 초기 복잡도 측정
+   echo "🛡️ 프로젝트 복잡도 초기 상태 검사 중..."
+   aiwf guard check . --config .aiwf/yolo-config.yaml
+   
+   # 빠른 체크가 필요한 경우
+   # aiwf guard quick .
    ```
 
 5. **상태 인덱스 초기화**:
@@ -144,20 +146,20 @@
 # --from-readme 플래그가 있는 경우
 if [[ "$ARGUMENTS" == *"--from-readme"* ]]; then
   echo "📋 README에서 TODO 추출하여 독립 스프린트 생성 중..."
-  node src/commands/sprint-independent.js --from-readme --minimal
+  aiwf sprint independent --from-readme --minimal
 fi
 
 # --from-issue N 플래그가 있는 경우
 if [[ "$ARGUMENTS" =~ --from-issue[[:space:]]+([0-9]+) ]]; then
   ISSUE_NUMBER="${BASH_REMATCH[1]}"
   echo "🔗 GitHub 이슈 #$ISSUE_NUMBER 기반 독립 스프린트 생성 중..."
-  node src/commands/sprint-independent.js --from-issue "$ISSUE_NUMBER" --minimal
+  aiwf sprint independent --from-issue "$ISSUE_NUMBER" --minimal
 fi
 
 # --create-independent 플래그가 있는 경우
 if [[ "$ARGUMENTS" == *"--create-independent"* ]]; then
   echo "🚀 인터랙티브 독립 스프린트 생성 중..."
-  node src/commands/sprint-independent.js --minimal
+  aiwf sprint independent --minimal
 fi
 ```
 
@@ -182,16 +184,12 @@ echo "🔧 엔지니어링 레벨을 '$ENGINEERING_LEVEL'로 설정했습니다.
 CREATED_SPRINT_ID=$(ls .aiwf/03_SPRINTS/ | grep "^S" | sort | tail -1 | cut -d'_' -f1)
 echo "📊 체크포인트 세션 시작: $CREATED_SPRINT_ID"
 
-# 체크포인트 매니저로 세션 초기화
-node -e "
-import('./src/utils/checkpoint-manager.js').then(({ CheckpointManager }) => {
-  const manager = new CheckpointManager('.');
-  manager.initialize().then(() => {
-    manager.startSession('$CREATED_SPRINT_ID', 'independent-sprint');
-    console.log('✅ 독립 스프린트 체크포인트 세션 시작됨');
-  });
-});
-"
+# CLI로 체크포인트 생성 (독립 스프린트 시작)
+aiwf checkpoint create "session_start" \
+  --message "독립 스프린트 $CREATED_SPRINT_ID 시작" \
+  --meta '{"sprint_id": "'$CREATED_SPRINT_ID'", "type": "independent-sprint"}'
+
+echo '✅ 독립 스프린트 체크포인트 세션 시작됨'
 ```
 
 ### 4. 오버엔지니어링 가드 활성화
@@ -202,6 +200,9 @@ echo "  - 요구사항 우선 모드: ON"
 echo "  - 간단한 해결책 선호: ON"  
 echo "  - 골드 플레이팅 방지: ON"
 echo "  - 트랙 유지 강제: ON"
+
+# CLI로 복잡도 초기 상태 확인
+aiwf guard quick .
 ```
 
 ### 5. 독립 스프린트 실행으로 전환
@@ -431,25 +432,15 @@ aiwf state show --focus={task_id} --check-dependencies
 **🛡️ 태스크 시작 전 오버엔지니어링 가드 체크**:
 ```bash
 # 태스크 시작 시 체크포인트 생성
-node -e "
-import('./src/utils/checkpoint-manager.js').then(({ CheckpointManager }) => {
-  const manager = new CheckpointManager('.');
-  manager.startTask('${task_id}', { 
-    engineering_level: '$(grep engineering_level .aiwf/yolo-config.yaml | cut -d: -f2 | xargs)',
-    focus_rules: ['requirement_first', 'simple_solution', 'no_gold_plating']
-  });
-});
-"
+aiwf checkpoint create "task_start" \
+  --message "태스크 ${task_id} 시작" \
+  --meta '{"task_id": "'${task_id}'", "engineering_level": "minimal"}'
 
 # 오버엔지니어링 가드 사전 체크
-node -e "
-import('./src/utils/engineering-guard.js').then(({ getEngineeringGuard }) => {
-  const guard = getEngineeringGuard('.aiwf/yolo-config.yaml');
-  guard.provideFeedback('current_task_area').then(feedback => {
-    feedback.forEach(f => console.log(\`\${f.level}: \${f.message}\`));
-  });
-});
-"
+aiwf guard feedback "task_${task_id}"
+
+# 빠른 복잡도 체크
+aiwf guard quick .
 ```
 
 **스마트 태스크 실행 (YOLO 최적화 with Subagents)**:
@@ -535,17 +526,8 @@ import('./src/utils/engineering-guard.js').then(({ getEngineeringGuard }) => {
 while task_in_progress; do
   sleep 60
   
-  # 오버엔지니어링 가드 실시간 체크
-  node -e "
-  import('./src/utils/engineering-guard.js').then(({ quickCheck }) => {
-    quickCheck('.').then(report => {
-      if (report.summary.high_severity > 0) {
-        console.log('⚠️ 오버엔지니어링 위험 감지!');
-        console.log('권장사항:', report.recommendations);
-      }
-    });
-  });
-  "
+  # CLI로 오버엔지니어링 가드 실시간 체크
+  aiwf guard quick . 2>/dev/null
   
   # 상태 업데이트
   aiwf state update --silent
@@ -559,36 +541,16 @@ done
 ```bash
 # 태스크 완료 후 복잡도 체크
 echo "🔍 태스크 완료 후 오버엔지니어링 검증 중..."
-node -e "
-import('./src/utils/engineering-guard.js').then(({ getEngineeringGuard }) => {
-  const guard = getEngineeringGuard('.aiwf/yolo-config.yaml');
-  guard.checkProject('.').then(report => {
-    console.log('📊 최종 복잡도 상태:', report.summary);
-    
-    if (report.summary.high_severity > 0) {
-      console.log('🚨 오버엔지니어링 발견!');
-      report.recommendations.forEach(rec => console.log('  💡', rec));
-      console.log('⚠️ 리팩토링을 고려하세요.');
-    } else {
-      console.log('✅ 복잡도 기준 통과');
-    }
-  });
-});
-"
 
-# 체크포인트 매니저로 태스크 완료 기록
-node -e "
-import('./src/utils/checkpoint-manager.js').then(({ CheckpointManager }) => {
-  const manager = new CheckpointManager('.');
-  manager.completeTask('${task_id}', {
-    complexity_check: 'passed',
-    engineering_level: 'minimal',
-    focus_maintained: true
-  }).then(() => {
-    console.log('📊 태스크 완료 체크포인트 생성됨');
-  });
-});
-"
+# CLI로 복잡도 최종 검사
+aiwf guard check . --config .aiwf/yolo-config.yaml
+
+# 체크포인트 생성 (태스크 완료)
+aiwf checkpoint create "task_complete" \
+  --message "태스크 ${task_id} 완료" \
+  --meta '{"task_id": "'${task_id}'", "complexity_check": "passed", "engineering_level": "minimal"}'
+
+echo '📊 태스크 완료 체크포인트 생성됨'
 ```
 
 **완료 검증 (전문 서브에이전트 활용)**:
@@ -1007,51 +969,23 @@ fi
 
 **체크포인트 매니저 최종 리포트**:
 ```bash
-# 체크포인트 매니저로 세션 종료 및 리포트 생성
-node -e "
-import('./src/utils/checkpoint-manager.js').then(({ CheckpointManager }) => {
-  const manager = new CheckpointManager('.');
-  manager.endSession({
-    mode: 'YOLO',
-    engineering_level: 'minimal',
-    overengineering_prevented: true,
-    focus_maintained: true
-  }).then(report => {
-    console.log('📊 YOLO 세션 최종 리포트:');
-    console.log('  완료된 태스크:', report.progress.completed);
-    console.log('  실패한 태스크:', report.progress.failed);
-    console.log('  총 실행 시간:', report.performance.total_time);
-    console.log('  평균 태스크 시간:', report.performance.avg_task_time);
-    console.log('  성공률:', report.performance.success_rate);
-    console.log('📁 상세 리포트:', \`checkpoints/session_\${report.session.id}_report.json\`);
-  });
-});
-"
+# CLI로 세션 종료 체크포인트 생성
+aiwf checkpoint create "session_end" \
+  --message "YOLO 세션 종료" \
+  --meta '{"mode": "YOLO", "engineering_level": "minimal", "focus_maintained": true}'
+
+# 세션 리포트 생성
+aiwf checkpoint report
+
+# 오래된 체크포인트 정리 (선택사항)
+aiwf checkpoint clean --keep 20
 ```
 
 **오버엔지니어링 방지 최종 보고서**:
 ```bash
-# 프로젝트 전체 복잡도 최종 분석
+# CLI로 프로젝트 전체 복잡도 최종 분석
 echo "🛡️ 오버엔지니어링 방지 최종 보고서 생성 중..."
-node -e "
-import('./src/utils/engineering-guard.js').then(({ getEngineeringGuard }) => {
-  const guard = getEngineeringGuard('.aiwf/yolo-config.yaml');
-  guard.checkProject('.').then(report => {
-    console.log('📊 복잡도 분석 결과:');
-    console.log('  총 위반사항:', report.summary.total_violations);
-    console.log('  높은 심각도:', report.summary.high_severity);
-    console.log('  중간 심각도:', report.summary.medium_severity);
-    console.log('  경고사항:', report.summary.warnings);
-    
-    if (report.recommendations.length > 0) {
-      console.log('💡 권장사항:');
-      report.recommendations.forEach(rec => console.log('  -', rec));
-    }
-    
-    console.log(report.passed ? '✅ 프로젝트 복잡도 기준 통과' : '⚠️ 일부 복잡도 이슈 발견');
-  });
-});
-"
+aiwf guard check . --config .aiwf/yolo-config.yaml
 ```
 
 ### 프로젝트 상태 보고서 생성
