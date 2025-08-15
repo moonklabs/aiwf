@@ -556,6 +556,69 @@ checkpoint
   });
 
 checkpoint
+  .command('add [type]')
+  .alias('create')
+  .description('Create a checkpoint / 체크포인트 생성')
+  .option('-m, --message <text>', 'Description for the checkpoint / 체크포인트 설명')
+  .option('--meta <json>', 'Additional metadata as JSON / 추가 메타데이터(JSON)')
+  .option('--cleanup <n>', 'Keep only last N checkpoints after creating / 생성 후 최근 N개만 보존')
+  .action(async (type, options) => {
+    try {
+      const fs = await import('fs/promises');
+      const path = await import('path');
+      let currentDir = process.cwd();
+
+      // 프로젝트 루트 탐색 (.aiwf 기준)
+      while (currentDir !== path.parse(currentDir).root) {
+        try {
+          await fs.access(path.join(currentDir, '.aiwf'));
+          break;
+        } catch {
+          currentDir = path.dirname(currentDir);
+        }
+      }
+
+      const manager = new CheckpointManager(currentDir);
+      await manager.initialize();
+
+      // 메타데이터 구성
+      const metadata = {};
+      if (options.message) metadata.message = options.message;
+      if (options.meta) {
+        try {
+          const parsed = JSON.parse(options.meta);
+          Object.assign(metadata, parsed);
+        } catch (e) {
+          console.error(chalk.red('❌ --meta 값이 올바른 JSON 형식이 아닙니다.'));
+          process.exit(1);
+        }
+      }
+
+      const cpType = type || 'manual';
+      const checkpointId = await manager.createCheckpoint(cpType, metadata);
+
+      console.log(chalk.green('✅ 체크포인트 생성 완료!'));
+      console.log(`  ID: ${chalk.cyan(checkpointId)}  유형: ${chalk.yellow(cpType)}`);
+      if (metadata.message) {
+        console.log(`  메시지: ${chalk.blue(metadata.message)}`);
+      }
+
+      if (options.cleanup) {
+        const keep = parseInt(options.cleanup, 10);
+        if (!Number.isNaN(keep) && keep > 0) {
+          await manager.cleanup(keep);
+          console.log(`🧹 최근 ${chalk.cyan(keep)}개만 보존하도록 정리했습니다.`);
+        } else {
+          console.log(chalk.yellow('⚠️ --cleanup 값이 유효하지 않아 정리를 건너뜁니다. 정수로 입력하세요.'));
+        }
+      }
+    } catch (error) {
+      console.error(chalk.red('❌ 체크포인트 생성 실패:'), error.message);
+      process.exit(1);
+    }
+  });
+
+checkpoint
   .command('restore <checkpointId>')
   .description('Restore from checkpoint / 체크포인트에서 복구')
   .action(async (checkpointId) => {
