@@ -130,19 +130,19 @@ aiwf state next
 
 ### 기본 사용법
 ```
-/aiwf:smart_start
+/aiwf:aiwf_smart_start
 ```
 → 워크플로우가 추천하는 최적의 태스크로 시작
 
 ### 특정 태스크 지정
 ```
-/aiwf:smart_start T03_S02
+/aiwf:aiwf_smart_start T03_S02
 ```
 → 지정된 태스크를 검증 후 시작
 
 ### 강제 실행
 ```
-/aiwf:smart_start T03_S02 --force
+/aiwf:aiwf_smart_start T03_S02 --force
 ```
 → 경고를 무시하고 태스크 시작 (주의 필요)
 
@@ -186,17 +186,17 @@ aiwf state next
 3. 일반 태스크 T001 - 문서 업데이트
 
 💡 해결 방법:
-- /aiwf:smart_start T02_S02로 선행 태스크 먼저 완료
-- 또는 /aiwf:smart_start T06_S02로 독립적인 작업 진행
+- /aiwf:aiwf_smart_start T02_S02로 선행 태스크 먼저 완료
+- 또는 /aiwf:aiwf_smart_start T06_S02로 독립적인 작업 진행
 ```
 
 ## 워크플로우 통합
 
 이 명령은 다음과 함께 사용됩니다:
-- `/aiwf:workflow_context` - 전체 컨텍스트 확인
-- `/aiwf:smart_complete` - 지능형 태스크 완료
-- `/aiwf:transition` - 단계 전환
-- `/aiwf:validate_workflow` - 상태 검증
+- `/aiwf:aiwf_workflow_context` - 전체 컨텍스트 확인
+- `/aiwf:aiwf_smart_complete` - 지능형 태스크 완료
+- `/aiwf:aiwf_transition` - 단계 전환
+- `/aiwf:aiwf_validate_workflow` - 상태 검증
 
 ## 주의사항
 
