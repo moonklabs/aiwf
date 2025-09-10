@@ -483,7 +483,7 @@ async function updateCommands(languagePath, spinner, msg, debugLog) {
       spinner,
       msg,
       languagePath,
-      false // commands는 기존 방식 유지 (파일 리스트 사용)
+      true // commands도 동적 디렉터리 탐색 사용 (파일 리스트 의존 제거)
     );
   } catch (error) {
     logWithSpinner(spinner, msg.commandsNotFound, debugLog);
@@ -498,7 +498,7 @@ async function updateCommands(languagePath, spinner, msg, debugLog) {
       spinner,
       msg,
       languagePath,
-      false // agents도 기존 방식 유지 (파일 리스트 사용)
+      true // agents도 동적 디렉터리 탐색 사용 (파일 리스트 의존 제거)
     );
     logWithSpinner(spinner, 'Successfully downloaded agents', debugLog);
   } catch (error) {

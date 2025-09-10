@@ -119,14 +119,37 @@ async function validateTool(tool) {
  */
 async function validateClaudeCode() {
   try {
-    const requiredFiles = [
+    // 기본 필수 파일 (현재 리포지토리에 존재하는 핵심 명령어)
+    const baseRequired = [
       'aiwf_initialize.md',
       'aiwf_do_task.md',
-      'aiwf_commit.md',
-      'aiwf_code_review.md'
+      'aiwf_commit.md'
     ];
 
-    for (const fileName of requiredFiles) {
+    // 과거 필수였던 리뷰 명령어의 대체 후보들
+    const reviewPrimary = 'aiwf_code_review.md';
+    const reviewAlternatives = [
+      'aiwf_yolo.md',
+      'aiwf_prime.md',
+      'aiwf_agent_workflow.md'
+    ];
+
+    // 디렉토리 존재 및 파일 개수 간단 점검
+    const dirExists = await fs
+      .access(TOOL_DIRS.CLAUDE_COMMANDS)
+      .then(() => true)
+      .catch(() => false);
+    if (!dirExists) {
+      return { success: false, reason: `Missing Claude commands directory: ${TOOL_DIRS.CLAUDE_COMMANDS}` };
+    }
+
+    const allFiles = await fs.readdir(TOOL_DIRS.CLAUDE_COMMANDS);
+    if (allFiles.length < VALIDATION_CONSTANTS.MIN_FILE_COUNT.CLAUDE_COMMANDS) {
+      return { success: false, reason: `Insufficient Claude commands files: expected at least ${VALIDATION_CONSTANTS.MIN_FILE_COUNT.CLAUDE_COMMANDS}, found ${allFiles.length}` };
+    }
+
+    // 기본 필수 파일 존재/크기 확인
+    for (const fileName of baseRequired) {
       const filePath = path.join(TOOL_DIRS.CLAUDE_COMMANDS, fileName);
       const exists = await fs
         .access(filePath)
@@ -135,8 +158,6 @@ async function validateClaudeCode() {
       if (!exists) {
         return { success: false, reason: `Missing file: ${filePath}` };
       }
-      
-      // Check file size
       try {
         const stats = await fs.stat(filePath);
         if (stats.size < VALIDATION_CONSTANTS.MIN_FILE_SIZE) {
@@ -145,6 +166,35 @@ async function validateClaudeCode() {
       } catch (error) {
         return { success: false, reason: `Cannot read file ${fileName}: ${error.message}` };
       }
+    }
+
+    // 리뷰 명령어: 기본 파일 또는 대체 파일 중 하나라도 존재하면 통과
+    const reviewPrimaryPath = path.join(TOOL_DIRS.CLAUDE_COMMANDS, reviewPrimary);
+    const primaryExists = await fs.access(reviewPrimaryPath).then(() => true).catch(() => false);
+
+    let alternativeUsed = null;
+    if (!primaryExists) {
+      for (const alt of reviewAlternatives) {
+        const altPath = path.join(TOOL_DIRS.CLAUDE_COMMANDS, alt);
+        const altExists = await fs.access(altPath).then(() => true).catch(() => false);
+        if (altExists) {
+          alternativeUsed = alt;
+          // 크기 확인
+          try {
+            const stats = await fs.stat(altPath);
+            if (stats.size < VALIDATION_CONSTANTS.MIN_FILE_SIZE) {
+              return { success: false, reason: `File ${alt} is too small (${stats.size} bytes)` };
+            }
+          } catch (error) {
+            return { success: false, reason: `Cannot read file ${alt}: ${error.message}` };
+          }
+          break;
+        }
+      }
+    }
+
+    if (!primaryExists && !alternativeUsed) {
+      return { success: false, reason: `Missing file: ${reviewPrimary} (or one of alternatives: ${reviewAlternatives.join(', ')})` };
     }
 
     return { success: true };
