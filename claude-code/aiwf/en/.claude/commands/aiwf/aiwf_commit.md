@@ -1,15 +1,15 @@
 # Analyze Changes and Create Logical Git Commits
 
 Follow these instructions from top to bottom.
+Always communicate with the user in Korean.
 
 ## Create a TODO with EXACTLY these 6 items
 
 1. Parse arguments and analyze git status
 2. Review changes and group by logical commits
 3. Propose commit structure and messages
-4. Check if user approval is necessary
-5. Execute approved commits
-6. Report commit results
+4. Execute approved commits
+5. Report commit results
 
 ---
 
@@ -22,7 +22,6 @@ Follow these instructions from top to bottom.
 
 **Context Provided** (when <$ARGUMENTS> contains text):
 
-- If YOLO is part of the <$ARGUMENTS> it is meant to skip user Approval (see Step 4 on your Todo)
 - The other text in <$ARGUMENTS> represents a **task ID**, **sprint ID**, or other **contextual identifier** provided by the user
 - This is NOT a file path - it's a semantic context for filtering changes
 - **PRIMARY FOCUS**: Only commit files directly related to this context

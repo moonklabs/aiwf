@@ -47,12 +47,6 @@ aiwf/
 │   │       ├── templates/
 │   │       └── utils/
 │   └── utils/                    # Framework utility modules
-├── ai-tools/                     # AI tool-specific configurations
-│   ├── claude-code/
-│   ├── cursor/
-│   ├── windsurf/
-│   ├── github-copilot/
-│   └── augment/
 ├── docs/                         # Project documentation
 ├── rules/                        # Global/manual rules for the framework
 ├── scripts/                      # Dev scripts (validation, tests, updates)
