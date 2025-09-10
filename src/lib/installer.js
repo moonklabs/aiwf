@@ -504,6 +504,22 @@ async function updateCommands(languagePath, spinner, msg, debugLog) {
   } catch (error) {
     logWithSpinner(spinner, 'Agents not found or failed to download', debugLog);
   }
+
+  // Download full .claude directory to include tools, workflow, and any other subfolders
+  logWithSpinner(spinner, 'Downloading full .claude directory (tools, workflow, etc.)...', debugLog);
+  try {
+    await downloadDirectory(
+      `${GITHUB_CONTENT_PREFIX}/${languagePath}/.claude`,
+      '.claude',
+      spinner,
+      msg,
+      languagePath,
+      true // 전체 .claude 폴더 동적 다운로드
+    );
+    logWithSpinner(spinner, 'Successfully downloaded .claude directory', debugLog);
+  } catch (error) {
+    logWithSpinner(spinner, `Failed to download full .claude directory: ${error.message}`, debugLog);
+  }
 }
 
 /**
