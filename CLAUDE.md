@@ -20,49 +20,48 @@ The AIWF project is organized as follows:
 
 ```
 aiwf/
-├── src/                  # Main source code directory
-│   ├── cli/             # CLI interface modules
-│   │   ├── index.js     # Main CLI entry point
-│   │   └── language-cli.js # Language management CLI
-│   ├── commands/        # AIWF command implementations
-│   │   ├── ai-tool.js   # AI tool integrations
-│   │   ├── compress.js  # Context compression
-│   │   ├── create-project.js # Project creation
-│   │   ├── evaluate.js  # AI response evaluation
-│   │   ├── feature.js   # Feature tracking
-│   │   ├── persona.js   # AI persona management
-│   │   └── token.js     # Token usage monitoring
-│   ├── lib/             # Core library modules
-│   │   ├── resource-loader.js # Resource management system
-│   │   ├── installer.js # AIWF installation
-│   │   └── resources/   # Bundled resources for NPM distribution
-│   │       ├── personas/    # AI persona definitions
-│   │       ├── templates/   # Project templates
-│   │       ├── commands/    # Command implementations
-│   │       └── utils/       # Utility modules
-├── ai-tools/             # AI tool-specific configurations
-│   ├── claude-code/      # Claude Code specific settings
-│   ├── cursor/           # Cursor AI integration
-│   ├── windsurf/        # Windsurf integration
-│   └── github-copilot/   # GitHub Copilot integration
-├── config/               # Configuration files
-│   ├── commit-patterns.js # Git commit patterns
-│   └── language.json     # Language settings
-├── docs/                 # Project documentation
-├── hooks/                # Git hooks and installation scripts
-│   ├── install-hooks.sh  # Hook installation script
-│   └── post-commit       # Post-commit hook
-├── templates/            # Project templates (development)
-│   ├── api-server/      # Express.js API server template
-│   ├── npm-library/     # NPM library template
-│   └── web-app/         # React web app template
-├── tests/                # Test suites
-│   ├── integration/      # Integration tests
-│   └── unit/            # Unit tests
-├── utils/                # Utility modules (development)
-├── package.json          # NPM package configuration
-├── CLAUDE.md            # This file - Claude Code guidance
-└── README.md            # Project documentation
+├── src/                          # Main source code directory
+│   ├── cli/                      # CLI entry points (aiwf, aiwf-lang, aiwf-sprint, etc.)
+│   │   ├── index.js              # Main CLI entry
+│   │   ├── language-cli.js       # Language management CLI
+│   │   ├── checkpoint-cli.js     # Checkpoint CLI
+│   │   ├── sprint-cli.js         # Sprint CLI
+│   │   └── cache-cli.js          # Template cache CLI
+│   ├── commands/                 # AIWF command implementations
+│   │   ├── ai-tool.js
+│   │   ├── compress.js
+│   │   ├── create-project.js
+│   │   ├── evaluate.js
+│   │   ├── persona.js
+│   │   ├── sprint-independent.js
+│   │   ├── sprint-task.js
+│   │   ├── state.js
+│   │   ├── token.js
+│   │   └── yolo-config.js
+│   ├── lib/
+│   │   ├── resource-loader.js    # Unified resource management
+│   │   └── resources/            # Bundled resources included in NPM package
+│   │       ├── commands/
+│   │       ├── config/
+│   │       ├── personas/
+│   │       ├── templates/
+│   │       └── utils/
+│   └── utils/                    # Framework utility modules
+├── ai-tools/                     # AI tool-specific configurations
+│   ├── claude-code/
+│   ├── cursor/
+│   ├── windsurf/
+│   ├── github-copilot/
+│   └── augment/
+├── docs/                         # Project documentation
+├── rules/                        # Global/manual rules for the framework
+├── scripts/                      # Dev scripts (validation, tests, updates)
+├── tests/                        # Jest tests (unit, integration)
+├── claude-code/                  # Claude Code command content (en/ko)
+├── package.json                  # NPM package configuration
+├── README.md
+├── README.ko.md
+└── CLAUDE.md                     # This file - Claude Code guidance
 ```
 
 ## AI Tools Directory
@@ -117,54 +116,32 @@ All commands use the ResourceLoader system to access bundled resources, ensuring
 
 ## Templates Directory
 
-The `templates/` directory provides starter templates for different project types:
+The template files distributed with the package are bundled under `src/lib/resources/templates/`. These templates are copied to the user project (e.g., `.aiwf/99_TEMPLATES/`) when needed.
 
-- **api-server/**: Express.js API server with TypeScript
-  - Includes Swagger documentation
-  - AIWF middleware integration
-  - Jest testing setup
-  
-- **npm-library/**: NPM package template
-  - TypeScript configuration
-  - Rollup bundling
-  - Complete testing setup
-  
-- **web-app/**: React + Vite web application
-  - TypeScript + Tailwind CSS
-  - AIWF dashboard components
-  - State management setup
+Common categories include:
+- API server templates (TypeScript, Swagger-ready, testing setup)
+- NPM library templates (TypeScript, bundling, tests)
+- Web app templates (React + Vite, Tailwind, dashboard components)
 
-## Hooks Directory
+## Hooks
 
-The `hooks/` directory contains Git hooks for automated workflow:
-
-- **install-hooks.sh**: Script to install git hooks into the project
-- **post-commit**: Automatically tracks commits for workflow integration
-
-To install hooks:
-```bash
-./hooks/install-hooks.sh
-```
-
-The post-commit hook automatically:
-- Parses commit messages for references
-- Maintains feature-commit relationships
+A dedicated `hooks/` directory is not part of the current repository layout. If Git hooks are required, manage them within your consuming projects as needed.
 
 ## Utils Directory
 
-The `utils/` directory contains utility modules for various AIWF features:
+The framework utilities live in `src/utils/`, and additional utility content shipped for end-user projects is under `src/lib/resources/utils/`.
 
-- **Compression utilities**: Various strategies for context compression
-- **Git utilities**: Git operation helpers and integrations
-- **Token management**: Token counting, tracking, and optimization
-- **Text processing**: Summarization and content normalization
-- **Persona utilities**: Context parsing and behavior validation
+- Compression utilities
+- Git-related helpers
+- Token management helpers
+- Text processing helpers
+- Persona utilities
 
 ## Key Files and Configurations
 
 ### package.json Configuration
 - **Type**: ES Module (`"type": "module"`)
-- **Version**: 0.3.18
+- **Version**: 0.3.19
 - **Main binaries**:
   - `aiwf` - Main CLI command
   - `aiwf-lang` - Language management CLI
@@ -262,7 +239,7 @@ This project uses ES modules. Always use:
 ### Language Content Rules
 **IMPORTANT**: Language management approach:
 - The framework uses a unified codebase with language-specific resources
-- Language selection is handled at runtime through `config/language.json`
+- Language selection is handled at runtime through `.aiwf/config/language.json`
 - Documentation files use language suffixes:
   - English: `GUIDE.md`
   - Korean: `GUIDE.ko.md`
@@ -308,7 +285,7 @@ AIWF is built on a modular architecture designed for extensibility and AI tool i
 - Commands can utilize utilities from `utils/` and libraries from `lib/`
 
 ### AI Persona System
-- Personas are defined in JSON format in the `personas/` directory
+- Personas distributed with the package are defined in JSON format under `src/lib/resources/personas/`
 - Each persona has associated knowledge bases and best practices
 - The system supports dynamic persona switching and context application
 
@@ -318,7 +295,7 @@ AIWF is built on a modular architecture designed for extensibility and AI tool i
 - Real-time monitoring and reporting capabilities
 
 ### Template System
-- Project templates are stored in the `templates/` directory
+- Project templates are bundled under `src/lib/resources/templates/` and are copied into user projects (e.g., `.aiwf/99_TEMPLATES/`) when used by the CLI
 - Each template is a complete, working project setup
 - Templates include AIWF integration out of the box
 
