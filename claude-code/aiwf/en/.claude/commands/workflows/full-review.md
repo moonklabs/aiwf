@@ -1,3 +1,7 @@
+---
+model: opus
+---
+
 Perform a comprehensive review using multiple specialized agents with explicit Task tool invocations:
 
 [Extended thinking: This workflow performs a thorough multi-perspective review by orchestrating specialized review agents. Each agent examines different aspects and the results are consolidated into a unified action plan.]

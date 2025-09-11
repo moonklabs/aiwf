@@ -1,3 +1,7 @@
+---
+model: sonnet
+---
+
 Perform comprehensive multi-agent code review with specialized reviewers:
 
 [Extended thinking: This tool command invokes multiple review-focused agents to provide different perspectives on code quality, security, and architecture. Each agent reviews independently, then findings are consolidated.]

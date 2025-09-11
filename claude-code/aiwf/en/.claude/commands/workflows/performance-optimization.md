@@ -1,3 +1,7 @@
+---
+model: opus
+---
+
 Optimize application performance end-to-end using specialized performance and optimization agents:
 
 [Extended thinking: This workflow coordinates multiple agents to identify and fix performance bottlenecks across the entire stack. From database queries to frontend rendering, each agent contributes their expertise to create a highly optimized application.]

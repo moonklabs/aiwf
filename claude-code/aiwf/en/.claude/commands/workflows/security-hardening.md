@@ -1,3 +1,7 @@
+---
+model: opus
+---
+
 Implement security-first architecture and hardening measures with coordinated agent orchestration:
 
 [Extended thinking: This workflow prioritizes security at every layer of the application stack. Multiple agents work together to identify vulnerabilities, implement secure patterns, and ensure compliance with security best practices.]

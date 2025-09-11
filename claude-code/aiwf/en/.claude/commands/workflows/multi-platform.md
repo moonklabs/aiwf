@@ -1,3 +1,7 @@
+---
+model: opus
+---
+
 Build the same feature across multiple platforms:
 
 Run in parallel:

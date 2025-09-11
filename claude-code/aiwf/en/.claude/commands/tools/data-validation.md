@@ -1,3 +1,7 @@
+---
+model: sonnet
+---
+
 # Data Validation Pipeline
 
 Create a comprehensive data validation system for: $ARGUMENTS

@@ -1,3 +1,7 @@
+---
+model: opus
+---
+
 Build data-driven features with integrated pipelines and ML capabilities using specialized agents:
 
 [Extended thinking: This workflow orchestrates data scientists, data engineers, backend architects, and AI engineers to build features that leverage data pipelines, analytics, and machine learning. Each agent contributes their expertise to create a complete data-driven solution.]

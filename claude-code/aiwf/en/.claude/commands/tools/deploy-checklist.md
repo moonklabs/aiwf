@@ -1,3 +1,7 @@
+---
+model: sonnet
+---
+
 # Deployment Checklist and Configuration
 
 Generate deployment configuration and checklist for: $ARGUMENTS
