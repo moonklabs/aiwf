@@ -1,3 +1,7 @@
+---
+model: sonnet
+---
+
 # AI Prompt Optimization
 
 Optimize the following prompt for better AI model performance: $ARGUMENTS

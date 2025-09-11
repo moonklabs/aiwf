@@ -1,3 +1,7 @@
+---
+model: sonnet
+---
+
 # LangChain/LangGraph Agent Scaffold
 
 Create a production-ready LangChain/LangGraph agent for: $ARGUMENTS

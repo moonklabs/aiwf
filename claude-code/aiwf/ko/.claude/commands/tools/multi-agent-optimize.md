@@ -1,3 +1,7 @@
+---
+model: sonnet
+---
+
 Optimize application stack using specialized optimization agents:
 
 [Extended thinking: This tool coordinates database, performance, and frontend optimization agents to improve application performance holistically. Each agent focuses on their domain while ensuring optimizations work together.]

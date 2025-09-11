@@ -1,3 +1,7 @@
+---
+model: opus
+---
+
 Modernize legacy code using expert agents:
 
 1. legacy-modernizer: Analyze and plan modernization

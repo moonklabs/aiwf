@@ -1,3 +1,7 @@
+---
+model: opus
+---
+
 # Machine Learning Pipeline
 
 Design and implement a complete ML pipeline for: $ARGUMENTS

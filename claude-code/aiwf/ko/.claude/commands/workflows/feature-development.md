@@ -1,3 +1,7 @@
+---
+model: opus
+---
+
 Implement a new feature using specialized agents with explicit Task tool invocations:
 
 [Extended thinking: This workflow orchestrates multiple specialized agents to implement a complete feature from design to deployment. Each agent receives context from previous agents to ensure coherent implementation.]

@@ -1,3 +1,7 @@
+---
+model: sonnet
+---
+
 # Standup Notes Generator
 
 Generate daily standup notes by reviewing Obsidian vault context and Jira tickets.

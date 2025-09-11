@@ -1,3 +1,7 @@
+---
+model: sonnet
+---
+
 # Error Analysis and Resolution
 
 Analyze and resolve errors in: $ARGUMENTS

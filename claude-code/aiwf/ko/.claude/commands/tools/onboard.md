@@ -1,3 +1,7 @@
+---
+model: sonnet
+---
+
 # Onboard
 
 You are given the following context:

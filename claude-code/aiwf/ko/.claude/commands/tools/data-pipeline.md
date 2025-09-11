@@ -1,3 +1,7 @@
+---
+model: sonnet
+---
+
 # Data Pipeline Architecture
 
 Design and implement a scalable data pipeline for: $ARGUMENTS

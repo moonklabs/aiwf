@@ -1,3 +1,7 @@
+---
+model: opus
+---
+
 Complete Git workflow using specialized agents:
 
 1. code-reviewer: Review uncommitted changes

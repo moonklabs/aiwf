@@ -1,3 +1,7 @@
+---
+model: opus
+---
+
 Implement a full-stack feature across multiple platforms with coordinated agent orchestration:
 
 [Extended thinking: This workflow orchestrates a comprehensive feature implementation across backend, frontend, mobile, and API layers. Each agent builds upon the work of previous agents to create a cohesive multi-platform solution.]

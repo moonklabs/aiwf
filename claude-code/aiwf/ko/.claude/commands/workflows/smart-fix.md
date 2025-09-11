@@ -1,3 +1,7 @@
+---
+model: opus
+---
+
 Intelligently fix the issue using automatic agent selection with explicit Task tool invocations:
 
 [Extended thinking: This workflow analyzes the issue and automatically routes to the most appropriate specialist agent(s). Complex issues may require multiple agents working together.]

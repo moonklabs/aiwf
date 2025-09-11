@@ -1,3 +1,7 @@
+---
+model: sonnet
+---
+
 # AI/ML Code Review
 
 Perform a specialized AI/ML code review for: $ARGUMENTS
