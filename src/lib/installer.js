@@ -999,9 +999,28 @@ async function installSelectedOptions(selectedOptions, languagePath, msg, debugL
  */
 async function installAIWFDocs(languagePath, debugLog) {
   await createDirectoryStructure();
-  const dummySpinner = null;
-  const dummyMsg = { downloading: 'Downloading AIWF documentation...' };
-  await downloadManifest(languagePath, dummySpinner, dummyMsg, debugLog);
+  const spinner = ora('Downloading AIWF files...').start();
+  const msg = {
+    downloading: 'Downloading AIWF documentation...',
+    downloadingTemplates: 'Downloading templates...',
+    templatesNotFound: 'Templates not found'
+  };
+
+  try {
+    // 매니페스트 다운로드
+    await downloadManifest(languagePath, spinner, msg, debugLog);
+
+    // 전체 .aiwf 디렉토리 다운로드
+    await downloadTemplates(languagePath, spinner, msg, debugLog);
+
+    spinner.succeed('AIWF documentation installed successfully');
+  } catch (error) {
+    spinner.fail('Failed to install AIWF documentation');
+    if (debugLog) {
+      console.error(error);
+    }
+    throw error;
+  }
 }
 
 /**
@@ -1015,58 +1034,59 @@ async function installClaudeCodeCommands(languagePath, debugLog) {
 }
 
 /**
- * 단일 도구 규칙 다운로드 및 처리
- * @param {string} tool - 도구 이름 ('cursor' 또는 'windsurf')
- * @param {Object} spinner - Ora spinner instance
- * @param {Object} msg - 지역화된 메시지
- * @param {boolean} debugLog - 디버그 로그 여부
- */
-async function downloadAndProcessSingleToolRules(tool, spinner, msg, debugLog) {
-  logWithSpinner(spinner, msg.installingToolRules || `Installing ${tool} rules...`, debugLog);
-
-  if (tool === 'cursor') {
-    // Cursor rules 설치
-    const cursorRulesDir = TOOL_DIRS.CURSOR_RULES;
-    await fs.mkdir(cursorRulesDir, { recursive: true });
-
-    try {
-      // rules/global에서 Cursor 규칙 복사
-      await downloadDirectory(`rules/global`, cursorRulesDir);
-      logWithSpinner(spinner, `Cursor rules installed successfully`, debugLog);
-    } catch (error) {
-      logWithSpinner(spinner, `Error installing Cursor rules: ${error.message}`, debugLog);
-    }
-  } else if (tool === 'windsurf') {
-    // Windsurf rules 설치
-    const windsurfRulesDir = TOOL_DIRS.WINDSURF_RULES;
-    await fs.mkdir(windsurfRulesDir, { recursive: true });
-
-    try {
-      // rules/global에서 Windsurf 규칙 복사
-      await downloadDirectory(`rules/global`, windsurfRulesDir);
-      logWithSpinner(spinner, `Windsurf rules installed successfully`, debugLog);
-    } catch (error) {
-      logWithSpinner(spinner, `Error installing Windsurf rules: ${error.message}`, debugLog);
-    }
-  }
-}
-
-/**
  * Windsurf 규칙 설치
  */
 async function installWindsurfRules(debugLog) {
-  const dummySpinner = null;
-  const dummyMsg = { installingToolRules: 'Installing Windsurf rules...' };
-  await downloadAndProcessSingleToolRules('windsurf', dummySpinner, dummyMsg, debugLog);
+  const spinner = ora('Installing Windsurf rules...').start();
+  const msg = {
+    checkingExistingTools: 'Checking existing tools...',
+    foundExistingCursor: 'Found existing Cursor rules',
+    foundExistingWindsurf: 'Found existing Windsurf rules',
+    backingUpToolFiles: 'Backing up tool files...',
+    toolBackupCreated: 'Tool backup created',
+    rulesGlobalNotFound: 'Rules global not found',
+    rulesManualNotFound: 'Rules manual not found',
+    toolRulesInstalled: 'Tool rules installed successfully'
+  };
+
+  try {
+    await downloadAndProcessRules(spinner, msg, debugLog);
+    spinner.succeed('Windsurf rules installed successfully');
+  } catch (error) {
+    spinner.fail('Failed to install Windsurf rules');
+    if (debugLog) {
+      console.error(error);
+    }
+    throw error;
+  }
 }
 
 /**
  * Cursor 규칙 설치
  */
 async function installCursorRules(debugLog) {
-  const dummySpinner = null;
-  const dummyMsg = { installingToolRules: 'Installing Cursor rules...' };
-  await downloadAndProcessSingleToolRules('cursor', dummySpinner, dummyMsg, debugLog);
+  const spinner = ora('Installing Cursor rules...').start();
+  const msg = {
+    checkingExistingTools: 'Checking existing tools...',
+    foundExistingCursor: 'Found existing Cursor rules',
+    foundExistingWindsurf: 'Found existing Windsurf rules',
+    backingUpToolFiles: 'Backing up tool files...',
+    toolBackupCreated: 'Tool backup created',
+    rulesGlobalNotFound: 'Rules global not found',
+    rulesManualNotFound: 'Rules manual not found',
+    toolRulesInstalled: 'Tool rules installed successfully'
+  };
+
+  try {
+    await downloadAndProcessRules(spinner, msg, debugLog);
+    spinner.succeed('Cursor rules installed successfully');
+  } catch (error) {
+    spinner.fail('Failed to install Cursor rules');
+    if (debugLog) {
+      console.error(error);
+    }
+    throw error;
+  }
 }
 
 /**
