@@ -49,54 +49,7 @@
         "EDITOR": "zed",
         "GIT_EDITOR": "zed --wait"
     },
-    "preferredNotifChannel": "terminal_bell",
-    "verbose": true,
     "cleanupPeriodDays": 90,
     "includeCoAuthoredBy": false,
-    "hooks": {
-        "beforeFileEdit": [
-            {
-                "command": "npm run lint:fix --silent || true",
-                "description": "파일 수정 전 자동 린트 수정 실행"
-            }
-        ],
-        "afterFileEdit": [
-            {
-                "command": "prettier --write {file} || true",
-                "description": "파일 수정 후 자동 포맷팅 실행"
-            }
-        ],
-        "beforeCommit": [
-            {
-                "command": "npm run lint || echo '린트 검사 실패'",
-                "description": "커밋 전 린트 검사"
-            },
-            {
-                "command": "npm run test || echo '테스트 실패'",
-                "description": "커밋 전 테스트 실행"
-            }
-        ],
-        "Stop": [
-            {
-                "matcher": "",
-                "hooks": [
-                    {
-                        "type": "command",
-                        "command": "afplay /System/Library/Sounds/Glass.aiff"
-                    }
-                ]
-            }
-        ],
-        "PostToolUse": [
-            {
-                "matcher": "Write|Edit|MultiEdit",
-                "hooks": [
-                    {
-                        "type": "command",
-                        "command": "aiwf_test"
-                    }
-                ]
-            }
-        ]
-    }
+    "alwaysThinkingEnabled": true
 }
