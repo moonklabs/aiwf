@@ -77,6 +77,18 @@ export const messages = {
     toolBackupCreated: '도구 파일 백업이 생성되었습니다',
     installingToolRules: '도구 규칙을 설치하는 중...',
     toolRulesInstalled: '도구 규칙이 성공적으로 설치되었습니다',
+
+    // 설치 옵션 관련
+    installationOptions: 'AIWF 설치 옵션을 선택하세요:',
+    aiwfDocs: 'AIWF 문서 폴더 (.aiwf/docs)',
+    claudeCodeCommands: 'Claude Code 명령어 및 에이전트',
+    windsurfRules: 'Windsurf 규칙 파일',
+    cursorRules: 'Cursor 규칙 파일',
+    selectAll: '모든 옵션 선택',
+    installSelected: '선택한 항목들을 설치하시겠습니까?',
+    installingOption: '설치 중: ',
+    optionInstalled: '완료: ',
+    noOptionsSelected: '선택된 옵션이 없습니다.',
   },
   en: {
     welcome: '\n🎉 Welcome to AIWF!\n',
@@ -153,6 +165,18 @@ export const messages = {
     toolBackupCreated: 'Tool files backup created',
     installingToolRules: 'Installing tool rules...',
     toolRulesInstalled: 'Tool rules installed successfully',
+
+    // Installation options
+    installationOptions: 'Select AIWF installation options:',
+    aiwfDocs: 'AIWF Documentation folder (.aiwf/docs)',
+    claudeCodeCommands: 'Claude Code commands and agents',
+    windsurfRules: 'Windsurf rules files',
+    cursorRules: 'Cursor rules files',
+    selectAll: 'Select all options',
+    installSelected: 'Install selected items?',
+    installingOption: 'Installing: ',
+    optionInstalled: 'Completed: ',
+    noOptionsSelected: 'No options selected.',
   }
 };
 

@@ -894,6 +894,182 @@ async function offerReinstallationOptions(validationResults, language) {
 }
 
 /**
+ * 사용자 설치 옵션 선택
+ * @param {Object} msg - 지역화된 메시지
+ * @returns {Promise<Array>} 선택된 설치 옵션 목록
+ */
+async function selectInstallationOptions(msg) {
+  console.log(chalk.cyan(`\n${msg.installationOptions}`));
+
+  const installOptions = [
+    {
+      title: msg.aiwfDocs,
+      value: 'aiwf-docs',
+      description: 'AIWF 문서 폴더'
+    },
+    {
+      title: msg.claudeCodeCommands,
+      value: 'claude-code-commands',
+      description: 'Claude Code 명령어 및 에이전트'
+    },
+    {
+      title: msg.windsurfRules,
+      value: 'windsurf-rules',
+      description: 'Windsurf 규칙 파일'
+    },
+    {
+      title: msg.cursorRules,
+      value: 'cursor-rules',
+      description: 'Cursor 규칙 파일'
+    }
+  ];
+
+  const response = await prompts([
+    {
+      type: 'multiselect',
+      name: 'selectedOptions',
+      message: msg.installationOptions,
+      choices: [
+        ...installOptions,
+        {
+          title: msg.selectAll,
+          value: 'all',
+          selected: true
+        }
+      ],
+      hint: '스페이스 키로 선택/해제, 엔터로 확인'
+    }
+  ]);
+
+  if (!response.selectedOptions || response.selectedOptions.length === 0) {
+    console.log(chalk.yellow(msg.noOptionsSelected));
+    process.exit(0);
+  }
+
+  // '모든 옵션 선택'이 포함된 경우 모든 옵션 반환
+  if (response.selectedOptions.includes('all')) {
+    return installOptions.map(opt => opt.value);
+  }
+
+  return response.selectedOptions;
+}
+
+/**
+ * 선택된 옵션별 설치 실행
+ * @param {Array} selectedOptions - 선택된 설치 옵션들
+ * @param {string} languagePath - 언어 경로
+ * @param {Object} msg - 지역화된 메시지
+ * @param {boolean} debugLog - 디버그 로그 여부
+ */
+async function installSelectedOptions(selectedOptions, languagePath, msg, debugLog) {
+  for (const option of selectedOptions) {
+    const spinner = ora(`${msg.installingOption}${option}...`).start();
+
+    try {
+      switch (option) {
+        case 'aiwf-docs':
+          await installAIWFDocs(languagePath, debugLog);
+          break;
+        case 'claude-code-commands':
+          await installClaudeCodeCommands(languagePath, debugLog);
+          break;
+        case 'windsurf-rules':
+          await installWindsurfRules(debugLog);
+          break;
+        case 'cursor-rules':
+          await installCursorRules(debugLog);
+          break;
+        default:
+          spinner.warn(`Unknown option: ${option}`);
+          continue;
+      }
+
+      spinner.succeed(`${msg.optionInstalled}${option}`);
+    } catch (error) {
+      spinner.fail(`Failed to install ${option}: ${error.message}`);
+      if (debugLog) {
+        console.error(error);
+      }
+    }
+  }
+}
+
+/**
+ * AIWF 문서 설치
+ */
+async function installAIWFDocs(languagePath, debugLog) {
+  await createDirectoryStructure();
+  const dummySpinner = null;
+  const dummyMsg = { downloading: 'Downloading AIWF documentation...' };
+  await downloadManifest(languagePath, dummySpinner, dummyMsg, debugLog);
+}
+
+/**
+ * Claude Code 명령어 설치
+ */
+async function installClaudeCodeCommands(languagePath, debugLog) {
+  const GITHUB_CONTENT_LANGUAGE_PREFIX = `${GITHUB_CONTENT_PREFIX}/${languagePath}`;
+  const dummySpinner = null;
+  const dummyMsg = { downloadingCommands: 'Downloading Claude Code commands...' };
+  await updateCommands(languagePath, dummySpinner, dummyMsg, debugLog);
+}
+
+/**
+ * 단일 도구 규칙 다운로드 및 처리
+ * @param {string} tool - 도구 이름 ('cursor' 또는 'windsurf')
+ * @param {Object} spinner - Ora spinner instance
+ * @param {Object} msg - 지역화된 메시지
+ * @param {boolean} debugLog - 디버그 로그 여부
+ */
+async function downloadAndProcessSingleToolRules(tool, spinner, msg, debugLog) {
+  logWithSpinner(spinner, msg.installingToolRules || `Installing ${tool} rules...`, debugLog);
+
+  if (tool === 'cursor') {
+    // Cursor rules 설치
+    const cursorRulesDir = TOOL_DIRS.CURSOR_RULES;
+    await fs.mkdir(cursorRulesDir, { recursive: true });
+
+    try {
+      // rules/global에서 Cursor 규칙 복사
+      await downloadDirectory(`rules/global`, cursorRulesDir);
+      logWithSpinner(spinner, `Cursor rules installed successfully`, debugLog);
+    } catch (error) {
+      logWithSpinner(spinner, `Error installing Cursor rules: ${error.message}`, debugLog);
+    }
+  } else if (tool === 'windsurf') {
+    // Windsurf rules 설치
+    const windsurfRulesDir = TOOL_DIRS.WINDSURF_RULES;
+    await fs.mkdir(windsurfRulesDir, { recursive: true });
+
+    try {
+      // rules/global에서 Windsurf 규칙 복사
+      await downloadDirectory(`rules/global`, windsurfRulesDir);
+      logWithSpinner(spinner, `Windsurf rules installed successfully`, debugLog);
+    } catch (error) {
+      logWithSpinner(spinner, `Error installing Windsurf rules: ${error.message}`, debugLog);
+    }
+  }
+}
+
+/**
+ * Windsurf 규칙 설치
+ */
+async function installWindsurfRules(debugLog) {
+  const dummySpinner = null;
+  const dummyMsg = { installingToolRules: 'Installing Windsurf rules...' };
+  await downloadAndProcessSingleToolRules('windsurf', dummySpinner, dummyMsg, debugLog);
+}
+
+/**
+ * Cursor 규칙 설치
+ */
+async function installCursorRules(debugLog) {
+  const dummySpinner = null;
+  const dummyMsg = { installingToolRules: 'Installing Cursor rules...' };
+  await downloadAndProcessSingleToolRules('cursor', dummySpinner, dummyMsg, debugLog);
+}
+
+/**
  * Main installation function
  * @param {Object} options - Installation options
  */
@@ -910,7 +1086,6 @@ export async function installAIWF(options = {}) {
 
   // Set language path
   const languagePath = getInstallationLanguagePath(selectedLanguage);
-  const GITHUB_CONTENT_LANGUAGE_PREFIX = `${GITHUB_CONTENT_PREFIX}/${languagePath}`;
 
   // Check existing installation
   const hasExisting = await checkExistingInstallation();
@@ -919,11 +1094,9 @@ export async function installAIWF(options = {}) {
   let projectBackupDir = null;
 
   if (hasExisting) {
-
     installDecision = await handleExistingInstallation(msg, options);
-
     if (!installDecision.continue) return;
-    
+
     // If reinstalling and preserving project, backup project files
     if (installDecision.installType === 'reinstall' && installDecision.preserveProject) {
       const { hasProject, projectFiles } = await checkExistingProject();
@@ -933,120 +1106,112 @@ export async function installAIWF(options = {}) {
     }
   }
 
-  const spinner = ora(msg.fetching).start();
+  // 설치 옵션 선택
+  let selectedOptions = ['aiwf-docs', 'claude-code-commands', 'windsurf-rules', 'cursor-rules'];
+
+  if (options.preselectedOptions) {
+    // CLI에서 미리 선택된 옵션들을 사용
+    selectedOptions = options.preselectedOptions;
+  } else if (!options.force && !options.interactive) {
+    // 기본적으로는 대화형 선택을 사용
+    selectedOptions = await selectInstallationOptions(msg);
+  } else if (options.interactive) {
+    // --interactive 플래그가 명시적으로 설정된 경우
+    selectedOptions = await selectInstallationOptions(msg);
+  }
+
+  console.log(chalk.blue(`\n설치할 옵션: ${selectedOptions.join(', ')}`));
 
   try {
-    // Create directory structure
-    await createDirectoryStructure();
-
-    // Download manifest (fresh installs only or complete reinstall)
-    if (!hasExisting || installDecision.installType === 'reinstall') {
-      await downloadManifest(languagePath, spinner, msg, debugLog);
-    }
-
-    // Download templates (fresh installs and complete reinstall only)
-    if (!hasExisting || installDecision.installType === 'reinstall') {
-      await downloadTemplates(languagePath, spinner, msg, debugLog);
-    }
-
-    // Update documentation (fresh installs and complete reinstall only)
-    if (!hasExisting || installDecision.installType === 'reinstall') {
-      await updateDocumentation(languagePath, spinner, msg, debugLog);
-    }
-
-    // Update commands
-    await updateCommands(languagePath, spinner, msg, debugLog);
-
-    // Download and process rules
-    const toolDirStatus = await downloadAndProcessRules(spinner, msg, debugLog);
+    // 선택된 옵션들을 설치
+    await installSelectedOptions(selectedOptions, languagePath, msg, debugLog);
 
     // Restore project files if needed
     if (projectBackupDir) {
       await restoreProjectFiles(projectBackupDir, msg);
     }
 
-    // Success
+    // Success message
     if (hasExisting && installDecision.installType === 'update') {
-      spinner.succeed(chalk.green(msg.updateSuccess));
+      console.log(chalk.green(`\n✅ ${msg.updateSuccess}`));
     } else {
-      spinner.succeed(chalk.green(msg.installSuccess));
+      console.log(chalk.green(`\n✅ ${msg.installSuccess}`));
     }
 
     // Display summary
     displaySummary(hasExisting, msg);
 
-    // Run validation
+    // Run validation based on selected options
     console.log(
       chalk.blue('\n🔍 Installation Validation / 설치 검증을 시작합니다...')
     );
-    const selectedTools = ['claude-code', 'cursor', 'windsurf'];
-    const validationResults = await validateInstallation(
-      selectedTools,
-      selectedLanguage
-    );
-    displaySpecCompliantValidationResults(validationResults, selectedLanguage);
 
-    // Handle partial failures
-    if (validationResults.failed.length > 0) {
-      const action = await offerReinstallationOptions(
-        validationResults,
+    // Map selected options to validation tools
+    const validationTools = [];
+    if (selectedOptions.includes('claude-code-commands')) {
+      validationTools.push('claude-code');
+    }
+    if (selectedOptions.includes('cursor-rules')) {
+      validationTools.push('cursor');
+    }
+    if (selectedOptions.includes('windsurf-rules')) {
+      validationTools.push('windsurf');
+    }
+
+    if (validationTools.length > 0) {
+      const validationResults = await validateInstallation(
+        validationTools,
         selectedLanguage
       );
+      displaySpecCompliantValidationResults(validationResults, selectedLanguage);
 
-      if (action === 'reinstall') {
-        console.log(
-          chalk.blue('\n🔄 재설치를 시작합니다... / Starting reinstallation...')
-        );
-        // Retry installation once
-        if (!options.isRetry) {
-          return await installAIWF({ ...options, isRetry: true });
-        }
-      } else if (action === 'rollback') {
-        console.log(
-          chalk.blue('\n↩️  실패한 도구를 롤백합니다... / Rolling back failed tools...')
-        );
-
-        // Rollback failed tools
-        const failedTools = validationResults.failed.map(({ tool }) => tool);
-        const backupDir = getCurrentBackupDir();
-        let rollbackResults = {};
-
-        for (const tool of failedTools) {
-          if (backupDir) {
-            const rollbackResult = await rollbackTool(
-              tool,
-              backupDir,
-              selectedLanguage
-            );
-            rollbackResults[tool] = rollbackResult;
-          }
-        }
-
-        // Re-validate after rollback
-        console.log(
-          chalk.blue('\n🔍 롤백 후 재검증... / Re-validating after rollback...')
-        );
-        const postRollbackValidation = await validateInstallation(
-          selectedTools,
-          selectedLanguage
-        );
-        displaySpecCompliantValidationResults(
-          postRollbackValidation,
+      // Handle partial failures
+      if (validationResults.failed.length > 0) {
+        const action = await offerReinstallationOptions(
+          validationResults,
           selectedLanguage
         );
 
-        // Rollback summary
-        console.log(chalk.blue('\n=== Rollback Summary / 롤백 요약 ==='));
-        for (const [tool, result] of Object.entries(rollbackResults)) {
-          if (result.success) {
-            console.log(
-              chalk.green(`✅ ${tool}: ${result.restoredCount} files restored`)
-            );
-          } else {
-            console.log(chalk.red(`❌ ${tool}: ${result.error}`));
+        if (action === 'reinstall') {
+          console.log(
+            chalk.blue('\n🔄 재설치를 시작합니다... / Starting reinstallation...')
+          );
+          // Retry installation once
+          if (!options.isRetry) {
+            return await installAIWF({ ...options, isRetry: true });
           }
+        } else if (action === 'rollback') {
+          console.log(
+            chalk.blue('\n↩️  실패한 도구를 롤백합니다... / Rolling back failed tools...')
+          );
+
+          // Rollback failed tools
+          const failedTools = validationResults.failed.map(({ tool }) => tool);
+          const backupDir = getCurrentBackupDir();
+
+          for (const tool of failedTools) {
+            if (backupDir) {
+              await rollbackTool(
+                tool,
+                backupDir,
+                selectedLanguage
+              );
+            }
+          }
+
+          // Re-validate after rollback
+          console.log(
+            chalk.blue('\n🔍 롤백 후 재검증... / Re-validating after rollback...')
+          );
+          const postRollbackValidation = await validateInstallation(
+            validationTools,
+            selectedLanguage
+          );
+          displaySpecCompliantValidationResults(postRollbackValidation, selectedLanguage);
         }
       }
+    } else {
+      console.log(chalk.yellow('\n⚠️ 검증할 도구가 선택되지 않았습니다.'));
     }
 
     console.log(chalk.green(msg.enjoy));
