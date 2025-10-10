@@ -1,5 +1,5 @@
 ---
-model: opus
+model: claude-opus-4-1
 ---
 
 Implement security-first architecture and hardening measures with coordinated agent orchestration:

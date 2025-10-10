@@ -1,233 +1,189 @@
-# 신규 마일스톤 계획 및 생성
+# Plan and Create New Milestone - Execute from Top to Bottom
 
-상호작용적이고 적응적인 프로세스를 통해 적절한 구조, 문서화, 프로젝트 통합을 갖춘 새로운 마일스톤을 생성합니다.
+Creates a new milestone with proper structure, documentation, and project integration through an interactive, adaptive process.
 
-## 정확히 다음 9개 항목으로 할 일 목록을 생성하세요
+## Create a TODO with EXACTLY these 8 items
 
-1. 워크플로우 상태 사전 검증
-2. 인수 분석 및 프로젝트 컨텍스트 파악
-3. 상호작용적 마일스톤 범위 및 정의
-4. 마일스톤 구조 및 명명 결정
-5. 마일스톤 디렉토리 및 메타 파일 생성
-6. 지원 문서 생성 가이드
-7. 마일스톤으로 프로젝트 매니페스트 업데이트
-8. 마일스톤 일관성 및 정렬 검증
-9. 상태 동기화 및 마일스톤 생성 보고
+1. Parse arguments and analyze project context
+2. Interactive milestone scoping and definition
+3. Determine milestone structure and naming
+4. Create milestone directory and meta file
+5. Guide supporting documentation creation
+6. Update project manifest with milestone
+7. Validate milestone coherence and alignment
+8. Report milestone creation and next steps
 
 ---
 
-## 1 · 워크플로우 상태 사전 검증
+## 1 · Parse arguments and analyze project context
 
-**병렬 서브에이전트**를 사용하여 다음 작업을 수행하세요:
+**CRITICAL:** You are given additional Arguments: <$ARGUMENTS>
 
-- `aiwf state show` 명령어로 현재 워크플로우 상태 확인
-- 진행 중인 작업이나 차단 요소 식별
-- 새 마일스톤 생성이 현재 워크플로우에 미치는 영향 평가
-- 상태 불일치나 프로젝트 구조 문제 확인
+**USE PARALLEL SUBAGENTS** to do these tasks:
 
-**상태 검증 결과:**
-- 현재 활성 태스크: [상태 명령어 결과]
-- 프로젝트 구조 무결성: [검증 결과]
-- 마일스톤 생성 준비성: [준비 상태]
+- Parse arguments for suggested milestone name/focus (defaults to interactive creation)
+- Read `.aiwf/00_PROJECT_MANIFEST.md` to understand current project state
+- Scan `.aiwf/02_REQUIREMENTS/` to identify existing milestones and numbering
+- Read `.aiwf/01_PROJECT_DOCS/ARCHITECTURE.md` to understand project scope
+- Check latest project review in `.aiwf/10_STATE_OF_PROJECT/` for current status
+- **IMPORTANT:** Understand project phase and what logical next milestone should be
 
-## 2 · 인수 분석 및 프로젝트 컨텍스트 파악
+## 2 · Interactive milestone scoping and definition
 
-**중요**: 추가 인수가 제공됩니다: <$ARGUMENTS>
+**Conversational milestone definition:**
 
-**병렬 서브에이전트**를 사용하여 다음 작업을 수행하세요:
+If arguments provided:
 
-- 제안된 마일스톤 이름/초점에 대한 인수 분석 (기본값은 대화형 생성)
-- `.aiwf/00_PROJECT_MANIFEST.md`를 읽어 현재 프로젝트 상태 파악
-- `.aiwf/02_REQUIREMENTS/`를 스캔하여 기존 마일스톤과 번호 체계 식별
-- `.aiwf/01_PROJECT_DOCS/ARCHITECTURE.md`를 읽어 프로젝트 범위 이해
-- `.aiwf/10_STATE_OF_PROJECT/`의 최신 프로젝트 리뷰를 확인하여 현재 상태 파악
-- **중요**: 프로젝트 단계를 이해하고 논리적으로 다음에 와야 할 마일스톤 파악
+- "I see you want to create a milestone for: [arguments]"
+- "Let me understand the scope better..."
 
-## 2. 상호작용적 마일스톤 범위 및 정의
+If no arguments:
 
-**대화형 마일스톤 정의:**
+- "Let's define your next milestone based on the current project state"
+- "I see you're currently on [current milestone] - what should we focus on next?"
 
-인수가 제공된 경우:
+**Interactive questions (adapt based on context):**
 
-- "다음을 위한 마일스톤을 생성하고자 하시는군요: [인수]"
-- "범위를 더 잘 이해해보겠습니다..."
+- "What's the main goal of this milestone?"
+- "What key deliverables should be completed?"
+- "Are there any specific technical challenges or requirements?"
+- "How does this milestone advance the project toward its long-term vision?"
+- "What would 'done' look like for this milestone?"
 
-인수가 없는 경우:
+**Keep conversational and adaptive** - don't interrogate, just gather what's needed
 
-- "현재 프로젝트 상태를 바탕으로 다음 마일스톤을 정의해보겠습니다"
-- "현재 [현재 마일스톤]에 있는 것으로 보입니다 - 다음에는 무엇에 집중해야 할까요?"
+## 3 · Determine milestone structure and naming
 
-**상호작용 질문 (컨텍스트에 따라 조정):**
+**Generate milestone details:**
 
-- "이 마일스톤의 주요 목표는 무엇인가요?"
-- "완료되어야 할 핵심 결과물은 무엇인가요?"
-- "특정한 기술적 도전이나 요구사항이 있나요?"
-- "이 마일스톤이 프로젝트를 장기 비전으로 어떻게 발전시킬까요?"
-- "이 마일스톤의 '완료'는 어떤 모습일까요?"
+- Determine next milestone number (M##) by scanning existing milestones
+- Create descriptive milestone name from user input
+- Format: `M##_Milestone_Name_Snake_Case`
+- **CRITICAL:** Ensure no duplicate milestone numbers
+- Validate naming follows AIWF conventions (underscores, no spaces)
 
-**대화형이고 적응적으로 유지** - 심문하지 말고 필요한 것만 수집하세요
+**Confirm with user:**
 
-## 3. 마일스톤 구조 및 명명 결정
+- "I'll create milestone: M##_[Name] - does this sound right?"
+- Allow user to adjust name or numbering if needed
 
-**마일스톤 세부사항 생성:**
+## 4 · Create milestone directory and meta file
 
-- 기존 마일스톤을 스캔하여 다음 마일스톤 번호 (M##) 결정
-- 사용자 입력에서 설명적 마일스톤 이름 생성
-- 형식: `M##_마일스톤_이름_스네이크_케이스`
-- **중요**: 중복된 마일스톤 번호가 없도록 보장
-- AIWF 규칙을 따르는 명명 검증 (밑줄, 공백 없음)
+**Create milestone structure:**
 
-**사용자와 확인:**
+- Create directory: `.aiwf/02_REQUIREMENTS/M##_Milestone_Name/`
+- Copy template from `.aiwf/99_TEMPLATES/milestone_meta_template.md`
+- Create milestone meta file: `M##_milestone_meta.md`
 
-- "마일스톤을 생성하겠습니다: M##\_[이름] - 괜찮으신가요?"
-- 필요시 사용자가 이름이나 번호를 조정할 수 있도록 허용
+**Populate milestone meta file:**
 
-## 4. 마일스톤 디렉토리 및 메타 파일 생성
-
-**마일스톤 구조 생성:**
-
-- 디렉토리 생성: `.aiwf/02_REQUIREMENTS/M##_마일스톤_이름/`
-- `.aiwf/99_TEMPLATES/milestone_meta_template.md`에서 템플릿 복사
-- 마일스톤 메타 파일 생성: `M##_milestone_meta.md`
-
-**마일스톤 메타 파일 채우기:**
-
-- YAML 프론트매터 작성:
+- Fill in YAML frontmatter:
   - `milestone_id: M##`
-  - `title: [마일스톤 이름]`
+  - `title: [Milestone Name]`
   - `status: pending`
-  - `last_updated: [현재 타임스탬프 YYYY-MM-DD HH:MM]`
-- 사용자 입력을 구조화된 섹션으로 변환:
-  - **목표**: 사용자 논의에서 명확한 목적
-  - **핵심 문서**: PRD 및 SPECS 파일 플레이스홀더
-  - **완료 정의**: 사용자 입력에서 구체적이고 측정 가능한 기준
-  - **노트/컨텍스트**: 사용자 논의에서 추가 컨텍스트
+  - `last_updated: [current timestamp YYYY-MM-DD HH:MM]`
+- Convert user input into structured sections:
+  - **Goals**: Clear objectives from user discussion
+  - **Key Documents**: Placeholder for PRD and SPECS files
+  - **Definition of Done**: Specific, measurable criteria from user input
+  - **Notes/Context**: Additional context from user discussion
 
-## 5. 지원 문서 생성 가이드
+## 5 · Guide supporting documentation creation
 
-**상호작용적 문서 계획:**
+**Interactive document planning:**
 
-마일스톤 범위를 기반으로 필요한 문서 제안:
+Based on milestone scope, suggest needed documents:
 
-- "이 마일스톤에는 다음이 필요할 것 같습니다:"
-- "□ PRD\_[마일스톤_이름].md - 제품 요구사항"
-- "□ SPECS\_[기술_영역].md - 기술 사양"
-- "□ 도메인별 문서"
+- "For this milestone, you'll likely need:"
+- "□ PRD_[Milestone_Name].md - Product requirements"
+- "□ SPECS_[Technical_Area].md - Technical specifications"
+- "□ Any domain-specific documentation"
 
-**사용자에게 문의:**
+**Ask user:**
 
-- "지금 이 문서들의 시작 템플릿을 만들어드릴까요?"
-- "아니면 필요에 따라 수동으로 만드시겠어요?"
+- "Would you like me to create starter templates for these documents now?"
+- "Or would you prefer to create them manually as needed?"
 
-**사용자가 템플릿 생성을 원하는 경우:**
+**If user wants templates created:**
 
-- 마일스톤별 섹션이 포함된 기본 PRD 템플릿 생성
-- 기술 마일스톤인 경우 SPECS 템플릿 생성
-- 문서 간 적절한 상호참조 포함
-- **중요**: 과도하게 엔지니어링하지 말고 유용한 시작점 생성
+- Create basic PRD template with milestone-specific sections
+- Create SPECS template if technical milestone
+- Include proper cross-references between documents
+- **IMPORTANT:** Don't over-engineer - create useful starting points
 
-**사용자가 수동을 선호하는 경우:**
+**If user prefers manual:**
 
-- 마일스톤 메타에 예상되는 문서 기록
-- 언제/어떻게 생성할지에 대한 가이드 제공
+- Note in milestone meta what documents are expected
+- Provide guidance on when/how to create them
 
-## 6. 마일스톤으로 프로젝트 매니페스트 업데이트
+## 6 · Update project manifest with milestone
 
-`.aiwf/00_PROJECT_MANIFEST.md` **업데이트**:
+**UPDATE** `.aiwf/00_PROJECT_MANIFEST.md`:
 
-- 마일스톤 섹션에 마일스톤 추가:
-  - 형식: `- [ ] M##: [마일스톤 이름] - 상태: 계획 중`
-  - 링크: `[M##](02_REQUIREMENTS/M##_마일스톤_이름/M##_milestone_meta.md)`
-- 프로젝트 메타데이터 업데이트:
-  - 활성 마일스톤인 경우 `current_milestone` 설정
-  - `highest_milestone` 번호 업데이트
-  - `last_updated` 타임스탬프 업데이트
-- **중요**: 모든 기존 내용과 형식 보존
+- Add milestone to milestones section:
+  - Format: `- [ ] M##: [Milestone Name] - Status: Planning`
+  - Link: `[M##](02_REQUIREMENTS/M##_Milestone_Name/M##_milestone_meta.md)`
+- Update project metadata:
+  - Set `current_milestone` if this is the active milestone
+  - Update `highest_milestone` number
+  - Update `last_updated` timestamp
+- **IMPORTANT:** Preserve all existing content and formatting
 
-## 7. 마일스톤 일관성 및 정렬 검증
+## 7 · Validate milestone coherence and alignment
 
-마일스톤 품질 **확인**:
+**VERIFY** milestone quality:
 
-- 마일스톤이 프로젝트 아키텍처 및 비전과 일치하는지 확인
-- 완료 정의가 구체적이고 측정 가능한지 보장
-- 마일스톤 범위가 적절한지 검증 (너무 광범위하거나 좁지 않게)
-- 마일스톤이 명시된 목표를 향해 프로젝트를 발전시키는지 확인
-- 마일스톤 번호 및 명명이 규칙을 따르는지 확인
-- 생성된 모든 파일이 템플릿 구조를 따르는지 검증
-- **중요**: 마일스톤은 독립적으로 가치 있고 달성 가능해야 함
+- Check milestone aligns with project architecture and vision
+- Ensure Definition of Done is specific and measurable
+- Validate milestone scope is appropriate (not too broad/narrow)
+- Confirm milestone advances project toward stated goals
+- Check milestone numbering and naming follows conventions
+- Verify all created files follow template structure
+- **CRITICAL:** Milestone should be independently valuable and achievable
 
-**고려사항**:
+**THINK ABOUT**:
 
-- 현재 프로젝트 상태를 고려할 때 이 마일스톤이 의미가 있는가?
-- 목표가 현실적이고 잘 범위가 정해져 있는가?
-- 완료 정의가 언제 완료되었는지 알 수 있을 만큼 명확한가?
-- 이 마일스톤이 향후 마일스톤을 논리적으로 설정하는가?
+- Does this milestone make sense given the current project state?
+- Are the goals realistic and well-scoped?
+- Is the Definition of Done clear enough to know when it's complete?
+- Does this milestone set up future milestones logically?
 
-마일스톤 품질 **확인**:
+## 8 · Report milestone creation and next steps
 
-- 마일스톤이 프로젝트 아키텍처 및 비전과 일치하는지 확인
-- 완료 정의가 구체적이고 측정 가능한지 보장
-- 마일스톤 범위가 적절한지 검증 (너무 광범위하거나 좁지 않게)
-- 마일스톤이 명시된 목표를 향해 프로젝트를 발전시키는지 확인
-- 마일스톤 번호 및 명명이 규칙을 따르는지 확인
-- 생성된 모든 파일이 템플릿 구조를 따르는지 검증
-- **중요**: 마일스톤은 독립적으로 가치 있고 달성 가능해야 함
-
-**고려사항**:
-
-- 현재 프로젝트 상태를 고려할 때 이 마일스톤이 의미가 있는가?
-- 목표가 현실적이고 잘 범위가 정해져 있는가?
-- 완료 정의가 언제 완료되었는지 알 수 있을 만큼 명확한가?
-- 이 마일스톤이 향후 마일스톤을 논리적으로 설정하는가?
-
-## 9 · 상태 동기화 및 마일스톤 생성 보고
-
-**마일스톤 생성 후 상태 동기화:**
-
-- `aiwf state update` 명령어로 워크플로우 상태 동기화
-- 새로 생성된 마일스톤의 우선순위 계산
-- 프로젝트 구조 변경사항 반영
-- 관련 태스크들의 종속성 업데이트
-
-**출력 형식**:
+**OUTPUT FORMAT**:
 
 ```markdown
-✅ **마일스톤 생성됨**: M##\_[마일스톤_이름]
+✅ **Milestone Created**: M##_[Milestone_Name]
 
-📋 **마일스톤 세부사항**:
-
+📋 **Milestone Details**:
 - ID: M##
-- 제목: [마일스톤 이름]
-- 상태: 계획 중
-- 초점: [주요 목표의 한 줄 요약]
+- Title: [Milestone Name]
+- Status: Planning
+- Focus: [One-line summary of main goal]
 
-📚 **생성된 문서**:
+📚 **Created Documents**:
+- Milestone meta: `02_REQUIREMENTS/M##_[Name]/M##_milestone_meta.md`
+- [Any additional documents created]
 
-- 마일스톤 메타: `02_REQUIREMENTS/M##_[이름]/M##_milestone_meta.md`
-- [생성된 추가 문서들]
+🎯 **Definition of Done**:
+- [Key DoD criteria from milestone]
 
-🎯 **완료 정의**:
+📈 **Project Impact**:
+- Updates project from M[previous] to M##
+- Advances toward: [project vision alignment]
 
-- [마일스톤의 핵심 DoD 기준]
+⏭️ **Recommended Next Steps**:
+- Review milestone details: `02_REQUIREMENTS/M##_[Name]/M##_milestone_meta.md`
+- Create supporting documentation as planned
+- Break down into sprints: `/aiwf_create_sprints_from_milestone M##`
+- Update with specific requirements as they become clear
 
-📈 **프로젝트 영향**:
-
-- 프로젝트를 M[이전]에서 M##로 업데이트
-- 다음을 향한 발전: [프로젝트 비전 정렬]
-
-⏭️ **권장 다음 단계**:
-
-- 마일스톤 세부사항 검토: `02_REQUIREMENTS/M##_[이름]/M##_milestone_meta.md`
-- 계획된 대로 지원 문서 생성
-- 스프린트로 분해: `/project:aiwf:create_sprints_from_milestone M##`
-- 명확해지는 대로 구체적인 요구사항으로 업데이트
-
-🎯 **개발 준비**: 구현 계획을 시작할 준비가 되면 `/project:aiwf:create_sprints_from_milestone M##` 사용
+🎯 **Ready for Development**: Use `/aiwf_create_sprints_from_milestone M##` when ready to start implementation planning
 ```
 
-**중요 참고사항**:
+**IMPORTANT NOTES**:
 
-- 마일스톤 범위는 집중되고 달성 가능하게 유지
-- 완료 정의는 측정 가능해야 함
-- 지원 문서는 필요에 따라 생성 가능
-- 마일스톤 계획은 반복적 - 더 많이 배우면서 개선
+- Keep milestone scope focused and achievable
+- Definition of Done should be measurable
+- Supporting documents can be created as needed
+- Milestone planning is iterative - refine as you learn more

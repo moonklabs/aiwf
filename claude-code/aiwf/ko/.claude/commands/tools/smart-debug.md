@@ -1,5 +1,5 @@
 ---
-model: sonnet
+model: claude-sonnet-4-0
 ---
 
 Debug complex issues using specialized debugging agents:

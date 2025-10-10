@@ -6,11 +6,41 @@
                 "mcp-server-git"
             ]
         },
+        "sequential-thinking": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-sequential-thinking"
+            ]
+        },
+        "time": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-time"
+            ]
+        },
+        "memory": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-memory"
+            ]
+        },
         "mcp-playwright": {
             "command": "npx",
             "args": [
                 "-y",
                 "@executeautomation/playwright-mcp-server"
+            ],
+            "env": {},
+            "disabled": false
+        },
+        "magic": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@magicuidesign/cli@latest"
             ],
             "env": {},
             "disabled": false

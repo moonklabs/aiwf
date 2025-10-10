@@ -3,13 +3,15 @@
 Follow these instructions from top to bottom.
 Always communicate with the user in Korean.
 
-## Create a TODO with EXACTLY these 6 items
+## Create a TODO with EXACTLY these 7 items
 
 1. Parse arguments and analyze git status
 2. Review changes and group by logical commits
 3. Propose commit structure and messages
-4. Execute approved commits
-5. Report commit results
+4. Check if user approval is necessary
+5. Execute approved commits
+6. Report commit results
+7. Generate Changelog (Optional)
 
 ---
 
@@ -111,9 +113,9 @@ For the next commit to create:
 
 ## 4 · Check if user approval is necessary
 
-If YOLO **IS** part of the <$ARGUMENTS> skip this and jump to next step.
+If `check` or `chk` is in the <$ARGUMENTS>, perform this step and request approval. Otherwise, skip this step and proceed to the next one.
 
-Otherwise ask the User for approval.
+When continuing, ask the User for approval.
 
 - Show the complete commit plan including files and message
 - Wait for explicit user confirmation before proceeding

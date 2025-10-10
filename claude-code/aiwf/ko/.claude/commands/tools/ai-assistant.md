@@ -1,5 +1,5 @@
 ---
-model: sonnet
+model: claude-sonnet-4-0
 ---
 
 # AI Assistant Development
@@ -67,9 +67,11 @@ class AIAssistantArchitecture:
                 ],
                 'implementation': '''
 class IntentClassifier:
-    def __init__(self, model_path: str):
+    def __init__(self, model_path: str, *, config: Optional[Dict[str, Any]] = None):
         self.model = self.load_model(model_path)
         self.intents = self.load_intent_schema()
+        default_config = {"threshold": 0.65}
+        self.config = {**default_config, **(config or {})}
     
     async def classify(self, text: str) -> Dict[str, Any]:
         # Preprocess text

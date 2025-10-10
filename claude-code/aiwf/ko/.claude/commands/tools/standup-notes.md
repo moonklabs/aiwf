@@ -1,5 +1,5 @@
 ---
-model: sonnet
+model: claude-sonnet-4-0
 ---
 
 # Standup Notes Generator
@@ -11,6 +11,12 @@ Generate daily standup notes by reviewing Obsidian vault context and Jira ticket
 /standup-notes
 ```
 
+## Prerequisites
+
+- Enable the **mcp-obsidian** provider with read/write access to the target vault.
+- Configure the **atlassian** provider with Jira credentials that can query the team's backlog.
+- Optional: connect calendar integrations if you want meetings to appear automatically.
+
 ## Process
 
 1. **Gather Context from Obsidian**
@@ -19,7 +25,7 @@ Generate daily standup notes by reviewing Obsidian vault context and Jira ticket
    - Look for project updates, completed tasks, and ongoing work
 
 2. **Check Jira Tickets**
-   - Use `mcp__atlassian__searchJiraIssuesUsingJql` to find tickets assigned to current user
+   - Use `mcp__atlassian__searchJiraIssuesUsingJql` to find tickets assigned to current user (fall back to asking the user for updates if the Atlassian connector is unavailable)
    - Filter for:
      - In Progress tickets (current work)
      - Recently resolved/closed tickets (yesterday's accomplishments)
@@ -44,8 +50,8 @@ Generate daily standup notes by reviewing Obsidian vault context and Jira ticket
    ```
 
 4. **Write to Obsidian**
-   - Create file in `Standup Notes/YYYY-MM-DD.md` format
-   - Use `mcp__mcp-obsidian__obsidian_append_content` to write the generated notes
+   - Create file in `Standup Notes/YYYY-MM-DD.md` format (or summarize in the chat if the Obsidian connector is disabled)
+   - Use `mcp__mcp-obsidian__obsidian_append_content` to write the generated notes when available
 
 ## Implementation Steps
 
