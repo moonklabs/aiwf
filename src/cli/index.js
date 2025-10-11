@@ -2,6 +2,7 @@
 
 import { program } from 'commander';
 import chalk from 'chalk';
+import figlet from 'figlet';
 import { installAIWF } from '../lib/installer.js';
 import StateCommand from '../commands/state.js';
 import { createYoloConfig, createInteractiveYoloConfig, showYoloConfig } from '../commands/yolo-config.js';
@@ -165,6 +166,19 @@ yoloConfig
     }
   });
 
+
+// Display ASCII art logo
+const aiwfLogo = figlet.textSync('AIWF', {
+  font: 'ANSI Shadow',
+  horizontalLayout: 'default',
+  verticalLayout: 'default',
+  width: 80,
+  whitespaceBreak: true
+});
+
+console.log(chalk.magentaBright(aiwfLogo));
+console.log(chalk.cyanBright.bold('AI Workflow Framework'));
+console.log();
 
 // Parse command line arguments
 program.parse(process.argv);
