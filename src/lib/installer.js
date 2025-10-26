@@ -924,34 +924,53 @@ async function selectInstallationOptions(msg) {
     }
   ];
 
-  const response = await prompts([
-    {
-      type: 'multiselect',
-      name: 'selectedOptions',
-      message: msg.installationOptions,
-      choices: [
-        ...installOptions,
-        {
-          title: msg.selectAll,
-          value: 'all',
-          selected: true
-        }
-      ],
-      hint: '스페이스 키로 선택/해제, 엔터로 확인'
-    }
-  ]);
+  // 1단계: 전체 설치 vs 개별 선택
+  const installTypeResponse = await prompts({
+    type: 'select',
+    name: 'installType',
+    message: msg.installationOptions || '설치 옵션을 선택하세요:',
+    choices: [
+      {
+        title: msg.selectAll || '✅ 모든 항목 설치 (권장)',
+        value: 'all',
+        description: '모든 AIWF 컴포넌트를 설치합니다'
+      },
+      {
+        title: '🎯 개별 항목 선택',
+        value: 'custom',
+        description: '원하는 항목만 선택하여 설치합니다'
+      }
+    ]
+  });
 
-  if (!response.selectedOptions || response.selectedOptions.length === 0) {
-    console.log(chalk.yellow(msg.noOptionsSelected));
+  // 취소된 경우
+  if (!installTypeResponse.installType) {
+    console.log(chalk.yellow(msg.noOptionsSelected || '설치가 취소되었습니다.'));
     process.exit(0);
   }
 
-  // '모든 옵션 선택'이 포함된 경우 모든 옵션 반환
-  if (response.selectedOptions.includes('all')) {
+  // 전체 설치 선택
+  if (installTypeResponse.installType === 'all') {
     return installOptions.map(opt => opt.value);
   }
 
-  return response.selectedOptions;
+  // 2단계: 개별 항목 선택
+  const customResponse = await prompts({
+    type: 'multiselect',
+    name: 'selectedOptions',
+    message: '설치할 항목을 선택하세요 (스페이스로 선택/해제, 엔터로 확인):',
+    choices: installOptions,
+    hint: '↑↓ 이동, 스페이스 선택/해제, 엔터 확인',
+    instructions: false
+  });
+
+  // 취소되거나 아무것도 선택하지 않은 경우
+  if (!customResponse.selectedOptions || customResponse.selectedOptions.length === 0) {
+    console.log(chalk.yellow(msg.noOptionsSelected || '선택된 항목이 없습니다.'));
+    process.exit(0);
+  }
+
+  return customResponse.selectedOptions;
 }
 
 /**
