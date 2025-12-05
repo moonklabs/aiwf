@@ -1,0 +1,26 @@
+{
+  "name": "aiwf",
+  "description": "AI Workflow Framework - Project management and development workflow for Claude Code with Korean/English support",
+  "version": "1.0.0",
+  "author": {
+    "name": "moonklabs",
+    "url": "https://github.com/moonklabs"
+  },
+  "homepage": "https://github.com/moonklabs/aiwf",
+  "repository": "https://github.com/moonklabs/aiwf",
+  "license": "MIT",
+  "keywords": [
+    "aiwf",
+    "workflow",
+    "project-management",
+    "korean",
+    "agile",
+    "sprint",
+    "milestone",
+    "tdd",
+    "devops"
+  ],
+  "claude": {
+    "minVersion": "1.0.0"
+  }
+}

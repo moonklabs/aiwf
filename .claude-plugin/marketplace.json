@@ -1,0 +1,19 @@
+{
+  "name": "aiwf-marketplace",
+  "description": "Development marketplace for AIWF (AI Workflow Framework) plugin",
+  "owner": {
+    "name": "moonklabs",
+    "url": "https://github.com/moonklabs"
+  },
+  "plugins": [
+    {
+      "name": "aiwf",
+      "description": "AI Workflow Framework - Project management and development workflow for Claude Code",
+      "version": "1.0.0",
+      "source": "./",
+      "author": {
+        "name": "moonklabs"
+      }
+    }
+  ]
+}
