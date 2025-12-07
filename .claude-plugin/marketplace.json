@@ -1,19 +1,50 @@
 {
   "name": "aiwf-marketplace",
-  "description": "Development marketplace for AIWF (AI Workflow Framework) plugin",
+  "description": "AI Workflow Framework - Complete AI development workflow ecosystem",
   "owner": {
     "name": "moonklabs",
     "url": "https://github.com/moonklabs"
   },
   "plugins": [
     {
-      "name": "aiwf",
-      "description": "AI Workflow Framework - Project management and development workflow for Claude Code",
+      "name": "aiwf-core",
+      "description": "AIWF Core - Session management, YOLO autonomous execution, Sprint/Task management",
       "version": "1.0.0",
-      "source": "./",
+      "source": "./plugins/aiwf-core",
       "author": {
         "name": "moonklabs"
-      }
+      },
+      "keywords": ["session", "yolo", "sprint", "task", "long-running-agent"]
+    },
+    {
+      "name": "aiwf-dev",
+      "description": "AIWF Dev Workflow - TDD, DevOps, deployment automation",
+      "version": "1.0.0",
+      "source": "./plugins/aiwf-dev",
+      "author": {
+        "name": "moonklabs"
+      },
+      "keywords": ["tdd", "devops", "deploy", "kubernetes", "docker"]
+    },
+    {
+      "name": "aiwf-experts",
+      "description": "AIWF Expert Agents - Build fixers, architects, code reviewers",
+      "version": "1.0.0",
+      "source": "./plugins/aiwf-experts",
+      "author": {
+        "name": "moonklabs"
+      },
+      "keywords": ["agents", "build-fixer", "architect", "code-review"]
+    },
+    {
+      "name": "aiwf-tools",
+      "description": "AIWF Development Tools - Refactoring, debugging, API, documentation",
+      "version": "1.0.0",
+      "source": "./plugins/aiwf-tools",
+      "author": {
+        "name": "moonklabs"
+      },
+      "keywords": ["tools", "refactoring", "debugging", "api", "docs"]
     }
   ]
 }
