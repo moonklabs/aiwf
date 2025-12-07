@@ -9,7 +9,7 @@
     {
       "name": "aiwf-core",
       "description": "AIWF Core - Session management, YOLO autonomous execution, Sprint/Task management",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "source": "./plugins/aiwf-core",
       "author": {
         "name": "moonklabs"
