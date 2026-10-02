@@ -1,9 +1,0 @@
-{
-  "name": "aiwf-core-legacy",
-  "version": "1.0.1",
-  "description": "Legacy AIWF session, task and YOLO commands; separate from the methodology core",
-  "author": {
-    "name": "moonklabs"
-  },
-  "license": "MIT"
-}

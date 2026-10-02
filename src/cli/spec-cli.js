@@ -7,7 +7,7 @@
  * This CLI records local snapshots and evidence; it never claims approval.
  */
 
-import path from 'node:path';
+import { existsSync, realpathSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
 
 import {
@@ -283,7 +283,8 @@ export function main(argv = process.argv.slice(2)) {
   return code;
 }
 
-const isDirect = process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href;
+const isDirect = process.argv[1] && existsSync(process.argv[1])
+  && import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href;
 if (isDirect) {
   main();
 }

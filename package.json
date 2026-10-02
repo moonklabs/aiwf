@@ -2,25 +2,15 @@
     "name": "aiwf",
     "version": "0.3.24",
     "description": "AI Workflow Framework: use-case-driven specs and evidence for coding agents",
-    "main": "index.js",
+    "main": "./src/lib/spec-workflow.js",
     "type": "module",
     "bin": {
-        "aiwf": "./src/cli/index.js",
-        "aiwf-lang": "./src/cli/language-cli.js",
-        "aiwf-sprint": "./src/cli/sprint-cli.js",
         "aiwf-spec": "./src/cli/spec-cli.js"
     },
     "scripts": {
-        "test": "node --experimental-vm-modules node_modules/.bin/jest",
+        "test": "node --test tests/spec-workflow/*.test.mjs",
         "check:deps": "node scripts/check-dependencies.js",
         "prepublishOnly": "npm run check:deps",
-        "lang:status": "node src/cli/index.js lang status",
-        "lang:set": "node src/cli/index.js lang set",
-        "lang:reset": "node src/cli/index.js lang reset",
-        "validate:commands": "node scripts/validate-commands.js",
-        "update:file-lists": "node scripts/update-file-lists.js",
-        "update:file-lists:dry-run": "node scripts/update-file-lists.js --dry-run",
-        "update:file-lists:verbose": "node scripts/update-file-lists.js --verbose",
         "test:spec": "node --test tests/spec-workflow/*.test.mjs",
         "validate:spec-plugin": "node scripts/validate-spec-plugin.mjs",
         "test:spec-upstream": "python3 plugins/aiwf-core/skills/use-case-spec/scripts/validate_use_case.py --self-test && python3 plugins/aiwf-core/skills/test-case/scripts/bpmn_paths.py --self-test && python3 plugins/aiwf-core/skills/spec-review/scripts/spec_lint.py --self-test",
@@ -30,15 +20,12 @@
         "aiwf",
         "ai",
         "workflow",
-        "framework",
         "claude-code",
-        "claude-code-plugin",
-        "multilingual",
-        "korean",
-        "english",
-        "project-management",
-        "agile",
-        "sprint"
+        "codex",
+        "spec-driven",
+        "use-case",
+        "evidence",
+        "sprintable"
     ],
     "author": "moonklabs",
     "license": "MIT",
@@ -54,103 +41,22 @@
         "node": ">=20.0.0"
     },
     "files": [
-        "src/",
-        ".claude-plugin/",
-        "skills/",
-        "commands/",
-        "agents/",
-        "hooks/",
-        "resources/",
-        "docs/",
-        "config/",
-        "utils/",
-        "lib/",
-        "templates/",
-        "rules/",
-        "personas/",
-        "scripts/",
-        "ai-tools/",
-        "index.js",
+        "src/cli/spec-cli.js",
+        "src/lib/spec-workflow.js",
+        ".claude-plugin/marketplace.json",
+        "scripts/check-dependencies.js",
+        "scripts/install-spec-skills.mjs",
+        "scripts/validate-spec-plugin.mjs",
+        "docs/modernization/",
+        "examples/spec-workflow/",
         "README.md",
         "README.ko.md",
-        "PLUGIN_README.md",
         "CHANGELOG.md",
-        "GUIDE.md",
-        "GUIDE.ko.md",
+        "plugins/aiwf-core/",
         "plugins/aiwf-spec/",
-        "examples/spec-workflow/",
         "plugins/aiwf-vaadin-jooq/",
         "plugins/aiwf-angular-jpa/",
         "plugins/aiwf-blazor-dotnet/",
-        "plugins/aiwf-nestjs-nextjs/",
-        "plugins/aiwf-core/",
-        "plugins/aiwf-core-legacy/"
-    ],
-    "dependencies": {
-        "chalk": "^5.3.0",
-        "chokidar": "^3.5.3",
-        "commander": "^11.1.0",
-        "fs-extra": "^11.3.0",
-        "glob": "^10.3.10",
-        "js-yaml": "^4.1.0",
-        "ora": "^8.0.1",
-        "prompts": "^2.4.2",
-        "table": "^6.8.1",
-        "tar": "^6.2.1",
-        "tiktoken": "^1.0.21",
-        "yaml": "^2.3.4",
-        "figlet": "^1.7.0"
-    },
-    "devDependencies": {
-        "jest": "^30.0.3"
-    },
-    "aiwf": {
-        "moduleCategories": {
-            "core": [
-                "utils/paths.js",
-                "utils/messages.js",
-                "utils/language-utils.js"
-            ],
-            "yolo": [
-                "utils/engineering-guard.js",
-                "utils/checkpoint-manager.js"
-            ],
-            "persona": [
-                "lib/ai-persona-manager.js",
-                "lib/context-engine.js",
-                "lib/metrics-collector.js",
-                "lib/task-analyzer.js",
-                "lib/token-optimizer.js"
-            ],
-            "installer": [
-                "lib/installer.js",
-                "lib/backup-manager.js",
-                "lib/file-downloader.js",
-                "lib/rollback-manager.js",
-                "lib/validator.js"
-            ],
-            "cache": [
-                "lib/template-cache-system.js",
-                "lib/offline-detector.js",
-                "lib/template-downloader.js",
-                "lib/template-version-manager.js"
-            ],
-            "github": [
-                "lib/github-integration.js",
-                "lib/state/state-index.js",
-                "lib/state/priority-calculator.js",
-                "lib/state/task-scanner.js"
-            ],
-            "common": [
-                "lib/resource-loader.js"
-            ]
-        },
-        "criticalModules": [
-            "utils/engineering-guard.js",
-            "utils/checkpoint-manager.js"
-        ],
-        "dynamicImports": [
-            "utils/engineering-guard.js"
-        ]
-    }
+        "plugins/aiwf-nestjs-nextjs/"
+    ]
 }

@@ -1,6 +1,5 @@
 # 의존성
 node_modules/
-package-lock.json
 
 # 테스트 커버리지
 coverage/

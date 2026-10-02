@@ -1,5 +1,14 @@
 # Changelog
 
+
+## Unreleased — remove the old framework (2026-10-03)
+
+- Remove the legacy core/dev/experts/tools plugins, old installer and language/sprint/persona/YOLO runtime, multilingual command collections, duplicate skills/rules, obsolete docs and their Jest tests/configuration.
+- Keep the six AIUP methodology/stack/workflow plugins, the spec CLI/library, current regression suite and worked example. Imported sources and attribution are unchanged.
+- **Breaking change:** remove the old aiwf/aiwf-lang/aiwf-sprint npm binaries and root all-in-one plugin manifest. The root is now a marketplace; install its individual plugins. Only aiwf-spec remains as a CLI.
+- Fix the spec CLI direct-entry check so npm-created bin symlinks actually execute commands.
+- Remove all external Node dependencies and stale package entries; use Node's built-in test runner for npm test. Existing consuming-project files and user/runtime data are untouched.
+
 ## Unreleased — AIUP core packaged as aiwf-core (2026-10-03)
 
 - Move the seven byte-identical upstream AIUP skills, their references and Python parsers into a dedicated `plugins/aiwf-core` plugin (Apache-2.0, upstream `aiup-core` 2.19.0, Simon Martinelli); the only upstream source change remains the appended AIWF attribution in the core NOTICE.

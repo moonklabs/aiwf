@@ -8,7 +8,6 @@
 - 방법론 core는 `plugins/aiwf-core`(`aiup-core` v2.19.0 스킬 7개).
 - AIWF 래퍼는 `plugins/aiwf-spec`(`workflow` 1개).
 - stack 4개 플러그인: 24개 (vaadin-jooq 8, angular-jpa 6, blazor-dotnet 5, nestjs-nextjs 5).
-- 기존 세션·작업 플러그인은 `plugins/aiwf-core-legacy`로 남김(파일 유지).
 - 원본(vendored)은 upstream 바이트 그대로 두고 이름·명령 참조 변환은 설치본에만 적용한다.
 
 ## Core: plugins/aiwf-core
@@ -36,10 +35,6 @@ AIWF가 추가한 `workflow` 하나만 담는다. upstream 스킬이 없으므�
 | 설치 이름 (Codex) | 원본 스킬 | 구분 |
 |---|---|---|
 | `aiwf-workflow` | (AIWF) | 자체 |
-
-## Legacy: plugins/aiwf-core-legacy
-
-예전 `plugins/aiwf-core`(세션·작업·YOLO 명령)를 이름만 바꾼 것이다. `agents/`, `commands/`, `hooks/`, `resources/`를 그대로 두었고 삭제한 파일은 없다. marketplace의 `aiwf-core-legacy` 항목으로 계속 설치할 수 있으며, 새 spec-first 경로는 이 플러그인에 의존하지 않는다.
 
 ## Stacks: plugins/aiwf-<stack>
 

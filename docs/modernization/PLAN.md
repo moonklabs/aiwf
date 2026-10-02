@@ -1,5 +1,7 @@
 # AIWF modernization — 2026-10-02
 
+Historical plan. Legacy-retention decisions are superseded by [LEGACY-REMOVAL-PLAN.md](LEGACY-REMOVAL-PLAN.md) on 2026-10-03.
+
 ## Target result
 
 Move AIWF from Claude-specific task bookkeeping toward durable, use-case-driven specifications consumed by existing coding agents. Reuse the AI Unified Process core rather than rebuilding its methodology. Keep specifications in Git and prepare reviewable evidence for future Sprintable integration.

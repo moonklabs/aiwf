@@ -42,7 +42,7 @@ upstream AIUP 스킬 31개를 바이트 그대로 가져오고 AIWF 자체 `work
 | `aiwf-blazor-dotnet` | stack | upstream 스킬 5개 (0.7.0) |
 | `aiwf-nestjs-nextjs` | stack | upstream 스킬 5개 (0.4.0) |
 
-각 플러그인은 가져온 upstream 파일(`skills/`, stack은 `rules/`와 있는 경우 `agents/`, `LICENSE`, `NOTICE`)과 플러그인별 `UPSTREAM.json`을 둔다. 유일한 upstream 소스 수정은 `aiwf-core` NOTICE에 덧붙인 AIWF 출처 문구이며, 그 밖의 vendored 파일은 upstream 바이트와 동일하다. `aiwf-spec`는 자체 upstream이 없어 core의 [UPSTREAM.json](plugins/aiwf-core/UPSTREAM.json)을 가리킨다. 기존 AIWF 세션·작업 플러그인은 `aiwf-core-legacy`로 남겨 두었고 삭제한 파일은 없다. 설치는 파일 복사이며 네이티브 Codex 서브에이전트를 등록하지 않고 MCP도 자동 구성하지 않는다. `agents/uc-coverage.md` 같은 에이전트 프롬프트는 리소스로만 복사되고, 호스트 매핑은 `workflow` 스킬이 설명한다. 이름·개수·pin 갱신 절차는 [SKILLS.ko.md](docs/modernization/SKILLS.ko.md)에 정리했다.
+각 플러그인은 가져온 upstream 파일(`skills/`, stack은 `rules/`와 있는 경우 `agents/`, `LICENSE`, `NOTICE`)과 플러그인별 `UPSTREAM.json`을 둔다. 유일한 upstream 소스 수정은 `aiwf-core` NOTICE에 덧붙인 AIWF 출처 문구이며, 그 밖의 vendored 파일은 upstream 바이트와 동일하다. `aiwf-spec`는 자체 upstream이 없어 core의 [UPSTREAM.json](plugins/aiwf-core/UPSTREAM.json)을 가리킨다. 설치는 파일 복사이며 네이티브 Codex 서브에이전트를 등록하지 않고 MCP도 자동 구성하지 않는다. `agents/uc-coverage.md` 같은 에이전트 프롬프트는 리소스로만 복사되고, 호스트 매핑은 `workflow` 스킬이 설명한다. 이름·개수·pin 갱신 절차는 [SKILLS.ko.md](docs/modernization/SKILLS.ko.md)에 정리했다.
 
 Claude Code에서는 이 저장소를 marketplace로 등록하고 필요한 플러그인(`aiwf-core`, `aiwf-spec`, `aiwf-<stack>`)을 설치한 뒤 `/aiwf-core:use-case-spec`, `/aiwf-spec:workflow`, `/aiwf-nestjs-nextjs:implement`처럼 플러그인 이름으로 한정해 호출한다.
 
@@ -133,7 +133,7 @@ npm run validate:spec-plugin
 npm run test:spec-upstream
 ```
 
-새 경로는 dependency-free CLI + 이식한 명세 검사기로 구성된다. 오래된 `aiwf install`, `aiwf-sprint`, 레거시 플러그인은 별도 경로로 남아 있으며 이번 CLI에서 사용하지 않는다. 예전 자료는 [레거시 CLI 가이드](docs/CLI_USAGE_GUIDE.md)에서 확인할 수 있다. 실제 파일럿 후 제거 범위를 결정한다.
+예전 설치기·언어/스프린트/페르소나/YOLO 명령·중복 스킬·레거시 플러그인과 문서는 제거했다. npm 패키지는 외부 Node 의존성 없이 `aiwf-spec`만 제공하며 `npm test`는 현재 회귀 검사를 실행한다. 예전 프레임워크와의 호환성은 종료했다. 이미 설치된 프로젝트의 파일이나 사용자 데이터는 변경하지 않는다.
 
 ## 출처와 라이선스
 

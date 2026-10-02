@@ -180,3 +180,20 @@ test('cli check on a tampered pin exits nonzero with pin_invalid JSON', () => {
   assert.ok(Array.isArray(body.added));
   assert.ok(Array.isArray(body.changed));
 });
+
+test('npm-style bin symlink executes help and initialization', () => {
+  const root = tmpRoot('bin-link');
+  try {
+    const bin = path.join(root, 'aiwf-spec');
+    fs.symlinkSync(CLI, bin);
+    const help = spawnSync(process.execPath, [bin, '--help'], { encoding: 'utf8' });
+    assert.equal(help.status, 0, help.stderr);
+    assert.match(help.stdout, /Usage: aiwf-spec/);
+    const init = spawnSync(process.execPath, [bin, 'init', '--root', root, '--name', 'Linked CLI', '--json'], { encoding: 'utf8' });
+    assert.equal(init.status, 0, init.stderr);
+    assert.equal(JSON.parse(init.stdout).command, 'init');
+    assert.ok(fs.existsSync(path.join(root, 'docs', 'vision.md')));
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});

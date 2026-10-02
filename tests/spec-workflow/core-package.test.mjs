@@ -20,12 +20,20 @@ test('methodology core is the primary independently installable package', () => 
   assert.match(installer, /join\(plugins, 'aiwf-core'\)/);
 });
 
-test('legacy core is preserved outside the methodology package', () => {
+test('only the methodology plugins and spec CLI are distributed', () => {
+  const names = ['aiwf-core', 'aiwf-spec', 'aiwf-vaadin-jooq', 'aiwf-angular-jpa', 'aiwf-blazor-dotnet', 'aiwf-nestjs-nextjs'];
+  const market = json('.claude-plugin/marketplace.json');
+  assert.deepEqual(market.plugins.map(p => p.name), names);
+  assert.deepEqual(readdirSync(root + 'plugins').sort(), [...names].sort());
+  const pkg = json('package.json');
+  assert.deepEqual(pkg.bin, { 'aiwf-spec': './src/cli/spec-cli.js' });
+  assert.equal(pkg.main, './src/lib/spec-workflow.js');
+  assert.deepEqual(pkg.dependencies ?? {}, {});
+  assert.deepEqual(pkg.devDependencies ?? {}, {});
+  assert.equal(existsSync(root + '.claude-plugin/plugin.json'), false);
+  for (const path of ['plugins/aiwf-core-legacy', 'src/cli/index.js', 'src/commands', 'src/config', 'src/utils', 'claude-code', 'skills', 'rules', 'jest.config.js']) {
+    assert.equal(existsSync(root + path), false, path);
+  }
   assert.equal(existsSync(root + 'plugins/aiwf-core/commands'), false);
   assert.equal(existsSync(root + 'plugins/aiwf-core/hooks'), false);
-  for (const path of ['commands/aiwf/session-start.md', 'hooks/hooks.json', 'agents/work-loop-agent.md', 'resources/templates/task_template.md']) {
-    assert.equal(existsSync(root + 'plugins/aiwf-core-legacy/' + path), true, path);
-  }
-  const legacy = json('.claude-plugin/marketplace.json').plugins.find(p => p.name === 'aiwf-core-legacy');
-  assert.equal(legacy.source, './plugins/aiwf-core-legacy');
 });

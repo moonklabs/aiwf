@@ -34,7 +34,7 @@ By default Codex installs the `aiwf-core` seven skills plus the `aiwf-spec` `wor
 | `aiwf-blazor-dotnet` | Stack | 5 upstream skills (0.7.0) |
 | `aiwf-nestjs-nextjs` | Stack | 5 upstream skills (0.4.0) |
 
-Each plugin vendors the upstream files it imports with a per-plugin `UPSTREAM.json` (`skills/` plus, for stacks, `rules/` and any `agents/`, `LICENSE`, `NOTICE`). The only upstream source change is the AIWF attribution appended to the `aiwf-core` NOTICE; every other vendored file is byte-identical. `aiwf-spec` has no upstream of its own and links the core [UPSTREAM.json](plugins/aiwf-core/UPSTREAM.json). The old AIWF session/task plugin is kept as `aiwf-core-legacy`; nothing was deleted. Installation copies files: it does not register native Codex subagents or configure MCP. Bundled agent prompts such as `agents/uc-coverage.md` are copied as resources, and the `workflow` skill describes the host mapping. See [SKILLS.ko.md](docs/modernization/SKILLS.ko.md) for names, counts and the pin-update procedure.
+Each plugin vendors the upstream files it imports with a per-plugin `UPSTREAM.json` (`skills/` plus, for stacks, `rules/` and any `agents/`, `LICENSE`, `NOTICE`). The only upstream source change is the AIWF attribution appended to the `aiwf-core` NOTICE; every other vendored file is byte-identical. `aiwf-spec` has no upstream of its own and links the core [UPSTREAM.json](plugins/aiwf-core/UPSTREAM.json). Installation copies files: it does not register native Codex subagents or configure MCP. Bundled agent prompts such as `agents/uc-coverage.md` are copied as resources, and the `workflow` skill describes the host mapping. See [SKILLS.ko.md](docs/modernization/SKILLS.ko.md) for names, counts and the pin-update procedure.
 
 For Claude Code, add this checkout's absolute path as a local marketplace during development, then install the core, the wrapper and any stack you need (`aiwf-core`, `aiwf-spec`, `aiwf-<stack>`) and invoke a qualified command such as `/aiwf-core:use-case-spec`, `/aiwf-spec:workflow` or `/aiwf-nestjs-nextjs:implement`. After publishing these changes, the remote marketplace source can be `moonklabs/aiwf`.
 
@@ -81,7 +81,7 @@ npm run validate:spec-plugin
 npm run test:spec-upstream
 ```
 
-Legacy installer, sprint CLI and plugins remain separately available while the new path is piloted. The new CLI does not depend on them. See the [legacy guide](docs/CLI_USAGE_GUIDE.md); removal is deferred until the pilot establishes the used path.
+The old installer, language/sprint/persona/YOLO commands, duplicate skill collections and legacy plugins have been removed. The npm package exposes only `aiwf-spec`, with no external Node dependencies. `npm test` runs the current regression suite. This is a breaking change from the old framework; previously installed project data is untouched.
 
 ## Attribution and licenses
 

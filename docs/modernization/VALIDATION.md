@@ -1,18 +1,18 @@
-# AIWF Spec validation — 2026-10-02
+# AIWF Spec validation — updated 2026-10-03
 
 Verified on Node.js 22.23.1 and Python 3.14.4. This record covers the local implementation and packaging, not live model execution or a generated application.
 
 | Check | Fresh result |
 |---|---|
-| `npm run test:spec` | 59 tests passed; 0 failed/skipped. Includes methodology-core/default-package selection, legacy-core preservation, spawned CLI calls, malformed pins/evidence, init preservation, drift, log hashes, symlink/output boundaries, all four optional stack installs, source provenance and installed parser self-test. |
+| `npm run test:spec` | 60 tests passed; 0 failed/skipped. `npm test` runs the same suite. Includes methodology-core/default-package selection, legacy exclusion and npm-bin symlink execution, spawned CLI calls, malformed pins/evidence, init preservation, drift, log hashes, symlink/output boundaries, all four optional stack installs, source provenance and installed parser self-test. |
 | `npm run test:spec-upstream` | All three imported Python self-tests passed. |
 | `npm run validate:spec-plugin` | 31 unchanged upstream skills across 5 methodology/stack plugins + 1 AIWF workflow extension; 71 imported files match original SHA256 values. The core NOTICE has one recorded attribution addition. All manifests, bundled references, marketplace and package entries validate. |
 | `npm run validate:spec-example` | 0 errors, 0 warnings, 0 information findings; no lint baseline accepted. |
 | Strict UC validator | 1 worked-example file; 0 errors, 0 warnings. |
 | `spec_lint.py --trace` | FR-001 → UC-001 → BR-001 → TC-001. Document trace only. |
 | Fresh-root smoke | init → filled example → lint → pin → check → packet → saved readback succeeded. 7 spec files; modified UC detected and stale packet generation rejected; restored original returns in sync. |
-| Syntax/static checks | New JavaScript files pass `node --check`; dependency declarations pass `npm run check:deps`. The staged whitespace check reports retained upstream whitespace, Markdown hard line breaks and an example's blank final line. Source formatting is preserved rather than normalized. |
-| Package inspection | `npm pack --dry-run --json` includes all 32 skill manifests, complete resources/rules/agent prompts, LICENSE/NOTICE for the 6 methodology/stack/workflow plugins, the CLI, installer and worked example. The separate legacy-core package is also preserved and included. No publication performed. |
+| Syntax/static checks | All retained Node source/scripts/tests pass `node --check`; `npm run check:deps` checks literal imports and local paths across 5 source files without external dependencies. `git diff --check` passes. No external linter or TypeScript target is declared. |
+| Package inspection | A real `npm pack --json` tarball contains 120 files, all 32 skill manifests and complete plugin resources/rules/agent prompts/LICENSE/NOTICE; no legacy plugins or entry points. Offline installation into a clean temporary project installs only AIWF, without external dependencies. Its npm bin, library/validators and Codex installer run successfully. No npm publication performed. |
 
 ## Saved demonstration
 
@@ -24,13 +24,13 @@ The saved packet also retains the command paths actually used at that time, incl
 
 The example digest is `da872a517e79e8d54791085831b5db5ca9dca67bbb52fcec67c061f87d16645b`. The example shows an imagined expense workflow; there is no expense app implementation. These artifacts demonstrate the recording format and local tool behavior, not expense-feature acceptance.
 
-## Legacy baseline
+## Historical legacy baseline — before removal
 
 `npm test -- --runInBand --coverage=false` yields **13 failed suites / 2 passed suites; 34 failed / 78 passed / 20 skipped tests**. A separate export of unmodified HEAD `19492b0`, using the same installed dependencies, yields the identical failing suite list and counts. Typical existing failures reference missing `index.js`, persona/context modules, and an obsolete bin location. Legacy tests also report open handles.
 
-This comparison establishes an unchanged observed legacy failure set, not that all legacy behavior is correct. Broad legacy repairs are deferred to the migration phase. The new tests use a separate Node test entry point and are not substituted for the legacy suite.
+This comparison establishes an unchanged observed legacy failure set at that earlier revision, not that all legacy behavior was correct. On 2026-10-03 the user requested legacy removal: these modules, obsolete tests and Jest setup were removed, and npm test now runs the retained spec-workflow suite. The old test counts above are historical evidence, not current failures or fixes.
 
-There is no TypeScript/typecheck target. ESLint configuration exists but its executable/dependency is not declared or installed; no ESLint success is claimed. Syntax, dependency and whitespace checks above are the available static checks used in this slice.
+There is no TypeScript/typecheck target or external ESLint dependency. The unused legacy ESLint configuration was removed. Syntax, literal import/dependency and whitespace checks above are the static checks used for the current package.
 
 ## Unverified gates
 
@@ -61,3 +61,14 @@ A separate read-only reviewer checked the installer, validator, workflow, plugin
 The seven upstream core skills were present under aiwf-spec, but aiwf-core still pointed to legacy session/YOLO/task commands. Corrected this package boundary: aiwf-core is now the primary marketplace package with the upstream 2.19.0 version and original author; aiwf-spec contains only the AIWF workflow extension. The core skill files, references and validators moved without byte changes. Existing legacy-core files are preserved under aiwf-core-legacy; the local CLI remains aiwf-spec and installed Codex names remain unchanged.
 
 New regressions fail before correction and pass afterward. All 59 targeted tests, all three original Python self-tests, the strict example lint and source/manifests validator pass. Default Codex installation includes core's seven skills and the wrapper's one skill, with optional stacks unchanged. The package test/readback confirms core and legacy files ship. Existing installations are not overwritten; users installing from the marketplace should choose aiwf-core first and install aiwf-spec only when the workflow extension is wanted.
+
+
+## Legacy framework removal — 2026-10-03
+
+This supersedes the legacy-preservation choice in the preceding package correction. Removed 627 tracked legacy files: core-legacy/dev/experts/tools plugins, old CLI/install/runtime helpers, multilingual command collections, duplicate skills/rules, old documentation and Jest suites/configuration. Only tracked repository files were deleted; consuming-project data, local runtime state and Git history were left untouched. The root remains a marketplace, with six plugins and no all-in-one root plugin manifest. npm metadata now exposes only aiwf-spec and the spec-workflow library, with no external Node dependencies; the lockfile contains only the root package.
+
+The package-inventory regression failed before removal and passes afterward. A clean tarball installation exposed a CLI symlink-entry bug: invoking the npm bin returned silently because the path differed from import.meta.url. A new help/init regression reproduced that failure, and resolving the entry path fixes it. All 60 current regressions, all three original Python self-tests, strict example lint, provenance/import checks and Node syntax checks pass. The 31 upstream skills and 71 unchanged imported resources retain their recorded original hashes; the only imported-source modification remains the core NOTICE attribution.
+
+The installed npm binary completed init → example structural lint → pin → check → packet → saved packet readback. The installed Codex installer then copied 13 skills (core + workflow + NestJS/Next.js) into the temporary project, and all three installed Python parser self-tests passed. The review packet stayed awaiting_review. This confirms package execution and recording, not live-model implementation, application acceptance or Sprintable integration. Existing historical packet logs/commands were not rewritten.
+
+A separate read-only reviewer found no blocking issue in the retained imports, plugin/package inventory, CLI entry fix, provenance and current guidance. The reviewer reran the current regressions and local validators; the packaged installation smoke was assessed from this session's recorded results. All 17 current guide files have resolving local Markdown links, and importing the installed npm library by package name succeeds.
