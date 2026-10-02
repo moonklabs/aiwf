@@ -1,0 +1,35 @@
+{
+  "repository": "https://github.com/AI-Unified-Process/marketplace",
+  "commit": "065dadda0f696c29ff2bacbda31b38152082e6fa",
+  "source": "aiup-angular-jpa",
+  "upstream_version": "0.7.0",
+  "license": "Apache-2.0",
+  "imported": [
+    "skills/",
+    "rules/",
+    "agents/uc-coverage.md",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "modifications": [],
+  "excluded": [
+    "evals/",
+    "MCP auto-configuration (.mcp.json, mcp.json) - optional servers are documented in rules/mcp-servers.md only",
+    "upstream manifests (plugin.json, .claude-plugin/plugin.json, .tessl-plugin/plugin.json, tessl.json)",
+    "upstream README.md (replaced by the AIWF README)"
+  ],
+  "upstream_sha256": {
+    "LICENSE": "596288b7c2507b134a18f9f1bfc4d5e415be0f910989d4787b840126a47ba6ac",
+    "NOTICE": "b61bb9b9d48a9c7d5ebd971d936f406f08656560ea190e35932260ca65b128fd",
+    "agents/uc-coverage.md": "4ace69f3b69ffc028da787844260e6a0b1467847529eb5817c29ea7214f5abe3",
+    "rules/mcp-servers.md": "68760ac0425c026b3cb7fbe165c6460524ed0d823d4fca44cf5f0a0fe4f2125a",
+    "skills/coverage-check/SKILL.md": "0bc787c232dc93eefb42fac4d1023d9d666c04478bbbe9f331a78535ef883136",
+    "skills/flyway-migration/SKILL.md": "919346c8e2b4d270409dfdfe80d8c437c202d5cac01eedd00a025612e3b02a25",
+    "skills/implement/SKILL.md": "0fc404e3610ca7d3d0bb577a27dbf6ea523b4f246e04925dca12eb749b862907",
+    "skills/implement/references/module-layout.md": "59faed86a850e4268ed35b76189c17b69b06f2e80a011580ac65f08e544fae7d",
+    "skills/playwright-test/SKILL.md": "c19c191c09ac8567e7c2fc483e3d78c7b8f36c202323240d2b37dc4a06779e74",
+    "skills/spring-boot-test/SKILL.md": "0e94bf317edd69e754bcdde824290b2cf26562d4f84ea645076aa61e5af0563e",
+    "skills/vitest-test/SKILL.md": "f15af9337be8e270542279bb34d005bf1e0cee5ad71322f4c301c93bfab274c3"
+  },
+  "modified_sha256": {}
+}

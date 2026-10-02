@@ -1,0 +1,31 @@
+{
+  "repository": "https://github.com/AI-Unified-Process/marketplace",
+  "commit": "065dadda0f696c29ff2bacbda31b38152082e6fa",
+  "source": "aiup-blazor-dotnet",
+  "upstream_version": "0.7.0",
+  "license": "Apache-2.0",
+  "imported": [
+    "skills/",
+    "rules/",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "modifications": [],
+  "excluded": [
+    "evals/",
+    "MCP auto-configuration (.mcp.json, mcp.json) - optional servers are documented in rules/mcp-servers.md only",
+    "upstream manifests (plugin.json, .claude-plugin/plugin.json, .tessl-plugin/plugin.json, tessl.json)",
+    "upstream README.md (replaced by the AIWF README)"
+  ],
+  "upstream_sha256": {
+    "LICENSE": "596288b7c2507b134a18f9f1bfc4d5e415be0f910989d4787b840126a47ba6ac",
+    "NOTICE": "b61bb9b9d48a9c7d5ebd971d936f406f08656560ea190e35932260ca65b128fd",
+    "rules/mcp-servers.md": "14b182f1eb42951a336c99ac0b0ea5928fc4672d6541fbf8acc5c2c96c952be3",
+    "skills/bunit-test/SKILL.md": "976316da23c2fba30b568aede0b86c07c17ec1cbe78e0497d9ef372cdf87f006",
+    "skills/dotnet-test/SKILL.md": "e404ed23c51c66653a905705a71b08c0544d67acdc2aac9a03072686fde117ca",
+    "skills/ef-migration/SKILL.md": "6a940573be60c3934dbd21dc38f05f75060b1dc028154942773242407f224ec3",
+    "skills/implement/SKILL.md": "2f02c05df30205d4cc53149b0cbca0f7f5ced03a89c82988d17897df2d21e7ad",
+    "skills/playwright-test/SKILL.md": "d249e98960dc28aa90a5fdbb346049614d6076cb2fcfc34b9926f708ad42cbe3"
+  },
+  "modified_sha256": {}
+}

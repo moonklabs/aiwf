@@ -1,5 +1,20 @@
 # Changelog
 
+## Unreleased — AIUP core restored and four stacks imported (2026-10-02)
+
+- Restore the seven `plugins/aiwf-spec` core SKILL.md files byte-identical to AIUP upstream `065dadda0f696c29ff2bacbda31b38152082e6fa`; the core references, parsers and scripts are unchanged, and the only upstream source change is the appended AIWF attribution in the core NOTICE. Host-neutral task tracking and evidence guidance now live only in the AIWF-owned `workflow` skill.
+- Import all four upstream stack plugins unchanged: `aiwf-vaadin-jooq` (2.20.0, 8 skills), `aiwf-angular-jpa` (0.7.0, 6), `aiwf-blazor-dotnet` (0.7.0, 5) and `aiwf-nestjs-nextjs` (0.4.0, 5). That is 24 byte-identical skills with their rules, agents, LICENSE/NOTICE and per-plugin `UPSTREAM.json` hashes.
+- Vendor 31 upstream skills plus AIWF's own `workflow` (32 total). See [docs/modernization/SKILLS.ko.md](docs/modernization/SKILLS.ko.md).
+- Extend `scripts/install-spec-skills.mjs` with `--stack <vaadin-jooq|angular-jpa|blazor-dotnet|nestjs-nextjs>` (core 8 plus the selected stack; default core 8). `--dry-run` writes nothing, an existing target skill is rejected without a force flag, and only installed Markdown copies get prefixed names and command references.
+- Add opt-in Claude Code marketplace entries `aiwf-<stack>` alongside `aiwf-spec`. No MCP server is installed automatically and no dependency is added.
+
+## Unreleased — specification workflow foundation (2026-10-02)
+
+- Add AIUP-derived `aiwf-spec` core skills and local init/pin/check/packet CLI; preserve upstream Apache-2.0 attribution.
+- Add portable Codex skill installation and local evidence examples. Sprintable synchronization is still a proposal.
+- **Compatibility change:** the package now declares Node.js >=20 for the development toolchain. This package-wide requirement also applies to the legacy `aiwf`, `aiwf-lang`, and `aiwf-sprint` bins; Node 14–18 installations under engine-strict are no longer supported by this development version. The change is an explicit support baseline, not a claim that every new API requires Node 20.
+
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),

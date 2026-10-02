@@ -1,359 +1,86 @@
-# AIWF (AI Workflow Framework)
+# AIWF — specifications, implementation and evidence
 
-[Read in Korean (한국어로 보기)](README.ko.md)
+[한국어](README.ko.md)
 
-[![NPM Version](https://img.shields.io/npm/v/aiwf.svg)](https://www.npmjs.com/package/aiwf)
-[![License](https://img.shields.io/npm/l/aiwf.svg)](https://github.com/moonklabs/aiwf/blob/main/LICENSE)
-[![Downloads](https://img.shields.io/npm/dm/aiwf.svg)](https://www.npmjs.com/package/aiwf)
+AIWF keeps use-case specifications in Git, lets existing Claude Code/Codex agents implement them, and records inspectable verification evidence.
 
-## What is AIWF?
+Modernization started on 2026-10-02. The new local path is **`aiwf-spec`**: non-overwriting initialization, specification pins, drift detection and review packets. Sprintable synchronization and unattended execution are planned, not implemented. These features describe this checkout; do not assume they are present in the previously published npm release.
 
-AIWF is an AI-powered workflow framework that enables autonomous software development with Claude Code. It provides intelligent command sets and workflow definitions that allow AI to manage entire project lifecycles - from planning to deployment - with minimal human intervention.
+See the [direction](docs/modernization/DIRECTION.ko.md), [validation record](docs/modernization/VALIDATION.md), [Sprintable adapter proposal](docs/modernization/SPRINTABLE.ko.md) and [worked example](examples/spec-workflow/README.md).
 
-This project is an updated version of [Simone](https://github.com/Helmi/claude-simone).
+## Start with this checkout
 
-## 🔌 Claude Code Plugin System
-
-AIWF is built as a **Claude Code Plugin** following the official Anthropic plugin architecture. The framework is organized into 4 specialized plugins:
-
-```
-aiwf/
-├── .claude-plugin/
-│   └── marketplace.json    # Plugin registry
-└── plugins/
-    ├── aiwf-core/     (26 files) → Session, YOLO, Sprint/Task management
-    ├── aiwf-dev/      (19 files) → TDD, DevOps automation
-    ├── aiwf-experts/  (24 files) → Expert agents (architects, reviewers)
-    └── aiwf-tools/    (51 files) → Development tools
-```
-
-### Plugin Overview
-
-| Plugin | Description | Key Features |
-|--------|-------------|--------------|
-| **aiwf-core** | Core framework | Session management, YOLO mode, Sprint/Task execution |
-| **aiwf-dev** | Development workflow | TDD (red/green/refactor), DevOps, CI/CD |
-| **aiwf-experts** | Expert agents | Build fixers, architects, code reviewers |
-| **aiwf-tools** | Utility tools | Refactoring, debugging, API scaffolding, docs |
-
-## ✨ Core Features
-
-### 🤖 **Agent-Based Autonomous Development**
-Multi-agent architecture where AIWF acts as the master orchestrator managing entire development workflows, while Claude Code operates as specialized subagents handling specific tasks. YOLO mode enables completely autonomous development - AI handles planning, coding, testing, and deployment without human intervention. Built-in checkpoint system ensures resilience and recovery.
-
-### 🧠 **Intelligent Task Management**  
-Workflow-based state management with dependency tracking, priority calculation, and smart task recommendations. AI understands project context and suggests optimal next actions.
-
-### 🎭 **Specialized AI Personas**
-Five expert personas (Architect, Security, Frontend, Backend, Data Analyst) with specialized knowledge bases and context-aware compression for domain-specific optimization.
-
-### 🧬 **Advanced Context Engineering**
-Intelligent context construction and optimization that maximizes AI effectiveness while minimizing token usage. Dynamic context compression, workflow-aware prompt engineering, and automatic relevance filtering ensure AI always has the right information at the right time.
-
-### 💡 **Smart Context Management**
-Token-efficient context strategies with automatic compression, intelligent chunking, and relevance scoring. Maintains comprehensive project understanding while optimizing for AI model limits and performance.
-
-### 🔄 **Multi-Agent Architecture** 
-AIWF operates as the master orchestration agent that coordinates complex development workflows. Claude Code instances function as specialized subagents, each handling specific domains like coding, testing, or documentation. This distributed approach enables parallel processing, fault tolerance, and specialized expertise application.
-
-### 🔗 **Seamless Integration**
-Native support for Claude Code, Cursor, Windsurf, GitHub, and Git with automated hooks, issue creation, and PR management.
-
-### ✅ **Robust Validation System**
-Advanced installation validation with intelligent file checking, dependency verification, and automated troubleshooting. Enhanced validation architecture ensures reliable framework setup and operation.
-
-## 📦 Installation
-
-### Option 1: Claude Code Plugin (Recommended)
-
-Install AIWF as a Claude Code plugin directly:
+Node.js 20+; Python 3.9+ for structural lint. The new Node CLI has no external dependencies. The target project directory must already exist.
 
 ```bash
-# From GitHub repository
-claude plugin add https://github.com/moonklabs/aiwf
-
-# Or from local path (for development)
-claude plugin add /path/to/aiwf
+node src/cli/spec-cli.js init --root /path/to/project --name "Our service"
+node scripts/install-spec-skills.mjs --project /path/to/project --dry-run
+node scripts/install-spec-skills.mjs --project /path/to/project --stack nestjs-nextjs --dry-run
+node scripts/install-spec-skills.mjs --project /path/to/project --stack nestjs-nextjs
 ```
 
-After installation, verify the plugins are loaded:
+Codex skills are installed as `aiwf-workflow`, `aiwf-requirements`, `aiwf-use-case-spec`, etc., with their full references, parsers and attribution. `--stack` selects one of `vaadin-jooq`, `angular-jpa`, `blazor-dotnet` or `nestjs-nextjs` and installs the core eight skills plus that stack; the default installs the core eight. Existing skills are never overwritten and there is no force flag. Live host skill selection and model execution remain separate pilot checks.
+
+## Stacks
+
+31 upstream AIUP skills are vendored unchanged plus AIWF's own `workflow` (32 total). The core plugin `aiwf-spec` holds the seven upstream core skills plus `workflow`; each stack lives in its own `plugins/aiwf-<stack>` plugin with byte-identical `skills/`, `rules/`, `agents/`, `LICENSE` and `NOTICE`, plus a per-plugin `UPSTREAM.json` with source hashes.
+
+| Plugin | Upstream | Version | Skills |
+|---|---|---|---|
+| `aiwf-vaadin-jooq` | `aiup-vaadin-jooq` | 2.20.0 | 8 |
+| `aiwf-angular-jpa` | `aiup-angular-jpa` | 0.7.0 | 6 |
+| `aiwf-blazor-dotnet` | `aiup-blazor-dotnet` | 0.7.0 | 5 |
+| `aiwf-nestjs-nextjs` | `aiup-nestjs-nextjs` | 0.4.0 | 5 |
+
+Installation copies files: it does not register native Codex subagents. Bundled agent prompts such as `agents/uc-coverage.md` are copied as resources, and the `workflow` skill describes the host mapping. No MCP server is installed automatically and no dependency is added. See [SKILLS.ko.md](docs/modernization/SKILLS.ko.md) for names, counts and the pin-update procedure.
+
+For Claude Code, add this checkout's absolute path as a local marketplace during development, then install the plugins you need and invoke a qualified command such as `/aiwf-spec:workflow` or `/aiwf-nestjs-nextjs:implement`. After publishing these changes, the remote marketplace source can be `moonklabs/aiwf`.
+
+## Workflow
+
+Write vision → requirements → glossary/entities → use cases → test definitions. For existing applications, draft observed behavior using `reverse-engineer`. Keep IDs stable and use canonical `docs/use_cases/UC-*.md` and `docs/test_cases/TC-*.md` paths. Implementation plans and architecture documents live under `docs/plans/` and `docs/architecture/`.
+
+Use English structural headings and status tokens. Korean prose is supported, but structural lint does not guarantee Korean semantic completeness.
 
 ```bash
-claude plugin list
+python3 plugins/aiwf-spec/skills/spec-review/scripts/spec_lint.py \
+  --docs /path/to/project/docs --strict --no-baseline
+node src/cli/spec-cli.js pin --root /path/to/project
+node src/cli/spec-cli.js check --root /path/to/project --json
 ```
 
-You should see 4 AIWF plugins:
-- `aiwf-core` - Session, YOLO, Sprint/Task
-- `aiwf-dev` - TDD, DevOps
-- `aiwf-experts` - Expert agents
-- `aiwf-tools` - Development tools
+Initialization creates Draft templates; complete them and add UC/TC documents before pinning. Review meaning separately from structural lint. A pin records byte-level SHA256 hashes; it grants no approval. After a reviewed spec change, explicitly refresh the pin with `--refresh` and rerun affected checks.
 
-### Option 2: NPM Global Installation
+Implement with the current project's tools, execute actual checks, and save logs. Create an evidence JSON file:
+
+```json
+{
+  "checks": [
+    {"name": "UC-001 regression", "command": "npm test", "status": "passed", "log": "artifacts/test.log"},
+    {"name": "Business acceptance", "command": "stakeholder review", "status": "not_run"}
+  ],
+  "unverified": ["Stakeholder acceptance has not been recorded"]
+}
+```
+
+This is an input-format example, not a test result. Executed checks require log files inside the project root. The CLI records submitted command strings and never executes them.
 
 ```bash
-npm install -g aiwf
+node src/cli/spec-cli.js packet --root /path/to/project --evidence /path/to/project/evidence.json
 ```
 
-After global installation, navigate to your project directory and run:
+The packet embeds logs and their hashes, specification digests, Git context when available, reported results and limitations. It preserves failed/unexecuted checks and stays `awaiting_review`. Results are not independently verified; human acceptance, approval, merge and deployment need their own evidence. Existing packets require explicit `--force` to overwrite.
+
+## Validate
 
 ```bash
-aiwf install
+npm run test:spec
+npm run validate:spec-plugin
+npm run test:spec-upstream
 ```
 
-The installer will guide you through:
+Legacy installer, sprint CLI and plugins remain separately available while the new path is piloted. The new CLI does not depend on them. See the [legacy guide](docs/CLI_USAGE_GUIDE.md); removal is deferred until the pilot establishes the used path.
 
-1. **Language Selection**: Choose between English and Korean
-2. **Project Setup**: Initialize AIWF in your current directory
-3. **Plugin Installation**: Install Claude Code plugins
-4. **Documentation**: Download guides and templates
-5. **Validation**: Comprehensive installation verification
+## Attribution and licenses
 
-## 🚀 Getting Started Guide
-
-### Step 1: Installation
-```bash
-# Option A: Claude Code Plugin (Recommended)
-claude plugin add https://github.com/moonklabs/aiwf
-
-# Option B: NPM + Manual Setup
-npm install -g aiwf
-cd your-project
-aiwf install
-```
-
-### Step 2: Project Planning Phase
-Enter **Plan Mode** - describe what you want to build and your project goals. **Do not start coding yet.**
-- Engage in thorough Q&A to clarify objectives
-- Define project scope and requirements
-- Set clear success criteria
-
-### Step 3: Initialize Project Framework
-```bash
-# Create/update Claude configuration
-/init
-
-# Initialize AIWF framework (creates first milestone)
-/aiwf:initialize
-```
-
-### Step 4: Create Sprint Plans
-```bash
-# Generate sprints from milestone (first sprint becomes active)
-/aiwf:create-sprint M01
-
-# If only one milestone exists, you can omit the milestone code
-/aiwf:create-sprint
-```
-
-### Step 5: Review and Refine
-Review generated plans and refine through Q&A until satisfied with the approach.
-
-### Step 6: Generate Task Lists
-```bash
-# Create detailed tasks for active sprint (first task becomes active)
-/aiwf:create-sprint-tasks
-```
-
-### Step 7: Execute Development
-```bash
-# Execute individual task
-/aiwf:do-task [task-id]
-
-# OR run autonomous development for entire sprint
-/aiwf:yolo
-```
-
-**YOLO Mode** orchestrates multiple Claude Code subagents to execute all sprint tasks continuously without interruption. The master agent coordinates planning while specialized subagents handle coding, testing, documentation, and commits automatically.
-
-### Key Commands
-
-**aiwf-core (Core Framework)**
-- `/aiwf:initialize` - Initial project setup
-- `/aiwf:session-start` - Start a new session
-- `/aiwf:session-end` - End current session with summary
-- `/aiwf:yolo` - Autonomous development mode
-- `/aiwf:do-task` - Execute individual task
-- `/aiwf:create-sprint` - Create sprint from milestone
-- `/aiwf:create-sprint-tasks` - Generate tasks for sprint
-- `/aiwf:commit` - Smart commit with context
-
-**aiwf-dev (Development Workflow)**
-- `/tdd:tdd-red` - Write failing test first
-- `/tdd:tdd-green` - Implement to pass test
-- `/tdd:tdd-refactor` - Refactor with tests passing
-- `/devops:deploy-checklist` - Deployment verification
-- `/devops:docker-optimize` - Docker optimization
-
-**aiwf-tools (Utilities)**
-- `/refactoring:refactor-clean` - Clean code refactoring
-- `/debugging:error-trace` - Error tracing and analysis
-- `/api:api-scaffold` - API scaffolding
-- `/docs:doc-generate` - Documentation generation
-
-### 🚀 YOLO Mode - Autonomous AI Development
-
-Revolutionary multi-agent orchestration that enables completely autonomous development workflows. AIWF acts as the master agent coordinating multiple Claude Code subagents:
-
-```bash
-# Full autonomous development - AI handles everything
-/aiwf:yolo
-
-# Target specific sprint execution
-/aiwf:yolo S03
-
-# Continuous multi-sprint development
-/aiwf:yolo sprint-all
-```
-
-Master agent analyzes requirements and coordinates specialized subagents that create tasks, write code, run tests, and commit changes - achieving true multi-agent autonomous software development.
-
-## 🛠️ CLI Tools
-
-AIWF provides several specialized CLI tools for different aspects of project management:
-
-### Main CLI Commands
-- `aiwf install` - Install AIWF framework in current project
-- `aiwf create-project` - Create new project from templates
-- `aiwf compress` - Context compression for token optimization
-- `aiwf token` - Token usage monitoring and management
-- `aiwf persona` - AI persona management
-- `aiwf evaluate` - AI response and code quality evaluation
-
-### Sprint Management (`aiwf-sprint`)
-- `aiwf-sprint create` - Create new independent sprint
-- `aiwf-sprint list` - List all sprints
-- `aiwf-sprint status` - Show sprint status and progress
-- `aiwf-sprint task create` - Add tasks to sprint
-- `aiwf-sprint task execute` - Execute sprint tasks
-
-### Checkpoint System (`aiwf-checkpoint`)
-- `aiwf-checkpoint create` - Create project checkpoint for rollback
-- `aiwf-checkpoint list` - List all available checkpoints
-- `aiwf-checkpoint restore` - Restore project to previous checkpoint
-
-### Language Management (`aiwf-lang`)
-- `aiwf-lang status` - Check current language settings
-- `aiwf-lang set ko` - Switch to Korean
-- `aiwf-lang set en` - Switch to English
-
-### Cache Management (`aiwf-cache`)
-- `aiwf-cache download` - Download templates to local cache
-- `aiwf-cache list` - List all cached templates
-- `aiwf-cache clean` - Clean cache storage
-- `aiwf-cache update` - Update cached templates
-- `aiwf-cache status` - Check cache status and usage
-
-## 📁 What Gets Installed
-
-### Directory Structure
-
-```text
-your_project/
-├── .aiwf/                        # Project management root
-│   ├── 00_PROJECT_MANIFEST.md    # Central tracking document
-│   ├── 01_PROJECT_DOCS/          # Project documentation
-│   ├── 02_REQUIREMENTS/          # Milestone requirements
-│   ├── 03_SPRINTS/              # Sprint execution tracking
-│   ├── 04_GENERAL_TASKS/        # Standalone tasks
-│   ├── 05_ARCHITECTURAL_DECISIONS/ # ADR documents
-│   ├── 10_STATE_OF_PROJECT/     # Project state snapshots
-│   ├── 98_PROMPTS/              # Useful AI prompts
-│   └── 99_TEMPLATES/            # Document templates
-├── .claude-plugin/              # Plugin registry
-│   └── marketplace.json         # 4 plugins registered
-├── plugins/                     # Plugin content
-│   ├── aiwf-core/              # Core: session, yolo, sprint
-│   ├── aiwf-dev/               # Dev: TDD, DevOps
-│   ├── aiwf-experts/           # Expert agents
-│   └── aiwf-tools/             # Development tools
-├── .cursor/rules/               # Cursor IDE development rules
-└── .windsurf/rules/             # Windsurf IDE development rules
-```
-
-### Language-Specific Content
-
-Based on your language selection (`aiwf-lang set en/ko`):
-
-| Language | Commands | Documentation |
-|----------|----------|---------------|
-| **English** (default) | Standard commands | English docs & templates |
-| **Korean** | `_kr` suffix available | Korean docs & templates |
-
-## 🏗️ Code Architecture
-
-### Optimized Validation System
-
-AIWF features a significantly improved validation system that ensures reliable installation and operation:
-
-#### Key Improvements in v0.3.18+
-- **86% Code Reduction**: Streamlined validator.js from 348 lines to 48 lines
-- **Unified Interface**: Single `validateInstallation()` function replaces 3 redundant methods
-- **Constants-Based Configuration**: All validation parameters centralized in `VALIDATION_CONSTANTS`
-- **Enhanced Error Reporting**: Specific, actionable error messages with detailed diagnostics
-
-#### VALIDATION_CONSTANTS Structure
-```javascript
-const VALIDATION_CONSTANTS = {
-  MIN_FILE_SIZE: 10,              // Minimum file size requirement
-  MIN_RULE_FILE_SIZE: 50,         // Minimum size for AI tool rule files
-  MIN_FILE_COUNT: {
-    CURSOR_MDC: 2,                // Required .mdc files for Cursor
-    WINDSURF_MD: 2,               // Required .md files for Windsurf  
-    CLAUDE_COMMANDS: 4            // Required command files for Claude
-  }
-};
-```
-
-#### Validation Features
-- **Multi-Tool Support**: Validates Claude Code, Cursor, Windsurf, and Gemini CLI
-- **File Integrity Checks**: Size validation, accessibility verification, and structure validation
-- **Intelligent Error Recovery**: Detailed troubleshooting guidance for failed validations
-- **Performance Optimized**: Faster execution with reduced memory footprint
-
-### Clean Architecture Principles
-
-The codebase follows clean architecture principles for maintainability and extensibility:
-
-#### Eliminated Code Duplication
-- **Unified Validation Logic**: Consolidated validation functions eliminate redundancy
-- **Shared Constants**: Centralized configuration reduces maintenance overhead
-- **Streamlined Error Handling**: Consistent error reporting across all validation types
-
-#### Improved Developer Experience
-- **Clear Separation of Concerns**: Validation, file management, and error reporting are properly isolated
-- **Maintainable Code Structure**: Reduced complexity makes the codebase easier to understand and modify
-- **Performance Benefits**: Optimized code paths improve installation speed and reliability
-
-## 📚 Documentation
-
-### Core Documentation
-- [Commands Guide](docs/COMMANDS_GUIDE.md) - Complete list of AIWF commands
-- [CLI Usage Guide](docs/CLI_USAGE_GUIDE.md) - Detailed CLI tool documentation
-- [Getting Started](docs/GETTING_STARTED.md) - Quick start guide for new users
-- [Development Guide](docs/DEVELOPMENT_GUIDE.md) - Contributing to AIWF
-
-### Feature Guides
-- [Independent Sprint Guide](docs/guides/independent-sprint-guide.md) - YOLO-focused sprint creation
-- [Checkpoint System Guide](docs/guides/checkpoint-system-guide.md) - Recovery and progress tracking
-- [AI Personas Guide](docs/guides/ai-personas-guide.md) - Using specialized AI personas
-- [Context Compression Guide](docs/guides/context-compression-guide.md) - Token optimization strategies
-- [Feature Git Integration Guide](docs/guides/feature-git-integration-guide.md) - Git hooks and tracking
-
-### Technical Documentation
-- [Architecture](docs/ARCHITECTURE.md) - System architecture and design
-- [State Management Guide](docs/STATE_MANAGEMENT_GUIDE.md) - Workflow-based state system
-- [AI Workflow](docs/AI-WORKFLOW.md) - AI integration patterns
-- [API Reference](docs/API_REFERENCE.md) - Programmatic usage
-- [Complete API Reference](docs/API_REFERENCE_FULL.md) - Comprehensive API documentation
-- [Validator API Reference](docs/VALIDATOR_API.md) - Validation system API documentation
-- [Code Cleanup Guide](docs/CODE_CLEANUP_GUIDE.md) - Code cleanup principles and patterns
-- [Troubleshooting](docs/TROUBLESHOOTING.md) - Common issues and solutions
-
-## 📖 Source
-
-This installer fetches the AIWF framework from:
-<https://github.com/moonklabs/aiwf>
-
-## 📝 License
-
-MIT
+The `aiwf-spec` core and the four stack plugins derive from the [AI Unified Process marketplace](https://github.com/AI-Unified-Process/marketplace) at commit `065dadda0f696c29ff2bacbda31b38152082e6fa`: core by Simon Martinelli, stacks by Simon Martinelli (vaadin-jooq), Marc Affolter (angular-jpa), Carl J. Mosca (blazor-dotnet) and Swift Ugandan (nestjs-nextjs). Each plugin's `UPSTREAM.json` records the exact source commit, original hashes and modifications. Existing AIWF code remains [MIT](LICENSE); imported plugins carry [Apache-2.0](plugins/aiwf-spec/LICENSE) and [NOTICE](plugins/aiwf-spec/NOTICE).

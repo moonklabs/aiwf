@@ -1,0 +1,32 @@
+{
+  "repository": "https://github.com/AI-Unified-Process/marketplace",
+  "commit": "065dadda0f696c29ff2bacbda31b38152082e6fa",
+  "source": "aiup-nestjs-nextjs",
+  "upstream_version": "0.4.0",
+  "license": "Apache-2.0",
+  "imported": [
+    "skills/",
+    "rules/",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "modifications": [],
+  "excluded": [
+    "evals/",
+    "MCP auto-configuration (.mcp.json, mcp.json) - optional servers are documented in rules/mcp-servers.md only",
+    "upstream manifests (plugin.json, .claude-plugin/plugin.json, .tessl-plugin/plugin.json, tessl.json)",
+    "upstream README.md (replaced by the AIWF README)"
+  ],
+  "upstream_sha256": {
+    "LICENSE": "596288b7c2507b134a18f9f1bfc4d5e415be0f910989d4787b840126a47ba6ac",
+    "NOTICE": "b61bb9b9d48a9c7d5ebd971d936f406f08656560ea190e35932260ca65b128fd",
+    "rules/mcp-servers.md": "06f8730b0b11f5012968a6815a5769b4d670076122c81cf3612ca0741c57fc64",
+    "skills/drizzle-migration/SKILL.md": "fcb8ba9e398c5b43ed1df3b5384f372ab064b74818c4164914a3ca3cf935e637",
+    "skills/implement/SKILL.md": "7f9a9154ddb1724c676ee89c48cf762dd1f961999d2c52763350e90f4e52a99f",
+    "skills/implement/references/project-layout.md": "73d2f0b021a15abd3139e1db1c4f8463c5e41482b3a7bff1fea79dd3ddb1a9ab",
+    "skills/nest-test/SKILL.md": "454ed7acf7088609f45e0f2e621cdac4739cfaa9d90bd5fee30fbfb4755197a9",
+    "skills/playwright-test/SKILL.md": "7db29d31a509bb821ca036da66ad8bf168f1817030112cdb66eda6ccaf3279dc",
+    "skills/react-test/SKILL.md": "29b207fb4f9d670d6c6fdcd6215d671ed66698b623819f3934e83788257eadb9"
+  },
+  "modified_sha256": {}
+}

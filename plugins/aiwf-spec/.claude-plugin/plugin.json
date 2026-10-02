@@ -1,0 +1,9 @@
+{
+  "name": "aiwf-spec",
+  "version": "0.1.0",
+  "description": "Use-case-driven specifications, structural checks and local evidence for Claude Code and Codex",
+  "author": {
+    "name": "moonklabs"
+  },
+  "license": "Apache-2.0"
+}

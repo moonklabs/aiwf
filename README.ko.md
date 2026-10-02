@@ -1,352 +1,138 @@
-# AIWF (AI Workflow Framework)
+# AIWF — 명세에서 구현과 검증까지
 
-[Read in English](README.md)
+[English](README.md)
 
-[![NPM Version](https://img.shields.io/npm/v/aiwf.svg)](https://www.npmjs.com/package/aiwf)
-[![License](https://img.shields.io/npm/l/aiwf.svg)](https://github.com/moonklabs/aiwf/blob/main/LICENSE)
-[![Downloads](https://img.shields.io/npm/dm/aiwf.svg)](https://www.npmjs.com/package/aiwf)
+AIWF는 유스케이스 명세를 Git에 유지하면서 기존 Claude Code/Codex로 구현하고, 실제 검증 결과를 검토 가능한 형태로 남기는 개발 워크플로우다.
 
-## AIWF란?
+2026-10-02부터 개선 중이다. 새 경로는 **`aiwf-spec`**이며, 현재 로컬 초기화·명세 버전 고정·변경 검사·검증 로그 묶기를 제공한다. Sprintable 연동과 무인 반복 실행은 후속 범위다. 아래 기능은 이 저장소의 개발 버전 기준이며 기존 npm 배포판에 포함됐다고 가정하면 안 된다.
 
-AIWF는 Claude Code와 함께 AI 기반 개발을 위해 특별히 설계된 마크다운 기반 프로젝트 관리 프레임워크입니다. 소프트웨어 프로젝트를 AI가 효과적으로 처리할 수 있는 관리 가능한 단위로 분해하여 생산성을 극대화합니다.
-이 프로젝트는 [Simone](https://github.com/Helmi/claude-simone)의 업데이트된 버전입니다.
+## 가장 먼저 읽을 것
 
-## 📦 설치
+- [개선 방향과 단계](docs/modernization/DIRECTION.ko.md)
+- [검증 기록과 한계](docs/modernization/VALIDATION.md)
+- [Sprintable 연결 계약 초안](docs/modernization/SPRINTABLE.ko.md)
+- [한국어 지출 제출 예제](examples/spec-workflow/README.md)
 
-### 전역 설치 (권장)
+## 개발 버전으로 시작하기
 
-```bash
-npm install -g aiwf
-```
-
-### 최초 설정
-
-전역 설치 후, 프로젝트 디렉토리에서 실행:
+Node.js 20 이상. 명세 구조 검사에는 Python 3.9 이상이 필요하다. 새 CLI는 외부 Node 패키지 없이 실행된다.
 
 ```bash
-aiwf install
+# 실제 대상 프로젝트 폴더는 먼저 존재해야 한다.
+node src/cli/spec-cli.js init --root /path/to/project --name "우리 서비스"
+
+# Codex용 스킬 설치: 기존 스킬은 덮어쓰지 않는다.
+node scripts/install-spec-skills.mjs --project /path/to/project --dry-run
+node scripts/install-spec-skills.mjs --project /path/to/project --stack nestjs-nextjs --dry-run
+node scripts/install-spec-skills.mjs --project /path/to/project --stack nestjs-nextjs
 ```
 
-설치 과정에서 안내하는 내용:
+Codex에 설치되는 스킬은 `aiwf-workflow`, `aiwf-requirements`, `aiwf-use-case-spec` 등이다. `--stack`은 `vaadin-jooq`, `angular-jpa`, `blazor-dotnet`, `nestjs-nextjs` 중 하나를 골라 core 8개와 해당 stack을 함께 설치하며, 기본값은 core 8개다. 기존 스킬은 덮어쓰지 않고 강제 플래그도 없다. 실제 호스트의 스킬 자동 선택과 모델 실행은 별도 파일럿에서 검증할 예정이다.
 
-1. **언어 선택**: 한국어와 영어 중 선택
-2. **프로젝트 설정**: 현재 디렉토리에 AIWF 초기화
-3. **Claude 명령어**: 언어별 명령어 설치
-4. **문서화**: 가이드 및 템플릿 다운로드
-5. **검증**: 포괄적인 설치 검증 및 문제 해결
+## 기술 스택
 
-## 🚀 사용법
+upstream AIUP 스킬 31개를 바이트 그대로 가져오고 AIWF 자체 `workflow` 1개를 더해 총 32개다. core 플러그인 `aiwf-spec`은 upstream core 7개와 `workflow`를 담고, 각 stack은 별도 `plugins/aiwf-<stack>` 플러그인에 있다. stack 플러그인은 `skills/`, `rules/`, `agents/`, `LICENSE`, `NOTICE`를 upstream 바이트 그대로 두고 플러그인별 `UPSTREAM.json`에 원본 hash를 기록한다.
 
-### 기본 명령어
+| 플러그인 | upstream | 버전 | 스킬 수 |
+|---|---|---|---|
+| `aiwf-vaadin-jooq` | `aiup-vaadin-jooq` | 2.20.0 | 8 |
+| `aiwf-angular-jpa` | `aiup-angular-jpa` | 0.7.0 | 6 |
+| `aiwf-blazor-dotnet` | `aiup-blazor-dotnet` | 0.7.0 | 5 |
+| `aiwf-nestjs-nextjs` | `aiup-nestjs-nextjs` | 0.4.0 | 5 |
+
+설치는 파일 복사이며 네이티브 Codex 서브에이전트를 등록하지 않는다. `agents/uc-coverage.md` 같은 에이전트 프롬프트는 리소스로만 복사되고, 호스트 매핑은 `workflow` 스킬이 설명한다. MCP 서버를 자동 구성하지 않으며 새 의존성도 추가하지 않는다. 이름·개수·pin 갱신 절차는 [SKILLS.ko.md](docs/modernization/SKILLS.ko.md)에 정리했다.
+
+Claude Code에서는 이 저장소를 marketplace로 등록하고 필요한 플러그인을 설치한 뒤 `/aiwf-spec:workflow`, `/aiwf-nestjs-nextjs:implement`처럼 플러그인 이름으로 한정해 호출한다.
+
+```text
+/plugin marketplace add moonklabs/aiwf
+/plugin install aiwf-spec@aiwf-plugins
+/plugin install aiwf-nestjs-nextjs@aiwf-plugins
+/aiwf-nestjs-nextjs:implement
+```
+
+원격 설치는 해당 변경이 저장소에 반영된 후 사용할 수 있다. 로컬 개발 중에는 현재 checkout의 절대 경로로 marketplace를 등록한다.
+
+## 개발 흐름
+
+1. 사용자 목표와 범위 밖의 일을 `docs/vision.md`에 작성한다.
+2. 요구사항·엔티티·유스케이스·테스트 정의를 작성한다. 예전 시스템은 reverse-engineer로 실제 동작부터 조사한다.
+3. 명세 구조와 참조를 검사하고, 의미 검토를 별도로 한다.
+4. 구현 계획까지 포함한 명세 버전을 고정한다.
+5. 현재 에이전트와 프로젝트 도구로 구현하고 실제 테스트를 실행한다.
+6. 명세 변경을 확인하고, 실행 로그와 미검증 사항을 packet으로 남긴다.
 
 ```bash
-# 현재 프로젝트에 AIWF 설치
-aiwf install
+# 저장소 checkout 기준 경로. 대상 프로젝트의 docs를 검사한다.
+python3 plugins/aiwf-spec/skills/spec-review/scripts/spec_lint.py \
+  --docs /path/to/project/docs --strict --no-baseline
 
-# 완전 재설치 강제 실행 (프롬프트 건너뛰고 모든 내용 덮어쓰기)
-aiwf install --force
-
-# 도움말 표시
-aiwf --help
-
-# 버전 확인
-aiwf --version
+node src/cli/spec-cli.js pin --root /path/to/project
+node src/cli/spec-cli.js check --root /path/to/project --json
 ```
 
-### 언어 관리
+초기화 문서는 Draft 템플릿이다. TODO를 채우고 UC/TC 문서를 작성한 후 pin한다. pin은 SHA256으로 파일 버전을 기록하며 승인을 부여하지 않는다. 명세를 수정했다면 변경 내용을 검토하고 `pin --refresh`로 명시적으로 갱신한다.
+
+```text
+project/
+├── docs/
+│   ├── vision.md
+│   ├── requirements.md
+│   ├── glossary.md
+│   ├── entity_model.md
+│   ├── use_cases.puml
+│   ├── use_cases/UC-001-*.md
+│   ├── test_cases/TC-001-*.md
+│   ├── architecture/          # 선택
+│   ├── plans/                 # 선택
+│   └── processes/*.bpmn       # 선택
+└── .aiwf/
+    ├── spec-pin.json
+    └── review-packet.json
+```
+
+헤딩·상태·ID는 파서 호환을 위해 영어 형식을 유지한다. 한국어 본문을 사용할 수 있지만 검사 통과가 한국어 의미의 완전성을 보장하지는 않는다.
+
+## 검증 결과 묶기
+
+테스트는 프로젝트의 도구로 실제 실행하고 로그를 저장한다. 다음 파일은 입력 형식 예시이며 테스트 성공을 증명하는 결과 자체가 아니다. `log`는 대상 프로젝트 안의 경로다.
+
+```json
+{
+  "checks": [
+    {
+      "name": "UC-001 regression",
+      "command": "npm test -- --runInBand",
+      "status": "passed",
+      "log": "artifacts/test.log"
+    },
+    {
+      "name": "Business acceptance",
+      "command": "stakeholder review",
+      "status": "not_run"
+    }
+  ],
+  "unverified": ["실제 사용자 업무 수용은 아직 확인하지 않음"]
+}
+```
 
 ```bash
-# 현재 언어 확인
-aiwf-lang status
-
-# 언어 변경
-aiwf-lang set ko    # 한국어
-aiwf-lang set en    # 영어
-
-# 자동 감지로 리셋
-aiwf-lang reset
+node src/cli/spec-cli.js packet \
+  --root /path/to/project --evidence /path/to/project/evidence.json
 ```
 
-### 기존 설치 업데이트
+packet은 로그 본문과 SHA256, 명세 digest, 보고된 검사 결과를 보관한다. `failed`/`not_run`을 보존하며 결과는 `awaiting_review`로 남는다. CLI는 입력된 명령을 실행하지 않고 검사 결과를 독립적으로 인증하지 않는다. 기존 packet은 기본적으로 덮어쓰지 않으며 재생성에는 `--force`가 필요하다.
 
-기존 AIWF가 있는 프로젝트에서 `aiwf install` 실행 시 다음 옵션을 제공합니다:
-
-#### 대화형 모드
-1. **업데이트**: 명령어와 문서만 업데이트하고 작업 내용은 보존
-2. **완전 재설치**: 새로 설치, 기존 프로젝트 덮어쓰기
-3. **건너뛰기**: 설치 취소
-
-#### 명령행 옵션
-- `--force`: 모든 프롬프트 건너뛰고 완전 재설치 실행
-
-#### 보존/업데이트 내용
-- **항상 보존**: 작업 파일, 스프린트, 태스크, 프로젝트 내용
-- **항상 업데이트**: Claude 명령어, 문서, 템플릿, 규칙
-- **백업 생성**: 업데이트된 파일의 자동 백업 (*.bak)
-
-## 📁 설치 내용
-
-### 디렉토리 구조
-
-```
-your_project/
-├── .aiwf/                        # 프로젝트 관리 루트
-│   ├── 00_PROJECT_MANIFEST.md    # 중앙 추적 문서
-│   ├── 01_PROJECT_DOCS/          # 프로젝트 문서
-│   ├── 02_REQUIREMENTS/          # 마일스톤 요구사항
-│   ├── 03_SPRINTS/              # 스프린트 실행 추적
-│   ├── 04_GENERAL_TASKS/        # 독립 작업
-│   ├── 05_ARCHITECTURAL_DECISIONS/ # ADR 문서
-│   ├── 10_STATE_OF_PROJECT/     # 프로젝트 상태 스냅샷
-│   ├── 98_PROMPTS/              # 유용한 AI 프롬프트
-│   └── 99_TEMPLATES/            # 문서 템플릿
-├── .claude/commands/aiwf/       # 언어별 Claude 명령어
-├── .cursor/rules/               # Cursor IDE 개발 규칙
-└── .windsurf/rules/             # Windsurf IDE 개발 규칙
-```
-
-### 언어별 콘텐츠
-
-선택한 언어에 따라 다음이 설치됩니다:
-
-**한국어 버전 (`ko/`)** (기본값):
-
-- 한국어 Claude 명령어 (`_kr` 접미사 포함)
-- 한국어 문서 및 템플릿
-- 현지화된 프로젝트 관리 콘텐츠
-
-**English Version (`en/`)**:
-
-- English Claude commands
-- English documentation and templates
-- Standard project management content
-
-## 🛠️ CLI 도구
-
-AIWF는 프로젝트 관리의 다양한 측면을 위한 여러 전문 CLI 도구를 제공합니다:
-
-### 주요 CLI 명령어
-- `aiwf install` - 현재 프로젝트에 AIWF 프레임워크 설치
-- `aiwf create-project` - 템플릿에서 새 프로젝트 생성
-- `aiwf compress` - 토큰 최적화를 위한 컨텍스트 압축
-- `aiwf token` - 토큰 사용량 모니터링 및 관리
-- `aiwf persona` - AI 페르소나 관리
-- `aiwf evaluate` - AI 응답 및 코드 품질 평가
-
-### 스프린트 관리 (`aiwf-sprint`)
-- `aiwf-sprint create` - 새로운 독립 스프린트 생성
-- `aiwf-sprint list` - 모든 스프린트 목록 조회
-- `aiwf-sprint status` - 스프린트 상태 및 진행상황 표시
-- `aiwf-sprint task create` - 스프린트에 작업 추가
-- `aiwf-sprint task execute` - 스프린트 작업 실행
-
-### 체크포인트 시스템 (`aiwf-checkpoint`)
-- `aiwf-checkpoint create` - 롤백을 위한 프로젝트 체크포인트 생성
-- `aiwf-checkpoint list` - 사용 가능한 모든 체크포인트 목록
-- `aiwf-checkpoint restore` - 이전 체크포인트로 프로젝트 복원
-
-### 언어 관리 (`aiwf-lang`)
-- `aiwf-lang status` - 현재 언어 설정 확인
-- `aiwf-lang set ko` - 한국어로 전환
-- `aiwf-lang set en` - 영어로 전환
-
-### 캐시 관리 (`aiwf-cache`)
-- `aiwf-cache download` - 템플릿을 로컬 캐시에 다운로드
-- `aiwf-cache list` - 캐시된 모든 템플릿 목록
-- `aiwf-cache clean` - 캐시 저장소 정리
-- `aiwf-cache update` - 캐시된 템플릿 업데이트
-- `aiwf-cache status` - 캐시 상태 및 사용량 확인
-
-## 🎯 시작하기
-
-설치 후 다음 단계:
-
-1. Claude Code에서 프로젝트를 엽니다
-2. `/project:aiwf` 명령어를 사용하여 프로젝트를 관리합니다
-3. `/project:aiwf:initialize` 명령어로 프로젝트 설정을 시작합니다
-
-### 주요 명령어
-
-- **초기화**: `/project:aiwf:initialize` - 프로젝트 초기 설정
-- **계획**: `/project:aiwf:aiwf_create_milestone_plan` - 마일스톤 계획 수립
-- **스프린트**: `/project:aiwf:create_sprints_from_milestone` - 스프린트 생성
-- **작업**: `/project:aiwf:do_task` - 작업 실행
-- **리뷰**: `/project:aiwf:code_review` - 코드 리뷰
-- **GitHub 연동**: `/project:aiwf:issue_create`, `/project:aiwf:pr_create`
-
-## 🏗️ 코드 아키텍처
-
-### 최적화된 검증 시스템
-
-AIWF는 안정적인 설치와 운영을 보장하는 크게 개선된 검증 시스템을 특징으로 합니다:
-
-#### v0.3.18+의 주요 개선사항
-- **86% 코드 감소**: validator.js를 348줄에서 48줄로 간소화
-- **통합 인터페이스**: 3개의 중복 메서드를 대체하는 단일 `validateInstallation()` 함수
-- **상수 기반 구성**: 모든 검증 매개변수가 `VALIDATION_CONSTANTS`에 중앙화됨
-- **향상된 오류 보고**: 상세한 진단을 포함한 구체적이고 실행 가능한 오류 메시지
-
-#### VALIDATION_CONSTANTS 구조
-```javascript
-const VALIDATION_CONSTANTS = {
-  MIN_FILE_SIZE: 10,              // 최소 파일 크기 요구사항
-  MIN_RULE_FILE_SIZE: 50,         // AI 도구 규칙 파일의 최소 크기
-  MIN_FILE_COUNT: {
-    CURSOR_MDC: 2,                // Cursor용 필수 .mdc 파일
-    WINDSURF_MD: 2,               // Windsurf용 필수 .md 파일  
-    CLAUDE_COMMANDS: 4            // Claude용 필수 명령 파일
-  }
-};
-```
-
-#### 검증 기능
-- **다중 도구 지원**: Claude Code, Cursor, Windsurf, Gemini CLI 검증
-- **파일 무결성 검사**: 크기 검증, 접근성 확인, 구조 검증
-- **지능적 오류 복구**: 실패한 검증에 대한 상세한 문제 해결 가이드
-- **성능 최적화**: 감소된 메모리 사용량으로 더 빠른 실행
-
-### 클린 아키텍처 원칙
-
-코드베이스는 유지보수성과 확장성을 위한 클린 아키텍처 원칙을 따릅니다:
-
-#### 코드 중복 제거
-- **통합된 검증 로직**: 통합된 검증 함수가 중복성을 제거함
-- **공유 상수**: 중앙화된 구성이 유지보수 오버헤드를 줄임
-- **간소화된 오류 처리**: 모든 검증 유형에 걸쳐 일관된 오류 보고
-
-#### 개선된 개발자 경험
-- **명확한 관심사 분리**: 검증, 파일 관리, 오류 보고가 적절히 분리됨
-- **유지보수 가능한 코드 구조**: 감소된 복잡성으로 코드베이스 이해와 수정이 더 쉬워짐
-- **성능 이점**: 최적화된 코드 경로가 설치 속도와 안정성을 향상시킴
-
-## 📚 문서
-
-### 핵심 문서
-- [명령어 가이드](docs/COMMANDS_GUIDE.ko.md) - 전체 AIWF 명령어 목록
-- [CLI 사용 가이드](docs/CLI_USAGE_GUIDE.ko.md) - 상세한 CLI 도구 문서
-- [시작하기](docs/GETTING_STARTED.md) - 새 사용자를 위한 빠른 시작 가이드
-- [개발 가이드](docs/DEVELOPMENT_GUIDE.ko.md) - AIWF에 기여하기
-
-### 기능 가이드
-- [독립 스프린트 가이드](docs/guides/independent-sprint-guide-ko.md) - YOLO 중심 스프린트 생성
-- [체크포인트 시스템 가이드](docs/guides/checkpoint-system-guide-ko.md) - 복구 및 진행 상황 추적
-- [AI 페르소나 가이드](docs/guides/ai-personas-guide-ko.md) - 전문 AI 페르소나 사용
-- [컨텍스트 압축 가이드](docs/guides/context-compression-guide-ko.md) - 토큰 최적화 전략
-- [기능 Git 통합 가이드](docs/guides/feature-git-integration-guide-ko.md) - Git hooks 및 추적
-
-### 기술 문서
-- [아키텍처](docs/ARCHITECTURE.ko.md) - 시스템 아키텍처 및 설계
-- [상태 관리 가이드](docs/STATE_MANAGEMENT_GUIDE.ko.md) - 워크플로우 기반 상태 시스템
-- [AI 워크플로우](docs/AI-WORKFLOW.ko.md) - AI 통합 패턴
-- [API 참조](docs/API_REFERENCE.md) - 프로그래머틱 사용
-- [전체 API 참조](docs/API_REFERENCE_FULL.ko.md) - 포괄적인 API 문서
-- [Validator API 참조](docs/VALIDATOR_API.ko.md) - 검증 시스템 API 문서
-- [코드 정리 가이드](docs/CODE_CLEANUP_GUIDE.ko.md) - 코드 정리 원칙과 패턴
-- [문제 해결](docs/TROUBLESHOOTING.md) - 일반적인 문제 및 해결책
-
-## ✨ 주요 기능
-
-- 🌍 **다국어 지원** - 한국어와 영어 완전 지원
-- 🎨 **아름다운 CLI** - 컬러와 진행 표시기가 있는 사용자 친화적 인터페이스
-- 🔄 **스마트 업데이트** - 자동 백업과 함께 지능형 업데이트 감지
-- 📦 **직접 다운로드** - 공식 GitHub 저장소에서 직접 다운로드
-- 🚀 **간편한 사용** - `npx` 사용으로 전역 설치 불필요
-- 💾 **안전한 백업** - 업데이트 시 타임스탬프 백업 생성
-- 🎯 **언어별 맞춤** - 언어별 명령어와 문서
-- 🔧 **IDE 통합** - Cursor와 Windsurf 개발 규칙 지원
-- 🔗 **GitHub 연동** - 이슈 및 PR 생성 자동화
-- 📊 **프로젝트 추적** - 마일스톤, 스프린트, 작업 체계적 관리
-- 🎭 **AI 페르소나** - 5가지 전문 페르소나 (Architect, Security, Frontend, Backend, Data Analyst)
-- 🧠 **페르소나 인식 압축** - 활성 페르소나에 최적화된 지능형 컨텍스트 압축
-- 📈 **경량 평가 시스템** - 최소한의 부담으로 자동 백그라운드 품질 모니터링
-- 🔍 **AI 도구 템플릿** - GitHub Copilot, Cursor, Windsurf, Augment 지원
-- 🪝 **Git Hooks 통합** - git 커밋과 함께 자동 기능 추적
-- 🤖 **워크플로우 기반 상태 관리** - 지능적 작업 우선순위 지정 및 의존성 추적
-- 🎯 **스마트 작업 추천** - 프로젝트 상태 기반 AI 구동 다음 행동 제안
-- 🔄 **적응적 스프린트 관리** - 80% 완료 시 자동 스프린트 생성
-- 🔍 **의존성 분석** - 순환 의존성 감지 및 차단 작업 식별
-
-## 🤖 워크플로우 기반 상태 관리 (신규!)
-
-AIWF는 이제 AI가 프로젝트 컨텍스트를 유지하는 데 도움이 되는 고급 상태 관리 시스템을 포함합니다:
-
-### 상태 관리 명령어
+## 개발 검증
 
 ```bash
-# 프로젝트 상태 인덱스 업데이트
-aiwf state update
-
-# 현재 상태 및 추천사항 표시
-aiwf state show
-
-# AI 기반 다음 작업 추천 받기
-aiwf state next
-
-# 워크플로우 일관성 검증
-aiwf state validate
-
-# 작업 시작으로 표시
-aiwf state start <task-id>
-
-# 작업 완료로 표시  
-aiwf state complete <task-id>
+npm run test:spec
+npm run validate:spec-plugin
+npm run test:spec-upstream
 ```
 
-### 주요 특징
+새 경로는 dependency-free CLI + 이식한 명세 검사기로 구성된다. 오래된 `aiwf install`, `aiwf-sprint`, 레거시 플러그인은 별도 경로로 남아 있으며 이번 CLI에서 사용하지 않는다. 예전 자료는 [레거시 CLI 가이드](docs/CLI_USAGE_GUIDE.md)에서 확인할 수 있다. 실제 파일럿 후 제거 범위를 결정한다.
 
-- **우선순위 매트릭스**: 긴급도(40%), 중요도(30%), 의존성(20%), 노력(10%) 기반 작업 점수화
-- **의존성 추적**: 차단 작업 및 순환 의존성 자동 식별
-- **80% 규칙**: 현재 스프린트가 80% 완료 시 다음 스프린트 준비 권장
-- **워크플로우 검증**: 마일스톤, 스프린트, 작업 전반의 상태 일관성 보장
-- **스마트 추천**: 프로젝트 상태 기반 최적 다음 행동 AI 제안
+## 출처와 라이선스
 
-### YOLO 모드와의 통합
-
-향상된 YOLO 모드는 이제 워크플로우 인텔리전스를 사용합니다:
-
-```bash
-# 워크플로우 기반 작업 선택으로 YOLO 실행
-/project:aiwf:yolo
-
-# 워크플로우 최적화를 통한 스프린트별 실행
-/project:aiwf:yolo S03
-
-# 적응적 스프린트 관리
-/project:aiwf:yolo sprint-all
-```
-
-## 📁 프로젝트 구조
-
-```
-aiwf/
-├── ai-tools/           # AI 도구별 구성
-├── commands/           # AIWF 명령어 구현
-├── config/             # 설정 파일
-├── docs/               # 프로젝트 문서
-├── hooks/              # 자동화된 워크플로우를 위한 Git hooks
-├── lib/                # 핵심 라이브러리 모듈
-├── personas/           # AI 페르소나 정의
-├── rules/              # 개발 규칙 및 가이드라인
-├── scripts/            # 빌드 및 유틸리티 스크립트
-├── templates/          # 프로젝트 템플릿 (api-server, npm-library, web-app)
-├── tests/              # 테스트 스위트
-└── utils/              # 유틸리티 모듈
-```
-
-### 주요 디렉토리
-
-- **hooks/**: 자동화 워크플로우를 위한 git hooks (post-commit) 포함
-
-## 🔧 요구사항
-
-- Node.js 14.0.0 이상
-- GitHub에서 다운로드하기 위한 인터넷 연결
-
-## 📖 소스
-
-이 설치 프로그램은 다음에서 AIWF 프레임워크를 가져옵니다:
-https://github.com/moonklabs/aiwf
-
-## 📝 라이선스
-
-MIT
+`aiwf-spec` core와 4개 stack 플러그인은 [AI Unified Process marketplace](https://github.com/AI-Unified-Process/marketplace) 커밋 `065dadda0f696c29ff2bacbda31b38152082e6fa`에서 가져왔다. core는 Simon Martinelli, stack은 Simon Martinelli(vaadin-jooq), Marc Affolter(angular-jpa), Carl J. Mosca(blazor-dotnet), Swift Ugandan(nestjs-nextjs)의 작업이다. 각 플러그인의 `UPSTREAM.json`에 원본 커밋·파일 hash·수정 내역을 기록했다. 기존 AIWF 코드는 [MIT](LICENSE), 가져온 플러그인은 [Apache-2.0](plugins/aiwf-spec/LICENSE)와 [NOTICE](plugins/aiwf-spec/NOTICE)를 따른다.

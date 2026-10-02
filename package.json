@@ -1,13 +1,14 @@
 {
     "name": "aiwf",
     "version": "0.3.24",
-    "description": "AI Workflow Framework for Claude Code with multi-language support (Korean/English)",
+    "description": "AI Workflow Framework: use-case-driven specs and evidence for coding agents",
     "main": "index.js",
     "type": "module",
     "bin": {
         "aiwf": "./src/cli/index.js",
         "aiwf-lang": "./src/cli/language-cli.js",
-        "aiwf-sprint": "./src/cli/sprint-cli.js"
+        "aiwf-sprint": "./src/cli/sprint-cli.js",
+        "aiwf-spec": "./src/cli/spec-cli.js"
     },
     "scripts": {
         "test": "node --experimental-vm-modules node_modules/.bin/jest",
@@ -19,7 +20,11 @@
         "validate:commands": "node scripts/validate-commands.js",
         "update:file-lists": "node scripts/update-file-lists.js",
         "update:file-lists:dry-run": "node scripts/update-file-lists.js --dry-run",
-        "update:file-lists:verbose": "node scripts/update-file-lists.js --verbose"
+        "update:file-lists:verbose": "node scripts/update-file-lists.js --verbose",
+        "test:spec": "node --test tests/spec-workflow/*.test.mjs",
+        "validate:spec-plugin": "node scripts/validate-spec-plugin.mjs",
+        "test:spec-upstream": "python3 plugins/aiwf-spec/skills/use-case-spec/scripts/validate_use_case.py --self-test && python3 plugins/aiwf-spec/skills/test-case/scripts/bpmn_paths.py --self-test && python3 plugins/aiwf-spec/skills/spec-review/scripts/spec_lint.py --self-test",
+        "validate:spec-example": "python3 plugins/aiwf-spec/skills/spec-review/scripts/spec_lint.py --docs examples/spec-workflow/docs --strict --no-baseline"
     },
     "keywords": [
         "aiwf",
@@ -46,7 +51,7 @@
     },
     "homepage": "https://github.com/moonklabs/aiwf#readme",
     "engines": {
-        "node": ">=14.0.0"
+        "node": ">=20.0.0"
     },
     "files": [
         "src/",
@@ -71,7 +76,13 @@
         "PLUGIN_README.md",
         "CHANGELOG.md",
         "GUIDE.md",
-        "GUIDE.ko.md"
+        "GUIDE.ko.md",
+        "plugins/aiwf-spec/",
+        "examples/spec-workflow/",
+        "plugins/aiwf-vaadin-jooq/",
+        "plugins/aiwf-angular-jpa/",
+        "plugins/aiwf-blazor-dotnet/",
+        "plugins/aiwf-nestjs-nextjs/"
     ],
     "dependencies": {
         "chalk": "^5.3.0",

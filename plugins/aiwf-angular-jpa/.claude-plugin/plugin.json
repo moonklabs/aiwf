@@ -1,0 +1,11 @@
+{
+  "name": "aiwf-angular-jpa",
+  "version": "0.7.0",
+  "description": "AI Unified Process construction skills for Spring Boot + Spring Data JPA and Angular applications.",
+  "author": {
+    "name": "Marc Affolter",
+    "email": "marc_affolter@outlook.com",
+    "url": "https://unifiedprocess.ai"
+  },
+  "license": "Apache-2.0"
+}

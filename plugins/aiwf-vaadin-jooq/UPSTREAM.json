@@ -1,0 +1,43 @@
+{
+  "repository": "https://github.com/AI-Unified-Process/marketplace",
+  "commit": "065dadda0f696c29ff2bacbda31b38152082e6fa",
+  "source": "aiup-vaadin-jooq",
+  "upstream_version": "2.20.0",
+  "license": "Apache-2.0",
+  "imported": [
+    "skills/",
+    "rules/",
+    "agents/uc-coverage.md",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "modifications": [],
+  "excluded": [
+    "evals/",
+    "MCP auto-configuration (.mcp.json, mcp.json) - optional servers are documented in rules/mcp-servers.md only",
+    "upstream manifests (plugin.json, .claude-plugin/plugin.json, .tessl-plugin/plugin.json, tessl.json)",
+    "upstream README.md (replaced by the AIWF README)"
+  ],
+  "upstream_sha256": {
+    "LICENSE": "596288b7c2507b134a18f9f1bfc4d5e415be0f910989d4787b840126a47ba6ac",
+    "NOTICE": "b61bb9b9d48a9c7d5ebd971d936f406f08656560ea190e35932260ca65b128fd",
+    "agents/uc-coverage.md": "9c0d650f77a76059fba5ecf33269012f73dfdadcc93fcfb8616a46fe45a7bb3d",
+    "rules/mcp-servers.md": "165a5b2fab0bbbdc939be6e28271c7621d77711e548757f1caa26b6e557f50c7",
+    "skills/browserless-test/SKILL.md": "eb46a8cc09a8968f8b0023ddb8eca98bcc55f2b2de7ce777446f31b902ab79c4",
+    "skills/browserless-test/references/UC001ManagePersonsTest.java": "dd0965768fe5cba4bb3e8a6b4f60134e9872add37bc19aa3c7f49968985f13da",
+    "skills/coverage-check/SKILL.md": "0b559b91a03948d2a64c6c0d617c6184d7e974dd1d6b102d99292aa32183b2ab",
+    "skills/flyway-migration/SKILL.md": "044289d07419b682216788213d9fb141b0edeeb9ac5c684490d62b648f3fc7b9",
+    "skills/hilla-test/SKILL.md": "9cf7f6a10c5d8e78331f8f3aa89fe5d7b60f8eb0045a8761b35ab970bb65c3f2",
+    "skills/hilla-test/references/UC001ManagePersonsServiceTest.java": "5a583b8be4eb7a4b2a9775f9ad6b8646f932c186dc7182148baf5fc83e5c388c",
+    "skills/hilla-test/references/UC001ManagePersonsViewTest.tsx": "48f1f9a10d3b931a27a2f1090c4938277a28e14694395781c6653c3cdc9d63e3",
+    "skills/implement-hilla/SKILL.md": "b4e28c75b48a5d45b504ab8396d38e284450e9ee7726702549584a16fea5c6b6",
+    "skills/implement/SKILL.md": "f8a819719ff423aa42dda2d79579593e0b00d88b3797b009568769cca6dac39f",
+    "skills/karibu-test/SKILL.md": "72faff0401a190afa171da8f418014f73a248650cd3fc1bc1d3bff4ee0106672",
+    "skills/karibu-test/references/UC001ManagePersonsTest.java": "411b425bdf5f29cbf7f16829e1adc52a195a0ae0f1182c22af55da0247f7b44c",
+    "skills/playwright-test/SKILL.md": "a7a790e275a924c3a3931d8dc6b4929142d8a936163a6a34faa5a4cfb63ba367",
+    "skills/playwright-test/references/ExampleViewIT.java": "66a4647d179e22407bdb488df5daa85d1d95dcc0f8c607a8abeac843da532640",
+    "skills/playwright-test/references/TC001CustomerOnboardingIT.java": "fd2f2234679d98d63f2241e791dcb254d611c9830e7d049ee0f40d7f5553dab3",
+    "skills/playwright-test/references/dramafinder-api.md": "a17250bb449445d474bad8d0735e556e011f63fe782c0fca1cb3e968d50b51a3"
+  },
+  "modified_sha256": {}
+}

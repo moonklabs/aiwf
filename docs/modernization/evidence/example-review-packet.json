@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "collected_at": "2026-10-02T08:16:54.916Z",
+  "status": "awaiting_review",
+  "acceptance": "not_recorded",
+  "remote_sync": "not_attempted",
+  "spec": {
+    "digest": "da872a517e79e8d54791085831b5db5ca9dca67bbb52fcec67c061f87d16645b",
+    "files": [
+      {
+        "path": "docs/entity_model.md",
+        "sha256": "edb9c35d17e73885346df31782089088c4dfe26e82f8b0cd2463e9febedc9d4e",
+        "bytes": 1474,
+        "kind": "required"
+      },
+      {
+        "path": "docs/glossary.md",
+        "sha256": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+        "bytes": 560,
+        "kind": "required"
+      },
+      {
+        "path": "docs/requirements.md",
+        "sha256": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+        "bytes": 471,
+        "kind": "required"
+      },
+      {
+        "path": "docs/test_cases/TC-001-submit-expense.md",
+        "sha256": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+        "bytes": 1529,
+        "kind": "test_case"
+      },
+      {
+        "path": "docs/use_cases.puml",
+        "sha256": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+        "bytes": 208,
+        "kind": "required"
+      },
+      {
+        "path": "docs/use_cases/UC-001-submit-expense.md",
+        "sha256": "e19c5b44acb98dcfb6c4992b1be16520cfe83f7dcb7dee04415b59cedd0590cf",
+        "bytes": 1812,
+        "kind": "use_case"
+      },
+      {
+        "path": "docs/vision.md",
+        "sha256": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+        "bytes": 516,
+        "kind": "required"
+      }
+    ]
+  },
+  "pin": {
+    "digest": "da872a517e79e8d54791085831b5db5ca9dca67bbb52fcec67c061f87d16645b",
+    "matched": true
+  },
+  "drift": {
+    "added": [],
+    "changed": [],
+    "deleted": []
+  },
+  "git": null,
+  "evidence": {
+    "trust": "reported_untrusted",
+    "checks_summary": {
+      "total": 3,
+      "passed": 2,
+      "failed": 0,
+      "not_run": 1
+    },
+    "checks": [
+      {
+        "name": "Specification structure and references",
+        "command": "python3 plugins/aiwf-spec/skills/spec-review/scripts/spec_lint.py --docs <smoke>/docs --strict --no-baseline",
+        "status": "passed",
+        "log": {
+          "path": "artifacts/spec-lint.log",
+          "sha256": "d891432dfaf07be0bf54139efeb64d926f404eaf302147f73d96b624b99cb67a",
+          "bytes": 62,
+          "content": "0 error(s), 0 warning(s), 0 info(s), 0 suppressed by baseline\n"
+        }
+      },
+      {
+        "name": "AIWF CLI regression tests",
+        "command": "npm run test:spec (AIWF checkout)",
+        "status": "passed",
+        "log": {
+          "path": "artifacts/spec-tests.log",
+          "sha256": "55979ee00c532db39ba76043c71ed01c426ca2a2698036ba6a306157e18d5d87",
+          "bytes": 8670,
+          "content": "\n> aiwf@0.3.24 test:spec\n> node --test tests/spec-workflow/*.test.mjs\n\nTAP version 13\n# Subtest: dry run writes nothing, real install retains parser siblings and attribution\nok 1 - dry run writes nothing, real install retains parser siblings and attribution\n  ---\n  duration_ms: 90.812084\n  type: 'test'\n  ...\n# Subtest: existing skill prevents partial install and preserves user content\nok 2 - existing skill prevents partial install and preserves user content\n  ---\n  duration_ms: 1.12275\n  type: 'test'\n  ...\n# Subtest: symlinked skill parent and dangling destination are rejected\nok 3 - symlinked skill parent and dangling destination are rejected\n  ---\n  duration_ms: 1.035125\n  type: 'test'\n  ...\n# Subtest: installer CLI rejects unknown flags and missing project\nok 4 - installer CLI rejects unknown flags and missing project\n  ---\n  duration_ms: 68.946625\n  type: 'test'\n  ...\n# Subtest: installed workflow and reference documents use the prefixed sibling names\nok 5 - installed workflow and reference documents use the prefixed sibling names\n  ---\n  duration_ms: 14.055625\n  type: 'test'\n  ...\n# Subtest: cli init prints machine JSON and exits zero\nok 6 - cli init prints machine JSON and exits zero\n  ---\n  duration_ms: 28.77975\n  type: 'test'\n  ...\n# Subtest: cli check --json reports ok on a pinned spec and nonzero drift afterwards\nok 7 - cli check --json reports ok on a pinned spec and nonzero drift afterwards\n  ---\n  duration_ms: 101.797625\n  type: 'test'\n  ...\n# Subtest: cli check exits nonzero when no pin exists\nok 8 - cli check exits nonzero when no pin exists\n  ---\n  duration_ms: 28.127458\n  type: 'test'\n  ...\n# Subtest: cli packet writes a review packet and refuses to overwrite without --force\nok 9 - cli packet writes a review packet and refuses to overwrite without --force\n  ---\n  duration_ms: 110.323083\n  type: 'test'\n  ...\n# Subtest: cli rejects unknown options and missing required arguments with nonzero exit\nok 10 - cli rejects unknown options and missing required arguments with nonzero exit\n  ---\n  duration_ms: 97.717417\n  type: 'test'\n  ...\n# Subtest: cli help exits zero and documents the commands\nok 11 - cli help exits zero and documents the commands\n  ---\n  duration_ms: 22.26375\n  type: 'test'\n  ...\n# Subtest: cli pin is blocked on Draft templates and exits nonzero\nok 12 - cli pin is blocked on Draft templates and exits nonzero\n  ---\n  duration_ms: 25.360375\n  type: 'test'\n  ...\n# Subtest: cli packet rejects an --output escaping the root or a symlinked output\nok 13 - cli packet rejects an --output escaping the root or a symlinked output\n  ---\n  duration_ms: 69.4035\n  type: 'test'\n  ...\n# Subtest: cli check on a tampered pin exits nonzero with pin_invalid JSON\nok 14 - cli check on a tampered pin exits nonzero with pin_invalid JSON\n  ---\n  duration_ms: 29.228875\n  type: 'test'\n  ...\n# Subtest: init creates Draft templates and empty use_case/test_case directories\nok 15 - init creates Draft templates and empty use_case/test_case directories\n  ---\n  duration_ms: 2.797125\n  type: 'test'\n  ...\n# Subtest: init is idempotent and never overwrites existing user files\nok 16 - init is idempotent and never overwrites existing user files\n  ---\n  duration_ms: 1.380042\n  type: 'test'\n  ...\n# Subtest: init rejects a symlinked artifact directory\nok 17 - init rejects a symlinked artifact directory\n  ---\n  duration_ms: 0.353375\n  type: 'test'\n  ...\n# Subtest: init rejects a symlinked required artifact file\nok 18 - init rejects a symlinked required artifact file\n  ---\n  duration_ms: 0.441666\n  type: 'test'\n  ...\n# Subtest: pin is blocked while templates remain Draft\nok 19 - pin is blocked while templates remain Draft\n  ---\n  duration_ms: 2.013375\n  type: 'test'\n  ...\n# Subtest: pin requires at least one use case and one test case\nok 20 - pin requires at least one use case and one test case\n  ---\n  duration_ms: 3.200333\n  type: 'test'\n  ...\n# Subtest: pin is deterministic and idempotent for unchanged content\nok 21 - pin is deterministic and idempotent for unchanged content\n  ---\n  duration_ms: 16.138083\n  type: 'test'\n  ...\n# Subtest: pin refuses to overwrite without --refresh and honors --refresh\nok 22 - pin refuses to overwrite without --refresh and honors --refresh\n  ---\n  duration_ms: 23.107208\n  type: 'test'\n  ...\n# Subtest: check reports ok, drift (added/changed/deleted), draft, and missing pin\nok 23 - check reports ok, drift (added/changed/deleted), draft, and missing pin\n  ---\n  duration_ms: 40.728333\n  type: 'test'\n  ...\n# Subtest: findDraftMarkers is case-insensitive and covers NEEDS CLARIFICATION\nok 24 - findDraftMarkers is case-insensitive and covers NEEDS CLARIFICATION\n  ---\n  duration_ms: 0.829625\n  type: 'test'\n  ...\n# Subtest: parseEvidence rejects malformed evidence and unknown fields\nok 25 - parseEvidence rejects malformed evidence and unknown fields\n  ---\n  duration_ms: 0.3385\n  type: 'test'\n  ...\n# Subtest: packet embeds log digest/body, preserves failed/not_run, and never claims approval\nok 26 - packet embeds log digest/body, preserves failed/not_run, and never claims approval\n  ---\n  duration_ms: 16.761709\n  type: 'test'\n  ...\n# Subtest: packet refuses when the pin is missing or the spec drifts\nok 27 - packet refuses when the pin is missing or the spec drifts\n  ---\n  duration_ms: 14.490958\n  type: 'test'\n  ...\n# Subtest: packet rejects log paths that escape the root or traverse a symlink\nok 28 - packet rejects log paths that escape the root or traverse a symlink\n  ---\n  duration_ms: 20.783666\n  type: 'test'\n  ...\n# Subtest: packet rejects an oversized log\nok 29 - packet rejects an oversized log\n  ---\n  duration_ms: 15.55925\n  type: 'test'\n  ...\n# Subtest: pin snapshots docs/processes/*.bpmn and tracks the optional lint baseline\nok 30 - pin snapshots docs/processes/*.bpmn and tracks the optional lint baseline\n  ---\n  duration_ms: 14.856333\n  type: 'test'\n  ...\n# Subtest: lint baseline is tracked but not scanned for draft markers\nok 31 - lint baseline is tracked but not scanned for draft markers\n  ---\n  duration_ms: 8.42125\n  type: 'test'\n  ...\n# Subtest: Reviewed status is recorded, not treated as a blocker (no approval claimed)\nok 32 - Reviewed status is recorded, not treated as a blocker (no approval claimed)\n  ---\n  duration_ms: 7.136166\n  type: 'test'\n  ...\n# Subtest: pin records optional git HEAD and dirty status when inside a repository\nok 33 - pin records optional git HEAD and dirty status when inside a repository\n  ---\n  duration_ms: 67.002041\n  type: 'test'\n  ...\n# Subtest: check rejects a tampered pin digest and packet refuses to build\nok 34 - check rejects a tampered pin digest and packet refuses to build\n  ---\n  duration_ms: 7.570666\n  type: 'test'\n  ...\n# Subtest: validateStoredPin rejects bad schema, duplicate paths, bad path, hash, bytes, kind, and null files\nok 35 - validateStoredPin rejects bad schema, duplicate paths, bad path, hash, bytes, kind, and null files\n  ---\n  duration_ms: 6.587291\n  type: 'test'\n  ...\n# Subtest: check rejects a self-consistent fake pin that omits required or minimum artifacts\nok 36 - check rejects a self-consistent fake pin that omits required or minimum artifacts\n  ---\n  duration_ms: 11.700208\n  type: 'test'\n  ...\n# Subtest: check flags artifacts missing from disk as out of sync\nok 37 - check flags artifacts missing from disk as out of sync\n  ---\n  duration_ms: 11.545708\n  type: 'test'\n  ...\n# Subtest: pin validates the existing pin instead of trusting a matching digest\nok 38 - pin validates the existing pin instead of trusting a matching digest\n  ---\n  duration_ms: 23.559833\n  type: 'test'\n  ...\n# Subtest: check returns a uniform shape for missing and invalid pins\nok 39 - check returns a uniform shape for missing and invalid pins\n  ---\n  duration_ms: 6.927167\n  type: 'test'\n  ...\n# Subtest: packet marks pin.matched true only within an in-sync spec\nok 40 - packet marks pin.matched true only within an in-sync spec\n  ---\n  duration_ms: 13.02875\n  type: 'test'\n  ...\n# Subtest: packet rejects a non-UTF-8 log instead of embedding a misleading body\nok 41 - packet rejects a non-UTF-8 log instead of embedding a misleading body\n  ---\n  duration_ms: 11.643208\n  type: 'test'\n  ...\n# Subtest: ordinary Todo product names are not unresolved drafting markers\nok 42 - ordinary Todo product names are not unresolved drafting markers\n  ---\n  duration_ms: 1.985875\n  type: 'test'\n  ...\n# Subtest: folder notes do not satisfy the required UC and TC minimums\nok 43 - folder notes do not satisfy the required UC and TC minimums\n  ---\n  duration_ms: 2.797958\n  type: 'test'\n  ...\n1..43\n# tests 43\n# suites 0\n# pass 43\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 551.798542\n"
+        }
+      },
+      {
+        "name": "Expense application behavior",
+        "command": "Application pilot not implemented",
+        "status": "not_run"
+      }
+    ],
+    "unverified": [
+      "Expense application has not been implemented or tested",
+      "Live Claude/Codex skill invocation not tested",
+      "Sprintable synchronization not implemented",
+      "Business acceptance not recorded"
+    ]
+  },
+  "limitations": [
+    "Recorded check output is not proof of business acceptance.",
+    "Check statuses are reported by the submitter and are not independently verified by this tool.",
+    "Remote synchronization was not attempted.",
+    "Human acceptance has not been recorded.",
+    "Structural and semantic lint is not performed by this tool; it remains an upstream step."
+  ]
+}

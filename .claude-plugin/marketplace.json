@@ -7,6 +7,95 @@
   },
   "plugins": [
     {
+      "name": "aiwf-spec",
+      "description": "Use-case-driven specifications, structural checks and local evidence for Claude Code and Codex",
+      "version": "0.1.0",
+      "source": "./plugins/aiwf-spec",
+      "author": {
+        "name": "moonklabs"
+      },
+      "keywords": [
+        "spec-driven",
+        "use-case",
+        "traceability",
+        "evidence",
+        "codex",
+        "sprintable"
+      ]
+    },
+    {
+      "name": "aiwf-vaadin-jooq",
+      "description": "AI Unified Process for the Vaadin/jOOQ stack - migrations, implementation, tests",
+      "version": "2.20.0",
+      "source": "./plugins/aiwf-vaadin-jooq",
+      "author": {
+        "name": "Simon Martinelli",
+        "email": "simon@martinelli.ch",
+        "url": "https://unifiedprocess.ai"
+      },
+      "keywords": [
+        "spec-driven",
+        "implementation",
+        "testing",
+        "vaadin",
+        "jooq"
+      ]
+    },
+    {
+      "name": "aiwf-angular-jpa",
+      "description": "AI Unified Process for the Angular/JPA stack - migrations, implementation, tests",
+      "version": "0.7.0",
+      "source": "./plugins/aiwf-angular-jpa",
+      "author": {
+        "name": "Marc Affolter",
+        "email": "marc_affolter@outlook.com",
+        "url": "https://unifiedprocess.ai"
+      },
+      "keywords": [
+        "spec-driven",
+        "implementation",
+        "testing",
+        "angular",
+        "jpa"
+      ]
+    },
+    {
+      "name": "aiwf-blazor-dotnet",
+      "description": "AI Unified Process for the C# / Blazor .NET 10 stack - migrations, implementation, tests",
+      "version": "0.7.0",
+      "source": "./plugins/aiwf-blazor-dotnet",
+      "author": {
+        "name": "Carl J. Mosca",
+        "email": "carljmosca@gmail.com",
+        "url": "https://unifiedprocess.ai"
+      },
+      "keywords": [
+        "spec-driven",
+        "implementation",
+        "testing",
+        "blazor",
+        "dotnet"
+      ]
+    },
+    {
+      "name": "aiwf-nestjs-nextjs",
+      "description": "AI Unified Process for the NestJS/Drizzle + Next.js stack - migrations, implementation, tests",
+      "version": "0.4.0",
+      "source": "./plugins/aiwf-nestjs-nextjs",
+      "author": {
+        "name": "Swift Ugandan",
+        "email": "swiftugandan@gmail.com",
+        "url": "https://unifiedprocess.ai"
+      },
+      "keywords": [
+        "spec-driven",
+        "implementation",
+        "testing",
+        "nestjs",
+        "nextjs"
+      ]
+    },
+    {
       "name": "aiwf-core",
       "description": "AIWF Core - Session management, YOLO autonomous execution, Sprint/Task management",
       "version": "1.0.1",
@@ -14,7 +103,13 @@
       "author": {
         "name": "moonklabs"
       },
-      "keywords": ["session", "yolo", "sprint", "task", "long-running-agent"]
+      "keywords": [
+        "session",
+        "yolo",
+        "sprint",
+        "task",
+        "long-running-agent"
+      ]
     },
     {
       "name": "aiwf-dev",
@@ -24,7 +119,13 @@
       "author": {
         "name": "moonklabs"
       },
-      "keywords": ["tdd", "devops", "deploy", "kubernetes", "docker"]
+      "keywords": [
+        "tdd",
+        "devops",
+        "deploy",
+        "kubernetes",
+        "docker"
+      ]
     },
     {
       "name": "aiwf-experts",
@@ -34,7 +135,12 @@
       "author": {
         "name": "moonklabs"
       },
-      "keywords": ["agents", "build-fixer", "architect", "code-review"]
+      "keywords": [
+        "agents",
+        "build-fixer",
+        "architect",
+        "code-review"
+      ]
     },
     {
       "name": "aiwf-tools",
@@ -44,7 +150,13 @@
       "author": {
         "name": "moonklabs"
       },
-      "keywords": ["tools", "refactoring", "debugging", "api", "docs"]
+      "keywords": [
+        "tools",
+        "refactoring",
+        "debugging",
+        "api",
+        "docs"
+      ]
     }
   ]
 }

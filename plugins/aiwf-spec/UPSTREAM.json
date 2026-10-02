@@ -1,0 +1,50 @@
+{
+  "repository": "https://github.com/AI-Unified-Process/marketplace",
+  "commit": "065dadda0f696c29ff2bacbda31b38152082e6fa",
+  "source": "aiup-core",
+  "upstream_version": "2.19.0",
+  "license": "Apache-2.0",
+  "imported": [
+    "skills/",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "modifications": [
+    "NOTICE: AIWF attribution appended"
+  ],
+  "excluded": [
+    "MCP configuration (optional context7 not required)",
+    "Tessl and Agent Plugins manifests and publication metadata",
+    "Upstream generation CI and evaluation fixtures"
+  ],
+  "upstream_sha256": {
+    "skills/entity-model/SKILL.md": "85b660f92e6442e1f1b459bfa697b50108a6e4e46ced5c731db1f9c200f724de",
+    "skills/entity-model/references/REFERENCE.md": "35611ec952a6fabd0c16b0efeab3b9a9890909ced9b7b075876c1bd93880b285",
+    "skills/requirements/SKILL.md": "8b1cc0ba83101251fff750a19109e13445bfb01cdfb20e1dbfefee01032e4f0c",
+    "skills/requirements/references/REFERENCE.md": "a387491b296c19d8422f606964ea2d67d7a70e138e873b03801ee55e13db7ac9",
+    "skills/requirements/references/glossary.md": "57ab356f1f9f11fb9127e5af5438806015b3b73b92dfb3e08a8c451472839ac9",
+    "skills/reverse-engineer/SKILL.md": "025bd92b6dc9c0a35859416b95bfe71e843e63a7a9979acc8bee338c3456b26f",
+    "skills/reverse-engineer/references/stack-signals.md": "7deaea7876ead22ddb651e786ac15e920df5e09a1e211cfcd8f24c02da380c9c",
+    "skills/spec-review/SKILL.md": "a1075c3e66fb968e3fbfb75db595793a880d434f87c93f054f0aae1af5237f13",
+    "skills/spec-review/references/lint-codes.md": "c03648b189a872d654a5deb0c686fb9559f804add75c7d2b4415e3823146e4e4",
+    "skills/spec-review/references/review-checklist.md": "31107805b83d9a088d536b42cfb30f68ef986ba6abfb94e17d3c96e64d4d27c9",
+    "skills/spec-review/scripts/spec_lint.py": "8a70d669f165870045c2174c47073cd3496f9da40de658d9695e876e6620f031",
+    "skills/test-case/SKILL.md": "890aca4afb3b09d7116d6bb99accfa969bd266926de03777edd6aa8d7093c033",
+    "skills/test-case/references/example-process.bpmn": "8edb429b03c3fa946f254f3513f377e8b24df444014940e7e0764e04891e1c57",
+    "skills/test-case/references/example.md": "d8accec068f68c994265ce7162885210c9dca9a7d4f6418a393d22f1186ce78c",
+    "skills/test-case/references/test-case.md": "176c9193e9e51acbb13cb2f3324623a2f51e26055ca6e6535e0d776325951609",
+    "skills/test-case/scripts/bpmn_paths.py": "8821d2fac8334219dda5271ab366d0f681a6a51545aa94bd462964c3598be8fb",
+    "skills/use-case-diagram/SKILL.md": "d7fddc93d00452c341fa0a591fbf6cded012ec17ad6f6a32527f6c999b658806",
+    "skills/use-case-spec/SKILL.md": "f65515cc7a24e9fca349c25fa93b09997596ceafb2e0925d98fc7fd17455dfe0",
+    "skills/use-case-spec/references/clarify-checklist.md": "d8cf83e720016409b21d61b64c031967527f74b6869e8565a615ffc78ac12762",
+    "skills/use-case-spec/references/example.md": "d1c91532433800ceb7a44cf7e98a0c4f297b74729bec9025f5e05b1db24331ca",
+    "skills/use-case-spec/references/format-spec.md": "31e7df5cd2a9d4e94001ef990236d25d5b952e90734e9d7417ad37c6ea61060a",
+    "skills/use-case-spec/references/use-case.md": "78a80aa0c0a1ea5522dca3cdea7ace954a677d316a41c724fde74fc871e03753",
+    "skills/use-case-spec/scripts/validate_use_case.py": "3a4cee5406639eb5406d8ec01bde4d7488ff31e3b8500566011a884bb6622be9",
+    "LICENSE": "596288b7c2507b134a18f9f1bfc4d5e415be0f910989d4787b840126a47ba6ac",
+    "NOTICE": "b61bb9b9d48a9c7d5ebd971d936f406f08656560ea190e35932260ca65b128fd"
+  },
+  "modified_sha256": {
+    "NOTICE": "78ce4aadcbf65ea1c8954c6ee6ae930b8eabba2f14bf529643c574699539fe47"
+  }
+}
