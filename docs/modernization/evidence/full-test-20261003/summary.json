@@ -1,0 +1,106 @@
+{
+  "checkout": "10e885ea6236e30d0797523c1cec4bf8d844487e",
+  "base": "/private/tmp/aiwf-comprehensive-74lc3ob7",
+  "consumer": "/private/tmp/aiwf-comprehensive-74lc3ob7/consumer",
+  "installed": "/private/tmp/aiwf-comprehensive-74lc3ob7/consumer/node_modules/aiwf",
+  "codex_live": "/private/tmp/aiwf-comprehensive-5ih6czuw/codex-live",
+  "matrix": [
+    {
+      "stack": "core",
+      "skills": 8,
+      "dry_run_no_write": true,
+      "reinstall_preserves_all_bytes": true,
+      "python_self_tests": 3
+    },
+    {
+      "stack": "vaadin-jooq",
+      "skills": 16,
+      "dry_run_no_write": true,
+      "reinstall_preserves_all_bytes": true,
+      "python_self_tests": 3
+    },
+    {
+      "stack": "angular-jpa",
+      "skills": 14,
+      "dry_run_no_write": true,
+      "reinstall_preserves_all_bytes": true,
+      "python_self_tests": 3
+    },
+    {
+      "stack": "blazor-dotnet",
+      "skills": 13,
+      "dry_run_no_write": true,
+      "reinstall_preserves_all_bytes": true,
+      "python_self_tests": 3
+    },
+    {
+      "stack": "nestjs-nextjs",
+      "skills": 13,
+      "dry_run_no_write": true,
+      "reinstall_preserves_all_bytes": true,
+      "python_self_tests": 3
+    }
+  ],
+  "tarball_files": 120,
+  "flow_checks": [
+    "draft pin rejected",
+    "strict lint and trace",
+    "init preserves existing data",
+    "pin/check success",
+    "passed/failed/not_run retained",
+    "packet overwrite refused",
+    "drift detected",
+    "stale packet rejected",
+    "restored spec in sync"
+  ],
+  "packet": "/private/tmp/aiwf-comprehensive-74lc3ob7/flow/.aiwf/review-packet.json",
+  "no_external_dependencies": true,
+  "node_tests": {
+    "passed": 61,
+    "failed": 0,
+    "skipped": 0
+  },
+  "python_versions": [
+    "3.14.4",
+    "3.11"
+  ],
+  "node_version": "22.23.1",
+  "coverage": {
+    "included": [
+      "src/cli/spec-cli.js",
+      "src/lib/spec-workflow.js",
+      "scripts/install-spec-skills.mjs"
+    ],
+    "line_percent": 91.94,
+    "branch_percent": 86.18,
+    "function_percent": 96.34
+  },
+  "codex": {
+    "model": "gpt-6-astra",
+    "completed": true,
+    "service_tests_passed": 12,
+    "packet_summary": {
+      "total": 8,
+      "passed": 4,
+      "failed": 0,
+      "not_run": 4
+    },
+    "packet_hashes_and_spec_files_independently_verified": true
+  },
+  "claude": {
+    "model": "claude-sonnet-5-5",
+    "plugin_skill": "aiwf-core:spec-review",
+    "structural_lint": "passed",
+    "semantic_warnings": 3,
+    "semantic_infos": 3
+  },
+  "fixed_defect": "Existing directory packet output rejected as output_not_file with and without force; sentinel preserved",
+  "limitations": [
+    "Full stack applications, UI, authentication and stakeholder acceptance not tested",
+    "Node 20 / Python 3.9 unavailable for minimum-version execution",
+    "Codex CLI configured gpt-6.1-sol unsupported by this account; explicit gpt-6-astra worked",
+    "Sprintable integration and unattended execution not implemented"
+  ],
+  "final_tarball_files": 129,
+  "directory_refusal_independently_reviewed": true
+}

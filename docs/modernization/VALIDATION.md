@@ -4,7 +4,7 @@ Verified on Node.js 22.23.1 and Python 3.14.4. This record covers the local impl
 
 | Check | Fresh result |
 |---|---|
-| `npm run test:spec` | 60 tests passed; 0 failed/skipped. `npm test` runs the same suite. Includes methodology-core/default-package selection, legacy exclusion and npm-bin symlink execution, spawned CLI calls, malformed pins/evidence, init preservation, drift, log hashes, symlink/output boundaries, all four optional stack installs, source provenance and installed parser self-test. |
+| `npm run test:spec` | 61 tests passed; 0 failed/skipped. `npm test` runs the same suite. Includes methodology-core/default-package selection, legacy exclusion and npm-bin symlink execution, spawned CLI calls, malformed pins/evidence, init preservation, drift, log hashes, symlink/output boundaries, all four optional stack installs, source provenance and installed parser self-test. |
 | `npm run test:spec-upstream` | All three imported Python self-tests passed. |
 | `npm run validate:spec-plugin` | 31 unchanged upstream skills across 5 methodology/stack plugins + 1 AIWF workflow extension; 71 imported files match original SHA256 values. The core NOTICE has one recorded attribution addition. All manifests, bundled references, marketplace and package entries validate. |
 | `npm run validate:spec-example` | 0 errors, 0 warnings, 0 information findings; no lint baseline accepted. |
@@ -12,7 +12,7 @@ Verified on Node.js 22.23.1 and Python 3.14.4. This record covers the local impl
 | `spec_lint.py --trace` | FR-001 → UC-001 → BR-001 → TC-001. Document trace only. |
 | Fresh-root smoke | init → filled example → lint → pin → check → packet → saved readback succeeded. 7 spec files; modified UC detected and stale packet generation rejected; restored original returns in sync. |
 | Syntax/static checks | All retained Node source/scripts/tests pass `node --check`; `npm run check:deps` checks literal imports and local paths across 5 source files without external dependencies. `git diff --check` passes. No external linter or TypeScript target is declared. |
-| Package inspection | A real `npm pack --json` tarball contains 120 files, all 32 skill manifests and complete plugin resources/rules/agent prompts/LICENSE/NOTICE; no legacy plugins or entry points. Offline installation into a clean temporary project installs only AIWF, without external dependencies. Its npm bin, library/validators and Codex installer run successfully. No npm publication performed. |
+| Package inspection | A real `npm pack --json` final tarball contains 129 files (including the full-test report and captured fixture), all 32 skill manifests and complete plugin resources/rules/agent prompts/LICENSE/NOTICE; no legacy plugins or entry points. Offline installation into a clean temporary project installs only AIWF, without external dependencies. Its npm bin, library/validators and Codex installer run successfully. No npm publication performed. |
 
 ## Saved demonstration
 
@@ -34,7 +34,7 @@ There is no TypeScript/typecheck target or external ESLint dependency. The unuse
 
 ## Unverified gates
 
-- Claude/Codex live skill discovery, automatic routing and selected-model execution.
+- Broad automatic skill routing across arbitrary requests and stack implementation. Bounded explicit Codex/Claude skill execution is now verified in [FULL-TEST-2026-10-03.md](FULL-TEST-2026-10-03.md).
 - One actual application's implementation, runtime behavior and stakeholder acceptance.
 - Sprintable Doc upload/readback, report evidence, approval flow, concurrency/retry/version invalidation.
 - CI execution queue, unattended retries/resume, safe merge and deployment.
@@ -72,3 +72,8 @@ The package-inventory regression failed before removal and passes afterward. A c
 The installed npm binary completed init → example structural lint → pin → check → packet → saved packet readback. The installed Codex installer then copied 13 skills (core + workflow + NestJS/Next.js) into the temporary project, and all three installed Python parser self-tests passed. The review packet stayed awaiting_review. This confirms package execution and recording, not live-model implementation, application acceptance or Sprintable integration. Existing historical packet logs/commands were not rewritten.
 
 A separate read-only reviewer found no blocking issue in the retained imports, plugin/package inventory, CLI entry fix, provenance and current guidance. The reviewer reran the current regressions and local validators; the packaged installation smoke was assessed from this session's recorded results. All 17 current guide files have resolving local Markdown links, and importing the installed npm library by package name succeeds.
+
+
+## Full behavior test follow-up — 2026-10-03
+
+[Full test report](FULL-TEST-2026-10-03.md) records fresh regression, all-stack package installs, preservation/failure checks and actual Codex/Claude skill execution. Fixed directory packet output errors with a coded refusal; 61 regressions now pass. A live Codex-generated service fixture passes 12 tests independently, and its recorded packet logs/spec hashes were read back. Claude structural lint passes, with three advisory semantic warnings remaining in the example. These bounded runs do not establish full stack applications, UI/login or stakeholder acceptance.

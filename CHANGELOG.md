@@ -1,6 +1,12 @@
 # Changelog
 
 
+## Unreleased — full workflow verification (2026-10-03)
+
+- Reject existing non-file packet outputs with output_not_file, including forced writes, and verify directory contents remain intact.
+- Expand the regression suite to 61 tests. Record clean npm/all-stack installation, drift/preservation checks, actual Codex service implementation and Claude plugin review; retain the 12-test service fixture and execution evidence.
+
+
 ## Unreleased — remove the old framework (2026-10-03)
 
 - Remove the legacy core/dev/experts/tools plugins, old installer and language/sprint/persona/YOLO runtime, multilingual command collections, duplicate skills/rules, obsolete docs and their Jest tests/configuration.

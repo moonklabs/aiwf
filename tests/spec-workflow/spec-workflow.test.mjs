@@ -552,3 +552,18 @@ test('folder notes do not satisfy the required UC and TC minimums', t => {
   write(path.join(root, 'docs/test_cases/README.md'), '# Notes\n');
   assert.throws(() => pinSpec(root), error => error.code === 'insufficient_test_cases');
 });
+
+test('packet output rejects an existing directory even when force is requested', t => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'aiwf-packet-directory-'));
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const output = path.join(root, 'existing-directory');
+  fs.mkdirSync(output);
+  const sentinel = path.join(output, 'keep.txt');
+  fs.writeFileSync(sentinel, 'user content');
+  for (const force of [false, true]) {
+    assert.throws(() => writeReviewPacket(root, { status: 'awaiting_review' }, { output, force }),
+      error => error.code === 'output_not_file');
+    assert.equal(fs.readFileSync(sentinel, 'utf8'), 'user content');
+    assert.equal(fs.statSync(output).isDirectory(), true);
+  }
+});

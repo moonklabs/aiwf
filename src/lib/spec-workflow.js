@@ -829,6 +829,9 @@ export function writeReviewPacket(root, packet, options = {}) {
     if (existing.isSymbolicLink()) {
       throw new SpecError('symlink_not_allowed', `Symlink not allowed: ${output}`);
     }
+    if (!existing.isFile()) {
+      throw new SpecError('output_not_file', `Packet output exists and is not a regular file: ${output}`);
+    }
     if (!options.force) {
       throw new SpecError('output_exists', `Refusing to overwrite existing packet: ${output} (use --force)`);
     }
