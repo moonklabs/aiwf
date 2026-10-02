@@ -30,13 +30,13 @@ AIUP(AI Unified Process) 명세 산출물을 최소 구성으로 끝까지 보�
 저장소 루트에서 다음을 실행한다.
 
 ```bash
-python3 plugins/aiwf-spec/skills/spec-review/scripts/spec_lint.py \
+python3 plugins/aiwf-core/skills/spec-review/scripts/spec_lint.py \
   --docs examples/spec-workflow/docs --strict --no-baseline
 
-python3 plugins/aiwf-spec/skills/use-case-spec/scripts/validate_use_case.py --strict \
+python3 plugins/aiwf-core/skills/use-case-spec/scripts/validate_use_case.py --strict \
   examples/spec-workflow/docs/use_cases/UC-001-submit-expense.md
 
-python3 plugins/aiwf-spec/skills/spec-review/scripts/spec_lint.py \
+python3 plugins/aiwf-core/skills/spec-review/scripts/spec_lint.py \
   --docs examples/spec-workflow/docs --trace
 ```
 

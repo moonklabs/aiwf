@@ -5,9 +5,9 @@ Swift Ugandan, pinned in [UPSTREAM.json](UPSTREAM.json).
 
 ## Stack purpose
 
-Turns the entity model and use-case specifications produced by aiwf-spec into Drizzle migrations and a NestJS backend over PostgreSQL plus a Next.js App Router frontend, with Nest, React and Playwright tests.
+Turns the entity model and use-case specifications produced by aiwf-core into Drizzle migrations and a NestJS backend over PostgreSQL plus a Next.js App Router frontend, with Nest, React and Playwright tests.
 
-The skills consume the specifications produced by `aiwf-spec` (entity model and
+The skills consume the specifications produced by `aiwf-core` (entity model and
 `UC-*.md` use cases) and are independent of the upstream `aiup-core` plugin.
 
 ## Raw source preservation

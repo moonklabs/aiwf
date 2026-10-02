@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
-const plugin = fileURLToPath(new URL('../../plugins/aiwf-spec/', import.meta.url));
+const plugin = fileURLToPath(new URL('../../plugins/aiwf-core/', import.meta.url));
 const provenance = JSON.parse(readFileSync(`${plugin}UPSTREAM.json`, 'utf8'));
 
 test('all seven upstream core skills retain their exact original bytes', () => {

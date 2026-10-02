@@ -7,8 +7,27 @@
   },
   "plugins": [
     {
+      "name": "aiwf-core",
+      "description": "AIWF methodology core, derived from AIUP: requirements, entities, use cases, journeys and specification review",
+      "version": "2.19.0",
+      "source": "./plugins/aiwf-core",
+      "author": {
+        "name": "Simon Martinelli",
+        "email": "simon@martinelli.ch",
+        "url": "https://unifiedprocess.ai"
+      },
+      "keywords": [
+        "core",
+        "spec-driven",
+        "requirements",
+        "use-case",
+        "traceability",
+        "codex"
+      ]
+    },
+    {
       "name": "aiwf-spec",
-      "description": "Use-case-driven specifications, structural checks and local evidence for Claude Code and Codex",
+      "description": "AIWF workflow extension for aiwf-core: local pins, implementation evidence and future Sprintable handoff",
       "version": "0.1.0",
       "source": "./plugins/aiwf-spec",
       "author": {
@@ -96,10 +115,10 @@
       ]
     },
     {
-      "name": "aiwf-core",
-      "description": "AIWF Core - Session management, YOLO autonomous execution, Sprint/Task management",
+      "name": "aiwf-core-legacy",
+      "description": "Legacy AIWF session, task and YOLO commands; separate from the methodology core",
       "version": "1.0.1",
-      "source": "./plugins/aiwf-core",
+      "source": "./plugins/aiwf-core-legacy",
       "author": {
         "name": "moonklabs"
       },

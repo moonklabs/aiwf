@@ -23,8 +23,8 @@
         "update:file-lists:verbose": "node scripts/update-file-lists.js --verbose",
         "test:spec": "node --test tests/spec-workflow/*.test.mjs",
         "validate:spec-plugin": "node scripts/validate-spec-plugin.mjs",
-        "test:spec-upstream": "python3 plugins/aiwf-spec/skills/use-case-spec/scripts/validate_use_case.py --self-test && python3 plugins/aiwf-spec/skills/test-case/scripts/bpmn_paths.py --self-test && python3 plugins/aiwf-spec/skills/spec-review/scripts/spec_lint.py --self-test",
-        "validate:spec-example": "python3 plugins/aiwf-spec/skills/spec-review/scripts/spec_lint.py --docs examples/spec-workflow/docs --strict --no-baseline"
+        "test:spec-upstream": "python3 plugins/aiwf-core/skills/use-case-spec/scripts/validate_use_case.py --self-test && python3 plugins/aiwf-core/skills/test-case/scripts/bpmn_paths.py --self-test && python3 plugins/aiwf-core/skills/spec-review/scripts/spec_lint.py --self-test",
+        "validate:spec-example": "python3 plugins/aiwf-core/skills/spec-review/scripts/spec_lint.py --docs examples/spec-workflow/docs --strict --no-baseline"
     },
     "keywords": [
         "aiwf",
@@ -82,7 +82,9 @@
         "plugins/aiwf-vaadin-jooq/",
         "plugins/aiwf-angular-jpa/",
         "plugins/aiwf-blazor-dotnet/",
-        "plugins/aiwf-nestjs-nextjs/"
+        "plugins/aiwf-nestjs-nextjs/",
+        "plugins/aiwf-core/",
+        "plugins/aiwf-core-legacy/"
     ],
     "dependencies": {
         "chalk": "^5.3.0",

@@ -1,7 +1,7 @@
 {
   "name": "aiwf-spec",
   "version": "0.1.0",
-  "description": "Use-case-driven specifications, structural checks and local evidence for Claude Code and Codex",
+  "description": "AIWF workflow extension for aiwf-core: local pins, implementation evidence and future Sprintable handoff",
   "author": {
     "name": "moonklabs"
   },

@@ -24,14 +24,17 @@ function files(directory) {
   });
 }
 
-for (const name of ['aiwf-spec', ...supportedStacks.map(stack => `aiwf-${stack}`)]) {
+for (const name of ['aiwf-core', 'aiwf-spec', ...supportedStacks.map(stack => `aiwf-${stack}`)]) {
   const plugin = join(root, 'plugins', name);
-  const provenance = JSON.parse(read(join(plugin, 'UPSTREAM.json')));
-  assert.equal(provenance.repository, 'https://github.com/AI-Unified-Process/marketplace');
-  assert.match(provenance.commit, /^[0-9a-f]{40}$/);
-  commit ??= provenance.commit;
-  assert.equal(provenance.commit, commit, `Mixed upstream versions: ${name}`);
-  const allowedModifications = name === 'aiwf-spec' ? ['NOTICE'] : [];
+  const provenance = name === 'aiwf-spec' ? { upstream_sha256: {}, modified_sha256: {} }
+    : JSON.parse(read(join(plugin, 'UPSTREAM.json')));
+  if (name !== 'aiwf-spec') {
+    assert.equal(provenance.repository, 'https://github.com/AI-Unified-Process/marketplace');
+    assert.match(provenance.commit, /^[0-9a-f]{40}$/);
+    commit ??= provenance.commit;
+    assert.equal(provenance.commit, commit, `Mixed upstream versions: ${name}`);
+  }
+  const allowedModifications = name === 'aiwf-core' ? ['NOTICE'] : [];
   for (const [path, expected] of Object.entries(provenance.modified_sha256)) {
     assert.ok(allowedModifications.includes(path), `Upstream sources must stay unchanged: ${name}/${path}`);
     assert.equal(digest(readFileSync(join(plugin, path))), expected, `Modified resource changed: ${name}/${path}`);
@@ -57,6 +60,8 @@ for (const name of ['aiwf-spec', ...supportedStacks.map(stack => `aiwf-${stack}`
     }
   }
   const names = readdirSync(join(plugin, 'skills')).sort();
+  if (name === 'aiwf-core') { assert.equal(names.length, 7); }
+  if (name === 'aiwf-spec') { assert.deepEqual(names, ['workflow']); }
   skills += names.length;
   for (const skill of names) {
     const file = join(plugin, 'skills', skill, 'SKILL.md');

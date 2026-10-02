@@ -17,7 +17,7 @@ function fixture(t) {
   for (const path of ['.claude-plugin', 'package.json', 'scripts/validate-spec-plugin.mjs', 'scripts/install-spec-skills.mjs']) {
     cpSync(join(repository, path), join(root, path), { recursive: true });
   }
-  for (const name of ['spec', 'vaadin-jooq', 'angular-jpa', 'blazor-dotnet', 'nestjs-nextjs']) {
+  for (const name of ['core', 'spec', 'vaadin-jooq', 'angular-jpa', 'blazor-dotnet', 'nestjs-nextjs']) {
     cpSync(join(repository, 'plugins', `aiwf-${name}`), join(root, 'plugins', `aiwf-${name}`), { recursive: true });
   }
   return root;
@@ -25,16 +25,16 @@ function fixture(t) {
 
 test('validator rejects modified upstream skill bytes', t => {
   const root = fixture(t);
-  const skill = join(root, 'plugins/aiwf-spec/skills/requirements/SKILL.md');
+  const skill = join(root, 'plugins/aiwf-core/skills/requirements/SKILL.md');
   writeFileSync(skill, readFileSync(skill, 'utf8') + '\nUnrecorded change.\n');
   const check = spawnSync(process.execPath, [join(root, 'scripts/validate-spec-plugin.mjs')], { encoding: 'utf8' });
   assert.equal(check.status, 1);
-  assert.match(check.stderr, /Upstream resource changed: aiwf-spec\/skills\/requirements\/SKILL.md/);
+  assert.match(check.stderr, /Upstream resource changed: aiwf-core\/skills\/requirements\/SKILL.md/);
 });
 
 test('modified-hash metadata cannot exempt a skill from source preservation', t => {
   const root = fixture(t);
-  const plugin = join(root, 'plugins/aiwf-spec');
+  const plugin = join(root, 'plugins/aiwf-core');
   const path = 'skills/requirements/SKILL.md';
   const text = readFileSync(join(plugin, path), 'utf8') + '\nRecorded but forbidden change.\n';
   writeFileSync(join(plugin, path), text);
@@ -43,5 +43,5 @@ test('modified-hash metadata cannot exempt a skill from source preservation', t 
   writeFileSync(join(plugin, 'UPSTREAM.json'), JSON.stringify(provenance));
   const check = spawnSync(process.execPath, [join(root, 'scripts/validate-spec-plugin.mjs')], { encoding: 'utf8' });
   assert.equal(check.status, 1);
-  assert.match(check.stderr, /Upstream sources must stay unchanged: aiwf-spec\/skills\/requirements\/SKILL.md/);
+  assert.match(check.stderr, /Upstream sources must stay unchanged: aiwf-core\/skills\/requirements\/SKILL.md/);
 });

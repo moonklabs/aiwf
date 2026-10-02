@@ -1,0 +1,11 @@
+{
+  "name": "aiwf-core",
+  "description": "AIWF methodology core, derived from AIUP: requirements, entities, use cases, journeys and specification review",
+  "version": "2.19.0",
+  "author": {
+    "name": "Simon Martinelli",
+    "email": "simon@martinelli.ch",
+    "url": "https://unifiedprocess.ai"
+  },
+  "license": "Apache-2.0"
+}

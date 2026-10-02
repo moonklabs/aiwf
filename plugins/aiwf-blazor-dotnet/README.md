@@ -5,9 +5,9 @@ Carl J. Mosca, pinned in [UPSTREAM.json](UPSTREAM.json).
 
 ## Stack purpose
 
-Turns the entity model and use-case specifications produced by aiwf-spec into EF Core migrations and Vertical Slice feature folders (Commands/Queries, EF Core entities, Blazor components), with .NET, bUnit and Playwright tests.
+Turns the entity model and use-case specifications produced by aiwf-core into EF Core migrations and Vertical Slice feature folders (Commands/Queries, EF Core entities, Blazor components), with .NET, bUnit and Playwright tests.
 
-The skills consume the specifications produced by `aiwf-spec` (entity model and
+The skills consume the specifications produced by `aiwf-core` (entity model and
 `UC-*.md` use cases) and are independent of the upstream `aiup-core` plugin.
 
 ## Raw source preservation

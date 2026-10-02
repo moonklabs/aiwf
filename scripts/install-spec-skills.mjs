@@ -35,7 +35,10 @@ export function installSpecSkills(project, { dryRun = false, stack } = {}) {
       throw new Error(`Expected directory: ${path}`);
     }
   }
-  const bundles = [{ plugin: join(plugins, 'aiwf-spec'), prefix: 'aiwf-' }];
+  const bundles = [
+    { plugin: join(plugins, 'aiwf-core'), prefix: 'aiwf-' },
+    { plugin: join(plugins, 'aiwf-spec'), prefix: 'aiwf-' }
+  ];
   if (stack) { bundles.push({ plugin: join(plugins, `aiwf-${stack}`), prefix: `aiwf-${stack}-` }); }
   const entries = bundles.flatMap(bundle => readdirSync(join(bundle.plugin, 'skills')).sort()
     .map(name => ({ ...bundle, name, installedName: `${bundle.prefix}${name}` })));

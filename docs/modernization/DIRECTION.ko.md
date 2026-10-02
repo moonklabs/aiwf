@@ -10,7 +10,7 @@ AIWF를 **유스케이스 명세를 실제 구현과 검증으로 연결하는 �
 
 ## AIUP에서 가져오는 것
 
-[공식 marketplace](https://github.com/AI-Unified-Process/marketplace)는 방법론을 담당하는 `aiup-core`와 기술 스택별 구현 플러그인을 분리한다. 이번에는 core의 7개 스킬, 문서 형식, 참조 템플릿, Python 검사기와 함께 기술 스택 플러그인 4개(`aiup-vaadin-jooq` 2.20.0, `aiup-angular-jpa` 0.7.0, `aiup-blazor-dotnet` 0.7.0, `aiup-nestjs-nextjs` 0.4.0)의 스킬 24개를 가져왔다. core SKILL.md 7개는 upstream 바이트와 동일하고 참조·검사기도 수정하지 않았으며, 유일한 upstream 소스 수정은 core NOTICE에 AIWF 출처를 덧붙인 것이다. stack 플러그인은 `skills/`, `rules/`, `agents/`, `LICENSE`, `NOTICE`를 바이트 그대로 두고 플러그인별 `UPSTREAM.json`에 hash를 기록한다. Apache-2.0 LICENSE와 NOTICE, 원본 커밋 및 수정 표시를 함께 보관한다. AIWF의 기존 MIT 라이선스와 가져온 플러그인의 Apache-2.0 라이선스는 파일 범위가 다르다.
+[공식 marketplace](https://github.com/AI-Unified-Process/marketplace)는 방법론을 담당하는 `aiup-core`와 기술 스택별 구현 플러그인을 분리한다. 이번에는 core의 7개 스킬, 문서 형식, 참조 템플릿, Python 검사기를 `plugins/aiwf-core`로, 기술 스택 플러그인 4개(`aiup-vaadin-jooq` 2.20.0, `aiup-angular-jpa` 0.7.0, `aiup-blazor-dotnet` 0.7.0, `aiup-nestjs-nextjs` 0.4.0)의 스킬 24개를 각 `plugins/aiwf-<stack>`으로 가져왔다. core SKILL.md 7개는 upstream 바이트와 동일하고 참조·검사기도 수정하지 않았으며, 유일한 upstream 소스 수정은 core NOTICE에 AIWF 출처를 덧붙인 것이다. stack 플러그인은 `skills/`, `rules/`, `agents/`, `LICENSE`, `NOTICE`를 바이트 그대로 두고 플러그인별 `UPSTREAM.json`에 hash를 기록한다. Apache-2.0 LICENSE와 NOTICE, 원본 커밋 및 수정 표시를 함께 보관한다. AIWF의 기존 MIT 라이선스와 가져온 플러그인의 Apache-2.0 라이선스는 파일 범위가 다르다.
 
 - 비전 → 요구사항 → 용어집/엔티티 → 유스케이스 → 테스트 정의.
 - `FR-001`, `UC-001`, `TC-001`로 연결하고 `UC-001 BR-001`처럼 업무 규칙의 소속을 표시한다.
@@ -25,9 +25,11 @@ AIWF를 **유스케이스 명세를 실제 구현과 검증으로 연결하는 �
 | 구성 | 책임 | 이번 상태 |
 |---|---|---|
 | 명세 `docs/` | 원하는 동작과 검증 정의, 안정적인 ID | AIUP 형식 채택 |
-| `aiwf-spec` 플러그인 | 명세 작성·검토·기존 시스템 분석 지침 | core 도입 + workflow 추가 |
+| `aiwf-core` 플러그인 | 요구사항·엔티티·유스케이스·명세 검토 지침 (필수 core) | upstream 7개 바이트 그대로 |
+| `aiwf-spec` 플러그인 | AIWF `workflow`, host 중립 작업 추적·증거 경계 | 자체 스킬 1개 |
 | stack 플러그인 `aiwf-<stack>` | 스택별 마이그레이션·구현·테스트 지침 | upstream 4종 바이트 그대로 이식 |
 | `aiwf-spec` CLI | 초기화, 명세 버전 고정, 변경 감지, 검증 로그 묶기 | 로컬 구현 |
+| `aiwf-core-legacy` 플러그인 | 기존 세션·작업·YOLO 명령 | 이름만 변경, 파일 유지 |
 | 현재 코딩 에이전트 | 코드 수정, 프로젝트 테스트 실행, 결과 보고 | 기존 도구 사용; 별도 모델 런타임 없음 |
 | Sprintable 어댑터 | 작업과 명세 버전 연결, 문서/증거 업로드 | 다음 단계 설계 |
 | 검토자/승인자 | 검토·업무 수용·승인 | 자동 통과로 대체하지 않음 |
@@ -40,13 +42,13 @@ AIWF를 **유스케이스 명세를 실제 구현과 검증으로 연결하는 �
 
 ## 진행 순서
 
-1. **로컬 기반:** core + 4개 stack 이식, 완전한 한국어 예제, 구조 검사, 명세 pin/change check, 검증 로그 packet, Claude/Codex 설치 경로. 이번 작업 범위다.
+1. **로컬 기반:** `aiwf-core`/`aiwf-spec` 분리와 4개 stack 이식, 완전한 한국어 예제, 구조 검사, 명세 pin/change check, 검증 로그 packet, Claude/Codex 설치 경로. 이번 작업 범위다.
 2. **실제 기능 파일럿:** 작은 실제 저장소에서 UC 하나를 선택한다. 정상 흐름과 실패 흐름을 구현하고 실제 앱 동작을 확인한다. 문서 작성부터 실행 결과까지 걸린 시간, 검토 횟수, 명세 대비 누락을 기록한다. 이 결과로 명세 양과 workflow를 조정한다.
 3. **Sprintable 연결:** 프로젝트/작업을 명시적으로 연결하고, packet을 문서로 등록하고, report evidence와 필요 시 승인 게이트를 만든다. 수정된 명세를 기존 승인으로 통과시키지 않는 버전 계약을 검증한다.
 4. **반복 실행:** 파일럿 이후 CI/에이전트 작업 큐·중단/재개·재시도·동시 작업 격리를 추가한다. 저장소 변경, 실패한 테스트, 승인 대기가 있는 경우 자동으로 병합하지 않는다. 반복 실행은 아직 구현되지 않았다.
 5. **레거시 정리:** 실제 사용 경로가 확인되면 예전 명령·문서·중복 모듈을 삭제하고 설치/배포 방식을 단순화한다.
 
-AIUP 기술 스택 플러그인 4개는 upstream 바이트 그대로 가져와 별도 `plugins/aiwf-<stack>`에 두었다. 설치기는 `--stack`으로 core 8개와 stack 하나를 함께 설치하며 기본은 core 8개이고, 기존 설치는 덮어쓰지 않고 강제 플래그도 없다. 설치는 파일 복사일 뿐 네이티브 Codex 에이전트를 등록하지 않고 MCP 서버를 자동 구성하지 않는다. 다만 어느 stack을 실제 파일럿에 쓸지는 대상 저장소가 정해진 뒤 선정한다. AIUP의 stack을 무조건 쓰기보다 실제 프로젝트의 테스트·구현 규칙과 맞추는 것이 먼저다.
+방법론 core 7개는 `plugins/aiwf-core`에, AIWF `workflow`는 `plugins/aiwf-spec`에 분리했다. 이전에는 core 7개를 `aiwf-spec`에 넣어 방법론 core와 AIWF 래퍼가 한 플러그인에 섞였는데, 원본 소스는 그대로 두고 위치만 옮겨 바로잡았다. 기존 AIWF 세션·작업 플러그인은 `plugins/aiwf-core-legacy`로 이름만 바꿔 남겼고 삭제한 파일은 없으며 기존 명령도 marketplace에서 계속 쓸 수 있다. Codex 설치기는 기본으로 core 7개와 `workflow` 1개를 설치하고 `--stack`으로 stack 하나를 추가하며, 기존 설치는 덮어쓰지 않고 강제 갱신 플래그도 없다. 설치는 파일 복사일 뿐 네이티브 Codex 에이전트를 등록하지 않고 MCP 서버를 자동 구성하지 않는다. 다만 어느 stack을 실제 파일럿에 쓸지는 대상 저장소가 정해진 뒤 선정한다. AIUP의 stack을 무조건 쓰기보다 실제 프로젝트의 테스트·구현 규칙과 맞추는 것이 먼저다.
 
 ## 이번 범위의 검증과 남은 것
 

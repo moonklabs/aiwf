@@ -4,7 +4,7 @@
 
 AIWF는 유스케이스 명세를 Git에 유지하면서 기존 Claude Code/Codex로 구현하고, 실제 검증 결과를 검토 가능한 형태로 남기는 개발 워크플로우다.
 
-2026-10-02부터 개선 중이다. 새 경로는 **`aiwf-spec`**이며, 현재 로컬 초기화·명세 버전 고정·변경 검사·검증 로그 묶기를 제공한다. Sprintable 연동과 무인 반복 실행은 후속 범위다. 아래 기능은 이 저장소의 개발 버전 기준이며 기존 npm 배포판에 포함됐다고 가정하면 안 된다.
+2026-10-02부터 개선 중이다. 새 경로는 두 플러그인으로 나뉜다. **`aiwf-core`**는 AIUP에서 가져온 방법론 core로 요구사항·유스케이스·엔티티·명세 검토용 upstream 스킬 7개를 담는다. **`aiwf-spec`**는 AIWF가 추가한 `workflow` 스킬을 담고, 저장소 CLI를 사용해 비파괴 초기화·명세 버전 고정·변경 감지·검증 로그 묶기를 연결한다. Sprintable 연동과 무인 반복 실행은 후속 범위다. 아래 기능은 이 저장소의 개발 버전 기준이며 기존 npm 배포판에 포함됐다고 가정하면 안 된다.
 
 ## 가장 먼저 읽을 것
 
@@ -27,22 +27,24 @@ node scripts/install-spec-skills.mjs --project /path/to/project --stack nestjs-n
 node scripts/install-spec-skills.mjs --project /path/to/project --stack nestjs-nextjs
 ```
 
-Codex에 설치되는 스킬은 `aiwf-workflow`, `aiwf-requirements`, `aiwf-use-case-spec` 등이다. `--stack`은 `vaadin-jooq`, `angular-jpa`, `blazor-dotnet`, `nestjs-nextjs` 중 하나를 골라 core 8개와 해당 stack을 함께 설치하며, 기본값은 core 8개다. 기존 스킬은 덮어쓰지 않고 강제 플래그도 없다. 실제 호스트의 스킬 자동 선택과 모델 실행은 별도 파일럿에서 검증할 예정이다.
+Codex는 기본적으로 `aiwf-core` 스킬 7개와 `aiwf-spec`의 `workflow`를 `aiwf-requirements`, `aiwf-use-case-spec`, ..., `aiwf-workflow`로 함께 설치하며 참조 문서·검사기·출처도 포함한다. `--stack`은 `vaadin-jooq`, `angular-jpa`, `blazor-dotnet`, `nestjs-nextjs` 중 하나를 골라 해당 stack을 추가한다. 기존 스킬은 덮어쓰지 않고 강제 플래그도 없다. 실제 호스트의 스킬 자동 선택과 모델 실행은 별도 파일럿에서 검증할 예정이다.
 
-## 기술 스택
+## 플러그인 구성
 
-upstream AIUP 스킬 31개를 바이트 그대로 가져오고 AIWF 자체 `workflow` 1개를 더해 총 32개다. core 플러그인 `aiwf-spec`은 upstream core 7개와 `workflow`를 담고, 각 stack은 별도 `plugins/aiwf-<stack>` 플러그인에 있다. stack 플러그인은 `skills/`, `rules/`, `agents/`, `LICENSE`, `NOTICE`를 upstream 바이트 그대로 두고 플러그인별 `UPSTREAM.json`에 원본 hash를 기록한다.
+upstream AIUP 스킬 31개를 바이트 그대로 가져오고 AIWF 자체 `workflow` 1개를 더해 총 32개다. `aiwf-core`가 upstream 7개를, `aiwf-spec`가 AIWF `workflow` 하나만 담는다.
 
-| 플러그인 | upstream | 버전 | 스킬 수 |
-|---|---|---|---|
-| `aiwf-vaadin-jooq` | `aiup-vaadin-jooq` | 2.20.0 | 8 |
-| `aiwf-angular-jpa` | `aiup-angular-jpa` | 0.7.0 | 6 |
-| `aiwf-blazor-dotnet` | `aiup-blazor-dotnet` | 0.7.0 | 5 |
-| `aiwf-nestjs-nextjs` | `aiup-nestjs-nextjs` | 0.4.0 | 5 |
+| 플러그인 | 역할 | 내용 |
+|---|---|---|
+| `aiwf-core` | 방법론 core (필수) | upstream 스킬 7개 바이트 그대로 (2.19.0) |
+| `aiwf-spec` | AIWF 래퍼 (선택) | AIWF `workflow` 하나 |
+| `aiwf-vaadin-jooq` | stack | upstream 스킬 8개 (2.20.0) |
+| `aiwf-angular-jpa` | stack | upstream 스킬 6개 (0.7.0) |
+| `aiwf-blazor-dotnet` | stack | upstream 스킬 5개 (0.7.0) |
+| `aiwf-nestjs-nextjs` | stack | upstream 스킬 5개 (0.4.0) |
 
-설치는 파일 복사이며 네이티브 Codex 서브에이전트를 등록하지 않는다. `agents/uc-coverage.md` 같은 에이전트 프롬프트는 리소스로만 복사되고, 호스트 매핑은 `workflow` 스킬이 설명한다. MCP 서버를 자동 구성하지 않으며 새 의존성도 추가하지 않는다. 이름·개수·pin 갱신 절차는 [SKILLS.ko.md](docs/modernization/SKILLS.ko.md)에 정리했다.
+각 플러그인은 가져온 upstream 파일(`skills/`, stack은 `rules/`와 있는 경우 `agents/`, `LICENSE`, `NOTICE`)과 플러그인별 `UPSTREAM.json`을 둔다. 유일한 upstream 소스 수정은 `aiwf-core` NOTICE에 덧붙인 AIWF 출처 문구이며, 그 밖의 vendored 파일은 upstream 바이트와 동일하다. `aiwf-spec`는 자체 upstream이 없어 core의 [UPSTREAM.json](plugins/aiwf-core/UPSTREAM.json)을 가리킨다. 기존 AIWF 세션·작업 플러그인은 `aiwf-core-legacy`로 남겨 두었고 삭제한 파일은 없다. 설치는 파일 복사이며 네이티브 Codex 서브에이전트를 등록하지 않고 MCP도 자동 구성하지 않는다. `agents/uc-coverage.md` 같은 에이전트 프롬프트는 리소스로만 복사되고, 호스트 매핑은 `workflow` 스킬이 설명한다. 이름·개수·pin 갱신 절차는 [SKILLS.ko.md](docs/modernization/SKILLS.ko.md)에 정리했다.
 
-Claude Code에서는 이 저장소를 marketplace로 등록하고 필요한 플러그인을 설치한 뒤 `/aiwf-spec:workflow`, `/aiwf-nestjs-nextjs:implement`처럼 플러그인 이름으로 한정해 호출한다.
+Claude Code에서는 이 저장소를 marketplace로 등록하고 필요한 플러그인(`aiwf-core`, `aiwf-spec`, `aiwf-<stack>`)을 설치한 뒤 `/aiwf-core:use-case-spec`, `/aiwf-spec:workflow`, `/aiwf-nestjs-nextjs:implement`처럼 플러그인 이름으로 한정해 호출한다.
 
 ```text
 /plugin marketplace add moonklabs/aiwf
@@ -64,7 +66,7 @@ Claude Code에서는 이 저장소를 marketplace로 등록하고 필요한 플�
 
 ```bash
 # 저장소 checkout 기준 경로. 대상 프로젝트의 docs를 검사한다.
-python3 plugins/aiwf-spec/skills/spec-review/scripts/spec_lint.py \
+python3 plugins/aiwf-core/skills/spec-review/scripts/spec_lint.py \
   --docs /path/to/project/docs --strict --no-baseline
 
 node src/cli/spec-cli.js pin --root /path/to/project
@@ -135,4 +137,4 @@ npm run test:spec-upstream
 
 ## 출처와 라이선스
 
-`aiwf-spec` core와 4개 stack 플러그인은 [AI Unified Process marketplace](https://github.com/AI-Unified-Process/marketplace) 커밋 `065dadda0f696c29ff2bacbda31b38152082e6fa`에서 가져왔다. core는 Simon Martinelli, stack은 Simon Martinelli(vaadin-jooq), Marc Affolter(angular-jpa), Carl J. Mosca(blazor-dotnet), Swift Ugandan(nestjs-nextjs)의 작업이다. 각 플러그인의 `UPSTREAM.json`에 원본 커밋·파일 hash·수정 내역을 기록했다. 기존 AIWF 코드는 [MIT](LICENSE), 가져온 플러그인은 [Apache-2.0](plugins/aiwf-spec/LICENSE)와 [NOTICE](plugins/aiwf-spec/NOTICE)를 따른다.
+`aiwf-core` 방법론 플러그인과 4개 stack 플러그인은 [AI Unified Process marketplace](https://github.com/AI-Unified-Process/marketplace) 커밋 `065dadda0f696c29ff2bacbda31b38152082e6fa`에서 가져왔다. `aiwf-core`와 `aiwf-vaadin-jooq`는 Simon Martinelli, `aiwf-angular-jpa`는 Marc Affolter, `aiwf-blazor-dotnet`은 Carl J. Mosca, `aiwf-nestjs-nextjs`는 Swift Ugandan의 작업이다. 각 플러그인의 `UPSTREAM.json`에 원본 커밋·파일 hash·수정 내역을 기록했다. 기존 AIWF 코드는 [MIT](LICENSE), 가져온 플러그인은 [Apache-2.0](plugins/aiwf-core/LICENSE)와 [NOTICE](plugins/aiwf-core/NOTICE)를 따른다.
