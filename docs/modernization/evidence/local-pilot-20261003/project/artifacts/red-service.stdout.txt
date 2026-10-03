@@ -1,0 +1,266 @@
+TAP version 13
+# Subtest: UC-001 success persists amount, description, submitted state and receipt
+ok 1 - UC-001 success persists amount, description, submitted state and receipt
+  ---
+  duration_ms: 1.535917
+  type: 'test'
+  ...
+# Subtest: UC-001 BR-001/A1 rejects 0 without changing prior state
+ok 2 - UC-001 BR-001/A1 rejects 0 without changing prior state
+  ---
+  duration_ms: 0.174875
+  type: 'test'
+  ...
+# Subtest: UC-001 BR-001/A1 rejects -1 without changing prior state
+ok 3 - UC-001 BR-001/A1 rejects -1 without changing prior state
+  ---
+  duration_ms: 0.091167
+  type: 'test'
+  ...
+# Subtest: UC-001 BR-001/A1 rejects -100 without changing prior state
+ok 4 - UC-001 BR-001/A1 rejects -100 without changing prior state
+  ---
+  duration_ms: 0.043709
+  type: 'test'
+  ...
+# Subtest: UC-001 BR-001/A1 rejects NaN without changing prior state
+ok 5 - UC-001 BR-001/A1 rejects NaN without changing prior state
+  ---
+  duration_ms: 0.095583
+  type: 'test'
+  ...
+# Subtest: UC-001 BR-001/A1 rejects Infinity without changing prior state
+ok 6 - UC-001 BR-001/A1 rejects Infinity without changing prior state
+  ---
+  duration_ms: 0.03975
+  type: 'test'
+  ...
+# Subtest: UC-001 BR-001/A1 rejects -Infinity without changing prior state
+ok 7 - UC-001 BR-001/A1 rejects -Infinity without changing prior state
+  ---
+  duration_ms: 0.066292
+  type: 'test'
+  ...
+# Subtest: UC-001 BR-001/A1 rejects 12000 without changing prior state
+ok 8 - UC-001 BR-001/A1 rejects 12000 without changing prior state
+  ---
+  duration_ms: 0.071292
+  type: 'test'
+  ...
+# Subtest: UC-001 BR-001/A1 rejects null without changing prior state
+ok 9 - UC-001 BR-001/A1 rejects null without changing prior state
+  ---
+  duration_ms: 0.200792
+  type: 'test'
+  ...
+# Subtest: UC-001 BR-001/A1 rejects undefined without changing prior state
+ok 10 - UC-001 BR-001/A1 rejects undefined without changing prior state
+  ---
+  duration_ms: 0.230291
+  type: 'test'
+  ...
+# Subtest: TC-001 service slice permits correction from -100 to 12000
+ok 11 - TC-001 service slice permits correction from -100 to 12000
+  ---
+  duration_ms: 0.097125
+  type: 'test'
+  ...
+# Subtest: UC-001 A2 storage failure preserves earlier records and permits recovery
+ok 12 - UC-001 A2 storage failure preserves earlier records and permits recovery
+  ---
+  duration_ms: 0.120417
+  type: 'test'
+  ...
+# Subtest: UC-001 BR-002 accepts 200 ASCII code points
+ok 13 - UC-001 BR-002 accepts 200 ASCII code points
+  ---
+  duration_ms: 0.037792
+  type: 'test'
+  ...
+# Subtest: UC-001 BR-002/A3 rejects 201 ASCII code points without mutation
+not ok 14 - UC-001 BR-002/A3 rejects 201 ASCII code points without mutation
+  ---
+  duration_ms: 0.216209
+  type: 'test'
+  location: '/private/tmp/aiwf-uc001-pilot-l07zou4o/project/tests/expense.test.mjs:72:3'
+  failureType: 'testCodeFailure'
+  error: 'Missing expected exception (RangeError).'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    name: 'RangeError'
+    message: 'Description must be at most 200 Unicode code points'
+  operator: 'throws'
+  stack: |-
+    TestContext.<anonymous> (file:///private/tmp/aiwf-uc001-pilot-l07zou4o/project/tests/expense.test.mjs:76:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: UC-001 BR-002 accepts 200 astral Unicode code points
+ok 15 - UC-001 BR-002 accepts 200 astral Unicode code points
+  ---
+  duration_ms: 0.486291
+  type: 'test'
+  ...
+# Subtest: UC-001 BR-002/A3 rejects 201 astral Unicode code points without mutation
+not ok 16 - UC-001 BR-002/A3 rejects 201 astral Unicode code points without mutation
+  ---
+  duration_ms: 0.095916
+  type: 'test'
+  location: '/private/tmp/aiwf-uc001-pilot-l07zou4o/project/tests/expense.test.mjs:72:3'
+  failureType: 'testCodeFailure'
+  error: 'Missing expected exception (RangeError).'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    name: 'RangeError'
+    message: 'Description must be at most 200 Unicode code points'
+  operator: 'throws'
+  stack: |-
+    TestContext.<anonymous> (file:///private/tmp/aiwf-uc001-pilot-l07zou4o/project/tests/expense.test.mjs:76:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: UC-001 BR-002/A3 rejects number description without mutation
+not ok 17 - UC-001 BR-002/A3 rejects number description without mutation
+  ---
+  duration_ms: 0.091792
+  type: 'test'
+  location: '/private/tmp/aiwf-uc001-pilot-l07zou4o/project/tests/expense.test.mjs:84:3'
+  failureType: 'testCodeFailure'
+  error: 'Missing expected exception (TypeError).'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    name: 'TypeError'
+    message: 'Description must be a string'
+  operator: 'throws'
+  stack: |-
+    TestContext.<anonymous> (file:///private/tmp/aiwf-uc001-pilot-l07zou4o/project/tests/expense.test.mjs:88:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: UC-001 BR-002/A3 rejects array description without mutation
+not ok 18 - UC-001 BR-002/A3 rejects array description without mutation
+  ---
+  duration_ms: 0.044666
+  type: 'test'
+  location: '/private/tmp/aiwf-uc001-pilot-l07zou4o/project/tests/expense.test.mjs:84:3'
+  failureType: 'testCodeFailure'
+  error: 'Missing expected exception (TypeError).'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    name: 'TypeError'
+    message: 'Description must be a string'
+  operator: 'throws'
+  stack: |-
+    TestContext.<anonymous> (file:///private/tmp/aiwf-uc001-pilot-l07zou4o/project/tests/expense.test.mjs:88:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: UC-001 BR-002/A3 rejects object description without mutation
+not ok 19 - UC-001 BR-002/A3 rejects object description without mutation
+  ---
+  duration_ms: 0.041917
+  type: 'test'
+  location: '/private/tmp/aiwf-uc001-pilot-l07zou4o/project/tests/expense.test.mjs:84:3'
+  failureType: 'testCodeFailure'
+  error: 'Missing expected exception (TypeError).'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    name: 'TypeError'
+    message: 'Description must be a string'
+  operator: 'throws'
+  stack: |-
+    TestContext.<anonymous> (file:///private/tmp/aiwf-uc001-pilot-l07zou4o/project/tests/expense.test.mjs:88:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: UC-001 BR-002 normalizes omitted optional description to empty string
+ok 20 - UC-001 BR-002 normalizes omitted optional description to empty string
+  ---
+  duration_ms: 0.0385
+  type: 'test'
+  ...
+# Subtest: UC-001 BR-002 normalizes null optional description to empty string
+not ok 21 - UC-001 BR-002 normalizes null optional description to empty string
+  ---
+  duration_ms: 0.185917
+  type: 'test'
+  location: '/private/tmp/aiwf-uc001-pilot-l07zou4o/project/tests/expense.test.mjs:96:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    null !== ''
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: ''
+  actual: ~
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///private/tmp/aiwf-uc001-pilot-l07zou4o/project/tests/expense.test.mjs:101:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: UC-001 BR-002 normalizes empty optional description to empty string
+ok 22 - UC-001 BR-002 normalizes empty optional description to empty string
+  ---
+  duration_ms: 0.029083
+  type: 'test'
+  ...
+# Subtest: TC-002 service slice corrects 201 to 200 and preserves earlier records
+not ok 23 - TC-002 service slice corrects 201 to 200 and preserves earlier records
+  ---
+  duration_ms: 0.061167
+  type: 'test'
+  location: '/private/tmp/aiwf-uc001-pilot-l07zou4o/project/tests/expense.test.mjs:106:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing expected exception (RangeError).'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  stack: |-
+    TestContext.<anonymous> (file:///private/tmp/aiwf-uc001-pilot-l07zou4o/project/tests/expense.test.mjs:110:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+1..23
+# tests 23
+# suites 0
+# pass 16
+# fail 7
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 39.162833

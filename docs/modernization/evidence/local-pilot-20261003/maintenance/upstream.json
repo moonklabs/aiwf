@@ -1,0 +1,24 @@
+{
+  "name": "upstream",
+  "argv": [
+    "npm",
+    "run",
+    "test:spec-upstream"
+  ],
+  "cwd": "/Users/moonklabs/workspace-plugin/aiwf",
+  "started_at": "2026-10-03T07:24:28.331557+00:00",
+  "ended_at": "2026-10-03T07:24:28.619185+00:00",
+  "wall_seconds": 0.28757287515327334,
+  "exit_code": 0,
+  "scope": "AIWF repository maintenance, separate from UC service pilot",
+  "stdout": {
+    "path": "upstream.stdout.txt",
+    "bytes": 337,
+    "sha256": "1b8d628021d37e7fd7d60575dd9534cc59819731df78d417a0ced99dc57df28b"
+  },
+  "stderr": {
+    "path": "upstream.stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

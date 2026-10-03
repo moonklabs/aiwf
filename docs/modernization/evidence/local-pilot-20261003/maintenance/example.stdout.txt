@@ -1,0 +1,5 @@
+
+> aiwf@0.3.24 validate:spec-example
+> python3 plugins/aiwf-core/skills/spec-review/scripts/spec_lint.py --docs examples/spec-workflow/docs --strict --no-baseline
+
+0 error(s), 0 warning(s), 0 info(s), 0 suppressed by baseline

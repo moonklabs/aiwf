@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "collected_at": "2026-10-03T07:19:37.358Z",
+  "status": "awaiting_review",
+  "acceptance": "not_recorded",
+  "remote_sync": "not_attempted",
+  "spec": {
+    "digest": "53e0bd97d338aa9ca96472e09ff9f2ee54b33e0e6a39a9e23bf63c1bb4272bef",
+    "files": [
+      {
+        "path": "docs/entity_model.md",
+        "sha256": "edb9c35d17e73885346df31782089088c4dfe26e82f8b0cd2463e9febedc9d4e",
+        "bytes": 1474,
+        "kind": "required"
+      },
+      {
+        "path": "docs/glossary.md",
+        "sha256": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+        "bytes": 560,
+        "kind": "required"
+      },
+      {
+        "path": "docs/plans/UC-001.md",
+        "sha256": "825d1762c29ca5c76cdcbdcb3f403849e9d0e61e9423c3bf0c051a6bd063ff87",
+        "bytes": 1525,
+        "kind": "plan"
+      },
+      {
+        "path": "docs/requirements.md",
+        "sha256": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+        "bytes": 471,
+        "kind": "required"
+      },
+      {
+        "path": "docs/test_cases/TC-001-submit-expense.md",
+        "sha256": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+        "bytes": 1529,
+        "kind": "test_case"
+      },
+      {
+        "path": "docs/use_cases.puml",
+        "sha256": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+        "bytes": 208,
+        "kind": "required"
+      },
+      {
+        "path": "docs/use_cases/UC-001-submit-expense.md",
+        "sha256": "e19c5b44acb98dcfb6c4992b1be16520cfe83f7dcb7dee04415b59cedd0590cf",
+        "bytes": 1812,
+        "kind": "use_case"
+      },
+      {
+        "path": "docs/vision.md",
+        "sha256": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+        "bytes": 516,
+        "kind": "required"
+      }
+    ]
+  },
+  "pin": {
+    "digest": "53e0bd97d338aa9ca96472e09ff9f2ee54b33e0e6a39a9e23bf63c1bb4272bef",
+    "matched": true
+  },
+  "drift": {
+    "added": [],
+    "changed": [],
+    "deleted": []
+  },
+  "git": null,
+  "evidence": {
+    "trust": "reported_untrusted",
+    "checks_summary": {
+      "total": 4,
+      "passed": 2,
+      "failed": 0,
+      "not_run": 2
+    },
+    "checks": [
+      {
+        "name": "C-STRUCTURE",
+        "command": "python3 /Users/moonklabs/workspace-plugin/aiwf/plugins/aiwf-core/skills/spec-review/scripts/spec_lint.py --docs docs --strict --no-baseline --format json",
+        "status": "passed",
+        "log": {
+          "path": "artifacts/baseline-structure.stdout.txt",
+          "sha256": "084e217c610e298df59b5c5470daedbe0f268f1baa11f9a2d1d60a6268c0fe7c",
+          "bytes": 113,
+          "content": "{\n  \"findings\": [],\n  \"summary\": {\n    \"errors\": 0,\n    \"warnings\": 0,\n    \"infos\": 0,\n    \"suppressed\": 0\n  }\n}\n"
+        }
+      },
+      {
+        "name": "C-SERVICE",
+        "command": "node --test tests/expense.test.mjs",
+        "status": "passed",
+        "log": {
+          "path": "artifacts/baseline-service.stdout.txt",
+          "sha256": "ffb08b7e228b9b78fe7265bacc51c3011bd379af830ec038a1ebae04c30ecbc8",
+          "bytes": 2435,
+          "content": "TAP version 13\n# Subtest: UC-001 success persists amount, description, submitted state and receipt\nok 1 - UC-001 success persists amount, description, submitted state and receipt\n  ---\n  duration_ms: 1.301125\n  type: 'test'\n  ...\n# Subtest: UC-001 BR-001/A1 rejects 0 without changing prior state\nok 2 - UC-001 BR-001/A1 rejects 0 without changing prior state\n  ---\n  duration_ms: 0.17775\n  type: 'test'\n  ...\n# Subtest: UC-001 BR-001/A1 rejects -1 without changing prior state\nok 3 - UC-001 BR-001/A1 rejects -1 without changing prior state\n  ---\n  duration_ms: 0.093459\n  type: 'test'\n  ...\n# Subtest: UC-001 BR-001/A1 rejects -100 without changing prior state\nok 4 - UC-001 BR-001/A1 rejects -100 without changing prior state\n  ---\n  duration_ms: 0.044583\n  type: 'test'\n  ...\n# Subtest: UC-001 BR-001/A1 rejects NaN without changing prior state\nok 5 - UC-001 BR-001/A1 rejects NaN without changing prior state\n  ---\n  duration_ms: 0.0935\n  type: 'test'\n  ...\n# Subtest: UC-001 BR-001/A1 rejects Infinity without changing prior state\nok 6 - UC-001 BR-001/A1 rejects Infinity without changing prior state\n  ---\n  duration_ms: 0.040084\n  type: 'test'\n  ...\n# Subtest: UC-001 BR-001/A1 rejects -Infinity without changing prior state\nok 7 - UC-001 BR-001/A1 rejects -Infinity without changing prior state\n  ---\n  duration_ms: 0.0675\n  type: 'test'\n  ...\n# Subtest: UC-001 BR-001/A1 rejects 12000 without changing prior state\nok 8 - UC-001 BR-001/A1 rejects 12000 without changing prior state\n  ---\n  duration_ms: 0.068042\n  type: 'test'\n  ...\n# Subtest: UC-001 BR-001/A1 rejects null without changing prior state\nok 9 - UC-001 BR-001/A1 rejects null without changing prior state\n  ---\n  duration_ms: 0.200166\n  type: 'test'\n  ...\n# Subtest: UC-001 BR-001/A1 rejects undefined without changing prior state\nok 10 - UC-001 BR-001/A1 rejects undefined without changing prior state\n  ---\n  duration_ms: 0.228917\n  type: 'test'\n  ...\n# Subtest: TC-001 service slice permits correction from -100 to 12000\nok 11 - TC-001 service slice permits correction from -100 to 12000\n  ---\n  duration_ms: 0.096458\n  type: 'test'\n  ...\n# Subtest: UC-001 A2 storage failure preserves earlier records and permits recovery\nok 12 - UC-001 A2 storage failure preserves earlier records and permits recovery\n  ---\n  duration_ms: 0.1155\n  type: 'test'\n  ...\n1..12\n# tests 12\n# suites 0\n# pass 12\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 37.279416\n"
+        }
+      },
+      {
+        "name": "C-UI",
+        "command": "not_run: no consuming UI/authentication app selected",
+        "status": "not_run"
+      },
+      {
+        "name": "C-HUMAN",
+        "command": "not_run: no human packet review recorded",
+        "status": "not_run"
+      }
+    ],
+    "unverified": [
+      "Login, submitter_id and real authorization",
+      "UI journey, error messages and receipt display",
+      "Real DB, cross-process durability, concurrency and Decimal precision",
+      "Business semantics, actual product adoption, human acceptance and active human time",
+      "Minimum Node 20/Python 3.9 and stack apps",
+      "Current CLI does not verify code/test hashes or execution-time freshness"
+    ]
+  },
+  "limitations": [
+    "Recorded check output is not proof of business acceptance.",
+    "Check statuses are reported by the submitter and are not independently verified by this tool.",
+    "Remote synchronization was not attempted.",
+    "Human acceptance has not been recorded.",
+    "Structural and semantic lint is not performed by this tool; it remains an upstream step."
+  ]
+}

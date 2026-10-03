@@ -607,8 +607,8 @@
       "translation": "docs/ko-skills/aiwf-spec/README.ko.md",
       "scope": "repository",
       "review_status": "awaiting_review",
-      "source_sha256": "74f91c39a6ffbfe6326d66f18dfc30e84cde8450cf170f018e8ea0cea53f6c3c",
-      "translation_sha256": "35b4bf097e1901a54d6d313fd5d009b5333b637ce215bbcf4303dd31e95456bf"
+      "source_sha256": "f2a3165cbf98987c214b5c8e5fd76a9a3d3d766eb46d91fab372068ab9589880",
+      "translation_sha256": "96ab18a48fc0fa5cc6263fa6b8095a2065ff2a124143b04aa361c3fabf334f38"
     },
     {
       "source": "plugins/aiwf-spec/skills/workflow/SKILL.md",
