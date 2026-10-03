@@ -9,9 +9,12 @@
     },
     "scripts": {
         "test": "node --test tests/spec-workflow/*.test.mjs",
+        "pretest": "npm run docs:check",
+        "docs:check": "node scripts/check-korean-docs.mjs",
+        "docs:check:local": "node scripts/check-korean-docs.mjs --check-local",
         "check:deps": "node scripts/check-dependencies.js",
-        "prepublishOnly": "npm run check:deps",
-        "test:spec": "node --test tests/spec-workflow/*.test.mjs",
+        "prepublishOnly": "npm run docs:check && npm run check:deps",
+        "test:spec": "npm test",
         "validate:spec-plugin": "node scripts/validate-spec-plugin.mjs",
         "test:spec-upstream": "python3 plugins/aiwf-core/skills/use-case-spec/scripts/validate_use_case.py --self-test && python3 plugins/aiwf-core/skills/test-case/scripts/bpmn_paths.py --self-test && python3 plugins/aiwf-core/skills/spec-review/scripts/spec_lint.py --self-test",
         "validate:spec-example": "python3 plugins/aiwf-core/skills/spec-review/scripts/spec_lint.py --docs examples/spec-workflow/docs --strict --no-baseline"
@@ -54,6 +57,8 @@
         "CHANGELOG.md",
         "plugins/aiwf-core/",
         "plugins/aiwf-spec/",
+        "plugins/aiwf-delegate-claude/",
+        "plugins/aiwf-delegate-codex/",
         "plugins/aiwf-vaadin-jooq/",
         "plugins/aiwf-angular-jpa/",
         "plugins/aiwf-blazor-dotnet/",

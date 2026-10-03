@@ -4,7 +4,7 @@ import { mkdtempSync, readFileSync, rmSync, mkdirSync, writeFileSync, existsSync
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
-import { installSpecSkills, supportedStacks } from '../../scripts/install-spec-skills.mjs';
+import { installSpecSkills, supportedDelegates, supportedStacks } from '../../scripts/install-spec-skills.mjs';
 
 function project(t) {
   const root = mkdtempSync(join(tmpdir(), 'aiwf-install-'));
@@ -16,6 +16,7 @@ test('dry run writes nothing, real install retains parser siblings and attributi
   const root = project(t);
   const dry = installSpecSkills(root, { dryRun: true });
   assert.equal(dry.destinations.length, 8);
+  assert.equal(dry.destinations.some(path => /aiwf-delegate-(claude|codex)$/.test(path)), false);
   assert.equal(existsSync(join(root, '.agents')), false);
   const result = installSpecSkills(root);
   assert.equal(result.installed.length, 8);
@@ -93,6 +94,32 @@ test('unknown stack is rejected before writing anything', t => {
   assert.equal(existsSync(join(root, '.agents')), false);
 });
 
+test('each delegation skill is omitted by default and independently opt-in', t => {
+  const counts = { claude: 9, codex: 9 };
+  for (const target of supportedDelegates) {
+    const root = project(t);
+    const dry = installSpecSkills(root, { delegates: [target], dryRun: true });
+    assert.equal(dry.destinations.length, counts[target]);
+    assert.equal(dry.destinations.some(path => path.endsWith(`aiwf-delegate-${target}`)), true);
+    assert.equal(dry.destinations.some(path => path.endsWith(`aiwf-delegate-${target === 'claude' ? 'codex' : 'claude'}`)), false);
+    assert.equal(existsSync(join(root, '.agents')), false);
+    const result = installSpecSkills(root, { delegates: [target] });
+    const skill = `aiwf-delegate-${target}`;
+    const skills = join(root, '.agents/skills');
+    assert.equal(result.installed.length, counts[target]);
+    assert.match(readFileSync(join(skills, `${skill}/SKILL.md`), 'utf8'), new RegExp(`^name: ${skill}$`, 'm'));
+    assert.match(readFileSync(join(skills, `${skill}/agents/openai.yaml`), 'utf8'), /allow_implicit_invocation: false/);
+    assert.equal(existsSync(join(skills, `aiwf-delegate-${target === 'claude' ? 'codex' : 'claude'}`)), false);
+  }
+});
+
+test('both delegation skills can be selected together and invalid targets fail before writing', t => {
+  const root = project(t);
+  assert.equal(installSpecSkills(root, { delegates: ['claude', 'codex', 'claude'], dryRun: true }).destinations.length, 10);
+  assert.throws(() => installSpecSkills(root, { delegates: ['../../outside'] }), /Unknown delegate/);
+  assert.equal(existsSync(join(root, '.agents')), false);
+});
+
 test('each optional stack installs its complete isolated bundle', t => {
   const counts = { 'vaadin-jooq': 8, 'angular-jpa': 6, 'blazor-dotnet': 5, 'nestjs-nextjs': 5 };
   for (const stack of supportedStacks) {
@@ -121,7 +148,7 @@ test('stack conflict preserves existing files and prevents partial core installa
   assert.equal(existsSync(join(root, '.agents/skills/aiwf-workflow')), false);
 });
 
-test('installer CLI accepts stack selection and rejects incomplete/repeated stack flags', t => {
+test('installer CLI accepts stack and delegate selections and rejects invalid options', t => {
   const root = project(t);
   const run = args => spawnSync(process.execPath, ['scripts/install-spec-skills.mjs', '--project', root, ...args], { encoding: 'utf8' });
   const dry = run(['--stack', 'blazor-dotnet', '--dry-run']);
@@ -130,5 +157,10 @@ test('installer CLI accepts stack selection and rejects incomplete/repeated stac
   assert.equal(run(['--stack']).status, 1);
   assert.equal(run(['--stack', 'invalid']).status, 1);
   assert.equal(run(['--stack', 'blazor-dotnet', '--stack', 'angular-jpa']).status, 1);
+  const both = run(['--delegate', 'claude', '--delegate', 'codex', '--dry-run']);
+  assert.equal(both.status, 0, both.stderr);
+  assert.equal(JSON.parse(both.stdout).destinations.length, 10);
+  assert.equal(run(['--delegate']).status, 1);
+  assert.equal(run(['--delegate', 'invalid']).status, 1);
   assert.equal(existsSync(join(root, '.agents')), false);
 });

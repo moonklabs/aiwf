@@ -1,0 +1,9 @@
+{
+  "name": "aiwf-delegate-claude",
+  "version": "0.1.0",
+  "description": "Optional, explicitly invoked delegation to Claude Code or its CLI",
+  "author": {
+    "name": "moonklabs"
+  },
+  "license": "MIT"
+}

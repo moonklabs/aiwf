@@ -4,9 +4,10 @@
 
 ## 요약
 
-- upstream 스킬 31개 + AIWF 자체 `workflow` 1개 = 총 32개.
+- upstream 스킬 31개 + AIWF 자체 `workflow` 1개 + 선택 위임 스킬 2개 = 총 34개 제공.
 - 방법론 core는 `plugins/aiwf-core`(`aiup-core` v2.19.0 스킬 7개).
 - AIWF 래퍼는 `plugins/aiwf-spec`(`workflow` 1개).
+- 선택 위임 애드온은 `plugins/aiwf-delegate-claude`와 `plugins/aiwf-delegate-codex`에 각각 스킬 1개를 둔다. 기본 설치에는 포함되지 않는다.
 - stack 4개 플러그인: 24개 (vaadin-jooq 8, angular-jpa 6, blazor-dotnet 5, nestjs-nextjs 5).
 - 원본(vendored)은 upstream 바이트 그대로 두고 이름·명령 참조 변환은 설치본에만 적용한다.
 
@@ -36,6 +37,12 @@ AIWF가 추가한 `workflow` 하나만 담는다. upstream 스킬이 없으므�
 |---|---|---|
 | `aiwf-workflow` | (AIWF) | 자체 |
 
+## Optional delegates: plugins/aiwf-delegate-<target>
+
+Claude와 Codex용 위임 스킬은 서로 독립된 선택 애드온이다. vendored upstream이 아니며 각각 자체 플러그인 안에 `delegate-claude` 또는 `delegate-codex` 스킬 하나를 둔다. Codex 설치 스크립트는 `--delegate claude` 또는 `--delegate codex`를 선택한 경우에만 `aiwf-delegate-<target>` 이름으로 복사한다. skills.sh 설치는 원래 `delegate-<target>` 이름을 사용한다. Claude Code marketplace 항목은 `/aiwf-delegate-claude:delegate-claude` 및 `/aiwf-delegate-codex:delegate-codex`로 호출한다.
+
+두 스킬 모두 직접 호출만 허용한다. 교차 CLI는 현재 요청에 명시된 `--cross-cli` 토큰이 있을 때만 실행한다. 기본은 읽기 전용이며, 현재 요청에 쓰기 요청과 명시 범위가 함께 있어야 한다. 실제 변경은 대상 CLI의 자체 권한 정책이 허용해야 한다.
+
 ## Stacks: plugins/aiwf-<stack>
 
 각 플러그인은 upstream 플러그인을 바이트 단위로 그대로 복사한 것이다. `skills/`, `rules/`, `agents/`, `LICENSE`, `NOTICE`는 수정하지 않았고 AIWF가 추가한 파일은 `README.md`, `UPSTREAM.json`, `.claude-plugin/plugin.json`뿐이다. 파일 hash는 각 플러그인의 UPSTREAM.json에 기록한다.
@@ -56,7 +63,7 @@ AIWF가 추가한 `workflow` 하나만 담는다. upstream 스킬이 없으므�
 | 원본(vendored) | `plugins/aiwf-core/`, `plugins/aiwf-spec/`, `plugins/aiwf-<stack>/` | upstream 바이트 그대로. 이름·참조를 바꾸지 않는다. |
 | 설치본 | 대상 프로젝트 `.agents/skills/` | 복사 후 설치 이름으로 변환. core/spec `aiwf-*`, stack `aiwf-<stack>-*`. |
 
-설치 시 SKILL.md `name`과 Markdown 본문의 `/skill`, `skill` 참조를 설치 이름으로 바꾸고 파일 끝에 AIWF 설치 수정 주석을 붙인다. vendored 원본은 변환하지 않는다. 이름 변환은 설치된 Markdown에만 적용되며, Java/TSX 같은 비-Markdown 참조 파일의 주석에 남은 upstream 명령 이름은 그대로 둔다. 복사본은 파일일 뿐이며 네이티브 Codex 서브에이전트를 등록하지 않는다. `agents/uc-coverage.md` 같은 에이전트 프롬프트는 리소스로 설치되고 실행에는 호스트 매핑이 필요하며, 그 매핑은 `workflow` 스킬이 설명한다.
+설치 시 SKILL.md `name`과 Markdown 본문의 `/skill`, `skill` 참조를 설치 이름으로 바꾸고 파일 끝에 AIWF 설치 수정 주석을 붙인다. vendored 원본은 변환하지 않는다. 이름 변환은 설치된 Markdown에만 적용되며, Java/TSX 같은 비-Markdown 참조 파일의 주석에 남은 upstream 명령 이름은 그대로 둔다. 복사본은 파일일 뿐이며 네이티브 Codex 서브에이전트를 등록하지 않는다. `agents/uc-coverage.md` 같은 에이전트 프롬프트는 리소스로 설치되고 실행에는 호스트 매핑이 필요하며, 그 매핑은 `workflow` 스킬이 설명한다. 선택 위임 스킬도 하위 에이전트 런타임을 설치하지 않는다.
 
 ## 설치
 

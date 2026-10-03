@@ -5,6 +5,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const plugins = resolve(dirname(fileURLToPath(import.meta.url)), '../plugins');
 export const supportedStacks = ['vaadin-jooq', 'angular-jpa', 'blazor-dotnet', 'nestjs-nextjs'];
+export const supportedDelegates = ['claude', 'codex'];
 
 function markdownFiles(directory) {
   return readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
@@ -19,10 +20,14 @@ function rejectSymlink(path) {
   }
 }
 
-export function installSpecSkills(project, { dryRun = false, stack } = {}) {
+export function installSpecSkills(project, { dryRun = false, stack, delegates = [] } = {}) {
   if (stack !== undefined && !supportedStacks.includes(stack)) {
     throw new Error(`Unknown stack: ${stack}; choose ${supportedStacks.join(', ')}`);
   }
+  if (!Array.isArray(delegates) || delegates.some(target => !supportedDelegates.includes(target))) {
+    throw new Error(`Unknown delegate: choose ${supportedDelegates.join(', ')}`);
+  }
+  delegates = [...new Set(delegates)];
   const root = resolve(project);
   rejectSymlink(root);
   if (!existsSync(root) || !lstatSync(root).isDirectory()) {
@@ -40,6 +45,9 @@ export function installSpecSkills(project, { dryRun = false, stack } = {}) {
     { plugin: join(plugins, 'aiwf-spec'), prefix: 'aiwf-' }
   ];
   if (stack) { bundles.push({ plugin: join(plugins, `aiwf-${stack}`), prefix: `aiwf-${stack}-` }); }
+  for (const target of delegates) {
+    bundles.push({ plugin: join(plugins, `aiwf-delegate-${target}`), prefix: 'aiwf-' });
+  }
   const entries = bundles.flatMap(bundle => readdirSync(join(bundle.plugin, 'skills')).sort()
     .map(name => ({ ...bundle, name, installedName: `${bundle.prefix}${name}` })));
   const destinations = entries.map(entry => join(target, entry.installedName));
@@ -94,6 +102,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     let project;
     let dryRun = false;
     let stack;
+    const delegates = [];
     for (let index = 0; index < args.length; index++) {
       if (args[index] === '--project' && args[index + 1] && !args[index + 1].startsWith('--') && !project) {
         project = args[++index];
@@ -101,13 +110,15 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
         dryRun = true;
       } else if (args[index] === '--stack' && args[index + 1] && !args[index + 1].startsWith('--') && !stack) {
         stack = args[++index];
+      } else if (args[index] === '--delegate' && args[index + 1] && !args[index + 1].startsWith('--')) {
+        delegates.push(args[++index]);
       } else if (args[index] === '--help') {
-        console.log(`node scripts/install-spec-skills.mjs --project <existing-project> [--stack <${supportedStacks.join('|')}>] [--dry-run]`);
+        console.log(`node scripts/install-spec-skills.mjs --project <existing-project> [--stack <${supportedStacks.join('|')}>] [--delegate <${supportedDelegates.join('|')}> ...] [--dry-run]`);
         process.exit(0);
       } else { throw new Error(`Unknown or incomplete argument: ${args[index]}`); }
     }
     if (!project) { throw new Error('--project is required'); }
-    console.log(JSON.stringify(installSpecSkills(project, { dryRun, stack }), null, 2));
+    console.log(JSON.stringify(installSpecSkills(project, { dryRun, stack, delegates }), null, 2));
   } catch (error) {
     console.error(error.message);
     process.exitCode = 1;

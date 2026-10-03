@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased — documentation-first Korean skill review (2026-10-03)
+
+- Add opt-in, target-specific delegation skills for Claude and Codex, including native routing and explicitly selected cross-CLI runs.
+- Add separate Korean review documents for all 34 repository skills and their Markdown references, rules and agent prompts, plus snapshots and review copies of the two user-provided local skills.
+- Record source/translation hashes and pending human review in a document manifest; check missing translations, drift, examples and links before tests and publishing. Keep executable skills unchanged and require documentation updates alongside instruction changes.
+
 
 ## Unreleased — full workflow verification (2026-10-03)
 
