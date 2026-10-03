@@ -1,0 +1,15 @@
+{
+  "checked_at": "2026-10-03T07:19:37.363014+00:00",
+  "packet_sha256": "ef0027d38a613765da2b6ea502e012482b619e582780ceb72725242dbee5ca4e",
+  "spec_digest": "53e0bd97d338aa9ca96472e09ff9f2ee54b33e0e6a39a9e23bf63c1bb4272bef",
+  "checks_summary": {
+    "total": 4,
+    "passed": 2,
+    "failed": 0,
+    "not_run": 2
+  },
+  "status": "awaiting_review",
+  "acceptance": "not_recorded",
+  "embedded_logs_byte_exact": true,
+  "scope": "one-off author assertions; not human acceptance"
+}

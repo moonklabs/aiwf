@@ -1,0 +1,12 @@
+@startuml Use Cases Overview
+left to right direction
+
+actor "제출자" as submitter
+
+rectangle "지출 정산 시스템" {
+    usecase "UC-001\n지출 내역 제출" as UC001
+}
+
+submitter --> UC001
+
+@enduml

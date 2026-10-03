@@ -1,0 +1,34 @@
+{
+  "checks": [
+    {
+      "name": "C-STRUCTURE",
+      "command": "python3 /Users/moonklabs/workspace-plugin/aiwf/plugins/aiwf-core/skills/spec-review/scripts/spec_lint.py --docs docs --strict --no-baseline --format json",
+      "status": "passed",
+      "log": "artifacts/baseline-structure.stdout.txt"
+    },
+    {
+      "name": "C-SERVICE",
+      "command": "node --test tests/expense.test.mjs",
+      "status": "passed",
+      "log": "artifacts/baseline-service.stdout.txt"
+    },
+    {
+      "name": "C-UI",
+      "command": "not_run: no consuming UI/authentication app selected",
+      "status": "not_run"
+    },
+    {
+      "name": "C-HUMAN",
+      "command": "not_run: no human packet review recorded",
+      "status": "not_run"
+    }
+  ],
+  "unverified": [
+    "Login, submitter_id and real authorization",
+    "UI journey, error messages and receipt display",
+    "Real DB, cross-process durability, concurrency and Decimal precision",
+    "Business semantics, actual product adoption, human acceptance and active human time",
+    "Minimum Node 20/Python 3.9 and stack apps",
+    "Current CLI does not verify code/test hashes or execution-time freshness"
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "spec_digest": "a2616b3224768a0a7972bd75ba19632d2e9b84afc5c175ae21c71281dc5017a2",
+  "files": [
+    {
+      "path": "docs/entity_model.md",
+      "sha256": "aeb25fc9017964259e74f99220b87efe13b722bffa716b1b12f3b82f9c7ee5d8",
+      "bytes": 1687,
+      "kind": "required"
+    },
+    {
+      "path": "docs/glossary.md",
+      "sha256": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "bytes": 560,
+      "kind": "required"
+    },
+    {
+      "path": "docs/plans/UC-001.md",
+      "sha256": "e54f99e9d9cea07c2f74979f2bd2b0295d451eaf713ade031f76630d8a453491",
+      "bytes": 1918,
+      "kind": "plan"
+    },
+    {
+      "path": "docs/requirements.md",
+      "sha256": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "bytes": 471,
+      "kind": "required"
+    },
+    {
+      "path": "docs/test_cases/TC-001-submit-expense.md",
+      "sha256": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "bytes": 1529,
+      "kind": "test_case"
+    },
+    {
+      "path": "docs/test_cases/TC-002-description-limit.md",
+      "sha256": "516fa1b0252d8870fe773bcd56b89b1086f45a7f792a573635395e2a89780745",
+      "bytes": 2021,
+      "kind": "test_case"
+    },
+    {
+      "path": "docs/use_cases.puml",
+      "sha256": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "bytes": 208,
+      "kind": "required"
+    },
+    {
+      "path": "docs/use_cases/UC-001-submit-expense.md",
+      "sha256": "f41984bc93f5d352f92bc3f62a1bc6d1dae3d5e931ed5b7ce4d44506afbcf93c",
+      "bytes": 2703,
+      "kind": "use_case"
+    },
+    {
+      "path": "docs/vision.md",
+      "sha256": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "bytes": 516,
+      "kind": "required"
+    }
+  ]
+}

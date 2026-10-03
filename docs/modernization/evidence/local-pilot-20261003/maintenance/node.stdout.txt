@@ -1,0 +1,535 @@
+
+> aiwf@0.3.24 pretest
+> npm run docs:check
+
+
+> aiwf@0.3.24 docs:check
+> node scripts/check-korean-docs.mjs
+
+한글 검토 문서 70개 / 스킬 36개: 검토 대기 70, 휴먼 리뷰 기록 0.
+자동 검사는 번역 의미의 정확성이나 휴먼 승인을 보장하지 않습니다.
+
+> aiwf@0.3.24 test
+> node --test tests/spec-workflow/*.test.mjs
+
+TAP version 13
+# Subtest: methodology core is the primary independently installable package
+ok 1 - methodology core is the primary independently installable package
+  ---
+  duration_ms: 0.745542
+  type: 'test'
+  ...
+# Subtest: methodology, optional delegation plugins and the spec CLI are distributed
+ok 2 - methodology, optional delegation plugins and the spec CLI are distributed
+  ---
+  duration_ms: 1.789291
+  type: 'test'
+  ...
+# Subtest: all seven upstream core skills retain their exact original bytes
+ok 3 - all seven upstream core skills retain their exact original bytes
+  ---
+  duration_ms: 0.759042
+  type: 'test'
+  ...
+# Subtest: cross-CLI requires a literal opt-in in the current user request
+ok 4 - cross-CLI requires a literal opt-in in the current user request
+  ---
+  duration_ms: 0.447667
+  type: 'test'
+  ...
+# Subtest: cross-CLI work defaults to read-only and scopes explicit writes to the current request
+ok 5 - cross-CLI work defaults to read-only and scopes explicit writes to the current request
+  ---
+  duration_ms: 0.637375
+  type: 'test'
+  ...
+# Subtest: matching-host delegation never falls back to a nested CLI process
+ok 6 - matching-host delegation never falls back to a nested CLI process
+  ---
+  duration_ms: 0.409458
+  type: 'test'
+  ...
+# Subtest: missing executable or authentication does not trigger a substitute or setup
+ok 7 - missing executable or authentication does not trigger a substitute or setup
+  ---
+  duration_ms: 0.25075
+  type: 'test'
+  ...
+# Subtest: cross-CLI process boundaries and permission bypasses are explicit
+ok 8 - cross-CLI process boundaries and permission bypasses are explicit
+  ---
+  duration_ms: 0.277917
+  type: 'test'
+  ...
+# Subtest: dry run writes nothing, real install retains parser siblings and attribution
+ok 9 - dry run writes nothing, real install retains parser siblings and attribution
+  ---
+  duration_ms: 118.610333
+  type: 'test'
+  ...
+# Subtest: existing skill prevents partial install and preserves user content
+ok 10 - existing skill prevents partial install and preserves user content
+  ---
+  duration_ms: 1.175542
+  type: 'test'
+  ...
+# Subtest: symlinked skill parent and dangling destination are rejected
+ok 11 - symlinked skill parent and dangling destination are rejected
+  ---
+  duration_ms: 2.037167
+  type: 'test'
+  ...
+# Subtest: installer CLI rejects unknown flags and missing project
+ok 12 - installer CLI rejects unknown flags and missing project
+  ---
+  duration_ms: 63.648875
+  type: 'test'
+  ...
+# Subtest: installed workflow and reference documents use the prefixed sibling names
+ok 13 - installed workflow and reference documents use the prefixed sibling names
+  ---
+  duration_ms: 13.577875
+  type: 'test'
+  ...
+# Subtest: stack install includes core, isolated stack names and mapped cross-skill references
+ok 14 - stack install includes core, isolated stack names and mapped cross-skill references
+  ---
+  duration_ms: 20.39725
+  type: 'test'
+  ...
+# Subtest: unknown stack is rejected before writing anything
+ok 15 - unknown stack is rejected before writing anything
+  ---
+  duration_ms: 0.265625
+  type: 'test'
+  ...
+# Subtest: each delegation skill is omitted by default and independently opt-in
+ok 16 - each delegation skill is omitted by default and independently opt-in
+  ---
+  duration_ms: 30.605541
+  type: 'test'
+  ...
+# Subtest: both delegation skills can be selected together and invalid targets fail before writing
+ok 17 - both delegation skills can be selected together and invalid targets fail before writing
+  ---
+  duration_ms: 0.790667
+  type: 'test'
+  ...
+# Subtest: each optional stack installs its complete isolated bundle
+ok 18 - each optional stack installs its complete isolated bundle
+  ---
+  duration_ms: 95.037625
+  type: 'test'
+  ...
+# Subtest: stack conflict preserves existing files and prevents partial core installation
+ok 19 - stack conflict preserves existing files and prevents partial core installation
+  ---
+  duration_ms: 0.977958
+  type: 'test'
+  ...
+# Subtest: installer CLI accepts stack and delegate selections and rejects invalid options
+ok 20 - installer CLI accepts stack and delegate selections and rejects invalid options
+  ---
+  duration_ms: 150.279583
+  type: 'test'
+  ...
+# Subtest: documentation checks preserve pending human review and do not write files
+ok 21 - documentation checks preserve pending human review and do not write files
+  ---
+  duration_ms: 10.022041
+  type: 'test'
+  ...
+# Subtest: source edits and new supporting documents require translation updates
+ok 22 - source edits and new supporting documents require translation updates
+  ---
+  duration_ms: 4.519834
+  type: 'test'
+  ...
+# Subtest: plugin README files are required in the Korean review catalog
+ok 23 - plugin README files are required in the Korean review catalog
+  ---
+  duration_ms: 6.370542
+  type: 'test'
+  ...
+# Subtest: translation changes, missing files and unlisted translations fail checks
+ok 24 - translation changes, missing files and unlisted translations fail checks
+  ---
+  duration_ms: 4.690667
+  type: 'test'
+  ...
+# Subtest: refreshing hashes cannot hide a changed executable example
+ok 25 - refreshing hashes cannot hide a changed executable example
+  ---
+  duration_ms: 4.634625
+  type: 'test'
+  ...
+# Subtest: broken review links and installable review filenames are rejected
+ok 26 - broken review links and installable review filenames are rejected
+  ---
+  duration_ms: 4.128708
+  type: 'test'
+  ...
+# Subtest: human review must name the exact source and translation versions
+ok 27 - human review must name the exact source and translation versions
+  ---
+  duration_ms: 5.995584
+  type: 'test'
+  ...
+# Subtest: malformed upstream Markdown samples allow a recorded display repair without changing payloads
+ok 28 - malformed upstream Markdown samples allow a recorded display repair without changing payloads
+  ---
+  duration_ms: 4.940167
+  type: 'test'
+  ...
+# Subtest: an unterminated source Markdown example can be closed at a recorded boundary
+ok 29 - an unterminated source Markdown example can be closed at a recorded boundary
+  ---
+  duration_ms: 5.434542
+  type: 'test'
+  ...
+# Subtest: fence length may change without changing example payload or language
+ok 30 - fence length may change without changing example payload or language
+  ---
+  duration_ms: 3.060417
+  type: 'test'
+  ...
+# Subtest: fence-like source text in a shell example does not start a nested Markdown block
+ok 31 - fence-like source text in a shell example does not start a nested Markdown block
+  ---
+  duration_ms: 3.5245
+  type: 'test'
+  ...
+# Subtest: source inline commands and identifiers cannot be silently changed in human review copies
+ok 32 - source inline commands and identifiers cannot be silently changed in human review copies
+  ---
+  duration_ms: 2.698791
+  type: 'test'
+  ...
+# Subtest: inline code wrapped across Markdown lines keeps the same rendered value
+ok 33 - inline code wrapped across Markdown lines keeps the same rendered value
+  ---
+  duration_ms: 2.568833
+  type: 'test'
+  ...
+# Subtest: reference links, balanced parentheses, angle destinations and bad escapes are reported
+ok 34 - reference links, balanced parentheses, angle destinations and bad escapes are reported
+  ---
+  duration_ms: 4.019583
+  type: 'test'
+  ...
+# Subtest: local snapshots report machine drift without making regular checks machine-dependent
+ok 35 - local snapshots report machine drift without making regular checks machine-dependent
+  ---
+  duration_ms: 6.357375
+  type: 'test'
+  ...
+# Subtest: awaiting a new human review removes a former live review record
+ok 36 - awaiting a new human review removes a former live review record
+  ---
+  duration_ms: 2.738583
+  type: 'test'
+  ...
+# Subtest: duplicate mappings and paths outside the repository fail without reading them
+ok 37 - duplicate mappings and paths outside the repository fail without reading them
+  ---
+  duration_ms: 5.031875
+  type: 'test'
+  ...
+# Subtest: validator rejects modified upstream skill bytes
+ok 38 - validator rejects modified upstream skill bytes
+  ---
+  duration_ms: 88.334792
+  type: 'test'
+  ...
+# Subtest: modified-hash metadata cannot exempt a skill from source preservation
+ok 39 - modified-hash metadata cannot exempt a skill from source preservation
+  ---
+  duration_ms: 59.309125
+  type: 'test'
+  ...
+# Subtest: cli init prints machine JSON and exits zero
+ok 40 - cli init prints machine JSON and exits zero
+  ---
+  duration_ms: 38.933667
+  type: 'test'
+  ...
+# Subtest: cli check --json reports ok on a pinned spec and nonzero drift afterwards
+ok 41 - cli check --json reports ok on a pinned spec and nonzero drift afterwards
+  ---
+  duration_ms: 146.601958
+  type: 'test'
+  ...
+# Subtest: cli check exits nonzero when no pin exists
+ok 42 - cli check exits nonzero when no pin exists
+  ---
+  duration_ms: 25.053542
+  type: 'test'
+  ...
+# Subtest: cli packet writes a review packet and refuses to overwrite without --force
+ok 43 - cli packet writes a review packet and refuses to overwrite without --force
+  ---
+  duration_ms: 136.733708
+  type: 'test'
+  ...
+# Subtest: cli rejects unknown options and missing required arguments with nonzero exit
+ok 44 - cli rejects unknown options and missing required arguments with nonzero exit
+  ---
+  duration_ms: 98.832292
+  type: 'test'
+  ...
+# Subtest: cli help exits zero and documents the commands
+ok 45 - cli help exits zero and documents the commands
+  ---
+  duration_ms: 23.48225
+  type: 'test'
+  ...
+# Subtest: cli pin is blocked on Draft templates and exits nonzero
+ok 46 - cli pin is blocked on Draft templates and exits nonzero
+  ---
+  duration_ms: 26.421
+  type: 'test'
+  ...
+# Subtest: cli packet rejects an --output escaping the root or a symlinked output
+ok 47 - cli packet rejects an --output escaping the root or a symlinked output
+  ---
+  duration_ms: 99.861
+  type: 'test'
+  ...
+# Subtest: cli check on a tampered pin exits nonzero with pin_invalid JSON
+ok 48 - cli check on a tampered pin exits nonzero with pin_invalid JSON
+  ---
+  duration_ms: 39.661709
+  type: 'test'
+  ...
+# Subtest: npm-style bin symlink executes help and initialization
+ok 49 - npm-style bin symlink executes help and initialization
+  ---
+  duration_ms: 51.12925
+  type: 'test'
+  ...
+# Subtest: init creates Draft templates and empty use_case/test_case directories
+ok 50 - init creates Draft templates and empty use_case/test_case directories
+  ---
+  duration_ms: 3.139875
+  type: 'test'
+  ...
+# Subtest: init is idempotent and never overwrites existing user files
+ok 51 - init is idempotent and never overwrites existing user files
+  ---
+  duration_ms: 2.981958
+  type: 'test'
+  ...
+# Subtest: init rejects a symlinked artifact directory
+ok 52 - init rejects a symlinked artifact directory
+  ---
+  duration_ms: 0.579042
+  type: 'test'
+  ...
+# Subtest: init rejects a symlinked required artifact file
+ok 53 - init rejects a symlinked required artifact file
+  ---
+  duration_ms: 1.139208
+  type: 'test'
+  ...
+# Subtest: pin is blocked while templates remain Draft
+ok 54 - pin is blocked while templates remain Draft
+  ---
+  duration_ms: 4.646667
+  type: 'test'
+  ...
+# Subtest: pin requires at least one use case and one test case
+ok 55 - pin requires at least one use case and one test case
+  ---
+  duration_ms: 5.958625
+  type: 'test'
+  ...
+# Subtest: pin is deterministic and idempotent for unchanged content
+ok 56 - pin is deterministic and idempotent for unchanged content
+  ---
+  duration_ms: 76.875667
+  type: 'test'
+  ...
+# Subtest: pin refuses to overwrite without --refresh and honors --refresh
+ok 57 - pin refuses to overwrite without --refresh and honors --refresh
+  ---
+  duration_ms: 58.328917
+  type: 'test'
+  ...
+# Subtest: check reports ok, drift (added/changed/deleted), draft, and missing pin
+ok 58 - check reports ok, drift (added/changed/deleted), draft, and missing pin
+  ---
+  duration_ms: 73.930292
+  type: 'test'
+  ...
+# Subtest: findDraftMarkers is case-insensitive and covers NEEDS CLARIFICATION
+ok 59 - findDraftMarkers is case-insensitive and covers NEEDS CLARIFICATION
+  ---
+  duration_ms: 1.261583
+  type: 'test'
+  ...
+# Subtest: parseEvidence rejects malformed evidence and unknown fields
+ok 60 - parseEvidence rejects malformed evidence and unknown fields
+  ---
+  duration_ms: 0.365708
+  type: 'test'
+  ...
+# Subtest: packet embeds log digest/body, preserves failed/not_run, and never claims approval
+ok 61 - packet embeds log digest/body, preserves failed/not_run, and never claims approval
+  ---
+  duration_ms: 28.099833
+  type: 'test'
+  ...
+# Subtest: packet refuses when the pin is missing or the spec drifts
+ok 62 - packet refuses when the pin is missing or the spec drifts
+  ---
+  duration_ms: 27.129125
+  type: 'test'
+  ...
+# Subtest: packet rejects log paths that escape the root or traverse a symlink
+ok 63 - packet rejects log paths that escape the root or traverse a symlink
+  ---
+  duration_ms: 38.532041
+  type: 'test'
+  ...
+# Subtest: packet rejects an oversized log
+ok 64 - packet rejects an oversized log
+  ---
+  duration_ms: 27.530125
+  type: 'test'
+  ...
+# Subtest: pin snapshots docs/processes/*.bpmn and tracks the optional lint baseline
+ok 65 - pin snapshots docs/processes/*.bpmn and tracks the optional lint baseline
+  ---
+  duration_ms: 23.264916
+  type: 'test'
+  ...
+# Subtest: lint baseline is tracked but not scanned for draft markers
+ok 66 - lint baseline is tracked but not scanned for draft markers
+  ---
+  duration_ms: 12.631667
+  type: 'test'
+  ...
+# Subtest: Reviewed status is recorded, not treated as a blocker (no approval claimed)
+ok 67 - Reviewed status is recorded, not treated as a blocker (no approval claimed)
+  ---
+  duration_ms: 12.661083
+  type: 'test'
+  ...
+# Subtest: pin records optional git HEAD and dirty status when inside a repository
+ok 68 - pin records optional git HEAD and dirty status when inside a repository
+  ---
+  duration_ms: 115.793583
+  type: 'test'
+  ...
+# Subtest: check rejects a tampered pin digest and packet refuses to build
+ok 69 - check rejects a tampered pin digest and packet refuses to build
+  ---
+  duration_ms: 16.757125
+  type: 'test'
+  ...
+# Subtest: validateStoredPin rejects bad schema, duplicate paths, bad path, hash, bytes, kind, and null files
+ok 70 - validateStoredPin rejects bad schema, duplicate paths, bad path, hash, bytes, kind, and null files
+  ---
+  duration_ms: 14.587917
+  type: 'test'
+  ...
+# Subtest: check rejects a self-consistent fake pin that omits required or minimum artifacts
+ok 71 - check rejects a self-consistent fake pin that omits required or minimum artifacts
+  ---
+  duration_ms: 30.739625
+  type: 'test'
+  ...
+# Subtest: check flags artifacts missing from disk as out of sync
+ok 72 - check flags artifacts missing from disk as out of sync
+  ---
+  duration_ms: 24.00025
+  type: 'test'
+  ...
+# Subtest: pin validates the existing pin instead of trusting a matching digest
+ok 73 - pin validates the existing pin instead of trusting a matching digest
+  ---
+  duration_ms: 52.453542
+  type: 'test'
+  ...
+# Subtest: check returns a uniform shape for missing and invalid pins
+ok 74 - check returns a uniform shape for missing and invalid pins
+  ---
+  duration_ms: 13.064584
+  type: 'test'
+  ...
+# Subtest: packet marks pin.matched true only within an in-sync spec
+ok 75 - packet marks pin.matched true only within an in-sync spec
+  ---
+  duration_ms: 24.898084
+  type: 'test'
+  ...
+# Subtest: packet rejects a non-UTF-8 log instead of embedding a misleading body
+ok 76 - packet rejects a non-UTF-8 log instead of embedding a misleading body
+  ---
+  duration_ms: 22.883542
+  type: 'test'
+  ...
+# Subtest: ordinary Todo product names are not unresolved drafting markers
+ok 77 - ordinary Todo product names are not unresolved drafting markers
+  ---
+  duration_ms: 2.183
+  type: 'test'
+  ...
+# Subtest: folder notes do not satisfy the required UC and TC minimums
+ok 78 - folder notes do not satisfy the required UC and TC minimums
+  ---
+  duration_ms: 2.845416
+  type: 'test'
+  ...
+# Subtest: packet output rejects an existing directory even when force is requested
+ok 79 - packet output rejects an existing directory even when force is requested
+  ---
+  duration_ms: 0.711459
+  type: 'test'
+  ...
+# Subtest: all four AIUP stack plugins are imported with AIWF-branded manifests
+ok 80 - all four AIUP stack plugins are imported with AIWF-branded manifests
+  ---
+  duration_ms: 2.781083
+  type: 'test'
+  ...
+# Subtest: every imported byte matches its recorded upstream hash and no source is modified
+ok 81 - every imported byte matches its recorded upstream hash and no source is modified
+  ---
+  duration_ms: 5.302
+  type: 'test'
+  ...
+# Subtest: the four stacks expose exactly 24 unchanged upstream skills
+ok 82 - the four stacks expose exactly 24 unchanged upstream skills
+  ---
+  duration_ms: 1.66275
+  type: 'test'
+  ...
+# Subtest: bundled rules and agents ship with the stack and stay linked to real skills
+ok 83 - bundled rules and agents ship with the stack and stay linked to real skills
+  ---
+  duration_ms: 1.969709
+  type: 'test'
+  ...
+# Subtest: LICENSE and NOTICE are the byte-identical upstream Apache-2.0 artifacts
+ok 84 - LICENSE and NOTICE are the byte-identical upstream Apache-2.0 artifacts
+  ---
+  duration_ms: 0.272625
+  type: 'test'
+  ...
+# Subtest: imported bytes equal the pinned reference checkout when it is available
+ok 85 - imported bytes equal the pinned reference checkout when it is available
+  ---
+  duration_ms: 0.06775
+  type: 'test'
+  ...
+# pinned reference not present at /private/tmp/aiwf-aiup-reference-20261002; skipping byte cross-check
+1..85
+# tests 85
+# suites 0
+# pass 85
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 783.916875

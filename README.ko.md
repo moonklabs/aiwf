@@ -11,6 +11,9 @@ AIWF는 유스케이스 명세를 Git에 유지하면서 기존 Claude Code/Code
 - [스킬 한글 휴먼 리뷰본과 문서 관리 절차](docs/ko-skills/README.md) — 모든 작업에서 먼저 확인하고 관련 원문·번역을 함께 갱신한다.
 - [Claude·Codex 위임 스킬 선택 설치·실행 명세](docs/modernization/DELEGATION-OPTIONAL.ko.md)
 - [개선 방향과 단계](docs/modernization/DIRECTION.ko.md)
+- [CLI 생산성 분석과 권고안](docs/modernization/CLI-PRODUCTIVITY.ko.md) — 실제 UC 파일럿 후 읽기 전용 검증과 선택 검사를 확장하는 제안. 원문·한글본 갱신은 모든 단계의 품질 조건이다.
+- [Claude 두 세션의 계획 리뷰](docs/modernization/CLAUDE-PLAN-REVIEW-2026-10-03.ko.md) — 조건부 적합, 검토 당시 고정본과 지적 사항 보존.
+- [파일럿 계획](docs/modernization/PILOT-UC-001.ko.md)과 [로컬 실행 결과](docs/modernization/PILOT-RESULT-2026-10-03.ko.md) — 완료 기준과 검사 연결표, drift 거부, 실패→수정→23개 테스트 통과. 실제 제품 적용·휴먼 수용·생산성 효과는 미검증이며 새 CLI 명령은 추가하지 않았다.
 - [검증 기록과 한계](docs/modernization/VALIDATION.md)
 - [Sprintable 연결 계약 초안](docs/modernization/SPRINTABLE.ko.md)
 - [한국어 지출 제출 예제](examples/spec-workflow/README.md)

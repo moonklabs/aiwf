@@ -1,0 +1,24 @@
+{
+  "name": "readme-replay",
+  "argv": [
+    "/bin/zsh",
+    "-c",
+    "set -e\npilot_parent=$(mktemp -d \"${TMPDIR:-/tmp}/aiwf-replay-XXXXXX\")\ncp -R docs/modernization/evidence/local-pilot-20261003/project \"$pilot_parent/project\"\npilot_root=\"$pilot_parent/project\"\npython3 plugins/aiwf-core/skills/spec-review/scripts/spec_lint.py --docs \"$pilot_root/docs\" --strict --no-baseline --format json > \"$pilot_root/artifacts/final-structure.stdout.txt\"\nnode --test \"$pilot_root/tests/expense.test.mjs\" > \"$pilot_root/artifacts/final-service.stdout.txt\"\nnode src/cli/spec-cli.js pin --root \"$pilot_root\" --json\nnode src/cli/spec-cli.js check --root \"$pilot_root\" --json\nnode src/cli/spec-cli.js packet --root \"$pilot_root\" --evidence \"$pilot_root/artifacts/final-evidence.json\" --output \"$pilot_root/.aiwf/new-review-packet.json\" --json"
+  ],
+  "cwd": "/Users/moonklabs/workspace-plugin/aiwf",
+  "started_at": "2026-10-03T07:24:53.476989+00:00",
+  "ended_at": "2026-10-03T07:24:53.728489+00:00",
+  "wall_seconds": 0.25144429225474596,
+  "exit_code": 0,
+  "scope": "Fresh temporary project; README replay instructions, separate from original pilot",
+  "stdout": {
+    "path": "readme-replay.stdout.txt",
+    "bytes": 13597,
+    "sha256": "cabac875c29717ea5d7d12aa614ba7737acec8e8daa8822abec8b748298cec8a"
+  },
+  "stderr": {
+    "path": "readme-replay.stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

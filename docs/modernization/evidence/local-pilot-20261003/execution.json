@@ -1,0 +1,1055 @@
+[
+  {
+    "name": "node-version",
+    "argv": [
+      "node",
+      "--version"
+    ],
+    "cwd": "/private/tmp/aiwf-uc001-pilot-l07zou4o/project",
+    "started_at": "2026-10-03T07:19:37.108736+00:00",
+    "ended_at": "2026-10-03T07:19:37.118327+00:00",
+    "wall_seconds": 0.00953658390790224,
+    "exit_code": 0,
+    "expected_exit_code": 0,
+    "input_sha256_before": {
+      "docs/entity_model.md": "edb9c35d17e73885346df31782089088c4dfe26e82f8b0cd2463e9febedc9d4e",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "825d1762c29ca5c76cdcbdcb3f403849e9d0e61e9423c3bf0c051a6bd063ff87",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/use_cases/UC-001-submit-expense.md": "e19c5b44acb98dcfb6c4992b1be16520cfe83f7dcb7dee04415b59cedd0590cf",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "4731f93ba34cf4f8334fca6ac5aea8f1d437c87952baf08bdfee32bca3eecea9",
+      "tests/expense.test.mjs": "5162da26ed2caf00497b4af8a68015d6e1eb225a3a7716bce857b55c3e39bf0f"
+    },
+    "input_sha256_after": {
+      "docs/entity_model.md": "edb9c35d17e73885346df31782089088c4dfe26e82f8b0cd2463e9febedc9d4e",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "825d1762c29ca5c76cdcbdcb3f403849e9d0e61e9423c3bf0c051a6bd063ff87",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/use_cases/UC-001-submit-expense.md": "e19c5b44acb98dcfb6c4992b1be16520cfe83f7dcb7dee04415b59cedd0590cf",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "4731f93ba34cf4f8334fca6ac5aea8f1d437c87952baf08bdfee32bca3eecea9",
+      "tests/expense.test.mjs": "5162da26ed2caf00497b4af8a68015d6e1eb225a3a7716bce857b55c3e39bf0f"
+    },
+    "stdout": {
+      "path": "artifacts/node-version.stdout.txt",
+      "sha256": "b8139b18707113247bd3eba5bff8ee50ed8f6bfd5076113805af4e414abfdf23",
+      "bytes": 9
+    },
+    "stderr": {
+      "path": "artifacts/node-version.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  },
+  {
+    "name": "python-version",
+    "argv": [
+      "python3",
+      "--version"
+    ],
+    "cwd": "/private/tmp/aiwf-uc001-pilot-l07zou4o/project",
+    "started_at": "2026-10-03T07:19:37.119380+00:00",
+    "ended_at": "2026-10-03T07:19:37.125797+00:00",
+    "wall_seconds": 0.00641216617077589,
+    "exit_code": 0,
+    "expected_exit_code": 0,
+    "input_sha256_before": {
+      "docs/entity_model.md": "edb9c35d17e73885346df31782089088c4dfe26e82f8b0cd2463e9febedc9d4e",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "825d1762c29ca5c76cdcbdcb3f403849e9d0e61e9423c3bf0c051a6bd063ff87",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/use_cases/UC-001-submit-expense.md": "e19c5b44acb98dcfb6c4992b1be16520cfe83f7dcb7dee04415b59cedd0590cf",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "4731f93ba34cf4f8334fca6ac5aea8f1d437c87952baf08bdfee32bca3eecea9",
+      "tests/expense.test.mjs": "5162da26ed2caf00497b4af8a68015d6e1eb225a3a7716bce857b55c3e39bf0f"
+    },
+    "input_sha256_after": {
+      "docs/entity_model.md": "edb9c35d17e73885346df31782089088c4dfe26e82f8b0cd2463e9febedc9d4e",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "825d1762c29ca5c76cdcbdcb3f403849e9d0e61e9423c3bf0c051a6bd063ff87",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/use_cases/UC-001-submit-expense.md": "e19c5b44acb98dcfb6c4992b1be16520cfe83f7dcb7dee04415b59cedd0590cf",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "4731f93ba34cf4f8334fca6ac5aea8f1d437c87952baf08bdfee32bca3eecea9",
+      "tests/expense.test.mjs": "5162da26ed2caf00497b4af8a68015d6e1eb225a3a7716bce857b55c3e39bf0f"
+    },
+    "stdout": {
+      "path": "artifacts/python-version.stdout.txt",
+      "sha256": "f615dc9512de8b165e2b595e5cdc608a3ba7927ae92f959c5b42ec3d58e2ffa8",
+      "bytes": 14
+    },
+    "stderr": {
+      "path": "artifacts/python-version.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  },
+  {
+    "name": "baseline-structure",
+    "argv": [
+      "python3",
+      "/Users/moonklabs/workspace-plugin/aiwf/plugins/aiwf-core/skills/spec-review/scripts/spec_lint.py",
+      "--docs",
+      "docs",
+      "--strict",
+      "--no-baseline",
+      "--format",
+      "json"
+    ],
+    "cwd": "/private/tmp/aiwf-uc001-pilot-l07zou4o/project",
+    "started_at": "2026-10-03T07:19:37.126844+00:00",
+    "ended_at": "2026-10-03T07:19:37.178791+00:00",
+    "wall_seconds": 0.0519421249628067,
+    "exit_code": 0,
+    "expected_exit_code": 0,
+    "input_sha256_before": {
+      "docs/entity_model.md": "edb9c35d17e73885346df31782089088c4dfe26e82f8b0cd2463e9febedc9d4e",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "825d1762c29ca5c76cdcbdcb3f403849e9d0e61e9423c3bf0c051a6bd063ff87",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/use_cases/UC-001-submit-expense.md": "e19c5b44acb98dcfb6c4992b1be16520cfe83f7dcb7dee04415b59cedd0590cf",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "4731f93ba34cf4f8334fca6ac5aea8f1d437c87952baf08bdfee32bca3eecea9",
+      "tests/expense.test.mjs": "5162da26ed2caf00497b4af8a68015d6e1eb225a3a7716bce857b55c3e39bf0f"
+    },
+    "input_sha256_after": {
+      "docs/entity_model.md": "edb9c35d17e73885346df31782089088c4dfe26e82f8b0cd2463e9febedc9d4e",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "825d1762c29ca5c76cdcbdcb3f403849e9d0e61e9423c3bf0c051a6bd063ff87",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/use_cases/UC-001-submit-expense.md": "e19c5b44acb98dcfb6c4992b1be16520cfe83f7dcb7dee04415b59cedd0590cf",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "4731f93ba34cf4f8334fca6ac5aea8f1d437c87952baf08bdfee32bca3eecea9",
+      "tests/expense.test.mjs": "5162da26ed2caf00497b4af8a68015d6e1eb225a3a7716bce857b55c3e39bf0f"
+    },
+    "stdout": {
+      "path": "artifacts/baseline-structure.stdout.txt",
+      "sha256": "084e217c610e298df59b5c5470daedbe0f268f1baa11f9a2d1d60a6268c0fe7c",
+      "bytes": 113
+    },
+    "stderr": {
+      "path": "artifacts/baseline-structure.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  },
+  {
+    "name": "baseline-service",
+    "argv": [
+      "node",
+      "--test",
+      "tests/expense.test.mjs"
+    ],
+    "cwd": "/private/tmp/aiwf-uc001-pilot-l07zou4o/project",
+    "started_at": "2026-10-03T07:19:37.179987+00:00",
+    "ended_at": "2026-10-03T07:19:37.239619+00:00",
+    "wall_seconds": 0.0596264167688787,
+    "exit_code": 0,
+    "expected_exit_code": 0,
+    "input_sha256_before": {
+      "docs/entity_model.md": "edb9c35d17e73885346df31782089088c4dfe26e82f8b0cd2463e9febedc9d4e",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "825d1762c29ca5c76cdcbdcb3f403849e9d0e61e9423c3bf0c051a6bd063ff87",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/use_cases/UC-001-submit-expense.md": "e19c5b44acb98dcfb6c4992b1be16520cfe83f7dcb7dee04415b59cedd0590cf",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "4731f93ba34cf4f8334fca6ac5aea8f1d437c87952baf08bdfee32bca3eecea9",
+      "tests/expense.test.mjs": "5162da26ed2caf00497b4af8a68015d6e1eb225a3a7716bce857b55c3e39bf0f"
+    },
+    "input_sha256_after": {
+      "docs/entity_model.md": "edb9c35d17e73885346df31782089088c4dfe26e82f8b0cd2463e9febedc9d4e",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "825d1762c29ca5c76cdcbdcb3f403849e9d0e61e9423c3bf0c051a6bd063ff87",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/use_cases/UC-001-submit-expense.md": "e19c5b44acb98dcfb6c4992b1be16520cfe83f7dcb7dee04415b59cedd0590cf",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "4731f93ba34cf4f8334fca6ac5aea8f1d437c87952baf08bdfee32bca3eecea9",
+      "tests/expense.test.mjs": "5162da26ed2caf00497b4af8a68015d6e1eb225a3a7716bce857b55c3e39bf0f"
+    },
+    "stdout": {
+      "path": "artifacts/baseline-service.stdout.txt",
+      "sha256": "ffb08b7e228b9b78fe7265bacc51c3011bd379af830ec038a1ebae04c30ecbc8",
+      "bytes": 2435
+    },
+    "stderr": {
+      "path": "artifacts/baseline-service.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  },
+  {
+    "name": "baseline-pin",
+    "argv": [
+      "node",
+      "/Users/moonklabs/workspace-plugin/aiwf/src/cli/spec-cli.js",
+      "pin",
+      "--root",
+      "/private/tmp/aiwf-uc001-pilot-l07zou4o/project",
+      "--json"
+    ],
+    "cwd": "/private/tmp/aiwf-uc001-pilot-l07zou4o/project",
+    "started_at": "2026-10-03T07:19:37.241075+00:00",
+    "ended_at": "2026-10-03T07:19:37.279398+00:00",
+    "wall_seconds": 0.038314500357955694,
+    "exit_code": 0,
+    "expected_exit_code": 0,
+    "input_sha256_before": {
+      "docs/entity_model.md": "edb9c35d17e73885346df31782089088c4dfe26e82f8b0cd2463e9febedc9d4e",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "825d1762c29ca5c76cdcbdcb3f403849e9d0e61e9423c3bf0c051a6bd063ff87",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/use_cases/UC-001-submit-expense.md": "e19c5b44acb98dcfb6c4992b1be16520cfe83f7dcb7dee04415b59cedd0590cf",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "4731f93ba34cf4f8334fca6ac5aea8f1d437c87952baf08bdfee32bca3eecea9",
+      "tests/expense.test.mjs": "5162da26ed2caf00497b4af8a68015d6e1eb225a3a7716bce857b55c3e39bf0f"
+    },
+    "input_sha256_after": {
+      "docs/entity_model.md": "edb9c35d17e73885346df31782089088c4dfe26e82f8b0cd2463e9febedc9d4e",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "825d1762c29ca5c76cdcbdcb3f403849e9d0e61e9423c3bf0c051a6bd063ff87",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/use_cases/UC-001-submit-expense.md": "e19c5b44acb98dcfb6c4992b1be16520cfe83f7dcb7dee04415b59cedd0590cf",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "4731f93ba34cf4f8334fca6ac5aea8f1d437c87952baf08bdfee32bca3eecea9",
+      "tests/expense.test.mjs": "5162da26ed2caf00497b4af8a68015d6e1eb225a3a7716bce857b55c3e39bf0f"
+    },
+    "stdout": {
+      "path": "artifacts/baseline-pin.stdout.txt",
+      "sha256": "8922b23ef35c948a04eb3af889b7efd93b60731cd357a7aadfcc66a78aeeffe5",
+      "bytes": 1898
+    },
+    "stderr": {
+      "path": "artifacts/baseline-pin.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  },
+  {
+    "name": "baseline-check",
+    "argv": [
+      "node",
+      "/Users/moonklabs/workspace-plugin/aiwf/src/cli/spec-cli.js",
+      "check",
+      "--root",
+      "/private/tmp/aiwf-uc001-pilot-l07zou4o/project",
+      "--json"
+    ],
+    "cwd": "/private/tmp/aiwf-uc001-pilot-l07zou4o/project",
+    "started_at": "2026-10-03T07:19:37.280822+00:00",
+    "ended_at": "2026-10-03T07:19:37.320951+00:00",
+    "wall_seconds": 0.040114208124578,
+    "exit_code": 0,
+    "expected_exit_code": 0,
+    "input_sha256_before": {
+      "docs/entity_model.md": "edb9c35d17e73885346df31782089088c4dfe26e82f8b0cd2463e9febedc9d4e",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "825d1762c29ca5c76cdcbdcb3f403849e9d0e61e9423c3bf0c051a6bd063ff87",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/use_cases/UC-001-submit-expense.md": "e19c5b44acb98dcfb6c4992b1be16520cfe83f7dcb7dee04415b59cedd0590cf",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "4731f93ba34cf4f8334fca6ac5aea8f1d437c87952baf08bdfee32bca3eecea9",
+      "tests/expense.test.mjs": "5162da26ed2caf00497b4af8a68015d6e1eb225a3a7716bce857b55c3e39bf0f"
+    },
+    "input_sha256_after": {
+      "docs/entity_model.md": "edb9c35d17e73885346df31782089088c4dfe26e82f8b0cd2463e9febedc9d4e",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "825d1762c29ca5c76cdcbdcb3f403849e9d0e61e9423c3bf0c051a6bd063ff87",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/use_cases/UC-001-submit-expense.md": "e19c5b44acb98dcfb6c4992b1be16520cfe83f7dcb7dee04415b59cedd0590cf",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "4731f93ba34cf4f8334fca6ac5aea8f1d437c87952baf08bdfee32bca3eecea9",
+      "tests/expense.test.mjs": "5162da26ed2caf00497b4af8a68015d6e1eb225a3a7716bce857b55c3e39bf0f"
+    },
+    "stdout": {
+      "path": "artifacts/baseline-check.stdout.txt",
+      "sha256": "a23f7c4d9534d24a77d9cd400498f1460bc8853782bf11ba9eaa9750cbfd971b",
+      "bytes": 1966
+    },
+    "stderr": {
+      "path": "artifacts/baseline-check.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  },
+  {
+    "name": "baseline-packet",
+    "argv": [
+      "node",
+      "/Users/moonklabs/workspace-plugin/aiwf/src/cli/spec-cli.js",
+      "packet",
+      "--root",
+      "/private/tmp/aiwf-uc001-pilot-l07zou4o/project",
+      "--evidence",
+      "/private/tmp/aiwf-uc001-pilot-l07zou4o/project/artifacts/baseline-evidence.json",
+      "--output",
+      "/private/tmp/aiwf-uc001-pilot-l07zou4o/project/artifacts/baseline-packet.json",
+      "--json"
+    ],
+    "cwd": "/private/tmp/aiwf-uc001-pilot-l07zou4o/project",
+    "started_at": "2026-10-03T07:19:37.322329+00:00",
+    "ended_at": "2026-10-03T07:19:37.361978+00:00",
+    "wall_seconds": 0.03964312467724085,
+    "exit_code": 0,
+    "expected_exit_code": 0,
+    "input_sha256_before": {
+      "docs/entity_model.md": "edb9c35d17e73885346df31782089088c4dfe26e82f8b0cd2463e9febedc9d4e",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "825d1762c29ca5c76cdcbdcb3f403849e9d0e61e9423c3bf0c051a6bd063ff87",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/use_cases/UC-001-submit-expense.md": "e19c5b44acb98dcfb6c4992b1be16520cfe83f7dcb7dee04415b59cedd0590cf",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "4731f93ba34cf4f8334fca6ac5aea8f1d437c87952baf08bdfee32bca3eecea9",
+      "tests/expense.test.mjs": "5162da26ed2caf00497b4af8a68015d6e1eb225a3a7716bce857b55c3e39bf0f"
+    },
+    "input_sha256_after": {
+      "docs/entity_model.md": "edb9c35d17e73885346df31782089088c4dfe26e82f8b0cd2463e9febedc9d4e",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "825d1762c29ca5c76cdcbdcb3f403849e9d0e61e9423c3bf0c051a6bd063ff87",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/use_cases/UC-001-submit-expense.md": "e19c5b44acb98dcfb6c4992b1be16520cfe83f7dcb7dee04415b59cedd0590cf",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "4731f93ba34cf4f8334fca6ac5aea8f1d437c87952baf08bdfee32bca3eecea9",
+      "tests/expense.test.mjs": "5162da26ed2caf00497b4af8a68015d6e1eb225a3a7716bce857b55c3e39bf0f"
+    },
+    "stdout": {
+      "path": "artifacts/baseline-packet.stdout.txt",
+      "sha256": "ef0027d38a613765da2b6ea502e012482b619e582780ceb72725242dbee5ca4e",
+      "bytes": 6821
+    },
+    "stderr": {
+      "path": "artifacts/baseline-packet.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  },
+  {
+    "name": "changed-check",
+    "argv": [
+      "node",
+      "/Users/moonklabs/workspace-plugin/aiwf/src/cli/spec-cli.js",
+      "check",
+      "--root",
+      "/private/tmp/aiwf-uc001-pilot-l07zou4o/project",
+      "--json"
+    ],
+    "cwd": "/private/tmp/aiwf-uc001-pilot-l07zou4o/project",
+    "started_at": "2026-10-03T07:20:11.981355+00:00",
+    "ended_at": "2026-10-03T07:20:12.017893+00:00",
+    "wall_seconds": 0.03648666711524129,
+    "exit_code": 1,
+    "expected_exit_code": 1,
+    "input_sha256_before": {
+      "docs/entity_model.md": "aeb25fc9017964259e74f99220b87efe13b722bffa716b1b12f3b82f9c7ee5d8",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "e54f99e9d9cea07c2f74979f2bd2b0295d451eaf713ade031f76630d8a453491",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/test_cases/TC-002-description-limit.md": "516fa1b0252d8870fe773bcd56b89b1086f45a7f792a573635395e2a89780745",
+      "docs/use_cases/UC-001-submit-expense.md": "f41984bc93f5d352f92bc3f62a1bc6d1dae3d5e931ed5b7ce4d44506afbcf93c",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "4731f93ba34cf4f8334fca6ac5aea8f1d437c87952baf08bdfee32bca3eecea9",
+      "tests/expense.test.mjs": "5162da26ed2caf00497b4af8a68015d6e1eb225a3a7716bce857b55c3e39bf0f"
+    },
+    "input_sha256_after": {
+      "docs/entity_model.md": "aeb25fc9017964259e74f99220b87efe13b722bffa716b1b12f3b82f9c7ee5d8",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "e54f99e9d9cea07c2f74979f2bd2b0295d451eaf713ade031f76630d8a453491",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/test_cases/TC-002-description-limit.md": "516fa1b0252d8870fe773bcd56b89b1086f45a7f792a573635395e2a89780745",
+      "docs/use_cases/UC-001-submit-expense.md": "f41984bc93f5d352f92bc3f62a1bc6d1dae3d5e931ed5b7ce4d44506afbcf93c",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "4731f93ba34cf4f8334fca6ac5aea8f1d437c87952baf08bdfee32bca3eecea9",
+      "tests/expense.test.mjs": "5162da26ed2caf00497b4af8a68015d6e1eb225a3a7716bce857b55c3e39bf0f"
+    },
+    "stdout": {
+      "path": "artifacts/changed-check.stdout.txt",
+      "sha256": "ec3a51eceabbb4a0e3e5f881de9847a938058310a6e9f55d1f35174512340f40",
+      "bytes": 2334
+    },
+    "stderr": {
+      "path": "artifacts/changed-check.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  },
+  {
+    "name": "changed-packet-refused",
+    "argv": [
+      "node",
+      "/Users/moonklabs/workspace-plugin/aiwf/src/cli/spec-cli.js",
+      "packet",
+      "--root",
+      "/private/tmp/aiwf-uc001-pilot-l07zou4o/project",
+      "--evidence",
+      "/private/tmp/aiwf-uc001-pilot-l07zou4o/project/artifacts/baseline-evidence.json",
+      "--output",
+      "/private/tmp/aiwf-uc001-pilot-l07zou4o/project/artifacts/drift-refused-packet.json",
+      "--json"
+    ],
+    "cwd": "/private/tmp/aiwf-uc001-pilot-l07zou4o/project",
+    "started_at": "2026-10-03T07:20:12.019194+00:00",
+    "ended_at": "2026-10-03T07:20:12.054771+00:00",
+    "wall_seconds": 0.035571583081036806,
+    "exit_code": 1,
+    "expected_exit_code": 1,
+    "input_sha256_before": {
+      "docs/entity_model.md": "aeb25fc9017964259e74f99220b87efe13b722bffa716b1b12f3b82f9c7ee5d8",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "e54f99e9d9cea07c2f74979f2bd2b0295d451eaf713ade031f76630d8a453491",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/test_cases/TC-002-description-limit.md": "516fa1b0252d8870fe773bcd56b89b1086f45a7f792a573635395e2a89780745",
+      "docs/use_cases/UC-001-submit-expense.md": "f41984bc93f5d352f92bc3f62a1bc6d1dae3d5e931ed5b7ce4d44506afbcf93c",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "4731f93ba34cf4f8334fca6ac5aea8f1d437c87952baf08bdfee32bca3eecea9",
+      "tests/expense.test.mjs": "5162da26ed2caf00497b4af8a68015d6e1eb225a3a7716bce857b55c3e39bf0f"
+    },
+    "input_sha256_after": {
+      "docs/entity_model.md": "aeb25fc9017964259e74f99220b87efe13b722bffa716b1b12f3b82f9c7ee5d8",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "e54f99e9d9cea07c2f74979f2bd2b0295d451eaf713ade031f76630d8a453491",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/test_cases/TC-002-description-limit.md": "516fa1b0252d8870fe773bcd56b89b1086f45a7f792a573635395e2a89780745",
+      "docs/use_cases/UC-001-submit-expense.md": "f41984bc93f5d352f92bc3f62a1bc6d1dae3d5e931ed5b7ce4d44506afbcf93c",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "4731f93ba34cf4f8334fca6ac5aea8f1d437c87952baf08bdfee32bca3eecea9",
+      "tests/expense.test.mjs": "5162da26ed2caf00497b4af8a68015d6e1eb225a3a7716bce857b55c3e39bf0f"
+    },
+    "stdout": {
+      "path": "artifacts/changed-packet-refused.stdout.txt",
+      "sha256": "cbf4d1721b291d991439800598a1be69a2c34eddcc4a47a6ca37af0da566b5d7",
+      "bytes": 183
+    },
+    "stderr": {
+      "path": "artifacts/changed-packet-refused.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  },
+  {
+    "name": "changed-structure",
+    "argv": [
+      "python3",
+      "/Users/moonklabs/workspace-plugin/aiwf/plugins/aiwf-core/skills/spec-review/scripts/spec_lint.py",
+      "--docs",
+      "docs",
+      "--strict",
+      "--no-baseline",
+      "--format",
+      "json"
+    ],
+    "cwd": "/private/tmp/aiwf-uc001-pilot-l07zou4o/project",
+    "started_at": "2026-10-03T07:20:12.056058+00:00",
+    "ended_at": "2026-10-03T07:20:12.109773+00:00",
+    "wall_seconds": 0.05370962526649237,
+    "exit_code": 0,
+    "expected_exit_code": 0,
+    "input_sha256_before": {
+      "docs/entity_model.md": "aeb25fc9017964259e74f99220b87efe13b722bffa716b1b12f3b82f9c7ee5d8",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "e54f99e9d9cea07c2f74979f2bd2b0295d451eaf713ade031f76630d8a453491",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/test_cases/TC-002-description-limit.md": "516fa1b0252d8870fe773bcd56b89b1086f45a7f792a573635395e2a89780745",
+      "docs/use_cases/UC-001-submit-expense.md": "f41984bc93f5d352f92bc3f62a1bc6d1dae3d5e931ed5b7ce4d44506afbcf93c",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "4731f93ba34cf4f8334fca6ac5aea8f1d437c87952baf08bdfee32bca3eecea9",
+      "tests/expense.test.mjs": "5162da26ed2caf00497b4af8a68015d6e1eb225a3a7716bce857b55c3e39bf0f"
+    },
+    "input_sha256_after": {
+      "docs/entity_model.md": "aeb25fc9017964259e74f99220b87efe13b722bffa716b1b12f3b82f9c7ee5d8",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "e54f99e9d9cea07c2f74979f2bd2b0295d451eaf713ade031f76630d8a453491",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/test_cases/TC-002-description-limit.md": "516fa1b0252d8870fe773bcd56b89b1086f45a7f792a573635395e2a89780745",
+      "docs/use_cases/UC-001-submit-expense.md": "f41984bc93f5d352f92bc3f62a1bc6d1dae3d5e931ed5b7ce4d44506afbcf93c",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "4731f93ba34cf4f8334fca6ac5aea8f1d437c87952baf08bdfee32bca3eecea9",
+      "tests/expense.test.mjs": "5162da26ed2caf00497b4af8a68015d6e1eb225a3a7716bce857b55c3e39bf0f"
+    },
+    "stdout": {
+      "path": "artifacts/changed-structure.stdout.txt",
+      "sha256": "084e217c610e298df59b5c5470daedbe0f268f1baa11f9a2d1d60a6268c0fe7c",
+      "bytes": 113
+    },
+    "stderr": {
+      "path": "artifacts/changed-structure.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  },
+  {
+    "name": "changed-pin-refresh",
+    "argv": [
+      "node",
+      "/Users/moonklabs/workspace-plugin/aiwf/src/cli/spec-cli.js",
+      "pin",
+      "--root",
+      "/private/tmp/aiwf-uc001-pilot-l07zou4o/project",
+      "--refresh",
+      "--json"
+    ],
+    "cwd": "/private/tmp/aiwf-uc001-pilot-l07zou4o/project",
+    "started_at": "2026-10-03T07:20:12.111906+00:00",
+    "ended_at": "2026-10-03T07:20:12.149652+00:00",
+    "wall_seconds": 0.03773724986240268,
+    "exit_code": 0,
+    "expected_exit_code": 0,
+    "input_sha256_before": {
+      "docs/entity_model.md": "aeb25fc9017964259e74f99220b87efe13b722bffa716b1b12f3b82f9c7ee5d8",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "e54f99e9d9cea07c2f74979f2bd2b0295d451eaf713ade031f76630d8a453491",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/test_cases/TC-002-description-limit.md": "516fa1b0252d8870fe773bcd56b89b1086f45a7f792a573635395e2a89780745",
+      "docs/use_cases/UC-001-submit-expense.md": "f41984bc93f5d352f92bc3f62a1bc6d1dae3d5e931ed5b7ce4d44506afbcf93c",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "4731f93ba34cf4f8334fca6ac5aea8f1d437c87952baf08bdfee32bca3eecea9",
+      "tests/expense.test.mjs": "5162da26ed2caf00497b4af8a68015d6e1eb225a3a7716bce857b55c3e39bf0f"
+    },
+    "input_sha256_after": {
+      "docs/entity_model.md": "aeb25fc9017964259e74f99220b87efe13b722bffa716b1b12f3b82f9c7ee5d8",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "e54f99e9d9cea07c2f74979f2bd2b0295d451eaf713ade031f76630d8a453491",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/test_cases/TC-002-description-limit.md": "516fa1b0252d8870fe773bcd56b89b1086f45a7f792a573635395e2a89780745",
+      "docs/use_cases/UC-001-submit-expense.md": "f41984bc93f5d352f92bc3f62a1bc6d1dae3d5e931ed5b7ce4d44506afbcf93c",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "4731f93ba34cf4f8334fca6ac5aea8f1d437c87952baf08bdfee32bca3eecea9",
+      "tests/expense.test.mjs": "5162da26ed2caf00497b4af8a68015d6e1eb225a3a7716bce857b55c3e39bf0f"
+    },
+    "stdout": {
+      "path": "artifacts/changed-pin-refresh.stdout.txt",
+      "sha256": "634aefbdf2f893148bb7877410b424ac8ae4e0ba412a554e3b8cb7dd17abda1c",
+      "bytes": 2115
+    },
+    "stderr": {
+      "path": "artifacts/changed-pin-refresh.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  },
+  {
+    "name": "red-structure",
+    "argv": [
+      "python3",
+      "/Users/moonklabs/workspace-plugin/aiwf/plugins/aiwf-core/skills/spec-review/scripts/spec_lint.py",
+      "--docs",
+      "docs",
+      "--strict",
+      "--no-baseline",
+      "--format",
+      "json"
+    ],
+    "cwd": "/private/tmp/aiwf-uc001-pilot-l07zou4o/project",
+    "started_at": "2026-10-03T07:20:30.369523+00:00",
+    "ended_at": "2026-10-03T07:20:30.420384+00:00",
+    "wall_seconds": 0.05080900015309453,
+    "exit_code": 0,
+    "expected_exit_code": 0,
+    "input_sha256_before": {
+      "docs/entity_model.md": "aeb25fc9017964259e74f99220b87efe13b722bffa716b1b12f3b82f9c7ee5d8",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "e54f99e9d9cea07c2f74979f2bd2b0295d451eaf713ade031f76630d8a453491",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/test_cases/TC-002-description-limit.md": "516fa1b0252d8870fe773bcd56b89b1086f45a7f792a573635395e2a89780745",
+      "docs/use_cases/UC-001-submit-expense.md": "f41984bc93f5d352f92bc3f62a1bc6d1dae3d5e931ed5b7ce4d44506afbcf93c",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "4731f93ba34cf4f8334fca6ac5aea8f1d437c87952baf08bdfee32bca3eecea9",
+      "tests/expense.test.mjs": "90b7203d0933c09b63d3d2ba1e302bb45eef8932f2d54837d27194e82a9ad439"
+    },
+    "input_sha256_after": {
+      "docs/entity_model.md": "aeb25fc9017964259e74f99220b87efe13b722bffa716b1b12f3b82f9c7ee5d8",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "e54f99e9d9cea07c2f74979f2bd2b0295d451eaf713ade031f76630d8a453491",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/test_cases/TC-002-description-limit.md": "516fa1b0252d8870fe773bcd56b89b1086f45a7f792a573635395e2a89780745",
+      "docs/use_cases/UC-001-submit-expense.md": "f41984bc93f5d352f92bc3f62a1bc6d1dae3d5e931ed5b7ce4d44506afbcf93c",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "4731f93ba34cf4f8334fca6ac5aea8f1d437c87952baf08bdfee32bca3eecea9",
+      "tests/expense.test.mjs": "90b7203d0933c09b63d3d2ba1e302bb45eef8932f2d54837d27194e82a9ad439"
+    },
+    "stdout": {
+      "path": "artifacts/red-structure.stdout.txt",
+      "sha256": "084e217c610e298df59b5c5470daedbe0f268f1baa11f9a2d1d60a6268c0fe7c",
+      "bytes": 113
+    },
+    "stderr": {
+      "path": "artifacts/red-structure.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  },
+  {
+    "name": "red-service",
+    "argv": [
+      "node",
+      "--test",
+      "tests/expense.test.mjs"
+    ],
+    "cwd": "/private/tmp/aiwf-uc001-pilot-l07zou4o/project",
+    "started_at": "2026-10-03T07:20:30.421760+00:00",
+    "ended_at": "2026-10-03T07:20:30.483804+00:00",
+    "wall_seconds": 0.06203695898875594,
+    "exit_code": 1,
+    "expected_exit_code": 1,
+    "input_sha256_before": {
+      "docs/entity_model.md": "aeb25fc9017964259e74f99220b87efe13b722bffa716b1b12f3b82f9c7ee5d8",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "e54f99e9d9cea07c2f74979f2bd2b0295d451eaf713ade031f76630d8a453491",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/test_cases/TC-002-description-limit.md": "516fa1b0252d8870fe773bcd56b89b1086f45a7f792a573635395e2a89780745",
+      "docs/use_cases/UC-001-submit-expense.md": "f41984bc93f5d352f92bc3f62a1bc6d1dae3d5e931ed5b7ce4d44506afbcf93c",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "4731f93ba34cf4f8334fca6ac5aea8f1d437c87952baf08bdfee32bca3eecea9",
+      "tests/expense.test.mjs": "90b7203d0933c09b63d3d2ba1e302bb45eef8932f2d54837d27194e82a9ad439"
+    },
+    "input_sha256_after": {
+      "docs/entity_model.md": "aeb25fc9017964259e74f99220b87efe13b722bffa716b1b12f3b82f9c7ee5d8",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "e54f99e9d9cea07c2f74979f2bd2b0295d451eaf713ade031f76630d8a453491",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/test_cases/TC-002-description-limit.md": "516fa1b0252d8870fe773bcd56b89b1086f45a7f792a573635395e2a89780745",
+      "docs/use_cases/UC-001-submit-expense.md": "f41984bc93f5d352f92bc3f62a1bc6d1dae3d5e931ed5b7ce4d44506afbcf93c",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "4731f93ba34cf4f8334fca6ac5aea8f1d437c87952baf08bdfee32bca3eecea9",
+      "tests/expense.test.mjs": "90b7203d0933c09b63d3d2ba1e302bb45eef8932f2d54837d27194e82a9ad439"
+    },
+    "stdout": {
+      "path": "artifacts/red-service.stdout.txt",
+      "sha256": "bd719bf3cf1e5e210d2b2ff853826dc86396d6a29a1767a4632cfe9db5bdf340",
+      "bytes": 10243
+    },
+    "stderr": {
+      "path": "artifacts/red-service.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  },
+  {
+    "name": "red-packet",
+    "argv": [
+      "node",
+      "/Users/moonklabs/workspace-plugin/aiwf/src/cli/spec-cli.js",
+      "packet",
+      "--root",
+      "/private/tmp/aiwf-uc001-pilot-l07zou4o/project",
+      "--evidence",
+      "/private/tmp/aiwf-uc001-pilot-l07zou4o/project/artifacts/red-evidence.json",
+      "--output",
+      "/private/tmp/aiwf-uc001-pilot-l07zou4o/project/artifacts/red-packet.json",
+      "--json"
+    ],
+    "cwd": "/private/tmp/aiwf-uc001-pilot-l07zou4o/project",
+    "started_at": "2026-10-03T07:20:30.485853+00:00",
+    "ended_at": "2026-10-03T07:20:30.532022+00:00",
+    "wall_seconds": 0.04616112494841218,
+    "exit_code": 0,
+    "expected_exit_code": 0,
+    "input_sha256_before": {
+      "docs/entity_model.md": "aeb25fc9017964259e74f99220b87efe13b722bffa716b1b12f3b82f9c7ee5d8",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "e54f99e9d9cea07c2f74979f2bd2b0295d451eaf713ade031f76630d8a453491",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/test_cases/TC-002-description-limit.md": "516fa1b0252d8870fe773bcd56b89b1086f45a7f792a573635395e2a89780745",
+      "docs/use_cases/UC-001-submit-expense.md": "f41984bc93f5d352f92bc3f62a1bc6d1dae3d5e931ed5b7ce4d44506afbcf93c",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "4731f93ba34cf4f8334fca6ac5aea8f1d437c87952baf08bdfee32bca3eecea9",
+      "tests/expense.test.mjs": "90b7203d0933c09b63d3d2ba1e302bb45eef8932f2d54837d27194e82a9ad439"
+    },
+    "input_sha256_after": {
+      "docs/entity_model.md": "aeb25fc9017964259e74f99220b87efe13b722bffa716b1b12f3b82f9c7ee5d8",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "e54f99e9d9cea07c2f74979f2bd2b0295d451eaf713ade031f76630d8a453491",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/test_cases/TC-002-description-limit.md": "516fa1b0252d8870fe773bcd56b89b1086f45a7f792a573635395e2a89780745",
+      "docs/use_cases/UC-001-submit-expense.md": "f41984bc93f5d352f92bc3f62a1bc6d1dae3d5e931ed5b7ce4d44506afbcf93c",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "4731f93ba34cf4f8334fca6ac5aea8f1d437c87952baf08bdfee32bca3eecea9",
+      "tests/expense.test.mjs": "90b7203d0933c09b63d3d2ba1e302bb45eef8932f2d54837d27194e82a9ad439"
+    },
+    "stdout": {
+      "path": "artifacts/red-packet.stdout.txt",
+      "sha256": "b7dab2c3606278b14f7f99b9fed2e63816dbe3ec7a9e438b751f3df6b7d112c7",
+      "bytes": 15021
+    },
+    "stderr": {
+      "path": "artifacts/red-packet.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  },
+  {
+    "name": "final-structure",
+    "argv": [
+      "python3",
+      "/Users/moonklabs/workspace-plugin/aiwf/plugins/aiwf-core/skills/spec-review/scripts/spec_lint.py",
+      "--docs",
+      "docs",
+      "--strict",
+      "--no-baseline",
+      "--format",
+      "json"
+    ],
+    "cwd": "/private/tmp/aiwf-uc001-pilot-l07zou4o/project",
+    "started_at": "2026-10-03T07:20:39.587377+00:00",
+    "ended_at": "2026-10-03T07:20:39.637667+00:00",
+    "wall_seconds": 0.050243125297129154,
+    "exit_code": 0,
+    "expected_exit_code": 0,
+    "input_sha256_before": {
+      "docs/entity_model.md": "aeb25fc9017964259e74f99220b87efe13b722bffa716b1b12f3b82f9c7ee5d8",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "e54f99e9d9cea07c2f74979f2bd2b0295d451eaf713ade031f76630d8a453491",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/test_cases/TC-002-description-limit.md": "516fa1b0252d8870fe773bcd56b89b1086f45a7f792a573635395e2a89780745",
+      "docs/use_cases/UC-001-submit-expense.md": "f41984bc93f5d352f92bc3f62a1bc6d1dae3d5e931ed5b7ce4d44506afbcf93c",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "8f434f4614809a9ec3c478235232bc0a14b586fab6e7a6c4467e91d7040c0669",
+      "tests/expense.test.mjs": "90b7203d0933c09b63d3d2ba1e302bb45eef8932f2d54837d27194e82a9ad439"
+    },
+    "input_sha256_after": {
+      "docs/entity_model.md": "aeb25fc9017964259e74f99220b87efe13b722bffa716b1b12f3b82f9c7ee5d8",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "e54f99e9d9cea07c2f74979f2bd2b0295d451eaf713ade031f76630d8a453491",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/test_cases/TC-002-description-limit.md": "516fa1b0252d8870fe773bcd56b89b1086f45a7f792a573635395e2a89780745",
+      "docs/use_cases/UC-001-submit-expense.md": "f41984bc93f5d352f92bc3f62a1bc6d1dae3d5e931ed5b7ce4d44506afbcf93c",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "8f434f4614809a9ec3c478235232bc0a14b586fab6e7a6c4467e91d7040c0669",
+      "tests/expense.test.mjs": "90b7203d0933c09b63d3d2ba1e302bb45eef8932f2d54837d27194e82a9ad439"
+    },
+    "stdout": {
+      "path": "artifacts/final-structure.stdout.txt",
+      "sha256": "084e217c610e298df59b5c5470daedbe0f268f1baa11f9a2d1d60a6268c0fe7c",
+      "bytes": 113
+    },
+    "stderr": {
+      "path": "artifacts/final-structure.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  },
+  {
+    "name": "final-service",
+    "argv": [
+      "node",
+      "--test",
+      "tests/expense.test.mjs"
+    ],
+    "cwd": "/private/tmp/aiwf-uc001-pilot-l07zou4o/project",
+    "started_at": "2026-10-03T07:20:39.639081+00:00",
+    "ended_at": "2026-10-03T07:20:39.699193+00:00",
+    "wall_seconds": 0.06010437523946166,
+    "exit_code": 0,
+    "expected_exit_code": 0,
+    "input_sha256_before": {
+      "docs/entity_model.md": "aeb25fc9017964259e74f99220b87efe13b722bffa716b1b12f3b82f9c7ee5d8",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "e54f99e9d9cea07c2f74979f2bd2b0295d451eaf713ade031f76630d8a453491",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/test_cases/TC-002-description-limit.md": "516fa1b0252d8870fe773bcd56b89b1086f45a7f792a573635395e2a89780745",
+      "docs/use_cases/UC-001-submit-expense.md": "f41984bc93f5d352f92bc3f62a1bc6d1dae3d5e931ed5b7ce4d44506afbcf93c",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "8f434f4614809a9ec3c478235232bc0a14b586fab6e7a6c4467e91d7040c0669",
+      "tests/expense.test.mjs": "90b7203d0933c09b63d3d2ba1e302bb45eef8932f2d54837d27194e82a9ad439"
+    },
+    "input_sha256_after": {
+      "docs/entity_model.md": "aeb25fc9017964259e74f99220b87efe13b722bffa716b1b12f3b82f9c7ee5d8",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "e54f99e9d9cea07c2f74979f2bd2b0295d451eaf713ade031f76630d8a453491",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/test_cases/TC-002-description-limit.md": "516fa1b0252d8870fe773bcd56b89b1086f45a7f792a573635395e2a89780745",
+      "docs/use_cases/UC-001-submit-expense.md": "f41984bc93f5d352f92bc3f62a1bc6d1dae3d5e931ed5b7ce4d44506afbcf93c",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "8f434f4614809a9ec3c478235232bc0a14b586fab6e7a6c4467e91d7040c0669",
+      "tests/expense.test.mjs": "90b7203d0933c09b63d3d2ba1e302bb45eef8932f2d54837d27194e82a9ad439"
+    },
+    "stdout": {
+      "path": "artifacts/final-service.stdout.txt",
+      "sha256": "2d189744c9af11967860d0f88955d77dc93b7083936f8548ff9fb60dd6b0d4da",
+      "bytes": 4588
+    },
+    "stderr": {
+      "path": "artifacts/final-service.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  },
+  {
+    "name": "final-check",
+    "argv": [
+      "node",
+      "/Users/moonklabs/workspace-plugin/aiwf/src/cli/spec-cli.js",
+      "check",
+      "--root",
+      "/private/tmp/aiwf-uc001-pilot-l07zou4o/project",
+      "--json"
+    ],
+    "cwd": "/private/tmp/aiwf-uc001-pilot-l07zou4o/project",
+    "started_at": "2026-10-03T07:20:39.701137+00:00",
+    "ended_at": "2026-10-03T07:20:39.739594+00:00",
+    "wall_seconds": 0.03845099965110421,
+    "exit_code": 0,
+    "expected_exit_code": 0,
+    "input_sha256_before": {
+      "docs/entity_model.md": "aeb25fc9017964259e74f99220b87efe13b722bffa716b1b12f3b82f9c7ee5d8",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "e54f99e9d9cea07c2f74979f2bd2b0295d451eaf713ade031f76630d8a453491",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/test_cases/TC-002-description-limit.md": "516fa1b0252d8870fe773bcd56b89b1086f45a7f792a573635395e2a89780745",
+      "docs/use_cases/UC-001-submit-expense.md": "f41984bc93f5d352f92bc3f62a1bc6d1dae3d5e931ed5b7ce4d44506afbcf93c",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "8f434f4614809a9ec3c478235232bc0a14b586fab6e7a6c4467e91d7040c0669",
+      "tests/expense.test.mjs": "90b7203d0933c09b63d3d2ba1e302bb45eef8932f2d54837d27194e82a9ad439"
+    },
+    "input_sha256_after": {
+      "docs/entity_model.md": "aeb25fc9017964259e74f99220b87efe13b722bffa716b1b12f3b82f9c7ee5d8",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "e54f99e9d9cea07c2f74979f2bd2b0295d451eaf713ade031f76630d8a453491",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/test_cases/TC-002-description-limit.md": "516fa1b0252d8870fe773bcd56b89b1086f45a7f792a573635395e2a89780745",
+      "docs/use_cases/UC-001-submit-expense.md": "f41984bc93f5d352f92bc3f62a1bc6d1dae3d5e931ed5b7ce4d44506afbcf93c",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "8f434f4614809a9ec3c478235232bc0a14b586fab6e7a6c4467e91d7040c0669",
+      "tests/expense.test.mjs": "90b7203d0933c09b63d3d2ba1e302bb45eef8932f2d54837d27194e82a9ad439"
+    },
+    "stdout": {
+      "path": "artifacts/final-check.stdout.txt",
+      "sha256": "5cc8d55484a231d535efa6a8b1cb5755eae3e5508c3d141742e2ae2bc29cf261",
+      "bytes": 2171
+    },
+    "stderr": {
+      "path": "artifacts/final-check.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  },
+  {
+    "name": "final-packet",
+    "argv": [
+      "node",
+      "/Users/moonklabs/workspace-plugin/aiwf/src/cli/spec-cli.js",
+      "packet",
+      "--root",
+      "/private/tmp/aiwf-uc001-pilot-l07zou4o/project",
+      "--evidence",
+      "/private/tmp/aiwf-uc001-pilot-l07zou4o/project/artifacts/final-evidence.json",
+      "--output",
+      "/private/tmp/aiwf-uc001-pilot-l07zou4o/project/artifacts/final-packet.json",
+      "--json"
+    ],
+    "cwd": "/private/tmp/aiwf-uc001-pilot-l07zou4o/project",
+    "started_at": "2026-10-03T07:20:39.741657+00:00",
+    "ended_at": "2026-10-03T07:20:39.778979+00:00",
+    "wall_seconds": 0.03731749998405576,
+    "exit_code": 0,
+    "expected_exit_code": 0,
+    "input_sha256_before": {
+      "docs/entity_model.md": "aeb25fc9017964259e74f99220b87efe13b722bffa716b1b12f3b82f9c7ee5d8",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "e54f99e9d9cea07c2f74979f2bd2b0295d451eaf713ade031f76630d8a453491",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/test_cases/TC-002-description-limit.md": "516fa1b0252d8870fe773bcd56b89b1086f45a7f792a573635395e2a89780745",
+      "docs/use_cases/UC-001-submit-expense.md": "f41984bc93f5d352f92bc3f62a1bc6d1dae3d5e931ed5b7ce4d44506afbcf93c",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "8f434f4614809a9ec3c478235232bc0a14b586fab6e7a6c4467e91d7040c0669",
+      "tests/expense.test.mjs": "90b7203d0933c09b63d3d2ba1e302bb45eef8932f2d54837d27194e82a9ad439"
+    },
+    "input_sha256_after": {
+      "docs/entity_model.md": "aeb25fc9017964259e74f99220b87efe13b722bffa716b1b12f3b82f9c7ee5d8",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "e54f99e9d9cea07c2f74979f2bd2b0295d451eaf713ade031f76630d8a453491",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/test_cases/TC-002-description-limit.md": "516fa1b0252d8870fe773bcd56b89b1086f45a7f792a573635395e2a89780745",
+      "docs/use_cases/UC-001-submit-expense.md": "f41984bc93f5d352f92bc3f62a1bc6d1dae3d5e931ed5b7ce4d44506afbcf93c",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "8f434f4614809a9ec3c478235232bc0a14b586fab6e7a6c4467e91d7040c0669",
+      "tests/expense.test.mjs": "90b7203d0933c09b63d3d2ba1e302bb45eef8932f2d54837d27194e82a9ad439"
+    },
+    "stdout": {
+      "path": "artifacts/final-packet.stdout.txt",
+      "sha256": "60048caa0caffa60aa7247215224afe16059c2cfc69d752343de694e6b8b8288",
+      "bytes": 9251
+    },
+    "stderr": {
+      "path": "artifacts/final-packet.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  },
+  {
+    "name": "archive-structure",
+    "argv": [
+      "python3",
+      "/Users/moonklabs/workspace-plugin/aiwf/plugins/aiwf-core/skills/spec-review/scripts/spec_lint.py",
+      "--docs",
+      "docs",
+      "--strict",
+      "--no-baseline",
+      "--format",
+      "json"
+    ],
+    "cwd": "/Users/moonklabs/workspace-plugin/aiwf/docs/modernization/evidence/local-pilot-20261003/project",
+    "started_at": "2026-10-03T07:21:06.679271+00:00",
+    "ended_at": "2026-10-03T07:21:06.737948+00:00",
+    "wall_seconds": 0.05861404212191701,
+    "exit_code": 0,
+    "expected_exit_code": 0,
+    "input_sha256_before": {
+      "docs/entity_model.md": "aeb25fc9017964259e74f99220b87efe13b722bffa716b1b12f3b82f9c7ee5d8",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "e54f99e9d9cea07c2f74979f2bd2b0295d451eaf713ade031f76630d8a453491",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/test_cases/TC-002-description-limit.md": "516fa1b0252d8870fe773bcd56b89b1086f45a7f792a573635395e2a89780745",
+      "docs/use_cases/UC-001-submit-expense.md": "f41984bc93f5d352f92bc3f62a1bc6d1dae3d5e931ed5b7ce4d44506afbcf93c",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "8f434f4614809a9ec3c478235232bc0a14b586fab6e7a6c4467e91d7040c0669",
+      "tests/expense.test.mjs": "90b7203d0933c09b63d3d2ba1e302bb45eef8932f2d54837d27194e82a9ad439"
+    },
+    "input_sha256_after": {
+      "docs/entity_model.md": "aeb25fc9017964259e74f99220b87efe13b722bffa716b1b12f3b82f9c7ee5d8",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "e54f99e9d9cea07c2f74979f2bd2b0295d451eaf713ade031f76630d8a453491",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/test_cases/TC-002-description-limit.md": "516fa1b0252d8870fe773bcd56b89b1086f45a7f792a573635395e2a89780745",
+      "docs/use_cases/UC-001-submit-expense.md": "f41984bc93f5d352f92bc3f62a1bc6d1dae3d5e931ed5b7ce4d44506afbcf93c",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "8f434f4614809a9ec3c478235232bc0a14b586fab6e7a6c4467e91d7040c0669",
+      "tests/expense.test.mjs": "90b7203d0933c09b63d3d2ba1e302bb45eef8932f2d54837d27194e82a9ad439"
+    },
+    "stdout": {
+      "path": "artifacts/archive-structure.stdout.txt",
+      "sha256": "084e217c610e298df59b5c5470daedbe0f268f1baa11f9a2d1d60a6268c0fe7c",
+      "bytes": 113
+    },
+    "stderr": {
+      "path": "artifacts/archive-structure.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  },
+  {
+    "name": "archive-service",
+    "argv": [
+      "node",
+      "--test",
+      "tests/expense.test.mjs"
+    ],
+    "cwd": "/Users/moonklabs/workspace-plugin/aiwf/docs/modernization/evidence/local-pilot-20261003/project",
+    "started_at": "2026-10-03T07:21:06.741867+00:00",
+    "ended_at": "2026-10-03T07:21:06.807862+00:00",
+    "wall_seconds": 0.06598629197105765,
+    "exit_code": 0,
+    "expected_exit_code": 0,
+    "input_sha256_before": {
+      "docs/entity_model.md": "aeb25fc9017964259e74f99220b87efe13b722bffa716b1b12f3b82f9c7ee5d8",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "e54f99e9d9cea07c2f74979f2bd2b0295d451eaf713ade031f76630d8a453491",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/test_cases/TC-002-description-limit.md": "516fa1b0252d8870fe773bcd56b89b1086f45a7f792a573635395e2a89780745",
+      "docs/use_cases/UC-001-submit-expense.md": "f41984bc93f5d352f92bc3f62a1bc6d1dae3d5e931ed5b7ce4d44506afbcf93c",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "8f434f4614809a9ec3c478235232bc0a14b586fab6e7a6c4467e91d7040c0669",
+      "tests/expense.test.mjs": "90b7203d0933c09b63d3d2ba1e302bb45eef8932f2d54837d27194e82a9ad439"
+    },
+    "input_sha256_after": {
+      "docs/entity_model.md": "aeb25fc9017964259e74f99220b87efe13b722bffa716b1b12f3b82f9c7ee5d8",
+      "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+      "docs/plans/UC-001.md": "e54f99e9d9cea07c2f74979f2bd2b0295d451eaf713ade031f76630d8a453491",
+      "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+      "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+      "docs/test_cases/TC-002-description-limit.md": "516fa1b0252d8870fe773bcd56b89b1086f45a7f792a573635395e2a89780745",
+      "docs/use_cases/UC-001-submit-expense.md": "f41984bc93f5d352f92bc3f62a1bc6d1dae3d5e931ed5b7ce4d44506afbcf93c",
+      "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+      "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+      "src/expense.mjs": "8f434f4614809a9ec3c478235232bc0a14b586fab6e7a6c4467e91d7040c0669",
+      "tests/expense.test.mjs": "90b7203d0933c09b63d3d2ba1e302bb45eef8932f2d54837d27194e82a9ad439"
+    },
+    "stdout": {
+      "path": "artifacts/archive-service.stdout.txt",
+      "sha256": "b3ecba2af8c5b5bdd4ae54db2568064125ee11e83f326f6e34ccb130d74045c4",
+      "bytes": 4588
+    },
+    "stderr": {
+      "path": "artifacts/archive-service.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  }
+]

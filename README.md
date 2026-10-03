@@ -10,6 +10,10 @@ Modernization started on 2026-10-02. The specification workflow is split across 
 
 See the [direction](docs/modernization/DIRECTION.ko.md), [validation record](docs/modernization/VALIDATION.md), [Sprintable adapter proposal](docs/modernization/SPRINTABLE.ko.md) and [worked example](examples/spec-workflow/README.md).
 
+The [CLI productivity analysis (Korean)](docs/modernization/CLI-PRODUCTIVITY.ko.md) proposes a real use-case pilot before read-only verification and optional checks with versioned execution records. Synchronized documentation remains a quality requirement at every step. These extensions are proposals, not implemented commands.
+
+Two independent Claude sessions assessed the reviewed proposal as conditionally suitable. The [Korean plan review](docs/modernization/CLAUDE-PLAN-REVIEW-2026-10-03.ko.md) preserves their concerns and original input. The revised [pilot plan](docs/modernization/PILOT-UC-001.ko.md) and [local execution result](docs/modernization/PILOT-RESULT-2026-10-03.ko.md) record drift refusal and failing-to-passing service tests. Actual product adoption, human review and productivity gains remain unverified; no proposed CLI commands were added.
+
 ## Start with this checkout
 
 Node.js 20+; Python 3.9+ for structural lint. The new Node CLI has no external dependencies. The target project directory must already exist.

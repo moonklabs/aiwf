@@ -1,0 +1,5 @@
+
+> aiwf@0.3.24 validate:spec-plugin
+> node scripts/validate-spec-plugin.mjs
+
+AIWF: 31 unchanged upstream skills + 3 AIWF skills (workflow and optional delegates); 71 unchanged upstream resources, 1 attributed NOTICE modification; references and manifests validated.

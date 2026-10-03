@@ -1,0 +1,31 @@
+{
+  "kind": "local_example_service_slice",
+  "base_revision": "fcf5ebc24bcd5e49148290a65ac6e1a5c4b22ba6",
+  "original_project_root": "/private/tmp/aiwf-uc001-pilot-l07zou4o/project",
+  "archive_project_root": "/Users/moonklabs/workspace-plugin/aiwf/docs/modernization/evidence/local-pilot-20261003/project",
+  "human_review": "not_recorded",
+  "human_active_time": "not_measured",
+  "reviewed_plan_sha256": "426d38f8d52001678083979ca7418c64c6d0b780fa8ef504aec1d6aa5c6b7ab8",
+  "node": "v22.23.1",
+  "python": "Python 3.14.8",
+  "final_input_sha256": {
+    "docs/entity_model.md": "aeb25fc9017964259e74f99220b87efe13b722bffa716b1b12f3b82f9c7ee5d8",
+    "docs/glossary.md": "093fc46be4b64534e670c046d935fce2287246190390d119f4c2edf43b7aedd9",
+    "docs/plans/UC-001.md": "e54f99e9d9cea07c2f74979f2bd2b0295d451eaf713ade031f76630d8a453491",
+    "docs/requirements.md": "d6190c0cfe5b43cd1fa7ba46fb252a558cc2854b0a5523cce7c2cf34db2c5254",
+    "docs/test_cases/TC-001-submit-expense.md": "f47b50f116ac8af187daf8915382c3a7e084d0110840b8b2cd0413f5d9a5d3b2",
+    "docs/test_cases/TC-002-description-limit.md": "516fa1b0252d8870fe773bcd56b89b1086f45a7f792a573635395e2a89780745",
+    "docs/use_cases/UC-001-submit-expense.md": "f41984bc93f5d352f92bc3f62a1bc6d1dae3d5e931ed5b7ce4d44506afbcf93c",
+    "docs/use_cases.puml": "b693ab2ddf7896b404a5193acd1fe65c3b4e0bb768df56a54360dc0f8c3a412d",
+    "docs/vision.md": "52fabfa494c1419bc1045f3404e26478a523a52c0f9910c40ac0199a7a9455fd",
+    "src/expense.mjs": "8f434f4614809a9ec3c478235232bc0a14b586fab6e7a6c4467e91d7040c0669",
+    "tests/expense.test.mjs": "90b7203d0933c09b63d3d2ba1e302bb45eef8932f2d54837d27194e82a9ad439"
+  },
+  "tool_sha256_at_archive": {
+    "src/cli/spec-cli.js": "52696829099edd56650e7966c14519dd12d09f7368077d63b28e10ad0e905a5c",
+    "src/lib/spec-workflow.js": "1c23a091ac0ed32812adb2f5c889d08fdf8427583f734e8b22eddb1895fa709b",
+    "plugins/aiwf-core/skills/spec-review/scripts/spec_lint.py": "8a70d669f165870045c2174c47073cd3496f9da40de658d9695e876e6620f031",
+    "plugins/aiwf-core/skills/use-case-spec/scripts/validate_use_case.py": "3a4cee5406639eb5406d8ec01bde4d7488ff31e3b8500566011a884bb6622be9",
+    "plugins/aiwf-core/skills/test-case/scripts/bpmn_paths.py": "8821d2fac8334219dda5271ab366d0f681a6a51545aa94bd462964c3598be8fb"
+  }
+}
