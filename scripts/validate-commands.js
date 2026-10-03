@@ -12,6 +12,7 @@
 
 import fs from 'fs/promises';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
 // 색상 출력을 위한 ANSI 코드
 const colors = {
@@ -91,9 +92,10 @@ async function scanCommandsDirectory(dir) {
         }
     } catch (error) {
         console.error(chalk.red(`Error scanning directory ${dir}: ${error.message}`));
+        return { commands, error: error.message };
     }
     
-    return commands;
+    return { commands, error: null };
 }
 
 // GitHub URL 참조 검증
@@ -120,8 +122,10 @@ async function validateCommands() {
     
     // 1. 디렉토리 스캔
     console.log(chalk.cyan('\n1. 디렉토리 스캔 중...'));
-    const koCommands = await scanCommandsDirectory(KO_COMMANDS_DIR);
-    const enCommands = await scanCommandsDirectory(EN_COMMANDS_DIR);
+    const koScan = await scanCommandsDirectory(KO_COMMANDS_DIR);
+    const enScan = await scanCommandsDirectory(EN_COMMANDS_DIR);
+    const koCommands = koScan.commands;
+    const enCommands = enScan.commands;
     
     console.log(chalk.gray(`   한국어 명령어: ${Object.keys(koCommands).length}개`));
     console.log(chalk.gray(`   영어 명령어: ${Object.keys(enCommands).length}개`));
@@ -131,6 +135,26 @@ async function validateCommands() {
     
     const allFiles = new Set([...Object.keys(koCommands), ...Object.keys(enCommands)]);
     const issues = [];
+
+    // 스캔 실패(존재하지 않는 디렉토리 등)를 통과로 삼키지 않는다
+    for (const [dir, scan] of [[KO_COMMANDS_DIR, koScan], [EN_COMMANDS_DIR, enScan]]) {
+        if (scan.error) {
+            issues.push({
+                type: 'scan_error',
+                file: dir,
+                message: `디렉토리 스캔 실패: ${dir} (${scan.error})`
+            });
+        }
+    }
+
+    // 검증 대상이 하나도 없으면 잘못된 통과로 간주한다
+    if (allFiles.size === 0 && issues.length === 0) {
+        issues.push({
+            type: 'no_commands',
+            file: null,
+            message: '명령어 파일을 찾을 수 없습니다 (검증 대상 없음)'
+        });
+    }
     
     for (const fileName of allFiles) {
         const koExists = koCommands[fileName];
@@ -247,8 +271,19 @@ async function validateCommands() {
 }
 
 // 메인 실행
-if (import.meta.url === `file://${process.argv[1]}`) {
-    validateCommands().catch(console.error);
+const isMainModule = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+
+if (isMainModule) {
+    validateCommands()
+        .then((result) => {
+            if (!result || result.success !== true) {
+                process.exitCode = 1;
+            }
+        })
+        .catch((error) => {
+            console.error(error);
+            process.exitCode = 1;
+        });
 }
 
 export { validateCommands };

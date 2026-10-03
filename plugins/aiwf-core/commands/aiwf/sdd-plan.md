@@ -147,5 +147,5 @@ API 명세를 별도 파일로 분리
 
 ## 참고
 
-- spec-driven-development 스킬 참조
-- 템플릿: .claude/skills/spec-driven-development/templates/plan-template.md
+- aiwf-spec-driven-development 스킬 참조
+- 템플릿: .claude/skills/aiwf-spec-driven-development/templates/plan-template.md

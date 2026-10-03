@@ -119,5 +119,5 @@ mkdir -p .sdd/specs
 
 ## 참고
 
-- spec-driven-development 스킬 참조
-- 템플릿: .claude/skills/spec-driven-development/templates/spec-template.md
+- aiwf-spec-driven-development 스킬 참조
+- 템플릿: .claude/skills/aiwf-spec-driven-development/templates/spec-template.md

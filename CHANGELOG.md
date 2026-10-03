@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Make portable Agent Skills installed through the official skills.sh CLI the primary installation path for Codex and Claude Code.
+- Rename the six existing skills to standard `aiwf-*` directory/frontmatter names. Preserve their reference resources and remove required host-specific hooks, commands, paths, and credentials from entrypoints.
+- Rewrite English/Korean getting-started documentation and add local/remote installation, invocation, migration, and update instructions.
+- Raise the npm package Node.js floor to 18 to match the bundled helper; the tested official skills installer separately requires Node.js 22.20+.
+
+### Fixed
+- Surface legacy/incomplete task files as status warnings, accept BOM-prefixed frontmatter, and preserve literal dollar sequences in project names.
+- Repair backend reference documents' return links and validate links throughout all bundled Markdown resources.
+- Include all four modular Claude Code plugins in the npm package.
+- Return a failing exit code when command validation finds inconsistencies or cannot scan command directories.
+
+### Added
+- Add the self-contained `aiwf` skill for project initialization, planning, task execution, review, and resuming, with bundled templates and an optional dependency-free init/status helper.
+- Add skill metadata/resource tests, installed-helper regression tests, full skill-resource npm packaging checks, and a real official-CLI installation smoke test for Codex and Claude Code.
+- Regression tests for npm plugin contents and command-validator exit codes.
+- An AIWF improvement roadmap with a baseline audit and prioritized migration fixes.
+
 ## [0.3.10] - 2025-07-23
 
 ### 🚀 Added

@@ -1,5 +1,7 @@
 # AIWF Plugin for Claude Code
 
+For the current **Codex and Claude Code** installation, use [the portable skills.sh guide](docs/SKILLS_INSTALLATION.md). This page documents the earlier Claude plugin route; its hooks and cross-plugin command dependencies still have known issues tracked in [the improvement plan](docs/AIWF_IMPROVEMENT_PLAN.ko.md).
+
 AI Workflow Framework (AIWF) - A comprehensive project management and development workflow plugin for Claude Code.
 
 ## Features
@@ -16,11 +18,13 @@ AI Workflow Framework (AIWF) - A comprehensive project management and developmen
 ### Via Plugin Marketplace
 
 ```bash
-/plugin marketplace add moonklabs/aiwf-marketplace
-/plugin install aiwf@aiwf-marketplace
+/plugin marketplace add moonklabs/aiwf
+/plugin install aiwf-core@aiwf-plugins
 ```
 
-### Via NPM (Alternative)
+The current registry lists `aiwf-core`, `aiwf-dev`, `aiwf-experts`, and `aiwf-tools` under `aiwf-plugins`. The root monolithic `aiwf@aiwf-marketplace` identity is no longer the registry entry. The command examples below are historical plugin examples and have not been validated as part of the portable skills update.
+
+### Via NPM (Legacy)
 
 ```bash
 npm install -g aiwf
@@ -104,11 +108,13 @@ When initialized, AIWF creates the following structure:
 The plugin includes these skills:
 
 - `aiwf:project-management` - AIWF project workflow
-- `aiwf:backend-dev-guidelines` - Node.js/Express/TypeScript patterns
-- `aiwf:frontend-dev-guidelines` - React/Vue development patterns
-- `aiwf:spec-driven-development` - Spec-driven development approach
-- `aiwf:error-tracking` - Error tracking and debugging
-- `aiwf:route-tester` - API route testing
+- `aiwf-backend-dev-guidelines` - Backend development patterns
+- `aiwf-frontend-dev-guidelines` - Frontend development patterns
+- `aiwf-spec-driven-development` - Spec-driven development approach
+- `aiwf-error-tracking` - Error tracking and debugging
+- `aiwf-route-tester` - API route testing
+
+These skills live at the repository's `skills/` root and are installed separately with the official skills CLI. See the current guide for the core `aiwf` and `aiwf-skill-developer` skills as well.
 
 ## Agents
 

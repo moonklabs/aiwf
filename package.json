@@ -1,7 +1,7 @@
 {
     "name": "aiwf",
     "version": "0.3.24",
-    "description": "AI Workflow Framework for Claude Code with multi-language support (Korean/English)",
+    "description": "Portable AI Workflow Framework skills for Codex and Claude Code (Korean/English)",
     "main": "index.js",
     "type": "module",
     "bin": {
@@ -17,6 +17,9 @@
         "lang:set": "node src/cli/index.js lang set",
         "lang:reset": "node src/cli/index.js lang reset",
         "validate:commands": "node scripts/validate-commands.js",
+        "validate:skills": "npm test -- --runInBand --coverage=false --runTestsByPath tests/skills.test.js",
+        "test:skills": "npm test -- --runInBand --coverage=false --runTestsByPath tests/skills.test.js tests/aiwf-project.test.js tests/package-distribution.test.js tests/validate-commands-cli.test.js",
+        "test:skills-install": "node scripts/test-skills-install.js",
         "update:file-lists": "node scripts/update-file-lists.js",
         "update:file-lists:dry-run": "node scripts/update-file-lists.js --dry-run",
         "update:file-lists:verbose": "node scripts/update-file-lists.js --verbose"
@@ -28,6 +31,9 @@
         "framework",
         "claude-code",
         "claude-code-plugin",
+        "codex",
+        "agent-skills",
+        "skills.sh",
         "multilingual",
         "korean",
         "english",
@@ -46,11 +52,12 @@
     },
     "homepage": "https://github.com/moonklabs/aiwf#readme",
     "engines": {
-        "node": ">=14.0.0"
+        "node": ">=18.0.0"
     },
     "files": [
         "src/",
         ".claude-plugin/",
+        "plugins/",
         "skills/",
         "commands/",
         "agents/",

@@ -156,5 +156,5 @@ tasks.md를 Superpowers plan 형식으로 변환:
 
 ## 참고
 
-- spec-driven-development 스킬 참조
-- 템플릿: .claude/skills/spec-driven-development/templates/tasks-template.md
+- aiwf-spec-driven-development 스킬 참조
+- 템플릿: .claude/skills/aiwf-spec-driven-development/templates/tasks-template.md
