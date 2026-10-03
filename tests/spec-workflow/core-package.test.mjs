@@ -20,8 +20,8 @@ test('methodology core is the primary independently installable package', () => 
   assert.match(installer, /join\(plugins, 'aiwf-core'\)/);
 });
 
-test('only the methodology plugins and spec CLI are distributed', () => {
-  const names = ['aiwf-core', 'aiwf-spec', 'aiwf-vaadin-jooq', 'aiwf-angular-jpa', 'aiwf-blazor-dotnet', 'aiwf-nestjs-nextjs'];
+test('methodology, optional delegation plugins and the spec CLI are distributed', () => {
+  const names = ['aiwf-core', 'aiwf-spec', 'aiwf-delegate-claude', 'aiwf-delegate-codex', 'aiwf-vaadin-jooq', 'aiwf-angular-jpa', 'aiwf-blazor-dotnet', 'aiwf-nestjs-nextjs'];
   const market = json('.claude-plugin/marketplace.json');
   assert.deepEqual(market.plugins.map(p => p.name), names);
   assert.deepEqual(readdirSync(root + 'plugins').sort(), [...names].sort());
@@ -36,4 +36,13 @@ test('only the methodology plugins and spec CLI are distributed', () => {
   }
   assert.equal(existsSync(root + 'plugins/aiwf-core/commands'), false);
   assert.equal(existsSync(root + 'plugins/aiwf-core/hooks'), false);
+  for (const target of ['claude', 'codex']) {
+    const skill = `delegate-${target}`;
+    const plugin = `plugins/aiwf-delegate-${target}/`;
+    assert.deepEqual(readdirSync(root + plugin + 'skills'), [skill]);
+    assert.match(readFileSync(root + plugin + `skills/${skill}/SKILL.md`, 'utf8'), /disable-model-invocation: true/);
+    for (const legalFile of ['LICENSE', 'NOTICE']) {
+      assert.equal(readFileSync(root + plugin + `skills/${skill}/${legalFile}`, 'utf8'), readFileSync(root + plugin + legalFile, 'utf8'));
+    }
+  }
 });

@@ -4,10 +4,12 @@
 
 AIWF는 유스케이스 명세를 Git에 유지하면서 기존 Claude Code/Codex로 구현하고, 실제 검증 결과를 검토 가능한 형태로 남기는 개발 워크플로우다.
 
-2026-10-02부터 개선 중이다. 새 경로는 두 플러그인으로 나뉜다. **`aiwf-core`**는 AIUP에서 가져온 방법론 core로 요구사항·유스케이스·엔티티·명세 검토용 upstream 스킬 7개를 담는다. **`aiwf-spec`**는 AIWF가 추가한 `workflow` 스킬을 담고, 저장소 CLI를 사용해 비파괴 초기화·명세 버전 고정·변경 감지·검증 로그 묶기를 연결한다. Sprintable 연동과 무인 반복 실행은 후속 범위다. 아래 기능은 이 저장소의 개발 버전 기준이며 기존 npm 배포판에 포함됐다고 가정하면 안 된다.
+2026-10-02부터 개선 중이다. 명세 워크플로는 두 플러그인으로 나뉜다. **`aiwf-core`**는 AIUP에서 가져온 방법론 core로 요구사항·유스케이스·엔티티·명세 검토용 upstream 스킬 7개를 담는다. **`aiwf-spec`**는 AIWF가 추가한 `workflow` 스킬을 담고, 저장소 CLI를 사용해 비파괴 초기화·명세 버전 고정·변경 감지·검증 로그 묶기를 연결한다. Claude/Codex 위임 애드온 두 개는 별도 선택 사항이다. Sprintable 연동과 무인 반복 실행은 후속 범위다. 아래 기능은 이 저장소의 개발 버전 기준이며 기존 npm 배포판에 포함됐다고 가정하면 안 된다.
 
 ## 가장 먼저 읽을 것
 
+- [스킬 한글 휴먼 리뷰본과 문서 관리 절차](docs/ko-skills/README.md) — 모든 작업에서 먼저 확인하고 관련 원문·번역을 함께 갱신한다.
+- [Claude·Codex 위임 스킬 선택 설치·실행 명세](docs/modernization/DELEGATION-OPTIONAL.ko.md)
 - [개선 방향과 단계](docs/modernization/DIRECTION.ko.md)
 - [검증 기록과 한계](docs/modernization/VALIDATION.md)
 - [Sprintable 연결 계약 초안](docs/modernization/SPRINTABLE.ko.md)
@@ -25,18 +27,32 @@ node src/cli/spec-cli.js init --root /path/to/project --name "우리 서비스"
 node scripts/install-spec-skills.mjs --project /path/to/project --dry-run
 node scripts/install-spec-skills.mjs --project /path/to/project --stack nestjs-nextjs --dry-run
 node scripts/install-spec-skills.mjs --project /path/to/project --stack nestjs-nextjs
+node scripts/install-spec-skills.mjs --project /path/to/project --delegate codex --dry-run
 ```
 
 Codex는 기본적으로 `aiwf-core` 스킬 7개와 `aiwf-spec`의 `workflow`를 `aiwf-requirements`, `aiwf-use-case-spec`, ..., `aiwf-workflow`로 함께 설치하며 참조 문서·검사기·출처도 포함한다. `--stack`은 `vaadin-jooq`, `angular-jpa`, `blazor-dotnet`, `nestjs-nextjs` 중 하나를 골라 해당 stack을 추가한다. 기존 스킬은 덮어쓰지 않고 강제 플래그도 없다. 실제 호스트의 스킬 자동 선택과 모델 실행은 별도 파일럿에서 검증할 예정이다.
 
+Claude/Codex 위임 스킬은 기본 설치에서 빠져 있다. `--delegate claude` 또는 `--delegate codex`로 하나를 고르며, 두 옵션을 함께 주면 둘 다 설치한다. Claude Code marketplace에서도 각 애드온을 따로 설치할 수 있다. 아래 GitHub 기반 skills.sh 명령은 이 변경을 저장소에 게시한 뒤 사용할 수 있다. 대상 스킬과 호스트를 함께 지정한다.
+
+```bash
+npx skills add https://github.com/moonklabs/aiwf --skill delegate-claude --agent codex
+npx skills add https://github.com/moonklabs/aiwf --skill delegate-codex --agent codex
+npx skills add https://github.com/moonklabs/aiwf --skill delegate-claude --agent claude-code
+npx skills add https://github.com/moonklabs/aiwf --skill delegate-codex --agent claude-code
+```
+
+위임은 스킬을 직접 호출해야 시작한다. 현재 호스트와 대상이 같으면 네이티브 위임을 사용한다. 다른 CLI를 시작하려면 현재 요청에 `--cross-cli` 토큰이 있어야 한다. 대상 지명만으로는 별도 프로세스 실행 동의가 되지 않는다. 교차 CLI는 기본 읽기 전용이며, 쓰기는 같은 요청에 변경 지시와 정확한 범위가 있을 때만 허용한다. 별도 CLI는 같은 OS 계정·작업 디렉터리·환경으로 실행되고 자체 권한 정책을 따르며 현재 호스트의 샌드박스나 승인을 상속하지 않는다. 자세한 내용은 [위임 명세](docs/modernization/DELEGATION-OPTIONAL.ko.md)를 참고한다.
+
 ## 플러그인 구성
 
-upstream AIUP 스킬 31개를 바이트 그대로 가져오고 AIWF 자체 `workflow` 1개를 더해 총 32개다. `aiwf-core`가 upstream 7개를, `aiwf-spec`가 AIWF `workflow` 하나만 담는다.
+upstream AIUP 스킬 31개를 바이트 그대로 가져오고 AIWF 자체 `workflow`와 선택 위임 스킬 2개를 더해 총 34개를 제공한다. `aiwf-core`가 upstream 7개를, `aiwf-spec`가 AIWF `workflow` 하나만 담는다.
 
 | 플러그인 | 역할 | 내용 |
 |---|---|---|
 | `aiwf-core` | 방법론 core (필수) | upstream 스킬 7개 바이트 그대로 (2.19.0) |
 | `aiwf-spec` | AIWF 래퍼 (선택) | AIWF `workflow` 하나 |
+| `aiwf-delegate-claude` | 선택 위임 애드온 | `delegate-claude` |
+| `aiwf-delegate-codex` | 선택 위임 애드온 | `delegate-codex` |
 | `aiwf-vaadin-jooq` | stack | upstream 스킬 8개 (2.20.0) |
 | `aiwf-angular-jpa` | stack | upstream 스킬 6개 (0.7.0) |
 | `aiwf-blazor-dotnet` | stack | upstream 스킬 5개 (0.7.0) |

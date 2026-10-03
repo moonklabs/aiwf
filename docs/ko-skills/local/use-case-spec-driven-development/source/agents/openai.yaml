@@ -1,0 +1,4 @@
+interface:
+  display_name: "유스케이스 기반 SDD"
+  short_description: "요구사항을 유스케이스부터 구현·검증까지 연결합니다"
+  default_prompt: "Use $use-case-spec-driven-development to specify, decompose, and deliver this software goal through use cases."

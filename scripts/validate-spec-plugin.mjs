@@ -88,6 +88,52 @@ for (const name of ['aiwf-core', 'aiwf-spec', ...supportedStacks.map(stack => `a
   assert.ok(pkg.files.includes(`plugins/${name}/`), `Package excludes plugin: ${name}`);
 }
 assert.equal(importedSkills, 31);
-assert.equal(skills, 32);
+const delegationTargets = ['claude', 'codex'];
+for (const target of delegationTargets) {
+  const name = `aiwf-delegate-${target}`;
+  const plugin = join(root, 'plugins', name);
+  const expectedSkill = `delegate-${target}`;
+  assert.deepEqual(readdirSync(join(plugin, 'skills')), [expectedSkill]);
+  const skill = read(join(plugin, 'skills', expectedSkill, 'SKILL.md'));
+  assert.match(skill, new RegExp(`^name: ${expectedSkill}$`, 'm'));
+  assert.match(skill, /^disable-model-invocation: true$/m);
+  assert.match(read(join(plugin, 'skills', expectedSkill, 'agents/openai.yaml')), /allow_implicit_invocation: false/);
+  for (const requiredPolicy of [
+    /current user request contains the literal token `--cross-cli`/,
+    /does not consent to starting a separate CLI process/,
+    /For cross-CLI work, default to read-only/,
+    /explicitly asks for file changes, with the files or directory scope stated/,
+    /Native subagents follow the current host's normal permission policy/,
+    /If the native subagent tool is unavailable, report that route as unavailable and stop, even when `--cross-cli` is present/,
+    /Do not substitute this host's native agents, another provider, or do the task yourself/,
+    /Do not substitute `npx`, a bundled or renamed binary, or another provider's CLI/,
+    /same operating-system account and inherits the current working directory and environment/,
+    /not a security-isolation boundary/,
+    /Do not expose environment secrets in prompts or output/,
+    /instead of retrying through another tool, broader access, or `sudo`/
+  ]) {
+    assert.match(skill, requiredPolicy, `Missing delegation safety policy: ${name} ${requiredPolicy}`);
+  }
+  if (target === 'claude') {
+    assert.match(skill, /--permission-mode plan/);
+    assert.match(skill, /Never add `--dangerously-skip-permissions`/);
+  } else {
+    assert.match(skill, /Codex `exec` defaults to a read-only sandbox/);
+    assert.match(skill, /Add `--sandbox workspace-write` only if the current user request explicitly authorizes writes/);
+    assert.match(skill, /Never add `--full-auto`, `--danger-full-access`/);
+  }
+  const entry = market.plugins.find(item => item.name === name);
+  assert.ok(entry, `Marketplace entry missing: ${name}`);
+  assert.equal(entry.source, `./plugins/${name}`);
+  assert.equal(entry.version, '0.1.0');
+  for (const manifestPath of ['.claude-plugin/plugin.json', 'plugin.json']) {
+    const manifest = JSON.parse(read(join(plugin, manifestPath)));
+    assert.equal(manifest.name, name);
+    assert.equal(manifest.version, entry.version);
+  }
+  assert.ok(pkg.files.includes(`plugins/${name}/`), `Package excludes plugin: ${name}`);
+  skills++;
+}
+assert.equal(skills, 34);
 assert.equal(pkg.bin['aiwf-spec'], './src/cli/spec-cli.js');
-console.log(`AIWF: ${importedSkills} unchanged upstream skills + ${skills - importedSkills} workflow; ${verified} unchanged upstream resources, ${modified} attributed NOTICE modification; references and manifests validated.`);
+console.log(`AIWF: ${importedSkills} unchanged upstream skills + ${skills - importedSkills} AIWF skills (workflow and optional delegates); ${verified} unchanged upstream resources, ${modified} attributed NOTICE modification; references and manifests validated.`);

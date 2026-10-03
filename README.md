@@ -2,9 +2,11 @@
 
 [한국어](README.ko.md)
 
+Read the [Korean skill review documents](docs/ko-skills/README.md) before feature work. Update affected originals, translations and review records together; run `npm run docs:check` before concluding a task. Translation and automated checks do not constitute human approval. See the [optional Claude/Codex delegation design](docs/modernization/DELEGATION-OPTIONAL.ko.md).
+
 AIWF keeps use-case specifications in Git, lets existing Claude Code/Codex agents implement them, and records inspectable verification evidence.
 
-Modernization started on 2026-10-02. The new path has two plugins: **`aiwf-core`**, the AIUP-derived methodology core (seven upstream skills for requirements, use cases, entities and specification review), and **`aiwf-spec`**, the AIWF wrapper whose `workflow` skill uses the repository CLI for non-overwriting initialization, specification pins, drift detection and review packets. Sprintable synchronization and unattended execution are planned, not implemented. These features describe this checkout; do not assume they are present in the previously published npm release.
+Modernization started on 2026-10-02. The specification workflow is split across two plugins: **`aiwf-core`**, the AIUP-derived methodology core (seven upstream skills for requirements, use cases, entities and specification review), and **`aiwf-spec`**, the AIWF wrapper whose `workflow` skill uses the repository CLI for non-overwriting initialization, specification pins, drift detection and review packets. Two separate Claude/Codex delegation add-ons are available by choice. Sprintable synchronization and unattended execution are planned, not implemented. These features describe this checkout; do not assume they are present in the previously published npm release.
 
 See the [direction](docs/modernization/DIRECTION.ko.md), [validation record](docs/modernization/VALIDATION.md), [Sprintable adapter proposal](docs/modernization/SPRINTABLE.ko.md) and [worked example](examples/spec-workflow/README.md).
 
@@ -17,18 +19,34 @@ node src/cli/spec-cli.js init --root /path/to/project --name "Our service"
 node scripts/install-spec-skills.mjs --project /path/to/project --dry-run
 node scripts/install-spec-skills.mjs --project /path/to/project --stack nestjs-nextjs --dry-run
 node scripts/install-spec-skills.mjs --project /path/to/project --stack nestjs-nextjs
+node scripts/install-spec-skills.mjs --project /path/to/project --delegate codex --dry-run
 ```
 
 By default Codex installs the `aiwf-core` seven skills plus the `aiwf-spec` `workflow` skill as `aiwf-requirements`, `aiwf-use-case-spec`, ..., `aiwf-workflow`, with their full references, parsers and attribution. `--stack` selects one of `vaadin-jooq`, `angular-jpa`, `blazor-dotnet` or `nestjs-nextjs` and adds that stack; existing skills are never overwritten and there is no force flag. Live host skill selection and model execution remain separate pilot checks.
 
+Delegation is opt-in: `--delegate claude` and `--delegate codex` add only the selected skill; repeat the option to add both. Claude Code users can instead install either marketplace add-on. To install one portable skill with the skills CLI for Codex or Claude Code, choose both the skill and agent explicitly:
+
+The GitHub-based skills.sh commands below become available after these changes are published to the repository.
+
+```bash
+npx skills add https://github.com/moonklabs/aiwf --skill delegate-claude --agent codex
+npx skills add https://github.com/moonklabs/aiwf --skill delegate-codex --agent codex
+npx skills add https://github.com/moonklabs/aiwf --skill delegate-claude --agent claude-code
+npx skills add https://github.com/moonklabs/aiwf --skill delegate-codex --agent claude-code
+```
+
+These skills run only when invoked directly. Native delegation is used when the current host matches the target. Starting the other CLI requires the literal `--cross-cli` token in the current request; naming a target alone does not authorize another process. Cross-CLI tasks are read-only by default. A write requires that same request to explicitly ask for changes and state their scope. The CLI runs under the same OS account, directory and environment, follows its own permission policy, and does not inherit the host's sandbox or approvals. See the [delegation design](docs/modernization/DELEGATION-OPTIONAL.ko.md).
+
 ## Plugins
 
-31 upstream AIUP skills are vendored unchanged plus AIWF's own `workflow` (32 total). `aiwf-core` holds the seven upstream skills; `aiwf-spec` holds only the AIWF `workflow`.
+31 upstream AIUP skills are vendored unchanged plus AIWF's own `workflow` and two optional delegation skills (34 total available). `aiwf-core` holds the seven upstream skills; `aiwf-spec` holds only the AIWF `workflow`.
 
 | Plugin | Role | Contents |
 |---|---|---|
 | `aiwf-core` | Methodology core (required) | 7 upstream skills, byte-identical (2.19.0) |
 | `aiwf-spec` | AIWF wrapper (optional) | AIWF `workflow` only |
+| `aiwf-delegate-claude` | Optional delegation add-on | `delegate-claude` |
+| `aiwf-delegate-codex` | Optional delegation add-on | `delegate-codex` |
 | `aiwf-vaadin-jooq` | Stack | 8 upstream skills (2.20.0) |
 | `aiwf-angular-jpa` | Stack | 6 upstream skills (0.7.0) |
 | `aiwf-blazor-dotnet` | Stack | 5 upstream skills (0.7.0) |

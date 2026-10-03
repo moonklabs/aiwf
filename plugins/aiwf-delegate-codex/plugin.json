@@ -1,0 +1,13 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "aiwf-delegate-codex",
+  "version": "0.1.0",
+  "description": "Optional, explicitly invoked delegation to Codex or its CLI",
+  "author": {
+    "name": "moonklabs"
+  },
+  "homepage": "https://github.com/moonklabs/aiwf",
+  "repository": "https://github.com/moonklabs/aiwf",
+  "license": "MIT",
+  "keywords": ["aiwf", "delegation", "codex", "skills"]
+}

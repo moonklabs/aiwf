@@ -43,6 +43,34 @@
       ]
     },
     {
+      "name": "aiwf-delegate-claude",
+      "description": "Optional explicit task delegation to Claude Code",
+      "version": "0.1.0",
+      "source": "./plugins/aiwf-delegate-claude",
+      "author": {
+        "name": "moonklabs"
+      },
+      "keywords": [
+        "core-addon",
+        "delegation",
+        "claude-code"
+      ]
+    },
+    {
+      "name": "aiwf-delegate-codex",
+      "description": "Optional explicit task delegation to Codex",
+      "version": "0.1.0",
+      "source": "./plugins/aiwf-delegate-codex",
+      "author": {
+        "name": "moonklabs"
+      },
+      "keywords": [
+        "core-addon",
+        "delegation",
+        "codex"
+      ]
+    },
+    {
       "name": "aiwf-vaadin-jooq",
       "description": "AI Unified Process for the Vaadin/jOOQ stack - migrations, implementation, tests",
       "version": "2.20.0",

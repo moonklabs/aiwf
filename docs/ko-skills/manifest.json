@@ -1,0 +1,730 @@
+{
+  "schema_version": 1,
+  "purpose": "휴먼 리뷰용 한글 문서의 원문·번역 버전과 실제 검토 상태 관리. 해시는 의미의 정확성이나 승인을 뜻하지 않는다.",
+  "repository_source_revision": "6bbfcf2ee40ec88b939c59d404a59554c761b680",
+  "source_groups": [
+    {
+      "name": "aiwf-angular-jpa",
+      "version": "0.7.0",
+      "license_path": "plugins/aiwf-angular-jpa/LICENSE",
+      "notice_path": "plugins/aiwf-angular-jpa/NOTICE",
+      "upstream_repository": "https://github.com/AI-Unified-Process/marketplace",
+      "upstream_commit": "065dadda0f696c29ff2bacbda31b38152082e6fa",
+      "provenance_path": "plugins/aiwf-angular-jpa/UPSTREAM.json"
+    },
+    {
+      "name": "aiwf-blazor-dotnet",
+      "version": "0.7.0",
+      "license_path": "plugins/aiwf-blazor-dotnet/LICENSE",
+      "notice_path": "plugins/aiwf-blazor-dotnet/NOTICE",
+      "upstream_repository": "https://github.com/AI-Unified-Process/marketplace",
+      "upstream_commit": "065dadda0f696c29ff2bacbda31b38152082e6fa",
+      "provenance_path": "plugins/aiwf-blazor-dotnet/UPSTREAM.json"
+    },
+    {
+      "name": "aiwf-core",
+      "version": "2.19.0",
+      "license_path": "plugins/aiwf-core/LICENSE",
+      "notice_path": "plugins/aiwf-core/NOTICE",
+      "upstream_repository": "https://github.com/AI-Unified-Process/marketplace",
+      "upstream_commit": "065dadda0f696c29ff2bacbda31b38152082e6fa",
+      "provenance_path": "plugins/aiwf-core/UPSTREAM.json"
+    },
+    {
+      "name": "aiwf-delegate-claude",
+      "version": "0.1.0",
+      "license_path": "plugins/aiwf-delegate-claude/LICENSE",
+      "notice_path": "plugins/aiwf-delegate-claude/NOTICE",
+      "origin": "AIWF 자체 선택 위임 애드온"
+    },
+    {
+      "name": "aiwf-delegate-codex",
+      "version": "0.1.0",
+      "license_path": "plugins/aiwf-delegate-codex/LICENSE",
+      "notice_path": "plugins/aiwf-delegate-codex/NOTICE",
+      "origin": "AIWF 자체 선택 위임 애드온"
+    },
+    {
+      "name": "aiwf-nestjs-nextjs",
+      "version": "0.4.0",
+      "license_path": "plugins/aiwf-nestjs-nextjs/LICENSE",
+      "notice_path": "plugins/aiwf-nestjs-nextjs/NOTICE",
+      "upstream_repository": "https://github.com/AI-Unified-Process/marketplace",
+      "upstream_commit": "065dadda0f696c29ff2bacbda31b38152082e6fa",
+      "provenance_path": "plugins/aiwf-nestjs-nextjs/UPSTREAM.json"
+    },
+    {
+      "name": "aiwf-spec",
+      "version": "0.1.0",
+      "license_path": "plugins/aiwf-spec/LICENSE",
+      "notice_path": "plugins/aiwf-spec/NOTICE",
+      "origin": "AIWF 자체 workflow"
+    },
+    {
+      "name": "aiwf-vaadin-jooq",
+      "version": "2.20.0",
+      "license_path": "plugins/aiwf-vaadin-jooq/LICENSE",
+      "notice_path": "plugins/aiwf-vaadin-jooq/NOTICE",
+      "upstream_repository": "https://github.com/AI-Unified-Process/marketplace",
+      "upstream_commit": "065dadda0f696c29ff2bacbda31b38152082e6fa",
+      "provenance_path": "plugins/aiwf-vaadin-jooq/UPSTREAM.json"
+    }
+  ],
+  "local_sources": [
+    {
+      "name": "grill-with-docs",
+      "installed_root": "~/.codex/skills/grill-with-docs",
+      "snapshot_root": "docs/ko-skills/local/grill-with-docs/source",
+      "captured_on": "2026-10-03",
+      "origin": "사용자가 제시한 로컬 설치본. core 및 설치 목록에 미포함."
+    },
+    {
+      "name": "use-case-spec-driven-development",
+      "installed_root": "~/.codex/skills/use-case-spec-driven-development",
+      "snapshot_root": "docs/ko-skills/local/use-case-spec-driven-development/source",
+      "captured_on": "2026-10-03",
+      "origin": "사용자가 제시한 로컬 설치본. core 및 설치 목록에 미포함."
+    }
+  ],
+  "documents": [
+    {
+      "source": "docs/ko-skills/local/grill-with-docs/source/ADR-FORMAT.md",
+      "translation": "docs/ko-skills/local/grill-with-docs/ADR-FORMAT.ko.md",
+      "scope": "local_snapshot",
+      "source_group": "local/grill-with-docs",
+      "source_sha256": "f1f36cd3f8d3b6474ddd5855da4e233bfc4ae1a1c5024909ccf11871819a41b2",
+      "translation_sha256": "1cb10b654151856c38a348cf6f471c0560ad770f3a4a437da7046e19a0d952b9",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "docs/ko-skills/local/grill-with-docs/source/CONTEXT-FORMAT.md",
+      "translation": "docs/ko-skills/local/grill-with-docs/CONTEXT-FORMAT.ko.md",
+      "scope": "local_snapshot",
+      "source_group": "local/grill-with-docs",
+      "source_sha256": "b8cc318f2a4285b530e908b6bc43901c3c5cd11100362636bbc4216639bef597",
+      "translation_sha256": "469771dcbb4d5dcb775f012ad3dd83be0052af931e109b3b27ab98c1276616c6",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "docs/ko-skills/local/grill-with-docs/source/README.md",
+      "translation": "docs/ko-skills/local/grill-with-docs/README.ko.md",
+      "scope": "local_snapshot",
+      "source_group": "local/grill-with-docs",
+      "source_sha256": "85efdf66759c0347a329b4d42f7efa53c69d5d5ed28c57ea9d9eea4c9ff934aa",
+      "translation_sha256": "8d6174fe38e9995f8b3567540ec0be574e9acd08a87f806367b2bd2e51b7ec3c",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "docs/ko-skills/local/grill-with-docs/source/SKILL.source.md",
+      "translation": "docs/ko-skills/local/grill-with-docs/SKILL.ko.md",
+      "scope": "local_snapshot",
+      "source_group": "local/grill-with-docs",
+      "source_sha256": "3e35025119ba03efe7983dfdec3c8b96918142e3978512f3c2bf66d428310c7e",
+      "translation_sha256": "7353a6c285804947b64782f662d9b876d5defb952a0ea11bda37c742f109a81f",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "docs/ko-skills/local/use-case-spec-driven-development/source/SKILL.source.md",
+      "translation": "docs/ko-skills/local/use-case-spec-driven-development/SKILL.ko.md",
+      "scope": "local_snapshot",
+      "source_group": "local/use-case-spec-driven-development",
+      "source_sha256": "2733c84a08aa315a2cf8ee79267a543ff0e5b5df8309d9fdc945669e1ebef4a3",
+      "translation_sha256": "8cb08f4ef421994f5f3d0efabc3a7b3f24bcc5e6811bd25a4b831bfb3fd461c1",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "docs/ko-skills/local/use-case-spec-driven-development/source/agents/openai.yaml",
+      "translation": "docs/ko-skills/local/use-case-spec-driven-development/agents/openai.ko.md",
+      "scope": "local_snapshot",
+      "source_group": "local/use-case-spec-driven-development",
+      "source_sha256": "a1999d9a859b7f6a9cf8310972da39b49b690cb80ea7deb8f6d764fa2463b827",
+      "translation_sha256": "8f6f03df3c0cb6404db49ce50f5dd90082b658b8c10e52f75978ac01de7ad0a3",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "docs/ko-skills/local/use-case-spec-driven-development/source/references/use-case-sdd-document-map.md",
+      "translation": "docs/ko-skills/local/use-case-spec-driven-development/references/use-case-sdd-document-map.ko.md",
+      "scope": "local_snapshot",
+      "source_group": "local/use-case-spec-driven-development",
+      "source_sha256": "1b3cf14895b638a8ebaa56805d2372e387a24e0f7b219d00d0d7bd546d3a5abe",
+      "translation_sha256": "7ca5298a8e519d507ce86bc220621805238b1fb192964261e5b8667751db4fda",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-angular-jpa/README.md",
+      "translation": "docs/ko-skills/aiwf-angular-jpa/README.ko.md",
+      "scope": "repository",
+      "review_status": "awaiting_review",
+      "source_sha256": "8ed9079610b44d1d9a09b341a00da7bd4e26cb12f23ae8a285b43d83ee854956",
+      "translation_sha256": "9f9b707790b1dea1e25359cad5cb1faf559486b59f13f2026b5324d75694e3e5"
+    },
+    {
+      "source": "plugins/aiwf-angular-jpa/agents/uc-coverage.md",
+      "translation": "docs/ko-skills/aiwf-angular-jpa/agents/uc-coverage.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-angular-jpa",
+      "source_sha256": "4ace69f3b69ffc028da787844260e6a0b1467847529eb5817c29ea7214f5abe3",
+      "translation_sha256": "9b292fbaac72017f48e07472692af9b60983acfa0cd736a74a5bcdfa07c44a45",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-angular-jpa/rules/mcp-servers.md",
+      "translation": "docs/ko-skills/aiwf-angular-jpa/rules/mcp-servers.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-angular-jpa",
+      "source_sha256": "68760ac0425c026b3cb7fbe165c6460524ed0d823d4fca44cf5f0a0fe4f2125a",
+      "translation_sha256": "ff01e35d91cbd17b38c33abecf422f92b4b61b8d1ca8b742ed8e50baa339ccf3",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-angular-jpa/skills/coverage-check/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-angular-jpa/skills/coverage-check/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-angular-jpa",
+      "source_sha256": "0bc787c232dc93eefb42fac4d1023d9d666c04478bbbe9f331a78535ef883136",
+      "translation_sha256": "532e72acc5e969bd0649324aad4a6819e4111630bddadd4f8f39895229c7d64d",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-angular-jpa/skills/flyway-migration/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-angular-jpa/skills/flyway-migration/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-angular-jpa",
+      "source_sha256": "919346c8e2b4d270409dfdfe80d8c437c202d5cac01eedd00a025612e3b02a25",
+      "translation_sha256": "db89e20e503c105dec7bc3c6308458eb1eac37096b80f36472bdd0f685846a0d",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-angular-jpa/skills/implement/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-angular-jpa/skills/implement/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-angular-jpa",
+      "source_sha256": "0fc404e3610ca7d3d0bb577a27dbf6ea523b4f246e04925dca12eb749b862907",
+      "translation_sha256": "8bcf3370de1729e0fc305a09f71b938ab7e43a0077151bce2550d8143262b303",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-angular-jpa/skills/implement/references/module-layout.md",
+      "translation": "docs/ko-skills/aiwf-angular-jpa/skills/implement/references/module-layout.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-angular-jpa",
+      "source_sha256": "59faed86a850e4268ed35b76189c17b69b06f2e80a011580ac65f08e544fae7d",
+      "translation_sha256": "b84353b2390190c623969737db71261e55200eccf299a4ae8090e28f0176835c",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-angular-jpa/skills/playwright-test/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-angular-jpa/skills/playwright-test/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-angular-jpa",
+      "source_sha256": "c19c191c09ac8567e7c2fc483e3d78c7b8f36c202323240d2b37dc4a06779e74",
+      "translation_sha256": "c07dcf0b55f5bde83e119fc33bdc7caec6ee732b14d6a78d12130afa811bb7f7",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-angular-jpa/skills/spring-boot-test/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-angular-jpa/skills/spring-boot-test/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-angular-jpa",
+      "source_sha256": "0e94bf317edd69e754bcdde824290b2cf26562d4f84ea645076aa61e5af0563e",
+      "translation_sha256": "191d23678250a02d02e922a2c12f237ee69ab2d189e45557681fb68b9d5b0a00",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-angular-jpa/skills/vitest-test/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-angular-jpa/skills/vitest-test/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-angular-jpa",
+      "source_sha256": "f15af9337be8e270542279bb34d005bf1e0cee5ad71322f4c301c93bfab274c3",
+      "translation_sha256": "ab75a3e55d94a919638611b9b699c69bf34dc80f60c43806c3dd3296d9f165d8",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-blazor-dotnet/README.md",
+      "translation": "docs/ko-skills/aiwf-blazor-dotnet/README.ko.md",
+      "scope": "repository",
+      "review_status": "awaiting_review",
+      "source_sha256": "c1f9ee668d3f00951f9932179307ac7c84f6bca15d354ab3823f465dcf42e5f4",
+      "translation_sha256": "69f679d2cfdd256e4b15bb46f920e7628bb9cddd86d58faff6d5f1973eaf49cf"
+    },
+    {
+      "source": "plugins/aiwf-blazor-dotnet/rules/mcp-servers.md",
+      "translation": "docs/ko-skills/aiwf-blazor-dotnet/rules/mcp-servers.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-blazor-dotnet",
+      "source_sha256": "14b182f1eb42951a336c99ac0b0ea5928fc4672d6541fbf8acc5c2c96c952be3",
+      "translation_sha256": "98691f0299152be4c3e30cbeed7dc0f89fc0d9dca5128eea9faa4e3dbdc5197a",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-blazor-dotnet/skills/bunit-test/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-blazor-dotnet/skills/bunit-test/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-blazor-dotnet",
+      "source_sha256": "976316da23c2fba30b568aede0b86c07c17ec1cbe78e0497d9ef372cdf87f006",
+      "translation_sha256": "26798c1a0bfbcd831c27103dd428d8fb8387712acf9d58ce8fd419595c3fed4d",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-blazor-dotnet/skills/dotnet-test/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-blazor-dotnet/skills/dotnet-test/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-blazor-dotnet",
+      "source_sha256": "e404ed23c51c66653a905705a71b08c0544d67acdc2aac9a03072686fde117ca",
+      "translation_sha256": "21202e7818ee6fd221128947c08e69b475aebf974cbde6b8d9a33733785c7225",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-blazor-dotnet/skills/ef-migration/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-blazor-dotnet/skills/ef-migration/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-blazor-dotnet",
+      "source_sha256": "6a940573be60c3934dbd21dc38f05f75060b1dc028154942773242407f224ec3",
+      "translation_sha256": "58d407cc1195c08d4c081503a29be551a669e875ca63d15b9a9cce972dfa70bc",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-blazor-dotnet/skills/implement/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-blazor-dotnet/skills/implement/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-blazor-dotnet",
+      "source_sha256": "2f02c05df30205d4cc53149b0cbca0f7f5ced03a89c82988d17897df2d21e7ad",
+      "translation_sha256": "dc14e01e3de17308ac223d49528d168abc5163bc72e80c93237e84643eaeffc8",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-blazor-dotnet/skills/playwright-test/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-blazor-dotnet/skills/playwright-test/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-blazor-dotnet",
+      "source_sha256": "d249e98960dc28aa90a5fdbb346049614d6076cb2fcfc34b9926f708ad42cbe3",
+      "translation_sha256": "499be0cbae483bd0c8bb665af624bb0f157c19b858dadd3516879867c0eeb9ef",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-core/README.md",
+      "translation": "docs/ko-skills/aiwf-core/README.ko.md",
+      "scope": "repository",
+      "review_status": "awaiting_review",
+      "source_sha256": "927155ed142005588e1b983defa92048851296f73468d993c9d0baf4fd9b0191",
+      "translation_sha256": "dd98829a92675dd3c65bb4859e15169467109f3c472e908bd92c221940c57b40"
+    },
+    {
+      "source": "plugins/aiwf-core/skills/entity-model/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-core/skills/entity-model/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-core",
+      "source_sha256": "85b660f92e6442e1f1b459bfa697b50108a6e4e46ced5c731db1f9c200f724de",
+      "translation_sha256": "04408126194f15bc718fb18f5f04d07bc6e8fded86d2f9a6de5caeeaaf6c8f03",
+      "review_status": "awaiting_review",
+      "rendering_adjustments": [
+        {
+          "kind": "unterminated_markdown_fence",
+          "end_before_source_line": "## Required Format for Each Entity",
+          "reason": "원문 Markdown 예제의 바깥 코드 펜스가 닫히지 않아, 다음 섹션 제목 직전에서 예제를 닫아 표시한다.",
+          "source_sha256": "85b660f92e6442e1f1b459bfa697b50108a6e4e46ced5c731db1f9c200f724de",
+          "translation_sha256": "04408126194f15bc718fb18f5f04d07bc6e8fded86d2f9a6de5caeeaaf6c8f03"
+        }
+      ]
+    },
+    {
+      "source": "plugins/aiwf-core/skills/entity-model/references/REFERENCE.md",
+      "translation": "docs/ko-skills/aiwf-core/skills/entity-model/references/REFERENCE.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-core",
+      "source_sha256": "35611ec952a6fabd0c16b0efeab3b9a9890909ced9b7b075876c1bd93880b285",
+      "translation_sha256": "ebbcd315207f6add95fa947444434938f8df7d93dac9257b8971c8206577e5e6",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-core/skills/requirements/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-core/skills/requirements/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-core",
+      "source_sha256": "8b1cc0ba83101251fff750a19109e13445bfb01cdfb20e1dbfefee01032e4f0c",
+      "translation_sha256": "0e7ec5cc129259340ec4a8824b07cebde286b1ad1e25d87e4e5a94d89f8c6d76",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-core/skills/requirements/references/REFERENCE.md",
+      "translation": "docs/ko-skills/aiwf-core/skills/requirements/references/REFERENCE.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-core",
+      "source_sha256": "a387491b296c19d8422f606964ea2d67d7a70e138e873b03801ee55e13db7ac9",
+      "translation_sha256": "871889bb465c941abc608ebc300a297e9c826daf2d7cd6d08bc79f71fc11cc24",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-core/skills/requirements/references/glossary.md",
+      "translation": "docs/ko-skills/aiwf-core/skills/requirements/references/glossary.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-core",
+      "source_sha256": "57ab356f1f9f11fb9127e5af5438806015b3b73b92dfb3e08a8c451472839ac9",
+      "translation_sha256": "221c634ee3533ddafd76822ce528505e13826365ae9537fb7e42b50b5575ab02",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-core/skills/reverse-engineer/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-core/skills/reverse-engineer/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-core",
+      "source_sha256": "025bd92b6dc9c0a35859416b95bfe71e843e63a7a9979acc8bee338c3456b26f",
+      "translation_sha256": "4299f3f0372b4c4dad13a8baa897341c1a9305c7e1bfa50b4001902b5609d095",
+      "review_status": "awaiting_review",
+      "rendering_adjustments": [
+        {
+          "kind": "nested_markdown_fence",
+          "reason": "원문 Markdown 예제 안에 같은 길이의 코드 펜스가 중첩되어 바깥 펜스를 네 개로 늘려 표시한다.",
+          "source_sha256": "025bd92b6dc9c0a35859416b95bfe71e843e63a7a9979acc8bee338c3456b26f",
+          "translation_sha256": "4299f3f0372b4c4dad13a8baa897341c1a9305c7e1bfa50b4001902b5609d095"
+        }
+      ]
+    },
+    {
+      "source": "plugins/aiwf-core/skills/reverse-engineer/references/stack-signals.md",
+      "translation": "docs/ko-skills/aiwf-core/skills/reverse-engineer/references/stack-signals.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-core",
+      "source_sha256": "7deaea7876ead22ddb651e786ac15e920df5e09a1e211cfcd8f24c02da380c9c",
+      "translation_sha256": "1cb7d39bbd433bb293b84a6d3e76a638d3c36c3919f8eaa3250cb26495e75436",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-core/skills/spec-review/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-core/skills/spec-review/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-core",
+      "source_sha256": "a1075c3e66fb968e3fbfb75db595793a880d434f87c93f054f0aae1af5237f13",
+      "translation_sha256": "0f10bd0006c84e4a409dcf81d657f81587260029085a29634e136c9148f95807",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-core/skills/spec-review/references/lint-codes.md",
+      "translation": "docs/ko-skills/aiwf-core/skills/spec-review/references/lint-codes.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-core",
+      "source_sha256": "c03648b189a872d654a5deb0c686fb9559f804add75c7d2b4415e3823146e4e4",
+      "translation_sha256": "f10f128c02a760b2bcff146037620a588676d144ba87411c50f9edc6188dc2e9",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-core/skills/spec-review/references/review-checklist.md",
+      "translation": "docs/ko-skills/aiwf-core/skills/spec-review/references/review-checklist.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-core",
+      "source_sha256": "31107805b83d9a088d536b42cfb30f68ef986ba6abfb94e17d3c96e64d4d27c9",
+      "translation_sha256": "3b4cb4f48114d8e5c138f85609e38074953553cf1b18b9d5321b5494ec43d670",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-core/skills/test-case/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-core/skills/test-case/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-core",
+      "source_sha256": "890aca4afb3b09d7116d6bb99accfa969bd266926de03777edd6aa8d7093c033",
+      "translation_sha256": "106dfc904193bc95011f50b20af1e8a60a7ef98d42731932a432773801062404",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-core/skills/test-case/references/example.md",
+      "translation": "docs/ko-skills/aiwf-core/skills/test-case/references/example.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-core",
+      "source_sha256": "d8accec068f68c994265ce7162885210c9dca9a7d4f6418a393d22f1186ce78c",
+      "translation_sha256": "2dbb98d35a38838acd9660c892d09d17a3259b1c68467b68bf72504c52d47dff",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-core/skills/test-case/references/test-case.md",
+      "translation": "docs/ko-skills/aiwf-core/skills/test-case/references/test-case.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-core",
+      "source_sha256": "176c9193e9e51acbb13cb2f3324623a2f51e26055ca6e6535e0d776325951609",
+      "translation_sha256": "bd6c7019e6a0ff4285d2d42dfeb8792fe168d87aa5adce8a270681d313f9fd27",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-core/skills/use-case-diagram/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-core/skills/use-case-diagram/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-core",
+      "source_sha256": "d7fddc93d00452c341fa0a591fbf6cded012ec17ad6f6a32527f6c999b658806",
+      "translation_sha256": "9ec25921cbd022820cc0e08aa54035c62facfb9505b0820be5e28e90f8037f4b",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-core/skills/use-case-spec/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-core/skills/use-case-spec/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-core",
+      "source_sha256": "f65515cc7a24e9fca349c25fa93b09997596ceafb2e0925d98fc7fd17455dfe0",
+      "translation_sha256": "ab3ec8a32df65d4a627ba3f1da09873811c5bd33a5101bfd7a3f53b6e88907bd",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-core/skills/use-case-spec/references/clarify-checklist.md",
+      "translation": "docs/ko-skills/aiwf-core/skills/use-case-spec/references/clarify-checklist.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-core",
+      "source_sha256": "d8cf83e720016409b21d61b64c031967527f74b6869e8565a615ffc78ac12762",
+      "translation_sha256": "0803dbc3c59b010ebd80c80c9d9e999040d83b31da0fe6a9e9ed084bda97b583",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-core/skills/use-case-spec/references/example.md",
+      "translation": "docs/ko-skills/aiwf-core/skills/use-case-spec/references/example.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-core",
+      "source_sha256": "d1c91532433800ceb7a44cf7e98a0c4f297b74729bec9025f5e05b1db24331ca",
+      "translation_sha256": "d03dd4cdf0854f52df1901e0a0440996b99c20ad37c91343fb68f60489883bbd",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-core/skills/use-case-spec/references/format-spec.md",
+      "translation": "docs/ko-skills/aiwf-core/skills/use-case-spec/references/format-spec.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-core",
+      "source_sha256": "31e7df5cd2a9d4e94001ef990236d25d5b952e90734e9d7417ad37c6ea61060a",
+      "translation_sha256": "7bf1ceb814852b13e2342b7c656eb019a31df6f89b024239c6a2e7b563411dcf",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-core/skills/use-case-spec/references/use-case.md",
+      "translation": "docs/ko-skills/aiwf-core/skills/use-case-spec/references/use-case.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-core",
+      "source_sha256": "78a80aa0c0a1ea5522dca3cdea7ace954a677d316a41c724fde74fc871e03753",
+      "translation_sha256": "eda2929f6e6611738a2805086a34e39c3b240c3b929f46ed50adcd36ff6b06c6",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-delegate-claude/README.md",
+      "translation": "docs/ko-skills/aiwf-delegate-claude/README.ko.md",
+      "scope": "repository",
+      "review_status": "awaiting_review",
+      "source_sha256": "6679022c19d297200f5c75b7d28c0925325ef166316b7c1b4edf0935ef9db9d7",
+      "translation_sha256": "b824a6d34a1318679c10c62e04bc1ec58c903d528b1039f186a16ca5a78ba6fb"
+    },
+    {
+      "source": "plugins/aiwf-delegate-claude/skills/delegate-claude/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-delegate-claude/skills/delegate-claude/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-delegate-claude",
+      "source_sha256": "90b15a4b351a5a49b11bcb50c8788ca4da7b3e499603b1d01c3a73496780a9fd",
+      "translation_sha256": "d538ae728b62ec28e596ac8afde73e00932770cdae03c45e4905dce323fd6359",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-delegate-codex/README.md",
+      "translation": "docs/ko-skills/aiwf-delegate-codex/README.ko.md",
+      "scope": "repository",
+      "review_status": "awaiting_review",
+      "source_sha256": "fa172a60349c1d7cee42d48147879b640974cdab73c916da083f4c4a6c545067",
+      "translation_sha256": "80a14fe0c157cee48a7d6f25e313e27f736a0013dd7d54cef3d1c1ad4832dcee"
+    },
+    {
+      "source": "plugins/aiwf-delegate-codex/skills/delegate-codex/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-delegate-codex/skills/delegate-codex/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-delegate-codex",
+      "source_sha256": "59debf0dd318e0a4f64cf980ddcfef1e467aa53862a76919505960b7566711b1",
+      "translation_sha256": "222e22746d88506173eb47519474320c7b8f7d42764280b2786c945c9ea9154f",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-nestjs-nextjs/README.md",
+      "translation": "docs/ko-skills/aiwf-nestjs-nextjs/README.ko.md",
+      "scope": "repository",
+      "review_status": "awaiting_review",
+      "source_sha256": "5cfb2d7e1336095b8092c62e9dae647d963214b7f7208f8afe2bd59de1574d70",
+      "translation_sha256": "38c345c1fd478d154d2b24649ebfc942e95e185e80dbf113913318b291d837a2"
+    },
+    {
+      "source": "plugins/aiwf-nestjs-nextjs/rules/mcp-servers.md",
+      "translation": "docs/ko-skills/aiwf-nestjs-nextjs/rules/mcp-servers.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-nestjs-nextjs",
+      "source_sha256": "06f8730b0b11f5012968a6815a5769b4d670076122c81cf3612ca0741c57fc64",
+      "translation_sha256": "6ccd7918705acf8a787d6d4eba37f4afb3accd3ef906a5249dbb59da239c5c80",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-nestjs-nextjs/skills/drizzle-migration/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-nestjs-nextjs/skills/drizzle-migration/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-nestjs-nextjs",
+      "source_sha256": "fcb8ba9e398c5b43ed1df3b5384f372ab064b74818c4164914a3ca3cf935e637",
+      "translation_sha256": "cb68d352d4a83d4fcd688248842d585e31830a4b856262f62f1c271157ce21ff",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-nestjs-nextjs/skills/implement/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-nestjs-nextjs/skills/implement/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-nestjs-nextjs",
+      "source_sha256": "7f9a9154ddb1724c676ee89c48cf762dd1f961999d2c52763350e90f4e52a99f",
+      "translation_sha256": "ca768db9b87449d042721b37e3643fa4abf69baddc6fddbca282b00fd854b9b6",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-nestjs-nextjs/skills/implement/references/project-layout.md",
+      "translation": "docs/ko-skills/aiwf-nestjs-nextjs/skills/implement/references/project-layout.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-nestjs-nextjs",
+      "source_sha256": "73d2f0b021a15abd3139e1db1c4f8463c5e41482b3a7bff1fea79dd3ddb1a9ab",
+      "translation_sha256": "039f556dd5cf4692f60625437d800eb023a65fe5970875aeb6226af356e95d1b",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-nestjs-nextjs/skills/nest-test/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-nestjs-nextjs/skills/nest-test/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-nestjs-nextjs",
+      "source_sha256": "454ed7acf7088609f45e0f2e621cdac4739cfaa9d90bd5fee30fbfb4755197a9",
+      "translation_sha256": "ee8db650d43bc3f46abbc89aab9fca7515ea762728d1cb1a75ba9fd33b99fe9c",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-nestjs-nextjs/skills/playwright-test/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-nestjs-nextjs/skills/playwright-test/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-nestjs-nextjs",
+      "source_sha256": "7db29d31a509bb821ca036da66ad8bf168f1817030112cdb66eda6ccaf3279dc",
+      "translation_sha256": "6238b463f0e47b44bba2aabdb9142812362b21d7710d5ea2b3273042c24935f9",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-nestjs-nextjs/skills/react-test/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-nestjs-nextjs/skills/react-test/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-nestjs-nextjs",
+      "source_sha256": "29b207fb4f9d670d6c6fdcd6215d671ed66698b623819f3934e83788257eadb9",
+      "translation_sha256": "c4304d0ca09c32238ed19f37b31822b83f852e72e78e2644ac5fab92193ed4aa",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-spec/README.md",
+      "translation": "docs/ko-skills/aiwf-spec/README.ko.md",
+      "scope": "repository",
+      "review_status": "awaiting_review",
+      "source_sha256": "74f91c39a6ffbfe6326d66f18dfc30e84cde8450cf170f018e8ea0cea53f6c3c",
+      "translation_sha256": "35b4bf097e1901a54d6d313fd5d009b5333b637ce215bbcf4303dd31e95456bf"
+    },
+    {
+      "source": "plugins/aiwf-spec/skills/workflow/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-spec/skills/workflow/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-spec",
+      "source_sha256": "1534f06fb0bde21c6c3ea974d1e1c4aafa6179e063e6a87e189a514bf6a2ccab",
+      "translation_sha256": "a82aefa589804a8ee5a0481e333b9b915d2c332a81a567eb637d0cd4ae1c38e7",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-vaadin-jooq/README.md",
+      "translation": "docs/ko-skills/aiwf-vaadin-jooq/README.ko.md",
+      "scope": "repository",
+      "review_status": "awaiting_review",
+      "source_sha256": "97daa2eae6f319272da6fb2e7d780078e81b4129c92715aef22932fabe61895c",
+      "translation_sha256": "f2f829bb1ef8ca1de0b2177cad056d7763518523ad1b9397fa097597383e5858"
+    },
+    {
+      "source": "plugins/aiwf-vaadin-jooq/agents/uc-coverage.md",
+      "translation": "docs/ko-skills/aiwf-vaadin-jooq/agents/uc-coverage.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-vaadin-jooq",
+      "source_sha256": "9c0d650f77a76059fba5ecf33269012f73dfdadcc93fcfb8616a46fe45a7bb3d",
+      "translation_sha256": "6aa2c1c17a6a676da3bbe9dc38a1f68818b531c22a48ff10ee8545c6331c4893",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-vaadin-jooq/rules/mcp-servers.md",
+      "translation": "docs/ko-skills/aiwf-vaadin-jooq/rules/mcp-servers.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-vaadin-jooq",
+      "source_sha256": "165a5b2fab0bbbdc939be6e28271c7621d77711e548757f1caa26b6e557f50c7",
+      "translation_sha256": "3ff262e0e3fa58bfdc886e62b5083d781d381a7df8e07f17b89fa356eb437ef8",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-vaadin-jooq/skills/browserless-test/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-vaadin-jooq/skills/browserless-test/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-vaadin-jooq",
+      "source_sha256": "eb46a8cc09a8968f8b0023ddb8eca98bcc55f2b2de7ce777446f31b902ab79c4",
+      "translation_sha256": "93eb9d72dc06d0ee57bc196dd09995117dd9b8b50bd4c7e60642e2228416a544",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-vaadin-jooq/skills/coverage-check/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-vaadin-jooq/skills/coverage-check/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-vaadin-jooq",
+      "source_sha256": "0b559b91a03948d2a64c6c0d617c6184d7e974dd1d6b102d99292aa32183b2ab",
+      "translation_sha256": "1d78acc5441cdc1d208a77f200aed4bff4fa33d45615bf6ea87c9cfa44b6115e",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-vaadin-jooq/skills/flyway-migration/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-vaadin-jooq/skills/flyway-migration/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-vaadin-jooq",
+      "source_sha256": "044289d07419b682216788213d9fb141b0edeeb9ac5c684490d62b648f3fc7b9",
+      "translation_sha256": "fb550f40bf886ad7fd67877b57d2d6b02ee9a3585235727fd7580646beb0956f",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-vaadin-jooq/skills/hilla-test/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-vaadin-jooq/skills/hilla-test/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-vaadin-jooq",
+      "source_sha256": "9cf7f6a10c5d8e78331f8f3aa89fe5d7b60f8eb0045a8761b35ab970bb65c3f2",
+      "translation_sha256": "93daeba242c917dad10ccc90a2c0f6f4236c5a2e1e41a3db3f75f39d61d87fe3",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-vaadin-jooq/skills/implement-hilla/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-vaadin-jooq/skills/implement-hilla/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-vaadin-jooq",
+      "source_sha256": "b4e28c75b48a5d45b504ab8396d38e284450e9ee7726702549584a16fea5c6b6",
+      "translation_sha256": "73178522f195826e270c594a038e77fbeab3a60e0c77a100401fcbf53c7af94c",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-vaadin-jooq/skills/implement/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-vaadin-jooq/skills/implement/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-vaadin-jooq",
+      "source_sha256": "f8a819719ff423aa42dda2d79579593e0b00d88b3797b009568769cca6dac39f",
+      "translation_sha256": "000bf2a9fd35a11315f33f1773391601027a2b0b112b0aeb83bf81f4c37443b0",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-vaadin-jooq/skills/karibu-test/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-vaadin-jooq/skills/karibu-test/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-vaadin-jooq",
+      "source_sha256": "72faff0401a190afa171da8f418014f73a248650cd3fc1bc1d3bff4ee0106672",
+      "translation_sha256": "432dff2b4ac1eb9e39a2542664d2c1448afe78d5549354649026aef5fb3918fe",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-vaadin-jooq/skills/playwright-test/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-vaadin-jooq/skills/playwright-test/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-vaadin-jooq",
+      "source_sha256": "a7a790e275a924c3a3931d8dc6b4929142d8a936163a6a34faa5a4cfb63ba367",
+      "translation_sha256": "a74cee6950851a70b003d8b228d203d05ecdbaac4032c12283b3a402abbbda8a",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-vaadin-jooq/skills/playwright-test/references/dramafinder-api.md",
+      "translation": "docs/ko-skills/aiwf-vaadin-jooq/skills/playwright-test/references/dramafinder-api.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-vaadin-jooq",
+      "source_sha256": "a17250bb449445d474bad8d0735e556e011f63fe782c0fca1cb3e968d50b51a3",
+      "translation_sha256": "c7bb1808b6181882c54a5e447be1ad47653f3471a08d77e75dfa1e1e182da04b",
+      "review_status": "awaiting_review"
+    }
+  ]
+}
