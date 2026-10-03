@@ -1,0 +1,7 @@
+{
+  "command": "packet",
+  "error": {
+    "code": "packet_requires_sync",
+    "message": "Spec is not in sync (status: drift); refresh the pin before building a review packet."
+  }
+}

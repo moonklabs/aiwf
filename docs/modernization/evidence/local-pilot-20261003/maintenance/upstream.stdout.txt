@@ -1,0 +1,7 @@
+
+> aiwf@0.3.24 test:spec-upstream
+> python3 plugins/aiwf-core/skills/use-case-spec/scripts/validate_use_case.py --self-test && python3 plugins/aiwf-core/skills/test-case/scripts/bpmn_paths.py --self-test && python3 plugins/aiwf-core/skills/spec-review/scripts/spec_lint.py --self-test
+
+self-test passed
+self-test passed
+self-test passed

@@ -1,0 +1,24 @@
+{
+  "name": "local-docs",
+  "argv": [
+    "npm",
+    "run",
+    "docs:check:local"
+  ],
+  "cwd": "/Users/moonklabs/workspace-plugin/aiwf",
+  "started_at": "2026-10-03T07:25:21.859478+00:00",
+  "ended_at": "2026-10-03T07:25:22.065562+00:00",
+  "wall_seconds": 0.20602320786565542,
+  "exit_code": 0,
+  "scope": "AIWF repository maintenance, separate from UC service pilot",
+  "stdout": {
+    "path": "local-docs.stdout.txt",
+    "bytes": 263,
+    "sha256": "2fe06e49d19221c1e79b000cabb9c5b4344847b835a369defe852aac2367ef18"
+  },
+  "stderr": {
+    "path": "local-docs.stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

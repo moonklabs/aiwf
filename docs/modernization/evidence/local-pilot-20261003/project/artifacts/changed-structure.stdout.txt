@@ -1,0 +1,9 @@
+{
+  "findings": [],
+  "summary": {
+    "errors": 0,
+    "warnings": 0,
+    "infos": 0,
+    "suppressed": 0
+  }
+}

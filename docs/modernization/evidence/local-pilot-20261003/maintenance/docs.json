@@ -1,0 +1,24 @@
+{
+  "name": "docs",
+  "argv": [
+    "npm",
+    "run",
+    "docs:check"
+  ],
+  "cwd": "/Users/moonklabs/workspace-plugin/aiwf",
+  "started_at": "2026-10-03T07:25:21.859478+00:00",
+  "ended_at": "2026-10-03T07:25:22.065613+00:00",
+  "wall_seconds": 0.2060687909834087,
+  "exit_code": 0,
+  "scope": "AIWF repository maintenance, separate from UC service pilot",
+  "stdout": {
+    "path": "docs.stdout.txt",
+    "bytes": 243,
+    "sha256": "51f7bb1582f62c134bd9c7da9dd89d6220d037253174685b512f9d6ad5cc32e9"
+  },
+  "stderr": {
+    "path": "docs.stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

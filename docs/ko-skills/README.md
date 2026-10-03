@@ -8,6 +8,9 @@
 - [AIWF workflow](aiwf-spec/skills/workflow/SKILL.ko.md): core와 구현·검증·검토 결과를 연결하는 현재 지시.
 - [로컬 두 스킬](#로컬-설치-스킬): 사용자가 제시한 요구사항 정리와 유스케이스 기반 개발 스킬. core 포함 여부와 문서 규약 차이도 함께 확인한다.
 - [각 플러그인의 README 한글본](CATALOG.md#플러그인-readme), [전체 번역 문서 목록](CATALOG.md), [작성 규칙](TRANSLATION-RULES.md), [정리 계획](PLAN.md), [원문·번역·검토 관리 목록](manifest.json).
+- [CLI 생산성 분석과 권고안](../modernization/CLI-PRODUCTIVITY.ko.md): 원문·한글본의 변경과 검토 준비를 우선하고 검증 자동화를 단계적으로 연결하는 제안. 새 CLI 명령이나 휴먼 승인을 추가한 기록은 아니다.
+- [Claude 두 세션의 계획 리뷰](../modernization/CLAUDE-PLAN-REVIEW-2026-10-03.ko.md): 방향과 검증 계약의 독립 AI 리뷰 및 남은 판단. 실제 휴먼 리뷰 상태는 바꾸지 않는다.
+- [파일럿 계획](../modernization/PILOT-UC-001.ko.md)과 [실행 결과](../modernization/PILOT-RESULT-2026-10-03.ko.md): 완료 기준·검사 연결표와 로컬 예제의 실패·재검증 근거. `aiwf-spec` README 원문·한글본에서 함께 연결하며 실제 제품 적용·휴먼 리뷰는 대기 상태다.
 
 기준 저장소 커밋은 `6bbfcf2ee40ec88b939c59d404a59554c761b680`이다. 파일별 실제 기준은 관리 목록의 원문 SHA256이다. 저장소 스킬 34개와 연결된 Markdown 참조·규칙·프롬프트, 플러그인 8개의 README를 번역 대상으로 삼는다. 로컬 두 스킬은 검토용 원문 스냅샷과 함께 별도 관리한다.
 

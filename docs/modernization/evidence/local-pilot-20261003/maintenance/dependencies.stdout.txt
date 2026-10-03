@@ -1,0 +1,5 @@
+
+> aiwf@0.3.24 check:deps
+> node scripts/check-dependencies.js
+
+Dependency declarations and local imports checked in 6 Node source files.

@@ -1,0 +1,24 @@
+{
+  "name": "provenance",
+  "argv": [
+    "npm",
+    "run",
+    "validate:spec-plugin"
+  ],
+  "cwd": "/Users/moonklabs/workspace-plugin/aiwf",
+  "started_at": "2026-10-03T07:24:28.331909+00:00",
+  "ended_at": "2026-10-03T07:24:28.487937+00:00",
+  "wall_seconds": 0.15594537509605289,
+  "exit_code": 0,
+  "scope": "AIWF repository maintenance, separate from UC service pilot",
+  "stdout": {
+    "path": "provenance.stdout.txt",
+    "bytes": 266,
+    "sha256": "b6bd97b774410817861f83cc3670245825f3b754544d089b3d18805228389b3d"
+  },
+  "stderr": {
+    "path": "provenance.stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

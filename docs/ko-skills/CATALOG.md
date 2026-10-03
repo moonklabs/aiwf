@@ -17,6 +17,12 @@
 | `aiwf-delegate-claude` | [읽기](aiwf-delegate-claude/README.ko.md) | [비교](../../plugins/aiwf-delegate-claude/README.md) |
 | `aiwf-delegate-codex` | [읽기](aiwf-delegate-codex/README.ko.md) | [비교](../../plugins/aiwf-delegate-codex/README.md) |
 
+`aiwf-spec` README에는 [CLI 생산성 분석과 권고안](../modernization/CLI-PRODUCTIVITY.ko.md)을 연결했다. 원문·한글본과 관리 목록을 함께 갱신했으며, 새 명령은 미구현 제안으로 표시한다.
+
+[Claude 두 세션의 검토 결과](../modernization/CLAUDE-PLAN-REVIEW-2026-10-03.ko.md)도 같은 README의 원문·한글본에서 연결한다. 자동 리뷰 결과는 휴먼 승인으로 기록하지 않는다.
+
+[파일럿 계획](../modernization/PILOT-UC-001.ko.md)과 [로컬 실행 결과](../modernization/PILOT-RESULT-2026-10-03.ko.md)를 추가로 연결했다. 기준·실패·최종 packet과 재현 자료를 보존하고 README의 원문·한글본·해시를 함께 갱신했다. 명세와 한글 문서의 휴먼 리뷰 상태는 대기로 유지한다.
+
 ## aiwf-angular-jpa
 
 | 문서 | 한글 검토본 | 원문 |

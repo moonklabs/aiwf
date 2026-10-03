@@ -1,0 +1,148 @@
+TAP version 13
+# Subtest: UC-001 success persists amount, description, submitted state and receipt
+ok 1 - UC-001 success persists amount, description, submitted state and receipt
+  ---
+  duration_ms: 1.223542
+  type: 'test'
+  ...
+# Subtest: UC-001 BR-001/A1 rejects 0 without changing prior state
+ok 2 - UC-001 BR-001/A1 rejects 0 without changing prior state
+  ---
+  duration_ms: 0.187625
+  type: 'test'
+  ...
+# Subtest: UC-001 BR-001/A1 rejects -1 without changing prior state
+ok 3 - UC-001 BR-001/A1 rejects -1 without changing prior state
+  ---
+  duration_ms: 0.093
+  type: 'test'
+  ...
+# Subtest: UC-001 BR-001/A1 rejects -100 without changing prior state
+ok 4 - UC-001 BR-001/A1 rejects -100 without changing prior state
+  ---
+  duration_ms: 0.049875
+  type: 'test'
+  ...
+# Subtest: UC-001 BR-001/A1 rejects NaN without changing prior state
+ok 5 - UC-001 BR-001/A1 rejects NaN without changing prior state
+  ---
+  duration_ms: 0.095625
+  type: 'test'
+  ...
+# Subtest: UC-001 BR-001/A1 rejects Infinity without changing prior state
+ok 6 - UC-001 BR-001/A1 rejects Infinity without changing prior state
+  ---
+  duration_ms: 0.042417
+  type: 'test'
+  ...
+# Subtest: UC-001 BR-001/A1 rejects -Infinity without changing prior state
+ok 7 - UC-001 BR-001/A1 rejects -Infinity without changing prior state
+  ---
+  duration_ms: 0.067875
+  type: 'test'
+  ...
+# Subtest: UC-001 BR-001/A1 rejects 12000 without changing prior state
+ok 8 - UC-001 BR-001/A1 rejects 12000 without changing prior state
+  ---
+  duration_ms: 0.072208
+  type: 'test'
+  ...
+# Subtest: UC-001 BR-001/A1 rejects null without changing prior state
+ok 9 - UC-001 BR-001/A1 rejects null without changing prior state
+  ---
+  duration_ms: 0.199583
+  type: 'test'
+  ...
+# Subtest: UC-001 BR-001/A1 rejects undefined without changing prior state
+ok 10 - UC-001 BR-001/A1 rejects undefined without changing prior state
+  ---
+  duration_ms: 0.225834
+  type: 'test'
+  ...
+# Subtest: TC-001 service slice permits correction from -100 to 12000
+ok 11 - TC-001 service slice permits correction from -100 to 12000
+  ---
+  duration_ms: 0.100292
+  type: 'test'
+  ...
+# Subtest: UC-001 A2 storage failure preserves earlier records and permits recovery
+ok 12 - UC-001 A2 storage failure preserves earlier records and permits recovery
+  ---
+  duration_ms: 0.118125
+  type: 'test'
+  ...
+# Subtest: UC-001 BR-002 accepts 200 ASCII code points
+ok 13 - UC-001 BR-002 accepts 200 ASCII code points
+  ---
+  duration_ms: 0.039791
+  type: 'test'
+  ...
+# Subtest: UC-001 BR-002/A3 rejects 201 ASCII code points without mutation
+ok 14 - UC-001 BR-002/A3 rejects 201 ASCII code points without mutation
+  ---
+  duration_ms: 0.045792
+  type: 'test'
+  ...
+# Subtest: UC-001 BR-002 accepts 200 astral Unicode code points
+ok 15 - UC-001 BR-002 accepts 200 astral Unicode code points
+  ---
+  duration_ms: 0.316917
+  type: 'test'
+  ...
+# Subtest: UC-001 BR-002/A3 rejects 201 astral Unicode code points without mutation
+ok 16 - UC-001 BR-002/A3 rejects 201 astral Unicode code points without mutation
+  ---
+  duration_ms: 0.03
+  type: 'test'
+  ...
+# Subtest: UC-001 BR-002/A3 rejects number description without mutation
+ok 17 - UC-001 BR-002/A3 rejects number description without mutation
+  ---
+  duration_ms: 0.038959
+  type: 'test'
+  ...
+# Subtest: UC-001 BR-002/A3 rejects array description without mutation
+ok 18 - UC-001 BR-002/A3 rejects array description without mutation
+  ---
+  duration_ms: 0.07825
+  type: 'test'
+  ...
+# Subtest: UC-001 BR-002/A3 rejects object description without mutation
+ok 19 - UC-001 BR-002/A3 rejects object description without mutation
+  ---
+  duration_ms: 0.027833
+  type: 'test'
+  ...
+# Subtest: UC-001 BR-002 normalizes omitted optional description to empty string
+ok 20 - UC-001 BR-002 normalizes omitted optional description to empty string
+  ---
+  duration_ms: 0.029792
+  type: 'test'
+  ...
+# Subtest: UC-001 BR-002 normalizes null optional description to empty string
+ok 21 - UC-001 BR-002 normalizes null optional description to empty string
+  ---
+  duration_ms: 0.019291
+  type: 'test'
+  ...
+# Subtest: UC-001 BR-002 normalizes empty optional description to empty string
+ok 22 - UC-001 BR-002 normalizes empty optional description to empty string
+  ---
+  duration_ms: 0.017833
+  type: 'test'
+  ...
+# Subtest: TC-002 service slice corrects 201 to 200 and preserves earlier records
+ok 23 - TC-002 service slice corrects 201 to 200 and preserves earlier records
+  ---
+  duration_ms: 0.050875
+  type: 'test'
+  ...
+1..23
+# tests 23
+# suites 0
+# pass 23
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 41.010583

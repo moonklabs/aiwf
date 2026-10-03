@@ -1,0 +1,6 @@
+
+> aiwf@0.3.24 docs:check
+> node scripts/check-korean-docs.mjs
+
+한글 검토 문서 70개 / 스킬 36개: 검토 대기 70, 휴먼 리뷰 기록 0.
+자동 검사는 번역 의미의 정확성이나 휴먼 승인을 보장하지 않습니다.
