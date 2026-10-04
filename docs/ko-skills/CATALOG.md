@@ -1,6 +1,6 @@
 # 전체 한글 검토 문서 목록
 
-34개 저장소 스킬, 플러그인 README 8개, 로컬 2개 스킬과 연결된 참조·규칙·프롬프트를 포함한 70개 문서다. 기술 용어와 실행 예제는 원문 형식을 유지한다. 검토 상태와 파일 버전의 기준은 [관리 목록](manifest.json)이며, 목록 작성은 휴먼 승인을 뜻하지 않는다.
+35개 저장소 스킬, 플러그인 README 8개, 로컬 2개 스킬과 연결된 참조·규칙·프롬프트를 포함한 71개 문서다. 기술 용어와 실행 예제는 원문 형식을 유지한다. 검토 상태와 파일 버전의 기준은 [관리 목록](manifest.json)이며, 목록 작성은 휴먼 승인을 뜻하지 않는다.
 
 [검토 시작점](README.md)으로 돌아갈 수 있다. 원문과 번역을 나란히 읽고 지시의 의미와 제한을 검토한다. 변경 시 해당 목록 링크도 함께 갱신한다.
 
@@ -100,6 +100,7 @@
 
 | 문서 | 한글 검토본 | 원문 |
 | --- | --- | --- |
+| `skills/sync-docs/SKILL.ko.md` | [읽기](aiwf-spec/skills/sync-docs/SKILL.ko.md) | [비교](../../plugins/aiwf-spec/skills/sync-docs/SKILL.md) |
 | `skills/workflow/SKILL.ko.md` | [읽기](aiwf-spec/skills/workflow/SKILL.ko.md) | [비교](../../plugins/aiwf-spec/skills/workflow/SKILL.md) |
 
 ## aiwf-vaadin-jooq

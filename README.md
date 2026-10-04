@@ -6,7 +6,7 @@ Read the [Korean skill review documents](docs/ko-skills/README.md) before featur
 
 AIWF keeps use-case specifications in Git, lets existing Claude Code/Codex agents implement them, and records inspectable verification evidence.
 
-Modernization started on 2026-10-02. The specification workflow is split across two plugins: **`aiwf-core`**, the AIUP-derived methodology core (seven upstream skills for requirements, use cases, entities and specification review), and **`aiwf-spec`**, the AIWF wrapper whose `workflow` skill uses the repository CLI for non-overwriting initialization, specification pins, drift detection and review packets. Two separate Claude/Codex delegation add-ons are available by choice. Sprintable synchronization and unattended execution are planned, not implemented. These features describe this checkout; do not assume they are present in the previously published npm release.
+Modernization started on 2026-10-02. The specification workflow is split across two plugins: **`aiwf-core`**, the AIUP-derived methodology core (seven upstream skills for requirements, use cases, entities and specification review), and **`aiwf-spec`**, the AIWF wrapper whose `workflow` skill uses the repository CLI and whose `sync-docs` skill maintains affected documents after development for non-overwriting initialization, specification pins, drift detection and review packets. Two separate Claude/Codex delegation add-ons are available by choice. Sprintable synchronization and unattended execution are planned, not implemented. These features describe this checkout; do not assume they are present in the previously published npm release.
 
 See the [direction](docs/modernization/DIRECTION.ko.md), [validation record](docs/modernization/VALIDATION.md), [Sprintable adapter proposal](docs/modernization/SPRINTABLE.ko.md) and [worked example](examples/spec-workflow/README.md).
 
@@ -26,7 +26,9 @@ node scripts/install-spec-skills.mjs --project /path/to/project --stack nestjs-n
 node scripts/install-spec-skills.mjs --project /path/to/project --delegate codex --dry-run
 ```
 
-By default Codex installs the `aiwf-core` seven skills plus the `aiwf-spec` `workflow` skill as `aiwf-requirements`, `aiwf-use-case-spec`, ..., `aiwf-workflow`, with their full references, parsers and attribution. `--stack` selects one of `vaadin-jooq`, `angular-jpa`, `blazor-dotnet` or `nestjs-nextjs` and adds that stack; existing skills are never overwritten and there is no force flag. Live host skill selection and model execution remain separate pilot checks.
+By default Codex installs the `aiwf-core` seven skills plus the `aiwf-spec` `workflow` and `sync-docs` skills as `aiwf-requirements`, `aiwf-use-case-spec`, ..., `aiwf-workflow`, `aiwf-sync-docs`, with their full references, parsers and attribution. `--stack` selects one of `vaadin-jooq`, `angular-jpa`, `blazor-dotnet` or `nestjs-nextjs` and adds that stack; existing skills are never overwritten and there is no force flag. Live host skill selection and model execution remain separate pilot checks.
+
+After development, use Codex's `aiwf-sync-docs` or Claude Code's `/aiwf-spec:sync-docs` with the change intent, comparison scope and UC IDs. The workflow includes this before completion; it updates affected documents and preserves implementation gaps and unverified behavior. See the [installation and standalone skills CLI guide](plugins/aiwf-spec/README.md#synchronize-documents-after-development) and [Korean review copy](docs/ko-skills/aiwf-spec/skills/sync-docs/SKILL.ko.md). This is a skill, not a new `aiwf-spec` CLI command.
 
 Delegation is opt-in: `--delegate claude` and `--delegate codex` add only the selected skill; repeat the option to add both. Claude Code users can instead install either marketplace add-on. To install one portable skill with the skills CLI for Codex or Claude Code, choose both the skill and agent explicitly:
 
@@ -43,12 +45,12 @@ These skills run only when invoked directly. Native delegation is used when the 
 
 ## Plugins
 
-31 upstream AIUP skills are vendored unchanged plus AIWF's own `workflow` and two optional delegation skills (34 total available). `aiwf-core` holds the seven upstream skills; `aiwf-spec` holds only the AIWF `workflow`.
+31 upstream AIUP skills are vendored unchanged plus AIWF's own `workflow`, `sync-docs` and two optional delegation skills (35 total available). `aiwf-core` holds the seven upstream skills; `aiwf-spec` holds the AIWF `workflow` and `sync-docs`.
 
 | Plugin | Role | Contents |
 |---|---|---|
 | `aiwf-core` | Methodology core (required) | 7 upstream skills, byte-identical (2.19.0) |
-| `aiwf-spec` | AIWF wrapper (optional) | AIWF `workflow` only |
+| `aiwf-spec` | AIWF wrapper (optional) | AIWF `workflow` and `sync-docs` |
 | `aiwf-delegate-claude` | Optional delegation add-on | `delegate-claude` |
 | `aiwf-delegate-codex` | Optional delegation add-on | `delegate-codex` |
 | `aiwf-vaadin-jooq` | Stack | 8 upstream skills (2.20.0) |

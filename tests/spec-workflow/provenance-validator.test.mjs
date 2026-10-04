@@ -32,6 +32,15 @@ test('validator rejects modified upstream skill bytes', t => {
   assert.match(check.stderr, /Upstream resource changed: aiwf-core\/skills\/requirements\/SKILL.md/);
 });
 
+test('validator rejects untracked aiwf-spec resources outside the named AIWF-owned skill directories', t => {
+  const root = fixture(t);
+  mkdirSync(join(root, 'plugins/aiwf-spec/skills/rogue'), { recursive: true });
+  writeFileSync(join(root, 'plugins/aiwf-spec/skills/rogue/SKILL.md'), 'rogue skill');
+  const check = spawnSync(process.execPath, [join(root, 'scripts/validate-spec-plugin.mjs')], { encoding: 'utf8' });
+  assert.equal(check.status, 1);
+  assert.ok(check.stderr.includes('Resource missing provenance: aiwf-spec/skills/rogue/SKILL.md'), check.stderr);
+});
+
 test('modified-hash metadata cannot exempt a skill from source preservation', t => {
   const root = fixture(t);
   const plugin = join(root, 'plugins/aiwf-core');
