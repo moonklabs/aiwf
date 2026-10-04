@@ -617,7 +617,7 @@
       "source_group": "aiwf-spec",
       "review_status": "awaiting_review",
       "source_sha256": "d5e95b583e7791618abb8b13f149cf74c2740e5b6a6055e323d55c3618495fbd",
-      "translation_sha256": "4aeb622a7dc62a62c744ab62586c5d9a8b7e9d84cf668a6691980c17c1fc202c"
+      "translation_sha256": "f0129fb9c4e7b798dd77f6070258ab1246496993b2584b026ce543aaaa404fb8"
     },
     {
       "source": "plugins/aiwf-spec/skills/workflow/SKILL.md",
