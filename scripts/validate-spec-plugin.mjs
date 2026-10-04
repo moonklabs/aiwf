@@ -17,6 +17,12 @@ let skills = 0;
 let importedSkills = 0;
 let commit;
 
+// AIWF-owned skill directories in aiwf-spec are authored here, not imported, so they
+// carry no upstream provenance. Keep this list narrow: only the named skill roots are
+// exempt, never arbitrary untracked resources in the plugin.
+const aiwfOwnedSkillRoots = ['skills/workflow/', 'skills/sync-docs/'];
+const isAiwfOwned = relative => aiwfOwnedSkillRoots.some(directory => relative.startsWith(directory));
+
 function files(directory) {
   return readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
     const file = join(directory, entry.name);
@@ -55,13 +61,13 @@ for (const name of ['aiwf-core', 'aiwf-spec', ...supportedStacks.map(stack => `a
     if (!existsSync(join(plugin, directory))) { continue; }
     for (const file of files(join(plugin, directory))) {
       const relative = file.slice(plugin.length + 1);
-      if (name === 'aiwf-spec' && relative.startsWith('skills/workflow/')) { continue; }
+      if (name === 'aiwf-spec' && isAiwfOwned(relative)) { continue; }
       assert.ok(Object.hasOwn(provenance.upstream_sha256, relative), `Resource missing provenance: ${name}/${relative}`);
     }
   }
   const names = readdirSync(join(plugin, 'skills')).sort();
   if (name === 'aiwf-core') { assert.equal(names.length, 7); }
-  if (name === 'aiwf-spec') { assert.deepEqual(names, ['workflow']); }
+  if (name === 'aiwf-spec') { assert.deepEqual(names, ['sync-docs', 'workflow']); }
   skills += names.length;
   for (const skill of names) {
     const file = join(plugin, 'skills', skill, 'SKILL.md');
@@ -134,6 +140,6 @@ for (const target of delegationTargets) {
   assert.ok(pkg.files.includes(`plugins/${name}/`), `Package excludes plugin: ${name}`);
   skills++;
 }
-assert.equal(skills, 34);
+assert.equal(skills, 35);
 assert.equal(pkg.bin['aiwf-spec'], './src/cli/spec-cli.js');
-console.log(`AIWF: ${importedSkills} unchanged upstream skills + ${skills - importedSkills} AIWF skills (workflow and optional delegates); ${verified} unchanged upstream resources, ${modified} attributed NOTICE modification; references and manifests validated.`);
+console.log(`AIWF: ${importedSkills} unchanged upstream skills + ${skills - importedSkills} AIWF skills (workflow, sync-docs and optional delegates); ${verified} unchanged upstream resources, ${modified} attributed NOTICE modification; references and manifests validated.`);

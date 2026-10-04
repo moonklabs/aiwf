@@ -1,12 +1,12 @@
 # AIWF 스킬 인벤토리
 
-작성: 2026-10-02, 2026-10-03 core 분리 반영. 기준 upstream: AIUP marketplace `065dadda0f696c29ff2bacbda31b38152082e6fa`.
+작성: 2026-10-02, 2026-10-03 core 분리, 2026-10-04 문서 동기화 스킬 반영. 기준 upstream: AIUP marketplace `065dadda0f696c29ff2bacbda31b38152082e6fa`.
 
 ## 요약
 
-- upstream 스킬 31개 + AIWF 자체 `workflow` 1개 + 선택 위임 스킬 2개 = 총 34개 제공.
+- upstream 스킬 31개 + AIWF 자체 `workflow`, `sync-docs` 2개 + 선택 위임 스킬 2개 = 총 35개 제공.
 - 방법론 core는 `plugins/aiwf-core`(`aiup-core` v2.19.0 스킬 7개).
-- AIWF 래퍼는 `plugins/aiwf-spec`(`workflow` 1개).
+- AIWF 래퍼는 `plugins/aiwf-spec`(`workflow`, `sync-docs` 2개, 0.2.0).
 - 선택 위임 애드온은 `plugins/aiwf-delegate-claude`와 `plugins/aiwf-delegate-codex`에 각각 스킬 1개를 둔다. 기본 설치에는 포함되지 않는다.
 - stack 4개 플러그인: 24개 (vaadin-jooq 8, angular-jpa 6, blazor-dotnet 5, nestjs-nextjs 5).
 - 원본(vendored)은 upstream 바이트 그대로 두고 이름·명령 참조 변환은 설치본에만 적용한다.
@@ -31,11 +31,12 @@
 
 ## Wrapper: plugins/aiwf-spec
 
-AIWF가 추가한 `workflow` 하나만 담는다. upstream 스킬이 없으므로 자체 `UPSTREAM.json`도 없고 core의 [UPSTREAM.json](../../plugins/aiwf-core/UPSTREAM.json)을 가리킨다. `LICENSE`/`NOTICE`(Apache-2.0)만 함께 유지한다.
+AIWF가 추가한 `workflow`와 `sync-docs`를 담는다. upstream 스킬이 없으므로 자체 `UPSTREAM.json`도 없고 core의 [UPSTREAM.json](../../plugins/aiwf-core/UPSTREAM.json)을 가리킨다. `LICENSE`/`NOTICE`(Apache-2.0)만 함께 유지한다.
 
 | 설치 이름 (Codex) | 원본 스킬 | 구분 |
 |---|---|---|
 | `aiwf-workflow` | (AIWF) | 자체 |
+| `aiwf-sync-docs` | (AIWF) | 개발 후 영향 문서 동기화 |
 
 ## Optional delegates: plugins/aiwf-delegate-<target>
 
@@ -76,7 +77,7 @@ Claude Code는 marketplace 항목을 쓴다. core는 `aiwf-core`(필수), 래퍼
 /plugin install aiwf-nestjs-nextjs@aiwf-plugins
 ```
 
-Codex는 checkout에서 `scripts/install-spec-skills.mjs`로 설치한다. 기본으로 `aiwf-core` 7개와 `aiwf-spec`의 `workflow` 1개를 설치하고, `--stack`은 네 값 중 하나이며 그 stack을 추가한다.
+Codex는 checkout에서 `scripts/install-spec-skills.mjs`로 설치한다. 기본으로 `aiwf-core` 7개와 `aiwf-spec`의 `workflow`, `sync-docs` 2개를 설치하고, `--stack`은 네 값 중 하나이며 그 stack을 추가한다.
 
 ```bash
 # 미리보기: 쓰기 없음
@@ -88,7 +89,7 @@ node scripts/install-spec-skills.mjs --project /path/to/project
 node scripts/install-spec-skills.mjs --project /path/to/project --stack nestjs-nextjs
 ```
 
-위 두 실제 설치 줄은 대안 관계이며 순서대로 실행하는 것이 아니다. 기본 설치가 core+workflow 스킬을 이미 만들면, 뒤이은 `--stack` 설치는 overwrite 없음 원칙 때문에 거부된다. 이미 존재하는 대상 스킬이 있으면 설치를 거부하고 아무것도 덮어쓰지 않는다. `--force` 같은 강제 플래그는 없다. 기존 설치를 갱신하려면 별도로 검토한 마이그레이션이 필요하다. 설치기는 MCP 서버를 자동 구성하지 않으며 새 의존성도 추가하지 않는다.
+위 두 실제 설치 줄은 대안 관계이며 순서대로 실행하는 것이 아니다. 기본 설치가 core+workflow+sync-docs 스킬을 이미 만들면, 뒤이은 `--stack` 설치는 overwrite 없음 원칙 때문에 거부된다. 이미 존재하는 대상 스킬이 있으면 설치를 거부하고 아무것도 덮어쓰지 않는다. `--force` 같은 강제 플래그는 없다. 기존 설치를 갱신하려면 별도로 검토한 마이그레이션이 필요하다. 설치기는 MCP 서버를 자동 구성하지 않으며 새 의존성도 추가하지 않는다.
 
 ## 최신 pin 갱신 절차
 

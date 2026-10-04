@@ -11,7 +11,7 @@ AIWF is a spec-driven development workflow for existing Claude Code/Codex agents
 ## Current structure
 
 - `plugins/aiwf-core`: seven unchanged AIUP methodology skills, references and Python validators.
-- `plugins/aiwf-spec`: the AIWF-owned workflow skill.
+- `plugins/aiwf-spec`: the AIWF-owned workflow and post-development sync-docs skills.
 - `plugins/aiwf-delegate-claude`, `plugins/aiwf-delegate-codex`: optional, explicitly invoked delegation plugins with native-host and opt-in cross-CLI paths.
 - `plugins/aiwf-<stack>`: four original AIUP stack plugins.
 - `docs/ko-skills`: Korean human-review translations, local skill snapshots, catalog and source/hash records. This review archive is not an installable plugin or npm package payload.

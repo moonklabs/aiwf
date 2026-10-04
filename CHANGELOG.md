@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.0 — post-development documentation synchronization (2026-10-04)
+
+- Add the AIWF-owned sync-docs skill and require affected-document reconciliation before workflow completion; preserve unmet requirements and unintended implementation differences.
+- Include aiwf-sync-docs in Codex project installations and aiwf-spec 0.2.0 for Claude Code; update Korean review copies, installation guidance and version records together.
+
 ## Unreleased — documentation-first Korean skill review (2026-10-03)
 
 - Add opt-in, target-specific delegation skills for Claude and Codex, including native routing and explicitly selected cross-CLI runs.

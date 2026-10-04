@@ -27,8 +27,8 @@
     },
     {
       "name": "aiwf-spec",
-      "description": "AIWF workflow extension for aiwf-core: local pins, implementation evidence and future Sprintable handoff",
-      "version": "0.1.0",
+      "description": "AIWF workflow extension for aiwf-core: document synchronization, local pins, implementation evidence and future Sprintable handoff",
+      "version": "0.2.0",
       "source": "./plugins/aiwf-spec",
       "author": {
         "name": "moonklabs"

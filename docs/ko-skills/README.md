@@ -6,13 +6,17 @@
 
 - [Core 스킬과 참조 문서](#core): 요구사항, 용어, 유스케이스, 테스트, 명세 검토, 역공학.
 - [AIWF workflow](aiwf-spec/skills/workflow/SKILL.ko.md): core와 구현·검증·검토 결과를 연결하는 현재 지시.
+- [개발 후 문서 동기화](aiwf-spec/skills/sync-docs/SKILL.ko.md): 변경 범위에 맞는 UC·규칙·테스트 정의·모델·사용 안내 갱신과 구현 불일치 보고.
+- [sync-docs 추가와 검증 기록](../modernization/SYNC-DOCS-VALIDATION-2026-10-04.ko.md): 설치·회귀 검사와 독립 에이전트 실행 예제, 미검증 범위와 휴먼 검토 항목.
 - [로컬 두 스킬](#로컬-설치-스킬): 사용자가 제시한 요구사항 정리와 유스케이스 기반 개발 스킬. core 포함 여부와 문서 규약 차이도 함께 확인한다.
 - [각 플러그인의 README 한글본](CATALOG.md#플러그인-readme), [전체 번역 문서 목록](CATALOG.md), [작성 규칙](TRANSLATION-RULES.md), [정리 계획](PLAN.md), [원문·번역·검토 관리 목록](manifest.json).
 - [CLI 생산성 분석과 권고안](../modernization/CLI-PRODUCTIVITY.ko.md): 원문·한글본의 변경과 검토 준비를 우선하고 검증 자동화를 단계적으로 연결하는 제안. 새 CLI 명령이나 휴먼 승인을 추가한 기록은 아니다.
+- [깊은 역설계 고도화 검토안](../modernization/DEEP-REVERSE-ENGINEERING.ko.md): 현행 동작의 근거 연결, 실행 재현과 충돌 검토를 보강하는 제안. 기존 스킬 변경이나 대상 제품의 역설계 완료 기록은 아니다.
+- [브라운필드·그린필드 작업 가이드](../modernization/BROWNFIELD-GREENFIELD.ko.md): 기존 동작 보존·변경 영향 분석과 신규 목표·첫 구현을 각각 명세·검증으로 연결하는 제안.
 - [Claude 두 세션의 계획 리뷰](../modernization/CLAUDE-PLAN-REVIEW-2026-10-03.ko.md): 방향과 검증 계약의 독립 AI 리뷰 및 남은 판단. 실제 휴먼 리뷰 상태는 바꾸지 않는다.
 - [파일럿 계획](../modernization/PILOT-UC-001.ko.md)과 [실행 결과](../modernization/PILOT-RESULT-2026-10-03.ko.md): 완료 기준·검사 연결표와 로컬 예제의 실패·재검증 근거. `aiwf-spec` README 원문·한글본에서 함께 연결하며 실제 제품 적용·휴먼 리뷰는 대기 상태다.
 
-기준 저장소 커밋은 `6bbfcf2ee40ec88b939c59d404a59554c761b680`이다. 파일별 실제 기준은 관리 목록의 원문 SHA256이다. 저장소 스킬 34개와 연결된 Markdown 참조·규칙·프롬프트, 플러그인 8개의 README를 번역 대상으로 삼는다. 로컬 두 스킬은 검토용 원문 스냅샷과 함께 별도 관리한다.
+기준 저장소 커밋은 `6bbfcf2ee40ec88b939c59d404a59554c761b680`이다. 파일별 실제 기준은 관리 목록의 원문 SHA256이다. 저장소 스킬 35개와 연결된 Markdown 참조·규칙·프롬프트, 플러그인 8개의 README를 번역 대상으로 삼는다. 로컬 두 스킬은 검토용 원문 스냅샷과 함께 별도 관리한다.
 
 ## 플러그인 README
 

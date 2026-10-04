@@ -55,10 +55,10 @@
     },
     {
       "name": "aiwf-spec",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "license_path": "plugins/aiwf-spec/LICENSE",
       "notice_path": "plugins/aiwf-spec/NOTICE",
-      "origin": "AIWF 자체 workflow"
+      "origin": "AIWF 자체 workflow 및 sync-docs"
     },
     {
       "name": "aiwf-vaadin-jooq",
@@ -607,16 +607,25 @@
       "translation": "docs/ko-skills/aiwf-spec/README.ko.md",
       "scope": "repository",
       "review_status": "awaiting_review",
-      "source_sha256": "f2a3165cbf98987c214b5c8e5fd76a9a3d3d766eb46d91fab372068ab9589880",
-      "translation_sha256": "96ab18a48fc0fa5cc6263fa6b8095a2065ff2a124143b04aa361c3fabf334f38"
+      "source_sha256": "85a72a78d83935254475e8d92722563927868e344468cd93ad617d1d537dcc24",
+      "translation_sha256": "97e0539ba1334675b57d7ff0e7361b6b0cb26251e2e56b7028816d0294c5deb1"
+    },
+    {
+      "source": "plugins/aiwf-spec/skills/sync-docs/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-spec/skills/sync-docs/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-spec",
+      "review_status": "awaiting_review",
+      "source_sha256": "d5e95b583e7791618abb8b13f149cf74c2740e5b6a6055e323d55c3618495fbd",
+      "translation_sha256": "4aeb622a7dc62a62c744ab62586c5d9a8b7e9d84cf668a6691980c17c1fc202c"
     },
     {
       "source": "plugins/aiwf-spec/skills/workflow/SKILL.md",
       "translation": "docs/ko-skills/aiwf-spec/skills/workflow/SKILL.ko.md",
       "scope": "repository",
       "source_group": "aiwf-spec",
-      "source_sha256": "1534f06fb0bde21c6c3ea974d1e1c4aafa6179e063e6a87e189a514bf6a2ccab",
-      "translation_sha256": "a82aefa589804a8ee5a0481e333b9b915d2c332a81a567eb637d0cd4ae1c38e7",
+      "source_sha256": "bf6f2d71ea25f51f3f1b676ee597d335bb174cea23ee20212342486990b7936c",
+      "translation_sha256": "c0ca2df1d7cb7f0c2a173e82acd635b3066ab14a9767b58cda64b183c3147651",
       "review_status": "awaiting_review"
     },
     {

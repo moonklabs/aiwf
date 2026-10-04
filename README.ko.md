@@ -4,7 +4,7 @@
 
 AIWF는 유스케이스 명세를 Git에 유지하면서 기존 Claude Code/Codex로 구현하고, 실제 검증 결과를 검토 가능한 형태로 남기는 개발 워크플로우다.
 
-2026-10-02부터 개선 중이다. 명세 워크플로는 두 플러그인으로 나뉜다. **`aiwf-core`**는 AIUP에서 가져온 방법론 core로 요구사항·유스케이스·엔티티·명세 검토용 upstream 스킬 7개를 담는다. **`aiwf-spec`**는 AIWF가 추가한 `workflow` 스킬을 담고, 저장소 CLI를 사용해 비파괴 초기화·명세 버전 고정·변경 감지·검증 로그 묶기를 연결한다. Claude/Codex 위임 애드온 두 개는 별도 선택 사항이다. Sprintable 연동과 무인 반복 실행은 후속 범위다. 아래 기능은 이 저장소의 개발 버전 기준이며 기존 npm 배포판에 포함됐다고 가정하면 안 된다.
+2026-10-02부터 개선 중이다. 명세 워크플로는 두 플러그인으로 나뉜다. **`aiwf-core`**는 AIUP에서 가져온 방법론 core로 요구사항·유스케이스·엔티티·명세 검토용 upstream 스킬 7개를 담는다. **`aiwf-spec`**는 AIWF가 추가한 `workflow`와 개발 후 문서 정리용 `sync-docs` 스킬을 담고, 저장소 CLI를 사용해 비파괴 초기화·명세 버전 고정·변경 감지·검증 로그 묶기를 연결한다. Claude/Codex 위임 애드온 두 개는 별도 선택 사항이다. Sprintable 연동과 무인 반복 실행은 후속 범위다. 아래 기능은 이 저장소의 개발 버전 기준이며 기존 npm 배포판에 포함됐다고 가정하면 안 된다.
 
 ## 가장 먼저 읽을 것
 
@@ -33,7 +33,9 @@ node scripts/install-spec-skills.mjs --project /path/to/project --stack nestjs-n
 node scripts/install-spec-skills.mjs --project /path/to/project --delegate codex --dry-run
 ```
 
-Codex는 기본적으로 `aiwf-core` 스킬 7개와 `aiwf-spec`의 `workflow`를 `aiwf-requirements`, `aiwf-use-case-spec`, ..., `aiwf-workflow`로 함께 설치하며 참조 문서·검사기·출처도 포함한다. `--stack`은 `vaadin-jooq`, `angular-jpa`, `blazor-dotnet`, `nestjs-nextjs` 중 하나를 골라 해당 stack을 추가한다. 기존 스킬은 덮어쓰지 않고 강제 플래그도 없다. 실제 호스트의 스킬 자동 선택과 모델 실행은 별도 파일럿에서 검증할 예정이다.
+Codex는 기본적으로 `aiwf-core` 스킬 7개와 `aiwf-spec`의 `workflow`, `sync-docs`를 `aiwf-requirements`, `aiwf-use-case-spec`, ..., `aiwf-workflow`, `aiwf-sync-docs`로 함께 설치하며 참조 문서·검사기·출처도 포함한다. `--stack`은 `vaadin-jooq`, `angular-jpa`, `blazor-dotnet`, `nestjs-nextjs` 중 하나를 골라 해당 stack을 추가한다. 기존 스킬은 덮어쓰지 않고 강제 플래그도 없다. 실제 호스트의 스킬 자동 선택과 모델 실행은 별도 파일럿에서 검증할 예정이다.
+
+개발 후에는 Codex의 `aiwf-sync-docs` 또는 Claude Code의 `/aiwf-spec:sync-docs`에 변경 의도, 비교 범위와 UC ID를 전달한다. workflow는 완료 전에 이 절차로 관련 문서를 갱신하고 구현 누락·미검증 동작을 보존한다. [단독 skills CLI 설치와 사용 안내](docs/ko-skills/aiwf-spec/README.ko.md#개발-후-문서-동기화), [한글 검토본](docs/ko-skills/aiwf-spec/skills/sync-docs/SKILL.ko.md)을 참고한다. 새 `aiwf-spec` CLI 명령을 추가한 것은 아니다.
 
 Claude/Codex 위임 스킬은 기본 설치에서 빠져 있다. `--delegate claude` 또는 `--delegate codex`로 하나를 고르며, 두 옵션을 함께 주면 둘 다 설치한다. Claude Code marketplace에서도 각 애드온을 따로 설치할 수 있다. 아래 GitHub 기반 skills.sh 명령은 이 변경을 저장소에 게시한 뒤 사용할 수 있다. 대상 스킬과 호스트를 함께 지정한다.
 
@@ -48,12 +50,12 @@ npx skills add https://github.com/moonklabs/aiwf --skill delegate-codex --agent 
 
 ## 플러그인 구성
 
-upstream AIUP 스킬 31개를 바이트 그대로 가져오고 AIWF 자체 `workflow`와 선택 위임 스킬 2개를 더해 총 34개를 제공한다. `aiwf-core`가 upstream 7개를, `aiwf-spec`가 AIWF `workflow` 하나만 담는다.
+upstream AIUP 스킬 31개를 바이트 그대로 가져오고 AIWF 자체 `workflow`, `sync-docs`와 선택 위임 스킬 2개를 더해 총 35개를 제공한다. `aiwf-core`가 upstream 7개를, `aiwf-spec`가 AIWF `workflow`와 `sync-docs` 담는다.
 
 | 플러그인 | 역할 | 내용 |
 |---|---|---|
 | `aiwf-core` | 방법론 core (필수) | upstream 스킬 7개 바이트 그대로 (2.19.0) |
-| `aiwf-spec` | AIWF 래퍼 (선택) | AIWF `workflow` 하나 |
+| `aiwf-spec` | AIWF 래퍼 (선택) | AIWF `workflow`와 `sync-docs` |
 | `aiwf-delegate-claude` | 선택 위임 애드온 | `delegate-claude` |
 | `aiwf-delegate-codex` | 선택 위임 애드온 | `delegate-codex` |
 | `aiwf-vaadin-jooq` | stack | upstream 스킬 8개 (2.20.0) |
@@ -81,7 +83,7 @@ Claude Code에서는 이 저장소를 marketplace로 등록하고 필요한 플�
 3. 명세 구조와 참조를 검사하고, 의미 검토를 별도로 한다.
 4. 구현 계획까지 포함한 명세 버전을 고정한다.
 5. 현재 에이전트와 프로젝트 도구로 구현하고 실제 테스트를 실행한다.
-6. 명세 변경을 확인하고, 실행 로그와 미검증 사항을 packet으로 남긴다.
+6. `sync-docs`로 영향받는 UC·규칙·테스트 정의·모델·사용 안내를 정리하고 불일치를 보고한다. 문서 검토와 명세 변경 확인 후 실행 로그와 미검증 사항을 packet으로 남긴다.
 
 ```bash
 # 저장소 checkout 기준 경로. 대상 프로젝트의 docs를 검사한다.
