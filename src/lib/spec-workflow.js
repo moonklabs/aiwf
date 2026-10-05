@@ -843,7 +843,7 @@ export function writeReviewPacket(root, packet, options = {}) {
 }
 
 /**
- * Initialize minimal AIUP-compatible Draft specs without overwriting user files.
+ * Initialize minimal Draft AIWF specs without overwriting user files.
  */
 export function initSpec(root, name) {
   const absRoot = path.resolve(root);

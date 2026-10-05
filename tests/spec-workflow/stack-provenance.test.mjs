@@ -14,7 +14,6 @@ import { fileURLToPath } from 'node:url';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(here, '../..');
-const REFERENCE = process.env.AIWF_AIUP_REFERENCE || '/private/tmp/aiwf-aiup-reference-20261002';
 
 const UPSTREAM_REPOSITORY = 'https://github.com/AI-Unified-Process/marketplace';
 const UPSTREAM_COMMIT = '065dadda0f696c29ff2bacbda31b38152082e6fa';
@@ -215,25 +214,5 @@ test('LICENSE and NOTICE are the byte-identical upstream Apache-2.0 artifacts', 
     assert.ok(fs.existsSync(path.join(dir, 'NOTICE')), `${stack.plugin} NOTICE is missing`);
     assert.equal(sha256(path.join(dir, 'LICENSE')), APACHE_LICENSE_SHA256, `${stack.plugin} LICENSE`);
     assert.equal(sha256(path.join(dir, 'NOTICE')), AIUP_NOTICE_SHA256, `${stack.plugin} NOTICE`);
-  }
-});
-
-test('imported bytes equal the pinned reference checkout when it is available', t => {
-  if (!fs.existsSync(path.join(REFERENCE, '.git'))) {
-    t.diagnostic(`pinned reference not present at ${REFERENCE}; skipping byte cross-check`);
-    return;
-  }
-  for (const stack of STACKS) {
-    const dir = pluginDir(stack);
-    const provenance = readJson(path.join(dir, 'UPSTREAM.json'));
-    for (const rel of Object.keys(provenance.upstream_sha256)) {
-      const referenceFile = path.join(REFERENCE, stack.source, rel);
-      assert.ok(fs.existsSync(referenceFile), `reference missing ${stack.source}/${rel}`);
-      assert.deepEqual(
-        fs.readFileSync(path.join(dir, rel)),
-        fs.readFileSync(referenceFile),
-        `${stack.plugin}/${rel} differs from the pinned reference`
-      );
-    }
   }
 });

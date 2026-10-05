@@ -1,14 +1,14 @@
 # AIWF Spec
 
-The AIWF workflow wrapper for the AIUP-derived methodology core. It adds AIWF's `workflow` and `sync-docs` skills; the upstream skills live in the sibling [aiwf-core](../aiwf-core) plugin.
+The AIWF workflow plugin. It adds the `workflow` and `sync-docs` skills; the methodology skills live in the sibling [aiwf-core](../aiwf-core) plugin.
 
 ## Contents
 
-- `skills/workflow` - AIWF's own skill: host-neutral task tracking, documentation synchronization before completion, explicit evidence/approval boundaries and the future Sprintable handoff.
-- `skills/sync-docs` - Synchronize affected use cases, rules, test definitions, data models and usage guides after scoped development; preserve unmet requirements and unintended code/spec differences. These two skills have no upstream counterpart.
+- `skills/workflow` - host-neutral task tracking, documentation synchronization before completion, explicit evidence/approval boundaries and the future Sprintable handoff.
+- `skills/sync-docs` - Synchronize affected use cases, rules, test definitions, data models and usage guides after scoped development; preserve unmet requirements and unintended code/spec differences.
 - `LICENSE` and `NOTICE` (Apache-2.0).
 
-The seven upstream skills (requirements, entities, use cases, journeys, reverse engineering, specification review) are no longer in this plugin. They were moved unchanged into [aiwf-core](../aiwf-core/README.md); the exact source commit, original hashes and the single NOTICE attribution change are recorded in the core [UPSTREAM.json](../aiwf-core/UPSTREAM.json). This plugin has no `UPSTREAM.json` of its own.
+The seven methodology skills (requirements, entities, use cases, journeys, reverse engineering, specification review) live in the sibling [aiwf-core](../aiwf-core/README.md) plugin.
 
 Canonical project artifacts are `docs/vision.md`, `requirements.md`, `glossary.md`, `entity_model.md`, `use_cases.puml`, `use_cases/UC-*.md`, `test_cases/TC-*.md`, and optional `processes/*.bpmn`. Keep English structural headings/status tokens; bodies may be Korean. Structural lint does not guarantee Korean semantic completeness. The structural checker is `aiwf-core/skills/spec-review/scripts/spec_lint.py`.
 

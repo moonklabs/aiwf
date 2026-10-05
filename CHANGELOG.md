@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.5.0 — Unreleased
+
+- Add the public `aiwf` CLI for npm global installation, interactive or explicit bundle selection, dry runs and installation status; keep `aiwf-spec` compatible.
+- Install complete prefixed skills through pinned `skills@1.7.0` for Codex and Claude, with separate project/user scope and optional stacks/delegation. Require Node.js 22.20+.
+- Preserve modified/unmanaged skills, skip unchanged installations, support additive installs and record verified partial results with retained local sources.
+- Update English/Korean installation guides and document the remaining profile, update/removal and native-plugin work.
+
+## Unreleased — Remove one-off verification code (2026-10-05)
+
+- Remove archived pilot service/test code, obsolete replay instructions and a dated temporary-checkout comparison. Keep historical logs and review documents.
+- Consolidate Electron license coverage into the existing packaging test and remove duplicate plugin-inventory tests; retain reusable installation, provenance and documentation checks.
+
+## Unreleased — Electron/React agent desktop stack (2026-10-05)
+
+- Add the MIT `aiwf-electron-react` plugin (0.1.0) extending core specifications with six skills: scaffold, implement, agent-runtime, renderer-test, electron-test and package.
+- Document main/preload/renderer/shared boundaries, adapter-driven Sally/PI/other agent execution, UI component sources, optional features and packaging checks. Requested package versions are an unverified baseline, not a tested lockfile.
+- Add opt-in `--stack electron-react` installation (15 core/spec/stack skills), marketplace and npm payload entries; preserve default installation and imported source checks.
+- Add full Korean review copies for the README, six skills and two references; maintain all new documents as awaiting human review.
+
+## Unreleased — AIWF documentation presentation (2026-10-05)
+
+- Remove origin descriptions and external source links from public guides, plugin introductions and CLI help; update Korean review copies and manifest records together.
+- Retain LICENSE/NOTICE, source provenance, unchanged methodology resources and historical execution evidence.
+
 ## 0.4.0 — post-development documentation synchronization (2026-10-04)
 
 - Add the AIWF-owned sync-docs skill and require affected-document reconciliation before workflow completion; preserve unmet requirements and unintended implementation differences.
@@ -21,21 +45,21 @@
 ## Unreleased — remove the old framework (2026-10-03)
 
 - Remove the legacy core/dev/experts/tools plugins, old installer and language/sprint/persona/YOLO runtime, multilingual command collections, duplicate skills/rules, obsolete docs and their Jest tests/configuration.
-- Keep the six AIUP methodology/stack/workflow plugins, the spec CLI/library, current regression suite and worked example. Imported sources and attribution are unchanged.
+- Keep the six methodology/stack/workflow plugins, the spec CLI/library, current regression suite and worked example.
 - **Breaking change:** remove the old aiwf/aiwf-lang/aiwf-sprint npm binaries and root all-in-one plugin manifest. The root is now a marketplace; install its individual plugins. Only aiwf-spec remains as a CLI.
 - Fix the spec CLI direct-entry check so npm-created bin symlinks actually execute commands.
 - Remove all external Node dependencies and stale package entries; use Node's built-in test runner for npm test. Existing consuming-project files and user/runtime data are untouched.
 
-## Unreleased — AIUP core packaged as aiwf-core (2026-10-03)
+## Unreleased — Methodology core packaged as aiwf-core (2026-10-03)
 
-- Move the seven byte-identical upstream AIUP skills, their references and Python parsers into a dedicated `plugins/aiwf-core` plugin (Apache-2.0, upstream `aiup-core` 2.19.0, Simon Martinelli); the only upstream source change remains the appended AIWF attribution in the core NOTICE.
+- Move the seven methodology skills, their references and Python parsers into a dedicated `plugins/aiwf-core` plugin (Apache-2.0, version 2.19.0).
 - Reduce `plugins/aiwf-spec` to the AIWF-owned `workflow` skill plus LICENSE/NOTICE. It has no `UPSTREAM.json` of its own and links the core [UPSTREAM.json](plugins/aiwf-core/UPSTREAM.json). This corrects the earlier import that put the core inside `aiwf-spec` and conflated the methodology core with the AIWF wrapper.
 - Rename the previous legacy `plugins/aiwf-core` (session, task and YOLO commands) to `plugins/aiwf-core-legacy` and add its marketplace entry; no files were deleted.
 - Order the marketplace `aiwf-core` first, then `aiwf-spec` and the stacks. The Codex installer still installs the core seven plus the AIWF `workflow` by default and adds a stack with `--stack`; installed name prefixes are unchanged and no MCP server is installed automatically.
 
-## Unreleased — AIUP core restored and four stacks imported (2026-10-02)
+## Unreleased — Methodology core restored and four stacks added (2026-10-02)
 
-- Restore the seven core SKILL.md files byte-identical to AIUP upstream `065dadda0f696c29ff2bacbda31b38152082e6fa` (initially under `plugins/aiwf-spec`, moved to `plugins/aiwf-core` on 2026-10-03); the core references, parsers and scripts are unchanged, and the only upstream source change is the appended AIWF attribution in the core NOTICE. Host-neutral task tracking and evidence guidance live only in the AIWF-owned `workflow` skill.
+- Restore the seven core SKILL.md files with their references, parsers and scripts (initially under `plugins/aiwf-spec`, moved to `plugins/aiwf-core` on 2026-10-03). Host-neutral task tracking and evidence guidance live in the separate `workflow` skill.
 - Import all four upstream stack plugins unchanged: `aiwf-vaadin-jooq` (2.20.0, 8 skills), `aiwf-angular-jpa` (0.7.0, 6), `aiwf-blazor-dotnet` (0.7.0, 5) and `aiwf-nestjs-nextjs` (0.4.0, 5). That is 24 byte-identical skills with their rules, agents, LICENSE/NOTICE and per-plugin `UPSTREAM.json` hashes.
 - Vendor 31 upstream skills plus AIWF's own `workflow` (32 total). See [docs/modernization/SKILLS.ko.md](docs/modernization/SKILLS.ko.md).
 - Extend `scripts/install-spec-skills.mjs` with `--stack <vaadin-jooq|angular-jpa|blazor-dotnet|nestjs-nextjs>` (core 8 plus the selected stack; default core 8). `--dry-run` writes nothing, an existing target skill is rejected without a force flag, and only installed Markdown copies get prefixed names and command references.
@@ -43,7 +67,7 @@
 
 ## Unreleased — specification workflow foundation (2026-10-02)
 
-- Add AIUP-derived `aiwf-spec` core skills and local init/pin/check/packet CLI; preserve upstream Apache-2.0 attribution.
+- Add specification skills and the local init/pin/check/packet CLI.
 - Add portable Codex skill installation and local evidence examples. Sprintable synchronization is still a proposal.
 - **Compatibility change:** the package now declares Node.js >=20 for the development toolchain. This package-wide requirement also applies to the legacy `aiwf`, `aiwf-lang`, and `aiwf-sprint` bins; Node 14–18 installations under engine-strict are no longer supported by this development version. The change is an explicit support baseline, not a claim that every new API requires Node 20.
 

@@ -1,10 +1,11 @@
 {
     "name": "aiwf",
-    "version": "0.4.0",
+    "version": "0.5.0",
     "description": "AI Workflow Framework: use-case-driven specs and evidence for coding agents",
     "main": "./src/lib/spec-workflow.js",
     "type": "module",
     "bin": {
+        "aiwf": "./src/cli/aiwf-cli.js",
         "aiwf-spec": "./src/cli/spec-cli.js"
     },
     "scripts": {
@@ -41,11 +42,11 @@
     },
     "homepage": "https://github.com/moonklabs/aiwf#readme",
     "engines": {
-        "node": ">=20.0.0"
+        "node": ">=22.20.0"
     },
     "files": [
-        "src/cli/spec-cli.js",
-        "src/lib/spec-workflow.js",
+        "src/cli/",
+        "src/lib/",
         ".claude-plugin/marketplace.json",
         "scripts/check-dependencies.js",
         "scripts/install-spec-skills.mjs",
@@ -62,6 +63,10 @@
         "plugins/aiwf-vaadin-jooq/",
         "plugins/aiwf-angular-jpa/",
         "plugins/aiwf-blazor-dotnet/",
-        "plugins/aiwf-nestjs-nextjs/"
-    ]
+        "plugins/aiwf-nestjs-nextjs/",
+        "plugins/aiwf-electron-react/"
+    ],
+    "dependencies": {
+        "skills": "1.7.0"
+    }
 }

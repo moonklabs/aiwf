@@ -1,11 +1,10 @@
 {
   "name": "aiwf-vaadin-jooq",
   "version": "2.20.0",
-  "description": "AI Unified Process construction skills for Vaadin/Hilla and jOOQ applications.",
+  "description": "AIWF construction skills for Vaadin/Hilla and jOOQ applications.",
   "author": {
     "name": "Simon Martinelli",
-    "email": "simon@martinelli.ch",
-    "url": "https://unifiedprocess.ai"
+    "email": "simon@martinelli.ch"
   },
   "license": "Apache-2.0"
 }

@@ -1,11 +1,10 @@
 {
   "name": "aiwf-blazor-dotnet",
   "version": "0.7.0",
-  "description": "AI Unified Process construction skills for C# / Blazor (.NET 10) applications.",
+  "description": "AIWF construction skills for C# / Blazor (.NET 10) applications.",
   "author": {
     "name": "Carl J. Mosca",
-    "email": "carljmosca@gmail.com",
-    "url": "https://unifiedprocess.ai"
+    "email": "carljmosca@gmail.com"
   },
   "license": "Apache-2.0"
 }

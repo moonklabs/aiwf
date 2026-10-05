@@ -158,7 +158,7 @@ test('both delegation skills can be selected together and invalid targets fail b
 });
 
 test('each optional stack installs its complete isolated bundle', t => {
-  const counts = { 'vaadin-jooq': 8, 'angular-jpa': 6, 'blazor-dotnet': 5, 'nestjs-nextjs': 5 };
+  const counts = { 'vaadin-jooq': 8, 'angular-jpa': 6, 'blazor-dotnet': 5, 'nestjs-nextjs': 5, 'electron-react': 6 };
   for (const stack of supportedStacks) {
     const root = project(t);
     const dry = installSpecSkills(root, { stack, dryRun: true });
@@ -168,11 +168,46 @@ test('each optional stack installs its complete isolated bundle', t => {
     assert.equal(result.installed.length, dry.destinations.length);
     const implement = join(root, '.agents/skills', `aiwf-${stack}-implement`);
     assert.match(readFileSync(join(implement, 'SKILL.md'), 'utf8'), new RegExp(`^name: aiwf-${stack}-implement$`, 'm'));
-    assert.match(readFileSync(join(implement, 'NOTICE'), 'utf8'), /AI Unified Process/);
-    if (stack === 'angular-jpa' || stack === 'vaadin-jooq') {
-      assert.equal(existsSync(join(implement, 'agents/uc-coverage.md')), true);
+    if (stack === 'electron-react') {
+      // Authored stack: MIT licensing and its bundled references are copied.
+      assert.match(readFileSync(join(implement, 'LICENSE'), 'utf8'), /MIT License/);
+      assert.equal(existsSync(join(implement, 'references/architecture.md')), true);
+      assert.equal(existsSync(join(root, '.agents/skills/aiwf-electron-react-scaffold/references/stack-profile.md')), true);
+    } else {
+      assert.match(readFileSync(join(implement, 'NOTICE'), 'utf8'), /AI Unified Process/);
+      if (stack === 'angular-jpa' || stack === 'vaadin-jooq') {
+        assert.equal(existsSync(join(implement, 'agents/uc-coverage.md')), true);
+      }
     }
   }
+});
+
+test('authored electron-react stack installs six prefixed skills and rewrites references', t => {
+  const root = project(t);
+  const skills = join(root, '.agents/skills');
+  const result = installSpecSkills(root, { stack: 'electron-react' });
+  assert.equal(result.installed.length, 15);
+  const authored = ['scaffold', 'implement', 'agent-runtime', 'renderer-test', 'electron-test', 'package'];
+  for (const name of authored) {
+    const text = readFileSync(join(skills, `aiwf-electron-react-${name}/SKILL.md`), 'utf8');
+    assert.match(text, new RegExp(`^name: aiwf-electron-react-${name}$`, 'm'));
+    // Sibling command and named-skill references are prefixed like the imported stacks.
+    assert.doesNotMatch(text, new RegExp(`(?<![.\\w-])/(${authored.join('|')})(?![\\w-])`));
+    assert.doesNotMatch(text, new RegExp('`(' + authored.join('|') + ')`'));
+  }
+  // Core references keep the shared aiwf- prefix used by installed copies.
+  const implement = readFileSync(join(skills, 'aiwf-electron-react-implement/SKILL.md'), 'utf8');
+  assert.doesNotMatch(implement, /(?<![.\w-])\/spec-review(?![\w-])/);
+});
+
+test('authored electron-react stack refuses to overwrite existing skills', t => {
+  const root = project(t);
+  const existing = join(root, '.agents/skills/aiwf-electron-react-implement');
+  mkdirSync(existing, { recursive: true });
+  writeFileSync(join(existing, 'SKILL.md'), 'custom electron-react content');
+  assert.throws(() => installSpecSkills(root, { stack: 'electron-react' }), /already exists/);
+  assert.equal(readFileSync(join(existing, 'SKILL.md'), 'utf8'), 'custom electron-react content');
+  assert.equal(existsSync(join(root, '.agents/skills/aiwf-workflow')), false);
 });
 
 test('stack conflict preserves existing files and prevents partial core installation', t => {
@@ -191,6 +226,9 @@ test('installer CLI accepts stack and delegate selections and rejects invalid op
   const dry = run(['--stack', 'blazor-dotnet', '--dry-run']);
   assert.equal(dry.status, 0, dry.stderr);
   assert.equal(JSON.parse(dry.stdout).destinations.length, 14);
+  const authored = run(['--stack', 'electron-react', '--dry-run']);
+  assert.equal(authored.status, 0, authored.stderr);
+  assert.equal(JSON.parse(authored.stdout).destinations.length, 15);
   assert.equal(run(['--stack']).status, 1);
   assert.equal(run(['--stack', 'invalid']).status, 1);
   assert.equal(run(['--stack', 'blazor-dotnet', '--stack', 'angular-jpa']).status, 1);

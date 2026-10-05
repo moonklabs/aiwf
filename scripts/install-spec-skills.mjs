@@ -1,18 +1,15 @@
 #!/usr/bin/env node
-import { cpSync, existsSync, lstatSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
-import { dirname, join, resolve } from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { existsSync, lstatSync } from 'node:fs';
+import { join, resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
 
-const plugins = resolve(dirname(fileURLToPath(import.meta.url)), '../plugins');
-export const supportedStacks = ['vaadin-jooq', 'angular-jpa', 'blazor-dotnet', 'nestjs-nextjs'];
-export const supportedDelegates = ['claude', 'codex'];
+import { listSkillBundles, selectSkillBundles, planSkillBundles, stageSkillBundles } from '../src/lib/skill-bundles.js';
 
-function markdownFiles(directory) {
-  return readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
-    const file = join(directory, entry.name);
-    return entry.isDirectory() ? markdownFiles(file) : entry.name.endsWith('.md') ? [file] : [];
-  });
-}
+// Stack and delegate selections are derived from the shared marketplace catalog so the
+// legacy installer and the managed `aiwf` CLI cannot drift apart.
+const catalog = listSkillBundles();
+export const supportedStacks = catalog.filter(bundle => bundle.kind === 'stack').map(bundle => bundle.id);
+export const supportedDelegates = catalog.filter(bundle => bundle.kind === 'delegate').map(bundle => bundle.id);
 
 function rejectSymlink(path) {
   if (existsSync(path) && lstatSync(path).isSymbolicLink()) {
@@ -33,67 +30,12 @@ export function installSpecSkills(project, { dryRun = false, stack, delegates = 
   if (!existsSync(root) || !lstatSync(root).isDirectory()) {
     throw new Error(`Project directory does not exist: ${root}`);
   }
-  const target = join(root, '.agents', 'skills');
-  for (const path of [join(root, '.agents'), target]) {
-    rejectSymlink(path);
-    if (existsSync(path) && !lstatSync(path).isDirectory()) {
-      throw new Error(`Expected directory: ${path}`);
-    }
+  const target = join(root, '.agents');
+  const selection = selectSkillBundles({ stacks: stack ? [stack] : [], delegates });
+  if (dryRun) {
+    return { dry_run: true, destinations: planSkillBundles(target, selection).map(entry => entry.directory) };
   }
-  const bundles = [
-    { plugin: join(plugins, 'aiwf-core'), prefix: 'aiwf-' },
-    { plugin: join(plugins, 'aiwf-spec'), prefix: 'aiwf-' }
-  ];
-  if (stack) { bundles.push({ plugin: join(plugins, `aiwf-${stack}`), prefix: `aiwf-${stack}-` }); }
-  for (const target of delegates) {
-    bundles.push({ plugin: join(plugins, `aiwf-delegate-${target}`), prefix: 'aiwf-' });
-  }
-  const entries = bundles.flatMap(bundle => readdirSync(join(bundle.plugin, 'skills')).sort()
-    .map(name => ({ ...bundle, name, installedName: `${bundle.prefix}${name}` })));
-  const destinations = entries.map(entry => join(target, entry.installedName));
-  for (const destination of destinations) {
-    // lstat detects dangling symlinks too.
-    try {
-      lstatSync(destination);
-      throw new Error(`Skill already exists; no files overwritten: ${destination}`);
-    } catch (error) {
-      if (error.code !== 'ENOENT') { throw error; }
-    }
-  }
-  if (dryRun) { return { dry_run: true, destinations }; }
-  mkdirSync(target, { recursive: true });
-  for (let index = 0; index < entries.length; index++) {
-    const entry = entries[index];
-    const destination = destinations[index];
-    cpSync(join(entry.plugin, 'skills', entry.name), destination, { recursive: true, errorOnExist: true, force: false });
-    for (const notice of ['LICENSE', 'NOTICE']) { cpSync(join(entry.plugin, notice), join(destination, notice)); }
-    for (const resources of ['rules', 'agents']) {
-      if (existsSync(join(entry.plugin, resources))) {
-        cpSync(join(entry.plugin, resources), join(destination, resources), { recursive: true, errorOnExist: true, force: false });
-      }
-    }
-    // Stack-local names take precedence; shared core commands retain their core names.
-    const mapping = new Map(entries.filter(item => item.prefix === 'aiwf-').map(item => [item.name, item.installedName]));
-    for (const item of entries.filter(item => item.plugin === entry.plugin)) {
-      mapping.set(item.name, item.installedName);
-    }
-    const commands = new RegExp(`(?<![.\\w-])/(${[...mapping.keys()].join('|')})(?![\\w-])`, 'g');
-    const namedSkills = new RegExp('`(' + [...mapping.keys()].join('|') + ')`', 'g');
-    for (const file of markdownFiles(destination)) {
-      const original = readFileSync(file, 'utf8');
-      let text = original;
-      if (file === join(destination, 'SKILL.md')) {
-        text = text.replace(/^name: .+$/m, `name: ${entry.installedName}`);
-      }
-      text = text.replace(commands, (_, name) => `/${mapping.get(name)}`)
-        .replace(namedSkills, (_, name) => '`' + mapping.get(name) + '`');
-      if (text !== original) {
-        text += '\n<!-- AIWF installation modification: prefixed skill names and command references throughout bundled Markdown. -->\n';
-        writeFileSync(file, text);
-      }
-    }
-  }
-  return { dry_run: false, installed: destinations };
+  return { dry_run: false, installed: stageSkillBundles(target, selection).map(entry => entry.directory) };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

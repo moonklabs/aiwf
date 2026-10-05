@@ -2,15 +2,15 @@
 
 > 플러그인 README 한글 검토본입니다. 원문: [README](../../../plugins/aiwf-spec/README.md). 검토 상태와 원문 SHA256은 [관리 목록](../manifest.json)에서 확인합니다. 번역과 자동 검사는 승인을 뜻하지 않습니다.
 
-AIWF workflow 래퍼는 AIUP 기반 방법론 core와 함께 사용합니다. AIWF 자체 `workflow`와 `sync-docs` 스킬을 추가하며, upstream 스킬은 함께 있는 [aiwf-core](../../../plugins/aiwf-core/README.md) 플러그인에 있습니다.
+AIWF workflow 플러그인입니다. `workflow`와 `sync-docs` 스킬을 추가하며, 방법론 스킬은 함께 있는 [aiwf-core](../../../plugins/aiwf-core) 플러그인에 있습니다.
 
 ## 구성
 
-- `skills/workflow`: 호스트에 종속되지 않는 작업 추적, 완료 전 문서 동기화, 명시적인 검증 근거와 승인 경계, 향후 Sprintable 인계 지점을 다루는 AIWF 자체 스킬입니다.
-- `skills/sync-docs`: 범위가 정해진 개발 후 영향받는 유스케이스, 규칙, 테스트 정의, 데이터 모델과 사용 안내를 동기화하고 미충족 요구사항과 의도하지 않은 코드·명세 차이를 보존합니다. 두 스킬에는 upstream 대응물이 없습니다.
+- `skills/workflow`: 호스트에 종속되지 않는 작업 추적, 완료 전 문서 동기화, 명시적인 검증 근거와 승인 경계, 향후 Sprintable 인계 지점을 다룹니다.
+- `skills/sync-docs`: 범위가 정해진 개발 후 영향받는 유스케이스, 규칙, 테스트 정의, 데이터 모델과 사용 안내를 동기화하고 미충족 요구사항과 의도하지 않은 코드·명세 차이를 보존합니다.
 - `LICENSE` 및 `NOTICE` (Apache-2.0).
 
-upstream 스킬 7개(요구사항, 엔티티, 유스케이스, 여정, 역공학, 명세 검토)는 이 플러그인에서 빠졌습니다. 스킬은 변경 없이 [aiwf-core](../../../plugins/aiwf-core/README.md)로 옮겼습니다. 정확한 원본 커밋, 기존 해시, 유일한 NOTICE 출처 변경은 core의 [UPSTREAM.json](../../../plugins/aiwf-core/UPSTREAM.json)에 기록되어 있습니다. 이 플러그인 자체에는 `UPSTREAM.json`이 없습니다.
+방법론 스킬 7개(요구사항, 엔티티, 유스케이스, 여정, 역공학, 명세 검토)는 함께 있는 [aiwf-core](../../../plugins/aiwf-core/README.md) 플러그인에 있습니다.
 
 표준 프로젝트 산출물은 `docs/vision.md`, `requirements.md`, `glossary.md`, `entity_model.md`, `use_cases.puml`, `use_cases/UC-*.md`, `test_cases/TC-*.md`이며 `processes/*.bpmn`은 선택 사항입니다. 구조 헤딩과 상태 토큰은 영어로 유지하고 본문은 한국어로 작성할 수 있습니다. 구조 검사가 한국어 의미의 완전성을 보장하지는 않습니다. 구조 검사기는 `aiwf-core/skills/spec-review/scripts/spec_lint.py`입니다.
 
