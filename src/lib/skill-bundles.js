@@ -20,6 +20,7 @@ const marketplaceFile = join(repositoryRoot, '.claude-plugin', 'marketplace.json
 
 const CORE_PLUGIN = 'aiwf-core';
 const WORKFLOW_PLUGIN = 'aiwf-spec';
+const DESIGN_PLUGIN = 'aiwf-design';
 const DELEGATE_PLUGIN = 'aiwf-delegate-';
 
 // Installed skill folders and plugin names are lowercase `aiwf-` identifiers, so the
@@ -27,10 +28,12 @@ const DELEGATE_PLUGIN = 'aiwf-delegate-';
 const SAFE_AIWF_NAME = /^aiwf-[a-z0-9-]+$/;
 
 // Installed names: core, workflow and delegate skills share the `aiwf-` prefix;
-// a stack adds its own id (for example `aiwf-nestjs-nextjs-implement`).
+// a stack adds its own id (for example `aiwf-nestjs-nextjs-implement`) and the
+// design add-on keeps its plugin name (`aiwf-design-workflow`).
 function pluginKind(name) {
   if (name === CORE_PLUGIN) { return 'core'; }
   if (name === WORKFLOW_PLUGIN) { return 'workflow'; }
+  if (name === DESIGN_PLUGIN) { return 'design'; }
   if (name.startsWith(DELEGATE_PLUGIN)) { return 'delegate'; }
   if (name.startsWith('aiwf-')) { return 'stack'; }
   throw new Error(`Unsupported AIWF plugin name in the marketplace: ${name}`);
@@ -43,8 +46,12 @@ function pluginId(name, kind) {
 }
 
 function installedPrefix(kind, id) {
-  return kind === 'stack' ? `aiwf-${id}-` : 'aiwf-';
+  if (kind === 'stack') { return `aiwf-${id}-`; }
+  return kind === 'design' ? `${DESIGN_PLUGIN}-` : 'aiwf-';
 }
+
+// Stack and design skill names are local to their plugin; the rest share one namespace.
+const hasLocalNames = kind => kind === 'stack' || kind === 'design';
 
 function readMarketplace() {
   const marketplace = JSON.parse(readFileSync(marketplaceFile, 'utf8'));
@@ -118,12 +125,14 @@ export function listSkillBundles() {
  * Resolve a selection descriptor into bundles.
  *
  * Core is always included and the workflow bundle is included unless
- * `coreOnly` is set. Stacks and delegates are opt-in: only the requested stack
- * ids (any number) and explicit delegate ids are returned. Unknown ids throw.
+ * `coreOnly` is set. Stacks, delegates and the design add-on are opt-in: only
+ * the requested stack ids (any number), explicit delegate ids and `design: true`
+ * are returned. Unknown ids throw.
  */
-export function selectSkillBundles({ stacks = [], delegates = [], coreOnly = false } = {}) {
+export function selectSkillBundles({ stacks = [], delegates = [], coreOnly = false, design = false } = {}) {
   if (!Array.isArray(stacks)) { throw new Error('stacks must be an array of stack ids'); }
   if (!Array.isArray(delegates)) { throw new Error('delegates must be an array of delegate ids'); }
+  if (typeof design !== 'boolean') { throw new Error('design must be true or false'); }
   const catalog = listSkillBundles();
   const stackIds = catalog.filter(bundle => bundle.kind === 'stack').map(bundle => bundle.id);
   const delegateIds = catalog.filter(bundle => bundle.kind === 'delegate').map(bundle => bundle.id);
@@ -140,6 +149,7 @@ export function selectSkillBundles({ stacks = [], delegates = [], coreOnly = fal
     if (bundle.kind === 'workflow') { return !coreOnly; }
     if (bundle.kind === 'stack') { return wantedStacks.has(bundle.id); }
     if (bundle.kind === 'delegate') { return wantedDelegates.has(bundle.id); }
+    if (bundle.kind === 'design') { return design; }
     return false;
   });
 }
@@ -175,13 +185,30 @@ function markdownFiles(directory) {
 function sharedSkillMapping() {
   const mapping = new Map();
   for (const bundle of listSkillBundles()) {
-    if (bundle.kind === 'stack') { continue; }
+    if (hasLocalNames(bundle.kind)) { continue; }
     for (const skill of bundle.skills) { mapping.set(skill.name, skill.installedName); }
   }
   return mapping;
 }
 
-function rewriteInstalledMarkdown(destination, entry, entries, shared) {
+// Qualified Claude Code references such as `aiwf-design:trace` map to installed names.
+// Design skills name core and workflow skills this way too; elsewhere `/aiwf-core:<skill>`
+// is explanatory host text, so only design references are rewritten there.
+function qualifiedSkillMapping() {
+  const mapping = new Map();
+  for (const bundle of listSkillBundles()) {
+    if (!['core', 'workflow', 'design'].includes(bundle.kind)) { continue; }
+    for (const skill of bundle.skills) { mapping.set(`${bundle.name}:${skill.name}`, skill.installedName); }
+  }
+  return mapping;
+}
+
+function qualifiedReferences(entry, qualified) {
+  const keys = [...qualified.keys()].filter(key => entry.bundle.kind === 'design' || key.startsWith(`${DESIGN_PLUGIN}:`));
+  return keys.length ? new RegExp(`(?<![\\w-])(${keys.join('|')})(?![\\w-])`, 'g') : null;
+}
+
+function rewriteInstalledMarkdown(destination, entry, entries, shared, qualified) {
   // Selected stack-local names overlay the shared mapping and stay isolated per plugin.
   const mapping = new Map(shared);
   for (const item of entries) {
@@ -189,6 +216,7 @@ function rewriteInstalledMarkdown(destination, entry, entries, shared) {
   }
   const commands = new RegExp(`(?<![.\\w-])/(${[...mapping.keys()].join('|')})(?![\\w-])`, 'g');
   const namedSkills = new RegExp('`(' + [...mapping.keys()].join('|') + ')`', 'g');
+  const qualifiedRefs = qualifiedReferences(entry, qualified);
   for (const file of markdownFiles(destination)) {
     const original = readFileSync(file, 'utf8');
     let text = original;
@@ -197,6 +225,7 @@ function rewriteInstalledMarkdown(destination, entry, entries, shared) {
     }
     text = text.replace(commands, (_, name) => `/${mapping.get(name)}`)
       .replace(namedSkills, (_, name) => '`' + mapping.get(name) + '`');
+    if (qualifiedRefs) { text = text.replace(qualifiedRefs, (_, ref) => qualified.get(ref)); }
     if (text !== original) {
       text += '\n<!-- AIWF installation modification: prefixed skill names and command references throughout bundled Markdown. -->\n';
       writeFileSync(file, text);
@@ -216,7 +245,7 @@ function assertVacantDestinations(destinations) {
   }
 }
 
-function copyEntries(skillsDirectory, entries, shared) {
+function copyEntries(skillsDirectory, entries, shared, qualified) {
   mkdirSync(skillsDirectory, { recursive: true });
   for (const entry of entries) {
     const destination = join(skillsDirectory, entry.installedName);
@@ -227,7 +256,7 @@ function copyEntries(skillsDirectory, entries, shared) {
         cpSync(join(entry.plugin, resource), join(destination, resource), { recursive: true, errorOnExist: true, force: false });
       }
     }
-    rewriteInstalledMarkdown(destination, entry, entries, shared);
+    rewriteInstalledMarkdown(destination, entry, entries, shared, qualified);
   }
 }
 
@@ -288,6 +317,6 @@ export function planSkillBundles(directory, selection) {
 export function stageSkillBundles(directory, selection) {
   const { skillsDirectory, entries, planned } = planStaging(directory, selection);
   assertVacantDestinations(planned.map(entry => entry.directory));
-  copyEntries(skillsDirectory, entries, sharedSkillMapping());
+  copyEntries(skillsDirectory, entries, sharedSkillMapping(), qualifiedSkillMapping());
   return planned;
 }

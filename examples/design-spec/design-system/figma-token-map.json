@@ -1,0 +1,22 @@
+{
+  "fileKey": "ExampleFileKey0001",
+  "spacingBase": "--spacing",
+  "variables": {
+    "white": { "skip": "primitive; reached through 01 · Color aliases" },
+    "gray/900": { "skip": "primitive; reached through 01 · Color aliases" },
+    "surface/card": { "css": "--color-surface-card" },
+    "text/primary": { "token": "color.text.primary" },
+    "radius/md": { "css": "--radius-md" },
+    "space/2": { "spacing": 2 }
+  },
+  "textStyles": {
+    "Text/Body": { "utility": "type-body" },
+    "Text/Title": { "utility": "type-title" }
+  },
+  "effectStyles": {
+    "Effect/Card": { "css": "--shadow-card" }
+  },
+  "paintStyles": {
+    "Surface/Header Gradient": { "token": "gradient.header" }
+  }
+}

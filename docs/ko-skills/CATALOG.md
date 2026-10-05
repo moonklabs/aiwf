@@ -1,6 +1,6 @@
 # 전체 한글 검토 문서 목록
 
-41개 저장소 스킬, 플러그인 README 9개, 로컬 2개 스킬과 연결된 참조·규칙·프롬프트를 포함한 80개 문서다. 기술 용어와 실행 예제는 원문 형식을 유지한다. 검토 상태와 파일 버전의 기준은 [관리 목록](manifest.json)이며, 목록 작성은 휴먼 승인을 뜻하지 않는다.
+46개 저장소 스킬, 플러그인 README 10개, 로컬 2개 스킬과 연결된 참조·규칙·프롬프트·템플릿을 포함한 95개 문서다. 기술 용어와 실행 예제는 원문 형식을 유지한다. 검토 상태와 파일 버전의 기준은 [관리 목록](manifest.json)이며, 목록 작성은 휴먼 승인을 뜻하지 않는다.
 
 [검토 시작점](README.md)으로 돌아갈 수 있다. 원문과 번역을 나란히 읽고 지시의 의미와 제한을 검토한다. 변경 시 해당 목록 링크도 함께 갱신한다.
 
@@ -12,6 +12,7 @@
 | --- | --- | --- |
 | `aiwf-core` | [읽기](aiwf-core/README.ko.md) | [비교](../../plugins/aiwf-core/README.md) |
 | `aiwf-spec` | [읽기](aiwf-spec/README.ko.md) | [비교](../../plugins/aiwf-spec/README.md) |
+| `aiwf-design` | [읽기](aiwf-design/README.ko.md) | [비교](../../plugins/aiwf-design/README.md) |
 | `aiwf-vaadin-jooq` | [읽기](aiwf-vaadin-jooq/README.ko.md) | [비교](../../plugins/aiwf-vaadin-jooq/README.md) |
 | `aiwf-angular-jpa` | [읽기](aiwf-angular-jpa/README.ko.md) | [비교](../../plugins/aiwf-angular-jpa/README.md) |
 | `aiwf-blazor-dotnet` | [읽기](aiwf-blazor-dotnet/README.ko.md) | [비교](../../plugins/aiwf-blazor-dotnet/README.md) |
@@ -86,6 +87,25 @@
 | 문서 | 한글 검토본 | 원문 |
 | --- | --- | --- |
 | `skills/delegate-codex/SKILL.ko.md` | [읽기](aiwf-delegate-codex/skills/delegate-codex/SKILL.ko.md) | [비교](../../plugins/aiwf-delegate-codex/skills/delegate-codex/SKILL.md) |
+
+## aiwf-design
+
+| 문서 | 한글 검토본 | 원문 |
+| --- | --- | --- |
+| `skills/apply/SKILL.ko.md` | [읽기](aiwf-design/skills/apply/SKILL.ko.md) | [비교](../../plugins/aiwf-design/skills/apply/SKILL.md) |
+| `skills/figma-sync/SKILL.ko.md` | [읽기](aiwf-design/skills/figma-sync/SKILL.ko.md) | [비교](../../plugins/aiwf-design/skills/figma-sync/SKILL.md) |
+| `skills/review/SKILL.ko.md` | [읽기](aiwf-design/skills/review/SKILL.ko.md) | [비교](../../plugins/aiwf-design/skills/review/SKILL.md) |
+| `skills/review/references/lint-codes.ko.md` | [읽기](aiwf-design/skills/review/references/lint-codes.ko.md) | [비교](../../plugins/aiwf-design/skills/review/references/lint-codes.md) |
+| `skills/trace/SKILL.ko.md` | [읽기](aiwf-design/skills/trace/SKILL.ko.md) | [비교](../../plugins/aiwf-design/skills/trace/SKILL.md) |
+| `skills/workflow/SKILL.ko.md` | [읽기](aiwf-design/skills/workflow/SKILL.ko.md) | [비교](../../plugins/aiwf-design/skills/workflow/SKILL.md) |
+| `skills/workflow/references/templates/design-spec/AGENTS.ko.md` | [읽기](aiwf-design/skills/workflow/references/templates/design-spec/AGENTS.ko.md) | [비교](../../plugins/aiwf-design/skills/workflow/references/templates/design-spec/AGENTS.md) |
+| `skills/workflow/references/templates/design-spec/HANDOFF.ko.md` | [읽기](aiwf-design/skills/workflow/references/templates/design-spec/HANDOFF.ko.md) | [비교](../../plugins/aiwf-design/skills/workflow/references/templates/design-spec/HANDOFF.md) |
+| `skills/workflow/references/templates/design-spec/README.ko.md` | [읽기](aiwf-design/skills/workflow/references/templates/design-spec/README.ko.md) | [비교](../../plugins/aiwf-design/skills/workflow/references/templates/design-spec/README.md) |
+| `skills/workflow/references/templates/design-spec/decisions.ko.md` | [읽기](aiwf-design/skills/workflow/references/templates/design-spec/decisions.ko.md) | [비교](../../plugins/aiwf-design/skills/workflow/references/templates/design-spec/decisions.md) |
+| `skills/workflow/references/templates/design-spec/design-system/README.ko.md` | [읽기](aiwf-design/skills/workflow/references/templates/design-spec/design-system/README.ko.md) | [비교](../../plugins/aiwf-design/skills/workflow/references/templates/design-spec/design-system/README.md) |
+| `skills/workflow/references/templates/design-spec/figma/figma-map.ko.md` | [읽기](aiwf-design/skills/workflow/references/templates/design-spec/figma/figma-map.ko.md) | [비교](../../plugins/aiwf-design/skills/workflow/references/templates/design-spec/figma/figma-map.md) |
+| `skills/workflow/references/templates/design-spec/traceability.ko.md` | [읽기](aiwf-design/skills/workflow/references/templates/design-spec/traceability.ko.md) | [비교](../../plugins/aiwf-design/skills/workflow/references/templates/design-spec/traceability.md) |
+| `skills/workflow/references/templates/plan.ko.md` | [읽기](aiwf-design/skills/workflow/references/templates/plan.ko.md) | [비교](../../plugins/aiwf-design/skills/workflow/references/templates/plan.md) |
 
 ## aiwf-electron-react
 

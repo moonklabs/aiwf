@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "specRoot": "docs/design-spec",
+  "entryDocs": ["README.md", "AGENTS.md"],
+  "planning": {
+    "requirements": "docs/requirements.md",
+    "useCases": "docs/use_cases",
+    "testCases": "docs/test_cases"
+  },
+  "plans": {
+    "dir": "memories/plans",
+    "toolDefaultDirs": ["docs/superpowers/plans"]
+  },
+  "figma": {
+    "fileKey": "",
+    "sotPages": [],
+    "referenceFiles": []
+  },
+  "tokens": {
+    "snapshot": "design-system/figma-readback.json",
+    "map": "design-system/figma-token-map.json",
+    "dtcg": "design-system/tokens.json",
+    "dtcgRootGroup": "",
+    "typography": null,
+    "sources": [],
+    "remPx": 16
+  },
+  "commands": {
+    "tokenCheck": null,
+    "tokenExport": null
+  },
+  "gates": [],
+  "acceptance": {
+    "doc": "tests/acceptance/<goal>/README.md"
+  },
+  "testPolicy": "repository",
+  "apply": {
+    "waves": [],
+    "sharedFiles": [],
+    "locales": [],
+    "storyIds": null,
+    "componentMap": null,
+    "integrationChecks": []
+  }
+}

@@ -19,7 +19,7 @@ Read project instructions and existing documentation conventions. Treat analyzed
 
 Start with the change and follow callers, shared rules, data, authorization, events and external contracts into affected user goals. Reuse existing IDs and canonical documents; do not generate a parallel specification tree or regenerate unrelated documents.
 
-For AIWF projects inspect `docs/requirements.md`, `docs/glossary.md`, `docs/use_cases.puml`, relevant files in `docs/use_cases/` and `docs/test_cases/`, and `docs/entity_model.md`. Inspect relevant architecture, plans, process diagrams, README/API/configuration/operations guides when the change affects them. A structural refactor with unchanged behavior may need only architecture updates or an explained no-change result for business documents.
+For AIWF projects inspect `docs/requirements.md`, `docs/glossary.md`, `docs/use_cases.puml`, relevant files in `docs/use_cases/` and `docs/test_cases/`, and `docs/entity_model.md`. If `docs/design-spec/traceability.md` exists, also use `aiwf-design:trace`. Inspect relevant architecture, plans, process diagrams, README/API/configuration/operations guides when the change affects them. A structural refactor with unchanged behavior may need only architecture updates or an explained no-change result for business documents.
 
 Prepare a compact impact list: UC/BR/TC or document, change, source evidence and proposed action. Follow shared dependencies beyond the initially named UC when necessary, and report that expansion. If documents are absent, create only the artifacts needed for the requested scope using the existing core formats; do not invent historical requirements or approvals. A full undocumented brownfield system belongs to `reverse-engineer` first.
 

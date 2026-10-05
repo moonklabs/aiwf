@@ -21,7 +21,7 @@ test('methodology core is the primary independently installable package', () => 
 });
 
 test('methodology, optional delegation plugins, the authored stack and the spec CLI are distributed', () => {
-  const required = ['aiwf-core', 'aiwf-spec', 'aiwf-delegate-claude', 'aiwf-delegate-codex', 'aiwf-vaadin-jooq', 'aiwf-angular-jpa', 'aiwf-blazor-dotnet', 'aiwf-nestjs-nextjs', 'aiwf-electron-react'];
+  const required = ['aiwf-core', 'aiwf-spec', 'aiwf-design', 'aiwf-delegate-claude', 'aiwf-delegate-codex', 'aiwf-vaadin-jooq', 'aiwf-angular-jpa', 'aiwf-blazor-dotnet', 'aiwf-nestjs-nextjs', 'aiwf-electron-react'];
   const market = json('.claude-plugin/marketplace.json');
   const marketNames = market.plugins.map(p => p.name);
   const pluginDirs = readdirSync(root + 'plugins').sort();

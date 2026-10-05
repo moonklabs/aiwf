@@ -239,3 +239,54 @@ test('installer CLI accepts stack and delegate selections and rejects invalid op
   assert.equal(run(['--delegate', 'invalid']).status, 1);
   assert.equal(existsSync(join(root, '.agents')), false);
 });
+
+test('design skills are opt-in, keep the aiwf-design- prefix and run their bundled checks', t => {
+  const root = project(t);
+  assert.equal(installSpecSkills(root, { dryRun: true }).destinations.some(path => /aiwf-design-/.test(path)), false);
+  const result = installSpecSkills(root, { design: true });
+  const design = ['apply', 'figma-sync', 'review', 'trace', 'workflow'].map(name => `aiwf-design-${name}`);
+  assert.equal(result.installed.length, 9 + design.length);
+  const skills = join(root, '.agents/skills');
+  for (const name of design) {
+    const text = readFileSync(join(skills, name, 'SKILL.md'), 'utf8');
+    assert.match(text, new RegExp(`^name: ${name}$`, 'm'));
+    assert.doesNotMatch(text, /aiwf-(design|core|spec):[a-z]/, `qualified reference left in ${name}`);
+    assert.match(readFileSync(join(skills, name, 'LICENSE'), 'utf8'), /Apache License/);
+  }
+  const router = readFileSync(join(skills, 'aiwf-design-workflow/SKILL.md'), 'utf8');
+  assert.match(router, /<skills>\/aiwf-design-review\/scripts\/design_spec_lint\.mjs/);
+  assert.match(router, /aiwf-design-figma-sync/);
+  assert.match(router, /aiwf-sync-docs/);
+  // The shared workflow keeps its own name and explanatory Claude Code text.
+  const workflow = readFileSync(join(skills, 'aiwf-workflow/SKILL.md'), 'utf8');
+  assert.doesNotMatch(workflow, /aiwf-design-workflow/);
+  assert.match(workflow, /\/aiwf-core:requirements/);
+  assert.match(workflow, /`aiwf-design-trace`/);
+  assert.match(readFileSync(join(skills, 'aiwf-sync-docs/SKILL.md'), 'utf8'), /`aiwf-design-trace`/);
+  assert.match(readFileSync(join(skills, 'aiwf-design-workflow/references/templates/design-spec/traceability.md'), 'utf8'), /^## 상태 값$/m);
+  for (const [skill, script] of [['aiwf-design-review', 'design_spec_lint.mjs'], ['aiwf-design-figma-sync', 'merge_readback.mjs'], ['aiwf-design-figma-sync', 'check_figma_tokens.mjs']]) {
+    const check = spawnSync(process.execPath, [join(skills, skill, 'scripts', script), '--self-test'], { encoding: 'utf8' });
+    assert.equal(check.status, 0, `${skill}/${script}: ${check.stdout}${check.stderr}`);
+  }
+});
+
+test('design conflict preserves the existing skill and installs nothing', t => {
+  const root = project(t);
+  const existing = join(root, '.agents/skills/aiwf-design-trace');
+  mkdirSync(existing, { recursive: true });
+  writeFileSync(join(existing, 'SKILL.md'), 'custom trace');
+  assert.throws(() => installSpecSkills(root, { design: true }), /already exists/);
+  assert.equal(readFileSync(join(existing, 'SKILL.md'), 'utf8'), 'custom trace');
+  assert.equal(existsSync(join(root, '.agents/skills/aiwf-workflow')), false);
+  assert.throws(() => installSpecSkills(root, { design: 'yes' }), /design must be true or false/);
+});
+
+test('installer CLI accepts --design once', t => {
+  const root = project(t);
+  const run = args => spawnSync(process.execPath, ['scripts/install-spec-skills.mjs', '--project', root, ...args], { encoding: 'utf8' });
+  const dry = run(['--design', '--dry-run']);
+  assert.equal(dry.status, 0, dry.stderr);
+  assert.equal(JSON.parse(dry.stdout).destinations.filter(path => /aiwf-design-/.test(path)).length, 5);
+  assert.equal(run(['--design', '--design']).status, 1);
+  assert.equal(existsSync(join(root, '.agents')), false);
+});

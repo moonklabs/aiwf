@@ -1,12 +1,13 @@
 # AIWF 스킬 인벤토리
 
-작성: 2026-10-02, 2026-10-03 core 분리, 2026-10-04 문서 동기화 스킬 반영, 2026-10-05 안내 문구 정리 및 Electron/React 스택 추가.
+작성: 2026-10-02, 2026-10-03 core 분리, 2026-10-04 문서 동기화 스킬 반영, 2026-10-05 안내 문구 정리 및 Electron/React 스택·design-spec 애드온 추가.
 
 ## 요약
 
-- 기존 방법론·스택 스킬 31개 + Electron/React 6개 + `workflow`, `sync-docs` 2개 + 선택 위임 스킬 2개 = 총 41개 제공.
+- 기존 방법론·스택 스킬 31개 + Electron/React 6개 + `workflow`, `sync-docs` 2개 + design-spec 5개 + 선택 위임 스킬 2개 = 총 46개 제공.
 - 방법론 core는 `plugins/aiwf-core`(v2.19.0 스킬 7개).
-- AIWF 래퍼는 `plugins/aiwf-spec`(`workflow`, `sync-docs` 2개, 0.2.0).
+- AIWF 래퍼는 `plugins/aiwf-spec`(`workflow`, `sync-docs` 2개, 0.3.0).
+- design-spec 애드온은 `plugins/aiwf-design`(`workflow`, `figma-sync`, `apply`, `trace`, `review` 5개, 0.1.0, `aiwf-core` 선행). 기본 설치에는 포함되지 않고 `--design`으로 추가하며 설치 이름은 `aiwf-design-<name>`이다.
 - 선택 위임 애드온은 `plugins/aiwf-delegate-claude`와 `plugins/aiwf-delegate-codex`에 각각 스킬 1개를 둔다. 기본 설치에는 포함되지 않는다.
 - stack 5개 플러그인: 30개 (vaadin-jooq 8, angular-jpa 6, blazor-dotnet 5, nestjs-nextjs 5, electron-react 6).
 - 원본(vendored)은 upstream 바이트 그대로 두고 이름·명령 참조 변환은 설치본에만 적용한다.
@@ -37,6 +38,18 @@ core는 방법론 스킬 7개와 참조 문서, Python 검사기를 제공한다
 |---|---|---|
 | `aiwf-workflow` | (AIWF) | 자체 |
 | `aiwf-sync-docs` | (AIWF) | 개발 후 영향 문서 동기화 |
+
+## Design-spec: plugins/aiwf-design
+
+디자이너 작업 공간(`docs/design-spec`)과 기획 문서·Figma·코드 사이의 작업을 역할별로 나눈 자체 스킬 5개를 담는다. `aiwf-core`를 선행 플러그인으로 선언하고 `LICENSE`/`NOTICE`(Apache-2.0)를 유지하며 `UPSTREAM.json`은 두지 않는다. 기본 설치에는 포함되지 않고 `--design`으로 추가한다. 설치본은 `aiwf-design:<name>` 참조와 `<skills>/<name>/` 스크립트 경로를 설치 이름으로 바꾼다.
+
+| 설치 이름 (Codex) | Claude Code | 구분 |
+|---|---|---|
+| `aiwf-design-workflow` | `/aiwf-design:workflow` | 역할 라우터, 템플릿으로 시작 |
+| `aiwf-design-figma-sync` | `/aiwf-design:figma-sync` | 읽기 전용 readback·병합·토큰 대조 |
+| `aiwf-design-apply` | `/aiwf-design:apply` | Figma 디자인을 코드에 적용 |
+| `aiwf-design-trace` | `/aiwf-design:trace` | 기획 ↔ 디자인 ↔ 구현 대응표 |
+| `aiwf-design-review` | `/aiwf-design:review` | 구조 lint와 판단 검사 |
 
 ## Optional delegates: plugins/aiwf-delegate-<target>
 

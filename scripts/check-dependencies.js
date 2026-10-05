@@ -28,4 +28,11 @@ for (const file of sources) {
     }
   }
 }
-console.log(`Dependency declarations and local imports checked in ${sources.length} Node source files.`);
+// Bundled skill scripts are copied into consuming projects, so they may use built-in modules only.
+const skillScripts = files(join(root, 'plugins/aiwf-design')).filter(file => /\/scripts\/[^/]+\.mjs$/.test(file));
+for (const file of skillScripts) {
+  for (const match of readFileSync(file, 'utf8').matchAll(/(?:\bfrom\s*|\bimport\s*\(?\s*|\brequire\s*\(\s*)['"]([^'"]+)['"]/g)) {
+    assert.ok(match[1].startsWith('.') ? existsSync(resolve(dirname(file), match[1])) : isBuiltin(match[1]), `Skill script must use built-in modules only: ${file}: ${match[1]}`);
+  }
+}
+console.log(`Dependency declarations and local imports checked in ${sources.length} Node source files; ${skillScripts.length} bundled skill scripts use built-in modules only.`);

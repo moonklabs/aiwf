@@ -1,0 +1,10 @@
+{
+  "name": "aiwf-design",
+  "version": "0.1.0",
+  "description": "AIWF design-spec workflow: role routing, read-only Figma token sync and design application, planning traceability and design-spec lint",
+  "author": {
+    "name": "moonklabs"
+  },
+  "license": "Apache-2.0",
+  "dependencies": ["aiwf-core"]
+}

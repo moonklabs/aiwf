@@ -55,7 +55,7 @@
     },
     {
       "name": "aiwf-spec",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "license_path": "plugins/aiwf-spec/LICENSE",
       "notice_path": "plugins/aiwf-spec/NOTICE",
       "origin": "AIWF 자체 workflow 및 sync-docs"
@@ -75,6 +75,13 @@
       "license_path": "plugins/aiwf-electron-react/LICENSE",
       "notice_path": "plugins/aiwf-electron-react/NOTICE",
       "origin": "AIWF 자체 Electron/React 에이전트 데스크톱 스택"
+    },
+    {
+      "name": "aiwf-design",
+      "version": "0.1.0",
+      "license_path": "plugins/aiwf-design/LICENSE",
+      "notice_path": "plugins/aiwf-design/NOTICE",
+      "origin": "AIWF 자체 design-spec 워크플로 플러그인"
     }
   ],
   "local_sources": [
@@ -623,16 +630,16 @@
       "scope": "repository",
       "source_group": "aiwf-spec",
       "review_status": "awaiting_review",
-      "source_sha256": "d5e95b583e7791618abb8b13f149cf74c2740e5b6a6055e323d55c3618495fbd",
-      "translation_sha256": "f0129fb9c4e7b798dd77f6070258ab1246496993b2584b026ce543aaaa404fb8"
+      "source_sha256": "2a494641613ffa9875c9bdb183c5872819f977d5152702a5e78816aebc7e7e38",
+      "translation_sha256": "fcee9c7dc9788a3f65535eb4a25e2ce16da8f312cc2d29fdf000243022641cba"
     },
     {
       "source": "plugins/aiwf-spec/skills/workflow/SKILL.md",
       "translation": "docs/ko-skills/aiwf-spec/skills/workflow/SKILL.ko.md",
       "scope": "repository",
       "source_group": "aiwf-spec",
-      "source_sha256": "910f26ea4bfe8f5a4dd6199d367932cab2a30fa4d468eb8a17f72a99e4d083ae",
-      "translation_sha256": "2ff6c06ff157cfa4c07cb85c9fcac2d3a24c1c682c8be445d32bf586df837ab3",
+      "source_sha256": "54a36680d58cd1250c3fce61fb8034c865b5ad596999a0ad6e7c7ae4f0f3ebd0",
+      "translation_sha256": "25dc70ac62aaf25ee98b273e1fb62d14f846d0e528d1eca1369e8e1dd8fc52d9",
       "review_status": "awaiting_review"
     },
     {
@@ -821,6 +828,141 @@
       "source_group": "aiwf-electron-react",
       "source_sha256": "daa7ce3d36956bef4efd991e6c231eeab5af8e29e1dcf4562035fe81485637cc",
       "translation_sha256": "6ffd3707c3f64a3cf71275eab72e5a820764eca4a9bc78e49cf27636d866e2f2",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-design/README.md",
+      "translation": "docs/ko-skills/aiwf-design/README.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-design",
+      "source_sha256": "7678e5bb327a854c0fd25565e823dc6504807d2939f063ef7fa85ebeb69f7f32",
+      "translation_sha256": "5639ab70116f3a0232080070b5682e6ce3ff874a2dd5ef710f0a6c06c99ae5bb",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-design/skills/apply/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-design/skills/apply/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-design",
+      "source_sha256": "5da5174bec44b2f180d08c77a09de8f97112917b1cb735423d6e4b03608e5044",
+      "translation_sha256": "0cf224d824fab475308ba45b5a9c62d2868e4d78bb7d4ce08ea7f1ba0ae8aad6",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-design/skills/figma-sync/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-design/skills/figma-sync/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-design",
+      "source_sha256": "0ad0e55041f5a5637f4fa5638ad9cc771d0f54be2ba81d93ab35af99b1cc8f26",
+      "translation_sha256": "006e112f74c1e7220cb6a9ee85d0126e7351f8efea390ccfc94ba4c41009ba25",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-design/skills/review/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-design/skills/review/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-design",
+      "source_sha256": "00b5d601ccfc9f290628e1f0f5dad5003433ee8c363a8e86b91cb4f3b4049033",
+      "translation_sha256": "8d82691fa1754a71aca200ffd646292ef5a7a4c550c0422a15d932de82bf69a2",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-design/skills/review/references/lint-codes.md",
+      "translation": "docs/ko-skills/aiwf-design/skills/review/references/lint-codes.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-design",
+      "source_sha256": "b36c68e6bfe8b296f2a71eba296c935222ee20eedcbbaf26ed19117990ec6e76",
+      "translation_sha256": "c41f68514f56c61657e8ae60e07925bd70b2c4a6cdbdad4ccbb6d613380826d8",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-design/skills/trace/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-design/skills/trace/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-design",
+      "source_sha256": "3b7a087e56309f1bab93af0349797915e13c376a7b3b86f779b5513439f19707",
+      "translation_sha256": "ead552a9ede2710cd64901fb1f02a57f2df98b9b7ddf15fd622be11afdba20b9",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-design/skills/workflow/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-design/skills/workflow/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-design",
+      "source_sha256": "4fb461e877722859f2d5a24b3938e232b71a42dd792686ccb4c6355abd728262",
+      "translation_sha256": "1df4486c355d66f7a6888ed516b5a3a0cde7e15629eebe087e84a65053bcd7af",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-design/skills/workflow/references/templates/design-spec/AGENTS.md",
+      "translation": "docs/ko-skills/aiwf-design/skills/workflow/references/templates/design-spec/AGENTS.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-design",
+      "source_sha256": "a68f85f3cc4fec70ec75ceab37e7c8ebf8097e0f6963b354e96969002700e15b",
+      "translation_sha256": "aefd1aad108a4a87322aa6bf6da8a2e98a243c4149cb0297261cdd4d8fc57ec3",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-design/skills/workflow/references/templates/design-spec/HANDOFF.md",
+      "translation": "docs/ko-skills/aiwf-design/skills/workflow/references/templates/design-spec/HANDOFF.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-design",
+      "source_sha256": "aeaf3ba36a8a0a2c23495bd27ca951a3902f1c30fb08dbcd6fca505e5b9e8301",
+      "translation_sha256": "a19a9db3a8f91ff3f77b1f9c5005326a5b953b3fb6f497282870cdf8964cbabb",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-design/skills/workflow/references/templates/design-spec/README.md",
+      "translation": "docs/ko-skills/aiwf-design/skills/workflow/references/templates/design-spec/README.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-design",
+      "source_sha256": "ea78ec4bf0682f48e902b8a186dcb786a7928fc1e84e066f2f373e8f7e6fba80",
+      "translation_sha256": "e626d9bf4b1453b69d2666dc9dc5622a655f9f46dfd944f08fc07e940d19bb04",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-design/skills/workflow/references/templates/design-spec/decisions.md",
+      "translation": "docs/ko-skills/aiwf-design/skills/workflow/references/templates/design-spec/decisions.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-design",
+      "source_sha256": "e883ea6d984b81c3111e74f3f9caada4364d68cf26c578f686e1ab3764d0cbf4",
+      "translation_sha256": "16a87e6b6872e012259250bb7510bdccad2549631d1f6d89b1757182d8affea3",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-design/skills/workflow/references/templates/design-spec/design-system/README.md",
+      "translation": "docs/ko-skills/aiwf-design/skills/workflow/references/templates/design-spec/design-system/README.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-design",
+      "source_sha256": "0c5c7403093c1ca68f2ccf61887b7d90dcf8644bd1195e3c91320a50f43c95dc",
+      "translation_sha256": "c8c72a41b822a713440f4e62ff8eb20fde73e32edc443eaa51fd78f6e90d522b",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-design/skills/workflow/references/templates/design-spec/figma/figma-map.md",
+      "translation": "docs/ko-skills/aiwf-design/skills/workflow/references/templates/design-spec/figma/figma-map.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-design",
+      "source_sha256": "e196b7a0f2721ce4d1ef032ffc294d0158f09264c08c7bf6a8dcdcbbd1e364f8",
+      "translation_sha256": "be9d58702c2e208f818ab583044fdd4fcd6bb8d4a0fbb6180a3782cbbce2070d",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-design/skills/workflow/references/templates/design-spec/traceability.md",
+      "translation": "docs/ko-skills/aiwf-design/skills/workflow/references/templates/design-spec/traceability.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-design",
+      "source_sha256": "5f4f4bb977643dd7c23288cd84b00325d25a4739a4776b8169a0c39265217e77",
+      "translation_sha256": "ce0ab4c83e7a630cf9d640431e2d6cda98b0197712e1f65aa59f4395ae61be3f",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-design/skills/workflow/references/templates/plan.md",
+      "translation": "docs/ko-skills/aiwf-design/skills/workflow/references/templates/plan.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-design",
+      "source_sha256": "66da138bbfab72d631502a703cbdeca949dc6620e5962aa2515301a4765076a7",
+      "translation_sha256": "219b4164f4ce8cd81e2e66899c507d8894244d4011aa9e748e443d5361753753",
       "review_status": "awaiting_review"
     }
   ]

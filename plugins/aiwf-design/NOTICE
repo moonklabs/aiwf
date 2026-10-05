@@ -1,0 +1,9 @@
+AIWF Design
+Copyright 2026 moonklabs
+
+This plugin contains the design-spec skills, scripts and templates of the
+AI Workflow Framework (AIWF). It was ported from design-spec skills developed
+by moonklabs in one of its application repositories (source commit 7aada8d5)
+and generalized to read project values from a design-spec configuration file.
+
+Licensed under the Apache License, Version 2.0; see LICENSE.

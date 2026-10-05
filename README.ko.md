@@ -37,9 +37,12 @@ aiwf status
 
 # 위임은 선택 사항이며 나중에 기존 구성에 추가할 수 있다.
 aiwf install --agent codex --stack electron-react --delegate claude codex
+
+# design-spec 스킬도 선택 사항이다.
+aiwf install --agent codex --design
 ```
 
-대화형 터미널의 `aiwf install`은 호스트·선택 스택·위임을 묻는다. 자동 실행에서는 `--agent`를 지정한다. 기본 추천 구성은 core와 workflow/문서 동기화이며, `--core-only`로 core만 선택할 수 있다. `--stack`은 `aiwf list`에 표시된 스택을 여러 개 선택할 수 있다. 스킬은 현재 프로젝트에 설치하며, 다른 프로젝트는 `--project /path/to/project`, 사용자 범위는 `--global`로 지정한다. **CLI의 npm 전역 설치와 스킬의 전역 설치는 별개다.**
+대화형 터미널의 `aiwf install`은 호스트·선택 스택·위임·design-spec 스킬 포함 여부를 묻는다. 자동 실행에서는 `--agent`를 지정한다. 기본 추천 구성은 core와 workflow/문서 동기화이며, `--core-only`로 core만 선택할 수 있다. `--stack`은 `aiwf list`에 표시된 스택을 여러 개 선택할 수 있다. 스킬은 현재 프로젝트에 설치하며, 다른 프로젝트는 `--project /path/to/project`, 사용자 범위는 `--global`로 지정한다. **CLI의 npm 전역 설치와 스킬의 전역 설치는 별개다.**
 
 AIWF는 플러그인 조합과 의존성을 계산하고 완전한 참조 자료와 `aiwf-` 이름을 준비한다. 실제 설치는 버전을 고정한 공식 skills CLI가 호스트·스킬·`--copy`를 지정해 수행한다. skills CLI를 따로 전역 설치하거나 실행 때 `npx`로 내려받을 필요가 없다. Codex의 프로젝트·사용자 스킬은 `.agents/skills`, Claude 프로젝트 스킬은 `.claude/skills`로 배치하며 Claude 사용자 범위는 `CLAUDE_CONFIG_DIR`를 따른다. [설치 설계와 검증](docs/modernization/CLI-INSTALLATION-REVIEW.ko.md)을 참고한다.
 
@@ -87,12 +90,13 @@ npx skills add https://github.com/moonklabs/aiwf --skill delegate-codex --agent 
 
 ## 플러그인 구성
 
-AIWF는 총 41개 스킬을 제공한다. `aiwf-core`의 방법론 스킬 7개, 기술 스택 5종의 구현·테스트 스킬 30개, `aiwf-spec`의 `workflow`·`sync-docs`, 선택 위임 스킬 2개로 구성된다.
+AIWF는 총 46개 스킬을 제공한다. `aiwf-core`의 방법론 스킬 7개, 기술 스택 5종의 구현·테스트 스킬 30개, `aiwf-spec`의 `workflow`·`sync-docs`, `aiwf-design`의 design-spec 스킬 5개, 선택 위임 스킬 2개로 구성된다.
 
 | 플러그인 | 역할 | 내용 |
 |---|---|---|
 | `aiwf-core` | 방법론 core (필수) | 방법론 스킬 7개 (2.19.0) |
 | `aiwf-spec` | AIWF 래퍼 (선택) | AIWF `workflow`와 `sync-docs` |
+| `aiwf-design` | design-spec 애드온 (선택, `aiwf-core` 필요) | `workflow`, `figma-sync`, `apply`, `trace`, `review` (0.1.0) |
 | `aiwf-delegate-claude` | 선택 위임 애드온 | `delegate-claude` |
 | `aiwf-delegate-codex` | 선택 위임 애드온 | `delegate-codex` |
 | `aiwf-vaadin-jooq` | stack | 스킬 8개 (2.20.0) |
@@ -105,7 +109,9 @@ Electron 에이전트 데스크톱 앱은 [Electron/React 안내 원문](plugins
 
 설치는 완전한 스킬 폴더의 파일 복사이며 네이티브 Codex 서브에이전트를 등록하지 않고 MCP도 자동 구성하지 않는다. `agents/uc-coverage.md` 같은 에이전트 프롬프트는 리소스로만 복사되고, 호스트 매핑은 `workflow` 스킬이 설명한다. 이름·개수·유지보수 절차는 [SKILLS.ko.md](docs/modernization/SKILLS.ko.md)에 정리했다.
 
-Claude Code에서는 이 저장소를 marketplace로 등록하고 필요한 플러그인(`aiwf-core`, `aiwf-spec`, `aiwf-<stack>`)을 설치한 뒤 `/aiwf-core:use-case-spec`, `/aiwf-spec:workflow`, `/aiwf-nestjs-nextjs:implement`처럼 플러그인 이름으로 한정해 호출한다.
+디자이너가 운영하는 디자인 작업 공간은 [design-spec 안내 원문](plugins/aiwf-design/README.md)과 [한글 검토본](docs/ko-skills/aiwf-design/README.ko.md)을 참고한다. 세션마다 역할(디자이너 작업·동기화·적용·추적·검토)을 하나로 정하고, 디자이너 작업 밖에서는 Figma를 읽기 전용으로 둔다. Figma 토큰을 DTCG 토큰과 대조하고, 기획 변경을 대응표에 추적하며, 작업 공간을 lint로 검사한다. 경로·Figma 파일 키·검사·게이트는 `docs/design-spec/design-spec.config.json`에서 읽는다. `aiwf install --design` 또는 checkout 설치기의 `--design`은 다섯 스킬을 `aiwf-design-<name>`으로 추가한다. [examples/design-spec](examples/design-spec/README.md)은 lint와 토큰 대조를 통과하는 최소 프로젝트다.
+
+Claude Code에서는 이 저장소를 marketplace로 등록하고 필요한 플러그인(`aiwf-core`, `aiwf-spec`, `aiwf-<stack>`, `aiwf-design`)을 설치한 뒤 `/aiwf-core:use-case-spec`, `/aiwf-spec:workflow`, `/aiwf-nestjs-nextjs:implement`, `/aiwf-design:workflow`처럼 플러그인 이름으로 한정해 호출한다.
 
 ```text
 /plugin marketplace add moonklabs/aiwf
@@ -192,6 +198,7 @@ packet은 로그 본문과 SHA256, 명세 digest, 보고된 검사 결과를 보
 npm run test:spec
 npm run validate:spec-plugin
 npm run test:spec-upstream
+npm run test:design
 ```
 
 예전 설치기·언어/스프린트/페르소나/YOLO 명령·중복 스킬·레거시 플러그인과 문서는 제거했다. 새 npm 패키지는 공식 skills CLI를 사용하는 `aiwf`와 기존 `aiwf-spec`를 제공하며 `npm test`는 현재 회귀 검사를 실행한다. 예전 프레임워크와의 호환성은 종료했다. 명세 CLI 자체는 Node 기본 모듈만 사용한다.

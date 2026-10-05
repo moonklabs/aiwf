@@ -20,7 +20,7 @@ Copyright 2026 moonklabs. Apache-2.0 라이선스. 플러그인의 LICENSE와 NO
 
 변경에서 시작하여 호출자, 공유 규칙, 데이터, 권한, 이벤트와 외부 계약을 따라 영향받는 사용자 목표를 찾는다. 기존 ID와 표준 문서를 재사용한다. 병렬 명세 트리를 만들거나 관련 없는 문서를 다시 생성하지 않는다.
 
-AIWF 프로젝트에서는 `docs/requirements.md`, `docs/glossary.md`, `docs/use_cases.puml`, `docs/use_cases/`와 `docs/test_cases/`의 관련 파일, `docs/entity_model.md`를 살핀다. 변경의 영향이 있으면 관련 아키텍처, 계획, 프로세스 다이어그램, README/API/설정/운영 안내도 살핀다. 동작이 같은 구조 리팩터링은 아키텍처 갱신만 필요하거나 업무 문서에 대해 이유를 설명한 변경 없음 결과가 적절할 수 있다.
+AIWF 프로젝트에서는 `docs/requirements.md`, `docs/glossary.md`, `docs/use_cases.puml`, `docs/use_cases/`와 `docs/test_cases/`의 관련 파일, `docs/entity_model.md`를 살핀다. `docs/design-spec/traceability.md`가 있으면 `aiwf-design:trace`도 함께 쓴다. 변경의 영향이 있으면 관련 아키텍처, 계획, 프로세스 다이어그램, README/API/설정/운영 안내도 살핀다. 동작이 같은 구조 리팩터링은 아키텍처 갱신만 필요하거나 업무 문서에 대해 이유를 설명한 변경 없음 결과가 적절할 수 있다.
 
 간결한 영향 목록을 준비한다. UC/BR/TC 또는 문서, 변경, 소스 근거와 제안 조치를 담는다. 필요하면 처음 지정한 UC 밖의 공유 의존성도 추적하고 범위 확대를 보고한다. 문서가 없으면 기존 core 형식으로 요청 범위에 필요한 산출물만 만든다. 과거 요구사항이나 승인을 지어내지 않는다. 전체 시스템의 문서가 없는 브라운필드는 먼저 `reverse-engineer`로 다룬다.
 

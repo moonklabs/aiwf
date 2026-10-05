@@ -17,13 +17,14 @@ function rejectSymlink(path) {
   }
 }
 
-export function installSpecSkills(project, { dryRun = false, stack, delegates = [] } = {}) {
+export function installSpecSkills(project, { dryRun = false, stack, delegates = [], design = false } = {}) {
   if (stack !== undefined && !supportedStacks.includes(stack)) {
     throw new Error(`Unknown stack: ${stack}; choose ${supportedStacks.join(', ')}`);
   }
   if (!Array.isArray(delegates) || delegates.some(target => !supportedDelegates.includes(target))) {
     throw new Error(`Unknown delegate: choose ${supportedDelegates.join(', ')}`);
   }
+  if (typeof design !== 'boolean') { throw new Error('design must be true or false'); }
   delegates = [...new Set(delegates)];
   const root = resolve(project);
   rejectSymlink(root);
@@ -31,7 +32,7 @@ export function installSpecSkills(project, { dryRun = false, stack, delegates = 
     throw new Error(`Project directory does not exist: ${root}`);
   }
   const target = join(root, '.agents');
-  const selection = selectSkillBundles({ stacks: stack ? [stack] : [], delegates });
+  const selection = selectSkillBundles({ stacks: stack ? [stack] : [], delegates, design });
   if (dryRun) {
     return { dry_run: true, destinations: planSkillBundles(target, selection).map(entry => entry.directory) };
   }
@@ -44,6 +45,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     let project;
     let dryRun = false;
     let stack;
+    let design = false;
     const delegates = [];
     for (let index = 0; index < args.length; index++) {
       if (args[index] === '--project' && args[index + 1] && !args[index + 1].startsWith('--') && !project) {
@@ -54,13 +56,15 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
         stack = args[++index];
       } else if (args[index] === '--delegate' && args[index + 1] && !args[index + 1].startsWith('--')) {
         delegates.push(args[++index]);
+      } else if (args[index] === '--design' && !design) {
+        design = true;
       } else if (args[index] === '--help') {
-        console.log(`node scripts/install-spec-skills.mjs --project <existing-project> [--stack <${supportedStacks.join('|')}>] [--delegate <${supportedDelegates.join('|')}> ...] [--dry-run]`);
+        console.log(`node scripts/install-spec-skills.mjs --project <existing-project> [--stack <${supportedStacks.join('|')}>] [--delegate <${supportedDelegates.join('|')}> ...] [--design] [--dry-run]`);
         process.exit(0);
       } else { throw new Error(`Unknown or incomplete argument: ${args[index]}`); }
     }
     if (!project) { throw new Error('--project is required'); }
-    console.log(JSON.stringify(installSpecSkills(project, { dryRun, stack, delegates }), null, 2));
+    console.log(JSON.stringify(installSpecSkills(project, { dryRun, stack, delegates, design }), null, 2));
   } catch (error) {
     console.error(error.message);
     process.exitCode = 1;

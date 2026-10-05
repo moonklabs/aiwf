@@ -32,9 +32,12 @@ aiwf status
 
 # Delegation stays optional. Add it later without reinstalling unchanged skills:
 aiwf install --agent codex --stack electron-react --delegate claude codex
+
+# The design-spec skills are optional too:
+aiwf install --agent codex --design
 ```
 
-`aiwf install` asks for hosts, optional stacks and delegation in an interactive terminal. Automation specifies `--agent`. The recommended default is core plus workflow/document synchronization; `--core-only` selects just core. `--stack` accepts multiple choices from `aiwf list`. Skill scope defaults to the current project; use `--project /path/to/project` for another existing project or `--global` for user-level skills. Installing the CLI globally does not select global skill scope.
+`aiwf install` asks for hosts, optional stacks, delegation and the design-spec skills in an interactive terminal. Automation specifies `--agent`. The recommended default is core plus workflow/document synchronization; `--core-only` selects just core. `--stack` accepts multiple choices from `aiwf list`. Skill scope defaults to the current project; use `--project /path/to/project` for another existing project or `--global` for user-level skills. Installing the CLI globally does not select global skill scope.
 
 AIWF resolves the selected bundles and prepares complete resources with isolated `aiwf-` names. Its pinned official skills CLI performs installation with explicit hosts, names and `--copy`; no separate global skills install or runtime `npx` download is needed. Codex project/user skills go to `.agents/skills`; Claude project skills go to `.claude/skills`, and user skills respect `CLAUDE_CONFIG_DIR`. See the [installation design and verification](docs/modernization/CLI-INSTALLATION-REVIEW.ko.md).
 
@@ -81,12 +84,13 @@ These skills run only when invoked directly. Native delegation is used when the 
 
 ## Plugins
 
-AIWF provides 41 skills: seven methodology skills in `aiwf-core`, 30 implementation and testing skills across five stacks, `workflow` and `sync-docs` in `aiwf-spec`, and two optional delegation skills.
+AIWF provides 46 skills: seven methodology skills in `aiwf-core`, 30 implementation and testing skills across five stacks, `workflow` and `sync-docs` in `aiwf-spec`, five design-spec skills in `aiwf-design`, and two optional delegation skills.
 
 | Plugin | Role | Contents |
 |---|---|---|
 | `aiwf-core` | Methodology core (required) | 7 methodology skills (2.19.0) |
 | `aiwf-spec` | AIWF wrapper (optional) | AIWF `workflow` and `sync-docs` |
+| `aiwf-design` | Design-spec add-on (optional, requires `aiwf-core`) | `workflow`, `figma-sync`, `apply`, `trace`, `review` (0.1.0) |
 | `aiwf-delegate-claude` | Optional delegation add-on | `delegate-claude` |
 | `aiwf-delegate-codex` | Optional delegation add-on | `delegate-codex` |
 | `aiwf-vaadin-jooq` | Stack | 8 skills (2.20.0) |
@@ -97,9 +101,11 @@ AIWF provides 41 skills: seven methodology skills in `aiwf-core`, 30 implementat
 
 For Electron agent desktop apps, see the [Electron/React guide](plugins/aiwf-electron-react/README.md) and [Korean review copy](docs/ko-skills/aiwf-electron-react/README.ko.md). It extends core specifications with scaffolding, implementation, runtime adapters, UI/Electron tests and packaging. Agent execution stays in the selected Sally/PI/other adapter; AI Elements supplies UI. From this checkout, select `--stack electron-react` to install 15 skills including core and spec. The new stack is not included in the published `aiwf@0.4.0`.
 
+For a designer-run design workspace next to the planning documents, see the [design-spec guide](plugins/aiwf-design/README.md) and [Korean review copy](docs/ko-skills/aiwf-design/README.ko.md). It routes each session to one role (designer work, sync, apply, trace or review), keeps Figma read-only outside designer work, checks Figma tokens against DTCG tokens, traces planning changes and lints the workspace. Project paths, the Figma file key, checks and gates come from `docs/design-spec/design-spec.config.json`. `aiwf install --design` or `--design` on the checkout installer adds the five skills as `aiwf-design-<name>`; [examples/design-spec](examples/design-spec/README.md) is a minimal project that passes the lint and token check.
+
 Installation copies complete skill folders: it does not register native Codex subagents or configure MCP. Bundled agent prompts such as `agents/uc-coverage.md` are copied as resources, and the `workflow` skill describes the host mapping. See [SKILLS.ko.md](docs/modernization/SKILLS.ko.md) for names, counts and maintenance procedures.
 
-For Claude Code, add this checkout's absolute path as a local marketplace during development, then install the core, the wrapper and any stack you need (`aiwf-core`, `aiwf-spec`, `aiwf-<stack>`) and invoke a qualified command such as `/aiwf-core:use-case-spec`, `/aiwf-spec:workflow` or `/aiwf-nestjs-nextjs:implement`. After publishing these changes, the remote marketplace source can be `moonklabs/aiwf`.
+For Claude Code, add this checkout's absolute path as a local marketplace during development, then install the core, the wrapper and any stack or add-on you need (`aiwf-core`, `aiwf-spec`, `aiwf-<stack>`, `aiwf-design`) and invoke a qualified command such as `/aiwf-core:use-case-spec`, `/aiwf-spec:workflow`, `/aiwf-nestjs-nextjs:implement` or `/aiwf-design:workflow`. After publishing these changes, the remote marketplace source can be `moonklabs/aiwf`.
 
 ## Workflow
 
@@ -142,6 +148,7 @@ The packet embeds logs and their hashes, specification digests, Git context when
 npm run test:spec
 npm run validate:spec-plugin
 npm run test:spec-upstream
+npm run test:design
 ```
 
 The old installer, language/sprint/persona/YOLO commands, duplicate skill collections and legacy plugins have been removed. The new npm package exposes `aiwf` with its official skills backend and the compatible `aiwf-spec`; `npm test` runs the current regression suite. Compatibility with the old framework has ended. The spec CLI itself uses built-in Node modules.

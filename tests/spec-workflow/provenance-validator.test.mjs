@@ -20,7 +20,7 @@ function fixture(t) {
   for (const path of ['.claude-plugin', 'package.json', 'scripts/validate-spec-plugin.mjs', 'scripts/install-spec-skills.mjs', 'src/lib/skill-bundles.js']) {
     cpSync(join(repository, path), join(root, path), { recursive: true });
   }
-  for (const name of ['core', 'spec', 'vaadin-jooq', 'angular-jpa', 'blazor-dotnet', 'nestjs-nextjs', 'electron-react', 'delegate-claude', 'delegate-codex']) {
+  for (const name of ['core', 'spec', 'design', 'vaadin-jooq', 'angular-jpa', 'blazor-dotnet', 'nestjs-nextjs', 'electron-react', 'delegate-claude', 'delegate-codex']) {
     cpSync(join(repository, 'plugins', `aiwf-${name}`), join(root, 'plugins', `aiwf-${name}`), { recursive: true });
   }
   return root;
@@ -91,4 +91,19 @@ test('validator rejects a missing declared electron-react reference file', t => 
   // The skill links its reference, so the broken-link guard reports it before the declared
   // resource check can; either is a valid rejection of the missing bundled file.
   assert.match(check.stderr, /(Broken bundled reference: aiwf-electron-react\/implement: references\/architecture\.md|Missing declared resource: aiwf-electron-react\/skills\/implement\/references\/architecture\.md)/);
+});
+
+test('validator requires the design plugin to declare its aiwf-core dependency and no upstream record', t => {
+  const root = fixture(t);
+  const manifestPath = join(root, 'plugins/aiwf-design/.claude-plugin/plugin.json');
+  const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
+  writeFileSync(manifestPath, JSON.stringify({ ...manifest, dependencies: [] }));
+  const missing = spawnSync(process.execPath, [join(root, 'scripts/validate-spec-plugin.mjs')], { encoding: 'utf8' });
+  assert.equal(missing.status, 1);
+  assert.match(missing.stderr, /Manifest dependency missing: aiwf-design -> aiwf-core/);
+  writeFileSync(manifestPath, JSON.stringify(manifest));
+  writeFileSync(join(root, 'plugins/aiwf-design/UPSTREAM.json'), '{}');
+  const upstream = spawnSync(process.execPath, [join(root, 'scripts/validate-spec-plugin.mjs')], { encoding: 'utf8' });
+  assert.equal(upstream.status, 1);
+  assert.match(upstream.stderr, /must not carry UPSTREAM.json: aiwf-design/);
 });

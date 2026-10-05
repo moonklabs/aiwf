@@ -59,6 +59,23 @@ test('selection always includes core, keeps workflow unless core-only, and opts 
   assert.deepEqual(selectSkillBundles({ stacks: [stackId], delegates: [delegateId] }), chosen);
 });
 
+test('the design add-on is its own opt-in kind with plugin-local names', t => {
+  const design = listSkillBundles().find(bundle => bundle.name === 'aiwf-design');
+  assert.equal(design.kind, 'design');
+  assert.equal(design.id, null);
+  for (const skill of design.skills) { assert.equal(skill.installedName, `aiwf-design-${skill.name}`); }
+  assert.equal(selectSkillBundles().some(bundle => bundle.kind === 'design'), false);
+  assert.deepEqual(selectSkillBundles({ design: true }).map(bundle => bundle.kind), ['core', 'workflow', 'design']);
+  assert.throws(() => selectSkillBundles({ design: 'yes' }), /design must be true or false/);
+  // Its `workflow` skill must not take over the shared name used by the aiwf-spec bundle.
+  const plain = scratch(t);
+  const withDesign = scratch(t);
+  stageSkillBundles(plain, selectSkillBundles());
+  stageSkillBundles(withDesign, selectSkillBundles({ design: true }));
+  const workflow = root => readFileSync(join(root, 'skills', 'aiwf-workflow', 'SKILL.md'), 'utf8');
+  assert.equal(workflow(plain), workflow(withDesign));
+});
+
 test('multiple stacks can be selected and unknown selections are rejected before staging', t => {
   const stackIds = listSkillBundles().filter(bundle => bundle.kind === 'stack').map(bundle => bundle.id);
   assert.ok(stackIds.length >= 2);

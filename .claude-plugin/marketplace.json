@@ -27,7 +27,7 @@
     {
       "name": "aiwf-spec",
       "description": "AIWF workflow extension for aiwf-core: document synchronization, local pins, implementation evidence and future Sprintable handoff",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "source": "./plugins/aiwf-spec",
       "author": {
         "name": "moonklabs"
@@ -39,6 +39,23 @@
         "evidence",
         "codex",
         "sprintable"
+      ]
+    },
+    {
+      "name": "aiwf-design",
+      "description": "AIWF design-spec workflow: role routing, read-only Figma token sync and design application, planning traceability and design-spec lint",
+      "version": "0.1.0",
+      "source": "./plugins/aiwf-design",
+      "author": {
+        "name": "moonklabs"
+      },
+      "keywords": [
+        "core-addon",
+        "design-spec",
+        "figma",
+        "design-tokens",
+        "traceability",
+        "codex"
       ]
     },
     {

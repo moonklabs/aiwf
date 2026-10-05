@@ -5,6 +5,8 @@
 ## 먼저 검토할 문서
 
 - [CLI 설치 중심 역할과 구현 검토](../modernization/CLI-INSTALLATION-REVIEW.ko.md): `npm i -g aiwf`와 공식 skills CLI를 사용하는 설치 입구. 호스트·구성 선택, 반복·추가 설치와 상태 조회를 구현했으며 새 npm 배포와 휴먼 리뷰는 대기 상태다.
+- [design-spec 애드온](aiwf-design/README.ko.md): 디자이너 작업 공간과 기획 문서·Figma·코드 사이의 역할 라우팅, 읽기 전용 토큰 동기화·디자인 적용, 대응표 추적과 lint. 프로젝트 값은 `design-spec.config.json` 하나에서 읽는다.
+- [design-spec 플러그인 검증 기록](../modernization/DESIGN-SPEC-VALIDATION-2026-10-05.ko.md): 원천 lint·토큰 대조 결과 비교, 압력 시나리오(스킬 없음/있음) 판정과 남은 개선 후보.
 - [Electron/React 에이전트 데스크톱](aiwf-electron-react/README.ko.md): core 명세를 확장하는 프로젝트 생성·구현·런타임 연결·UI/Electron 테스트·패키징 스킬 6개.
 - [Electron/React 플러그인 검증 기록](../modernization/ELECTRON-REACT-VALIDATION-2026-10-05.ko.md): 설치·문서·패키징 확인과 실제 앱에서 남은 검증.
 - [Core 스킬과 참조 문서](#core): 요구사항, 용어, 유스케이스, 테스트, 명세 검토, 역공학.
@@ -19,7 +21,7 @@
 - [Claude 두 세션의 계획 리뷰](../modernization/CLAUDE-PLAN-REVIEW-2026-10-03.ko.md): 방향과 검증 계약의 독립 AI 리뷰 및 남은 판단. 실제 휴먼 리뷰 상태는 바꾸지 않는다.
 - [파일럿 계획](../modernization/PILOT-UC-001.ko.md)과 [실행 결과](../modernization/PILOT-RESULT-2026-10-03.ko.md): 완료 기준·검사 연결표와 로컬 예제의 실패·재검증 근거. `aiwf-spec` README 원문·한글본에서 함께 연결하며 실제 제품 적용·휴먼 리뷰는 대기 상태다.
 
-기준 저장소 커밋은 `6bbfcf2ee40ec88b939c59d404a59554c761b680`이다. 파일별 실제 기준은 관리 목록의 원문 SHA256이다. 저장소 스킬 41개와 연결된 Markdown 참조·규칙·프롬프트, 플러그인 9개의 README를 번역 대상으로 삼는다. 로컬 두 스킬은 검토용 원문 스냅샷과 함께 별도 관리한다.
+기준 저장소 커밋은 `6bbfcf2ee40ec88b939c59d404a59554c761b680`이다. 파일별 실제 기준은 관리 목록의 원문 SHA256이다. 저장소 스킬 46개와 연결된 Markdown 참조·규칙·프롬프트·템플릿, 플러그인 10개의 README를 번역 대상으로 삼는다. 로컬 두 스킬은 검토용 원문 스냅샷과 함께 별도 관리한다.
 
 ## 플러그인 README
 
@@ -31,6 +33,7 @@
 | --- | --- |
 | `aiwf-core` | [README](aiwf-core/README.ko.md) |
 | `aiwf-spec` | [README](aiwf-spec/README.ko.md) |
+| `aiwf-design` | [README](aiwf-design/README.ko.md) |
 | `aiwf-vaadin-jooq` | [README](aiwf-vaadin-jooq/README.ko.md) |
 | `aiwf-angular-jpa` | [README](aiwf-angular-jpa/README.ko.md) |
 | `aiwf-blazor-dotnet` | [README](aiwf-blazor-dotnet/README.ko.md) |
@@ -63,6 +66,18 @@
 | --- | --- |
 | `delegate-claude` | [지시](aiwf-delegate-claude/skills/delegate-claude/SKILL.ko.md) |
 | `delegate-codex` | [지시](aiwf-delegate-codex/skills/delegate-codex/SKILL.ko.md) |
+
+## design-spec 애드온
+
+`aiwf-core`를 선행 플러그인으로 두는 선택 설치 플러그인이다. Claude Code에서는 `/aiwf-design:<name>`, Codex 설치본에서는 `aiwf-design-<name>`으로 부른다. 실행 원문은 영어이며 파서가 읽는 한국어 상태 값과 헤딩은 원문 그대로 둔다. 템플릿 번역본도 함께 검토한다.
+
+| 스킬 | 검토할 내용 | 한글 검토본 |
+| --- | --- | --- |
+| `workflow` | 세션 역할 라우팅, Figma 쓰기 여부, 템플릿으로 시작 | [지시](aiwf-design/skills/workflow/SKILL.ko.md) |
+| `figma-sync` | 읽기 전용 readback·병합·토큰 대조 | [지시](aiwf-design/skills/figma-sync/SKILL.ko.md) |
+| `apply` | 철칙·합리화 표·빨간 신호, 조사·단계 템플릿 | [지시](aiwf-design/skills/apply/SKILL.ko.md) |
+| `trace` | 대응표 행 상태·날짜·HANDOFF 대기 줄 | [지시](aiwf-design/skills/trace/SKILL.ko.md) |
+| `review` | 구조 lint와 판단 검사 | [지시](aiwf-design/skills/review/SKILL.ko.md), [lint 코드](aiwf-design/skills/review/references/lint-codes.ko.md) |
 
 ## 기술 스택별 스킬
 

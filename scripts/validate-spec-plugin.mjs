@@ -28,6 +28,22 @@ const authoredPlugins = new Map([
     license: /Apache(-| License, Version )2\.0/,
     manifestLicense: 'Apache-2.0'
   }],
+  ['aiwf-design', {
+    skillRoots: ['skills/workflow/', 'skills/figma-sync/', 'skills/apply/', 'skills/trace/', 'skills/review/'],
+    skills: ['apply', 'figma-sync', 'review', 'trace', 'workflow'],
+    resources: [
+      'skills/review/scripts/design_spec_lint.mjs',
+      'skills/figma-sync/scripts/figma-readback.plugin.js',
+      'skills/figma-sync/scripts/merge_readback.mjs',
+      'skills/figma-sync/scripts/check_figma_tokens.mjs',
+      'skills/apply/scripts/check_templates.mjs',
+      'skills/workflow/references/templates/design-spec.config.json',
+      'skills/workflow/references/templates/design-spec/traceability.md'
+    ],
+    license: /Apache(-| License, Version )2\.0/,
+    manifestLicense: 'Apache-2.0',
+    dependencies: ['aiwf-core']
+  }],
   ['aiwf-electron-react', {
     skillRoots: [
       'skills/scaffold/',
@@ -56,7 +72,7 @@ function files(directory) {
   });
 }
 
-for (const name of ['aiwf-core', 'aiwf-spec', ...supportedStacks.map(stack => `aiwf-${stack}`)]) {
+for (const name of ['aiwf-core', 'aiwf-spec', 'aiwf-design', ...supportedStacks.map(stack => `aiwf-${stack}`)]) {
   const plugin = join(root, 'plugins', name);
   const authored = authoredPlugins.get(name);
   const provenance = authored ? { upstream_sha256: {}, modified_sha256: {} }
@@ -121,6 +137,11 @@ for (const name of ['aiwf-core', 'aiwf-spec', ...supportedStacks.map(stack => `a
   assert.equal(manifest.version, entry.version);
   if (authored) {
     assert.equal(manifest.license, authored.manifestLicense, `Manifest license mismatch: ${name}`);
+    for (const dependency of authored.dependencies ?? []) {
+      assert.ok(manifest.dependencies?.includes(dependency), `Manifest dependency missing: ${name} -> ${dependency}`);
+      assert.ok(market.plugins.some(item => item.name === dependency), `Dependency is not in this marketplace: ${dependency}`);
+    }
+    assert.equal(existsSync(join(plugin, 'UPSTREAM.json')), false, `Authored plugin must not carry UPSTREAM.json: ${name}`);
     for (const resource of authored.resources ?? []) {
       assert.ok(existsSync(join(plugin, resource)), `Missing declared resource: ${name}/${resource}`);
     }
@@ -178,6 +199,6 @@ for (const target of delegationTargets) {
   assert.ok(pkg.files.includes(`plugins/${name}/`), `Package excludes plugin: ${name}`);
   skills++;
 }
-assert.equal(skills, 41);
+assert.equal(skills, 46);
 assert.equal(pkg.bin['aiwf-spec'], './src/cli/spec-cli.js');
-console.log(`AIWF: ${importedSkills} unchanged upstream skills + ${skills - importedSkills} AIWF skills (workflow, sync-docs, the authored electron-react stack and optional delegates); ${verified} unchanged upstream resources, ${modified} attributed NOTICE modification; references, declared resources and manifests validated.`);
+console.log(`AIWF: ${importedSkills} unchanged upstream skills + ${skills - importedSkills} AIWF skills (workflow, sync-docs, design-spec, the authored electron-react stack and optional delegates); ${verified} unchanged upstream resources, ${modified} attributed NOTICE modification; references, declared resources and manifests validated.`);

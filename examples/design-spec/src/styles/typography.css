@@ -1,0 +1,19 @@
+/* Figma 텍스트 스타일 → 유틸리티. `Text/Body` → `type-body`. 값 대조: check_figma_tokens.mjs */
+
+/* Figma Text/Body — Pretendard Regular 14/22 */
+@utility type-body {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 400;
+  letter-spacing: 0px;
+}
+
+/* Figma Text/Title — Pretendard SemiBold 16/24 */
+@utility type-title {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 24px;
+  font-weight: 600;
+  letter-spacing: -0.14px;
+}

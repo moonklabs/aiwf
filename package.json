@@ -18,7 +18,8 @@
         "test:spec": "npm test",
         "validate:spec-plugin": "node scripts/validate-spec-plugin.mjs",
         "test:spec-upstream": "python3 plugins/aiwf-core/skills/use-case-spec/scripts/validate_use_case.py --self-test && python3 plugins/aiwf-core/skills/test-case/scripts/bpmn_paths.py --self-test && python3 plugins/aiwf-core/skills/spec-review/scripts/spec_lint.py --self-test",
-        "validate:spec-example": "python3 plugins/aiwf-core/skills/spec-review/scripts/spec_lint.py --docs examples/spec-workflow/docs --strict --no-baseline"
+        "validate:spec-example": "python3 plugins/aiwf-core/skills/spec-review/scripts/spec_lint.py --docs examples/spec-workflow/docs --strict --no-baseline",
+        "test:design": "node plugins/aiwf-design/skills/review/scripts/design_spec_lint.mjs --self-test && node plugins/aiwf-design/skills/figma-sync/scripts/merge_readback.mjs --self-test && node plugins/aiwf-design/skills/figma-sync/scripts/check_figma_tokens.mjs --self-test && node plugins/aiwf-design/skills/apply/scripts/check_templates.mjs && node plugins/aiwf-design/skills/review/scripts/design_spec_lint.mjs --root examples/design-spec --strict && node plugins/aiwf-design/skills/figma-sync/scripts/check_figma_tokens.mjs --root examples/design-spec"
     },
     "keywords": [
         "aiwf",
@@ -53,11 +54,13 @@
         "scripts/validate-spec-plugin.mjs",
         "docs/modernization/",
         "examples/spec-workflow/",
+        "examples/design-spec/",
         "README.md",
         "README.ko.md",
         "CHANGELOG.md",
         "plugins/aiwf-core/",
         "plugins/aiwf-spec/",
+        "plugins/aiwf-design/",
         "plugins/aiwf-delegate-claude/",
         "plugins/aiwf-delegate-codex/",
         "plugins/aiwf-vaadin-jooq/",

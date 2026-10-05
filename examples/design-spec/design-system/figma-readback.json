@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "fileKey": "ExampleFileKey0001",
+  "fileName": "Expense app (example)",
+  "readAt": "2026-10-05T00:00:00.000Z",
+  "counts": { "variables": 6, "textStyles": 2, "effectStyles": 1, "paintStyles": 1 },
+  "collections": [
+    { "name": "00 · Primitives", "id": "VariableCollectionId:1:1", "modes": ["Light"] },
+    { "name": "01 · Color", "id": "VariableCollectionId:1:2", "modes": ["Light"] },
+    { "name": "02 · Scale", "id": "VariableCollectionId:1:3", "modes": ["Light"] }
+  ],
+  "variables": [
+    { "c": "00 · Primitives", "n": "white", "v": "#ffffffff" },
+    { "c": "00 · Primitives", "n": "gray/900", "v": "#1f2937ff" },
+    { "c": "01 · Color", "n": "surface/card", "v": "#ffffffff", "a": "white" },
+    { "c": "01 · Color", "n": "text/primary", "v": "#1f2937ff", "a": "gray/900" },
+    { "c": "02 · Scale", "n": "radius/md", "v": 8 },
+    { "c": "02 · Scale", "n": "space/2", "v": 8 }
+  ],
+  "textStyles": [
+    { "name": "Text/Body", "fontFamily": "Pretendard", "fontStyle": "Regular", "fontSize": 14, "lineHeight": { "unit": "PIXELS", "value": 22 }, "letterSpacing": { "unit": "PIXELS", "value": 0 } },
+    { "name": "Text/Title", "fontFamily": "Pretendard", "fontStyle": "SemiBold", "fontSize": 16, "lineHeight": { "unit": "PIXELS", "value": 24 }, "letterSpacing": { "unit": "PIXELS", "value": -0.14 } }
+  ],
+  "effectStyles": [
+    { "name": "Effect/Card", "effects": [{ "type": "DROP_SHADOW", "offsetX": 0, "offsetY": 2, "blur": 8, "spread": 0, "color": "#0f172a14" }] }
+  ],
+  "paintStyles": [
+    { "name": "Surface/Header Gradient", "paints": [{ "type": "GRADIENT_LINEAR", "stops": [{ "position": 0, "color": "#f8fafcff" }, { "position": 1, "color": "#eef2f7ff" }], "handles": { "start": { "x": 0, "y": 0.5 }, "end": { "x": 1, "y": 0.5 } } }] }
+  ]
+}

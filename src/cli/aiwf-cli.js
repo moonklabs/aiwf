@@ -25,6 +25,7 @@ Install options:
   --agent <codex|claude-code> ...  Explicit host selection; repeat or select both.
   --stack <name> ...              Optional stack bundles; see aiwf list.
   --delegate <claude|codex> ...    Optional delegation skills (off by default).
+  --design                       Add the design-spec skills (aiwf-design-*).
   --core-only                    Omit the recommended workflow/sync-docs bundle.
   --project <path>                Existing project (default: current directory).
   --global                       Install skills for the current user.
@@ -43,10 +44,10 @@ Skills are portable instructions; native plugins and agent login are separate.
 }
 
 function parse(args, command) {
-  const allowed = command === 'install' ? ['agent', 'stack', 'delegate', 'project', 'global', 'core-only', 'dry-run', 'json']
+  const allowed = command === 'install' ? ['agent', 'stack', 'delegate', 'design', 'project', 'global', 'core-only', 'dry-run', 'json']
     : command === 'status' ? ['project', 'global', 'json'] : ['json'];
   const arrays = new Set(['agent', 'stack', 'delegate']);
-  const flags = new Set(['global', 'core-only', 'dry-run', 'json']);
+  const flags = new Set(['global', 'core-only', 'design', 'dry-run', 'json']);
   const options = {};
   for (let index = 0; index < args.length; index++) {
     const key = args[index].replace(/^--/, '');
@@ -68,7 +69,8 @@ function parse(args, command) {
   }
   if (options.global && options.project) { throw new Error('Choose --project or --global, not both.'); }
   return { agents: options.agent, stacks: options.stack, delegates: options.delegate, project: options.project,
-    global: Boolean(options.global), coreOnly: Boolean(options['core-only']), dryRun: Boolean(options['dry-run']), json: Boolean(options.json) };
+    global: Boolean(options.global), coreOnly: Boolean(options['core-only']), design: options.design ? true : undefined,
+    dryRun: Boolean(options['dry-run']), json: Boolean(options.json) };
 }
 
 async function choices(options) {
@@ -88,6 +90,11 @@ async function choices(options) {
       options.stacks = values(await input.question(`Stacks (${stacks.join(', ')}; Enter for none): `));
     }
     if (!options.delegates) { options.delegates = values(await input.question('Delegation skills (claude, codex; Enter for none): ')); }
+    if (options.design === undefined) {
+      const answer = (await input.question('Include design-spec skills (aiwf-design)? [y/N]: ')).trim().toLowerCase();
+      if (!['', 'y', 'yes', 'n', 'no'].includes(answer)) { throw new Error('Answer yes or no for the design-spec skills.'); }
+      options.design = ['y', 'yes'].includes(answer);
+    }
     return options;
   } finally { input.close(); }
 }

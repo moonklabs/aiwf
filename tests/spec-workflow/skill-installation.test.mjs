@@ -160,6 +160,10 @@ test('npm-style bin symlink works from another cwd and strict CLI parsing preser
   for (const args of [['install'], ['install', '--unknown'], ['install', '--agent'], ['install', '--agent', 'codex', '--project', root, '--global']]) {
     assert.equal(run(args).status, 2);
   }
+  const design = run(['install', '--agent', 'codex', '--design', '--dry-run', '--json']);
+  assert.equal(design.status, 0, design.stderr);
+  assert.equal(JSON.parse(design.stdout).items.filter(item => item.plugin === 'aiwf-design').length, 5);
+  assert.equal(run(['install', '--agent', 'codex', '--design', '--design', '--dry-run']).status, 2);
   const unknown = run(['install', '--agent', 'unknown', '--dry-run', '--json']);
   assert.equal(unknown.status, 1);
   assert.equal(run(['spec', '--help']).status, 0);
