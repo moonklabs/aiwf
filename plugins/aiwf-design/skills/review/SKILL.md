@@ -27,7 +27,7 @@ Run from the repository root (or pass `--root <repo>`); pass `--config <file>` w
 | Places where `decisions.md` and Figma differ | Compare decisions' rule sentences with snapshot values (e.g. the code font). List them; do not resolve them |
 | `memories/plans/` cited as if it were the current source | The source must be decisions · figma-map · design-system documents |
 | Figma value tables copied into other documents | Values come from Figma and tokens; documents only link |
-| Whether planning documents were edited in design-spec work | `git diff --stat -- <planning.requirements> <planning.useCases> <planning.testCases>` |
+| Whether planning or upper-level reference documents were edited in design-spec work | `git diff --stat -- <planning.requirements> <planning.useCases> <planning.testCases>` plus the glossary, product, architecture and vision documents |
 | Whether HANDOFF reflects the last work | Compare with the progress log and traceability dates (`DS_HANDOFF_STALE`) |
 | Sentences pointing at a renamed heading | With `DS_QUOTED_HEADING`, `grep -rn "<old heading>" <entryDocs> <specRoot>` |
 

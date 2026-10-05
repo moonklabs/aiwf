@@ -25,5 +25,5 @@
 ## Update rules
 1. **Planning changes**: the side that changed it sets the affected rows to `기획 변경 대기` and adds a line to HANDOFF "기획 변경 대기".
 2. **Design changes**: the designer edits the Figma column and state. When it differs from planning, set `기획 변경 필요` and add it to HANDOFF "아직 결정 안 된 것".
-3. **Applied to code**: change only the implementation column and the state (`구현: 새 디자인`). After a real-app review, set `검증 완료` with an evidence link.
+3. **Applied to code**: change only the implementation column and the state. Set `구현: 새 디자인` only after the gates passed; until then keep the previous state and note what is unverified. After a real-app review, set `검증 완료` with an evidence link.
 4. Overwrite rows. Do not accumulate past states in a row.

@@ -29,7 +29,7 @@ Copyright 2026 moonklabs. Apache-2.0 라이선스. 플러그인의 LICENSE와 NO
 3. 조사 (읽기 전용): 컴포넌트 묶음마다 Figma 실측 스펙 → 코드 대상 → 차이 목록, 그다음 완결성 비평. [references/survey-template.js](../../../../../plugins/aiwf-design/skills/apply/references/survey-template.js)
 4. `apply.waves` 순서대로 단계별로 적용한다(예: 공용 아이콘 → L1 기본 → L2 셸 → L3 채팅). 묶음마다 구현 → 적대적 검증 → 수정을 하고, 각 단계 끝에 통합한다(i18n, story id, 컴포넌트 맵, 다른 파일 요청). 각 파일은 한 묶음만 소유한다. [references/wave-template.js](../../../../../plugins/aiwf-design/skills/apply/references/wave-template.js)
 5. 게이트를 통과한 뒤 그 단계의 파일만 커밋한다. 진행 중인 단계의 파일은 커밋하지 않는다. 커밋은 임시 `git worktree add --detach`에서 다시 검사한다.
-6. traceability 구현 열과 상태를 갱신하고(aiwf-design:trace) 인수 문서의 진행 기록을 갱신한다.
+6. traceability 구현 열과 상태를 갱신하고(aiwf-design:trace) 인수 문서의 진행 기록을 갱신한다. `구현: 새 디자인`은 게이트를 통과한 작업에만 쓰고, 그렇지 않으면 미검증 범위를 기록한다.
 
 Workflow 도구는 사용자가 워크플로우를 명시적으로 요청할 때만 사용한다. 그 밖에는 같은 구조를 Agent 도구로 실행한다. 두 템플릿은 Claude Code Workflow 스크립트이며, 그 `args`는 설정에서 만든다. Codex나 Workflow 도구가 없는 호스트에서는 같은 프롬프트, 모델, 파일 소유권으로 하위 에이전트에 위임해 같은 단계를 실행하고, 위임이 불가능하면 직접 순서대로 실행하며, 어느 경로로 실행했는지 보고한다. 템플릿을 바꾼 뒤에는 `node <skills>/apply/scripts/check_templates.mjs`를 실행한다. `agent()` 호출에 명시적 모델이 없거나 설정된 경로를 무시하면 이 검사가 실패한다.
 

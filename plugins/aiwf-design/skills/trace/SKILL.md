@@ -40,7 +40,7 @@ Set the row state to `기획 변경 필요` and add one line to HANDOFF's "아�
 
 ## After applying to code
 
-Change only the implementation column and the state (`구현: 새 디자인`). When a person confirms it in the real app, set `검증 완료` and add an evidence link.
+Change only the implementation column and the state. Set `구현: 새 디자인` only after the gates for that change (`gates`, including the token check) have actually passed. Until then keep the previous state and name what is unverified in parentheses, for example `구현: 이전 디자인 (적용 중, 게이트 미실행)`. When a person confirms it in the real app, set `검증 완료` and add an evidence link.
 
 ## Check
 

@@ -28,7 +28,7 @@ node <skills>/review/scripts/design_spec_lint.mjs --self-test
 | `decisions.md`와 Figma가 다른 곳 | decisions의 규칙 문장을 스냅샷 값과 비교한다(예: 코드 글꼴). 목록으로 적고 해결하지 않는다 |
 | `memories/plans/`를 현재 기준처럼 인용 | 기준은 decisions · figma-map · design-system 문서여야 한다 |
 | Figma 값 표를 다른 문서에 복사 | 값은 Figma와 토큰에서 오고, 문서는 링크만 둔다 |
-| design-spec 작업에서 기획 문서를 고쳤는지 | `git diff --stat -- <planning.requirements> <planning.useCases> <planning.testCases>` |
+| design-spec 작업에서 기획 문서나 상위 참조 문서를 고쳤는지 | `git diff --stat -- <planning.requirements> <planning.useCases> <planning.testCases>`와 용어집·제품·아키텍처·비전 문서 |
 | HANDOFF가 마지막 작업을 반영하는지 | 진행 기록과 traceability 날짜와 비교한다 (`DS_HANDOFF_STALE`) |
 | 이름이 바뀐 제목을 가리키는 문장 | `DS_QUOTED_HEADING`과 함께 `grep -rn "<old heading>" <entryDocs> <specRoot>` |
 

@@ -19,7 +19,7 @@
 - 도구의 기본 폴더가 다르더라도 계획은 `memories/plans/`에 둔다. 이 폴더 안에 `docs/` 폴더를 만들지 않는다.
 
 ## 기획 문서와의 관계
-- 기획 문서(requirements · use_cases · test_cases)는 참조 문서이다. 디자인 작업에서 고치지 않는다.
+- 기획 문서(requirements · use_cases · test_cases)와 그 밖의 상위 문서(glossary, product, architecture, vision)는 참조 문서이다. 디자인 작업에서 고치지 않는다.
 - [traceability.md](../../../../../../../../plugins/aiwf-design/skills/workflow/references/templates/design-spec/traceability.md)에서만 연결한다.
 - 기획이 바뀌면 상태가 `기획 변경 대기`가 되고 HANDOFF 절 "기획 변경 대기"에 한 줄이 들어간다.
 - 디자인 결정이 기획과 다르면 그 행을 `기획 변경 필요`로 표시한다. 기획이 새 ID로 반영한다.

@@ -34,9 +34,9 @@ Every project value comes from `docs/design-spec/design-spec.config.json` (or th
 
 ## Mixed requests
 
-- One session takes one role. If "while you're at it, fix Figma too" arrives during sync or apply, finish the current work read-only. Write the Figma change in the acceptance document's "디자이너 전달 목록" and in HANDOFF, and ask the user whether to run it as separate designer work.
+- One session takes one role. If "while you're at it, fix Figma too" arrives during sync or apply, finish the current work read-only. Record the Figma change in the acceptance document's "디자이너 전달 목록". Add a line to HANDOFF as well, unless the repository's instructions keep this role out of the design-spec documents; then state in the report that the designer must carry it into HANDOFF. Ask the user whether to run it as separate designer work.
 - When `decisions.md` and Figma differ, do not pick one. Record the difference and ask for a decision. `decisions.md` holds only what the user confirmed.
-- Do not change the planning documents (requirements · use_cases · test_cases) in design-spec work.
+- Do not change the planning documents (requirements · use_cases · test_cases) or the other upper-level reference documents (such as the glossary, product, architecture and vision documents) in design-spec work. Report a needed change instead.
 
 ## What is the source of truth
 
@@ -59,4 +59,4 @@ Run them from the repository root; pass `--config <file>` when the config is not
 
 ## Stop when
 
-The chosen role's deliverable exists, and the lint and the role's checks were actually run with their results and remaining differences reported. Render and visual inspection happen only when the user asks; otherwise record them as unverified.
+The chosen role's deliverable exists, and the lint and the role's checks were actually run with their results and remaining differences reported. If a Figma change went onto the "디자이너 전달 목록" without a HANDOFF line, the report says that the designer must carry it into HANDOFF. Render and visual inspection happen only when the user asks; otherwise record them as unverified.

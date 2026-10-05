@@ -5,6 +5,7 @@
 - Add the optional `aiwf-design` plugin (0.1.0, Apache-2.0, depends on `aiwf-core`): workflow, figma-sync, apply, trace and review skills for a designer-run design-spec workspace, with English instructions that keep the Korean parser words.
 - Read every project value from `docs/design-spec/design-spec.config.json`; the lint, readback, merge and a new generic DTCG token check use it, and fail clearly without it. Add templates, a lint- and token-clean example and `npm run test:design`.
 - Add `--design` to `aiwf install` and `scripts/install-spec-skills.mjs`; installed names are `aiwf-design-<name>` and qualified `aiwf-design:<name>` references are rewritten. `aiwf-spec` 0.3.0 calls `aiwf-design:trace` when a project has a design-spec traceability table.
+- After pressure tests, require passed gates before `구현: 새 디자인`, let repository rules decide whether apply sessions write HANDOFF, and keep glossary, product, architecture and vision documents out of design-spec edits.
 
 ## 0.5.0 — Unreleased
 

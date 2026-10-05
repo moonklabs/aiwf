@@ -28,7 +28,7 @@ Project values come from `design-spec.config.json` (schema in the plugin README)
 3. Survey (read-only): per component group, measured Figma spec → code targets → difference list, then a completeness critic. [references/survey-template.js](references/survey-template.js)
 4. Apply wave by wave in the order of `apply.waves` (for example shared icons → L1 base → L2 shell → L3 chat). Per group implement → adversarial verification → fix; at the end of each wave integrate (i18n, story ids, component map, requests to other files). Each file is owned by one group only. [references/wave-template.js](references/wave-template.js)
 5. After the gates pass, commit only that wave's files. Do not commit files of a wave in progress. Recheck the commit in a temporary `git worktree add --detach`.
-6. Update the traceability implementation column and status (aiwf-design:trace) and the acceptance document's progress log.
+6. Update the traceability implementation column and status (aiwf-design:trace) and the acceptance document's progress log. Use `구현: 새 디자인` only for work whose gates passed; otherwise record what is unverified.
 
 Use the Workflow tool only when the user explicitly asks for a workflow. Otherwise run the same structure with the Agent tool. The two templates are Claude Code Workflow scripts; build their `args` from the config. In Codex or any host without the Workflow tool, run the same stages by delegating to subagents with the same prompts, models and file ownership, or run them in order yourself when delegation is unavailable, and report which route ran. After changing a template, run `node <skills>/apply/scripts/check_templates.mjs`; it fails when an `agent()` call has no explicit model or ignores the configured paths.
 

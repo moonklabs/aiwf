@@ -17,7 +17,7 @@ This folder is the design workspace. Its results are the Figma file and the docu
 - Plans go to `memories/plans/`, even when a tool defaults to another folder. Do not create a `docs/` folder inside this folder.
 
 ## Relation to the planning documents
-- The planning documents (requirements · use_cases · test_cases) are references. Do not edit them in design work.
+- The planning documents (requirements · use_cases · test_cases) and the other upper-level documents (glossary, product, architecture, vision) are references. Do not edit them in design work.
 - Connect them only in [traceability.md](traceability.md).
 - When planning changes, the state becomes `기획 변경 대기` and one line goes to the HANDOFF section "기획 변경 대기".
 - When a design decision differs from planning, mark the row `기획 변경 필요`; planning reflects it with a new ID.

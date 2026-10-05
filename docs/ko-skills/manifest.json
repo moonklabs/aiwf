@@ -844,8 +844,8 @@
       "translation": "docs/ko-skills/aiwf-design/skills/apply/SKILL.ko.md",
       "scope": "repository",
       "source_group": "aiwf-design",
-      "source_sha256": "5da5174bec44b2f180d08c77a09de8f97112917b1cb735423d6e4b03608e5044",
-      "translation_sha256": "0cf224d824fab475308ba45b5a9c62d2868e4d78bb7d4ce08ea7f1ba0ae8aad6",
+      "source_sha256": "7581c4fc2480a1a9c07d1395d248791558266e5454cd641d46a666c00daf3285",
+      "translation_sha256": "d9e3b436fbf7b2b8f543f45396d8acd0f86e154f17f6f460e2edba441baf9850",
       "review_status": "awaiting_review"
     },
     {
@@ -862,8 +862,8 @@
       "translation": "docs/ko-skills/aiwf-design/skills/review/SKILL.ko.md",
       "scope": "repository",
       "source_group": "aiwf-design",
-      "source_sha256": "00b5d601ccfc9f290628e1f0f5dad5003433ee8c363a8e86b91cb4f3b4049033",
-      "translation_sha256": "8d82691fa1754a71aca200ffd646292ef5a7a4c550c0422a15d932de82bf69a2",
+      "source_sha256": "1269b3ec8a5eb64476d09c9484525360674687bb6826c1a7c14d5c65ec5d6bfa",
+      "translation_sha256": "825f14c8bdea7c973218d80d4615b70fa6a8ac6679c36eb99f02ba87fa4f0c76",
       "review_status": "awaiting_review"
     },
     {
@@ -880,8 +880,8 @@
       "translation": "docs/ko-skills/aiwf-design/skills/trace/SKILL.ko.md",
       "scope": "repository",
       "source_group": "aiwf-design",
-      "source_sha256": "3b7a087e56309f1bab93af0349797915e13c376a7b3b86f779b5513439f19707",
-      "translation_sha256": "ead552a9ede2710cd64901fb1f02a57f2df98b9b7ddf15fd622be11afdba20b9",
+      "source_sha256": "12254a820c550c9501419eea1f5a071bd88530d0052781ae450e1f29c7f8b246",
+      "translation_sha256": "e3e05e86881e77194f314a8b6caa8d1aadac11ab157a2f7e3c533ddacb6165ea",
       "review_status": "awaiting_review"
     },
     {
@@ -889,8 +889,8 @@
       "translation": "docs/ko-skills/aiwf-design/skills/workflow/SKILL.ko.md",
       "scope": "repository",
       "source_group": "aiwf-design",
-      "source_sha256": "4fb461e877722859f2d5a24b3938e232b71a42dd792686ccb4c6355abd728262",
-      "translation_sha256": "1df4486c355d66f7a6888ed516b5a3a0cde7e15629eebe087e84a65053bcd7af",
+      "source_sha256": "e60ebe75c2ae7735523812506f87775b634a4cfdaa7d3b43cb54a4c1db073d9a",
+      "translation_sha256": "750a87cc648aac48acb7ec7faf41789879cc9b6e5df51a58e92dd9158e08e20f",
       "review_status": "awaiting_review"
     },
     {
@@ -898,8 +898,8 @@
       "translation": "docs/ko-skills/aiwf-design/skills/workflow/references/templates/design-spec/AGENTS.ko.md",
       "scope": "repository",
       "source_group": "aiwf-design",
-      "source_sha256": "a68f85f3cc4fec70ec75ceab37e7c8ebf8097e0f6963b354e96969002700e15b",
-      "translation_sha256": "aefd1aad108a4a87322aa6bf6da8a2e98a243c4149cb0297261cdd4d8fc57ec3",
+      "source_sha256": "ed0a87cf9f3bdf486fce98002f74fbc92eac1b99740d5cc7c374ebd7f0e12480",
+      "translation_sha256": "7d737fc7f2749e6c43d6dd38a3cb4afb6d7f780189d95ead1b37d048652588d7",
       "review_status": "awaiting_review"
     },
     {
@@ -952,8 +952,8 @@
       "translation": "docs/ko-skills/aiwf-design/skills/workflow/references/templates/design-spec/traceability.ko.md",
       "scope": "repository",
       "source_group": "aiwf-design",
-      "source_sha256": "5f4f4bb977643dd7c23288cd84b00325d25a4739a4776b8169a0c39265217e77",
-      "translation_sha256": "ce0ab4c83e7a630cf9d640431e2d6cda98b0197712e1f65aa59f4395ae61be3f",
+      "source_sha256": "d306d717abb14a55f64cbf3f1e3d25258ed6a62f635c39a0f2570c0e7de9cbe4",
+      "translation_sha256": "b9eab5d96c9f5c9d744747d77fee16d90d6d04bd5425272bfa067958ca97ca73",
       "review_status": "awaiting_review"
     },
     {
