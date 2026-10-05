@@ -4,6 +4,9 @@
 
 ## 먼저 검토할 문서
 
+- [CLI 설치 중심 역할과 구현 검토](../modernization/CLI-INSTALLATION-REVIEW.ko.md): `npm i -g aiwf`와 공식 skills CLI를 사용하는 설치 입구. 호스트·구성 선택, 반복·추가 설치와 상태 조회를 구현했으며 새 npm 배포와 휴먼 리뷰는 대기 상태다.
+- [Electron/React 에이전트 데스크톱](aiwf-electron-react/README.ko.md): core 명세를 확장하는 프로젝트 생성·구현·런타임 연결·UI/Electron 테스트·패키징 스킬 6개.
+- [Electron/React 플러그인 검증 기록](../modernization/ELECTRON-REACT-VALIDATION-2026-10-05.ko.md): 설치·문서·패키징 확인과 실제 앱에서 남은 검증.
 - [Core 스킬과 참조 문서](#core): 요구사항, 용어, 유스케이스, 테스트, 명세 검토, 역공학.
 - [AIWF workflow](aiwf-spec/skills/workflow/SKILL.ko.md): core와 구현·검증·검토 결과를 연결하는 현재 지시.
 - [개발 후 문서 동기화](aiwf-spec/skills/sync-docs/SKILL.ko.md): 변경 범위에 맞는 UC·규칙·테스트 정의·모델·사용 안내 갱신과 구현 불일치 보고.
@@ -16,11 +19,13 @@
 - [Claude 두 세션의 계획 리뷰](../modernization/CLAUDE-PLAN-REVIEW-2026-10-03.ko.md): 방향과 검증 계약의 독립 AI 리뷰 및 남은 판단. 실제 휴먼 리뷰 상태는 바꾸지 않는다.
 - [파일럿 계획](../modernization/PILOT-UC-001.ko.md)과 [실행 결과](../modernization/PILOT-RESULT-2026-10-03.ko.md): 완료 기준·검사 연결표와 로컬 예제의 실패·재검증 근거. `aiwf-spec` README 원문·한글본에서 함께 연결하며 실제 제품 적용·휴먼 리뷰는 대기 상태다.
 
-기준 저장소 커밋은 `6bbfcf2ee40ec88b939c59d404a59554c761b680`이다. 파일별 실제 기준은 관리 목록의 원문 SHA256이다. 저장소 스킬 35개와 연결된 Markdown 참조·규칙·프롬프트, 플러그인 8개의 README를 번역 대상으로 삼는다. 로컬 두 스킬은 검토용 원문 스냅샷과 함께 별도 관리한다.
+기준 저장소 커밋은 `6bbfcf2ee40ec88b939c59d404a59554c761b680`이다. 파일별 실제 기준은 관리 목록의 원문 SHA256이다. 저장소 스킬 41개와 연결된 Markdown 참조·규칙·프롬프트, 플러그인 9개의 README를 번역 대상으로 삼는다. 로컬 두 스킬은 검토용 원문 스냅샷과 함께 별도 관리한다.
 
 ## 플러그인 README
 
-플러그인별 README는 설치·구성·출처 안내를 담으므로 스킬 문서와 함께 한국어로 유지한다. 원문 README를 수정할 때 번역, 이 목록, `CATALOG.md`, `manifest.json`을 같은 변경에서 갱신하고, 검토가 끝나지 않은 버전은 `awaiting_review`로 둔다.
+플러그인별 README는 설치·구성·라이선스 안내를 담으므로 스킬 문서와 함께 한국어로 유지한다. 원문 README를 수정할 때 번역, 이 목록, `CATALOG.md`, `manifest.json`을 같은 변경에서 갱신하고, 검토가 끝나지 않은 버전은 `awaiting_review`로 둔다.
+
+2026-10-05에는 core·spec·기술 스택 4종의 README 원문과 한글본을 기능·설치 안내 중심으로 정리했다. 법적 고지와 원본 추적 기록은 각 플러그인에 보존하며, 문구 정리는 기존 스킬의 동작이나 휴먼 리뷰 상태를 변경하지 않는다.
 
 | 플러그인 | 한글 검토본 |
 | --- | --- |
@@ -30,6 +35,7 @@
 | `aiwf-angular-jpa` | [README](aiwf-angular-jpa/README.ko.md) |
 | `aiwf-blazor-dotnet` | [README](aiwf-blazor-dotnet/README.ko.md) |
 | `aiwf-nestjs-nextjs` | [README](aiwf-nestjs-nextjs/README.ko.md) |
+| `aiwf-electron-react` | [README](aiwf-electron-react/README.ko.md) |
 | `aiwf-delegate-claude` | [README](aiwf-delegate-claude/README.ko.md) |
 | `aiwf-delegate-codex` | [README](aiwf-delegate-codex/README.ko.md) |
 
@@ -66,6 +72,7 @@
 | Angular / JPA (6개) | [implement](aiwf-angular-jpa/skills/implement/SKILL.ko.md), [flyway-migration](aiwf-angular-jpa/skills/flyway-migration/SKILL.ko.md), [coverage-check](aiwf-angular-jpa/skills/coverage-check/SKILL.ko.md), [spring-boot-test](aiwf-angular-jpa/skills/spring-boot-test/SKILL.ko.md), [vitest-test](aiwf-angular-jpa/skills/vitest-test/SKILL.ko.md), [playwright-test](aiwf-angular-jpa/skills/playwright-test/SKILL.ko.md) |
 | Blazor / .NET (5개) | [implement](aiwf-blazor-dotnet/skills/implement/SKILL.ko.md), [ef-migration](aiwf-blazor-dotnet/skills/ef-migration/SKILL.ko.md), [bunit-test](aiwf-blazor-dotnet/skills/bunit-test/SKILL.ko.md), [dotnet-test](aiwf-blazor-dotnet/skills/dotnet-test/SKILL.ko.md), [playwright-test](aiwf-blazor-dotnet/skills/playwright-test/SKILL.ko.md) |
 | NestJS / Next.js (5개) | [implement](aiwf-nestjs-nextjs/skills/implement/SKILL.ko.md), [drizzle-migration](aiwf-nestjs-nextjs/skills/drizzle-migration/SKILL.ko.md), [nest-test](aiwf-nestjs-nextjs/skills/nest-test/SKILL.ko.md), [react-test](aiwf-nestjs-nextjs/skills/react-test/SKILL.ko.md), [playwright-test](aiwf-nestjs-nextjs/skills/playwright-test/SKILL.ko.md) |
+| Electron / React (6개) | [scaffold](aiwf-electron-react/skills/scaffold/SKILL.ko.md), [implement](aiwf-electron-react/skills/implement/SKILL.ko.md), [agent-runtime](aiwf-electron-react/skills/agent-runtime/SKILL.ko.md), [renderer-test](aiwf-electron-react/skills/renderer-test/SKILL.ko.md), [electron-test](aiwf-electron-react/skills/electron-test/SKILL.ko.md), [package](aiwf-electron-react/skills/package/SKILL.ko.md) |
 
 스킬 지시와 참조 문서는 플러그인 `skills/`, `rules/`, `agents/` 아래에서 찾고, 각 플러그인 루트 `README.md`도 별도의 한글본으로 관리한다. 법적 문서(`LICENSE`, `NOTICE`)와 JSON·Python·Java·TypeScript·BPMN 등의 실행·예제 파일은 번역 대상에서 제외하며 필요한 경우 원문에 연결한다. 코드 블록의 내용과 순서는 보존한다. 중첩 Markdown 예제가 렌더링을 깨뜨리는 경우에만 바깥 펜스 길이를 늘리고 관리 목록에 보정 사유를 기록한다. 실제 실행과 API 유효성 검증은 별도 작업이다.
 
@@ -95,3 +102,5 @@
 6. 실제 사람이 검토한 경우에만 `human_reviewed`와 검토자·시각·검토한 두 해시를 `human_review`에 기록한다. 예를 들어 `reviewer`, `reviewed_at`, `source_sha256`, `translation_sha256`을 남긴다. 코드나 제품 승인으로 확대 해석하지 않는다.
 
 자동 검사는 파일 정합성과 일부 누락을 찾는 도구다. 번역의 의미, 원문 지시의 적절성, 요구사항·테스트의 충분성은 사람이 검토한다. 작성 규칙과 변경 이력을 먼저 정리하고 검토 자료가 최신인 상태에서 기능 작업을 진행한다.
+
+테스트·검증 코드는 반복해서 사용할 동작·문서 계약 검사만 유지한다. 일회성 실험 코드, 임시 설치 fixture와 보조 검증 스크립트는 사용 후 정리하고, 필요한 결과는 검토 문서에 남긴다. 특정 시점의 플러그인 목록을 중복 확인하거나 날짜가 고정된 로컬 checkout에 의존하는 검사는 추가하지 않는다. 실행 코드를 제거하면 재실행 안내를 함께 정리하고 과거 결과를 현재 검사로 표시하지 않는다.

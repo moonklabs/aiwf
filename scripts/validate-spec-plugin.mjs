@@ -17,11 +17,37 @@ let skills = 0;
 let importedSkills = 0;
 let commit;
 
-// AIWF-owned skill directories in aiwf-spec are authored here, not imported, so they
-// carry no upstream provenance. Keep this list narrow: only the named skill roots are
-// exempt, never arbitrary untracked resources in the plugin.
-const aiwfOwnedSkillRoots = ['skills/workflow/', 'skills/sync-docs/'];
-const isAiwfOwned = relative => aiwfOwnedSkillRoots.some(directory => relative.startsWith(directory));
+// AIWF-authored plugins are written in this repository, not imported, so they carry no
+// UPSTREAM.json. Each entry names the exact skill roots authored here, the skill set the
+// plugin must expose, and any bundled resource files it promises to ship. Keep these lists
+// explicit: a resource outside the named roots is still rejected for missing provenance.
+const authoredPlugins = new Map([
+  ['aiwf-spec', {
+    skillRoots: ['skills/workflow/', 'skills/sync-docs/'],
+    skills: ['sync-docs', 'workflow'],
+    license: /Apache(-| License, Version )2\.0/,
+    manifestLicense: 'Apache-2.0'
+  }],
+  ['aiwf-electron-react', {
+    skillRoots: [
+      'skills/scaffold/',
+      'skills/implement/',
+      'skills/agent-runtime/',
+      'skills/renderer-test/',
+      'skills/electron-test/',
+      'skills/package/'
+    ],
+    skills: ['agent-runtime', 'electron-test', 'implement', 'package', 'renderer-test', 'scaffold'],
+    resources: ['skills/scaffold/references/stack-profile.md', 'skills/implement/references/architecture.md'],
+    license: null,
+    manifestLicense: 'MIT',
+    licenseFile: 'LICENSE'
+  }]
+]);
+const isAuthoredResource = (name, relative) => {
+  const authored = authoredPlugins.get(name);
+  return authored !== undefined && authored.skillRoots.some(directory => relative.startsWith(directory));
+};
 
 function files(directory) {
   return readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
@@ -32,9 +58,10 @@ function files(directory) {
 
 for (const name of ['aiwf-core', 'aiwf-spec', ...supportedStacks.map(stack => `aiwf-${stack}`)]) {
   const plugin = join(root, 'plugins', name);
-  const provenance = name === 'aiwf-spec' ? { upstream_sha256: {}, modified_sha256: {} }
+  const authored = authoredPlugins.get(name);
+  const provenance = authored ? { upstream_sha256: {}, modified_sha256: {} }
     : JSON.parse(read(join(plugin, 'UPSTREAM.json')));
-  if (name !== 'aiwf-spec') {
+  if (!authored) {
     assert.equal(provenance.repository, 'https://github.com/AI-Unified-Process/marketplace');
     assert.match(provenance.commit, /^[0-9a-f]{40}$/);
     commit ??= provenance.commit;
@@ -61,20 +88,21 @@ for (const name of ['aiwf-core', 'aiwf-spec', ...supportedStacks.map(stack => `a
     if (!existsSync(join(plugin, directory))) { continue; }
     for (const file of files(join(plugin, directory))) {
       const relative = file.slice(plugin.length + 1);
-      if (name === 'aiwf-spec' && isAiwfOwned(relative)) { continue; }
+      if (isAuthoredResource(name, relative)) { continue; }
       assert.ok(Object.hasOwn(provenance.upstream_sha256, relative), `Resource missing provenance: ${name}/${relative}`);
     }
   }
   const names = readdirSync(join(plugin, 'skills')).sort();
   if (name === 'aiwf-core') { assert.equal(names.length, 7); }
-  if (name === 'aiwf-spec') { assert.deepEqual(names, ['sync-docs', 'workflow']); }
+  if (authored) { assert.deepEqual(names, authored.skills, `Skill set mismatch: ${name}`); }
   skills += names.length;
   for (const skill of names) {
     const file = join(plugin, 'skills', skill, 'SKILL.md');
     const text = read(file);
     assert.match(text, new RegExp(`^---\\nname: ${skill}\\n`, 'm'), `Skill name mismatch: ${name}/${skill}`);
     assert.match(text, /^description: .+/m);
-    assert.match(text, /Apache(-| License, Version )2\.0/);
+    const licensePattern = authored ? authored.license : /Apache(-| License, Version )2\.0/;
+    if (licensePattern) { assert.match(text, licensePattern, `Skill license text missing: ${name}/${skill}`); }
     for (const markdown of files(dirname(file)).filter(path => path.endsWith('.md'))) {
       const prose = read(markdown).replace(/^```[^\n]*\n[\s\S]*?^```\s*$/gm, '');
       for (const match of prose.matchAll(/\]\(([^\s)]+)\)/g)) {
@@ -91,6 +119,16 @@ for (const name of ['aiwf-core', 'aiwf-spec', ...supportedStacks.map(stack => `a
   const manifest = JSON.parse(read(join(plugin, '.claude-plugin/plugin.json')));
   assert.equal(manifest.name, entry.name);
   assert.equal(manifest.version, entry.version);
+  if (authored) {
+    assert.equal(manifest.license, authored.manifestLicense, `Manifest license mismatch: ${name}`);
+    for (const resource of authored.resources ?? []) {
+      assert.ok(existsSync(join(plugin, resource)), `Missing declared resource: ${name}/${resource}`);
+    }
+    if (authored.licenseFile) {
+      assert.ok(existsSync(join(plugin, authored.licenseFile)), `Missing license file: ${name}/${authored.licenseFile}`);
+      assert.match(read(join(plugin, authored.licenseFile)), /MIT License|Permission is hereby granted, free of charge/, `License text mismatch: ${name}/${authored.licenseFile}`);
+    }
+  }
   assert.ok(pkg.files.includes(`plugins/${name}/`), `Package excludes plugin: ${name}`);
 }
 assert.equal(importedSkills, 31);
@@ -140,6 +178,6 @@ for (const target of delegationTargets) {
   assert.ok(pkg.files.includes(`plugins/${name}/`), `Package excludes plugin: ${name}`);
   skills++;
 }
-assert.equal(skills, 35);
+assert.equal(skills, 41);
 assert.equal(pkg.bin['aiwf-spec'], './src/cli/spec-cli.js');
-console.log(`AIWF: ${importedSkills} unchanged upstream skills + ${skills - importedSkills} AIWF skills (workflow, sync-docs and optional delegates); ${verified} unchanged upstream resources, ${modified} attributed NOTICE modification; references and manifests validated.`);
+console.log(`AIWF: ${importedSkills} unchanged upstream skills + ${skills - importedSkills} AIWF skills (workflow, sync-docs, the authored electron-react stack and optional delegates); ${verified} unchanged upstream resources, ${modified} attributed NOTICE modification; references, declared resources and manifests validated.`);

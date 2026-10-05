@@ -32,7 +32,7 @@ export class UsageError extends Error {
 
 export const COMMANDS = {
   init: {
-    summary: 'Create minimal Draft AIUP-compatible spec files (never overwrites).',
+    summary: 'Create minimal Draft AIWF spec files (never overwrites).',
     string: ['root', 'name'],
     boolean: ['json'],
     required: ['root', 'name']

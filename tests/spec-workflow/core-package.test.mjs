@@ -17,18 +17,23 @@ test('methodology core is the primary independently installable package', () => 
   assert.equal(readdirSync(root + 'plugins/aiwf-core/skills').length, 7);
   assert.deepEqual(readdirSync(root + 'plugins/aiwf-spec/skills').sort(), ['sync-docs', 'workflow']);
   const installer = readFileSync(root + 'scripts/install-spec-skills.mjs', 'utf8');
-  assert.match(installer, /join\(plugins, 'aiwf-core'\)/);
+  assert.match(installer, /skill-bundles\.js/);
 });
 
-test('methodology, optional delegation plugins and the spec CLI are distributed', () => {
-  const names = ['aiwf-core', 'aiwf-spec', 'aiwf-delegate-claude', 'aiwf-delegate-codex', 'aiwf-vaadin-jooq', 'aiwf-angular-jpa', 'aiwf-blazor-dotnet', 'aiwf-nestjs-nextjs'];
+test('methodology, optional delegation plugins, the authored stack and the spec CLI are distributed', () => {
+  const required = ['aiwf-core', 'aiwf-spec', 'aiwf-delegate-claude', 'aiwf-delegate-codex', 'aiwf-vaadin-jooq', 'aiwf-angular-jpa', 'aiwf-blazor-dotnet', 'aiwf-nestjs-nextjs', 'aiwf-electron-react'];
   const market = json('.claude-plugin/marketplace.json');
-  assert.deepEqual(market.plugins.map(p => p.name), names);
-  assert.deepEqual(readdirSync(root + 'plugins').sort(), [...names].sort());
+  const marketNames = market.plugins.map(p => p.name);
+  const pluginDirs = readdirSync(root + 'plugins').sort();
+  assert.equal(marketNames[0], 'aiwf-core');
+  assert.deepEqual([...marketNames].sort(), pluginDirs);
+  for (const name of required) {
+    assert.ok(pluginDirs.includes(name), `missing distributed plugin: ${name}`);
+  }
   const pkg = json('package.json');
-  assert.deepEqual(pkg.bin, { 'aiwf-spec': './src/cli/spec-cli.js' });
+  assert.deepEqual(pkg.bin, { aiwf: './src/cli/aiwf-cli.js', 'aiwf-spec': './src/cli/spec-cli.js' });
   assert.equal(pkg.main, './src/lib/spec-workflow.js');
-  assert.deepEqual(pkg.dependencies ?? {}, {});
+  assert.equal(pkg.dependencies.skills, '1.7.0');
   assert.deepEqual(pkg.devDependencies ?? {}, {});
   assert.equal(existsSync(root + '.claude-plugin/plugin.json'), false);
   for (const path of ['plugins/aiwf-core-legacy', 'src/cli/index.js', 'src/commands', 'src/config', 'src/utils', 'claude-code', 'skills', 'rules', 'jest.config.js']) {
@@ -44,5 +49,10 @@ test('methodology, optional delegation plugins and the spec CLI are distributed'
     for (const legalFile of ['LICENSE', 'NOTICE']) {
       assert.equal(readFileSync(root + plugin + `skills/${skill}/${legalFile}`, 'utf8'), readFileSync(root + plugin + legalFile, 'utf8'));
     }
+  }
+  const desktop = 'plugins/aiwf-electron-react/';
+  for (const skill of readdirSync(root + desktop + 'skills')) {
+    // Standalone skills CLI installs must retain the full license.
+    assert.equal(readFileSync(root + desktop + `skills/${skill}/LICENSE`, 'utf8'), readFileSync(root + desktop + 'LICENSE', 'utf8'));
   }
 });

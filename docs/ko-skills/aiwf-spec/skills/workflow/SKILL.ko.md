@@ -15,7 +15,7 @@ Copyright 2026 moonklabs. Apache-2.0 라이선스. 플러그인의 [LICENSE](../
 
 core 스킬 7개와 선택 가능한 기술 스택 묶음 4개는 보존된 upstream 리소스다. AIWF에 맞추려고 이들의 원문 지시를 수정하지 않는다. 호스트별 처리는 이 workflow와 사용자의 저장소 지침을 통해 적용한다. 보존된 스킬이 `TodoWrite`처럼 사용할 수 없는 도구를 지정하면 호스트의 작업 추적 도구나 짧은 Markdown 체크리스트를 사용한다. 함께 제공되는 스크립트와 참조는 설치된 스킬 폴더를 기준으로 찾는다.
 
-방법론의 기반은 `aiup-core`에서 파생한 `aiwf-core` 플러그인이다. 선택 확장인 `aiwf-spec` workflow보다 먼저 설치한다. core는 `requirements`, `entity-model`, `use-case-diagram`, `use-case-spec`, `test-case`, `spec-review`, `reverse-engineer`와 관련 검사기를 담당한다. Claude Code는 `/aiwf-core:requirements`처럼 core 스킬을 호출하며, 이 확장은 `/aiwf-spec:workflow`를 제공한다. Codex 설치기는 두 패키지를 포함하고 기존 `aiwf-*` 스킬 이름을 유지한다.
+방법론의 기반은 `aiwf-core` 플러그인이다. 선택 확장인 `aiwf-spec` workflow보다 먼저 설치한다. core는 `requirements`, `entity-model`, `use-case-diagram`, `use-case-spec`, `test-case`, `spec-review`, `reverse-engineer`와 관련 검사기를 담당한다. Claude Code는 `/aiwf-core:requirements`처럼 core 스킬을 호출하며, 이 확장은 `/aiwf-spec:workflow`를 제공한다. Codex 설치기는 두 패키지를 포함하고 기존 `aiwf-*` 스킬 이름을 유지한다.
 
 저장소에 맞는 기술 스택을 선택한다. Codex 설치에서는 스택 이름을 접두어로 붙이며, 예를 들어 `aiwf-nestjs-nextjs-implement`가 된다. 명령 참조의 이름 변경은 설치 사본에만 적용한다. Claude Code에서는 해당 `aiwf-*` 플러그인을 설치하고 플러그인 이름을 포함한 명령으로 호출한다. 원래 upstream 에이전트 이름은 유지한다. Angular/Vaadin coverage 스킬에는 `agents/uc-coverage.md` 프롬프트가 포함되어 있다. 파일 설치만으로 Codex 사용자 정의 에이전트가 등록되지는 않는다. 지원되는 호스트에서는 해당 프롬프트로 네이티브 위임을 사용한다. 스킬이 에이전트 기능을 요구하지만 제공되지 않으면 그 부재를 명시한다. 같은 에이전트가 검사했는데 별도 검토자가 실행한 것으로 보고하지 않는다.
 

@@ -4,13 +4,14 @@
 
 AIWF는 유스케이스 명세를 Git에 유지하면서 기존 Claude Code/Codex로 구현하고, 실제 검증 결과를 검토 가능한 형태로 남기는 개발 워크플로우다.
 
-2026-10-02부터 개선 중이다. 명세 워크플로는 두 플러그인으로 나뉜다. **`aiwf-core`**는 AIUP에서 가져온 방법론 core로 요구사항·유스케이스·엔티티·명세 검토용 upstream 스킬 7개를 담는다. **`aiwf-spec`**는 AIWF가 추가한 `workflow`와 개발 후 문서 정리용 `sync-docs` 스킬을 담고, 저장소 CLI를 사용해 비파괴 초기화·명세 버전 고정·변경 감지·검증 로그 묶기를 연결한다. Claude/Codex 위임 애드온 두 개는 별도 선택 사항이다. Sprintable 연동과 무인 반복 실행은 후속 범위다. 아래 기능은 이 저장소의 개발 버전 기준이며 기존 npm 배포판에 포함됐다고 가정하면 안 된다.
+명세 워크플로는 두 플러그인으로 나뉜다. **`aiwf-core`**는 요구사항·유스케이스·엔티티·명세 검토를 위한 방법론 스킬 7개를 제공한다. **`aiwf-spec`**는 비파괴 초기화·명세 버전 고정·변경 감지·검증 로그 묶기를 연결하는 `workflow`와 개발 후 영향받는 문서를 정리하는 `sync-docs`를 제공한다. Claude/Codex 위임 애드온 두 개는 별도 선택 사항이다. Sprintable 연동과 무인 반복 실행은 후속 범위다. 현재 npm 배포 버전은 `aiwf@0.4.0`이다.
 
 ## 가장 먼저 읽을 것
 
 - [스킬 한글 휴먼 리뷰본과 문서 관리 절차](docs/ko-skills/README.md) — 모든 작업에서 먼저 확인하고 관련 원문·번역을 함께 갱신한다.
 - [Claude·Codex 위임 스킬 선택 설치·실행 명세](docs/modernization/DELEGATION-OPTIONAL.ko.md)
 - [개선 방향과 단계](docs/modernization/DIRECTION.ko.md)
+- [CLI 설치 중심 역할과 구현 검토](docs/modernization/CLI-INSTALLATION-REVIEW.ko.md) — npm 전역 CLI 설치, 공식 skills CLI 기반 구성 설치와 반복·추가 설치.
 - [CLI 생산성 분석과 권고안](docs/modernization/CLI-PRODUCTIVITY.ko.md) — 실제 UC 파일럿 후 읽기 전용 검증과 선택 검사를 확장하는 제안. 원문·한글본 갱신은 모든 단계의 품질 조건이다.
 - [Claude 두 세션의 계획 리뷰](docs/modernization/CLAUDE-PLAN-REVIEW-2026-10-03.ko.md) — 조건부 적합, 검토 당시 고정본과 지적 사항 보존.
 - [파일럿 계획](docs/modernization/PILOT-UC-001.ko.md)과 [로컬 실행 결과](docs/modernization/PILOT-RESULT-2026-10-03.ko.md) — 완료 기준과 검사 연결표, drift 거부, 실패→수정→23개 테스트 통과. 실제 제품 적용·휴먼 수용·생산성 효과는 미검증이며 새 CLI 명령은 추가하지 않았다.
@@ -18,9 +19,45 @@ AIWF는 유스케이스 명세를 Git에 유지하면서 기존 Claude Code/Code
 - [Sprintable 연결 계약 초안](docs/modernization/SPRINTABLE.ko.md)
 - [한국어 지출 제출 예제](examples/spec-workflow/README.md)
 
-## 개발 버전으로 시작하기
+## CLI를 설치하고 스킬 구성 선택하기
 
-Node.js 20 이상. 명세 구조 검사에는 Python 3.9 이상이 필요하다. 새 CLI는 외부 Node 패키지 없이 실행된다.
+다음 `aiwf@0.5.0` 배포부터 **CLI를 npm 전역 설치한 뒤 프로젝트에 필요한 스킬 구성을 설치**하는 흐름을 기본으로 안내한다. 현재 checkout에는 구현되어 있으며, 배포된 `aiwf@0.4.0`은 아직 `aiwf-spec`만 제공한다.
+
+포함된 `skills@1.7.0` 실행에는 **Node.js 22.20 이상**이 필요하다. 명세 구조 검사에는 Python 3.9 이상이 필요하다.
+
+```bash
+# aiwf@0.5.0 배포 후:
+npm i -g aiwf
+aiwf install
+
+# 실제 대상 프로젝트에서 호스트와 스택을 지정해 재현 가능한 설치:
+aiwf install --agent codex claude-code --stack electron-react --dry-run
+aiwf install --agent codex claude-code --stack electron-react
+aiwf status
+
+# 위임은 선택 사항이며 나중에 기존 구성에 추가할 수 있다.
+aiwf install --agent codex --stack electron-react --delegate claude codex
+```
+
+대화형 터미널의 `aiwf install`은 호스트·선택 스택·위임을 묻는다. 자동 실행에서는 `--agent`를 지정한다. 기본 추천 구성은 core와 workflow/문서 동기화이며, `--core-only`로 core만 선택할 수 있다. `--stack`은 `aiwf list`에 표시된 스택을 여러 개 선택할 수 있다. 스킬은 현재 프로젝트에 설치하며, 다른 프로젝트는 `--project /path/to/project`, 사용자 범위는 `--global`로 지정한다. **CLI의 npm 전역 설치와 스킬의 전역 설치는 별개다.**
+
+AIWF는 플러그인 조합과 의존성을 계산하고 완전한 참조 자료와 `aiwf-` 이름을 준비한다. 실제 설치는 버전을 고정한 공식 skills CLI가 호스트·스킬·`--copy`를 지정해 수행한다. skills CLI를 따로 전역 설치하거나 실행 때 `npx`로 내려받을 필요가 없다. Codex의 프로젝트·사용자 스킬은 `.agents/skills`, Claude 프로젝트 스킬은 `.claude/skills`로 배치하며 Claude 사용자 범위는 `CLAUDE_CONFIG_DIR`를 따른다. [설치 설계와 검증](docs/modernization/CLI-INSTALLATION-REVIEW.ko.md)을 참고한다.
+
+같은 버전의 AIWF 관리 스킬은 건너뛰므로 스택·위임·다른 호스트를 나중에 추가할 수 있다. 로컬 수정이나 다른 도구가 설치한 기존 스킬은 충돌로 표시하고 보존한다. `.aiwf/skills-installation.json`에 버전과 해시를 기록하고, 공식 `skills-lock.json`이 삭제된 임시 경로를 가리키지 않도록 `.aiwf/skill-sources/`에 설치 소스를 유지한다. 이 자료는 설치와 함께 보존한다. `aiwf status`는 기록된 설치를 확인하며 다른 도구의 설치를 자동으로 관리 대상으로 삼지 않는다. 스킬 갱신·제거와 저장 프로필은 후속 범위다. CLI 자체 갱신은 `npm i -g aiwf@latest`를 사용하며 설치된 스킬을 자동 갱신하지 않는다.
+
+명세 초기화·pin·변경 확인·packet은 `aiwf spec --help`로 사용하며 기존 `aiwf-spec`도 유지한다. portable 스킬과 네이티브 플러그인은 설치 방식이 다르다. 아래 Claude marketplace와 직접 skills.sh 설치 경로도 계속 지원한다.
+
+## 현재 checkout에서 실행하기
+
+실제 대상 프로젝트 폴더는 먼저 존재해야 한다. 새 npm 버전 배포 전에는 checkout CLI를 실행한다.
+
+```bash
+npm ci
+node src/cli/aiwf-cli.js install --agent codex --stack electron-react --project /path/to/project --dry-run
+node src/cli/aiwf-cli.js install --agent codex --stack electron-react --project /path/to/project
+```
+
+이전 checkout 전용 복사 스크립트도 유지하며, 이 경로는 기존 스킬이 하나라도 있으면 덮어쓰기 없이 중단한다.
 
 ```bash
 # 실제 대상 프로젝트 폴더는 먼저 존재해야 한다.
@@ -33,7 +70,7 @@ node scripts/install-spec-skills.mjs --project /path/to/project --stack nestjs-n
 node scripts/install-spec-skills.mjs --project /path/to/project --delegate codex --dry-run
 ```
 
-Codex는 기본적으로 `aiwf-core` 스킬 7개와 `aiwf-spec`의 `workflow`, `sync-docs`를 `aiwf-requirements`, `aiwf-use-case-spec`, ..., `aiwf-workflow`, `aiwf-sync-docs`로 함께 설치하며 참조 문서·검사기·출처도 포함한다. `--stack`은 `vaadin-jooq`, `angular-jpa`, `blazor-dotnet`, `nestjs-nextjs` 중 하나를 골라 해당 stack을 추가한다. 기존 스킬은 덮어쓰지 않고 강제 플래그도 없다. 실제 호스트의 스킬 자동 선택과 모델 실행은 별도 파일럿에서 검증할 예정이다.
+Codex는 기본적으로 `aiwf-core` 스킬 7개와 `aiwf-spec`의 `workflow`, `sync-docs`를 `aiwf-requirements`, `aiwf-use-case-spec`, ..., `aiwf-workflow`, `aiwf-sync-docs`로 함께 설치하며 참조 문서·검사기·출처도 포함한다. `--stack`은 `vaadin-jooq`, `angular-jpa`, `blazor-dotnet`, `nestjs-nextjs`, `electron-react` 중 하나를 골라 해당 stack을 추가한다. 기존 스킬은 덮어쓰지 않고 강제 플래그도 없다. 실제 호스트의 스킬 자동 선택과 모델 실행은 별도 파일럿에서 검증할 예정이다.
 
 개발 후에는 Codex의 `aiwf-sync-docs` 또는 Claude Code의 `/aiwf-spec:sync-docs`에 변경 의도, 비교 범위와 UC ID를 전달한다. workflow는 완료 전에 이 절차로 관련 문서를 갱신하고 구현 누락·미검증 동작을 보존한다. [단독 skills CLI 설치와 사용 안내](docs/ko-skills/aiwf-spec/README.ko.md#개발-후-문서-동기화), [한글 검토본](docs/ko-skills/aiwf-spec/skills/sync-docs/SKILL.ko.md)을 참고한다. 새 `aiwf-spec` CLI 명령을 추가한 것은 아니다.
 
@@ -50,20 +87,23 @@ npx skills add https://github.com/moonklabs/aiwf --skill delegate-codex --agent 
 
 ## 플러그인 구성
 
-upstream AIUP 스킬 31개를 바이트 그대로 가져오고 AIWF 자체 `workflow`, `sync-docs`와 선택 위임 스킬 2개를 더해 총 35개를 제공한다. `aiwf-core`가 upstream 7개를, `aiwf-spec`가 AIWF `workflow`와 `sync-docs` 담는다.
+AIWF는 총 41개 스킬을 제공한다. `aiwf-core`의 방법론 스킬 7개, 기술 스택 5종의 구현·테스트 스킬 30개, `aiwf-spec`의 `workflow`·`sync-docs`, 선택 위임 스킬 2개로 구성된다.
 
 | 플러그인 | 역할 | 내용 |
 |---|---|---|
-| `aiwf-core` | 방법론 core (필수) | upstream 스킬 7개 바이트 그대로 (2.19.0) |
+| `aiwf-core` | 방법론 core (필수) | 방법론 스킬 7개 (2.19.0) |
 | `aiwf-spec` | AIWF 래퍼 (선택) | AIWF `workflow`와 `sync-docs` |
 | `aiwf-delegate-claude` | 선택 위임 애드온 | `delegate-claude` |
 | `aiwf-delegate-codex` | 선택 위임 애드온 | `delegate-codex` |
-| `aiwf-vaadin-jooq` | stack | upstream 스킬 8개 (2.20.0) |
-| `aiwf-angular-jpa` | stack | upstream 스킬 6개 (0.7.0) |
-| `aiwf-blazor-dotnet` | stack | upstream 스킬 5개 (0.7.0) |
-| `aiwf-nestjs-nextjs` | stack | upstream 스킬 5개 (0.4.0) |
+| `aiwf-vaadin-jooq` | stack | 스킬 8개 (2.20.0) |
+| `aiwf-angular-jpa` | stack | 스킬 6개 (0.7.0) |
+| `aiwf-blazor-dotnet` | stack | 스킬 5개 (0.7.0) |
+| `aiwf-nestjs-nextjs` | stack | 스킬 5개 (0.4.0) |
+| `aiwf-electron-react` | 에이전트 데스크톱 stack | 스킬 6개 (0.1.0) |
 
-각 플러그인은 가져온 upstream 파일(`skills/`, stack은 `rules/`와 있는 경우 `agents/`, `LICENSE`, `NOTICE`)과 플러그인별 `UPSTREAM.json`을 둔다. 유일한 upstream 소스 수정은 `aiwf-core` NOTICE에 덧붙인 AIWF 출처 문구이며, 그 밖의 vendored 파일은 upstream 바이트와 동일하다. `aiwf-spec`는 자체 upstream이 없어 core의 [UPSTREAM.json](plugins/aiwf-core/UPSTREAM.json)을 가리킨다. 설치는 파일 복사이며 네이티브 Codex 서브에이전트를 등록하지 않고 MCP도 자동 구성하지 않는다. `agents/uc-coverage.md` 같은 에이전트 프롬프트는 리소스로만 복사되고, 호스트 매핑은 `workflow` 스킬이 설명한다. 이름·개수·pin 갱신 절차는 [SKILLS.ko.md](docs/modernization/SKILLS.ko.md)에 정리했다.
+Electron 에이전트 데스크톱 앱은 [Electron/React 안내 원문](plugins/aiwf-electron-react/README.md)과 [한글 검토본](docs/ko-skills/aiwf-electron-react/README.ko.md)을 참고한다. core 명세를 바탕으로 프로젝트 생성, 구현, 런타임 어댑터, UI/Electron 테스트와 패키징을 진행한다. 실제 에이전트는 선택한 Sally·PI·기타 어댑터가 실행하고 AI Elements는 UI를 담당한다. 현재 checkout에서 `--stack electron-react`를 선택하면 core·spec을 포함한 15개 스킬을 설치한다. 새 스택은 배포된 `aiwf@0.4.0`에는 포함되지 않는다.
+
+설치는 완전한 스킬 폴더의 파일 복사이며 네이티브 Codex 서브에이전트를 등록하지 않고 MCP도 자동 구성하지 않는다. `agents/uc-coverage.md` 같은 에이전트 프롬프트는 리소스로만 복사되고, 호스트 매핑은 `workflow` 스킬이 설명한다. 이름·개수·유지보수 절차는 [SKILLS.ko.md](docs/modernization/SKILLS.ko.md)에 정리했다.
 
 Claude Code에서는 이 저장소를 marketplace로 등록하고 필요한 플러그인(`aiwf-core`, `aiwf-spec`, `aiwf-<stack>`)을 설치한 뒤 `/aiwf-core:use-case-spec`, `/aiwf-spec:workflow`, `/aiwf-nestjs-nextjs:implement`처럼 플러그인 이름으로 한정해 호출한다.
 
@@ -154,8 +194,8 @@ npm run validate:spec-plugin
 npm run test:spec-upstream
 ```
 
-예전 설치기·언어/스프린트/페르소나/YOLO 명령·중복 스킬·레거시 플러그인과 문서는 제거했다. npm 패키지는 외부 Node 의존성 없이 `aiwf-spec`만 제공하며 `npm test`는 현재 회귀 검사를 실행한다. 예전 프레임워크와의 호환성은 종료했다. 이미 설치된 프로젝트의 파일이나 사용자 데이터는 변경하지 않는다.
+예전 설치기·언어/스프린트/페르소나/YOLO 명령·중복 스킬·레거시 플러그인과 문서는 제거했다. 새 npm 패키지는 공식 skills CLI를 사용하는 `aiwf`와 기존 `aiwf-spec`를 제공하며 `npm test`는 현재 회귀 검사를 실행한다. 예전 프레임워크와의 호환성은 종료했다. 명세 CLI 자체는 Node 기본 모듈만 사용한다.
 
-## 출처와 라이선스
+## 라이선스
 
-`aiwf-core` 방법론 플러그인과 4개 stack 플러그인은 [AI Unified Process marketplace](https://github.com/AI-Unified-Process/marketplace) 커밋 `065dadda0f696c29ff2bacbda31b38152082e6fa`에서 가져왔다. `aiwf-core`와 `aiwf-vaadin-jooq`는 Simon Martinelli, `aiwf-angular-jpa`는 Marc Affolter, `aiwf-blazor-dotnet`은 Carl J. Mosca, `aiwf-nestjs-nextjs`는 Swift Ugandan의 작업이다. 각 플러그인의 `UPSTREAM.json`에 원본 커밋·파일 hash·수정 내역을 기록했다. 기존 AIWF 코드는 [MIT](LICENSE), 가져온 플러그인은 [Apache-2.0](plugins/aiwf-core/LICENSE)와 [NOTICE](plugins/aiwf-core/NOTICE)를 따른다.
+AIWF 코드는 [MIT](LICENSE)를 따른다. 플러그인 파일에는 해당 [Apache-2.0](plugins/aiwf-core/LICENSE) 또는 [MIT](plugins/aiwf-electron-react/LICENSE) 라이선스와 [NOTICE](plugins/aiwf-core/NOTICE)를 유지하며, 적용 범위는 각 플러그인의 법적 문서를 확인한다.

@@ -2,6 +2,8 @@
 
 실행: 2026-10-03. 상태: **로컬 검증 완료, 실제 제품 적용·휴먼 리뷰 대기**. [실행 전 계획](PILOT-UC-001.ko.md), [검토 당시 계획](CLI-PRODUCTIVITY-REVIEWED-2026-10-03.ko.md), [Claude 두 세션의 리뷰](CLAUDE-PLAN-REVIEW-2026-10-03.ko.md)를 구분해 읽는다. 이번 수정본에 대한 Claude 재검토는 실행하지 않았다.
 
+2026-10-05 정리: 일회성 서비스 구현·테스트와 재실행 안내를 제거했다. 아래 검사 수·명령·해시·로그는 2026-10-03 실행 당시 기록이다. 현재 보관 범위는 [기록 안내](evidence/local-pilot-20261003/README.ko.md)에서 확인한다.
+
 ## 결과와 이번 변경
 
 기존 지출 제출 예제를 별도 임시 프로젝트에서 실행했다. 엔터티의 사용 내용 길이 200을 `UC-001 BR-002/A3`, `TC-002`, [구현 계획의 검사 연결표](evidence/local-pilot-20261003/project/docs/plans/UC-001.md)에 명시하고 서비스 구현·테스트를 연결했다. Unicode code point 수와 생략·null·타입 정책은 이 예제의 결정이며 실제 업무 정책 승인이 아니다.
@@ -10,7 +12,7 @@
 
 명세 변경 시 `check`는 TC 추가 1개와 기존 문서 변경 3개를 drift로 보고했고 exit 1을 반환했다. 갱신 전 `packet`도 `packet_requires_sync`로 거부했으며 출력 파일이 만들어지지 않았다. 명세를 명시적으로 다시 pin한 뒤 실패·최종 packet을 따로 생성했다.
 
-AIWF의 실행 CLI·upstream 원문·스킬은 수정하지 않았다. 서비스 변경은 [보관 예제](evidence/local-pilot-20261003/README.ko.md)의 재현 자료다. `verify`, runner, packet v2, 문서 보고서와 CI는 미구현 후보로 유지한다.
+AIWF의 실행 CLI·upstream 원문·스킬은 수정하지 않았다. 서비스 변경의 실행 결과는 [보관 기록](evidence/local-pilot-20261003/README.ko.md)에 남겼다. `verify`, runner, packet v2, 문서 보고서와 CI는 미구현 후보로 유지한다.
 
 ## 실행 근거
 

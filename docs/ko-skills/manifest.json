@@ -68,6 +68,13 @@
       "upstream_repository": "https://github.com/AI-Unified-Process/marketplace",
       "upstream_commit": "065dadda0f696c29ff2bacbda31b38152082e6fa",
       "provenance_path": "plugins/aiwf-vaadin-jooq/UPSTREAM.json"
+    },
+    {
+      "name": "aiwf-electron-react",
+      "version": "0.1.0",
+      "license_path": "plugins/aiwf-electron-react/LICENSE",
+      "notice_path": "plugins/aiwf-electron-react/NOTICE",
+      "origin": "AIWF 자체 Electron/React 에이전트 데스크톱 스택"
     }
   ],
   "local_sources": [
@@ -155,8 +162,8 @@
       "translation": "docs/ko-skills/aiwf-angular-jpa/README.ko.md",
       "scope": "repository",
       "review_status": "awaiting_review",
-      "source_sha256": "8ed9079610b44d1d9a09b341a00da7bd4e26cb12f23ae8a285b43d83ee854956",
-      "translation_sha256": "9f9b707790b1dea1e25359cad5cb1faf559486b59f13f2026b5324d75694e3e5"
+      "source_sha256": "7bbc8ce2d89a9b64df6a2bd7a2e87ab14f45dddedb94ed2b71aece7b21192cab",
+      "translation_sha256": "7bfc58e55741b85af9d5e2f5a5ad25be0de1d1edcc932a9ac45f26ece68f2551"
     },
     {
       "source": "plugins/aiwf-angular-jpa/agents/uc-coverage.md",
@@ -244,8 +251,8 @@
       "translation": "docs/ko-skills/aiwf-blazor-dotnet/README.ko.md",
       "scope": "repository",
       "review_status": "awaiting_review",
-      "source_sha256": "c1f9ee668d3f00951f9932179307ac7c84f6bca15d354ab3823f465dcf42e5f4",
-      "translation_sha256": "69f679d2cfdd256e4b15bb46f920e7628bb9cddd86d58faff6d5f1973eaf49cf"
+      "source_sha256": "4d180f6f91559de998bafde9aef15539ac5f153300dd2f05fd862d0907011c47",
+      "translation_sha256": "155c51ece741cc96416315c34bde97b5d50d80f3d3c39d8e6605bb73be1be2b8"
     },
     {
       "source": "plugins/aiwf-blazor-dotnet/rules/mcp-servers.md",
@@ -306,8 +313,8 @@
       "translation": "docs/ko-skills/aiwf-core/README.ko.md",
       "scope": "repository",
       "review_status": "awaiting_review",
-      "source_sha256": "927155ed142005588e1b983defa92048851296f73468d993c9d0baf4fd9b0191",
-      "translation_sha256": "dd98829a92675dd3c65bb4859e15169467109f3c472e908bd92c221940c57b40"
+      "source_sha256": "94c3f2a60e87b1201cc8eace184bbaf2d7b0d23056432f427c0eb488351e0444",
+      "translation_sha256": "473c0542b61f184acb3dae4904ddd1d0647c03eecce9355cacc0b129aa34f6a1"
     },
     {
       "source": "plugins/aiwf-core/skills/entity-model/SKILL.md",
@@ -536,8 +543,8 @@
       "translation": "docs/ko-skills/aiwf-nestjs-nextjs/README.ko.md",
       "scope": "repository",
       "review_status": "awaiting_review",
-      "source_sha256": "5cfb2d7e1336095b8092c62e9dae647d963214b7f7208f8afe2bd59de1574d70",
-      "translation_sha256": "38c345c1fd478d154d2b24649ebfc942e95e185e80dbf113913318b291d837a2"
+      "source_sha256": "4795505ec3f37da1b6bc603f7d8da6fe5d8ff2cfac2d2889df28b532caae69da",
+      "translation_sha256": "862afaea52604b25e864c2f6eb972e3eebe5568e3bb55438a3c8f10fbe361366"
     },
     {
       "source": "plugins/aiwf-nestjs-nextjs/rules/mcp-servers.md",
@@ -607,8 +614,8 @@
       "translation": "docs/ko-skills/aiwf-spec/README.ko.md",
       "scope": "repository",
       "review_status": "awaiting_review",
-      "source_sha256": "85a72a78d83935254475e8d92722563927868e344468cd93ad617d1d537dcc24",
-      "translation_sha256": "97e0539ba1334675b57d7ff0e7361b6b0cb26251e2e56b7028816d0294c5deb1"
+      "source_sha256": "48eebf17d0da5b7be1661655347863b1e5e049a8d1e45ba0338890eefb01f60d",
+      "translation_sha256": "1e26cce58083928fee33f2e9dc24de0134151674cbd2b5683191d7fa274f7bb1"
     },
     {
       "source": "plugins/aiwf-spec/skills/sync-docs/SKILL.md",
@@ -624,8 +631,8 @@
       "translation": "docs/ko-skills/aiwf-spec/skills/workflow/SKILL.ko.md",
       "scope": "repository",
       "source_group": "aiwf-spec",
-      "source_sha256": "bf6f2d71ea25f51f3f1b676ee597d335bb174cea23ee20212342486990b7936c",
-      "translation_sha256": "c0ca2df1d7cb7f0c2a173e82acd635b3066ab14a9767b58cda64b183c3147651",
+      "source_sha256": "910f26ea4bfe8f5a4dd6199d367932cab2a30fa4d468eb8a17f72a99e4d083ae",
+      "translation_sha256": "2ff6c06ff157cfa4c07cb85c9fcac2d3a24c1c682c8be445d32bf586df837ab3",
       "review_status": "awaiting_review"
     },
     {
@@ -633,8 +640,8 @@
       "translation": "docs/ko-skills/aiwf-vaadin-jooq/README.ko.md",
       "scope": "repository",
       "review_status": "awaiting_review",
-      "source_sha256": "97daa2eae6f319272da6fb2e7d780078e81b4129c92715aef22932fabe61895c",
-      "translation_sha256": "f2f829bb1ef8ca1de0b2177cad056d7763518523ad1b9397fa097597383e5858"
+      "source_sha256": "a72e33608416174dd851fb5abec3ae860f10fa3a9e5300d2bc78a143ad4fd335",
+      "translation_sha256": "9c488a467d1a20b9563beb0100249454425d76f9991aef177815a909e729d6d3"
     },
     {
       "source": "plugins/aiwf-vaadin-jooq/agents/uc-coverage.md",
@@ -733,6 +740,87 @@
       "source_group": "aiwf-vaadin-jooq",
       "source_sha256": "a17250bb449445d474bad8d0735e556e011f63fe782c0fca1cb3e968d50b51a3",
       "translation_sha256": "c7bb1808b6181882c54a5e447be1ad47653f3471a08d77e75dfa1e1e182da04b",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-electron-react/README.md",
+      "translation": "docs/ko-skills/aiwf-electron-react/README.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-electron-react",
+      "source_sha256": "6342085aa2ef441b7709c8b092f41782c4cf2f930a102fc35d4f3fed5dd71c54",
+      "translation_sha256": "fb8a2bbee75a8b2235769be3c3080d1664fd2c5c147403f0a159cab348c9846b",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-electron-react/skills/agent-runtime/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-electron-react/skills/agent-runtime/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-electron-react",
+      "source_sha256": "5e75b5bd4198dbc2a0573fd46031b572145d86320b3ea3882e56f1173da2e09c",
+      "translation_sha256": "c2530fdd0274c0407e09aa708b251c1152451489b713ce808fb3b8ea8e2de37d",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-electron-react/skills/electron-test/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-electron-react/skills/electron-test/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-electron-react",
+      "source_sha256": "307cbeb3b37d86755e66001f57b02b4eeb2746969183a24d4dfb3419930f5013",
+      "translation_sha256": "4b6a51f2447e787be4fd87eb952b10fa6bd68383f634296c92d2ffb5de217260",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-electron-react/skills/implement/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-electron-react/skills/implement/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-electron-react",
+      "source_sha256": "ac19916c4fad224fbc9e054068822e83277cd4cc91c1ce2df8355afda658968c",
+      "translation_sha256": "dde1af9c361d11f7572a500ba39d9de26b4cb0ac4ede15820d91fae75a0c83a3",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-electron-react/skills/implement/references/architecture.md",
+      "translation": "docs/ko-skills/aiwf-electron-react/skills/implement/references/architecture.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-electron-react",
+      "source_sha256": "3cfa464de9d240c461a1f22441dfc7459fe0a873c395aeec324b03466c212cb3",
+      "translation_sha256": "dcada8e784ff1519f797e3ee9fd42c7da62c65e1476cc4ed9e09bcd0b2841ccb",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-electron-react/skills/package/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-electron-react/skills/package/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-electron-react",
+      "source_sha256": "7c7fee9e5334aad72972f99632a3299aa29b74d4269814e7164129e136199786",
+      "translation_sha256": "24b4959abf32e51909cf1f920c6646ecbc3fd27a9c15e20f62c1af3bde560bb5",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-electron-react/skills/renderer-test/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-electron-react/skills/renderer-test/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-electron-react",
+      "source_sha256": "3ee0dbfd903f430817c51da0393532351f4b666769d8a6af1a7f8bd318f19201",
+      "translation_sha256": "f4da06a3454344904f39a1ed81cb4ac32efb934550104f68f02bd023d3b66cda",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-electron-react/skills/scaffold/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-electron-react/skills/scaffold/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-electron-react",
+      "source_sha256": "9a6005e62005ebee8f6c1fbaf05519dd356bd04f6aad212ce8f6bfe902f9e745",
+      "translation_sha256": "c1fe72ae5676a8063f294613e4766d376056deaff6f98cf777ae9cbd26a8088d",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-electron-react/skills/scaffold/references/stack-profile.md",
+      "translation": "docs/ko-skills/aiwf-electron-react/skills/scaffold/references/stack-profile.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-electron-react",
+      "source_sha256": "daa7ce3d36956bef4efd991e6c231eeab5af8e29e1dcf4562035fe81485637cc",
+      "translation_sha256": "6ffd3707c3f64a3cf71275eab72e5a820764eca4a9bc78e49cf27636d866e2f2",
       "review_status": "awaiting_review"
     }
   ]

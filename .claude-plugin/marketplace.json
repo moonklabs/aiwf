@@ -8,13 +8,12 @@
   "plugins": [
     {
       "name": "aiwf-core",
-      "description": "AIWF methodology core, derived from AIUP: requirements, entities, use cases, journeys and specification review",
+      "description": "AIWF methodology core: requirements, entities, use cases, journeys and specification review",
       "version": "2.19.0",
       "source": "./plugins/aiwf-core",
       "author": {
         "name": "Simon Martinelli",
-        "email": "simon@martinelli.ch",
-        "url": "https://unifiedprocess.ai"
+        "email": "simon@martinelli.ch"
       },
       "keywords": [
         "core",
@@ -72,13 +71,12 @@
     },
     {
       "name": "aiwf-vaadin-jooq",
-      "description": "AI Unified Process for the Vaadin/jOOQ stack - migrations, implementation, tests",
+      "description": "AIWF skills for the Vaadin/jOOQ stack - migrations, implementation, tests",
       "version": "2.20.0",
       "source": "./plugins/aiwf-vaadin-jooq",
       "author": {
         "name": "Simon Martinelli",
-        "email": "simon@martinelli.ch",
-        "url": "https://unifiedprocess.ai"
+        "email": "simon@martinelli.ch"
       },
       "keywords": [
         "spec-driven",
@@ -90,13 +88,12 @@
     },
     {
       "name": "aiwf-angular-jpa",
-      "description": "AI Unified Process for the Angular/JPA stack - migrations, implementation, tests",
+      "description": "AIWF skills for the Angular/JPA stack - migrations, implementation, tests",
       "version": "0.7.0",
       "source": "./plugins/aiwf-angular-jpa",
       "author": {
         "name": "Marc Affolter",
-        "email": "marc_affolter@outlook.com",
-        "url": "https://unifiedprocess.ai"
+        "email": "marc_affolter@outlook.com"
       },
       "keywords": [
         "spec-driven",
@@ -108,13 +105,12 @@
     },
     {
       "name": "aiwf-blazor-dotnet",
-      "description": "AI Unified Process for the C# / Blazor .NET 10 stack - migrations, implementation, tests",
+      "description": "AIWF skills for the C# / Blazor .NET 10 stack - migrations, implementation, tests",
       "version": "0.7.0",
       "source": "./plugins/aiwf-blazor-dotnet",
       "author": {
         "name": "Carl J. Mosca",
-        "email": "carljmosca@gmail.com",
-        "url": "https://unifiedprocess.ai"
+        "email": "carljmosca@gmail.com"
       },
       "keywords": [
         "spec-driven",
@@ -126,13 +122,12 @@
     },
     {
       "name": "aiwf-nestjs-nextjs",
-      "description": "AI Unified Process for the NestJS/Drizzle + Next.js stack - migrations, implementation, tests",
+      "description": "AIWF skills for the NestJS/Drizzle + Next.js stack - migrations, implementation, tests",
       "version": "0.4.0",
       "source": "./plugins/aiwf-nestjs-nextjs",
       "author": {
         "name": "Swift Ugandan",
-        "email": "swiftugandan@gmail.com",
-        "url": "https://unifiedprocess.ai"
+        "email": "swiftugandan@gmail.com"
       },
       "keywords": [
         "spec-driven",
@@ -141,6 +136,15 @@
         "nestjs",
         "nextjs"
       ]
+    },
+    {
+      "name": "aiwf-electron-react",
+      "version": "0.1.0",
+      "description": "AIWF skills for Electron, React and TypeScript agent desktop apps: typed IPC, agent adapters, chat UI, testing and packaging.",
+      "author": {
+        "name": "moonklabs"
+      },
+      "source": "./plugins/aiwf-electron-react"
     }
   ]
 }

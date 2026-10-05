@@ -6,7 +6,7 @@ Read the [Korean skill review documents](docs/ko-skills/README.md) before featur
 
 AIWF keeps use-case specifications in Git, lets existing Claude Code/Codex agents implement them, and records inspectable verification evidence.
 
-Modernization started on 2026-10-02. The specification workflow is split across two plugins: **`aiwf-core`**, the AIUP-derived methodology core (seven upstream skills for requirements, use cases, entities and specification review), and **`aiwf-spec`**, the AIWF wrapper whose `workflow` skill uses the repository CLI and whose `sync-docs` skill maintains affected documents after development for non-overwriting initialization, specification pins, drift detection and review packets. Two separate Claude/Codex delegation add-ons are available by choice. Sprintable synchronization and unattended execution are planned, not implemented. These features describe this checkout; do not assume they are present in the previously published npm release.
+The specification workflow is split across two plugins: **`aiwf-core`** provides seven methodology skills for requirements, use cases, entities and specification review; **`aiwf-spec`** provides `workflow` for non-overwriting initialization, specification pins, drift detection and review packets, plus `sync-docs` for maintaining affected documents after development. Two separate Claude/Codex delegation add-ons are available by choice. Sprintable synchronization and unattended execution are planned, not implemented. The current npm release is `aiwf@0.4.0`.
 
 See the [direction](docs/modernization/DIRECTION.ko.md), [validation record](docs/modernization/VALIDATION.md), [Sprintable adapter proposal](docs/modernization/SPRINTABLE.ko.md) and [worked example](examples/spec-workflow/README.md).
 
@@ -14,9 +14,45 @@ The [CLI productivity analysis (Korean)](docs/modernization/CLI-PRODUCTIVITY.ko.
 
 Two independent Claude sessions assessed the reviewed proposal as conditionally suitable. The [Korean plan review](docs/modernization/CLAUDE-PLAN-REVIEW-2026-10-03.ko.md) preserves their concerns and original input. The revised [pilot plan](docs/modernization/PILOT-UC-001.ko.md) and [local execution result](docs/modernization/PILOT-RESULT-2026-10-03.ko.md) record drift refusal and failing-to-passing service tests. Actual product adoption, human review and productivity gains remain unverified; no proposed CLI commands were added.
 
-## Start with this checkout
+## Install the CLI and choose your skills
 
-Node.js 20+; Python 3.9+ for structural lint. The new Node CLI has no external dependencies. The target project directory must already exist.
+The primary distribution flow for the next `aiwf@0.5.0` release is a global CLI install followed by a project skill install. This flow is implemented in the current checkout; the published `aiwf@0.4.0` still exposes only `aiwf-spec`.
+
+Requires Node.js 22.20+ for the included `skills@1.7.0` backend; Python 3.9+ is used by specification validators.
+
+```bash
+# After aiwf@0.5.0 is published:
+npm i -g aiwf
+aiwf install
+
+# Explicit, reproducible selection; run in the existing target project:
+aiwf install --agent codex claude-code --stack electron-react --dry-run
+aiwf install --agent codex claude-code --stack electron-react
+aiwf status
+
+# Delegation stays optional. Add it later without reinstalling unchanged skills:
+aiwf install --agent codex --stack electron-react --delegate claude codex
+```
+
+`aiwf install` asks for hosts, optional stacks and delegation in an interactive terminal. Automation specifies `--agent`. The recommended default is core plus workflow/document synchronization; `--core-only` selects just core. `--stack` accepts multiple choices from `aiwf list`. Skill scope defaults to the current project; use `--project /path/to/project` for another existing project or `--global` for user-level skills. Installing the CLI globally does not select global skill scope.
+
+AIWF resolves the selected bundles and prepares complete resources with isolated `aiwf-` names. Its pinned official skills CLI performs installation with explicit hosts, names and `--copy`; no separate global skills install or runtime `npx` download is needed. Codex project/user skills go to `.agents/skills`; Claude project skills go to `.claude/skills`, and user skills respect `CLAUDE_CONFIG_DIR`. See the [installation design and verification](docs/modernization/CLI-INSTALLATION-REVIEW.ko.md).
+
+Unchanged AIWF-managed skills are skipped, so stacks, delegation and another host can be added later. Local modifications and unmanaged existing skills cause a conflict and are preserved. AIWF records versions and hashes in `.aiwf/skills-installation.json`, and retains source resources in `.aiwf/skill-sources/` so the official `skills-lock.json` does not point to a deleted temporary directory. Keep these sources with the installation. `aiwf status` reports recorded installations; skills installed by other tools are outside that record. Update/removal and saved profiles remain future work. CLI upgrades use `npm i -g aiwf@latest`; this does not automatically update existing skills.
+
+Use `aiwf spec --help` for document initialization, pinning, drift and evidence packets; the `aiwf-spec` executable remains compatible. Portable skills and native host plugins have distinct installation paths. Native Claude marketplace use and direct skills.sh installation remain available below.
+
+## Run the current checkout
+
+The target project directory must already exist. Use the checkout CLI before the next npm release:
+
+```bash
+npm ci
+node src/cli/aiwf-cli.js install --agent codex --stack electron-react --project /path/to/project --dry-run
+node src/cli/aiwf-cli.js install --agent codex --stack electron-react --project /path/to/project
+```
+
+The earlier checkout-only copy script remains available with its original refusal to overwrite any existing skill:
 
 ```bash
 node src/cli/spec-cli.js init --root /path/to/project --name "Our service"
@@ -26,7 +62,7 @@ node scripts/install-spec-skills.mjs --project /path/to/project --stack nestjs-n
 node scripts/install-spec-skills.mjs --project /path/to/project --delegate codex --dry-run
 ```
 
-By default Codex installs the `aiwf-core` seven skills plus the `aiwf-spec` `workflow` and `sync-docs` skills as `aiwf-requirements`, `aiwf-use-case-spec`, ..., `aiwf-workflow`, `aiwf-sync-docs`, with their full references, parsers and attribution. `--stack` selects one of `vaadin-jooq`, `angular-jpa`, `blazor-dotnet` or `nestjs-nextjs` and adds that stack; existing skills are never overwritten and there is no force flag. Live host skill selection and model execution remain separate pilot checks.
+By default Codex installs the `aiwf-core` seven skills plus the `aiwf-spec` `workflow` and `sync-docs` skills as `aiwf-requirements`, `aiwf-use-case-spec`, ..., `aiwf-workflow`, `aiwf-sync-docs`, with their full references, parsers and attribution. `--stack` selects one of `vaadin-jooq`, `angular-jpa`, `blazor-dotnet`, `nestjs-nextjs` or `electron-react` and adds that stack; existing skills are never overwritten and there is no force flag. Live host skill selection and model execution remain separate pilot checks.
 
 After development, use Codex's `aiwf-sync-docs` or Claude Code's `/aiwf-spec:sync-docs` with the change intent, comparison scope and UC IDs. The workflow includes this before completion; it updates affected documents and preserves implementation gaps and unverified behavior. See the [installation and standalone skills CLI guide](plugins/aiwf-spec/README.md#synchronize-documents-after-development) and [Korean review copy](docs/ko-skills/aiwf-spec/skills/sync-docs/SKILL.ko.md). This is a skill, not a new `aiwf-spec` CLI command.
 
@@ -45,20 +81,23 @@ These skills run only when invoked directly. Native delegation is used when the 
 
 ## Plugins
 
-31 upstream AIUP skills are vendored unchanged plus AIWF's own `workflow`, `sync-docs` and two optional delegation skills (35 total available). `aiwf-core` holds the seven upstream skills; `aiwf-spec` holds the AIWF `workflow` and `sync-docs`.
+AIWF provides 41 skills: seven methodology skills in `aiwf-core`, 30 implementation and testing skills across five stacks, `workflow` and `sync-docs` in `aiwf-spec`, and two optional delegation skills.
 
 | Plugin | Role | Contents |
 |---|---|---|
-| `aiwf-core` | Methodology core (required) | 7 upstream skills, byte-identical (2.19.0) |
+| `aiwf-core` | Methodology core (required) | 7 methodology skills (2.19.0) |
 | `aiwf-spec` | AIWF wrapper (optional) | AIWF `workflow` and `sync-docs` |
 | `aiwf-delegate-claude` | Optional delegation add-on | `delegate-claude` |
 | `aiwf-delegate-codex` | Optional delegation add-on | `delegate-codex` |
-| `aiwf-vaadin-jooq` | Stack | 8 upstream skills (2.20.0) |
-| `aiwf-angular-jpa` | Stack | 6 upstream skills (0.7.0) |
-| `aiwf-blazor-dotnet` | Stack | 5 upstream skills (0.7.0) |
-| `aiwf-nestjs-nextjs` | Stack | 5 upstream skills (0.4.0) |
+| `aiwf-vaadin-jooq` | Stack | 8 skills (2.20.0) |
+| `aiwf-angular-jpa` | Stack | 6 skills (0.7.0) |
+| `aiwf-blazor-dotnet` | Stack | 5 skills (0.7.0) |
+| `aiwf-nestjs-nextjs` | Stack | 5 skills (0.4.0) |
+| `aiwf-electron-react` | Agent desktop stack | 6 skills (0.1.0) |
 
-Each plugin vendors the upstream files it imports with a per-plugin `UPSTREAM.json` (`skills/` plus, for stacks, `rules/` and any `agents/`, `LICENSE`, `NOTICE`). The only upstream source change is the AIWF attribution appended to the `aiwf-core` NOTICE; every other vendored file is byte-identical. `aiwf-spec` has no upstream of its own and links the core [UPSTREAM.json](plugins/aiwf-core/UPSTREAM.json). Installation copies files: it does not register native Codex subagents or configure MCP. Bundled agent prompts such as `agents/uc-coverage.md` are copied as resources, and the `workflow` skill describes the host mapping. See [SKILLS.ko.md](docs/modernization/SKILLS.ko.md) for names, counts and the pin-update procedure.
+For Electron agent desktop apps, see the [Electron/React guide](plugins/aiwf-electron-react/README.md) and [Korean review copy](docs/ko-skills/aiwf-electron-react/README.ko.md). It extends core specifications with scaffolding, implementation, runtime adapters, UI/Electron tests and packaging. Agent execution stays in the selected Sally/PI/other adapter; AI Elements supplies UI. From this checkout, select `--stack electron-react` to install 15 skills including core and spec. The new stack is not included in the published `aiwf@0.4.0`.
+
+Installation copies complete skill folders: it does not register native Codex subagents or configure MCP. Bundled agent prompts such as `agents/uc-coverage.md` are copied as resources, and the `workflow` skill describes the host mapping. See [SKILLS.ko.md](docs/modernization/SKILLS.ko.md) for names, counts and maintenance procedures.
 
 For Claude Code, add this checkout's absolute path as a local marketplace during development, then install the core, the wrapper and any stack you need (`aiwf-core`, `aiwf-spec`, `aiwf-<stack>`) and invoke a qualified command such as `/aiwf-core:use-case-spec`, `/aiwf-spec:workflow` or `/aiwf-nestjs-nextjs:implement`. After publishing these changes, the remote marketplace source can be `moonklabs/aiwf`.
 
@@ -105,8 +144,8 @@ npm run validate:spec-plugin
 npm run test:spec-upstream
 ```
 
-The old installer, language/sprint/persona/YOLO commands, duplicate skill collections and legacy plugins have been removed. The npm package exposes only `aiwf-spec`, with no external Node dependencies. `npm test` runs the current regression suite. This is a breaking change from the old framework; previously installed project data is untouched.
+The old installer, language/sprint/persona/YOLO commands, duplicate skill collections and legacy plugins have been removed. The new npm package exposes `aiwf` with its official skills backend and the compatible `aiwf-spec`; `npm test` runs the current regression suite. Compatibility with the old framework has ended. The spec CLI itself uses built-in Node modules.
 
-## Attribution and licenses
+## Licenses
 
-The `aiwf-core` methodology plugin and the four stack plugins derive from the [AI Unified Process marketplace](https://github.com/AI-Unified-Process/marketplace) at commit `065dadda0f696c29ff2bacbda31b38152082e6fa`: `aiwf-core` and `aiwf-vaadin-jooq` by Simon Martinelli, `aiwf-angular-jpa` by Marc Affolter, `aiwf-blazor-dotnet` by Carl J. Mosca and `aiwf-nestjs-nextjs` by Swift Ugandan. Each plugin's `UPSTREAM.json` records the exact source commit, original hashes and modifications. Existing AIWF code remains [MIT](LICENSE); imported plugins carry [Apache-2.0](plugins/aiwf-core/LICENSE) and [NOTICE](plugins/aiwf-core/NOTICE).
+AIWF code uses [MIT](LICENSE). Plugin files retain their applicable [Apache-2.0](plugins/aiwf-core/LICENSE) or [MIT](plugins/aiwf-electron-react/LICENSE) licenses and [NOTICE](plugins/aiwf-core/NOTICE) files; see each plugin's legal documents.

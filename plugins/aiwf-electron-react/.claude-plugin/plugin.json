@@ -1,0 +1,9 @@
+{
+  "name": "aiwf-electron-react",
+  "version": "0.1.0",
+  "description": "AIWF skills for Electron, React and TypeScript agent desktop apps: typed IPC, agent adapters, chat UI, testing and packaging.",
+  "author": {
+    "name": "moonklabs"
+  },
+  "license": "MIT"
+}

@@ -1,10 +1,12 @@
 # 전체 한글 검토 문서 목록
 
-35개 저장소 스킬, 플러그인 README 8개, 로컬 2개 스킬과 연결된 참조·규칙·프롬프트를 포함한 71개 문서다. 기술 용어와 실행 예제는 원문 형식을 유지한다. 검토 상태와 파일 버전의 기준은 [관리 목록](manifest.json)이며, 목록 작성은 휴먼 승인을 뜻하지 않는다.
+41개 저장소 스킬, 플러그인 README 9개, 로컬 2개 스킬과 연결된 참조·규칙·프롬프트를 포함한 80개 문서다. 기술 용어와 실행 예제는 원문 형식을 유지한다. 검토 상태와 파일 버전의 기준은 [관리 목록](manifest.json)이며, 목록 작성은 휴먼 승인을 뜻하지 않는다.
 
 [검토 시작점](README.md)으로 돌아갈 수 있다. 원문과 번역을 나란히 읽고 지시의 의미와 제한을 검토한다. 변경 시 해당 목록 링크도 함께 갱신한다.
 
 ## 플러그인 README
+
+2026-10-05에 core·spec·기술 스택 4종의 원문과 한글본을 기능·설치 안내 중심으로 갱신했다. 아래 문서 경로는 유지하며 해당 버전의 검토 상태는 `awaiting_review`다.
 
 | 플러그인 | 한글 검토본 | 원문 |
 | --- | --- | --- |
@@ -14,6 +16,7 @@
 | `aiwf-angular-jpa` | [읽기](aiwf-angular-jpa/README.ko.md) | [비교](../../plugins/aiwf-angular-jpa/README.md) |
 | `aiwf-blazor-dotnet` | [읽기](aiwf-blazor-dotnet/README.ko.md) | [비교](../../plugins/aiwf-blazor-dotnet/README.md) |
 | `aiwf-nestjs-nextjs` | [읽기](aiwf-nestjs-nextjs/README.ko.md) | [비교](../../plugins/aiwf-nestjs-nextjs/README.md) |
+| `aiwf-electron-react` | [읽기](aiwf-electron-react/README.ko.md) | [비교](../../plugins/aiwf-electron-react/README.md) |
 | `aiwf-delegate-claude` | [읽기](aiwf-delegate-claude/README.ko.md) | [비교](../../plugins/aiwf-delegate-claude/README.md) |
 | `aiwf-delegate-codex` | [읽기](aiwf-delegate-codex/README.ko.md) | [비교](../../plugins/aiwf-delegate-codex/README.md) |
 
@@ -83,6 +86,19 @@
 | 문서 | 한글 검토본 | 원문 |
 | --- | --- | --- |
 | `skills/delegate-codex/SKILL.ko.md` | [읽기](aiwf-delegate-codex/skills/delegate-codex/SKILL.ko.md) | [비교](../../plugins/aiwf-delegate-codex/skills/delegate-codex/SKILL.md) |
+
+## aiwf-electron-react
+
+| 문서 | 한글 검토본 | 원문 |
+| --- | --- | --- |
+| `skills/agent-runtime/SKILL.ko.md` | [읽기](aiwf-electron-react/skills/agent-runtime/SKILL.ko.md) | [비교](../../plugins/aiwf-electron-react/skills/agent-runtime/SKILL.md) |
+| `skills/electron-test/SKILL.ko.md` | [읽기](aiwf-electron-react/skills/electron-test/SKILL.ko.md) | [비교](../../plugins/aiwf-electron-react/skills/electron-test/SKILL.md) |
+| `skills/implement/SKILL.ko.md` | [읽기](aiwf-electron-react/skills/implement/SKILL.ko.md) | [비교](../../plugins/aiwf-electron-react/skills/implement/SKILL.md) |
+| `skills/implement/references/architecture.ko.md` | [읽기](aiwf-electron-react/skills/implement/references/architecture.ko.md) | [비교](../../plugins/aiwf-electron-react/skills/implement/references/architecture.md) |
+| `skills/package/SKILL.ko.md` | [읽기](aiwf-electron-react/skills/package/SKILL.ko.md) | [비교](../../plugins/aiwf-electron-react/skills/package/SKILL.md) |
+| `skills/renderer-test/SKILL.ko.md` | [읽기](aiwf-electron-react/skills/renderer-test/SKILL.ko.md) | [비교](../../plugins/aiwf-electron-react/skills/renderer-test/SKILL.md) |
+| `skills/scaffold/SKILL.ko.md` | [읽기](aiwf-electron-react/skills/scaffold/SKILL.ko.md) | [비교](../../plugins/aiwf-electron-react/skills/scaffold/SKILL.md) |
+| `skills/scaffold/references/stack-profile.ko.md` | [읽기](aiwf-electron-react/skills/scaffold/references/stack-profile.ko.md) | [비교](../../plugins/aiwf-electron-react/skills/scaffold/references/stack-profile.md) |
 
 ## aiwf-nestjs-nextjs
 

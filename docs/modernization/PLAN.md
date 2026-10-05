@@ -4,7 +4,7 @@ Historical plan. Legacy-retention decisions are superseded by [LEGACY-REMOVAL-PL
 
 ## Target result
 
-Move AIWF from Claude-specific task bookkeeping toward durable, use-case-driven specifications consumed by existing coding agents. Reuse the AI Unified Process core rather than rebuilding its methodology. Keep specifications in Git and prepare reviewable evidence for future Sprintable integration.
+Move AIWF from Claude-specific task bookkeeping toward durable, use-case-driven specifications consumed by existing coding agents. Keep specifications in Git and prepare reviewable evidence for future Sprintable integration.
 
 ## First implementation boundary
 
