@@ -24,8 +24,8 @@ Copyright 2026 moonklabs. Apache-2.0 라이선스. 플러그인의 LICENSE와 NO
 
 ## 순서
 
-1. 인수 문서: SOT 페이지와 노드, 범위, 적용 결정, 디자이너 전달 목록, 진행 기록.
-2. 토큰 검사: `commands.tokenCheck` (또는 `node <skills>/figma-sync/scripts/check_figma_tokens.mjs`). 실패하면 먼저 aiwf-design:figma-sync를 실행한다.
+1. 인수 문서는 코드를 바꾸기 전에 쓴다. 첫 파일 편집으로 하고, 진행 기록에 `진행 중` 행을 먼저 넣은 뒤 게이트 뒤에 완성한다. 작업이 기존 목표에 속하면(`acceptance.doc`에 맞는 기존 문서와 traceability의 링크를 확인한다) 그 목표의 문서를 갱신하고, 새 목표일 때만 새 `<goal>`을 만든다. SOT 페이지와 노드, 범위, 적용 결정, 디자이너 전달 목록, 진행 기록을 적는다.
+2. 토큰 검사: `commands.tokenCheck`. 설정이 없거나 실행되지 않으면(예: 의존성 없음) 대신 `node <skills>/figma-sync/scripts/check_figma_tokens.mjs`를 실행하고 어느 쪽을 실행했는지 밝힌다. 실패하면 먼저 aiwf-design:figma-sync를 실행한다.
 3. 조사 (읽기 전용): 컴포넌트 묶음마다 Figma 실측 스펙 → 코드 대상 → 차이 목록, 그다음 완결성 비평. [references/survey-template.js](../../../../../plugins/aiwf-design/skills/apply/references/survey-template.js)
 4. `apply.waves` 순서대로 단계별로 적용한다(예: 공용 아이콘 → L1 기본 → L2 셸 → L3 채팅). 묶음마다 구현 → 적대적 검증 → 수정을 하고, 각 단계 끝에 통합한다(i18n, story id, 컴포넌트 맵, 다른 파일 요청). 각 파일은 한 묶음만 소유한다. [references/wave-template.js](../../../../../plugins/aiwf-design/skills/apply/references/wave-template.js)
 5. 게이트를 통과한 뒤 그 단계의 파일만 커밋한다. 진행 중인 단계의 파일은 커밋하지 않는다. 커밋은 임시 `git worktree add --detach`에서 다시 검사한다.
@@ -47,4 +47,4 @@ Workflow 도구는 사용자가 워크플로우를 명시적으로 요청할 때
 
 ## 빨간 신호
 
-`use_figma` 스크립트에 대입문이 보인다 · `acceptance-gates`에서 새 단위 테스트 파일(`*.test.ts` 등) · 같은 역할의 파일이 있는데 새 컴포넌트 파일 · `#` 색 리터럴 추가 · 인수 문서 없이 구현 시작 · 두 묶음이 같은 파일을 고친다. → 멈추고 위 순서로 돌아간다.
+`use_figma` 스크립트에 대입문이 보인다 · `acceptance-gates`에서 새 단위 테스트 파일(`*.test.ts` 등) · 같은 역할의 파일이 있는데 새 컴포넌트 파일 · `#` 색 리터럴 추가 · 인수 문서 없이 구현 시작 · 변경 전후 비교에 `git stash`나 `git checkout` 사용 (대신 `git worktree add --detach HEAD`) · 두 묶음이 같은 파일을 고친다. → 멈추고 위 순서로 돌아간다.

@@ -23,8 +23,8 @@ Project values come from `design-spec.config.json` (schema in the plugin README)
 
 ## Order
 
-1. Acceptance document: SOT pages and nodes, scope, 적용 결정, 디자이너 전달 목록, 진행 기록.
-2. Token check: `commands.tokenCheck` (or `node <skills>/figma-sync/scripts/check_figma_tokens.mjs`). If it fails, run aiwf-design:figma-sync first.
+1. Acceptance document, written before any code change: make it your first file edit, with a 진행 기록 row marked `진행 중` that you complete after the gates. If the work falls within an existing goal (check the existing documents that match `acceptance.doc` and the links in traceability), update that goal's document; create a new `<goal>` only for a new goal. Record SOT pages and nodes, scope, 적용 결정, 디자이너 전달 목록, 진행 기록.
+2. Token check: `commands.tokenCheck`. If it is unset or cannot start (for example missing dependencies), run `node <skills>/figma-sync/scripts/check_figma_tokens.mjs` instead and say which one ran. If it fails, run aiwf-design:figma-sync first.
 3. Survey (read-only): per component group, measured Figma spec → code targets → difference list, then a completeness critic. [references/survey-template.js](references/survey-template.js)
 4. Apply wave by wave in the order of `apply.waves` (for example shared icons → L1 base → L2 shell → L3 chat). Per group implement → adversarial verification → fix; at the end of each wave integrate (i18n, story ids, component map, requests to other files). Each file is owned by one group only. [references/wave-template.js](references/wave-template.js)
 5. After the gates pass, commit only that wave's files. Do not commit files of a wave in progress. Recheck the commit in a temporary `git worktree add --detach`.
@@ -46,4 +46,4 @@ Use the Workflow tool only when the user explicitly asks for a workflow. Otherwi
 
 ## Red flags
 
-An assignment appears in a `use_figma` script · a new unit test file (such as `*.test.ts`) under `acceptance-gates` · a new component file while a file with the same role exists · an added `#` color literal · implementation started without an acceptance document · two groups edit the same file. → Stop and return to the order above.
+An assignment appears in a `use_figma` script · a new unit test file (such as `*.test.ts`) under `acceptance-gates` · a new component file while a file with the same role exists · an added `#` color literal · implementation started without an acceptance document · `git stash` or `git checkout` used to compare before and after (use `git worktree add --detach HEAD` instead) · two groups edit the same file. → Stop and return to the order above.

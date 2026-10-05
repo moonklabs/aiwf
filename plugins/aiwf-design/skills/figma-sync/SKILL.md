@@ -30,7 +30,7 @@ Paths below are config keys of `design-spec.config.json` (schema in the plugin R
    ```
    The merge refuses to write and fails when an array length differs from the `counts` Figma reported, when file keys are mixed, or when a section is missing.
 3. `git diff <tokens.snapshot>` — confirm that only the changes the designer described appear. If other changes appear, ask the designer.
-4. Run the token check (`commands.tokenCheck`, or `node <skills>/figma-sync/scripts/check_figma_tokens.mjs`). The failure list is the to-do list.
+4. Run the token check: `commands.tokenCheck`, or `node <skills>/figma-sync/scripts/check_figma_tokens.mjs` when it is unset or cannot start; report which one ran. The failure list is the to-do list.
 5. Reflect colors as tokens in `tokens.sources` (Figma `group/name` → `--group-name` unless the map's rules say otherwise), text styles as utilities in `tokens.typography`, and new or renamed Figma names in `tokens.map`.
 6. Run `commands.tokenExport` when it is set, then pass the token check. This check compares declared values; it is not a render or pixel match.
 7. Update the row in the traceability design-system table (aiwf-design:trace).

@@ -56,7 +56,7 @@ node <skills>/review/scripts/design_spec_lint.mjs              # documents, link
 node <skills>/figma-sync/scripts/check_figma_tokens.mjs        # Figma snapshot ↔ code tokens
 ```
 
-저장소 루트에서 실행하고, 설정이 기본 경로에 없으면 `--config <file>`을 넘긴다. 프로젝트가 자체 토큰 검사를 정의했으면 둘째 줄 대신 설정의 `commands.tokenCheck`를 사용한다.
+저장소 루트에서 실행하고, 설정이 기본 경로에 없으면 `--config <file>`을 넘긴다. 프로젝트가 자체 토큰 검사를 정의했으면 둘째 줄 대신 설정의 `commands.tokenCheck`를 사용한다. 그 명령이 실행되지 않으면 둘째 줄로 대신하고 그 사실을 밝힌다.
 
 ## 멈출 때
 

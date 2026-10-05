@@ -55,7 +55,7 @@ node <skills>/review/scripts/design_spec_lint.mjs              # documents, link
 node <skills>/figma-sync/scripts/check_figma_tokens.mjs        # Figma snapshot ↔ code tokens
 ```
 
-Run them from the repository root; pass `--config <file>` when the config is not at the default path. Use the config's `commands.tokenCheck` instead of the second line when the project defines its own token check.
+Run them from the repository root; pass `--config <file>` when the config is not at the default path. Use the config's `commands.tokenCheck` instead of the second line when the project defines its own token check; if that command cannot start, fall back to the second line and say so.
 
 ## Stop when
 

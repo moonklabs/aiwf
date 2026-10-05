@@ -31,7 +31,7 @@ Copyright 2026 moonklabs. Apache-2.0 라이선스. 플러그인의 LICENSE와 NO
    ```
    병합은 배열 길이가 Figma가 보고한 `counts`와 다르거나, 파일 키가 섞여 있거나, 구역이 빠졌으면 쓰기를 거부하고 실패한다.
 3. `git diff <tokens.snapshot>` — 디자이너가 설명한 변경만 보이는지 확인한다. 다른 변경이 보이면 디자이너에게 묻는다.
-4. 토큰 검사를 실행한다 (`commands.tokenCheck`, 또는 `node <skills>/figma-sync/scripts/check_figma_tokens.mjs`). 실패 목록이 할 일 목록이다.
+4. 토큰 검사를 실행한다: `commands.tokenCheck`, 또는 설정이 없거나 실행되지 않으면 `node <skills>/figma-sync/scripts/check_figma_tokens.mjs`. 어느 쪽을 실행했는지 보고한다. 실패 목록이 할 일 목록이다.
 5. 색은 `tokens.sources`에 토큰으로 반영하고(맵의 규칙이 달리 정하지 않으면 Figma `group/name` → `--group-name`), 텍스트 스타일은 `tokens.typography`에 유틸리티로, 새로 생기거나 이름이 바뀐 Figma 이름은 `tokens.map`에 반영한다.
 6. `commands.tokenExport`가 설정되어 있으면 실행한 뒤 토큰 검사를 통과시킨다. 이 검사는 선언된 값을 비교하며 렌더나 픽셀 일치가 아니다.
 7. traceability 디자인 시스템 표의 해당 행을 갱신한다 (aiwf-design:trace).

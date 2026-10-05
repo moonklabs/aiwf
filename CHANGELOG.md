@@ -6,6 +6,7 @@
 - Read every project value from `docs/design-spec/design-spec.config.json`; the lint, readback, merge and a new generic DTCG token check use it, and fail clearly without it. Add templates, a lint- and token-clean example and `npm run test:design`.
 - Add `--design` to `aiwf install` and `scripts/install-spec-skills.mjs`; installed names are `aiwf-design-<name>` and qualified `aiwf-design:<name>` references are rewritten. `aiwf-spec` 0.3.0 calls `aiwf-design:trace` when a project has a design-spec traceability table.
 - After pressure tests, require passed gates before `구현: 새 디자인`, let repository rules decide whether apply sessions write HANDOFF, and keep glossary, product, architecture and vision documents out of design-spec edits.
+- Reuse an existing goal's acceptance document for in-scope apply work, and fall back to the bundled token check (reporting which ran) when `commands.tokenCheck` cannot start. Make the acceptance-document edit the first file edit and flag `git stash`/`git checkout` before/after comparisons.
 
 ## 0.5.0 — Unreleased
 
