@@ -18,14 +18,16 @@ function project(t) {
 test('dry run writes nothing, real install retains parser siblings and attribution', t => {
   const root = project(t);
   const dry = installSpecSkills(root, { dryRun: true });
-  assert.equal(dry.destinations.length, 9);
+  assert.equal(dry.destinations.length, 10);
   assert.equal(dry.destinations.some(path => /aiwf-delegate-(claude|codex)$/.test(path)), false);
   assert.equal(dry.destinations.some(path => path.endsWith('aiwf-sync-docs')), true);
   assert.equal(existsSync(join(root, '.agents')), false);
   const result = installSpecSkills(root);
-  assert.equal(result.installed.length, 9);
+  assert.equal(result.installed.length, 10);
   const skills = join(root, '.agents/skills');
   assert.match(readFileSync(join(skills, 'aiwf-workflow/SKILL.md'), 'utf8'), /name: aiwf-workflow/);
+  assert.match(readFileSync(join(skills, 'aiwf-docpilot/SKILL.md'), 'utf8'), /name: aiwf-docpilot/);
+  assert.match(readFileSync(join(skills, 'aiwf-docpilot/agents/openai.yaml'), 'utf8'), /Use the `aiwf-docpilot` skill/);
   assert.match(readFileSync(join(skills, 'aiwf-spec-review/NOTICE'), 'utf8'), /derived from/);
   const check = spawnSync('python3', [join(skills, 'aiwf-spec-review/scripts/spec_lint.py'), '--self-test'], { encoding: 'utf8' });
   assert.equal(check.status, 0, check.stdout + check.stderr);
@@ -84,7 +86,7 @@ test('installed sync-docs skill is renamed and rewrites sibling command referenc
   assert.match(installed, /^name: aiwf-sync-docs$/m);
   const source = readFileSync(join(repository, 'plugins/aiwf-spec/skills/sync-docs/SKILL.md'), 'utf8');
   const tick = String.fromCharCode(96);
-  const siblings = ['requirements', 'entity-model', 'use-case-diagram', 'use-case-spec', 'test-case', 'spec-review', 'reverse-engineer', 'workflow', 'sync-docs'];
+  const siblings = ['requirements', 'entity-model', 'use-case-diagram', 'use-case-spec', 'test-case', 'spec-review', 'reverse-engineer', 'docpilot', 'workflow', 'sync-docs'];
   const slashRef = new RegExp('(?<![A-Za-z0-9_.-])/(' + siblings.join('|') + ')(?![A-Za-z0-9_-])');
   const namedRef = new RegExp(tick + '(' + siblings.join('|') + ')' + tick);
   assert.doesNotMatch(installed, slashRef);
@@ -113,7 +115,7 @@ test('pre-existing sync-docs destination blocks installation without overwriting
 test('stack install includes core, isolated stack names and mapped cross-skill references', t => {
   const root = project(t);
   const result = installSpecSkills(root, { stack: 'nestjs-nextjs' });
-  assert.equal(result.installed.length, 14);
+  assert.equal(result.installed.length, 15);
   const skills = join(root, '.agents/skills');
   const implement = readFileSync(join(skills, 'aiwf-nestjs-nextjs-implement/SKILL.md'), 'utf8');
   assert.match(implement, /^name: aiwf-nestjs-nextjs-implement$/m);
@@ -132,7 +134,7 @@ test('unknown stack is rejected before writing anything', t => {
 });
 
 test('each delegation skill is omitted by default and independently opt-in', t => {
-  const counts = { claude: 10, codex: 10 };
+  const counts = { claude: 11, codex: 11 };
   for (const target of supportedDelegates) {
     const root = project(t);
     const dry = installSpecSkills(root, { delegates: [target], dryRun: true });
@@ -152,7 +154,7 @@ test('each delegation skill is omitted by default and independently opt-in', t =
 
 test('both delegation skills can be selected together and invalid targets fail before writing', t => {
   const root = project(t);
-  assert.equal(installSpecSkills(root, { delegates: ['claude', 'codex', 'claude'], dryRun: true }).destinations.length, 11);
+  assert.equal(installSpecSkills(root, { delegates: ['claude', 'codex', 'claude'], dryRun: true }).destinations.length, 12);
   assert.throws(() => installSpecSkills(root, { delegates: ['../../outside'] }), /Unknown delegate/);
   assert.equal(existsSync(join(root, '.agents')), false);
 });
@@ -162,7 +164,7 @@ test('each optional stack installs its complete isolated bundle', t => {
   for (const stack of supportedStacks) {
     const root = project(t);
     const dry = installSpecSkills(root, { stack, dryRun: true });
-    assert.equal(dry.destinations.length, 9 + counts[stack]);
+    assert.equal(dry.destinations.length, 10 + counts[stack]);
     assert.equal(existsSync(join(root, '.agents')), false);
     const result = installSpecSkills(root, { stack });
     assert.equal(result.installed.length, dry.destinations.length);
@@ -186,7 +188,7 @@ test('authored electron-react stack installs six prefixed skills and rewrites re
   const root = project(t);
   const skills = join(root, '.agents/skills');
   const result = installSpecSkills(root, { stack: 'electron-react' });
-  assert.equal(result.installed.length, 15);
+  assert.equal(result.installed.length, 16);
   const authored = ['scaffold', 'implement', 'agent-runtime', 'renderer-test', 'electron-test', 'package'];
   for (const name of authored) {
     const text = readFileSync(join(skills, `aiwf-electron-react-${name}/SKILL.md`), 'utf8');
@@ -225,16 +227,16 @@ test('installer CLI accepts stack and delegate selections and rejects invalid op
   const run = args => spawnSync(process.execPath, ['scripts/install-spec-skills.mjs', '--project', root, ...args], { encoding: 'utf8' });
   const dry = run(['--stack', 'blazor-dotnet', '--dry-run']);
   assert.equal(dry.status, 0, dry.stderr);
-  assert.equal(JSON.parse(dry.stdout).destinations.length, 14);
+  assert.equal(JSON.parse(dry.stdout).destinations.length, 15);
   const authored = run(['--stack', 'electron-react', '--dry-run']);
   assert.equal(authored.status, 0, authored.stderr);
-  assert.equal(JSON.parse(authored.stdout).destinations.length, 15);
+  assert.equal(JSON.parse(authored.stdout).destinations.length, 16);
   assert.equal(run(['--stack']).status, 1);
   assert.equal(run(['--stack', 'invalid']).status, 1);
   assert.equal(run(['--stack', 'blazor-dotnet', '--stack', 'angular-jpa']).status, 1);
   const both = run(['--delegate', 'claude', '--delegate', 'codex', '--dry-run']);
   assert.equal(both.status, 0, both.stderr);
-  assert.equal(JSON.parse(both.stdout).destinations.length, 11);
+  assert.equal(JSON.parse(both.stdout).destinations.length, 12);
   assert.equal(run(['--delegate']).status, 1);
   assert.equal(run(['--delegate', 'invalid']).status, 1);
   assert.equal(existsSync(join(root, '.agents')), false);
@@ -245,7 +247,7 @@ test('design skills are opt-in, keep the aiwf-design- prefix and run their bundl
   assert.equal(installSpecSkills(root, { dryRun: true }).destinations.some(path => /aiwf-design-/.test(path)), false);
   const result = installSpecSkills(root, { design: true });
   const design = ['apply', 'figma-sync', 'review', 'trace', 'workflow'].map(name => `aiwf-design-${name}`);
-  assert.equal(result.installed.length, 9 + design.length);
+  assert.equal(result.installed.length, 10 + design.length);
   const skills = join(root, '.agents/skills');
   for (const name of design) {
     const text = readFileSync(join(skills, name, 'SKILL.md'), 'utf8');

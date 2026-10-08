@@ -1,0 +1,4 @@
+interface:
+  display_name: "DocPilot"
+  short_description: "Orchestrate AIWF skills for full reverse engineering or scoped documentation updates"
+  default_prompt: "Use the `aiwf-docpilot` skill to complete full reverse engineering or documentation updates within the requested scope."

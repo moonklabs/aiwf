@@ -1,6 +1,6 @@
 # 전체 한글 검토 문서 목록
 
-46개 저장소 스킬, 플러그인 README 10개, 로컬 2개 스킬과 연결된 참조·규칙·프롬프트·템플릿을 포함한 95개 문서다. 기술 용어와 실행 예제는 원문 형식을 유지한다. 검토 상태와 파일 버전의 기준은 [관리 목록](manifest.json)이며, 목록 작성은 휴먼 승인을 뜻하지 않는다.
+47개 저장소 스킬, 플러그인 README 10개, 로컬 2개 스킬과 연결된 참조·규칙·프롬프트·템플릿을 포함한 96개 문서다. 기술 용어와 실행 예제는 원문 형식을 유지한다. 검토 상태와 파일 버전의 기준은 [관리 목록](manifest.json)이며, 목록 작성은 휴먼 승인을 뜻하지 않는다.
 
 [검토 시작점](README.md)으로 돌아갈 수 있다. 원문과 번역을 나란히 읽고 지시의 의미와 제한을 검토한다. 변경 시 해당 목록 링크도 함께 갱신한다.
 
@@ -62,6 +62,7 @@
 | `skills/requirements/references/REFERENCE.ko.md` | [읽기](aiwf-core/skills/requirements/references/REFERENCE.ko.md) | [비교](../../plugins/aiwf-core/skills/requirements/references/REFERENCE.md) |
 | `skills/requirements/references/glossary.ko.md` | [읽기](aiwf-core/skills/requirements/references/glossary.ko.md) | [비교](../../plugins/aiwf-core/skills/requirements/references/glossary.md) |
 | `skills/reverse-engineer/SKILL.ko.md` | [읽기](aiwf-core/skills/reverse-engineer/SKILL.ko.md) | [비교](../../plugins/aiwf-core/skills/reverse-engineer/SKILL.md) |
+| `skills/docpilot/SKILL.ko.md` | [읽기](aiwf-core/skills/docpilot/SKILL.ko.md) | [비교](../../plugins/aiwf-core/skills/docpilot/SKILL.md) |
 | `skills/reverse-engineer/references/stack-signals.ko.md` | [읽기](aiwf-core/skills/reverse-engineer/references/stack-signals.ko.md) | [비교](../../plugins/aiwf-core/skills/reverse-engineer/references/stack-signals.md) |
 | `skills/spec-review/SKILL.ko.md` | [읽기](aiwf-core/skills/spec-review/SKILL.ko.md) | [비교](../../plugins/aiwf-core/skills/spec-review/SKILL.md) |
 | `skills/spec-review/references/lint-codes.ko.md` | [읽기](aiwf-core/skills/spec-review/references/lint-codes.ko.md) | [비교](../../plugins/aiwf-core/skills/spec-review/references/lint-codes.md) |

@@ -4,7 +4,7 @@ The AIWF methodology core plugin. Apache-2.0; see [LICENSE](LICENSE) and [NOTICE
 
 ## What it holds
 
-Seven methodology skills cover requirements, entities, use cases, journey definitions, reverse engineering and specification review. Host-neutral task tracking and evidence guidance are not here.
+Eight methodology and orchestration skills cover requirements, entities, use cases, journey definitions, reverse engineering, specification review, and full or incremental documentation flows. Host-neutral task tracking and evidence guidance are not here.
 
 | Skill | Purpose |
 |---|---|
@@ -15,6 +15,9 @@ Seven methodology skills cover requirements, entities, use cases, journey defini
 | `test-case` | Author `TC-*.md` test definitions |
 | `spec-review` | Structural lint and the professional review checklist |
 | `reverse-engineer` | Draft observed behavior from an existing system |
+| `docpilot` | Orchestrate full reverse engineering or scoped documentation updates using the relevant AIWF skills |
+
+`docpilot` is an AIWF-authored supplement. It does not change the upstream `aiwf-core` 2.19.0 resources; the original upstream provenance remains recorded in `UPSTREAM.json`.
 
 The structural checker ships with the review skill at `skills/spec-review/scripts/spec_lint.py`; `use-case-spec` and `test-case` bundle `scripts/validate_use_case.py` and `scripts/bpmn_paths.py`.
 

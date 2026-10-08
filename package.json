@@ -1,12 +1,12 @@
 {
     "name": "aiwf",
-    "version": "0.5.0",
+    "version": "0.6.0",
     "description": "AI Workflow Framework: use-case-driven specs and evidence for coding agents",
     "main": "./src/lib/spec-workflow.js",
     "type": "module",
     "bin": {
-        "aiwf": "./src/cli/aiwf-cli.js",
-        "aiwf-spec": "./src/cli/spec-cli.js"
+        "aiwf": "src/cli/aiwf-cli.js",
+        "aiwf-spec": "src/cli/spec-cli.js"
     },
     "scripts": {
         "test": "node --test tests/spec-workflow/*.test.mjs",

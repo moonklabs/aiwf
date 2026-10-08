@@ -6,7 +6,7 @@
 
 AIWF 방법론 core 플러그인입니다. Apache-2.0 라이선스이며 [LICENSE](../../../plugins/aiwf-core/LICENSE)와 [NOTICE](../../../plugins/aiwf-core/NOTICE)를 확인하세요.
 
-방법론 스킬 7개는 요구사항, 엔티티, 유스케이스, 여정 정의, 역공학, 명세 검토를 다룹니다. 호스트에 종속되지 않는 작업 추적과 검증 근거 안내는 여기에 포함되지 않습니다.
+방법론·오케스트레이션 스킬 8개는 요구사항, 엔티티, 유스케이스, 여정 정의, 역공학, 명세 검토, 전체·변경분 문서화 흐름을 다룹니다. 호스트에 종속되지 않는 작업 추적과 검증 근거 안내는 여기에 포함되지 않습니다.
 
 | 스킬 | 목적 |
 |---|---|
@@ -17,6 +17,9 @@ AIWF 방법론 core 플러그인입니다. Apache-2.0 라이선스이며 [LICENS
 | `test-case` | `TC-*.md` 테스트 정의 작성 |
 | `spec-review` | 구조 검사와 전문가 검토 체크리스트 |
 | `reverse-engineer` | 기존 시스템에서 관찰된 동작을 바탕으로 초안 작성 |
+| `docpilot` | 관련 AIWF 스킬을 조합해 전체 역공학 또는 범위가 정해진 문서 갱신 수행 |
+
+`docpilot`는 AIWF가 작성한 보충 스킬입니다. upstream `aiwf-core` 2.19.0 원문 리소스는 수정하지 않았으며, 원본 출처 정보는 `UPSTREAM.json`에 유지합니다.
 
 구조 검사기는 검토 스킬의 `skills/spec-review/scripts/spec_lint.py`에 들어 있습니다. `use-case-spec`과 `test-case`에는 `scripts/validate_use_case.py`와 `scripts/bpmn_paths.py`가 포함됩니다.
 

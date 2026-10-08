@@ -4,7 +4,7 @@
 
 AIWF는 유스케이스 명세를 Git에 유지하면서 기존 Claude Code/Codex로 구현하고, 실제 검증 결과를 검토 가능한 형태로 남기는 개발 워크플로우다.
 
-명세 워크플로는 두 플러그인으로 나뉜다. **`aiwf-core`**는 요구사항·유스케이스·엔티티·명세 검토를 위한 방법론 스킬 7개를 제공한다. **`aiwf-spec`**는 비파괴 초기화·명세 버전 고정·변경 감지·검증 로그 묶기를 연결하는 `workflow`와 개발 후 영향받는 문서를 정리하는 `sync-docs`를 제공한다. Claude/Codex 위임 애드온 두 개는 별도 선택 사항이다. Sprintable 연동과 무인 반복 실행은 후속 범위다. 현재 npm 배포 버전은 `aiwf@0.4.0`이다.
+명세 워크플로는 두 플러그인으로 나뉜다. **`aiwf-core`**는 요구사항·유스케이스·엔티티·명세 검토 및 전체·변경분 문서화 오케스트레이션을 위한 방법론 스킬 8개를 제공한다. **`aiwf-spec`**는 비파괴 초기화·명세 버전 고정·변경 감지·검증 로그 묶기를 연결하는 `workflow`와 개발 후 영향받는 문서를 정리하는 `sync-docs`를 제공한다. Claude/Codex 위임 애드온 두 개는 별도 선택 사항이다. Sprintable 연동과 무인 반복 실행은 후속 범위다. `aiwf@0.6.0`에는 설치 CLI와 선택 스택/design 구성, `docpilot`가 포함된다.
 
 ## 가장 먼저 읽을 것
 
@@ -21,12 +21,11 @@ AIWF는 유스케이스 명세를 Git에 유지하면서 기존 Claude Code/Code
 
 ## CLI를 설치하고 스킬 구성 선택하기
 
-다음 `aiwf@0.5.0` 배포부터 **CLI를 npm 전역 설치한 뒤 프로젝트에 필요한 스킬 구성을 설치**하는 흐름을 기본으로 안내한다. 현재 checkout에는 구현되어 있으며, 배포된 `aiwf@0.4.0`은 아직 `aiwf-spec`만 제공한다.
+`aiwf@0.6.0`의 기본 흐름은 **CLI를 npm 전역 설치한 뒤 프로젝트에 필요한 스킬 구성을 설치**하는 것이다. 패키지는 `aiwf`와 호환 실행 파일 `aiwf-spec`를 함께 제공한다.
 
 포함된 `skills@1.7.0` 실행에는 **Node.js 22.20 이상**이 필요하다. 명세 구조 검사에는 Python 3.9 이상이 필요하다.
 
 ```bash
-# aiwf@0.5.0 배포 후:
 npm i -g aiwf
 aiwf install
 
@@ -52,7 +51,7 @@ AIWF는 플러그인 조합과 의존성을 계산하고 완전한 참조 자료
 
 ## 현재 checkout에서 실행하기
 
-실제 대상 프로젝트 폴더는 먼저 존재해야 한다. 새 npm 버전 배포 전에는 checkout CLI를 실행한다.
+실제 대상 프로젝트 폴더는 먼저 존재해야 한다. 개발 중에는 checkout CLI를 실행할 수 있다.
 
 ```bash
 npm ci
@@ -73,7 +72,7 @@ node scripts/install-spec-skills.mjs --project /path/to/project --stack nestjs-n
 node scripts/install-spec-skills.mjs --project /path/to/project --delegate codex --dry-run
 ```
 
-Codex는 기본적으로 `aiwf-core` 스킬 7개와 `aiwf-spec`의 `workflow`, `sync-docs`를 `aiwf-requirements`, `aiwf-use-case-spec`, ..., `aiwf-workflow`, `aiwf-sync-docs`로 함께 설치하며 참조 문서·검사기·출처도 포함한다. `--stack`은 `vaadin-jooq`, `angular-jpa`, `blazor-dotnet`, `nestjs-nextjs`, `electron-react` 중 하나를 골라 해당 stack을 추가한다. 기존 스킬은 덮어쓰지 않고 강제 플래그도 없다. 실제 호스트의 스킬 자동 선택과 모델 실행은 별도 파일럿에서 검증할 예정이다.
+Codex는 기본적으로 `aiwf-core` 스킬 8개와 `aiwf-spec`의 `workflow`, `sync-docs`를 `aiwf-requirements`, `aiwf-use-case-spec`, ..., `aiwf-docpilot`, `aiwf-workflow`, `aiwf-sync-docs`로 함께 설치하며 참조 문서·검사기·출처도 포함한다. `--stack`은 `vaadin-jooq`, `angular-jpa`, `blazor-dotnet`, `nestjs-nextjs`, `electron-react` 중 하나를 골라 해당 stack을 추가한다. 기존 스킬은 덮어쓰지 않고 강제 플래그도 없다. 실제 호스트의 스킬 자동 선택과 모델 실행은 별도 파일럿에서 검증할 예정이다.
 
 개발 후에는 Codex의 `aiwf-sync-docs` 또는 Claude Code의 `/aiwf-spec:sync-docs`에 변경 의도, 비교 범위와 UC ID를 전달한다. workflow는 완료 전에 이 절차로 관련 문서를 갱신하고 구현 누락·미검증 동작을 보존한다. [단독 skills CLI 설치와 사용 안내](docs/ko-skills/aiwf-spec/README.ko.md#개발-후-문서-동기화), [한글 검토본](docs/ko-skills/aiwf-spec/skills/sync-docs/SKILL.ko.md)을 참고한다. 새 `aiwf-spec` CLI 명령을 추가한 것은 아니다.
 
@@ -90,11 +89,11 @@ npx skills add https://github.com/moonklabs/aiwf --skill delegate-codex --agent 
 
 ## 플러그인 구성
 
-AIWF는 총 46개 스킬을 제공한다. `aiwf-core`의 방법론 스킬 7개, 기술 스택 5종의 구현·테스트 스킬 30개, `aiwf-spec`의 `workflow`·`sync-docs`, `aiwf-design`의 design-spec 스킬 5개, 선택 위임 스킬 2개로 구성된다.
+AIWF는 총 47개 스킬을 제공한다. `aiwf-core`의 방법론·오케스트레이션 스킬 8개, 기술 스택 5종의 구현·테스트 스킬 30개, `aiwf-spec`의 `workflow`·`sync-docs`, `aiwf-design`의 design-spec 스킬 5개, 선택 위임 스킬 2개로 구성된다.
 
 | 플러그인 | 역할 | 내용 |
 |---|---|---|
-| `aiwf-core` | 방법론 core (필수) | 방법론 스킬 7개 (2.19.0) |
+| `aiwf-core` | 방법론 core (필수) | 방법론·오케스트레이션 스킬 8개 (upstream 2.19.0 + AIWF 보충 스킬) |
 | `aiwf-spec` | AIWF 래퍼 (선택) | AIWF `workflow`와 `sync-docs` |
 | `aiwf-design` | design-spec 애드온 (선택, `aiwf-core` 필요) | `workflow`, `figma-sync`, `apply`, `trace`, `review` (0.1.0) |
 | `aiwf-delegate-claude` | 선택 위임 애드온 | `delegate-claude` |
@@ -105,7 +104,7 @@ AIWF는 총 46개 스킬을 제공한다. `aiwf-core`의 방법론 스킬 7개, 
 | `aiwf-nestjs-nextjs` | stack | 스킬 5개 (0.4.0) |
 | `aiwf-electron-react` | 에이전트 데스크톱 stack | 스킬 6개 (0.1.0) |
 
-Electron 에이전트 데스크톱 앱은 [Electron/React 안내 원문](plugins/aiwf-electron-react/README.md)과 [한글 검토본](docs/ko-skills/aiwf-electron-react/README.ko.md)을 참고한다. core 명세를 바탕으로 프로젝트 생성, 구현, 런타임 어댑터, UI/Electron 테스트와 패키징을 진행한다. 실제 에이전트는 선택한 Sally·PI·기타 어댑터가 실행하고 AI Elements는 UI를 담당한다. 현재 checkout에서 `--stack electron-react`를 선택하면 core·spec을 포함한 15개 스킬을 설치한다. 새 스택은 배포된 `aiwf@0.4.0`에는 포함되지 않는다.
+Electron 에이전트 데스크톱 앱은 [Electron/React 안내 원문](plugins/aiwf-electron-react/README.md)과 [한글 검토본](docs/ko-skills/aiwf-electron-react/README.ko.md)을 참고한다. core 명세를 바탕으로 프로젝트 생성, 구현, 런타임 어댑터, UI/Electron 테스트와 패키징을 진행한다. 실제 에이전트는 선택한 Sally·PI·기타 어댑터가 실행하고 AI Elements는 UI를 담당한다. `--stack electron-react`를 선택하면 core·spec을 포함한 16개 스킬을 설치한다. 이 스택은 `aiwf@0.6.0`에 포함된다.
 
 설치는 완전한 스킬 폴더의 파일 복사이며 네이티브 Codex 서브에이전트를 등록하지 않고 MCP도 자동 구성하지 않는다. `agents/uc-coverage.md` 같은 에이전트 프롬프트는 리소스로만 복사되고, 호스트 매핑은 `workflow` 스킬이 설명한다. 이름·개수·유지보수 절차는 [SKILLS.ko.md](docs/modernization/SKILLS.ko.md)에 정리했다.
 

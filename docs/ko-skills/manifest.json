@@ -31,6 +31,11 @@
       "provenance_path": "plugins/aiwf-core/UPSTREAM.json"
     },
     {
+      "name": "aiwf-docpilot",
+      "version": "0.1.0",
+      "origin": "사용자가 제공한 SellerKing 데스크톱 저장소의 skills/reverse-flow를 바탕으로 DocPilot으로 명명한 AIWF 로컬 보충 스킬."
+    },
+    {
       "name": "aiwf-delegate-claude",
       "version": "0.1.0",
       "license_path": "plugins/aiwf-delegate-claude/LICENSE",
@@ -320,8 +325,8 @@
       "translation": "docs/ko-skills/aiwf-core/README.ko.md",
       "scope": "repository",
       "review_status": "awaiting_review",
-      "source_sha256": "94c3f2a60e87b1201cc8eace184bbaf2d7b0d23056432f427c0eb488351e0444",
-      "translation_sha256": "473c0542b61f184acb3dae4904ddd1d0647c03eecce9355cacc0b129aa34f6a1"
+      "source_sha256": "dbd3907cf553520f62590bd261abbd44e73602ac1494de379435b488cd27256d",
+      "translation_sha256": "7ef015d9ada4e52ce3fd8e7f7eca4ad997d299db5fd376f0ca8a4915dec71a1f"
     },
     {
       "source": "plugins/aiwf-core/skills/entity-model/SKILL.md",
@@ -401,6 +406,15 @@
       "source_group": "aiwf-core",
       "source_sha256": "7deaea7876ead22ddb651e786ac15e920df5e09a1e211cfcd8f24c02da380c9c",
       "translation_sha256": "1cb7d39bbd433bb293b84a6d3e76a638d3c36c3919f8eaa3250cb26495e75436",
+      "review_status": "awaiting_review"
+    },
+    {
+      "source": "plugins/aiwf-core/skills/docpilot/SKILL.md",
+      "translation": "docs/ko-skills/aiwf-core/skills/docpilot/SKILL.ko.md",
+      "scope": "repository",
+      "source_group": "aiwf-docpilot",
+      "source_sha256": "fcabc6496aa530195e001083ae76e6ec503ecc99607d692f2c1f112fe7185047",
+      "translation_sha256": "ee9ff39ab446de6760c5369f63e95fc31d477644079a1926a15c0ebcb84c2aa4",
       "review_status": "awaiting_review"
     },
     {

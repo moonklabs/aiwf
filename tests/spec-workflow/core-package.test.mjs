@@ -14,7 +14,8 @@ test('methodology core is the primary independently installable package', () => 
   assert.equal(manifest.version, '2.19.0');
   assert.equal(manifest.author.name, 'Simon Martinelli');
   assert.equal(json('plugins/aiwf-core/UPSTREAM.json').source, 'aiup-core');
-  assert.equal(readdirSync(root + 'plugins/aiwf-core/skills').length, 7);
+  assert.equal(readdirSync(root + 'plugins/aiwf-core/skills').length, 8);
+  assert.ok(existsSync(root + 'plugins/aiwf-core/skills/docpilot/SKILL.md'));
   assert.deepEqual(readdirSync(root + 'plugins/aiwf-spec/skills').sort(), ['sync-docs', 'workflow']);
   const installer = readFileSync(root + 'scripts/install-spec-skills.mjs', 'utf8');
   assert.match(installer, /skill-bundles\.js/);

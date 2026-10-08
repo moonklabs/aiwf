@@ -12,7 +12,7 @@ Public guides, plugin introductions and CLI help describe AIWF functionality and
 
 ## Current structure
 
-- `plugins/aiwf-core`: seven methodology skills, references and Python validators.
+- `plugins/aiwf-core`: eight methodology and orchestration skills, references and Python validators.
 - `plugins/aiwf-spec`: the AIWF-owned workflow and post-development sync-docs skills.
 - `plugins/aiwf-delegate-claude`, `plugins/aiwf-delegate-codex`: optional, explicitly invoked delegation plugins with native-host and opt-in cross-CLI paths.
 - `plugins/aiwf-<stack>`: four imported stack plugins and the AIWF-owned MIT `aiwf-electron-react` desktop stack.

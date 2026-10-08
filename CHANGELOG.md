@@ -1,6 +1,15 @@
 # Changelog
 
-## Unreleased — design-spec plugin (2026-10-05)
+## 0.6.0 — DocPilot orchestration skill (2026-10-08)
+
+- Add the English `docpilot` skill to the default core installation. It routes full codebase documentation or scoped change synchronization through relevant AIWF authoring, review, and workflow skills.
+- Preserve the upstream `aiwf-core` 2.19.0 resources and provenance; identify `docpilot` as an AIWF-authored supplement.
+- Add the Korean human-review translation and Codex metadata review copy, update current skill totals and installation guidance, and extend installer/provenance regression checks.
+- Keep the Korean translation in `awaiting_review`; automated checks do not constitute human approval.
+
+## 0.5.0 — CLI installation and optional stacks (2026-10-05)
+
+### Design-spec plugin
 
 - Add the optional `aiwf-design` plugin (0.1.0, Apache-2.0, depends on `aiwf-core`): workflow, figma-sync, apply, trace and review skills for a designer-run design-spec workspace, with English instructions that keep the Korean parser words.
 - Read every project value from `docs/design-spec/design-spec.config.json`; the lint, readback, merge and a new generic DTCG token check use it, and fail clearly without it. Add templates, a lint- and token-clean example and `npm run test:design`.
@@ -8,26 +17,26 @@
 - After pressure tests, require passed gates before `구현: 새 디자인`, let repository rules decide whether apply sessions write HANDOFF, and keep glossary, product, architecture and vision documents out of design-spec edits.
 - Reuse an existing goal's acceptance document for in-scope apply work, and fall back to the bundled token check (reporting which ran) when `commands.tokenCheck` cannot start. Make the acceptance-document edit the first file edit and flag `git stash`/`git checkout` before/after comparisons.
 
-## 0.5.0 — Unreleased
+### Installation CLI
 
 - Add the public `aiwf` CLI for npm global installation, interactive or explicit bundle selection, dry runs and installation status; keep `aiwf-spec` compatible.
 - Install complete prefixed skills through pinned `skills@1.7.0` for Codex and Claude, with separate project/user scope and optional stacks/delegation. Require Node.js 22.20+.
 - Preserve modified/unmanaged skills, skip unchanged installations, support additive installs and record verified partial results with retained local sources.
 - Update English/Korean installation guides and document the remaining profile, update/removal and native-plugin work.
 
-## Unreleased — Remove one-off verification code (2026-10-05)
+### Remove one-off verification code
 
 - Remove archived pilot service/test code, obsolete replay instructions and a dated temporary-checkout comparison. Keep historical logs and review documents.
 - Consolidate Electron license coverage into the existing packaging test and remove duplicate plugin-inventory tests; retain reusable installation, provenance and documentation checks.
 
-## Unreleased — Electron/React agent desktop stack (2026-10-05)
+### Electron/React agent desktop stack
 
 - Add the MIT `aiwf-electron-react` plugin (0.1.0) extending core specifications with six skills: scaffold, implement, agent-runtime, renderer-test, electron-test and package.
 - Document main/preload/renderer/shared boundaries, adapter-driven Sally/PI/other agent execution, UI component sources, optional features and packaging checks. Requested package versions are an unverified baseline, not a tested lockfile.
 - Add opt-in `--stack electron-react` installation (15 core/spec/stack skills), marketplace and npm payload entries; preserve default installation and imported source checks.
 - Add full Korean review copies for the README, six skills and two references; maintain all new documents as awaiting human review.
 
-## Unreleased — AIWF documentation presentation (2026-10-05)
+### AIWF documentation presentation
 
 - Remove origin descriptions and external source links from public guides, plugin introductions and CLI help; update Korean review copies and manifest records together.
 - Retain LICENSE/NOTICE, source provenance, unchanged methodology resources and historical execution evidence.

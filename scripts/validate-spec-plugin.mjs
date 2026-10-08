@@ -61,6 +61,7 @@ const authoredPlugins = new Map([
   }]
 ]);
 const isAuthoredResource = (name, relative) => {
+  if (name === 'aiwf-core' && relative.startsWith('skills/docpilot/')) { return true; }
   const authored = authoredPlugins.get(name);
   return authored !== undefined && authored.skillRoots.some(directory => relative.startsWith(directory));
 };
@@ -109,7 +110,12 @@ for (const name of ['aiwf-core', 'aiwf-spec', 'aiwf-design', ...supportedStacks.
     }
   }
   const names = readdirSync(join(plugin, 'skills')).sort();
-  if (name === 'aiwf-core') { assert.equal(names.length, 7); }
+  if (name === 'aiwf-core') {
+    assert.equal(names.length, 8);
+    assert.deepEqual(names, ['docpilot', 'entity-model', 'requirements', 'reverse-engineer', 'spec-review', 'test-case', 'use-case-diagram', 'use-case-spec']);
+    assert.match(read(join(plugin, 'skills/docpilot/SKILL.md')), /^name: docpilot$/m);
+    assert.match(read(join(plugin, 'skills/docpilot/agents/openai.yaml')), /AIWF skills for full reverse engineering/);
+  }
   if (authored) { assert.deepEqual(names, authored.skills, `Skill set mismatch: ${name}`); }
   skills += names.length;
   for (const skill of names) {
@@ -117,7 +123,8 @@ for (const name of ['aiwf-core', 'aiwf-spec', 'aiwf-design', ...supportedStacks.
     const text = read(file);
     assert.match(text, new RegExp(`^---\\nname: ${skill}\\n`, 'm'), `Skill name mismatch: ${name}/${skill}`);
     assert.match(text, /^description: .+/m);
-    const licensePattern = authored ? authored.license : /Apache(-| License, Version )2\.0/;
+    const localCoreSupplement = name === 'aiwf-core' && skill === 'docpilot';
+    const licensePattern = authored ? authored.license : localCoreSupplement ? null : /Apache(-| License, Version )2\.0/;
     if (licensePattern) { assert.match(text, licensePattern, `Skill license text missing: ${name}/${skill}`); }
     for (const markdown of files(dirname(file)).filter(path => path.endsWith('.md'))) {
       const prose = read(markdown).replace(/^```[^\n]*\n[\s\S]*?^```\s*$/gm, '');
@@ -199,6 +206,6 @@ for (const target of delegationTargets) {
   assert.ok(pkg.files.includes(`plugins/${name}/`), `Package excludes plugin: ${name}`);
   skills++;
 }
-assert.equal(skills, 46);
+assert.equal(skills, 47);
 assert.equal(pkg.bin['aiwf-spec'], './src/cli/spec-cli.js');
-console.log(`AIWF: ${importedSkills} unchanged upstream skills + ${skills - importedSkills} AIWF skills (workflow, sync-docs, design-spec, the authored electron-react stack and optional delegates); ${verified} unchanged upstream resources, ${modified} attributed NOTICE modification; references, declared resources and manifests validated.`);
+console.log(`AIWF: ${importedSkills} unchanged upstream skills + ${skills - importedSkills} AIWF skills (including docpilot, workflow, sync-docs, design-spec, the authored electron-react stack and optional delegates); ${verified} unchanged upstream resources, ${modified} attributed NOTICE modification; references, declared resources and manifests validated.`);

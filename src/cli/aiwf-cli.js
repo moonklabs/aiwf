@@ -111,7 +111,7 @@ function output(command, result, json) {
   if (!result.items.length) { process.stdout.write('No AIWF-managed skills are recorded in this scope.\n'); }
   for (const item of result.items) { process.stdout.write(`${(item.action ?? item.status).padEnd(10)} ${item.agent} ${item.name}${item.reason ? ': ' + item.reason : ''}\n`); }
   if (command === 'install' && !result.dry_run && result.success) {
-    process.stdout.write('\nNext: invoke aiwf-reverse-engineer for an existing app or aiwf-requirements for a new project.\n');
+    process.stdout.write('\nNext: invoke aiwf-docpilot to document or update an existing app, aiwf-reverse-engineer for focused discovery, or aiwf-requirements for a new project.\n');
     process.stdout.write(`Korean overview: ${fileURLToPath(new URL('../../README.ko.md', import.meta.url))}\n`);
     process.stdout.write('Full skill review documents: https://github.com/moonklabs/aiwf/tree/main/docs/ko-skills\n');
     process.stdout.write('Specification tools: aiwf spec --help (or aiwf-spec --help).\n');
