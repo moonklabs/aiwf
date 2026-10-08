@@ -31,4 +31,10 @@
 
 Codex UI 직접 확인은 컴퓨터 조작 도구가 Codex 앱 접근을 허용하지 않아 실행하지 못했다. app-server 검색은 실제 사용자 설정과 설치 폴더를 사용했다. 이미 열린 대화의 주입된 스킬 목록은 그 대화가 카탈로그를 다시 읽기 전까지 오래된 목록일 수 있다. 이 검증은 스킬 발견과 활성 상태에 한정하며 DocPilot로 대상 앱의 역공학을 수행한 결과는 아니다.
 
+## Claude Code 마켓플레이스 갱신
+
+Codex 검증 뒤 Claude Code 사용자 설치를 별도로 읽었다. 기존 `aiwf-core@aiwf-plugins`는 `2.19.0`으로 활성화되어 있었지만 DocPilot이 든 최신 GitHub main도 core `2.19.0`으로 표시되어, `claude plugin update`가 `already at latest version`으로 건너뛰었다. 따라서 upstream base `2.19.0`과 구분되는 AIWF 마켓플레이스 배포 버전 `2.19.1`을 부여했다. upstream 원문 리소스와 버전 provenance는 바꾸지 않았다.
+
+Claude에 빠진 design 플러그인은 `claude plugin install aiwf-design@aiwf-plugins --scope user`로 설치했다. Core `2.19.1`과 DocPilot의 적용 여부는 GitHub main 갱신 후 기존 플러그인의 업데이트 결과와 Claude 설치 cache의 실제 파일로 확인한다.
+
 스킬 지시 원문은 변경하지 않았다. [DocPilot 한글 검토본](../ko-skills/aiwf-core/skills/docpilot/SKILL.ko.md)과 이 수정의 설치 계약은 의미 검토 대기 상태다. npm 게시와 GitHub 반영 결과는 확인 후 별도로 기록한다.

@@ -23,7 +23,7 @@
     },
     {
       "name": "aiwf-core",
-      "version": "2.19.0",
+      "version": "2.19.1",
       "license_path": "plugins/aiwf-core/LICENSE",
       "notice_path": "plugins/aiwf-core/NOTICE",
       "upstream_repository": "https://github.com/AI-Unified-Process/marketplace",
@@ -325,8 +325,8 @@
       "translation": "docs/ko-skills/aiwf-core/README.ko.md",
       "scope": "repository",
       "review_status": "awaiting_review",
-      "source_sha256": "dbd3907cf553520f62590bd261abbd44e73602ac1494de379435b488cd27256d",
-      "translation_sha256": "7ef015d9ada4e52ce3fd8e7f7eca4ad997d299db5fd376f0ca8a4915dec71a1f"
+      "source_sha256": "ce4a80ee40867f9daaf37a294bb2d43695c96213ff0d450c871117e24749ee15",
+      "translation_sha256": "fcd7597aa62b9ed07364973a99e34ee589b9ec546d460a2fbd24fbf07472a2e9"
     },
     {
       "source": "plugins/aiwf-core/skills/entity-model/SKILL.md",

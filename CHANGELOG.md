@@ -1,5 +1,10 @@
 # Changelog
 
+## aiwf-core 2.19.1 — AIWF marketplace extension (2026-10-08)
+
+- Version the core marketplace package separately from its upstream 2.19.0 base so Claude Code detects and installs the AIWF-authored DocPilot supplement.
+- Preserve upstream core skill bytes and provenance; synchronize the marketplace manifest, Korean plugin README and source/version record.
+
 ## 0.6.1 — additive installation after bundle changes (2026-10-08)
 
 - Compare complete staged skill resources when a bundle hash or version changes, allowing new skills such as DocPilot to be added while identical managed skills remain untouched.

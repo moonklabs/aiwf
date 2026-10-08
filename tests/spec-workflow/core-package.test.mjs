@@ -12,7 +12,8 @@ test('methodology core is the primary independently installable package', () => 
   assert.equal(market.plugins[0].name, 'aiwf-core');
   const manifest = json('plugins/aiwf-core/.claude-plugin/plugin.json');
   assert.equal(manifest.name, 'aiwf-core');
-  assert.equal(manifest.version, '2.19.0');
+  assert.equal(manifest.version, '2.19.1');
+  assert.equal(json('plugins/aiwf-core/UPSTREAM.json').upstream_version, '2.19.0');
   assert.equal(manifest.author.name, 'Simon Martinelli');
   assert.equal(json('plugins/aiwf-core/UPSTREAM.json').source, 'aiup-core');
   assert.equal(readdirSync(root + 'plugins/aiwf-core/skills').length, 8);

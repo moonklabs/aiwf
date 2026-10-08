@@ -4,8 +4,8 @@
 
 ## 요약
 
-- 기존 방법론·스택 스킬 31개 + Electron/React 6개 + `workflow`, `sync-docs` 2개 + design-spec 5개 + 선택 위임 스킬 2개 = 총 46개 제공.
-- 방법론 core는 `plugins/aiwf-core`(v2.19.0 스킬 7개).
+- 기존 방법론·스택 스킬 31개 + Electron/React 6개 + `workflow`, `sync-docs` 2개 + design-spec 5개 + 선택 위임 스킬 2개 + DocPilot 1개 = 총 47개 제공.
+- 방법론 core는 `plugins/aiwf-core`(AIWF 마켓플레이스 v2.19.1, upstream 2.19.0 스킬 7개와 DocPilot 보충 1개).
 - AIWF 래퍼는 `plugins/aiwf-spec`(`workflow`, `sync-docs` 2개, 0.3.0).
 - design-spec 애드온은 `plugins/aiwf-design`(`workflow`, `figma-sync`, `apply`, `trace`, `review` 5개, 0.1.0, `aiwf-core` 선행). 기본 설치에는 포함되지 않고 `--design`으로 추가하며 설치 이름은 `aiwf-design-<name>`이다.
 - 선택 위임 애드온은 `plugins/aiwf-delegate-claude`와 `plugins/aiwf-delegate-codex`에 각각 스킬 1개를 둔다. 기본 설치에는 포함되지 않는다.
@@ -14,7 +14,7 @@
 
 ## Core: plugins/aiwf-core
 
-core는 방법론 스킬 7개와 참조 문서, Python 검사기를 제공한다. host 중립 작업 추적·증거 경계 지침은 `aiwf-spec`의 `workflow`에 있다.
+core는 upstream 방법론 스킬 7개와 AIWF 보충 스킬 DocPilot, 참조 문서 및 Python 검사기를 제공한다. host 중립 작업 추적·증거 경계 지침은 `aiwf-spec`의 `workflow`에 있다.
 
 이전에는 이 7개를 `aiwf-spec`에 넣어 방법론 core와 AIWF 래퍼가 한 플러그인에 섞였는데, 2026-10-03에 원본 바이트 그대로 `aiwf-core`로 옮겨 분리했다.
 

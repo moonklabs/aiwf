@@ -9,7 +9,7 @@
     {
       "name": "aiwf-core",
       "description": "AIWF methodology core: requirements, entities, use cases, journeys and specification review",
-      "version": "2.19.0",
+      "version": "2.19.1",
       "source": "./plugins/aiwf-core",
       "author": {
         "name": "Simon Martinelli",

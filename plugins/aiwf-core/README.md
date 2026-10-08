@@ -17,7 +17,7 @@ Eight methodology and orchestration skills cover requirements, entities, use cas
 | `reverse-engineer` | Draft observed behavior from an existing system |
 | `docpilot` | Orchestrate full reverse engineering or scoped documentation updates using the relevant AIWF skills |
 
-`docpilot` is an AIWF-authored supplement. It does not change the upstream `aiwf-core` 2.19.0 resources; the original upstream provenance remains recorded in `UPSTREAM.json`.
+The AIWF marketplace release is `2.19.1`, based on the unchanged upstream `aiwf-core` 2.19.0 resources with `docpilot` as an AIWF-authored supplement. The original upstream provenance remains recorded in `UPSTREAM.json`.
 
 The structural checker ships with the review skill at `skills/spec-review/scripts/spec_lint.py`; `use-case-spec` and `test-case` bundle `scripts/validate_use_case.py` and `scripts/bpmn_paths.py`.
 

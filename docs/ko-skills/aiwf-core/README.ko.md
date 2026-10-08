@@ -19,7 +19,7 @@ AIWF 방법론 core 플러그인입니다. Apache-2.0 라이선스이며 [LICENS
 | `reverse-engineer` | 기존 시스템에서 관찰된 동작을 바탕으로 초안 작성 |
 | `docpilot` | 관련 AIWF 스킬을 조합해 전체 역공학 또는 범위가 정해진 문서 갱신 수행 |
 
-`docpilot`는 AIWF가 작성한 보충 스킬입니다. upstream `aiwf-core` 2.19.0 원문 리소스는 수정하지 않았으며, 원본 출처 정보는 `UPSTREAM.json`에 유지합니다.
+AIWF 마켓플레이스 배포 버전은 `2.19.1`입니다. 변경하지 않은 upstream `aiwf-core` 2.19.0 리소스에 AIWF 보충 스킬 `docpilot`를 더했습니다. 원본 출처 정보는 `UPSTREAM.json`에 유지합니다.
 
 구조 검사기는 검토 스킬의 `skills/spec-review/scripts/spec_lint.py`에 들어 있습니다. `use-case-spec`과 `test-case`에는 `scripts/validate_use_case.py`와 `scripts/bpmn_paths.py`가 포함됩니다.
 
