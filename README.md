@@ -6,7 +6,7 @@ Read the [Korean skill review documents](docs/ko-skills/README.md) before featur
 
 AIWF keeps use-case specifications in Git, lets existing Claude Code/Codex agents implement them, and records inspectable verification evidence.
 
-The specification workflow is split across two plugins: **`aiwf-core`** provides eight methodology and orchestration skills for requirements, use cases, entities, specification review, and full or incremental documentation; **`aiwf-spec`** provides `workflow` for non-overwriting initialization, specification pins, drift detection and review packets, plus `sync-docs` for maintaining affected documents after development. Two separate Claude/Codex delegation add-ons are available by choice. Sprintable synchronization and unattended execution are planned, not implemented. The `aiwf@0.6.0` release includes the installation CLI, optional stack/design bundles, and `docpilot`.
+The specification workflow is split across two plugins: **`aiwf-core`** provides eight methodology and orchestration skills for requirements, use cases, entities, specification review, and full or incremental documentation; **`aiwf-spec`** provides `workflow` for non-overwriting initialization, specification pins, drift detection and review packets, plus `sync-docs` for maintaining affected documents after development. Two separate Claude/Codex delegation add-ons are available by choice. Sprintable synchronization and unattended execution are planned, not implemented. The `aiwf@0.6.1` release includes the installation CLI, optional stack/design bundles, and `docpilot`.
 
 See the [direction](docs/modernization/DIRECTION.ko.md), [validation record](docs/modernization/VALIDATION.md), [Sprintable adapter proposal](docs/modernization/SPRINTABLE.ko.md) and [worked example](examples/spec-workflow/README.md).
 
@@ -16,7 +16,7 @@ Two independent Claude sessions assessed the reviewed proposal as conditionally 
 
 ## Install the CLI and choose your skills
 
-The primary distribution flow for `aiwf@0.6.0` is a global CLI install followed by a project skill install. The package provides both `aiwf` and the compatible `aiwf-spec` executable.
+The primary distribution flow for `aiwf@0.6.1` is a global CLI install followed by a project skill install. The package provides both `aiwf` and the compatible `aiwf-spec` executable.
 
 Requires Node.js 22.20+ for the included `skills@1.7.0` backend; Python 3.9+ is used by specification validators.
 
@@ -42,6 +42,17 @@ AIWF resolves the selected bundles and prepares complete resources with isolated
 
 Unchanged AIWF-managed skills are skipped, so stacks, delegation and another host can be added later. Local modifications and unmanaged existing skills cause a conflict and are preserved. AIWF records versions and hashes in `.aiwf/skills-installation.json`, and retains source resources in `.aiwf/skill-sources/` so the official `skills-lock.json` does not point to a deleted temporary directory. Keep these sources with the installation. `aiwf status` reports recorded installations; skills installed by other tools are outside that record. Update/removal and saved profiles remain future work. CLI upgrades use `npm i -g aiwf@latest`; this does not automatically update existing skills.
 
+After a CLI upgrade, run `aiwf install` again in the same skill scope to add newly released skills. A changed bundle is allowed when each existing managed skill's complete installed resources still match both its receipt and the new package. Changed skill contents remain conflicts. For user-level Codex skills:
+
+```bash
+npm i -g aiwf@latest
+aiwf install --agent codex --global --dry-run
+aiwf install --agent codex --global
+aiwf status --global
+```
+
+The new DocPilot skill appears as `aiwf-docpilot`. Installation status verifies files; Codex must also reload its skill catalog to display newly installed skills. See the [discovery fix and verification](docs/modernization/SKILL-DISCOVERY-FIX.ko.md).
+
 Use `aiwf spec --help` for document initialization, pinning, drift and evidence packets; the `aiwf-spec` executable remains compatible. Portable skills and native host plugins have distinct installation paths. Native Claude marketplace use and direct skills.sh installation remain available below.
 
 ## Run the current checkout
@@ -64,7 +75,7 @@ node scripts/install-spec-skills.mjs --project /path/to/project --stack nestjs-n
 node scripts/install-spec-skills.mjs --project /path/to/project --delegate codex --dry-run
 ```
 
-By default Codex installs the `aiwf-core` seven skills plus the `aiwf-spec` `workflow` and `sync-docs` skills as `aiwf-requirements`, `aiwf-use-case-spec`, ..., `aiwf-workflow`, `aiwf-sync-docs`, with their full references, parsers and attribution. `--stack` selects one of `vaadin-jooq`, `angular-jpa`, `blazor-dotnet`, `nestjs-nextjs` or `electron-react` and adds that stack; existing skills are never overwritten and there is no force flag. Live host skill selection and model execution remain separate pilot checks.
+By default Codex installs the `aiwf-core` eight skills plus the `aiwf-spec` `workflow` and `sync-docs` skills as `aiwf-requirements`, `aiwf-use-case-spec`, ..., `aiwf-docpilot`, `aiwf-workflow`, `aiwf-sync-docs`, with their full references, parsers and attribution. `--stack` selects one of `vaadin-jooq`, `angular-jpa`, `blazor-dotnet`, `nestjs-nextjs` or `electron-react` and adds that stack; existing skills are never overwritten and there is no force flag. Live host skill selection and model execution remain separate pilot checks.
 
 After development, use Codex's `aiwf-sync-docs` or Claude Code's `/aiwf-spec:sync-docs` with the change intent, comparison scope and UC IDs. The workflow includes this before completion; it updates affected documents and preserves implementation gaps and unverified behavior. See the [installation and standalone skills CLI guide](plugins/aiwf-spec/README.md#synchronize-documents-after-development) and [Korean review copy](docs/ko-skills/aiwf-spec/skills/sync-docs/SKILL.ko.md). This is a skill, not a new `aiwf-spec` CLI command.
 
@@ -98,7 +109,7 @@ AIWF provides 47 skills: eight methodology and orchestration skills in `aiwf-cor
 | `aiwf-nestjs-nextjs` | Stack | 5 skills (0.4.0) |
 | `aiwf-electron-react` | Agent desktop stack | 6 skills (0.1.0) |
 
-For Electron agent desktop apps, see the [Electron/React guide](plugins/aiwf-electron-react/README.md) and [Korean review copy](docs/ko-skills/aiwf-electron-react/README.ko.md). It extends core specifications with scaffolding, implementation, runtime adapters, UI/Electron tests and packaging. Agent execution stays in the selected Sally/PI/other adapter; AI Elements supplies UI. Select `--stack electron-react` to install 16 skills including core and spec. This stack is included in `aiwf@0.6.0`.
+For Electron agent desktop apps, see the [Electron/React guide](plugins/aiwf-electron-react/README.md) and [Korean review copy](docs/ko-skills/aiwf-electron-react/README.ko.md). It extends core specifications with scaffolding, implementation, runtime adapters, UI/Electron tests and packaging. Agent execution stays in the selected Sally/PI/other adapter; AI Elements supplies UI. Select `--stack electron-react` to install 16 skills including core and spec. This stack is included in `aiwf@0.6.1`.
 
 For a designer-run design workspace next to the planning documents, see the [design-spec guide](plugins/aiwf-design/README.md) and [Korean review copy](docs/ko-skills/aiwf-design/README.ko.md). It routes each session to one role (designer work, sync, apply, trace or review), keeps Figma read-only outside designer work, checks Figma tokens against DTCG tokens, traces planning changes and lints the workspace. Project paths, the Figma file key, checks and gates come from `docs/design-spec/design-spec.config.json`. `aiwf install --design` or `--design` on the checkout installer adds the five skills as `aiwf-design-<name>`; [examples/design-spec](examples/design-spec/README.md) is a minimal project that passes the lint and token check.
 

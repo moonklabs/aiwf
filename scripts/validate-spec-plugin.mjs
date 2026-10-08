@@ -207,5 +207,5 @@ for (const target of delegationTargets) {
   skills++;
 }
 assert.equal(skills, 47);
-assert.equal(pkg.bin['aiwf-spec'], './src/cli/spec-cli.js');
+assert.equal(resolve(root, pkg.bin['aiwf-spec']), join(root, 'src/cli/spec-cli.js'));
 console.log(`AIWF: ${importedSkills} unchanged upstream skills + ${skills - importedSkills} AIWF skills (including docpilot, workflow, sync-docs, design-spec, the authored electron-react stack and optional delegates); ${verified} unchanged upstream resources, ${modified} attributed NOTICE modification; references, declared resources and manifests validated.`);

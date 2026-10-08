@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
 import { existsSync, lstatSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, realpathSync, renameSync, rmSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
-import { homedir } from 'node:os';
+import { homedir, tmpdir } from 'node:os';
 import { dirname, isAbsolute, join, relative, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
@@ -113,6 +113,13 @@ function checkSkillsLock(paths) {
   }
 }
 
+function stagedSkillDigests(options) {
+  const staging = mkdtempSync(join(tmpdir(), 'aiwf-skill-comparison-'));
+  try {
+    return new Map(stageSkillBundles(staging, options).map(item => [item.installedName, treeDigest(item.directory)]));
+  } finally { rmSync(staging, { recursive: true, force: true }); }
+}
+
 export function planSkillInstallation(options = {}) {
   const paths = scopePaths(options);
   checkSkillsLock(paths);
@@ -123,6 +130,7 @@ export function planSkillInstallation(options = {}) {
   const bundles = selectSkillBundles(options);
   const receipt = readReceipt(paths.receipt);
   const items = [];
+  let expected;
   for (const bundle of bundles) {
     const sourceDigest = treeDigest(resolve(packageRoot, 'plugins', bundle.name));
     for (const skill of bundle.skills) {
@@ -137,12 +145,17 @@ export function planSkillInstallation(options = {}) {
           if (!info.isDirectory() || info.isSymbolicLink()) { action = 'conflict'; reason = 'Destination is not a regular skill directory.'; }
           else if (!previous) { action = 'conflict'; reason = 'Existing skill is not managed by this AIWF installation record.'; }
           else if (previous.destination !== destination) { action = 'conflict'; reason = 'The recorded host configuration uses a different destination.'; }
-          else if (previous.source_digest !== sourceDigest || previous.plugin_version !== bundle.version) {
-            action = 'conflict'; reason = 'Installed source differs; updating is a separate operation.';
-          } else {
+          else {
             try {
-              if (treeDigest(destination) === previous.digest) { action = 'keep'; }
-              else { action = 'conflict'; reason = 'Installed files have local changes.'; }
+              const digest = treeDigest(destination);
+              if (digest !== previous.digest) { action = 'conflict'; reason = 'Installed files have local changes.'; }
+              else if (previous.source_digest !== sourceDigest || previous.plugin_version !== bundle.version) {
+                // A new sibling or bundle README can change the bundle hash without
+                // changing this installed skill. Compare complete staged resources.
+                expected ??= stagedSkillDigests(options);
+                if (expected.get(skill.installedName) === digest) { action = 'keep'; }
+                else { action = 'conflict'; reason = 'Installed source differs; updating is a separate operation.'; }
+              } else { action = 'keep'; }
             } catch (error) { action = 'conflict'; reason = error.message; }
           }
         }

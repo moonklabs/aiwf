@@ -4,7 +4,7 @@
 
 AIWF는 유스케이스 명세를 Git에 유지하면서 기존 Claude Code/Codex로 구현하고, 실제 검증 결과를 검토 가능한 형태로 남기는 개발 워크플로우다.
 
-명세 워크플로는 두 플러그인으로 나뉜다. **`aiwf-core`**는 요구사항·유스케이스·엔티티·명세 검토 및 전체·변경분 문서화 오케스트레이션을 위한 방법론 스킬 8개를 제공한다. **`aiwf-spec`**는 비파괴 초기화·명세 버전 고정·변경 감지·검증 로그 묶기를 연결하는 `workflow`와 개발 후 영향받는 문서를 정리하는 `sync-docs`를 제공한다. Claude/Codex 위임 애드온 두 개는 별도 선택 사항이다. Sprintable 연동과 무인 반복 실행은 후속 범위다. `aiwf@0.6.0`에는 설치 CLI와 선택 스택/design 구성, `docpilot`가 포함된다.
+명세 워크플로는 두 플러그인으로 나뉜다. **`aiwf-core`**는 요구사항·유스케이스·엔티티·명세 검토 및 전체·변경분 문서화 오케스트레이션을 위한 방법론 스킬 8개를 제공한다. **`aiwf-spec`**는 비파괴 초기화·명세 버전 고정·변경 감지·검증 로그 묶기를 연결하는 `workflow`와 개발 후 영향받는 문서를 정리하는 `sync-docs`를 제공한다. Claude/Codex 위임 애드온 두 개는 별도 선택 사항이다. Sprintable 연동과 무인 반복 실행은 후속 범위다. `aiwf@0.6.1`에는 설치 CLI와 선택 스택/design 구성, `docpilot`가 포함된다.
 
 ## 가장 먼저 읽을 것
 
@@ -21,7 +21,7 @@ AIWF는 유스케이스 명세를 Git에 유지하면서 기존 Claude Code/Code
 
 ## CLI를 설치하고 스킬 구성 선택하기
 
-`aiwf@0.6.0`의 기본 흐름은 **CLI를 npm 전역 설치한 뒤 프로젝트에 필요한 스킬 구성을 설치**하는 것이다. 패키지는 `aiwf`와 호환 실행 파일 `aiwf-spec`를 함께 제공한다.
+`aiwf@0.6.1`의 기본 흐름은 **CLI를 npm 전역 설치한 뒤 프로젝트에 필요한 스킬 구성을 설치**하는 것이다. 패키지는 `aiwf`와 호환 실행 파일 `aiwf-spec`를 함께 제공한다.
 
 포함된 `skills@1.7.0` 실행에는 **Node.js 22.20 이상**이 필요하다. 명세 구조 검사에는 Python 3.9 이상이 필요하다.
 
@@ -45,7 +45,18 @@ aiwf install --agent codex --design
 
 AIWF는 플러그인 조합과 의존성을 계산하고 완전한 참조 자료와 `aiwf-` 이름을 준비한다. 실제 설치는 버전을 고정한 공식 skills CLI가 호스트·스킬·`--copy`를 지정해 수행한다. skills CLI를 따로 전역 설치하거나 실행 때 `npx`로 내려받을 필요가 없다. Codex의 프로젝트·사용자 스킬은 `.agents/skills`, Claude 프로젝트 스킬은 `.claude/skills`로 배치하며 Claude 사용자 범위는 `CLAUDE_CONFIG_DIR`를 따른다. [설치 설계와 검증](docs/modernization/CLI-INSTALLATION-REVIEW.ko.md)을 참고한다.
 
-같은 버전의 AIWF 관리 스킬은 건너뛰므로 스택·위임·다른 호스트를 나중에 추가할 수 있다. 로컬 수정이나 다른 도구가 설치한 기존 스킬은 충돌로 표시하고 보존한다. `.aiwf/skills-installation.json`에 버전과 해시를 기록하고, 공식 `skills-lock.json`이 삭제된 임시 경로를 가리키지 않도록 `.aiwf/skill-sources/`에 설치 소스를 유지한다. 이 자료는 설치와 함께 보존한다. `aiwf status`는 기록된 설치를 확인하며 다른 도구의 설치를 자동으로 관리 대상으로 삼지 않는다. 스킬 갱신·제거와 저장 프로필은 후속 범위다. CLI 자체 갱신은 `npm i -g aiwf@latest`를 사용하며 설치된 스킬을 자동 갱신하지 않는다.
+내용이 같은 AIWF 관리 스킬은 건너뛰므로 스택·위임·다른 호스트를 나중에 추가할 수 있다. 로컬 수정이나 다른 도구가 설치한 기존 스킬은 충돌로 표시하고 보존한다. `.aiwf/skills-installation.json`에 버전과 해시를 기록하고, 공식 `skills-lock.json`이 삭제된 임시 경로를 가리키지 않도록 `.aiwf/skill-sources/`에 설치 소스를 유지한다. 이 자료는 설치와 함께 보존한다. `aiwf status`는 기록된 설치를 확인하며 다른 도구의 설치를 자동으로 관리 대상으로 삼지 않는다. 스킬 갱신·제거와 저장 프로필은 후속 범위다. CLI 자체 갱신은 `npm i -g aiwf@latest`를 사용하며 설치된 스킬을 자동 갱신하지 않는다.
+
+CLI 갱신 뒤에는 기존 스킬과 같은 설치 범위에서 `aiwf install`을 다시 실행해 새로 배포된 스킬을 추가한다. 번들 해시가 달라져도 기존 관리 스킬의 전체 설치 리소스가 설치 기록 및 새 배포본과 모두 일치하면 유지한다. 스킬 내용이 실제로 달라진 경우에는 계속 충돌로 처리한다. Codex 사용자 범위의 예시는 다음과 같다.
+
+```bash
+npm i -g aiwf@latest
+aiwf install --agent codex --global --dry-run
+aiwf install --agent codex --global
+aiwf status --global
+```
+
+새 DocPilot의 설치 이름은 `aiwf-docpilot`다. 설치 상태는 파일을 검사하며, Codex 화면에 새 스킬이 표시되려면 스킬 카탈로그도 다시 읽어야 한다. [검색 오류 수정과 검증](docs/modernization/SKILL-DISCOVERY-FIX.ko.md)을 참고한다.
 
 명세 초기화·pin·변경 확인·packet은 `aiwf spec --help`로 사용하며 기존 `aiwf-spec`도 유지한다. portable 스킬과 네이티브 플러그인은 설치 방식이 다르다. 아래 Claude marketplace와 직접 skills.sh 설치 경로도 계속 지원한다.
 
@@ -104,7 +115,7 @@ AIWF는 총 47개 스킬을 제공한다. `aiwf-core`의 방법론·오케스트
 | `aiwf-nestjs-nextjs` | stack | 스킬 5개 (0.4.0) |
 | `aiwf-electron-react` | 에이전트 데스크톱 stack | 스킬 6개 (0.1.0) |
 
-Electron 에이전트 데스크톱 앱은 [Electron/React 안내 원문](plugins/aiwf-electron-react/README.md)과 [한글 검토본](docs/ko-skills/aiwf-electron-react/README.ko.md)을 참고한다. core 명세를 바탕으로 프로젝트 생성, 구현, 런타임 어댑터, UI/Electron 테스트와 패키징을 진행한다. 실제 에이전트는 선택한 Sally·PI·기타 어댑터가 실행하고 AI Elements는 UI를 담당한다. `--stack electron-react`를 선택하면 core·spec을 포함한 16개 스킬을 설치한다. 이 스택은 `aiwf@0.6.0`에 포함된다.
+Electron 에이전트 데스크톱 앱은 [Electron/React 안내 원문](plugins/aiwf-electron-react/README.md)과 [한글 검토본](docs/ko-skills/aiwf-electron-react/README.ko.md)을 참고한다. core 명세를 바탕으로 프로젝트 생성, 구현, 런타임 어댑터, UI/Electron 테스트와 패키징을 진행한다. 실제 에이전트는 선택한 Sally·PI·기타 어댑터가 실행하고 AI Elements는 UI를 담당한다. `--stack electron-react`를 선택하면 core·spec을 포함한 16개 스킬을 설치한다. 이 스택은 `aiwf@0.6.1`에 포함된다.
 
 설치는 완전한 스킬 폴더의 파일 복사이며 네이티브 Codex 서브에이전트를 등록하지 않고 MCP도 자동 구성하지 않는다. `agents/uc-coverage.md` 같은 에이전트 프롬프트는 리소스로만 복사되고, 호스트 매핑은 `workflow` 스킬이 설명한다. 이름·개수·유지보수 절차는 [SKILLS.ko.md](docs/modernization/SKILLS.ko.md)에 정리했다.
 

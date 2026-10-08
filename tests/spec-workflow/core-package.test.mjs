@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
@@ -32,7 +33,8 @@ test('methodology, optional delegation plugins, the authored stack and the spec 
     assert.ok(pluginDirs.includes(name), `missing distributed plugin: ${name}`);
   }
   const pkg = json('package.json');
-  assert.deepEqual(pkg.bin, { aiwf: './src/cli/aiwf-cli.js', 'aiwf-spec': './src/cli/spec-cli.js' });
+  assert.deepEqual(Object.fromEntries(Object.entries(pkg.bin).map(([name, path]) => [name, resolve(root, path)])),
+    { aiwf: resolve(root, 'src/cli/aiwf-cli.js'), 'aiwf-spec': resolve(root, 'src/cli/spec-cli.js') });
   assert.equal(pkg.main, './src/lib/spec-workflow.js');
   assert.equal(pkg.dependencies.skills, '1.7.0');
   assert.deepEqual(pkg.devDependencies ?? {}, {});

@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { installSkills, skillDestination, skillInstallationStatus } from '../../src/lib/skill-installation.js';
+import { installSkills, skillDestination, skillInstallationStatus, treeDigest } from '../../src/lib/skill-installation.js';
 
 const cli = fileURLToPath(new URL('../../src/cli/aiwf-cli.js', import.meta.url));
 function project(t) {
@@ -69,6 +69,53 @@ test('unmanaged directories and edited managed files block all writes', t => {
   assert.throws(() => installSkills({ ...base, stacks: ['electron-react'] }), /conflicts/);
   assert.equal(existsSync(skillDestination(root, 'codex', false, 'aiwf-electron-react-implement')), false);
   assert.ok(skillInstallationStatus({ project: root }).items.some(item => item.status === 'modified'));
+});
+
+test('a changed bundle can add a new skill while retaining identical managed skills', t => {
+  const root = project(t);
+  const options = { project: root, agents: ['codex'], coreOnly: true };
+  installSkills(options, { backend: copyingBackend(root) });
+  const receiptPath = join(root, '.aiwf/skills-installation.json');
+  const receipt = JSON.parse(readFileSync(receiptPath, 'utf8'));
+  receipt.installations = receipt.installations.filter(item => item.name !== 'aiwf-docpilot');
+  for (const item of receipt.installations) { item.source_digest = '0'.repeat(64); }
+  writeFileSync(receiptPath, JSON.stringify(receipt));
+  rmSync(skillDestination(root, 'codex', false, 'aiwf-docpilot'), { recursive: true });
+  const before = receipt.installations.map(item => treeDigest(item.destination));
+  const plan = installSkills({ ...options, dryRun: true });
+  assert.equal(plan.success, true);
+  assert.deepEqual(plan.items.filter(item => item.action === 'add').map(item => item.name), ['aiwf-docpilot']);
+  assert.equal(plan.items.filter(item => item.action === 'keep').length, receipt.installations.length);
+  assert.equal(readFileSync(receiptPath, 'utf8'), JSON.stringify(receipt));
+  const calls = [];
+  const result = installSkills(options, { backend: copyingBackend(root, calls) });
+  assert.equal(result.success, true);
+  assert.deepEqual(calls.map(call => call.skills), [['aiwf-docpilot']]);
+  assert.deepEqual(receipt.installations.map(item => treeDigest(item.destination)), before);
+  assert.equal(skillInstallationStatus({ project: root }).success, true);
+  assert.ok(installSkills(options).items.every(item => item.action === 'keep'));
+});
+
+test('changed managed content still blocks additions even when it matches its old receipt', t => {
+  const root = project(t);
+  const options = { project: root, agents: ['codex'], coreOnly: true };
+  installSkills(options, { backend: copyingBackend(root) });
+  const receiptPath = join(root, '.aiwf/skills-installation.json');
+  const receipt = JSON.parse(readFileSync(receiptPath, 'utf8'));
+  receipt.installations = receipt.installations.filter(item => item.name !== 'aiwf-docpilot');
+  rmSync(skillDestination(root, 'codex', false, 'aiwf-docpilot'), { recursive: true });
+  const previous = receipt.installations.find(item => item.name === 'aiwf-requirements');
+  const instructions = join(previous.destination, 'SKILL.md');
+  writeFileSync(instructions, 'earlier published instructions\n');
+  previous.digest = treeDigest(previous.destination);
+  previous.source_digest = '0'.repeat(64);
+  writeFileSync(receiptPath, JSON.stringify(receipt));
+  const plan = installSkills({ ...options, dryRun: true });
+  assert.equal(plan.success, false);
+  assert.equal(plan.items.find(item => item.name === previous.name).action, 'conflict');
+  assert.throws(() => installSkills(options), /conflicts/);
+  assert.equal(readFileSync(instructions, 'utf8'), 'earlier published instructions\n');
+  assert.equal(existsSync(skillDestination(root, 'codex', false, 'aiwf-docpilot')), false);
 });
 
 test('verified partial installs are recorded and a retry resumes the remaining skills', t => {

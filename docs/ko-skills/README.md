@@ -4,6 +4,8 @@
 
 ## 먼저 검토할 문서
 
+- [새 스킬 설치·검색 오류 수정](../modernization/SKILL-DISCOVERY-FIX.ko.md): CLI 갱신과 사용자 범위 추가 설치, 번들 변경 시 기존 파일 보존, 실제 Codex 검색 확인. 휴먼 리뷰는 대기 상태다.
+
 - [CLI 설치 중심 역할과 구현 검토](../modernization/CLI-INSTALLATION-REVIEW.ko.md): `npm i -g aiwf`와 공식 skills CLI를 사용하는 설치 입구. 호스트·구성 선택, 반복·추가 설치와 상태 조회를 구현했다. `0.5.0` npm 게시와 배포판 설치를 확인했으며 휴먼 리뷰는 대기 상태다.
 - [design-spec 애드온](aiwf-design/README.ko.md): 디자이너 작업 공간과 기획 문서·Figma·코드 사이의 역할 라우팅, 읽기 전용 토큰 동기화·디자인 적용, 대응표 추적과 lint. 프로젝트 값은 `design-spec.config.json` 하나에서 읽는다.
 - [design-spec 플러그인 검증 기록](../modernization/DESIGN-SPEC-VALIDATION-2026-10-05.ko.md): 원천 lint·토큰 대조 결과 비교, 압력 시나리오(스킬 없음/있음) 판정과 남은 개선 후보.

@@ -1,6 +1,6 @@
 {
     "name": "aiwf",
-    "version": "0.6.0",
+    "version": "0.6.1",
     "description": "AI Workflow Framework: use-case-driven specs and evidence for coding agents",
     "main": "./src/lib/spec-workflow.js",
     "type": "module",

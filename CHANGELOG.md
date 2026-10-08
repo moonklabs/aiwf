@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.6.1 — additive installation after bundle changes (2026-10-08)
+
+- Compare complete staged skill resources when a bundle hash or version changes, allowing new skills such as DocPilot to be added while identical managed skills remain untouched.
+- Preserve conflicts for changed source content, local modifications and unmanaged directories; add regression coverage for older installation receipts.
+- Document CLI upgrades followed by installation in the original scope and verification through the Codex skill catalog.
+- Synchronize package-lock metadata and validate normalized npm executable paths.
+
 ## 0.6.0 — DocPilot orchestration skill (2026-10-08)
 
 - Add the English `docpilot` skill to the default core installation. It routes full codebase documentation or scoped change synchronization through relevant AIWF authoring, review, and workflow skills.
