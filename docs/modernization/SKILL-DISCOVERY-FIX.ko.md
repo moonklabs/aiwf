@@ -35,6 +35,8 @@ Codex UI 직접 확인은 컴퓨터 조작 도구가 Codex 앱 접근을 허용�
 
 Codex 검증 뒤 Claude Code 사용자 설치를 별도로 읽었다. 기존 `aiwf-core@aiwf-plugins`는 `2.19.0`으로 활성화되어 있었지만 DocPilot이 든 최신 GitHub main도 core `2.19.0`으로 표시되어, `claude plugin update`가 `already at latest version`으로 건너뛰었다. 따라서 upstream base `2.19.0`과 구분되는 AIWF 마켓플레이스 배포 버전 `2.19.1`을 부여했다. upstream 원문 리소스와 버전 provenance는 바꾸지 않았다.
 
-Claude에 빠진 design 플러그인은 `claude plugin install aiwf-design@aiwf-plugins --scope user`로 설치했다. Core `2.19.1`과 DocPilot의 적용 여부는 GitHub main 갱신 후 기존 플러그인의 업데이트 결과와 Claude 설치 cache의 실제 파일로 확인한다.
+GitHub `main`의 `d3ff67b`에 AIWF marketplace core `2.19.1`을 반영했다. 이전 upstream base `2.19.0` 리소스와 provenance는 그대로다. Claude 마켓플레이스 clone을 이 main으로 갱신한 다음 기존 core의 업데이트가 `2.19.0`에서 `2.19.1`로 적용됐고, 새 설치 cache에 8개 스킬과 `docpilot/SKILL.md`가 있음을 확인했다.
+
+빠져 있던 `aiwf-design@aiwf-plugins`도 user scope에 설치했다. Claude registry와 settings에서 core, design, spec, NestJS/Next.js, Electron/React 플러그인 다섯 개가 모두 `enabled`다. design 5개와 DocPilot을 포함한 core 8개를 확인했다. Claude CLI 결과는 업데이트가 현재 세션 재시작 뒤 적용된다고 명시한다.
 
 스킬 지시 원문은 변경하지 않았다. [DocPilot 한글 검토본](../ko-skills/aiwf-core/skills/docpilot/SKILL.ko.md)과 이 수정의 설치 계약은 의미 검토 대기 상태다. npm 게시와 GitHub 반영 결과는 확인 후 별도로 기록한다.
